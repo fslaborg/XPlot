@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>XPlot.GoogleCharts</id>
+    <version>0.0.1</version>
+    <authors>Taha Hachana</authors>
+    <owners>Taha Hachana</owners>
+    <projectUrl>https://github.com/TahaHachana/XPlot</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>F# Data Visualization Library</description>
+    <releaseNotes>Basic Google area chart support.</releaseNotes>
+    <tags>F#, DATA, VISUALIZATION, HTML5, JAVASCRIPT, DATAVIS</tags>
+    <dependencies>
+      <dependency id="Newtonsoft.Json" version="[6.0.5]" />
+      <dependency id="Google.DataTable.Net.Wrapper" version="[3.1.0]" />
+    </dependencies>
+  </metadata>
+</package>
