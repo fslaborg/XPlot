@@ -20,28 +20,30 @@ type ChartGallery =
         match FSharpValue.GetUnionFields(__, typeof<ChartGallery>) with
         | case, _ -> case.Name + "Chart"
 
-
 type key = IConvertible
 type value = IConvertible
 
-type DataPoint =
-    {
-        X : key
-        Y : value
-    }
+module Data =
 
-    static member New(x, y) = {X = x; Y = y}
+    type DataPoint =
+        {
+            X : key
+            Y : value
+        }
 
-type Series =
-    {
-        Name : string option
-        DataPoints : seq<DataPoint>
-    }
+        static member New(x, y) = {X = x; Y = y}
 
-    static member New(dps, ?name) = {Name = name; DataPoints = dps}
+    type Series =
+        {
+            Name : string option
+            DataPoints : seq<DataPoint>
+        }
 
+        static member New name dps = {Name = name; DataPoints = dps}
 
-let makeDataTable series =
+        member __.WithName name = {__ with Name = name}
+
+let makeDataTable (series:Data.Series list) =
     let dt = new DataTable()
     let firstSeries = Seq.head series
     let firstDpX = firstSeries.DataPoints |> Seq.head |> fun x -> x.X
@@ -88,11 +90,9 @@ module Configuration =
 
     type Animation() =
 
-        [<DefaultValue>]
-        val mutable duration : int
+        member val duration = 0 with get, set
 
-        [<DefaultValue>]
-        val mutable easing : string
+        member val easing = "linear" with get, set
 
     type Gradient() =
 
@@ -334,32 +334,61 @@ module Configuration =
         [<DefaultValue>]
         val mutable viewWindow : ViewWindow
 
+    type Legend() =
+
+        [<DefaultValue>]
+        val mutable alignment : string
+
+        [<DefaultValue>]
+        val mutable maxLines : int
+
+        [<DefaultValue>]
+        val mutable position : string
+
+        [<DefaultValue>]
+        val mutable textStyle : TextStyle
+
+    type Series() =
+
+        [<DefaultValue>]
+        val mutable annotations : Annotations
+
+        [<DefaultValue>]
+        val mutable color : string
+
+        [<DefaultValue>]
+        val mutable targetAxisIndex : int
+
+        [<DefaultValue>]
+        val mutable pointShape : string
+
+        [<DefaultValue>]
+        val mutable pointSize : int
+
+        [<DefaultValue>]
+        val mutable lineWidth : int
+
+        [<DefaultValue>]
+        val mutable areaOpacity : float
+
+        [<DefaultValue>]
+        val mutable visibleInLegend : bool
+
+    type Tooltip() =
+
+        [<DefaultValue>]
+        val mutable isHtml : bool
+
+        [<DefaultValue>]
+        val mutable showColorCode : bool
+
+        [<DefaultValue>]
+        val mutable textStyle : TextStyle
+
+        [<DefaultValue>]
+        val mutable trigger : string
 
 
-
-
-
-
-
-//
-//    type Legend() =
-//
-//        [<DefaultValue>]
-//        val mutable position : string
-//
-//        [<DefaultValue>]
-//        val mutable alignment : string
-//
-//        [<DefaultValue>]
-//        val mutable textStyle : TextStyle
-//
-//        [<DefaultValue>]
-//        val mutable maxLines : int
-//
-//    type Axis() =
-//
-//        [<DefaultValue>]
-//        val mutable minValue : int
 
     type Options() =
 
@@ -417,6 +446,67 @@ module Configuration =
         [<DefaultValue>]
         val mutable height : int
 
+        [<DefaultValue>]
+        val mutable interpolateNulls : bool
+
+        [<DefaultValue>]
+        val mutable isStacked : bool
+
+        [<DefaultValue>]
+        val mutable legend : Legend
+
+        member val lineWidth = 6 with get, set
+
+        [<DefaultValue>]
+        val mutable orientation : string
+
+        [<DefaultValue>]
+        val mutable pointShape : string
+
+        [<DefaultValue>]
+        val mutable pointSize : int
+
+        [<DefaultValue>]
+        val mutable reverseCategories : bool
+
+        [<DefaultValue>]
+        val mutable selectionMode : string
+
+        [<DefaultValue>]
+        val mutable series : Series []
+
+        [<DefaultValue>]
+        val mutable theme : string
+
+        [<DefaultValue>]
+        val mutable title : string
+
+        [<DefaultValue>]
+        val mutable titlePosition : string
+
+        [<DefaultValue>]
+        val mutable titleTextStyle : TextStyle
+
+        [<DefaultValue>]
+        val mutable tooltip : Tooltip
+
+        [<DefaultValue>]
+        val mutable vAxes : Axis []
+
+        [<DefaultValue>]
+        val mutable vAxis : Axis
+
+        [<DefaultValue>]
+        val mutable width : int
+
+
+
+
+
+
+
+
+
     
 //        [<DefaultValue>]
 //        val mutable title : string
@@ -436,7 +526,7 @@ let jsTemplate =
 
                 var options = {OPTIONS} 
 
-                var chart = new google.visualization.{TYPE}(document.getElementById('chart_div'));
+                var chart = new google.visualization.{TYPE}(document.getElementById('{GUID}'));
                 chart.draw(data, options);
             }
         </script>"""
@@ -452,19 +542,22 @@ let coreTemplate =
         {JS}
     </head>
     <body>
-        <div id="chart_div" style="width: 900px;"></div>
+        <div id="{GUID}"></div>
 </html>"""
 
-type GoogleChart() as chart =
+type GoogleChart() as this =
     
     [<DefaultValue>]
     val mutable private options : Options
 
     [<DefaultValue>]
-    val mutable private data : seq<Series>
+    val mutable private data : seq<Data.Series>
 
-    [<DefaultValue>]
-    val mutable private html : string
+//    [<DefaultValue>]
+//    val mutable private js : string
+//
+//    [<DefaultValue>]
+//    val mutable private html : string
 
     [<DefaultValue>]
     val mutable private ``type`` : ChartGallery
@@ -477,43 +570,52 @@ type GoogleChart() as chart =
         gc.data <- data
         gc.options <- options
         gc.``type`` <- ``type``
-        let dt = makeDataTable(data |> Seq.toList)
+        gc
+
+    member __.Js =
+        let dt = makeDataTable(__.data |> Seq.toList)
         let dataJson = dt.GetJson()
         let settings = JsonSerializerSettings()
         settings.NullValueHandling <- NullValueHandling.Ignore
-        let optionsJson = JsonConvert.SerializeObject(options, settings)
-        let js =
-            jsTemplate.Replace("{DATA}", dataJson)
-                .Replace("{OPTIONS}", optionsJson)
-                .Replace("{TYPE}", gc.``type``.ToString())
-        let html = coreTemplate.Replace("{JS}", js)
-        gc.html <- html
-        gc
+        let optionsJson = JsonConvert.SerializeObject(__.options, settings)
+        jsTemplate.Replace("{DATA}", dataJson)
+            .Replace("{OPTIONS}", optionsJson)
+            .Replace("{TYPE}", __.``type``.ToString())
+            .Replace("{GUID}", guid)
+
+    member __.Html =
+        coreTemplate.Replace("{JS}", __.Js)
+            .Replace("{GUID}", guid)
 
     member __.Show() =
-        File.WriteAllText(htmlFile, chart.html)
+        File.WriteAllText(htmlFile, __.Html)
         Process.Start htmlFile
         |> ignore
 
 type Chart =
-    
-    static member Area(data:seq<#key * #value>, options) =
+    //(data:seq<#key * #value>, ?Name, ?Title, ?XTitle, ?YTitle)
+
+    static member Area(data:seq<#key * #value>, ?Name, ?Options) =
         let data' =
             data
-            |> Seq.map DataPoint.New
-            |> Series.New
+            |> Seq.map Data.DataPoint.New
+            |> Data.Series.New Name
+            
 
-        GoogleChart.Create [data'] options Area
+        GoogleChart.Create [data'] (defaultArg Options <| Configuration.Options()) Area
 
-    static member Area(data:seq<#seq<'K * 'V>> when 'K :> key and 'V :> value, options) =
+    static member Area(data:seq<#seq<'K * 'V>> when 'K :> key and 'V :> value, ?Names, ?Options) =
         let data' =
             data
-            |> Seq.map (fun x ->
+            |> Seq.mapi (fun idx x ->
                 x 
-                |> Seq.map DataPoint.New
-                |> Series.New)
+                |> Seq.map Data.DataPoint.New
+                |> fun dps ->
+                    match Names with
+                    | None -> Data.Series.New None dps
+                    | Some names -> Data.Series.New (Seq.nth idx names |> Some) dps)
 
-        GoogleChart.Create data' options Area
+        GoogleChart.Create data' (defaultArg Options <| Configuration.Options()) Area
         
 
 
