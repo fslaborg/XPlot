@@ -49,10 +49,11 @@
   </Choose>
   <Import Project="$(FSharpTargetsPath)" />
   <ItemGroup>
-    <Compile Include="Library1.fs" />
-    <None Include="Script.fsx" />
+    <Compile Include="Main.fs" />
+    <None Include="Tests.fsx" />
     <Content Include="Google.DataTable.Net.Wrapper.XML" />
     <Content Include="packages.config" />
+    <Content Include="app.config" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Google.DataTable.Net.Wrapper">
