@@ -49,6 +49,7 @@
   </Choose>
   <Import Project="$(FSharpTargetsPath)" />
   <ItemGroup>
+    <Compile Include="AssemblyInfo.fs" />
     <Compile Include="Main.fs" />
     <None Include="Tests.fsx" />
     <Content Include="Google.DataTable.Net.Wrapper.XML" />

@@ -13,7 +13,6 @@ let chart1 =
     |> Chart.WithTitle "Company Sales"
     |> Chart.WithXTitle "Year"
     |> Chart.WithYTitle "Amount"
-    |> Chart.WithLegend true
     |> Chart.Show
 
 // multiple data series
@@ -25,6 +24,7 @@ let chart2 =
     |> Chart.WithXTitle "Year"
     |> Chart.WithYTitle "Amount"
     |> Chart.WithId "my_chart"
+    |> Chart.WithLegend true
     |> Chart.Show
 
 // custom options
@@ -44,6 +44,7 @@ let chart3 =
     |> Chart.Area
     |> Chart.WithLabels ["Sales"; "Expenses"]
     |> Chart.WithOptions options
+    |> Chart.WithLegend true
     |> Chart.Show
 
 

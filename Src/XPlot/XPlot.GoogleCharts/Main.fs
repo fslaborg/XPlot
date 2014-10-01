@@ -23,9 +23,10 @@ type ChartGallery =
 type key = IConvertible
 type value = IConvertible
 
+[<AutoOpen>]
 module Data =
 
-    type DataPoint =
+    type Datum =
         {
             X : key
             Y : value
@@ -36,65 +37,73 @@ module Data =
     type Series =
         {
             Name : string option
-            DataPoints : seq<DataPoint>
+            Datums : seq<Datum>
         }
 
-        static member New name dps = {Name = name; DataPoints = dps}
+        static member New name datums = {Name = name; Datums = datums}
 
         member __.WithName name = {__ with Name = name}
 
-let makeDataTable (series:Data.Series list) =
-    let dt = new DataTable()
-    let firstSeries = Seq.head series
-    let firstDpX = firstSeries.DataPoints |> Seq.head |> fun x -> x.X
-    let columnType =
-        firstDpX.GetTypeCode()
+    let inferColumnType isKey series =
+        series.Datums
+        |> Seq.head
+        |> fun datum ->
+            match isKey with
+            | false -> datum.Y
+            | true -> datum.X
+        |> fun x -> x.GetTypeCode()
         |> function
         | TypeCode.Boolean -> ColumnType.Boolean
         | TypeCode.DateTime -> ColumnType.Datetime
         | TypeCode.String -> ColumnType.String
         | _ -> ColumnType.Number
-    let firstColumn = Column(columnType)
-    match firstSeries.Name with
-    | None -> ()
-    | Some name -> firstColumn.Label <- name
-    dt.AddColumn firstColumn |> ignore
-    
-    series
-    |> List.iter (fun x ->
-        let column = Column(ColumnType.Number)
-        match x.Name with
-        | None -> ()
-        | Some name -> column.Label <- name
-        dt.AddColumn column |> ignore    
-    )
 
-    series
-    |> List.map (fun x -> x.DataPoints |> Seq.toList)
-    |> Seq.toList
-    |> List.concat
-    |> Seq.groupBy (fun dp -> dp.X)
-    |> Seq.toList
-    |> List.map (fun (key, dps) -> key, dps |> Seq.toList |> List.map (fun dp -> dp.Y))
-    |> List.iter (fun (key, values) ->
-        let row = dt.NewRow()
-        row.AddCell(Cell(key)) |> ignore
-        values
-        |> List.iter (fun value -> Cell(value) |> row.AddCell |> ignore)
-        dt.AddRow row |> ignore
-    )
-    dt
+    let keyColumnType = inferColumnType true
+
+    let valueColumnType = inferColumnType false
+
+    let makeDataTable (series:seq<Series>) =
+        let dt = new DataTable()
+    
+        // keys column
+        let firstSeries = Seq.head series
+        let firstColumn = Column(keyColumnType firstSeries)
+        match firstSeries.Name with
+        | None -> ()
+        | Some name -> firstColumn.Label <- name
+        dt.AddColumn firstColumn |> ignore
+    
+        // values columns        
+        series
+        |> Seq.iter (fun x ->
+            let column = Column(valueColumnType x)
+            match x.Name with
+            | None -> ()
+            | Some name -> column.Label <- name
+            dt.AddColumn column |> ignore    
+        )
+
+        // table rows
+        series
+        |> Seq.map (fun x -> x.Datums)
+        |> Seq.concat
+        |> Seq.groupBy (fun datum -> datum.X)
+        |> Seq.map (fun (key, dps) -> key, dps |> Seq.map (fun dp -> dp.Y))
+        |> Seq.iter (fun (key, values) ->
+            let row = dt.NewRow()
+            row.AddCell(Cell(key)) |> ignore
+            values
+            |> Seq.iter (fun value ->
+                Cell(value)
+                |> row.AddCell
+                |> ignore
+            )
+            dt.AddRow row |> ignore
+        )
+        dt
 
 [<AutoOpen>]
 module Configuration =
-
-//    let mutable minValueVal : int option = None
-//        
-//    member __.minValue
-//        with get() = minValueVal.Value
-//        and set(value) = minValueVal <- Some value
-//
-//    member __.ShouldSerializeminValue() = not minValueVal.IsNone
 
     type Animation() =
         
@@ -945,17 +954,20 @@ let coreTemplate =
 </html>"""
 
 type GoogleChart() =
+
+    [<DefaultValue>]
+    val mutable private data : seq<Data.Series>
     
     [<DefaultValue>]
     val mutable private options : Options
 
     [<DefaultValue>]
-    val mutable private data : seq<Data.Series>
-
-    [<DefaultValue>]
     val mutable private ``type`` : ChartGallery
     
-    let mutable guid = Guid.NewGuid().ToString()
+    /// The chart's container div id.
+    member val Id =
+        Guid.NewGuid().ToString()
+        with get, set
 
     static member internal Create data options ``type`` =
         let gc = GoogleChart()
@@ -964,55 +976,64 @@ type GoogleChart() =
         gc.``type`` <- ``type``
         gc
 
+    /// The chart's JavaScript code. Doesn't contain the
+    /// necessary line for loading the appropiate Google
+    /// visualization package. 
     member __.Js =
-        let dt = makeDataTable(__.data |> Seq.toList)
-        let dataJson = dt.GetJson()
-//        let settings = JsonSerializerSettings()
-//        settings.NullValueHandling <- NullValueHandling.Ignore
-//        settings.DefaultValueHandling <- DefaultValueHandling.Ignore
-         
-        let optionsJson = JsonConvert.SerializeObject(__.options) //, settings)
+        let dt = makeDataTable __.data
+        let dataJson = dt.GetJson()         
+        let optionsJson = JsonConvert.SerializeObject(__.options)
         jsTemplate.Replace("{DATA}", dataJson)
             .Replace("{OPTIONS}", optionsJson)
             .Replace("{TYPE}", __.``type``.ToString())
-            .Replace("{GUID}", guid)
+            .Replace("{GUID}", __.Id)
 
+    /// The chart's complete HTML code.
     member __.Html =
         coreTemplate.Replace("{JS}", __.Js)
-            .Replace("{GUID}", guid)
+            .Replace("{GUID}", __.Id)
 
+    /// Displays the chart in the default browser.
     member __.Show() =
-        let htmlFile = Path.GetTempPath() + guid + ".html"
+        let htmlFile = Path.GetTempPath() + __.Id + ".html"
         File.WriteAllText(htmlFile, __.Html)
         Process.Start htmlFile
         |> ignore
 
+    /// Sets the data series label. Use this member if the
+    /// chart's data is a single series.
     member __.WithLabel label =
         __.data <-
             __.data
             |> Seq.head
             |> fun series -> [series.WithName (Some label)]
 
+    /// Sets the data series labels. Use this member if the
+    /// chart's data is a series collection.
     member __.WithLabels labels =
         __.data <-
             __.data
             |> Seq.mapi (fun idx series -> series.WithName (labels |> Seq.nth idx |> Some))
 
+    /// Sets the chart's title.
     member __.WithTitle title =
         __.options.title <- title
 
+    /// Sets the chart's X-axis title.
     member __.WithXTitle xTitle =
         try
             __.options.hAxis.title <- xTitle
         with _ ->
             __.options.hAxis <- Axis(title = xTitle)
 
+    /// Sets the chart's Y-axis title.
     member __.WithYTitle yTitle =
         try
             __.options.vAxis.title <- yTitle
         with _ ->
             __.options.vAxis <- Axis(title = yTitle)
 
+    /// Display/hide the legend.
     member __.WithLegend enabled =
         match __.options.legend <> Unchecked.defaultof<Legend> with
         | false ->
@@ -1024,66 +1045,88 @@ type GoogleChart() =
             | false -> __.options.legend.position <- "none"
             | true -> __.options.legend.position <- "right"
 
-    member __.WithId id = guid <- id
+    /// Sets the chart's container div id.
+    member __.WithId newId = __.Id <- newId
 
+    /// Sets the chart's configuration options.
     member __.WithOptions options = __.options <- options
 
 type Chart =
 
+    /// <summary>Creates an area chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Name">The data set name.</param>
+    /// <param name="Options">The chart's options.</param>
     static member Area(data:seq<#key * #value>, ?Name, ?Options) =
         let data' =
             data
-            |> Seq.map Data.DataPoint.New
-            |> Data.Series.New Name
-            
+            |> Seq.map Datum.New
+            |> Series.New Name
 
         GoogleChart.Create [data'] (defaultArg Options <| Configuration.Options()) Area
 
+    /// <summary>Creates an area chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Name">The data sets names.</param>
+    /// <param name="Options">The chart's options.</param>
     static member Area(data:seq<#seq<'K * 'V>> when 'K :> key and 'V :> value, ?Names, ?Options) =
         let data' =
             data
             |> Seq.mapi (fun idx x ->
                 x 
-                |> Seq.map Data.DataPoint.New
-                |> fun dps ->
+                |> Seq.map Datum.New
+                |> fun datums ->
                     match Names with
-                    | None -> Data.Series.New None dps
-                    | Some names -> Data.Series.New (Seq.nth idx names |> Some) dps)
+                    | None -> Series.New None datums
+                    | Some names -> Series.New (Seq.nth idx names |> Some) datums)
 
         GoogleChart.Create data' (defaultArg Options <| Configuration.Options()) Area
         
 type Chart with
 
-    static member Show (chart:GoogleChart) = chart.Show()
+    /// Displays the chart in the default browser.    
+    static member Show (chart:GoogleChart) =
+        chart.Show()
+        chart
 
+    /// Sets the data series label. Use this member if the
+    /// chart's data is a single series.
     static member WithLabel label (chart:GoogleChart) =
         chart.WithLabel label
         chart
 
+    /// Sets the data series labels. Use this member if the
+    /// chart's data is a series collection.
     static member WithLabels labels (chart:GoogleChart) =
         chart.WithLabels labels
         chart
 
+    /// Sets the chart's title.
     static member WithTitle title (chart:GoogleChart) =
         chart.WithTitle title
         chart
 
+    /// Sets the chart's X-axis title.
     static member WithXTitle xTitle (chart:GoogleChart) =
         chart.WithXTitle xTitle
         chart
 
+    /// Sets the chart's Y-axis title.
     static member WithYTitle yTitle (chart:GoogleChart) =
         chart.WithYTitle yTitle
         chart
 
+    /// Display/hide the legend.
     static member WithLegend enabled (chart:GoogleChart) =
         chart.WithLegend enabled
         chart
 
+    /// Sets the chart's container div id.
     static member WithId id (chart:GoogleChart) =
         chart.WithId id
         chart
 
+    /// Sets the chart's configuration options.
     static member WithOptions options (chart:GoogleChart) =
         chart.WithOptions options
         chart
