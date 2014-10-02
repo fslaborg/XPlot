@@ -119,7 +119,6 @@ module Configuration =
             and set(value) = easingField <- Some value
 
         member __.ShouldSerializeduration() = not durationField.IsNone
-
         member __.ShouldSerializeeasing() = not easingField.IsNone
 
     type Gradient() =
@@ -938,13 +937,13 @@ let jsTemplate =
             }"""
 
 
-let coreTemplate =
+let template =
     """<html>
     <head>
         <title>Google Chart</title>
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
         <script type="text/javascript">
-            google.load("visualization", "1", {packages:["corechart"]})
+            google.load("visualization", "1", {packages:["{PACKAGES}"]})
             {JS}
         </script>
     </head>
@@ -990,7 +989,11 @@ type GoogleChart() =
 
     /// The chart's complete HTML code.
     member __.Html =
-        coreTemplate.Replace("{JS}", __.Js)
+        let packages =
+            match __.``type`` with
+            | Area -> "corechart"
+        template.Replace("{PACKAGES}", packages)
+            .Replace("{JS}", __.Js)
             .Replace("{GUID}", __.Id)
 
     /// Displays the chart in the default browser.
