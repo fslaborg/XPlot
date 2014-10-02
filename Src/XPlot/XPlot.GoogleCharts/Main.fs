@@ -927,8 +927,7 @@ module Configuration =
         member __.ShouldSerializewidth() = not widthField.IsNone
 
 let jsTemplate =
-    """<script type="text/javascript">
-            google.setOnLoadCallback(drawChart);
+    """google.setOnLoadCallback(drawChart);
             function drawChart() {
                 var data = new google.visualization.DataTable({DATA});
 
@@ -936,21 +935,22 @@ let jsTemplate =
 
                 var chart = new google.visualization.{TYPE}(document.getElementById('{GUID}'));
                 chart.draw(data, options);
-            }
-        </script>"""
+            }"""
 
 
 let coreTemplate =
     """<html>
     <head>
+        <title>Google Chart</title>
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
         <script type="text/javascript">
             google.load("visualization", "1", {packages:["corechart"]})
+            {JS}
         </script>
-        {JS}
     </head>
     <body>
         <div id="{GUID}"></div>
+    </body>
 </html>"""
 
 type GoogleChart() =
