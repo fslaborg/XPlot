@@ -1,0 +1,21 @@
+﻿<html>
+<head>
+    <title>Google Chart</title>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        google.load("visualization", "1", { packages: ["corechart"] })
+        google.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data = new google.visualization.DataTable({ "cols": [{ "type": "string", "id": "Column 0", "label": "Sales" }, { "type": "number", "id": "Column 1", "label": "Sales" }, { "type": "number", "id": "Column 2", "label": "Expenses" }], "rows": [{ "c": [{ "v": "2013" }, { "v": 1000 }, { "v": 400 }] }, { "c": [{ "v": "2014" }, { "v": 1170 }, { "v": 460 }] }, { "c": [{ "v": "2015" }, { "v": 660 }, { "v": 1120 }] }, { "c": [{ "v": "2016" }, { "v": 1030 }, { "v": 540 }] }] });
+
+            var options = { "hAxis": { "title": "Year", "titleTextStyle": { "color": "#333" } }, "height": 500, "legend": { "position": "right" }, "title": "Company Performance", "vAxis": { "minValue": 0 }, "width": 900 }
+
+            var chart = new google.visualization.AreaChart(document.getElementById('b59cc281-a834-40e2-8a2c-eea26bc0c5af'));
+            chart.draw(data, options);
+        }
+    </script>
+</head>
+<body>
+    <div id="b59cc281-a834-40e2-8a2c-eea26bc0c5af"></div>
+</body>
+</html>

@@ -1,0 +1,105 @@
+﻿/* Common */
+body {
+    font-family: 'open sans', 'helvetica neue', helvetica, arial, sans-serif;
+}
+
+#home-body {
+    background-color: #ECEBE8;
+}
+
+.navbar-default {
+    background-color: #ECEBE8;
+}
+
+    .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover {
+        font-weight: bold;
+        background-color: #ECEBE8;
+    }
+
+.page-header {
+    border-bottom: 1px solid #dad7d0;
+}
+
+.jumbotron {
+    background-color: #ECEBE8;
+    color: #2980b9;
+}
+
+#push {
+    height: 100px;
+}
+
+/* Sub Page */
+.navbar-default-inner {
+    background-color: white;
+    margin-bottom: 0;
+}
+
+    .navbar-default-inner .navbar-nav > .active > a, .navbar-default-inner .navbar-nav > .active > a:hover {
+        font-weight: bold;
+        background-color: white;
+    }
+
+.inner-jumbotron {
+    background-color: white;
+    padding: 0;
+}
+
+/* Chart Page */
+.demo-header {
+    width: 80%;
+}
+
+#gist {
+    width: 75%;
+}
+
+.chart-iframe {
+    width: 100%;
+    height: 600px;
+    border: none;
+}
+
+.map-chart-iframe {
+    width: 100%;
+    height: 500px;
+    border: none;
+}
+
+.gist .file-data {
+    font-size: 13px !important;
+}
+
+.gist .gist-data {
+     border-bottom: none !important; 
+}
+
+.gist .gist-meta {
+     display: none; 
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    background-color: #363432;
+    color: rgba(255,255,255,.5);
+}
+
+.container .text-muted {
+    margin: 20px 0;
+}
