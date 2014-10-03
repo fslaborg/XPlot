@@ -9,7 +9,6 @@ let expenses = ["2013", 400; "2014", 460; "2015", 1120; "2016", 540]
 let chart1 =
     sales
     |> Chart.Area
-    |> Chart.WithLabel "Sales"
     |> Chart.WithTitle "Company Sales"
     |> Chart.WithXTitle "Year"
     |> Chart.WithYTitle "Amount"

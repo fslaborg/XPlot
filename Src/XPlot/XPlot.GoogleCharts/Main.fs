@@ -13,15 +13,6 @@ open System
 open System.Diagnostics
 open System.IO
 
-//let sales = ["2013", 1000; "2014", 1170; "2015", 660; "2016", 1030]
-//let expenses = ["2013", 400; "2014", 460; "2015", 1120; "2016", 540]
-//
-//let data = [sales; expenses]
-//let dt = data.ToGoogleDataTable()
-//
-//dt.Build().GetJson()
-
-
 type ChartGallery =
     | Area
 
@@ -56,85 +47,18 @@ module Data =
 
         member __.WithName name = {__ with Name = name}
 
-    let sales =
-        ["2013", 1000; "2014", 1170; "2015", 660; "2016", 1030]
-        |> List.map (fun (x, y) -> x, y, 10)
-        |> List.map Datum.New
-        
-    let expenses =
-        ["2013", 400; "2014", 460; "2015", 1120; "2016", 540]
-        |> List.map (fun (x, y) -> x, y, 20)
-        |> List.map Datum.New
-
-    let salesSeries = Series.New (Some "Sales") sales
-    let expensesSeries = Series.New (Some "Expenses") expenses
-
-    let series = seq {yield salesSeries; yield expensesSeries}
-
-
-
-//    let dt = new DataTable()
-//    let labels =
-//        [
-//            for x in series -> x.Name
-//        ]
-//    let datum = Seq.head series |> fun x -> Seq.head x.Datums
-//    let firstColumnType =
-//        datum.X.GetTypeCode()
-//        |> function
-//        | TypeCode.Boolean -> ColumnType.Boolean
-//        | TypeCode.DateTime -> ColumnType.Datetime
-//        | TypeCode.String -> ColumnType.String
-//        | _ -> ColumnType.Number
-//        |> fun x -> dt.AddColumn(Column(x)) |> ignore
-//
-//    labels
-//    |> Seq.zip [yield datum.Y1.GetTypeCode(); if datum.Y2.IsSome then yield datum.Y2.Value.GetTypeCode()]
-//    |> Seq.iter (fun (typecode, label) ->
-//        let columnType =
-//            match typecode with
-//            | TypeCode.Boolean -> ColumnType.Boolean
-//            | TypeCode.DateTime -> ColumnType.Datetime
-//            | TypeCode.String -> ColumnType.String
-//            | _ -> ColumnType.Number
-//        let column = Column(columnType)
-//        if label.IsSome then column.Label <- label.Value
-//        dt.AddColumn column |> ignore)
-
-//    let inferColumnType isKey series =
-//        series.Datums
-//        |> Seq.head
-//        |> fun datum ->
-//            match isKey with
-//            | false -> datum.Y
-//            | true -> datum.X
-//        |> fun x -> x.GetTypeCode()
-//        |> function
-//        | TypeCode.Boolean -> ColumnType.Boolean
-//        | TypeCode.DateTime -> ColumnType.Datetime
-//        | TypeCode.String -> ColumnType.String
-//        | _ -> ColumnType.Number
-
-//    let keyColumnType = inferColumnType true
-//
-//    let valueColumnType = inferColumnType false
-
-    let makeDataTable (series:seq<Series>) =
+    let makeDataTable (series:seq<Series>) labels =
         let dt = new DataTable()
-    
-//        let labels =
-//            [
-//                for x in series -> x.Name
-//            ]
+            
         let datum = Seq.head series |> fun x -> Seq.head x.Datums
-        let firstColumnType =
-            datum.X.GetTypeCode()
-            |> function
-            | TypeCode.Boolean -> ColumnType.Boolean
-            | TypeCode.DateTime -> ColumnType.Datetime
-            | TypeCode.String -> ColumnType.String
-            | _ -> ColumnType.Number
-            |> fun x -> dt.AddColumn(Column(x)) |> ignore
+
+        datum.X.GetTypeCode()
+        |> function
+        | TypeCode.Boolean -> ColumnType.Boolean
+        | TypeCode.DateTime -> ColumnType.Datetime
+        | TypeCode.String -> ColumnType.String
+        | _ -> ColumnType.Number
+        |> fun x -> dt.AddColumn(Column(x)) |> ignore
 
         [
             yield datum.Y1.GetTypeCode()
@@ -142,7 +66,7 @@ module Data =
             if datum.Y2.IsSome then yield datum.Y2.Value.GetTypeCode()
             if datum.Y2.IsSome then yield datum.Y2.Value.GetTypeCode()
         ]
-        |> Seq.iter (fun typecode ->
+        |> Seq.iteri (fun idx typecode ->
             let columnType =
                 match typecode with
                 | TypeCode.Boolean -> ColumnType.Boolean
@@ -150,26 +74,10 @@ module Data =
                 | TypeCode.String -> ColumnType.String
                 | _ -> ColumnType.Number
             let column = Column(columnType)
-//            if label.IsSome then column.Label <- label.Value
+            match labels with
+            | None -> ()
+            | Some labelsSeq -> column.Label <- Seq.nth idx labelsSeq
             dt.AddColumn column |> ignore)
-//        dt.Columns
-//        // keys column
-//        let firstSeries = Seq.head series
-//        let firstColumn = Column(keyColumnType firstSeries)
-//        match firstSeries.Name with
-//        | None -> ()
-//        | Some name -> firstColumn.Label <- name
-//        dt.AddColumn firstColumn |> ignore
-    
-//        // values columns        
-//        series
-//        |> Seq.iter (fun x ->
-//            let column = Column(valueColumnType x)
-//            match x.Name with
-//            | None -> ()
-//            | Some name -> column.Label <- name
-//            dt.AddColumn column |> ignore    
-//        )
 
         // table rows
         series
@@ -182,20 +90,14 @@ module Data =
             row.AddCell(Cell(key)) |> ignore
             values
             |> Seq.iter (fun value ->
-//                let row = dt.NewRow()
-//                row.AddCell(Cell(key)) |> ignore
                 value
                 |> Seq.iter (fun v ->
-//                    let row = dt.NewRow()
-//                    row.AddCell(Cell(key)) |> ignore
                     Cell(v)
                     |> row.AddCell
                     |> ignore
                 )
             )
             dt.AddRow row |> ignore
-
-    //        dt.AddRow row |> ignore
         )
         dt
 
@@ -1049,10 +951,12 @@ let template =
     </body>
 </html>"""
 
-type GoogleChart() =
+type GoogleChart() as this =
 
     [<DefaultValue>]
     val mutable private data : seq<Data.Series>
+
+    member val labels : seq<string> option = None with get, set
     
     [<DefaultValue>]
     val mutable private options : Options
@@ -1065,9 +969,10 @@ type GoogleChart() =
         Guid.NewGuid().ToString()
         with get, set
 
-    static member internal Create data options ``type`` =
+    static member internal Create data labels options ``type`` =
         let gc = GoogleChart()
         gc.data <- data
+        gc.labels <- labels
         gc.options <- options
         gc.``type`` <- ``type``
         gc
@@ -1076,7 +981,7 @@ type GoogleChart() =
     /// necessary line for loading the appropiate Google
     /// visualization package. 
     member __.Js =
-        let dt = makeDataTable __.data
+        let dt = makeDataTable __.data __.labels
         let dataJson = dt.GetJson()         
         let optionsJson = JsonConvert.SerializeObject(__.options)
         jsTemplate.Replace("{DATA}", dataJson)
@@ -1110,10 +1015,7 @@ type GoogleChart() =
 
     /// Sets the data series labels. Use this member if the
     /// chart's data is a series collection.
-    member __.WithLabels labels =
-        __.data <-
-            __.data
-            |> Seq.mapi (fun idx series -> series.WithName (labels |> Seq.nth idx |> Some))
+    member __.WithLabels labels = __.labels <- Some labels
 
     /// Sets the chart's title.
     member __.WithTitle title =
@@ -1155,32 +1057,36 @@ type Chart =
 
     /// <summary>Creates an area chart.</summary>
     /// <param name="data">The chart's data.</param>
-    /// <param name="Name">The data set name.</param>
+    /// <param name="Label">The data column label.</param>
     /// <param name="Options">The chart's options.</param>
-    static member Area(data:seq<#key * #value>, ?Name, ?Options) =
+    static member Area(data:seq<#key * #value>, ?Label:string, ?Options) =
         let data' =
             data
             |> Seq.map Datum.New
-            |> Series.New Name
-
-        GoogleChart.Create [data'] (defaultArg Options <| Configuration.Options()) Area
+            |> Series.New None
+        let labels =
+            match Label with
+            | None -> None
+            | Some label -> [label] |> List.toSeq |> Some
+        GoogleChart.Create [data'] labels (defaultArg Options <| Configuration.Options()) Area
 
     /// <summary>Creates an area chart.</summary>
     /// <param name="data">The chart's data.</param>
-    /// <param name="Name">The data sets names.</param>
+    /// <param name="Labels">The data clumns labels.</param>
     /// <param name="Options">The chart's options.</param>
-    static member Area(data:seq<#seq<'K * 'V>> when 'K :> key and 'V :> value, ?Names, ?Options) =
+    static member Area(data:seq<#seq<'K * 'V>> when 'K :> key and 'V :> value, ?Labels:seq<string>, ?Options) =
         let data' =
             data
-            |> Seq.mapi (fun idx x ->
+            |> Seq.map (fun x ->
                 x 
                 |> Seq.map Datum.New
-                |> fun datums ->
-                    match Names with
-                    | None -> Series.New None datums
-                    | Some names -> Series.New (Seq.nth idx names |> Some) datums)
+                |> Series.New None)
+//                |> fun datums ->
+//                    match Names with
+//                    | None -> Series.New None datums
+//                    | Some names -> Series.New (Seq.nth idx names |> Some) datums)
 
-        GoogleChart.Create data' (defaultArg Options <| Configuration.Options()) Area
+        GoogleChart.Create data' Labels (defaultArg Options <| Configuration.Options()) Area
         
 type Chart with
 
