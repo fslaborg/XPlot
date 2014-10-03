@@ -13,6 +13,15 @@ open System
 open System.Diagnostics
 open System.IO
 
+//let sales = ["2013", 1000; "2014", 1170; "2015", 660; "2016", 1030]
+//let expenses = ["2013", 400; "2014", 460; "2015", 1120; "2016", 540]
+//
+//let data = [sales; expenses]
+//let dt = data.ToGoogleDataTable()
+//
+//dt.Build().GetJson()
+
+
 type ChartGallery =
     | Area
 
@@ -29,10 +38,13 @@ module Data =
     type Datum =
         {
             X : key
-            Y : value
+            Y1 : value
+            Y2 : value option
         }
 
-        static member New(x, y) = {X = x; Y = y}
+        static member New(x, y) = {X = x; Y1 = y; Y2 = None}
+
+        static member New(x, y1, y2) = {X = x; Y1 = y1; Y2 = Some y2}
 
     type Series =
         {
@@ -44,61 +56,146 @@ module Data =
 
         member __.WithName name = {__ with Name = name}
 
-    let inferColumnType isKey series =
-        series.Datums
-        |> Seq.head
-        |> fun datum ->
-            match isKey with
-            | false -> datum.Y
-            | true -> datum.X
-        |> fun x -> x.GetTypeCode()
-        |> function
-        | TypeCode.Boolean -> ColumnType.Boolean
-        | TypeCode.DateTime -> ColumnType.Datetime
-        | TypeCode.String -> ColumnType.String
-        | _ -> ColumnType.Number
+    let sales =
+        ["2013", 1000; "2014", 1170; "2015", 660; "2016", 1030]
+        |> List.map (fun (x, y) -> x, y, 10)
+        |> List.map Datum.New
+        
+    let expenses =
+        ["2013", 400; "2014", 460; "2015", 1120; "2016", 540]
+        |> List.map (fun (x, y) -> x, y, 20)
+        |> List.map Datum.New
 
-    let keyColumnType = inferColumnType true
+    let salesSeries = Series.New (Some "Sales") sales
+    let expensesSeries = Series.New (Some "Expenses") expenses
 
-    let valueColumnType = inferColumnType false
+    let series = seq {yield salesSeries; yield expensesSeries}
+
+
+
+//    let dt = new DataTable()
+//    let labels =
+//        [
+//            for x in series -> x.Name
+//        ]
+//    let datum = Seq.head series |> fun x -> Seq.head x.Datums
+//    let firstColumnType =
+//        datum.X.GetTypeCode()
+//        |> function
+//        | TypeCode.Boolean -> ColumnType.Boolean
+//        | TypeCode.DateTime -> ColumnType.Datetime
+//        | TypeCode.String -> ColumnType.String
+//        | _ -> ColumnType.Number
+//        |> fun x -> dt.AddColumn(Column(x)) |> ignore
+//
+//    labels
+//    |> Seq.zip [yield datum.Y1.GetTypeCode(); if datum.Y2.IsSome then yield datum.Y2.Value.GetTypeCode()]
+//    |> Seq.iter (fun (typecode, label) ->
+//        let columnType =
+//            match typecode with
+//            | TypeCode.Boolean -> ColumnType.Boolean
+//            | TypeCode.DateTime -> ColumnType.Datetime
+//            | TypeCode.String -> ColumnType.String
+//            | _ -> ColumnType.Number
+//        let column = Column(columnType)
+//        if label.IsSome then column.Label <- label.Value
+//        dt.AddColumn column |> ignore)
+
+//    let inferColumnType isKey series =
+//        series.Datums
+//        |> Seq.head
+//        |> fun datum ->
+//            match isKey with
+//            | false -> datum.Y
+//            | true -> datum.X
+//        |> fun x -> x.GetTypeCode()
+//        |> function
+//        | TypeCode.Boolean -> ColumnType.Boolean
+//        | TypeCode.DateTime -> ColumnType.Datetime
+//        | TypeCode.String -> ColumnType.String
+//        | _ -> ColumnType.Number
+
+//    let keyColumnType = inferColumnType true
+//
+//    let valueColumnType = inferColumnType false
 
     let makeDataTable (series:seq<Series>) =
         let dt = new DataTable()
     
-        // keys column
-        let firstSeries = Seq.head series
-        let firstColumn = Column(keyColumnType firstSeries)
-        match firstSeries.Name with
-        | None -> ()
-        | Some name -> firstColumn.Label <- name
-        dt.AddColumn firstColumn |> ignore
+//        let labels =
+//            [
+//                for x in series -> x.Name
+//            ]
+        let datum = Seq.head series |> fun x -> Seq.head x.Datums
+        let firstColumnType =
+            datum.X.GetTypeCode()
+            |> function
+            | TypeCode.Boolean -> ColumnType.Boolean
+            | TypeCode.DateTime -> ColumnType.Datetime
+            | TypeCode.String -> ColumnType.String
+            | _ -> ColumnType.Number
+            |> fun x -> dt.AddColumn(Column(x)) |> ignore
+
+        [
+            yield datum.Y1.GetTypeCode()
+            yield datum.Y1.GetTypeCode()
+            if datum.Y2.IsSome then yield datum.Y2.Value.GetTypeCode()
+            if datum.Y2.IsSome then yield datum.Y2.Value.GetTypeCode()
+        ]
+        |> Seq.iter (fun typecode ->
+            let columnType =
+                match typecode with
+                | TypeCode.Boolean -> ColumnType.Boolean
+                | TypeCode.DateTime -> ColumnType.Datetime
+                | TypeCode.String -> ColumnType.String
+                | _ -> ColumnType.Number
+            let column = Column(columnType)
+//            if label.IsSome then column.Label <- label.Value
+            dt.AddColumn column |> ignore)
+//        dt.Columns
+//        // keys column
+//        let firstSeries = Seq.head series
+//        let firstColumn = Column(keyColumnType firstSeries)
+//        match firstSeries.Name with
+//        | None -> ()
+//        | Some name -> firstColumn.Label <- name
+//        dt.AddColumn firstColumn |> ignore
     
-        // values columns        
-        series
-        |> Seq.iter (fun x ->
-            let column = Column(valueColumnType x)
-            match x.Name with
-            | None -> ()
-            | Some name -> column.Label <- name
-            dt.AddColumn column |> ignore    
-        )
+//        // values columns        
+//        series
+//        |> Seq.iter (fun x ->
+//            let column = Column(valueColumnType x)
+//            match x.Name with
+//            | None -> ()
+//            | Some name -> column.Label <- name
+//            dt.AddColumn column |> ignore    
+//        )
 
         // table rows
         series
         |> Seq.map (fun x -> x.Datums)
         |> Seq.concat
         |> Seq.groupBy (fun datum -> datum.X)
-        |> Seq.map (fun (key, dps) -> key, dps |> Seq.map (fun dp -> dp.Y))
+        |> Seq.map (fun (key, dps) -> key, dps |> Seq.map (fun dp -> [yield dp.Y1; if dp.Y2.IsSome then yield dp.Y2.Value]))
         |> Seq.iter (fun (key, values) ->
             let row = dt.NewRow()
             row.AddCell(Cell(key)) |> ignore
             values
             |> Seq.iter (fun value ->
-                Cell(value)
-                |> row.AddCell
-                |> ignore
+//                let row = dt.NewRow()
+//                row.AddCell(Cell(key)) |> ignore
+                value
+                |> Seq.iter (fun v ->
+//                    let row = dt.NewRow()
+//                    row.AddCell(Cell(key)) |> ignore
+                    Cell(v)
+                    |> row.AddCell
+                    |> ignore
+                )
             )
             dt.AddRow row |> ignore
+
+    //        dt.AddRow row |> ignore
         )
         dt
 
