@@ -46,6 +46,52 @@ let chart3 =
     |> Chart.WithLegend true
     |> Chart.Show
 
+open System
+
+module Annotation =
+
+    let chart1 =
+        [
+            DateTime(2314, 2, 15), 12400, "", ""
+            DateTime(2314, 2, 16), 24045, "Lalibertines", "First encounter"
+            DateTime(2314, 2, 17), 35022, "Lalibertines", "They are very tall"
+            DateTime(2314, 2, 18), 12284, "Lalibertines", "Attack on our crew!"
+            DateTime(2314, 2, 19), 8476, "Lalibertines", "Heavy casualties"
+            DateTime(2314, 2, 20), 0, "Lalibertines", "All crew lost"
+        ]
+        |> Chart.Annotation
+        |> Chart.WithOptions(Options(displayAnnotations = true))
+        |> Chart.WithLabels ["Kepler-22b mission"; "Kepler-22b title"; "Kepler-22b text"]
+        |> Chart.Show
+
+    let chart2 =
+        let kepler =
+            [
+                DateTime(2314, 2, 15), 12400, "", ""
+                DateTime(2314, 2, 16), 24045, "Lalibertines", "First encounter"
+                DateTime(2314, 2, 17), 35022, "Lalibertines", "They are very tall"
+                DateTime(2314, 2, 18), 12284, "Lalibertines", "Attack on our crew!"
+                DateTime(2314, 2, 19), 8476, "Lalibertines", "Heavy casualties"
+                DateTime(2314, 2, 20), 0, "Lalibertines", "All crew lost"
+            ]
+        let gliese =
+            [
+                DateTime(2314, 2, 15), 10645, "", ""
+                DateTime(2314, 2, 16), 12374, "", ""
+                DateTime(2314, 2, 17), 15766, "Gallantors", "First Encounter"
+                DateTime(2314, 2, 18), 34334, "Gallantors", "Statement of shared principles"
+                DateTime(2314, 2, 19), 66467, "Gallantors", "Mysteries revealed"
+                DateTime(2314, 2, 20), 79463, "Gallantors", "Omniscience achieved"
+            ]
+        [kepler; gliese]
+        |> Chart.Annotation
+        |> Chart.WithOptions(Options(displayAnnotations = true))
+        |> Chart.WithLabels
+            [
+                "Kepler-22b mission"; "Kepler-22b title"; "Kepler-22b text"
+                "Gliese 163 mission"; "Gliese title"; "Gliese text"            
+            ]
+        |> Chart.Show
 
 
 

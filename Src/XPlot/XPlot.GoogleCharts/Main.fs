@@ -14,6 +14,7 @@ open System.Diagnostics
 open System.IO
 
 type ChartGallery =
+    | Annotation
     | Area
 
     override __.ToString() =
@@ -31,11 +32,14 @@ module Data =
             X : key
             Y1 : value
             Y2 : value option
+            Y3 : value option
         }
 
-        static member New(x, y) = {X = x; Y1 = y; Y2 = None}
+        static member New(x, y) = {X = x; Y1 = y; Y2 = None; Y3 = None}
 
-        static member New(x, y1, y2) = {X = x; Y1 = y1; Y2 = Some y2}
+        static member New(x, y1, y2) = {X = x; Y1 = y1; Y2 = Some y2; Y3 = None}
+
+        static member New(x, y1, y2, y3) = {X = x; Y1 = y1; Y2 = Some y2; Y3 = Some y3}
 
     type Series =
         {
@@ -60,11 +64,14 @@ module Data =
         | _ -> ColumnType.Number
         |> fun x -> dt.AddColumn(Column(x)) |> ignore
 
+        
         [
-            yield datum.Y1.GetTypeCode()
-            yield datum.Y1.GetTypeCode()
-            if datum.Y2.IsSome then yield datum.Y2.Value.GetTypeCode()
-            if datum.Y2.IsSome then yield datum.Y2.Value.GetTypeCode()
+            for x in 1 .. Seq.length series do
+                yield datum.Y1.GetTypeCode()
+//            for x in 1 .. Seq.length series do
+                if datum.Y2.IsSome then yield datum.Y2.Value.GetTypeCode()
+//            for x in 1 .. Seq.length series do                
+                if datum.Y3.IsSome then yield datum.Y3.Value.GetTypeCode()
         ]
         |> Seq.iteri (fun idx typecode ->
             let columnType =
@@ -84,7 +91,7 @@ module Data =
         |> Seq.map (fun x -> x.Datums)
         |> Seq.concat
         |> Seq.groupBy (fun datum -> datum.X)
-        |> Seq.map (fun (key, dps) -> key, dps |> Seq.map (fun dp -> [yield dp.Y1; if dp.Y2.IsSome then yield dp.Y2.Value]))
+        |> Seq.map (fun (key, dps) -> key, dps |> Seq.map (fun dp -> [yield dp.Y1; if dp.Y2.IsSome then yield dp.Y2.Value; if dp.Y3.IsSome then yield dp.Y3.Value]))
         |> Seq.iter (fun (key, values) ->
             let row = dt.NewRow()
             row.AddCell(Cell(key)) |> ignore
@@ -742,6 +749,30 @@ module Configuration =
         let mutable vAxesField : Axis [] option = None
         let mutable vAxisField : Axis option = None
         let mutable widthField : int option = Some 900
+        // Annotation
+        let mutable allowHtmlField : bool option = None
+        let mutable allValuesSuffixField : string option = None
+        let mutable annotationsWidthField : int option = None
+        let mutable dateFormatField : string option = None
+        let mutable displayAnnotationsField : bool option = None
+        let mutable displayAnnotationsFilterField : bool option = None
+        let mutable displayDateBarSeparatorField : bool option = None
+        let mutable displayExactValuesField : bool option = None
+        let mutable displayLegendDotsField : bool option = None
+        let mutable displayLegendValuesField : bool option = None
+        let mutable displayRangeSelectorField : bool option = None
+        let mutable displayZoomButtonsField : bool option = None
+        let mutable fillField : int option = None
+        let mutable legendPositionField : string option = None
+        let mutable maxField : int option = None
+        let mutable minField : int option = None
+        let mutable numberFormatsField : string option = None
+        let mutable scaleColumnsField : int [] option = None
+        let mutable scaleFormatField : string option = None
+        let mutable scaleTypeField : string option = None
+        let mutable thicknessField : int option = None
+        let mutable zoomEndTimeField : DateTime option = None
+        let mutable zoomStartTimeField : DateTime option = None
 
         member __.aggregationTarget
             with get() = aggregationTargetField.Value
@@ -887,6 +918,98 @@ module Configuration =
             with get() = widthField.Value
             and set(value) = widthField <- Some value
 
+        member __.allowHtml
+            with get() = allowHtmlField.Value
+            and set(value) = allowHtmlField <- Some value
+
+        member __.allValuesSuffix
+            with get() = allValuesSuffixField.Value
+            and set(value) = allValuesSuffixField <- Some value
+
+        member __.annotationsWidth
+            with get() = annotationsWidthField.Value
+            and set(value) = annotationsWidthField <- Some value
+
+        member __.dateFormat
+            with get() = dateFormatField.Value
+            and set(value) = dateFormatField <- Some value
+
+        member __.displayAnnotations
+            with get() = displayAnnotationsField.Value
+            and set(value) = displayAnnotationsField <- Some value
+
+        member __.displayAnnotationsFilter
+            with get() = displayAnnotationsFilterField.Value
+            and set(value) = displayAnnotationsFilterField <- Some value
+
+        member __.displayDateBarSeparator
+            with get() = displayDateBarSeparatorField.Value
+            and set(value) = displayDateBarSeparatorField <- Some value
+
+        member __.displayExactValues
+            with get() = displayExactValuesField.Value
+            and set(value) = displayExactValuesField <- Some value
+
+        member __.displayLegendDots
+            with get() = displayLegendDotsField.Value
+            and set(value) = displayLegendDotsField <- Some value
+
+        member __.displayLegendValues
+            with get() = displayLegendValuesField.Value
+            and set(value) = displayLegendValuesField <- Some value
+
+        member __.displayRangeSelector
+            with get() = displayRangeSelectorField.Value
+            and set(value) = displayRangeSelectorField <- Some value
+
+        member __.displayZoomButtons
+            with get() = displayZoomButtonsField.Value
+            and set(value) = displayZoomButtonsField <- Some value
+
+        member __.fill
+            with get() = fillField.Value
+            and set(value) = fillField <- Some value
+
+        member __.legendPosition
+            with get() = legendPositionField.Value
+            and set(value) = legendPositionField <- Some value
+
+        member __.max
+            with get() = maxField.Value
+            and set(value) = maxField <- Some value
+
+        member __.min
+            with get() = minField.Value
+            and set(value) = minField <- Some value
+
+        member __.numberFormats
+            with get() = numberFormatsField.Value
+            and set(value) = numberFormatsField <- Some value
+
+        member __.scaleColumns
+            with get() = scaleColumnsField.Value
+            and set(value) = scaleColumnsField <- Some value
+
+        member __.scaleFormat
+            with get() = scaleFormatField.Value
+            and set(value) = scaleFormatField <- Some value
+
+        member __.scaleType
+            with get() = scaleTypeField.Value
+            and set(value) = scaleTypeField <- Some value
+
+        member __.thickness
+            with get() = thicknessField.Value
+            and set(value) = thicknessField <- Some value
+
+        member __.zoomEndTime
+            with get() = zoomEndTimeField.Value
+            and set(value) = zoomEndTimeField <- Some value
+
+        member __.zoomStartTime
+            with get() = zoomStartTimeField.Value
+            and set(value) = zoomStartTimeField <- Some value
+
         member __.ShouldSerializeaggregationTarget() = not aggregationTargetField.IsNone
         member __.ShouldSerializeanimation() = not animationField.IsNone
         member __.ShouldSerializeannotations() = not annotationsField.IsNone
@@ -923,6 +1046,29 @@ module Configuration =
         member __.ShouldSerializevAxes() = not vAxesField.IsNone
         member __.ShouldSerializevAxis() = not vAxisField.IsNone
         member __.ShouldSerializewidth() = not widthField.IsNone
+        member __.ShouldSerializeallowHtml() = not allowHtmlField.IsNone
+        member __.ShouldSerializeallValuesSuffix() = not allValuesSuffixField.IsNone
+        member __.ShouldSerializeannotationsWidth() = not annotationsWidthField.IsNone
+        member __.ShouldSerializedateFormat() = not dateFormatField.IsNone
+        member __.ShouldSerializedisplayAnnotations() = not displayAnnotationsField.IsNone
+        member __.ShouldSerializedisplayAnnotationsFilter() = not displayAnnotationsFilterField.IsNone
+        member __.ShouldSerializedisplayDateBarSeparator() = not displayDateBarSeparatorField.IsNone
+        member __.ShouldSerializedisplayExactValues() = not displayExactValuesField.IsNone
+        member __.ShouldSerializedisplayLegendDots() = not displayLegendDotsField.IsNone
+        member __.ShouldSerializedisplayLegendValues() = not displayLegendValuesField.IsNone
+        member __.ShouldSerializedisplayRangeSelector() = not displayRangeSelectorField.IsNone
+        member __.ShouldSerializedisplayZoomButtons() = not displayZoomButtonsField.IsNone
+        member __.ShouldSerializefill() = not fillField.IsNone
+        member __.ShouldSerializelegendPosition() = not legendPositionField.IsNone
+        member __.ShouldSerializemax() = not maxField.IsNone
+        member __.ShouldSerializemin() = not minField.IsNone
+        member __.ShouldSerializenumberFormats() = not numberFormatsField.IsNone
+        member __.ShouldSerializescaleColumns() = not scaleColumnsField.IsNone
+        member __.ShouldSerializescaleFormat() = not scaleFormatField.IsNone
+        member __.ShouldSerializescaleType() = not scaleTypeField.IsNone
+        member __.ShouldSerializethickness() = not thicknessField.IsNone
+        member __.ShouldSerializezoomEndTime() = not zoomEndTimeField.IsNone
+        member __.ShouldSerializezoomStartTime() = not zoomStartTimeField.IsNone
 
 let jsTemplate =
     """google.setOnLoadCallback(drawChart);
@@ -951,7 +1097,7 @@ let template =
     </body>
 </html>"""
 
-type GoogleChart() as this =
+type GoogleChart() =
 
     [<DefaultValue>]
     val mutable private data : seq<Data.Series>
@@ -993,6 +1139,7 @@ type GoogleChart() as this =
     member __.Html =
         let packages =
             match __.``type`` with
+            | Annotation -> "annotationchart"
             | Area -> "corechart"
         template.Replace("{PACKAGES}", packages)
             .Replace("{JS}", __.Js)
@@ -1057,6 +1204,30 @@ type Chart =
 
     /// <summary>Creates an area chart.</summary>
     /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">The data columns label.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Annotation(data:seq<DateTime * #value * string * string>, ?Labels, ?Options) =
+        let data' =
+            data
+            |> Seq.map Datum.New
+            |> Series.New None
+        GoogleChart.Create [data'] Labels (defaultArg Options <| Configuration.Options()) Annotation
+
+    /// <summary>Creates an area chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">The data columns label.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Annotation(data:seq<#seq<'K * 'V * string * string>> when 'K :> key and 'V :> value, ?Labels, ?Options) =
+        let data' =
+            data
+            |> Seq.map (fun x ->
+                x 
+                |> Seq.map Datum.New
+                |> Series.New None)
+        GoogleChart.Create data' Labels (defaultArg Options <| Configuration.Options()) Annotation
+
+    /// <summary>Creates an area chart.</summary>
+    /// <param name="data">The chart's data.</param>
     /// <param name="Label">The data column label.</param>
     /// <param name="Options">The chart's options.</param>
     static member Area(data:seq<#key * #value>, ?Label:string, ?Options) =
@@ -1081,11 +1252,6 @@ type Chart =
                 x 
                 |> Seq.map Datum.New
                 |> Series.New None)
-//                |> fun datums ->
-//                    match Names with
-//                    | None -> Series.New None datums
-//                    | Some names -> Series.New (Seq.nth idx names |> Some) datums)
-
         GoogleChart.Create data' Labels (defaultArg Options <| Configuration.Options()) Area
         
 type Chart with
