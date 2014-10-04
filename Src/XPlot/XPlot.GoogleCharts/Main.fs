@@ -16,6 +16,7 @@ open System.IO
 type ChartGallery =
     | Annotation
     | Area
+    | Bar
 
     override __.ToString() =
         match FSharpValue.GetUnionFields(__, typeof<ChartGallery>) with
@@ -711,6 +712,16 @@ module Configuration =
         member __.ShouldSerializetextStyle() = not textStyleField.IsNone
         member __.ShouldSerializetrigger() = not triggerField.IsNone
 
+    type Bar() =
+
+        let mutable groupWidthField : string option = None
+        
+        member __.groupWidth
+            with get() = groupWidthField.Value
+            and set(value) = groupWidthField <- Some value
+
+        member __.ShouldSerializegroupWidth() = not groupWidthField.IsNone
+
     type Options() =
 
         let mutable aggregationTargetField : string option = None
@@ -773,6 +784,7 @@ module Configuration =
         let mutable thicknessField : int option = None
         let mutable zoomEndTimeField : DateTime option = None
         let mutable zoomStartTimeField : DateTime option = None
+        let mutable barField : Bar option = None
 
         member __.aggregationTarget
             with get() = aggregationTargetField.Value
@@ -1010,6 +1022,10 @@ module Configuration =
             with get() = zoomStartTimeField.Value
             and set(value) = zoomStartTimeField <- Some value
 
+        member __.bar
+            with get() = barField.Value
+            and set(value) = barField <- Some value
+
         member __.ShouldSerializeaggregationTarget() = not aggregationTargetField.IsNone
         member __.ShouldSerializeanimation() = not animationField.IsNone
         member __.ShouldSerializeannotations() = not annotationsField.IsNone
@@ -1069,6 +1085,7 @@ module Configuration =
         member __.ShouldSerializethickness() = not thicknessField.IsNone
         member __.ShouldSerializezoomEndTime() = not zoomEndTimeField.IsNone
         member __.ShouldSerializezoomStartTime() = not zoomStartTimeField.IsNone
+        member __.ShouldSerializebar() = not barField.IsNone
 
 //    let ``default`` =
 //        Options(
@@ -1150,7 +1167,7 @@ type GoogleChart() =
         let packages =
             match __.``type`` with
             | Annotation -> "annotationchart"
-            | Area -> "corechart"
+            | Area | Bar -> "corechart"
         template.Replace("{PACKAGES}", packages)
             .Replace("{JS}", __.Js)
             .Replace("{GUID}", __.Id)
@@ -1224,7 +1241,7 @@ type GoogleChart() =
 
 type Chart =
 
-    /// <summary>Creates an area chart.</summary>
+    /// <summary>Creates an annotation chart.</summary>
     /// <param name="data">The chart's data.</param>
     /// <param name="Labels">The data columns label.</param>
     /// <param name="Options">The chart's options.</param>
@@ -1235,7 +1252,7 @@ type Chart =
             |> Series.New None
         GoogleChart.Create [data'] Labels (defaultArg Options <| Configuration.Options()) Annotation
 
-    /// <summary>Creates an area chart.</summary>
+    /// <summary>Creates an annotation chart.</summary>
     /// <param name="data">The chart's data.</param>
     /// <param name="Labels">The data columns label.</param>
     /// <param name="Options">The chart's options.</param>
@@ -1275,6 +1292,34 @@ type Chart =
                 |> Seq.map Datum.New
                 |> Series.New None)
         GoogleChart.Create data' Labels (defaultArg Options <| Configuration.Options()) Area
+
+    /// <summary>Creates a bar chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Label">The data column label.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Bar(data:seq<#key * #value>, ?Label:string, ?Options) =
+        let data' =
+            data
+            |> Seq.map Datum.New
+            |> Series.New None
+        let labels =
+            match Label with
+            | None -> None
+            | Some label -> [label] |> List.toSeq |> Some
+        GoogleChart.Create [data'] labels (defaultArg Options <| Configuration.Options()) ChartGallery.Bar
+
+    /// <summary>Creates a bar chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">The data clumns labels.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Bar(data:seq<#seq<'K * 'V>> when 'K :> key and 'V :> value, ?Labels:seq<string>, ?Options) =
+        let data' =
+            data
+            |> Seq.map (fun x ->
+                x 
+                |> Seq.map Datum.New
+                |> Series.New None)
+        GoogleChart.Create data' Labels (defaultArg Options <| Configuration.Options()) ChartGallery.Bar
         
 type Chart with
 

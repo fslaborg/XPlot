@@ -94,3 +94,47 @@ module Area =
         |> Chart.WithLegend true
         |> Chart.Show
 
+module Bar =
+
+    let sales = ["2013", 1000; "2014", 1170; "2015", 660; "2016", 1030]
+    let expenses = ["2013", 400; "2014", 460; "2015", 1120; "2016", 540]
+
+    // single data series
+    let chart1 =
+        sales
+        |> Chart.Bar
+        |> Chart.WithTitle "Company Sales"
+        |> Chart.WithXTitle "Amount"
+        |> Chart.WithYTitle "Year"
+        |> Chart.Show
+
+    // multiple data series
+    let chart2 =
+        [sales; expenses]
+        |> Chart.Bar
+        |> Chart.WithLabels ["Sales"; "Expenses"]
+        |> Chart.WithTitle "Company Performance"
+        |> Chart.WithXTitle "Amount"
+        |> Chart.WithYTitle "Year"
+        |> Chart.WithLegend true
+        |> Chart.Show
+
+    // custom options
+    let options = Options()
+
+    options.title <- "Company Performance"
+
+    let vAxisOptions = Axis()
+    vAxisOptions.title <- "Year"
+    vAxisOptions.titleTextStyle <- TextStyle(color = "red")
+    options.vAxis <- vAxisOptions
+
+    let chart3 =
+        [sales; expenses]
+        |> Chart.Bar
+        |> Chart.WithLabels ["Sales"; "Expenses"]
+        |> Chart.WithOptions options
+        |> Chart.WithLegend true
+        |> Chart.Show
+
+
