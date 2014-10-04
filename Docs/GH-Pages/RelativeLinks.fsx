@@ -7,7 +7,7 @@ open System.IO
 open System.Text.RegularExpressions
 
 let linkPattern = "(href|src)=\"(.+?)\""
-let projectUrl = "http://tahahachana.github.io/FsPlot/"
+let projectUrl = "http://tahahachana.github.io/XPlot/"
 let path = Path.Combine(__SOURCE_DIRECTORY__, "bin\html")
 
 let updateLinks html =

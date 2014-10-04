@@ -730,10 +730,10 @@ module Configuration =
         let mutable fontNameField : string option = None
         let mutable forceIFrameField : bool option = None
         let mutable hAxisField : Axis option = None
-        let mutable heightField : int option = Some 500
+        let mutable heightField : int option = None
         let mutable interpolateNullsField : bool option = None
         let mutable isStackedField : bool option = None
-        let mutable legendField : Legend option = Some <| Legend(position = "none")
+        let mutable legendField : Legend option = Some <| Legend(position="none")
         let mutable lineWidthField : int option = None
         let mutable orientationField : string option = None
         let mutable pointShapeField : string option = None
@@ -748,7 +748,7 @@ module Configuration =
         let mutable tooltipField : Tooltip option = None
         let mutable vAxesField : Axis [] option = None
         let mutable vAxisField : Axis option = None
-        let mutable widthField : int option = Some 900
+        let mutable widthField : int option = None
         // Annotation
         let mutable allowHtmlField : bool option = None
         let mutable allValuesSuffixField : string option = None
@@ -1070,6 +1070,13 @@ module Configuration =
         member __.ShouldSerializezoomEndTime() = not zoomEndTimeField.IsNone
         member __.ShouldSerializezoomStartTime() = not zoomStartTimeField.IsNone
 
+//    let ``default`` =
+//        Options(
+//            height = 500,
+//            legend = Legend(position = "none"),
+//            width =900
+//        )
+
 let jsTemplate =
     """google.setOnLoadCallback(drawChart);
             function drawChart() {
@@ -1080,7 +1087,6 @@ let jsTemplate =
                 var chart = new google.visualization.{TYPE}(document.getElementById('{GUID}'));
                 chart.draw(data, options);
             }"""
-
 
 let template =
     """<html>
@@ -1093,7 +1099,7 @@ let template =
         </script>
     </head>
     <body>
-        <div id="{GUID}"></div>
+        <div id="{GUID}" style="width: {WIDTH}px; height: {HEIGHT}px;"></div>
     </body>
 </html>"""
 
@@ -1114,6 +1120,10 @@ type GoogleChart() =
     member val Id =
         Guid.NewGuid().ToString()
         with get, set
+
+    member val height = 500 with get, set
+
+    member val width = 900 with get, set
 
     static member internal Create data labels options ``type`` =
         let gc = GoogleChart()
@@ -1144,6 +1154,8 @@ type GoogleChart() =
         template.Replace("{PACKAGES}", packages)
             .Replace("{JS}", __.Js)
             .Replace("{GUID}", __.Id)
+            .Replace("{WIDTH}", string(__.width))
+            .Replace("{HEIGHT}", string(__.height))
 
     /// Displays the chart in the default browser.
     member __.Show() =
@@ -1184,15 +1196,25 @@ type GoogleChart() =
 
     /// Display/hide the legend.
     member __.WithLegend enabled =
-        match __.options.legend <> Unchecked.defaultof<Legend> with
+        match enabled with
         | false ->
-            match enabled with
-            | false -> __.options.legend <- Legend(position = "none")
-            | true -> __.options.legend <- Legend(position = "right")
+            try
+                __.options.legend.position <- "none"
+            with _ -> __.options.legend <- Legend(position = "none") 
         | true ->
-            match enabled with
-            | false -> __.options.legend.position <- "none"
-            | true -> __.options.legend.position <- "right"
+            try
+                __.options.legend.position <- "right"
+            with _ -> __.options.legend <- Legend(position = "right") 
+                
+//        match __.options.legend <> Unchecked.defaultof<Legend> with
+//        | false ->
+//            match enabled with
+//            | false -> __.options.legend <- Legend(position = "none")
+//            | true -> __.options.legend <- Legend(position = "right")
+//        | true ->
+//            match enabled with
+//            | false -> __.options.legend.position <- "none"
+//            | true -> __.options.legend.position <- "right"
 
     /// Sets the chart's container div id.
     member __.WithId newId = __.Id <- newId
@@ -1217,7 +1239,7 @@ type Chart =
     /// <param name="data">The chart's data.</param>
     /// <param name="Labels">The data columns label.</param>
     /// <param name="Options">The chart's options.</param>
-    static member Annotation(data:seq<#seq<'K * 'V * string * string>> when 'K :> key and 'V :> value, ?Labels, ?Options) =
+    static member Annotation(data:seq<#seq<DateTime * 'V * string * string>> when 'V :> value, ?Labels, ?Options) =
         let data' =
             data
             |> Seq.map (fun x ->

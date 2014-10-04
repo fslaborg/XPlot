@@ -60,6 +60,11 @@ module Site =
                 1
                 "Google Area Chart"
                 [Demo.New "a78621f0f95f4b411fa5" "Google Area Chart"]
+            chartSitelet
+                "/chart/google-annotation-chart"
+                2
+                "Google Annotation Chart"
+                [Demo.New "c5840517d75dcff6c83b" "Google Annotation Chart"]
         ]
 
 [<Sealed>]
@@ -68,10 +73,10 @@ type Website() =
         member this.Sitelet = Site.Main
         member this.Actions =
             [
-                Home
-                GoogleCharts
-                Highcharts
-                Chart 1
+                yield Home
+                yield GoogleCharts
+                yield Highcharts
+                for x in 1 .. 2 -> Chart x
             ]
 
 [<assembly: Website(typeof<Website>)>]
