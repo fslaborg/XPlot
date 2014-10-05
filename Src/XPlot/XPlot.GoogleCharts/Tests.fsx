@@ -159,3 +159,27 @@ module Bar =
         |> Chart.WithOptions options
         |> Chart.WithLabels ["Fantasy & Sci Fi"; "Romance"; "Mystery/Crime"; "General"; "Western"; "Literature"]
         |> Chart.Show
+
+module Bubble =
+
+    let lifeExpectancy = ["CAN", 80.66; "DEU", 79.84; "DNK", 78.6; "EGY", 72.73]
+    let fertilityRate = ["CAN", 1.67; "DEU", 1.36; "DNK", 1.84; "EGY", 2.78]
+
+    let options =
+        Options(
+            title = "Correlation between life expectancy and fertility rate",
+            hAxis = Axis(title = "Life Expectancy"),
+            vAxis = Axis(title = "Fertility Rate"),
+            bubble = Bubble(textStyle = TextStyle(fontSize = 11))
+        )
+
+    let chart =
+        [lifeExpectancy; fertilityRate]
+        |> Chart.Bubble
+        |> Chart.WithOptions options
+        |> Chart.WithLabels ["Life Expectancy"; "Fertility Rate"]
+        |> Chart.Show
+
+
+
+

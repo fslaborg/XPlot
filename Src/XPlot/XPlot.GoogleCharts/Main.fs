@@ -17,6 +17,7 @@ type ChartGallery =
     | Annotation
     | Area
     | Bar
+    | Bubble
 
     override __.ToString() =
         match FSharpValue.GetUnionFields(__, typeof<ChartGallery>) with
@@ -610,6 +611,7 @@ module Configuration =
         let mutable maxLinesField : int option = None
         let mutable positionField : string option = None
         let mutable textStyleField : TextStyle option = None
+        let mutable numberFormatField : string option = None
 
         member __.alignment
             with get() = alignmentField.Value
@@ -627,10 +629,15 @@ module Configuration =
             with get() = textStyleField.Value
             and set(value) = textStyleField <- Some value
 
+        member __.numberFormat
+            with get() = numberFormatField.Value
+            and set(value) = numberFormatField <- Some value
+
         member __.ShouldSerializealignment() = not alignmentField.IsNone
         member __.ShouldSerializemaxLines() = not maxLinesField.IsNone
         member __.ShouldSerializeposition() = not positionField.IsNone
         member __.ShouldSerializetextStyle() = not textStyleField.IsNone
+        member __.ShouldSerializenumberFormat() = not numberFormatField.IsNone
 
     type Series() =
 
@@ -722,6 +729,62 @@ module Configuration =
 
         member __.ShouldSerializegroupWidth() = not groupWidthField.IsNone
 
+    type Bubble() =
+
+        let mutable opacityField : float option = None
+        let mutable strokeField : string option = None
+        let mutable textStyleField : TextStyle option = None
+                
+        member __.opacity
+            with get() = opacityField.Value
+            and set(value) = opacityField <- Some value
+
+        member __.stroke
+            with get() = strokeField.Value
+            and set(value) = strokeField <- Some value
+
+        member __.textStyle
+            with get() = textStyleField.Value
+            and set(value) = textStyleField <- Some value
+
+        member __.ShouldSerializeopacity() = not opacityField.IsNone
+        member __.ShouldSerializestroke() = not strokeField.IsNone
+        member __.ShouldSerializetextStyle() = not textStyleField.IsNone
+
+    type ColorAxis() =
+
+        let mutable minValueField : int option = None
+        let mutable maxValueField : int option = None
+        let mutable valuesField : int [] option = None
+        let mutable colorsField : string [] option = None
+        let mutable legendField : Legend option = None
+        
+        member __.minValue
+            with get() = minValueField.Value
+            and set(value) = minValueField <- Some value
+
+        member __.maxValue
+            with get() = maxValueField.Value
+            and set(value) = maxValueField <- Some value
+
+        member __.values
+            with get() = valuesField.Value
+            and set(value) = valuesField <- Some value
+
+        member __.colors
+            with get() = colorsField.Value
+            and set(value) = colorsField <- Some value
+
+        member __.legend
+            with get() = legendField.Value
+            and set(value) = legendField <- Some value
+
+        member __.ShouldSerializeminValue() = not minValueField.IsNone
+        member __.ShouldSerializemaxValue() = not maxValueField.IsNone
+        member __.ShouldSerializevalues() = not valuesField.IsNone
+        member __.ShouldSerializecolors() = not colorsField.IsNone
+        member __.ShouldSerializelegend() = not legendField.IsNone
+
     type Options() =
 
         let mutable aggregationTargetField : string option = None
@@ -784,7 +847,11 @@ module Configuration =
         let mutable thicknessField : int option = None
         let mutable zoomEndTimeField : DateTime option = None
         let mutable zoomStartTimeField : DateTime option = None
+        // bar
         let mutable barField : Bar option = None
+        // bubble
+        let mutable bubbleField : Bubble option = None
+        let mutable colorAxisField : ColorAxis option = None
 
         member __.aggregationTarget
             with get() = aggregationTargetField.Value
@@ -1025,6 +1092,14 @@ module Configuration =
         member __.bar
             with get() = barField.Value
             and set(value) = barField <- Some value
+        
+        member __.bubble
+            with get() = bubbleField.Value
+            and set(value) = bubbleField <- Some value
+        
+        member __.colorAxis
+            with get() = colorAxisField.Value
+            and set(value) = colorAxisField <- Some value
 
         member __.ShouldSerializeaggregationTarget() = not aggregationTargetField.IsNone
         member __.ShouldSerializeanimation() = not animationField.IsNone
@@ -1086,6 +1161,9 @@ module Configuration =
         member __.ShouldSerializezoomEndTime() = not zoomEndTimeField.IsNone
         member __.ShouldSerializezoomStartTime() = not zoomStartTimeField.IsNone
         member __.ShouldSerializebar() = not barField.IsNone
+        member __.ShouldSerializebubble() = not bubbleField.IsNone
+        member __.ShouldSerializecolorAxis() = not colorAxisField.IsNone
+
 
 //    let ``default`` =
 //        Options(
@@ -1167,7 +1245,7 @@ type GoogleChart() =
         let packages =
             match __.``type`` with
             | Annotation -> "annotationchart"
-            | Area | Bar -> "corechart"
+            | Area | Bar | Bubble -> "corechart"
         template.Replace("{PACKAGES}", packages)
             .Replace("{JS}", __.Js)
             .Replace("{GUID}", __.Id)
@@ -1320,6 +1398,30 @@ type Chart =
                 |> Seq.map Datum.New
                 |> Series.New None)
         GoogleChart.Create data' Labels (defaultArg Options <| Configuration.Options()) ChartGallery.Bar
+
+    /// <summary>Creates a bubble chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">The data clumns labels.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Bubble(data:seq<string * #value>, ?Labels, ?Options) =
+        let data' =
+            data
+            |> Seq.map Datum.New
+            |> Series.New None
+        GoogleChart.Create [data'] Labels (defaultArg Options <| Configuration.Options()) ChartGallery.Bubble
+
+    /// <summary>Creates a bubble chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">The data clumns labels.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Bubble(data:seq<#seq<string * 'V>> when 'V :> value, ?Labels, ?Options) =
+        let data' =
+            data
+            |> Seq.map (fun x ->
+                x 
+                |> Seq.map Datum.New
+                |> Series.New None)
+        GoogleChart.Create data' Labels (defaultArg Options <| Configuration.Options()) ChartGallery.Bubble
         
 type Chart with
 
