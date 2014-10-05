@@ -18,10 +18,15 @@ type ChartGallery =
     | Area
     | Bar
     | Bubble
+    | Calendar
 
     override __.ToString() =
         match FSharpValue.GetUnionFields(__, typeof<ChartGallery>) with
-        | case, _ -> case.Name + "Chart"
+        | case, _ ->
+            let name = case.Name
+            match name with
+            | "Calendar" -> name
+            | _ -> name + "Chart"
 
 type key = IConvertible
 type value = IConvertible
@@ -800,6 +805,114 @@ module Configuration =
         member __.ShouldSerializecolors() = not colorsField.IsNone
         member __.ShouldSerializelegend() = not legendField.IsNone
 
+    type CellColor() =
+        
+        let mutable strokeField : string option = None
+        let mutable strokeOpacityField : float option = None
+        let mutable strokeWidthField : int option = None
+
+        member __.stroke
+            with get() = strokeField.Value
+            and set(value) = strokeField <- Some value
+
+        member __.strokeOpacity
+            with get() = strokeOpacityField.Value
+            and set(value) = strokeOpacityField <- Some value
+
+        member __.strokeWidth
+            with get() = strokeWidthField.Value
+            and set(value) = strokeWidthField <- Some value
+
+        member __.ShouldSerializestroke() = not strokeField.IsNone
+        member __.ShouldSerializestrokeOpacity() = not strokeOpacityField.IsNone
+        member __.ShouldSerializestrokeWidth() = not strokeWidthField.IsNone
+
+    type Calendar() =
+        
+        let mutable cellColorField : CellColor option = None
+        let mutable cellSizeField : int option = None
+        let mutable dayOfWeekLabelField : TextStyle option = None
+        let mutable dayOfWeekRightSpaceField : int option = None
+        let mutable daysOfWeekField : string option = None
+        let mutable focusedCellColorField : CellColor option = None
+        let mutable monthLabelField : TextStyle option = None
+        let mutable monthOutlineColorField : CellColor option = None
+        let mutable underMonthSpaceField : int option = None
+        let mutable underYearSpaceField : int option = None
+        let mutable unusedMonthOutlineColorField : CellColor option = None
+
+        member __.cellColor
+            with get() = cellColorField.Value
+            and set(value) = cellColorField <- Some value
+
+        member __.cellSize
+            with get() = cellSizeField.Value
+            and set(value) = cellSizeField <- Some value
+
+        member __.dayOfWeekLabel
+            with get() = dayOfWeekLabelField.Value
+            and set(value) = dayOfWeekLabelField <- Some value
+
+        member __.dayOfWeekRightSpace
+            with get() = dayOfWeekRightSpaceField.Value
+            and set(value) = dayOfWeekRightSpaceField <- Some value
+
+        member __.daysOfWeek
+            with get() = daysOfWeekField.Value
+            and set(value) = daysOfWeekField <- Some value
+
+        member __.focusedCellColor
+            with get() = focusedCellColorField.Value
+            and set(value) = focusedCellColorField <- Some value
+
+        member __.monthLabel
+            with get() = monthLabelField.Value
+            and set(value) = monthLabelField <- Some value
+
+        member __.monthOutlineColor
+            with get() = monthOutlineColorField.Value
+            and set(value) = monthOutlineColorField <- Some value
+
+        member __.underMonthSpace
+            with get() = underMonthSpaceField.Value
+            and set(value) = underMonthSpaceField <- Some value
+
+        member __.underYearSpace
+            with get() = underYearSpaceField.Value
+            and set(value) = underYearSpaceField <- Some value
+
+        member __.unusedMonthOutlineColor
+            with get() = unusedMonthOutlineColorField.Value
+            and set(value) = unusedMonthOutlineColorField <- Some value
+
+        member __.ShouldSerializecellColor() = not cellColorField.IsNone
+        member __.ShouldSerializecellSize() = not cellSizeField.IsNone
+        member __.ShouldSerializedayOfWeekLabel() = not dayOfWeekLabelField.IsNone
+        member __.ShouldSerializedayOfWeekRightSpace() = not dayOfWeekRightSpaceField.IsNone
+        member __.ShouldSerializedaysOfWeek() = not daysOfWeekField.IsNone
+        member __.ShouldSerializefocusedCellColor() = not focusedCellColorField.IsNone
+        member __.ShouldSerializemonthLabel() = not monthLabelField.IsNone
+        member __.ShouldSerializemonthOutlineColor() = not monthOutlineColorField.IsNone
+        member __.ShouldSerializeunderMonthSpace() = not underMonthSpaceField.IsNone
+        member __.ShouldSerializeunderYearSpace() = not underYearSpaceField.IsNone
+        member __.ShouldSerializeunusedMonthOutlineColor() = not unusedMonthOutlineColorField.IsNone
+
+    type NoDataPattern() =
+
+        let mutable backgroundColorField : string option = None
+        let mutable colorField : string option = None
+
+        member __.backgroundColor
+            with get() = backgroundColorField.Value
+            and set(value) = backgroundColorField <- Some value
+
+        member __.color
+            with get() = colorField.Value
+            and set(value) = colorField <- Some value
+
+        member __.ShouldSerializebackgroundColor() = not backgroundColorField.IsNone
+        member __.ShouldSerializecolor() = not colorField.IsNone
+        
     type Options() =
 
         let mutable aggregationTargetField : string option = None
@@ -867,6 +980,10 @@ module Configuration =
         // bubble
         let mutable bubbleField : Bubble option = None
         let mutable colorAxisField : ColorAxis option = None
+        // calendar
+        let mutable calendarField : Calendar option = None
+        let mutable noDataPatternField : NoDataPattern option = None
+
 
         member __.aggregationTarget
             with get() = aggregationTargetField.Value
@@ -1116,6 +1233,14 @@ module Configuration =
             with get() = colorAxisField.Value
             and set(value) = colorAxisField <- Some value
 
+        member __.calendar
+            with get() = calendarField.Value
+            and set(value) = calendarField <- Some value
+
+        member __.noDataPattern
+            with get() = noDataPatternField.Value
+            and set(value) = noDataPatternField <- Some value
+
         member __.ShouldSerializeaggregationTarget() = not aggregationTargetField.IsNone
         member __.ShouldSerializeanimation() = not animationField.IsNone
         member __.ShouldSerializeannotations() = not annotationsField.IsNone
@@ -1178,6 +1303,8 @@ module Configuration =
         member __.ShouldSerializebar() = not barField.IsNone
         member __.ShouldSerializebubble() = not bubbleField.IsNone
         member __.ShouldSerializecolorAxis() = not colorAxisField.IsNone
+        member __.ShouldSerializecalendar() = not calendarField.IsNone
+        member __.ShouldSerializenoDataPattern() = not noDataPatternField.IsNone
 
 
 //    let ``default`` =
@@ -1204,7 +1331,7 @@ let template =
         <title>Google Chart</title>
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
         <script type="text/javascript">
-            google.load("visualization", "1", {packages:["{PACKAGES}"]})
+            google.load("visualization", "{VERSION}", {packages:["{PACKAGES}"]})
             {JS}
         </script>
     </head>
@@ -1257,11 +1384,17 @@ type GoogleChart() =
 
     /// The chart's complete HTML code.
     member __.Html =
+        let version =
+            match __.``type`` with
+            | Calendar -> "1.1"            
+            | _ -> "1"
         let packages =
             match __.``type`` with
             | Annotation -> "annotationchart"
             | Area | Bar | Bubble -> "corechart"
-        template.Replace("{PACKAGES}", packages)
+            | Calendar -> "calendar"
+        template.Replace("{VERSION}", version)
+            .Replace("{PACKAGES}", packages)
             .Replace("{JS}", __.Js)
             .Replace("{GUID}", __.Id)
             .Replace("{WIDTH}", string(__.width))
@@ -1424,6 +1557,21 @@ type Chart =
             |> Seq.map Datum.New
             |> Series.New None
         GoogleChart.Create [data'] Labels (defaultArg Options <| Configuration.Options()) ChartGallery.Bubble
+     
+    /// <summary>Creates a calendar chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Label">The data column label.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Calendar(data:seq<DateTime * #value>, ?Label:string, ?Options) =
+        let data' =
+            data
+            |> Seq.map Datum.New
+            |> Series.New None
+        let labels =
+            match Label with
+            | None -> None
+            | Some label -> [label] |> List.toSeq |> Some
+        GoogleChart.Create [data'] labels (defaultArg Options <| Configuration.Options()) ChartGallery.Calendar
         
 type Chart with
 

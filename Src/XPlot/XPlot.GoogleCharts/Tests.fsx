@@ -189,6 +189,25 @@ module Bubble =
         |> Chart.WithLegend true
         |> Chart.Show
 
+module Calendar =
 
+    let rnd = Random()
 
+    let data =
+        [
+            for x in 1. .. 500. ->
+                DateTime(2013, 1, 9).AddDays(x), rnd.Next(1, 9)
+        ]
 
+    let options =
+        Options(
+            title = "GitHub Contributions",
+            height = 350
+        )
+
+    let chart =
+        data
+        |> Chart.Calendar
+        |> Chart.WithOptions options
+        |> Chart.Show
+            
