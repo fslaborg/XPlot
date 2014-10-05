@@ -7,7 +7,7 @@
     <ProjectGuid>{218f37b9-b1bd-433d-9178-dfa9fd779b78}</ProjectGuid>
     <WebSharperProject>Html</WebSharperProject>
     <WebSharperHtmlDirectory>$(MSBuildThisFileDirectory)bin\html</WebSharperHtmlDirectory>
-    <NuGetPackageImportStamp>64a3a39d</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>1a0e14cc</NuGetPackageImportStamp>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
@@ -47,10 +47,12 @@
     <None Include="Highcharts.html" />
     <None Include="Chart.html" />
     <None Include="RelativeLinks.fsx" />
-    <None Include="packages.config" />
     <None Include="screenshot.png" />
     <None Include="iframe\a78621f0f95f4b411fa5.html" />
     <None Include="iframe\c5840517d75dcff6c83b.html" />
+    <None Include="iframe\4874aebfce1f4b588f5e.html" />
+    <None Include="iframe\d07cbc8b0233ef94ebf8.html" />
+    <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />

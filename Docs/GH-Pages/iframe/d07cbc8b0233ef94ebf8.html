@@ -1,0 +1,21 @@
+﻿<html>
+<head>
+    <title>Google Chart</title>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        google.load("visualization", "1", { packages: ["corechart"] })
+        google.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data = new google.visualization.DataTable({ "cols": [{ "type": "string", "id": "Column 0" }, { "type": "number", "id": "Column 1", "label": "Life Expectancy" }, { "type": "number", "id": "Column 2", "label": "Fertility Rate" }], "rows": [{ "c": [{ "v": "CAN" }, { "v": 80.66 }, { "v": 1.67 }] }, { "c": [{ "v": "DEU" }, { "v": 79.84 }, { "v": 1.36 }] }, { "c": [{ "v": "DNK" }, { "v": 78.6 }, { "v": 1.84 }] }, { "c": [{ "v": "EGY" }, { "v": 72.73 }, { "v": 2.78 }] }] });
+
+            var options = { "hAxis": { "title": "Life Expectancy" }, "legend": { "position": "none" }, "title": "Correlation between life expectancy and fertility rate", "vAxis": { "title": "Fertility Rate" }, "bubble": { "textStyle": { "fontSize": 11 } } }
+
+            var chart = new google.visualization.BubbleChart(document.getElementById('6b7c3de1-eeeb-46e1-880d-d5afb6705760'));
+            chart.draw(data, options);
+        }
+    </script>
+</head>
+<body>
+    <div id="6b7c3de1-eeeb-46e1-880d-d5afb6705760" style="width: 900px; height: 500px;"></div>
+</body>
+</html>

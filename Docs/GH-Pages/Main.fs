@@ -56,15 +56,25 @@ module Site =
             Sitelet.Content "/google-charts" GoogleCharts View.googleCharts
             Sitelet.Content "/highcharts" Highcharts View.highcharts
             chartSitelet
-                "/chart/google-area-chart"
+                "/chart/google-annotation-chart"
                 1
+                "Google Annotation Chart"
+                [Demo.New "c5840517d75dcff6c83b" "Google Annotation Chart"]
+            chartSitelet
+                "/chart/google-area-chart"
+                2
                 "Google Area Chart"
                 [Demo.New "a78621f0f95f4b411fa5" "Google Area Chart"]
             chartSitelet
-                "/chart/google-annotation-chart"
-                2
-                "Google Annotation Chart"
-                [Demo.New "c5840517d75dcff6c83b" "Google Annotation Chart"]
+                "/chart/google-bar-chart"
+                3
+                "Google Bar Chart"
+                [Demo.New "4874aebfce1f4b588f5e" "Google Bar Chart"]
+            chartSitelet
+                "/chart/google-bubble-chart"
+                4
+                "Google Bubble Chart"
+                [Demo.New "d07cbc8b0233ef94ebf8" "Google Bubble Chart"]
         ]
 
 [<Sealed>]
@@ -76,7 +86,7 @@ type Website() =
                 yield Home
                 yield GoogleCharts
                 yield Highcharts
-                for x in 1 .. 2 -> Chart x
+                for x in 1 .. 4 -> Chart x
             ]
 
 [<assembly: Website(typeof<Website>)>]
