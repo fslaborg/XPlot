@@ -35,13 +35,16 @@ module Data =
             Y1 : value
             Y2 : value option
             Y3 : value option
+            Y4 : value option
         }
 
-        static member New(x, y) = {X = x; Y1 = y; Y2 = None; Y3 = None}
+        static member New(x, y) = {X = x; Y1 = y; Y2 = None; Y3 = None; Y4 = None}
 
-        static member New(x, y1, y2) = {X = x; Y1 = y1; Y2 = Some y2; Y3 = None}
+        static member New(x, y1, y2) = {X = x; Y1 = y1; Y2 = Some y2; Y3 = None; Y4 = None}
 
-        static member New(x, y1, y2, y3) = {X = x; Y1 = y1; Y2 = Some y2; Y3 = Some y3}
+        static member New(x, y1, y2, y3) = {X = x; Y1 = y1; Y2 = Some y2; Y3 = Some y3; Y4 = None}
+
+        static member New(x, y1, y2, y3, y4) = {X = x; Y1 = y1; Y2 = Some y2; Y3 = Some y3; Y4 = Some y4}
 
     type Series =
         {
@@ -53,6 +56,7 @@ module Data =
 
         member __.WithName name = {__ with Name = name}
 
+    // TODO: more elegant way to construct a data table
     let makeDataTable (series:seq<Series>) labels =
         let dt = new DataTable()
             
@@ -74,6 +78,8 @@ module Data =
                 if datum.Y2.IsSome then yield datum.Y2.Value.GetTypeCode()
 //            for x in 1 .. Seq.length series do                
                 if datum.Y3.IsSome then yield datum.Y3.Value.GetTypeCode()
+                if datum.Y4.IsSome then yield datum.Y4.Value.GetTypeCode()
+
         ]
         |> Seq.iteri (fun idx typecode ->
             let columnType =
@@ -93,7 +99,16 @@ module Data =
         |> Seq.map (fun x -> x.Datums)
         |> Seq.concat
         |> Seq.groupBy (fun datum -> datum.X)
-        |> Seq.map (fun (key, dps) -> key, dps |> Seq.map (fun dp -> [yield dp.Y1; if dp.Y2.IsSome then yield dp.Y2.Value; if dp.Y3.IsSome then yield dp.Y3.Value]))
+        |> Seq.map (fun (key, dps) ->
+            key, dps |> Seq.map (fun dp -> 
+                [
+                    yield dp.Y1
+                    if dp.Y2.IsSome then yield dp.Y2.Value
+                    if dp.Y3.IsSome then yield dp.Y3.Value
+                    if dp.Y4.IsSome then yield dp.Y4.Value
+                ]
+            )
+        )
         |> Seq.iter (fun (key, values) ->
             let row = dt.NewRow()
             row.AddCell(Cell(key)) |> ignore
@@ -1403,25 +1418,12 @@ type Chart =
     /// <param name="data">The chart's data.</param>
     /// <param name="Labels">The data clumns labels.</param>
     /// <param name="Options">The chart's options.</param>
-    static member Bubble(data:seq<string * #value>, ?Labels, ?Options) =
+    static member Bubble(data:seq<string * #value * #value * #value * #value>, ?Labels, ?Options) =
         let data' =
             data
             |> Seq.map Datum.New
             |> Series.New None
         GoogleChart.Create [data'] Labels (defaultArg Options <| Configuration.Options()) ChartGallery.Bubble
-
-    /// <summary>Creates a bubble chart.</summary>
-    /// <param name="data">The chart's data.</param>
-    /// <param name="Labels">The data clumns labels.</param>
-    /// <param name="Options">The chart's options.</param>
-    static member Bubble(data:seq<#seq<string * 'V>> when 'V :> value, ?Labels, ?Options) =
-        let data' =
-            data
-            |> Seq.map (fun x ->
-                x 
-                |> Seq.map Datum.New
-                |> Series.New None)
-        GoogleChart.Create data' Labels (defaultArg Options <| Configuration.Options()) ChartGallery.Bubble
         
 type Chart with
 
