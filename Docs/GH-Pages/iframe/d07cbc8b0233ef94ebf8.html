@@ -6,16 +6,16 @@
         google.load("visualization", "1", { packages: ["corechart"] })
         google.setOnLoadCallback(drawChart);
         function drawChart() {
-            var data = new google.visualization.DataTable({ "cols": [{ "type": "string", "id": "Column 0" }, { "type": "number", "id": "Column 1", "label": "Life Expectancy" }, { "type": "number", "id": "Column 2", "label": "Fertility Rate" }], "rows": [{ "c": [{ "v": "CAN" }, { "v": 80.66 }, { "v": 1.67 }] }, { "c": [{ "v": "DEU" }, { "v": 79.84 }, { "v": 1.36 }] }, { "c": [{ "v": "DNK" }, { "v": 78.6 }, { "v": 1.84 }] }, { "c": [{ "v": "EGY" }, { "v": 72.73 }, { "v": 2.78 }] }] });
+            var data = new google.visualization.DataTable({ "cols": [{ "type": "string", "id": "Column 0" }, { "type": "number", "id": "Column 1", "label": "Life Expectancy" }, { "type": "number", "id": "Column 2", "label": "Fertility Rat" }, { "type": "string", "id": "Column 3", "label": "Region" }, { "type": "number", "id": "Column 4", "label": "Population" }], "rows": [{ "c": [{ "v": "CAN" }, { "v": 80.66 }, { "v": 1.67 }, { "v": "North America" }, { "v": 33739900 }] }, { "c": [{ "v": "DEU" }, { "v": 79.84 }, { "v": 1.36 }, { "v": "Europe" }, { "v": 81902307 }] }, { "c": [{ "v": "DNK" }, { "v": 78.6 }, { "v": 1.84 }, { "v": "Europe" }, { "v": 5523095 }] }, { "c": [{ "v": "EGY" }, { "v": 72.73 }, { "v": 2.78 }, { "v": "Middle East" }, { "v": 79716203 }] }, { "c": [{ "v": "GBR" }, { "v": 80.05 }, { "v": 2 }, { "v": "Europe" }, { "v": 61801570 }] }, { "c": [{ "v": "RUS" }, { "v": 68.6 }, { "v": 1.54 }, { "v": "Europe" }, { "v": 141850000 }] }, { "c": [{ "v": "USA" }, { "v": 78.09 }, { "v": 2.05 }, { "v": "North America" }, { "v": 307007000 }] }] });
 
-            var options = { "hAxis": { "title": "Life Expectancy" }, "legend": { "position": "none" }, "title": "Correlation between life expectancy and fertility rate", "vAxis": { "title": "Fertility Rate" }, "bubble": { "textStyle": { "fontSize": 11 } } }
+            var options = { "hAxis": { "title": "Life Expectancy" }, "legend": { "position": "right" }, "title": "Correlation between life expectancy, fertility rate and population of some world countries (2010)", "vAxis": { "title": "Fertility Rate" }, "bubble": { "textStyle": { "fontSize": 11 } } }
 
-            var chart = new google.visualization.BubbleChart(document.getElementById('6b7c3de1-eeeb-46e1-880d-d5afb6705760'));
+            var chart = new google.visualization.BubbleChart(document.getElementById('cf4ab1c1-1db7-443b-9eb5-21bf84aa5b86'));
             chart.draw(data, options);
         }
     </script>
 </head>
 <body>
-    <div id="6b7c3de1-eeeb-46e1-880d-d5afb6705760" style="width: 900px; height: 500px;"></div>
+    <div id="cf4ab1c1-1db7-443b-9eb5-21bf84aa5b86" style="width: 900px; height: 500px;"></div>
 </body>
 </html>
