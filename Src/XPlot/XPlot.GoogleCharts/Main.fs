@@ -13,22 +13,6 @@ open System
 open System.Diagnostics
 open System.IO
 
-type ChartGallery =
-    | Annotation
-    | Area
-    | Bar
-    | Bubble
-    | Calendar
-    | Candlestick
-
-    override __.ToString() =
-        match FSharpValue.GetUnionFields(__, typeof<ChartGallery>) with
-        | case, _ ->
-            let name = case.Name
-            match name with
-            | "Calendar" -> name
-            | _ -> name + "Chart"
-
 type key = IConvertible
 type value = IConvertible
 
@@ -278,9 +262,14 @@ module Configuration =
 
     type Annotations() =
 
+        let mutable alwaysOutsideField : bool option = None
         let mutable boxStyleField : BoxStyle option = None
         let mutable highContrastField : bool option = None
         let mutable textStyleField : TextStyle option = None
+
+        member __.alwaysOutside
+            with get() = alwaysOutsideField.Value
+            and set(value) = alwaysOutsideField <- Some value
 
         member __.boxStyle
             with get() = boxStyleField.Value
@@ -294,6 +283,7 @@ module Configuration =
             with get() = textStyleField.Value
             and set(value) = textStyleField <- Some value
 
+        member __.ShouldSerializealwaysOutside() = not alwaysOutsideField.IsNone
         member __.ShouldSerializeboxStyle() = not boxStyleField.IsNone
         member __.ShouldSerializehighContrast() = not highContrastField.IsNone
         member __.ShouldSerializetextStyle() = not textStyleField.IsNone
@@ -1400,6 +1390,23 @@ let template =
     </body>
 </html>"""
 
+type ChartGallery =
+    | Annotation
+    | Area
+    | Bar
+    | Bubble
+    | Calendar
+    | Candlestick
+    | Column
+
+    override __.ToString() =
+        match FSharpValue.GetUnionFields(__, typeof<ChartGallery>) with
+        | case, _ ->
+            let name = case.Name
+            match name with
+            | "Calendar" -> name
+            | _ -> name + "Chart"
+
 type GoogleChart() =
 
     [<DefaultValue>]
@@ -1451,7 +1458,7 @@ type GoogleChart() =
         let packages =
             match __.``type`` with
             | Annotation -> "annotationchart"
-            | Area | Bar | Bubble | Candlestick -> "corechart"
+            | Area | Bar | Bubble | Candlestick | Column -> "corechart"
             | Calendar -> "calendar"
         template.Replace("{VERSION}", version)
             .Replace("{PACKAGES}", packages)
@@ -1656,6 +1663,34 @@ type Chart =
                 |> Seq.map Datum.New
                 |> Series.New None)
         GoogleChart.Create data' Labels (defaultArg Options <| Configuration.Options()) ChartGallery.Candlestick
+
+    /// <summary>Creates a column chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Label">The data column label.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Column(data:seq<#key * #value>, ?Label:string, ?Options) =
+        let data' =
+            data
+            |> Seq.map Datum.New
+            |> Series.New None
+        let labels =
+            match Label with
+            | None -> None
+            | Some label -> [label] |> List.toSeq |> Some
+        GoogleChart.Create [data'] labels (defaultArg Options <| Configuration.Options()) ChartGallery.Column
+
+    /// <summary>Creates a column chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">The data clumns labels.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Column(data:seq<#seq<'K * 'V>> when 'K :> key and 'V :> value, ?Labels:seq<string>, ?Options) =
+        let data' =
+            data
+            |> Seq.map (fun x ->
+                x 
+                |> Seq.map Datum.New
+                |> Series.New None)
+        GoogleChart.Create data' Labels (defaultArg Options <| Configuration.Options()) ChartGallery.Column
         
 type Chart with
 
