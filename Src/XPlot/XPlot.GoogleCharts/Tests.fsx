@@ -196,7 +196,7 @@ module Calendar =
     let data =
         [
             for x in 1. .. 500. ->
-                DateTime(2013, 1, 9).AddDays(x), rnd.Next(1, 9)
+                DateTime(2013, 1, 9).AddDays(x), rnd.Next(0, 9)
         ]
 
     let options =
@@ -210,4 +210,20 @@ module Calendar =
         |> Chart.Calendar
         |> Chart.WithOptions options
         |> Chart.Show
-            
+
+module Candlestick =
+    
+    let data =
+        [
+            "Mon", 20, 28, 38, 45
+            "Tue", 31, 38, 55, 66
+            "Wed", 50, 55, 77, 80
+            "Thu", 77, 77, 66, 50
+            "Fri", 68, 66, 22, 15        
+        ]
+        
+    let chart =
+        Chart.Candlestick data
+        |> Chart.Show     
+        
+              

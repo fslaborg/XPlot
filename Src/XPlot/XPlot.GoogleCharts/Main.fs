@@ -19,6 +19,7 @@ type ChartGallery =
     | Bar
     | Bubble
     | Calendar
+    | Candlestick
 
     override __.ToString() =
         match FSharpValue.GetUnionFields(__, typeof<ChartGallery>) with
@@ -659,6 +660,28 @@ module Configuration =
         member __.ShouldSerializetextStyle() = not textStyleField.IsNone
         member __.ShouldSerializenumberFormat() = not numberFormatField.IsNone
 
+    type CandleColor() =
+    
+        let mutable fillField : string option = None
+        let mutable strokeField : string option = None
+        let mutable strokeWidthField : int option = None
+
+        member __.fill
+            with get() = fillField.Value
+            and set(value) = fillField <- Some value
+
+        member __.stroke
+            with get() = strokeField.Value
+            and set(value) = strokeField <- Some value
+
+        member __.strokeWidth
+            with get() = strokeWidthField.Value
+            and set(value) = strokeWidthField <- Some value
+
+        member __.ShouldSerializefill() = not fillField.IsNone
+        member __.ShouldSerializestroke() = not strokeField.IsNone
+        member __.ShouldSerializestrokeWidth() = not strokeWidthField.IsNone
+
     type Series() =
 
         let mutable annotationsField : Annotations option = None
@@ -669,6 +692,9 @@ module Configuration =
         let mutable lineWidthField : int option = None
         let mutable areaOpacityField : float option = None
         let mutable visibleInLegendField : bool option = None
+        // Candlestick
+        let mutable fallingColorField : CandleColor option = None
+        let mutable risingColorField : CandleColor option = None
 
         member __.annotations
             with get() = annotationsField.Value
@@ -702,6 +728,14 @@ module Configuration =
             with get() = visibleInLegendField.Value
             and set(value) = visibleInLegendField <- Some value
 
+        member __.fallingColor
+            with get() = fallingColorField.Value
+            and set(value) = fallingColorField <- Some value
+
+        member __.risingColor
+            with get() = risingColorField.Value
+            and set(value) = risingColorField <- Some value
+
         member __.ShouldSerializeannotations() = not annotationsField.IsNone
         member __.ShouldSerializecolor() = not colorField.IsNone
         member __.ShouldSerializetargetAxisIndex() = not targetAxisIndexField.IsNone
@@ -710,6 +744,8 @@ module Configuration =
         member __.ShouldSerializelineWidth() = not lineWidthField.IsNone
         member __.ShouldSerializeareaOpacity() = not areaOpacityField.IsNone
         member __.ShouldSerializevisibleInLegend() = not visibleInLegendField.IsNone
+        member __.ShouldSerializefallingColor() = not fallingColorField.IsNone
+        member __.ShouldSerializerisingColor() = not risingColorField.IsNone
 
     type Tooltip() =
 
@@ -912,7 +948,30 @@ module Configuration =
 
         member __.ShouldSerializebackgroundColor() = not backgroundColorField.IsNone
         member __.ShouldSerializecolor() = not colorField.IsNone
-        
+           
+    type Candlestick() =
+
+        let mutable hollowIsRisingField : bool option = None
+        let mutable fallingColorField : CandleColor option = None
+        let mutable risingColorField : CandleColor option = None
+
+        member __.hollowIsRising
+            with get() = hollowIsRisingField.Value
+            and set(value) = hollowIsRisingField <- Some value
+
+        member __.fallingColor
+            with get() = fallingColorField.Value
+            and set(value) = fallingColorField <- Some value
+
+        member __.risingColor
+            with get() = risingColorField.Value
+            and set(value) = risingColorField <- Some value
+
+        member __.ShouldSerializehollowIsRising() = not hollowIsRisingField.IsNone
+        member __.ShouldSerializefallingColor() = not fallingColorField.IsNone
+        member __.ShouldSerializerisingColor() = not risingColorField.IsNone
+    
+            
     type Options() =
 
         let mutable aggregationTargetField : string option = None
@@ -975,15 +1034,16 @@ module Configuration =
         let mutable thicknessField : int option = None
         let mutable zoomEndTimeField : DateTime option = None
         let mutable zoomStartTimeField : DateTime option = None
-        // bar
+        // Bar
         let mutable barField : Bar option = None
-        // bubble
+        // Bubble
         let mutable bubbleField : Bubble option = None
         let mutable colorAxisField : ColorAxis option = None
-        // calendar
+        // Calendar
         let mutable calendarField : Calendar option = None
         let mutable noDataPatternField : NoDataPattern option = None
-
+        // Candlestick
+        let mutable candlestickField : Candlestick option = None
 
         member __.aggregationTarget
             with get() = aggregationTargetField.Value
@@ -1391,7 +1451,7 @@ type GoogleChart() =
         let packages =
             match __.``type`` with
             | Annotation -> "annotationchart"
-            | Area | Bar | Bubble -> "corechart"
+            | Area | Bar | Bubble | Candlestick -> "corechart"
             | Calendar -> "calendar"
         template.Replace("{VERSION}", version)
             .Replace("{PACKAGES}", packages)
@@ -1572,6 +1632,30 @@ type Chart =
             | None -> None
             | Some label -> [label] |> List.toSeq |> Some
         GoogleChart.Create [data'] labels (defaultArg Options <| Configuration.Options()) ChartGallery.Calendar
+ 
+    /// <summary>Creates a candlestick chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">The data clumns labels.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Candlestick(data:seq<#key * #value * #value * #value * #value>, ?Labels, ?Options) =
+        let data' =
+            data
+            |> Seq.map Datum.New
+            |> Series.New None
+        GoogleChart.Create [data'] Labels (defaultArg Options <| Configuration.Options()) ChartGallery.Candlestick
+
+    /// <summary>Creates a candlestick chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">The data clumns labels.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Candlestick(data:seq<#seq<'K * 'V * 'V * 'V * 'V>> when 'K :> key and 'V :> value, ?Labels, ?Options) =
+        let data' =
+            data
+            |> Seq.map (fun x ->
+                x 
+                |> Seq.map Datum.New
+                |> Series.New None)
+        GoogleChart.Create data' Labels (defaultArg Options <| Configuration.Options()) ChartGallery.Candlestick
         
 type Chart with
 
