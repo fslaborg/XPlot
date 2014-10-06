@@ -685,6 +685,9 @@ module Configuration =
         // Candlestick
         let mutable fallingColorField : CandleColor option = None
         let mutable risingColorField : CandleColor option = None
+        // Combo
+        let mutable curveTypeField : string option = None
+        let mutable typeField : string option = None
 
         member __.annotations
             with get() = annotationsField.Value
@@ -726,6 +729,14 @@ module Configuration =
             with get() = risingColorField.Value
             and set(value) = risingColorField <- Some value
 
+        member __.curveType
+            with get() = curveTypeField.Value
+            and set(value) = curveTypeField <- Some value
+
+        member __.``type``
+            with get() = typeField.Value
+            and set(value) = typeField <- Some value
+
         member __.ShouldSerializeannotations() = not annotationsField.IsNone
         member __.ShouldSerializecolor() = not colorField.IsNone
         member __.ShouldSerializetargetAxisIndex() = not targetAxisIndexField.IsNone
@@ -736,6 +747,8 @@ module Configuration =
         member __.ShouldSerializevisibleInLegend() = not visibleInLegendField.IsNone
         member __.ShouldSerializefallingColor() = not fallingColorField.IsNone
         member __.ShouldSerializerisingColor() = not risingColorField.IsNone
+        member __.ShouldSerializecurveType() = not curveTypeField.IsNone
+        member __.ShouldSerializetype() = not typeField.IsNone
 
     type Tooltip() =
 
@@ -1034,6 +1047,9 @@ module Configuration =
         let mutable noDataPatternField : NoDataPattern option = None
         // Candlestick
         let mutable candlestickField : Candlestick option = None
+        // Combo
+        let mutable curveTypeField : string option = None
+        let mutable seriesTypeField : string option = None
 
         member __.aggregationTarget
             with get() = aggregationTargetField.Value
@@ -1291,6 +1307,14 @@ module Configuration =
             with get() = noDataPatternField.Value
             and set(value) = noDataPatternField <- Some value
 
+        member __.curveType
+            with get() = curveTypeField.Value
+            and set(value) = curveTypeField <- Some value
+
+        member __.seriesType
+            with get() = seriesTypeField.Value
+            and set(value) = seriesTypeField <- Some value
+
         member __.ShouldSerializeaggregationTarget() = not aggregationTargetField.IsNone
         member __.ShouldSerializeanimation() = not animationField.IsNone
         member __.ShouldSerializeannotations() = not annotationsField.IsNone
@@ -1355,14 +1379,8 @@ module Configuration =
         member __.ShouldSerializecolorAxis() = not colorAxisField.IsNone
         member __.ShouldSerializecalendar() = not calendarField.IsNone
         member __.ShouldSerializenoDataPattern() = not noDataPatternField.IsNone
-
-
-//    let ``default`` =
-//        Options(
-//            height = 500,
-//            legend = Legend(position = "none"),
-//            width =900
-//        )
+        member __.ShouldSerializecurveType() = not curveTypeField.IsNone
+        member __.ShouldSerializeseriesType() = not curveTypeField.IsNone
 
 let jsTemplate =
     """google.setOnLoadCallback(drawChart);
@@ -1398,6 +1416,7 @@ type ChartGallery =
     | Calendar
     | Candlestick
     | Column
+    | Combo
 
     override __.ToString() =
         match FSharpValue.GetUnionFields(__, typeof<ChartGallery>) with
@@ -1458,8 +1477,8 @@ type GoogleChart() =
         let packages =
             match __.``type`` with
             | Annotation -> "annotationchart"
-            | Area | Bar | Bubble | Candlestick | Column -> "corechart"
             | Calendar -> "calendar"
+            | _ -> "corechart"
         template.Replace("{VERSION}", version)
             .Replace("{PACKAGES}", packages)
             .Replace("{JS}", __.Js)
@@ -1691,6 +1710,19 @@ type Chart =
                 |> Seq.map Datum.New
                 |> Series.New None)
         GoogleChart.Create data' Labels (defaultArg Options <| Configuration.Options()) ChartGallery.Column
+
+    /// <summary>Creates a combo chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">The data clumns labels.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Combo(data:seq<#seq<'K * 'V>> when 'K :> key and 'V :> value, ?Labels:seq<string>, ?Options) =
+        let data' =
+            data
+            |> Seq.map (fun x ->
+                x 
+                |> Seq.map Datum.New
+                |> Series.New None)
+        GoogleChart.Create data' Labels (defaultArg Options <| Configuration.Options()) ChartGallery.Combo
         
 type Chart with
 
