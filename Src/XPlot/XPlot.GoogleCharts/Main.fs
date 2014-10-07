@@ -1050,6 +1050,18 @@ module Configuration =
         // Combo
         let mutable curveTypeField : string option = None
         let mutable seriesTypeField : string option = None
+        // Gauge
+        let mutable greenColorField : string option = None
+        let mutable greenFromField : int option = None
+        let mutable greenToField : int option = None
+        let mutable majorTicksField : string [] option = None
+        let mutable minorTicksField : int option = None
+        let mutable redColorField : string option = None
+        let mutable redFromField : int option = None
+        let mutable redToField : int option = None
+        let mutable yellowColorField : string option = None
+        let mutable yellowFromField : int option = None
+        let mutable yellowToField : int option = None
 
         member __.aggregationTarget
             with get() = aggregationTargetField.Value
@@ -1315,6 +1327,51 @@ module Configuration =
             with get() = seriesTypeField.Value
             and set(value) = seriesTypeField <- Some value
 
+        member __.greenColor
+            with get() = greenColorField.Value
+            and set(value) = greenColorField <- Some value
+
+        member __.greenFrom
+            with get() = greenFromField.Value
+            and set(value) = greenFromField <- Some value
+
+        member __.greenTo
+            with get() = greenToField.Value
+            and set(value) = greenToField <- Some value
+
+
+        member __.majorTicks
+            with get() = majorTicksField.Value
+            and set(value) = majorTicksField <- Some value
+
+        member __.minorTicks
+            with get() = minorTicksField.Value
+            and set(value) = minorTicksField <- Some value
+
+        member __.redColor
+            with get() = redColorField.Value
+            and set(value) = redColorField <- Some value
+
+        member __.redFrom
+            with get() = redFromField.Value
+            and set(value) = redFromField <- Some value
+
+        member __.redTo
+            with get() = redToField.Value
+            and set(value) = redToField <- Some value
+
+        member __.yellowColor
+            with get() = yellowColorField.Value
+            and set(value) = yellowColorField <- Some value
+
+        member __.yellowFrom
+            with get() = yellowFromField.Value
+            and set(value) = yellowFromField <- Some value
+
+        member __.yellowTo
+            with get() = yellowFromField.Value
+            and set(value) = yellowFromField <- Some value
+
         member __.ShouldSerializeaggregationTarget() = not aggregationTargetField.IsNone
         member __.ShouldSerializeanimation() = not animationField.IsNone
         member __.ShouldSerializeannotations() = not annotationsField.IsNone
@@ -1381,6 +1438,17 @@ module Configuration =
         member __.ShouldSerializenoDataPattern() = not noDataPatternField.IsNone
         member __.ShouldSerializecurveType() = not curveTypeField.IsNone
         member __.ShouldSerializeseriesType() = not curveTypeField.IsNone
+        member __.ShouldSerializegreenColor() = not greenColorField.IsNone
+        member __.ShouldSerializegreenFrom() = not greenFromField.IsNone
+        member __.ShouldSerializegreenTo() = not greenToField.IsNone
+        member __.ShouldSerializemajorTicks() = not majorTicksField.IsNone
+        member __.ShouldSerializeminorTicks() = not minorTicksField.IsNone
+        member __.ShouldSerializeredColor() = not redColorField.IsNone
+        member __.ShouldSerializeredFrom() = not redFromField.IsNone
+        member __.ShouldSerializeredTo() = not redToField.IsNone
+        member __.ShouldSerializeyellowColor() = not yellowColorField.IsNone
+        member __.ShouldSerializeyellowFrom() = not yellowFromField.IsNone
+        member __.ShouldSerializeyellowTo() = not yellowFromField.IsNone
 
 let jsTemplate =
     """google.setOnLoadCallback(drawChart);
@@ -1417,6 +1485,7 @@ type ChartGallery =
     | Candlestick
     | Column
     | Combo
+    | Gauge
 
     override __.ToString() =
         match FSharpValue.GetUnionFields(__, typeof<ChartGallery>) with
@@ -1424,6 +1493,7 @@ type ChartGallery =
             let name = case.Name
             match name with
             | "Calendar" -> name
+            | "Gauge" -> name
             | _ -> name + "Chart"
 
 type GoogleChart() =
@@ -1478,6 +1548,7 @@ type GoogleChart() =
             match __.``type`` with
             | Annotation -> "annotationchart"
             | Calendar -> "calendar"
+            | Gauge -> "gauge"
             | _ -> "corechart"
         template.Replace("{VERSION}", version)
             .Replace("{PACKAGES}", packages)
@@ -1723,6 +1794,21 @@ type Chart =
                 |> Seq.map Datum.New
                 |> Series.New None)
         GoogleChart.Create data' Labels (defaultArg Options <| Configuration.Options()) ChartGallery.Combo
+
+    /// <summary>Creates a gauge chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Label">The data column label.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Gauge(data:seq<string * #value>, ?Label:string, ?Options) =
+        let data' =
+            data
+            |> Seq.map Datum.New
+            |> Series.New None
+        let labels =
+            match Label with
+            | None -> None
+            | Some label -> [label] |> List.toSeq |> Some
+        GoogleChart.Create [data'] labels (defaultArg Options <| Configuration.Options()) ChartGallery.Gauge
         
 type Chart with
 

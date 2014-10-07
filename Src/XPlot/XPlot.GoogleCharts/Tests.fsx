@@ -248,7 +248,7 @@ module Column =
         |> Chart.WithLegend true
         |> Chart.Show
 
-    let chart4 =
+    let chart2 =
         let fantasy = ["2010", 10; "2020", 16; "2030", 28]
         let romance = ["2010", 24; "2020", 22; "2030", 19]
         let mystery = ["2010", 20; "2020", 23; "2030", 29]
@@ -293,3 +293,23 @@ module Combo =
     |> Chart.Combo
     |> Chart.WithOptions options
     |> Chart.Show
+
+module Gauge =
+
+    let data = ["Memory", 80; "CPU", 55; "Network", 68]
+
+    let options =
+        Options(
+            width = 400,
+            height = 120,
+            redFrom = 90,
+            redTo = 100,
+            yellowFrom = 75,
+            yellowTo = 90,
+            minorTicks = 5
+        )
+
+    let chart =
+        Chart.Gauge data
+        |> Chart.WithOptions options
+        |> Chart.Show
