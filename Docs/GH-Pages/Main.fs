@@ -85,6 +85,16 @@ module Site =
                 6
                 "Google Candlestick Chart"
                 [Demo.New "b740f58188f4cddfc0ba" "Google Candlestick Chart"]
+            chartSitelet
+                "/chart/google-column-chart"
+                7
+                "Google Column Chart"
+                [Demo.New "b2135ec0e93d28295bbb" "Google Column Chart"]
+            chartSitelet
+                "/chart/google-combo-chart"
+                8
+                "Google Combo Chart"
+                [Demo.New "0cb2f60010398f1be9ab" "Google Combo Chart"]
         ]
 
 [<Sealed>]
@@ -96,7 +106,7 @@ type Website() =
                 yield Home
                 yield GoogleCharts
                 yield Highcharts
-                for x in 1 .. 6 -> Chart x
+                for x in 1 .. 8 -> Chart x
             ]
 
 [<assembly: Website(typeof<Website>)>]

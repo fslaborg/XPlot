@@ -1,0 +1,21 @@
+﻿<html>
+<head>
+    <title>Google Chart</title>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        google.load("visualization", "1", { packages: ["corechart"] })
+        google.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data = new google.visualization.DataTable({ "cols": [{ "type": "string", "id": "Column 0" }, { "type": "number", "id": "Column 1", "label": "Sales" }, { "type": "number", "id": "Column 2", "label": "Expenses" }], "rows": [{ "c": [{ "v": "2013" }, { "v": 1000 }, { "v": 400 }] }, { "c": [{ "v": "2014" }, { "v": 1170 }, { "v": 460 }] }, { "c": [{ "v": "2015" }, { "v": 660 }, { "v": 1120 }] }, { "c": [{ "v": "2016" }, { "v": 1030 }, { "v": 540 }] }] });
+
+            var options = { "hAxis": { "title": "Year", "titleTextStyle": { "color": "red" } }, "legend": { "position": "right" }, "title": "Company Performance" }
+
+            var chart = new google.visualization.ColumnChart(document.getElementById('a51c8304-4998-4c54-8dad-8185dded3b2f'));
+            chart.draw(data, options);
+        }
+    </script>
+</head>
+<body>
+    <div id="a51c8304-4998-4c54-8dad-8185dded3b2f" style="width: 900px; height: 500px;"></div>
+</body>
+</html>
