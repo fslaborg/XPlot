@@ -313,3 +313,93 @@ module Gauge =
         Chart.Gauge data
         |> Chart.WithOptions options
         |> Chart.Show
+
+module Geo =
+
+    let chart1 =
+        [
+            "Germany", 200
+            "United States", 300
+            "Brazil", 400
+            "Canada", 500
+            "France", 600
+            "RU", 700
+        ]
+        |> Chart.Geo
+        |> Chart.WithLabel "Popularity"
+        |> Chart.Show
+
+    // marker geochart
+    let data =
+        [
+            "Rome", 2761477, 1285.31
+            "Milan", 1324110, 181.76
+            "Naples", 959574, 117.27
+            "Turin", 907563, 130.17
+            "Palermo", 655875, 158.9
+            "Genoa", 607906, 243.60
+            "Bologna", 380181, 140.7
+            "Florence", 371282, 102.41
+            "Fiumicino", 67370, 213.44
+            "Anzio", 52192, 43.43
+            "Ciampino", 38262, 11.
+        ]
+
+    let options =
+        Options(
+            region = "IT",
+            displayMode = "markers",
+            colorAxis = ColorAxis(colors = [|"green"; "blue"|])
+        ) 
+
+    let chart =
+        data
+        |> Chart.Geo
+        |> Chart.WithLabels ["Population"; "Area"]
+        |> Chart.WithOptions options
+        |> Chart.Show
+
+
+    // Displaying Proportional Markers
+    let data' =
+        [
+            "France", 65700000, 50
+            "Germany", 81890000, 27
+            "Poland", 38540000, 23
+        ]
+
+    let options' =
+        Options(
+            sizeAxis = SizeAxis(minValue = 0, maxValue = 100),
+            region = "155",
+            displayMode = "markers",
+            colorAxis = ColorAxis(colors = [|"#e7711c"; "#4374e0"|])
+        ) 
+
+    let chart3 =
+        data'
+        |> Chart.Geo
+        |> Chart.WithLabels ["Population"; "Area Percentage"]
+        |> Chart.WithOptions options'
+        |> Chart.Show
+
+    // Text Geochart
+    let data'' =
+        [
+            "South America", 600
+            "Canada", 500
+            "France", 600
+            "Russia", 700
+            "Australia", 600
+        ]
+
+    let options'' = Options(displayMode = "text")
+     
+    let chart4 =
+        data''
+        |> Chart.Geo
+        |> Chart.WithLabel "Popularity"
+        |> Chart.WithOptions options''
+        |> Chart.Show
+
+

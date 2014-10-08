@@ -974,7 +974,49 @@ module Configuration =
         member __.ShouldSerializefallingColor() = not fallingColorField.IsNone
         member __.ShouldSerializerisingColor() = not risingColorField.IsNone
     
-            
+    type MagnifyingGlass()  =
+        let mutable enableField : bool option = None
+        let mutable zoomFactorField : float option = None
+
+        member __.enable
+            with get() = enableField.Value
+            and set(value) = enableField <- Some value
+
+        member __.zoomFactor
+            with get() = zoomFactorField.Value
+            and set(value) = zoomFactorField <- Some value
+
+        member __.ShouldSerializeenable() = not enableField.IsNone
+        member __.ShouldSerializezoomFactor() = not zoomFactorField.IsNone
+         
+    type SizeAxis() =
+        let mutable maxSizeField : int option = None
+        let mutable maxValueField : int option = None
+        let mutable minSizeField : int option = None
+        let mutable minValueField : int option = None
+
+        member __.maxSize
+            with get() = maxSizeField.Value
+            and set(value) = maxSizeField <- Some value
+
+        member __.maxValue
+            with get() = maxValueField.Value
+            and set(value) = maxValueField <- Some value
+
+        member __.minSize
+            with get() = minSizeField.Value
+            and set(value) = minSizeField <- Some value
+
+        member __.minValue
+            with get() = minValueField.Value
+            and set(value) = minValueField <- Some value
+
+        member __.ShouldSerializemaxSize() = not maxSizeField.IsNone
+        member __.ShouldSerializemaxValue() = not maxValueField.IsNone
+        member __.ShouldSerializeminSize() = not minSizeField.IsNone
+        member __.ShouldSerializeminValue() = not minValueField.IsNone
+
+                   
     type Options() =
 
         let mutable aggregationTargetField : string option = None
@@ -1062,6 +1104,17 @@ module Configuration =
         let mutable yellowColorField : string option = None
         let mutable yellowFromField : int option = None
         let mutable yellowToField : int option = None
+        // Geo
+        let mutable datalessRegionColorField : string option = None
+        let mutable displayModeField : string option = None
+        let mutable domainField : string option = None
+        let mutable enableRegionInteractivityField : bool option = None
+        let mutable keepAspectRatioField : bool option = None
+        let mutable regionField : string option = None
+        let mutable magnifyingGlassField : MagnifyingGlass option = None
+        let mutable markerOpacityField : float option = None
+        let mutable resolutionField : string option = None
+        let mutable sizeAxisField : SizeAxis option = None
 
         member __.aggregationTarget
             with get() = aggregationTargetField.Value
@@ -1372,6 +1425,47 @@ module Configuration =
             with get() = yellowFromField.Value
             and set(value) = yellowFromField <- Some value
 
+
+        member __.datalessRegionColor
+            with get() = datalessRegionColorField.Value
+            and set(value) = datalessRegionColorField <- Some value
+        
+        member __.displayMode
+            with get() = displayModeField.Value
+            and set(value) = displayModeField <- Some value
+
+        member __.domain
+            with get() = domainField.Value
+            and set(value) = domainField <- Some value
+
+        member __.enableRegionInteractivity
+            with get() = enableRegionInteractivityField.Value
+            and set(value) = enableRegionInteractivityField <- Some value
+
+        member __.keepAspectRatio
+            with get() = keepAspectRatioField.Value
+            and set(value) = keepAspectRatioField <- Some value
+
+        member __.region
+            with get() = regionField.Value
+            and set(value) = regionField <- Some value
+
+        member __.magnifyingGlass
+            with get() = magnifyingGlassField.Value
+            and set(value) = magnifyingGlassField <- Some value
+
+        member __.markerOpacity
+            with get() = markerOpacityField.Value
+            and set(value) = markerOpacityField <- Some value
+
+        member __.resolution
+            with get() = resolutionField.Value
+            and set(value) = resolutionField <- Some value
+
+        member __.sizeAxis
+            with get() = sizeAxisField.Value
+            and set(value) = sizeAxisField <- Some value
+
         member __.ShouldSerializeaggregationTarget() = not aggregationTargetField.IsNone
         member __.ShouldSerializeanimation() = not animationField.IsNone
         member __.ShouldSerializeannotations() = not annotationsField.IsNone
@@ -1449,6 +1543,16 @@ module Configuration =
         member __.ShouldSerializeyellowColor() = not yellowColorField.IsNone
         member __.ShouldSerializeyellowFrom() = not yellowFromField.IsNone
         member __.ShouldSerializeyellowTo() = not yellowFromField.IsNone
+        member __.ShouldSerializedatalessRegionColor() = not datalessRegionColorField.IsNone
+        member __.ShouldSerializedisplayMode() = not displayModeField.IsNone
+        member __.ShouldSerializedomain() = not domainField.IsNone
+        member __.ShouldSerializeenableRegionInteractivity() = not enableRegionInteractivityField.IsNone
+        member __.ShouldSerializekeepAspectRatio() = not keepAspectRatioField.IsNone
+        member __.ShouldSerializeregion() = not regionField.IsNone
+        member __.ShouldSerializemagnifyingGlass() = not magnifyingGlassField.IsNone
+        member __.ShouldSerializemarkerOpacity() = not markerOpacityField.IsNone
+        member __.ShouldSerializeresolution() = not resolutionField.IsNone
+        member __.ShouldSerializesizeAxis() = not sizeAxisField.IsNone
 
 let jsTemplate =
     """google.setOnLoadCallback(drawChart);
@@ -1486,6 +1590,7 @@ type ChartGallery =
     | Column
     | Combo
     | Gauge
+    | Geo
 
     override __.ToString() =
         match FSharpValue.GetUnionFields(__, typeof<ChartGallery>) with
@@ -1549,6 +1654,7 @@ type GoogleChart() =
             | Annotation -> "annotationchart"
             | Calendar -> "calendar"
             | Gauge -> "gauge"
+            | Geo -> "geochart"
             | _ -> "corechart"
         template.Replace("{VERSION}", version)
             .Replace("{PACKAGES}", packages)
@@ -1566,11 +1672,7 @@ type GoogleChart() =
 
     /// Sets the data series label. Use this member if the
     /// chart's data is a single series.
-    member __.WithLabel label =
-        __.data <-
-            __.data
-            |> Seq.head
-            |> fun series -> [series.WithName (Some label)]
+    member __.WithLabel label = __.labels <- Some <| seq {yield label}
 
     /// Sets the data series labels. Use this member if the
     /// chart's data is a series collection.
@@ -1809,6 +1911,32 @@ type Chart =
             | None -> None
             | Some label -> [label] |> List.toSeq |> Some
         GoogleChart.Create [data'] labels (defaultArg Options <| Configuration.Options()) ChartGallery.Gauge
+
+    /// <summary>Creates a geo chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Label">The data column label.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Geo(data:seq<string * #value>, ?Label:string, ?Options) =
+        let data' =
+            data
+            |> Seq.map Datum.New
+            |> Series.New None
+        let labels =
+            match Label with
+            | None -> None
+            | Some label -> [label] |> List.toSeq |> Some
+        GoogleChart.Create [data'] labels (defaultArg Options <| Configuration.Options()) ChartGallery.Geo
+
+    /// <summary>Creates a geo chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Label">The data column label.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Geo(data:seq<string * #value * #value>, ?Labels, ?Options) =
+        let data' =
+            data
+            |> Seq.map Datum.New
+            |> Series.New None
+        GoogleChart.Create [data'] Labels (defaultArg Options <| Configuration.Options()) ChartGallery.Geo
         
 type Chart with
 
