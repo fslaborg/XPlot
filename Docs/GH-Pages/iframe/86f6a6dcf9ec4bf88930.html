@@ -1,0 +1,21 @@
+﻿<html>
+<head>
+    <title>Google Chart</title>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        google.load("visualization", "1", { packages: ["geochart"] })
+        google.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data = new google.visualization.DataTable({ "cols": [{ "type": "string", "id": "Column 0" }, { "type": "number", "id": "Column 1", "label": "Population" }, { "type": "number", "id": "Column 2", "label": "Area" }], "rows": [{ "c": [{ "v": "Rome" }, { "v": 2761477 }, { "v": 1285.31 }] }, { "c": [{ "v": "Milan" }, { "v": 1324110 }, { "v": 181.76 }] }, { "c": [{ "v": "Naples" }, { "v": 959574 }, { "v": 117.27 }] }, { "c": [{ "v": "Turin" }, { "v": 907563 }, { "v": 130.17 }] }, { "c": [{ "v": "Palermo" }, { "v": 655875 }, { "v": 158.9 }] }, { "c": [{ "v": "Genoa" }, { "v": 607906 }, { "v": 243.6 }] }, { "c": [{ "v": "Bologna" }, { "v": 380181 }, { "v": 140.7 }] }, { "c": [{ "v": "Florence" }, { "v": 371282 }, { "v": 102.41 }] }, { "c": [{ "v": "Fiumicino" }, { "v": 67370 }, { "v": 213.44 }] }, { "c": [{ "v": "Anzio" }, { "v": 52192 }, { "v": 43.43 }] }, { "c": [{ "v": "Ciampino" }, { "v": 38262 }, { "v": 11 }] }] });
+
+            var options = { "legend": { "position": "none" }, "colorAxis": { "colors": ["green", "blue"] }, "displayMode": "markers", "region": "IT" }
+
+            var chart = new google.visualization.GeoChart(document.getElementById('f1dbdd84-3282-47b7-9704-e5ef9da5e40f'));
+            chart.draw(data, options);
+        }
+    </script>
+</head>
+<body>
+    <div id="f1dbdd84-3282-47b7-9704-e5ef9da5e40f" style="width: 900px; height: 500px;"></div>
+</body>
+</html>

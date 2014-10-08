@@ -1422,9 +1422,8 @@ module Configuration =
             and set(value) = yellowFromField <- Some value
 
         member __.yellowTo
-            with get() = yellowFromField.Value
-            and set(value) = yellowFromField <- Some value
-
+            with get() = yellowToField.Value
+            and set(value) = yellowToField <- Some value
 
         member __.datalessRegionColor
             with get() = datalessRegionColorField.Value

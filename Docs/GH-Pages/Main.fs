@@ -95,6 +95,17 @@ module Site =
                 8
                 "Google Combo Chart"
                 [Demo.New "0cb2f60010398f1be9ab" "Google Combo Chart"]
+            chartSitelet
+                "/chart/google-gauge-chart"
+                9
+                "Google Gauge Chart"
+                [Demo.New "6fc88dd6024cf683a33f" "Google Gauge Chart"]
+            chartSitelet
+                "/chart/google-geo-chart"
+                10
+                "Google Geo Chart"
+                [Demo.New "86f6a6dcf9ec4bf88930" "Google Geo Chart"]
+
         ]
 
 [<Sealed>]
@@ -106,7 +117,7 @@ type Website() =
                 yield Home
                 yield GoogleCharts
                 yield Highcharts
-                for x in 1 .. 8 -> Chart x
+                for x in 1 .. 10 -> Chart x
             ]
 
 [<assembly: Website(typeof<Website>)>]
