@@ -1016,7 +1016,28 @@ module Configuration =
         member __.ShouldSerializeminSize() = not minSizeField.IsNone
         member __.ShouldSerializeminValue() = not minValueField.IsNone
 
-                   
+    type Histogram() =
+
+        let mutable bucketSizeField : int option = None
+        let mutable hideBucketItemsField : bool option = None
+        let mutable lastBucketPercentileField : int option = None
+
+        member __.bucketSize
+            with get() = bucketSizeField.Value
+            and set(value) = bucketSizeField <- Some value
+
+        member __.hideBucketItems
+            with get() = hideBucketItemsField.Value
+            and set(value) = hideBucketItemsField <- Some value
+
+        member __.lastBucketPercentile
+            with get() = lastBucketPercentileField.Value
+            and set(value) = lastBucketPercentileField <- Some value
+
+        member __.ShouldSerializebucketSize() = not bucketSizeField.IsNone
+        member __.ShouldSerializehideBucketItems() = not hideBucketItemsField.IsNone
+        member __.ShouldSerializelastBucketPercentile() = not lastBucketPercentileField.IsNone
+               
     type Options() =
 
         let mutable aggregationTargetField : string option = None
@@ -1115,6 +1136,8 @@ module Configuration =
         let mutable markerOpacityField : float option = None
         let mutable resolutionField : string option = None
         let mutable sizeAxisField : SizeAxis option = None
+        // Histogram
+        let mutable histogramField : Histogram option = None
 
         member __.aggregationTarget
             with get() = aggregationTargetField.Value
@@ -1465,6 +1488,10 @@ module Configuration =
             with get() = sizeAxisField.Value
             and set(value) = sizeAxisField <- Some value
 
+        member __.histogram
+            with get() = histogramField.Value
+            and set(value) = histogramField <- Some value
+
         member __.ShouldSerializeaggregationTarget() = not aggregationTargetField.IsNone
         member __.ShouldSerializeanimation() = not animationField.IsNone
         member __.ShouldSerializeannotations() = not annotationsField.IsNone
@@ -1552,6 +1579,7 @@ module Configuration =
         member __.ShouldSerializemarkerOpacity() = not markerOpacityField.IsNone
         member __.ShouldSerializeresolution() = not resolutionField.IsNone
         member __.ShouldSerializesizeAxis() = not sizeAxisField.IsNone
+        member __.ShouldSerializehistogram() = not histogramField.IsNone
 
 let jsTemplate =
     """google.setOnLoadCallback(drawChart);
@@ -1590,6 +1618,7 @@ type ChartGallery =
     | Combo
     | Gauge
     | Geo
+    | Histogram
 
     override __.ToString() =
         match FSharpValue.GetUnionFields(__, typeof<ChartGallery>) with
@@ -1598,6 +1627,7 @@ type ChartGallery =
             match name with
             | "Calendar" -> name
             | "Gauge" -> name
+            | "Histogram" -> name
             | _ -> name + "Chart"
 
 type GoogleChart() =
@@ -1936,6 +1966,21 @@ type Chart =
             |> Seq.map Datum.New
             |> Series.New None
         GoogleChart.Create [data'] Labels (defaultArg Options <| Configuration.Options()) ChartGallery.Geo
+
+    /// <summary>Creates a histogram chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Label">The data column label.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Histogram(data:seq<string * #value>, ?Label, ?Options) =
+        let data' =
+            data
+            |> Seq.map Datum.New
+            |> Series.New None
+        let labels =
+            match Label with
+            | None -> None
+            | Some label -> [label] |> List.toSeq |> Some
+        GoogleChart.Create [data'] labels (defaultArg Options <| Configuration.Options()) ChartGallery.Histogram
         
 type Chart with
 
