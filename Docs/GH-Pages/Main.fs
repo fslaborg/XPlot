@@ -105,6 +105,21 @@ module Site =
                 10
                 "Google Geo Chart"
                 [Demo.New "86f6a6dcf9ec4bf88930" "Google Geo Chart"]
+            chartSitelet
+                "/chart/google-histogram-chart"
+                11
+                "Google Histogram Chart"
+                [Demo.New "9d202603aae1df40303b" "Google Histogram Chart"]
+            chartSitelet
+                "/chart/google-line-chart"
+                12
+                "Google Line Chart"
+                [Demo.New "8a8e831364c2a965f646" "Google Line Chart"]
+            chartSitelet
+                "/chart/google-map-chart"
+                13
+                "Google Map Chart"
+                [Demo.New "e723a85381063a9f9e16" "Google Map Chart"]
 
         ]
 
@@ -117,7 +132,7 @@ type Website() =
                 yield Home
                 yield GoogleCharts
                 yield Highcharts
-                for x in 1 .. 10 -> Chart x
+                for x in 1 .. 13 -> Chart x
             ]
 
 [<assembly: Website(typeof<Website>)>]
