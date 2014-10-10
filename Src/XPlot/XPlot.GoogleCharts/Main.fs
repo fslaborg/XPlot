@@ -1138,6 +1138,14 @@ module Configuration =
         let mutable sizeAxisField : SizeAxis option = None
         // Histogram
         let mutable histogramField : Histogram option = None
+        // Map
+        let mutable enableScrollWheelField : bool option = None
+        let mutable showTipField : bool option = None
+        let mutable showLineField : bool option = None
+        let mutable lineColorField : string option = None
+        let mutable mapTypeField : string option = None
+        let mutable useMapTypeControlField : bool option = None
+        let mutable zoomLevelField : int option = None
 
         member __.aggregationTarget
             with get() = aggregationTargetField.Value
@@ -1492,6 +1500,34 @@ module Configuration =
             with get() = histogramField.Value
             and set(value) = histogramField <- Some value
 
+        member __.enableScrollWheel
+            with get() = enableScrollWheelField.Value
+            and set(value) = enableScrollWheelField <- Some value
+
+        member __.showTip
+            with get() = showTipField.Value
+            and set(value) = showTipField <- Some value
+
+        member __.showLine
+            with get() = showLineField.Value
+            and set(value) = showLineField <- Some value
+
+        member __.lineColor
+            with get() = lineColorField.Value
+            and set(value) = lineColorField <- Some value
+
+        member __.mapType
+            with get() = mapTypeField.Value
+            and set(value) = mapTypeField <- Some value
+
+        member __.useMapTypeControl
+            with get() = useMapTypeControlField.Value
+            and set(value) = useMapTypeControlField <- Some value
+
+        member __.zoomLevel
+            with get() = zoomLevelField.Value
+            and set(value) = zoomLevelField <- Some value
+
         member __.ShouldSerializeaggregationTarget() = not aggregationTargetField.IsNone
         member __.ShouldSerializeanimation() = not animationField.IsNone
         member __.ShouldSerializeannotations() = not annotationsField.IsNone
@@ -1580,6 +1616,13 @@ module Configuration =
         member __.ShouldSerializeresolution() = not resolutionField.IsNone
         member __.ShouldSerializesizeAxis() = not sizeAxisField.IsNone
         member __.ShouldSerializehistogram() = not histogramField.IsNone
+        member __.ShouldSerializeenableScrollWheel() = not enableScrollWheelField.IsNone
+        member __.ShouldSerializeshowTip() = not showTipField.IsNone
+        member __.ShouldSerializeshowLine() = not showLineField.IsNone
+        member __.ShouldSerializelineColor() = not lineColorField.IsNone
+        member __.ShouldSerializemapType() = not mapTypeField.IsNone
+        member __.ShouldSerializeuseMapTypeControl() = not useMapTypeControlField.IsNone
+        member __.ShouldSerializezoomLevel() = not zoomLevelField.IsNone
 
 let jsTemplate =
     """google.setOnLoadCallback(drawChart);
@@ -1620,6 +1663,7 @@ type ChartGallery =
     | Geo
     | Histogram
     | Line
+    | Map
 
     override __.ToString() =
         match FSharpValue.GetUnionFields(__, typeof<ChartGallery>) with
@@ -1629,6 +1673,7 @@ type ChartGallery =
             | "Calendar" -> name
             | "Gauge" -> name
             | "Histogram" -> name
+            | "Map" -> name
             | _ -> name + "Chart"
 
 type GoogleChart() =
@@ -1685,6 +1730,7 @@ type GoogleChart() =
             | Calendar -> "calendar"
             | Gauge -> "gauge"
             | Geo -> "geochart"
+            | Map -> "map"
             | _ -> "corechart"
         template.Replace("{VERSION}", version)
             .Replace("{PACKAGES}", packages)
@@ -2010,6 +2056,32 @@ type Chart =
                 |> Seq.map Datum.New
                 |> Series.New None)
         GoogleChart.Create data' Labels (defaultArg Options <| Configuration.Options()) Line
+     
+    /// <summary>Creates a map chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Label">The data column label.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Map(data:seq<string * string>, ?Label:string, ?Options) =
+        let data' =
+            data
+            |> Seq.map Datum.New
+            |> Series.New None
+        let labels =
+            match Label with
+            | None -> None
+            | Some label -> [label] |> List.toSeq |> Some
+        GoogleChart.Create [data'] labels (defaultArg Options <| Configuration.Options()) Map
+
+    /// <summary>Creates a map chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Label">The data column label.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Map(data:seq<float * float * string>, ?Labels, ?Options) =
+        let data' =
+            data
+            |> Seq.map Datum.New
+            |> Series.New None
+        GoogleChart.Create [data'] Labels (defaultArg Options <| Configuration.Options()) Map
         
 type Chart with
 
