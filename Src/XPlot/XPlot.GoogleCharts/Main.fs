@@ -1557,7 +1557,7 @@ module Configuration =
         member __.ShouldSerializecalendar() = not calendarField.IsNone
         member __.ShouldSerializenoDataPattern() = not noDataPatternField.IsNone
         member __.ShouldSerializecurveType() = not curveTypeField.IsNone
-        member __.ShouldSerializeseriesType() = not curveTypeField.IsNone
+        member __.ShouldSerializeseriesType() = not seriesTypeField.IsNone
         member __.ShouldSerializegreenColor() = not greenColorField.IsNone
         member __.ShouldSerializegreenFrom() = not greenFromField.IsNone
         member __.ShouldSerializegreenTo() = not greenToField.IsNone
@@ -1619,6 +1619,7 @@ type ChartGallery =
     | Gauge
     | Geo
     | Histogram
+    | Line
 
     override __.ToString() =
         match FSharpValue.GetUnionFields(__, typeof<ChartGallery>) with
@@ -1981,6 +1982,34 @@ type Chart =
             | None -> None
             | Some label -> [label] |> List.toSeq |> Some
         GoogleChart.Create [data'] labels (defaultArg Options <| Configuration.Options()) ChartGallery.Histogram
+
+    /// <summary>Creates a line chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Label">The data column label.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Line(data:seq<#key * #value>, ?Label:string, ?Options) =
+        let data' =
+            data
+            |> Seq.map Datum.New
+            |> Series.New None
+        let labels =
+            match Label with
+            | None -> None
+            | Some label -> [label] |> List.toSeq |> Some
+        GoogleChart.Create [data'] labels (defaultArg Options <| Configuration.Options()) Line
+
+    /// <summary>Creates an line chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">The data clumns labels.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Line(data:seq<#seq<'K * 'V>> when 'K :> key and 'V :> value, ?Labels:seq<string>, ?Options) =
+        let data' =
+            data
+            |> Seq.map (fun x ->
+                x 
+                |> Seq.map Datum.New
+                |> Series.New None)
+        GoogleChart.Create data' Labels (defaultArg Options <| Configuration.Options()) Line
         
 type Chart with
 
