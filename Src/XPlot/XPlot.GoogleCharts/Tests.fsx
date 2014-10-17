@@ -508,3 +508,52 @@ module Map =
         |> Chart.Map
         |> Chart.WithOptions options
         |> Chart.Show 
+
+module Pie =
+
+    let chart1 =
+        [
+            "Work", 11
+            "Eat", 2
+            "Commute", 2
+            "Watch TV", 2
+            "Sleep", 7
+        ]
+        |> Chart.Pie
+        |> Chart.WithTitle "My Daily Activities"
+        |> Chart.Show
+
+    let chart2 =
+        let options =
+            Options(
+                title = "My Daily Activities",
+                is3D = true
+            )
+        [
+            "Work", 11
+            "Eat", 2
+            "Commute", 2
+            "Watch TV", 2
+            "Sleep", 7
+        ]
+        |> Chart.Pie
+        |> Chart.WithOptions options
+        |> Chart.Show
+
+    let chart3 =
+        let options =
+            Options(
+                title = "My Daily Activities",
+                pieHole = 0.4
+            )
+        [
+            "Work", 11
+            "Eat", 2
+            "Commute", 2
+            "Watch TV", 2
+            "Sleep", 7
+        ]
+        |> Chart.Pie
+        |> Chart.WithOptions options
+        |> Chart.Show
+

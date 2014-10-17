@@ -1037,6 +1037,27 @@ module Configuration =
         member __.ShouldSerializebucketSize() = not bucketSizeField.IsNone
         member __.ShouldSerializehideBucketItems() = not hideBucketItemsField.IsNone
         member __.ShouldSerializelastBucketPercentile() = not lastBucketPercentileField.IsNone
+       
+    type Slice() =
+        let mutable colorField : string option = None
+        let mutable offsetField : float option = None
+        let mutable textStyleField : TextStyle option = None
+
+        member __.color
+            with get() = colorField.Value
+            and set(value) = colorField <- Some value
+
+        member __.offset
+            with get() = offsetField.Value
+            and set(value) = offsetField <- Some value
+
+        member __.textStyle
+            with get() = textStyleField.Value
+            and set(value) = textStyleField <- Some value
+
+        member __.ShouldSerializecolor() = not colorField.IsNone
+        member __.ShouldSerializeoffset() = not offsetField.IsNone
+        member __.ShouldSerializetextStyle() = not textStyleField.IsNone    
                
     type Options() =
 
@@ -1146,6 +1167,17 @@ module Configuration =
         let mutable mapTypeField : string option = None
         let mutable useMapTypeControlField : bool option = None
         let mutable zoomLevelField : int option = None
+        // Pie
+        let mutable is3DField : bool option = None
+        let mutable pieHoleField : float option = None
+        let mutable pieSliceBorderColorField : string option = None
+        let mutable pieSliceTextField : string option = None
+        let mutable pieSliceTextStyleField : TextStyle option = None
+        let mutable pieStartAngleField : int option = None
+        let mutable pieResidueSliceColorField : string option = None
+        let mutable pieResidueSliceLabelField : string option = None
+        let mutable slicesField : Slice option = None
+        let mutable sliceVisibilityThresholdField : int option = None
 
         member __.aggregationTarget
             with get() = aggregationTargetField.Value
@@ -1528,6 +1560,46 @@ module Configuration =
             with get() = zoomLevelField.Value
             and set(value) = zoomLevelField <- Some value
 
+        member __.is3D
+            with get() = is3DField.Value
+            and set(value) = is3DField <- Some value
+
+        member __.pieHole
+            with get() = pieHoleField.Value
+            and set(value) = pieHoleField <- Some value
+
+        member __.pieSliceBorderColor
+            with get() = pieSliceBorderColorField.Value
+            and set(value) = pieSliceBorderColorField <- Some value
+
+        member __.pieSliceText
+            with get() = pieSliceTextField.Value
+            and set(value) = pieSliceTextField <- Some value
+
+        member __.pieSliceTextStyle
+            with get() = pieSliceTextStyleField.Value
+            and set(value) = pieSliceTextStyleField <- Some value
+
+        member __.pieStartAngle
+            with get() = pieStartAngleField.Value
+            and set(value) = pieStartAngleField <- Some value
+
+        member __.pieResidueSliceColor
+            with get() = pieResidueSliceColorField.Value
+            and set(value) = pieResidueSliceColorField <- Some value
+
+        member __.pieResidueSliceLabel
+            with get() = pieResidueSliceLabelField.Value
+            and set(value) = pieResidueSliceLabelField <- Some value
+
+        member __.slices
+            with get() = slicesField.Value
+            and set(value) = slicesField <- Some value
+
+        member __.sliceVisibilityThreshold
+            with get() = sliceVisibilityThresholdField.Value
+            and set(value) = sliceVisibilityThresholdField <- Some value
+
         member __.ShouldSerializeaggregationTarget() = not aggregationTargetField.IsNone
         member __.ShouldSerializeanimation() = not animationField.IsNone
         member __.ShouldSerializeannotations() = not annotationsField.IsNone
@@ -1623,6 +1695,16 @@ module Configuration =
         member __.ShouldSerializemapType() = not mapTypeField.IsNone
         member __.ShouldSerializeuseMapTypeControl() = not useMapTypeControlField.IsNone
         member __.ShouldSerializezoomLevel() = not zoomLevelField.IsNone
+        member __.ShouldSerializeis3D() = not is3DField.IsNone
+        member __.ShouldSerializepieHole() = not pieHoleField.IsNone
+        member __.ShouldSerializepieSliceBorderColor() = not pieSliceBorderColorField.IsNone
+        member __.ShouldSerializepieSliceText() = not pieSliceTextField.IsNone
+        member __.ShouldSerializepieSliceTextStyle() = not pieSliceTextStyleField.IsNone
+        member __.ShouldSerializepieStartAngle() = not pieStartAngleField.IsNone
+        member __.ShouldSerializepieResidueSliceColor() = not pieResidueSliceColorField.IsNone
+        member __.ShouldSerializepieResidueSliceLabel() = not pieResidueSliceLabelField.IsNone
+        member __.ShouldSerializeslices() = not slicesField.IsNone
+        member __.ShouldSerializesliceVisibilityThreshold() = not sliceVisibilityThresholdField.IsNone
 
 let jsTemplate =
     """google.setOnLoadCallback(drawChart);
@@ -1664,6 +1746,7 @@ type ChartGallery =
     | Histogram
     | Line
     | Map
+    | Pie
 
     override __.ToString() =
         match FSharpValue.GetUnionFields(__, typeof<ChartGallery>) with
@@ -2082,6 +2165,21 @@ type Chart =
             |> Seq.map Datum.New
             |> Series.New None
         GoogleChart.Create [data'] Labels (defaultArg Options <| Configuration.Options()) Map
+
+    /// <summary>Creates a pie chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Label">The data column label.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Pie(data:seq<string * #value>, ?Label:string, ?Options) =
+        let data' =
+            data
+            |> Seq.map Datum.New
+            |> Series.New None
+        let labels =
+            match Label with
+            | None -> None
+            | Some label -> [label] |> List.toSeq |> Some
+        GoogleChart.Create [data'] labels (defaultArg Options <| Configuration.Options()) ChartGallery.Pie
         
 type Chart with
 
