@@ -46,74 +46,92 @@ module Data =
 
         member __.WithName name = {__ with Name = name}
 
-    // TODO: more elegant way to construct a data table
-    let makeDataTable (series:seq<Series>) labels =
-        let dt = new DataTable()
-            
-        let datum = Seq.head series |> fun x -> Seq.head x.Datums
+//===========================================================================================
 
-        datum.X.GetTypeCode()
-        |> function
-        | TypeCode.Boolean -> ColumnType.Boolean
-        | TypeCode.DateTime -> ColumnType.Datetime
-        | TypeCode.String -> ColumnType.String
-        | _ -> ColumnType.Number
-        |> fun x -> dt.AddColumn(Column(x)) |> ignore
+//    let sales =
+//        ["2013", 1000; "2014", 1170; "2015", 660; "2016", 1030]
+//        |> List.map Datum.New
+//        |> Series.New None
+//
+//    let expenses =
+//        ["2013", 400; "2014", 460; "2015", 1120; "2016", 540]
+//        |> List.map Datum.New
+//        |> Series.New None
+//
+//    let series = [sales; expenses]
 
-        
-        [
-            for x in 1 .. Seq.length series do
-                yield datum.Y1.GetTypeCode()
-//            for x in 1 .. Seq.length series do
-                if datum.Y2.IsSome then yield datum.Y2.Value.GetTypeCode()
-//            for x in 1 .. Seq.length series do                
-                if datum.Y3.IsSome then yield datum.Y3.Value.GetTypeCode()
-                if datum.Y4.IsSome then yield datum.Y4.Value.GetTypeCode()
+    let makeDataTable (series:seq<Series>) (labels:seq<string> option) groupKeys =
+        let rows =
+            let datums =
+                series
+                |> Seq.map (fun x -> x.Datums)
+                |> Seq.concat
+            match groupKeys with
+            | false ->
+                datums
+                |> Seq.map (fun x ->
+                    [
+                        yield x.X
+                        yield x.Y1
+                        if x.Y2.IsSome then yield x.Y2.Value
+                        if x.Y3.IsSome then yield x.Y3.Value
+                        if x.Y4.IsSome then yield x.Y4.Value
+                    ]
+                )
+            | true ->
+                datums
+                |> Seq.groupBy (fun x -> x.X)
+                |> Seq.map (fun (key, datums) ->
+                    [
+                        yield key
+                        for x in datums do
+                            yield x.Y1
+                            if x.Y2.IsSome then yield x.Y2.Value
+                            if x.Y3.IsSome then yield x.Y3.Value
+                            if x.Y4.IsSome then yield x.Y4.Value
+                    ]
+                )
 
-        ]
-        |> Seq.iteri (fun idx typecode ->
-            let columnType =
-                match typecode with
-                | TypeCode.Boolean -> ColumnType.Boolean
-                | TypeCode.DateTime -> ColumnType.Datetime
-                | TypeCode.String -> ColumnType.String
-                | _ -> ColumnType.Number
-            let column = Column(columnType)
-            match labels with
-            | None -> ()
-            | Some labelsSeq -> column.Label <- Seq.nth idx labelsSeq
-            dt.AddColumn column |> ignore)
 
-        // table rows
-        series
-        |> Seq.map (fun x -> x.Datums)
-        |> Seq.concat
-        |> Seq.groupBy (fun datum -> datum.X)
-        |> Seq.map (fun (key, dps) ->
-            key, dps |> Seq.map (fun dp -> 
-                [
-                    yield dp.Y1
-                    if dp.Y2.IsSome then yield dp.Y2.Value
-                    if dp.Y3.IsSome then yield dp.Y3.Value
-                    if dp.Y4.IsSome then yield dp.Y4.Value
-                ]
+        let dataTable =
+            let dt = DataTable()
+            let firstRow = Seq.head rows
+            let labels' =
+                match labels with
+                | None -> None
+                | Some labelsSeq ->
+                    match (Seq.length labelsSeq) = firstRow.Length with
+                    | false -> Some <| Seq.append ["Column 1"] labelsSeq
+                    | true -> Some labelsSeq
+            firstRow
+            |> List.iteri (fun idx x ->
+                let typeCode = x.GetTypeCode()
+                let columnType =
+                    match typeCode with
+                    | TypeCode.Boolean -> ColumnType.Boolean
+                    | TypeCode.DateTime -> ColumnType.Datetime
+                    | TypeCode.String -> ColumnType.String
+                    | _ -> ColumnType.Number
+                let column = Column(columnType)
+                match labels' with
+                | None -> ()
+                | Some labelsSeq -> column.Label <- Seq.nth idx labelsSeq
+                dt.AddColumn column |> ignore        
             )
-        )
-        |> Seq.iter (fun (key, values) ->
-            let row = dt.NewRow()
-            row.AddCell(Cell(key)) |> ignore
-            values
-            |> Seq.iter (fun value ->
-                value
+        
+            rows
+            |> Seq.iter (fun values -> 
+                let row = dt.NewRow()
+                values
                 |> Seq.iter (fun v ->
                     Cell(v)
                     |> row.AddCell
                     |> ignore
                 )
+                dt.AddRow row |> ignore
             )
-            dt.AddRow row |> ignore
-        )
-        dt
+            dt
+        dataTable
 
 [<AutoOpen>]
 module Configuration =
@@ -1910,7 +1928,11 @@ type GoogleChart() =
     /// necessary line for loading the appropiate Google
     /// visualization package. 
     member __.Js =
-        let dt = makeDataTable __.data __.labels
+        let groupKeys =
+            match __.``type`` with
+            | Histogram | Sankey -> false
+            | _ -> true
+        let dt = makeDataTable __.data __.labels groupKeys
         let dataJson = dt.GetJson()         
         let optionsJson = JsonConvert.SerializeObject(__.options)
         jsTemplate.Replace("{DATA}", dataJson)
@@ -2303,12 +2325,12 @@ type Chart =
     /// <param name="data">The chart's data.</param>
     /// <param name="Labels">The data clumns labels.</param>
     /// <param name="Options">The chart's options.</param>
-//    static member Sankey(data:seq<string * string * #value>, ?Labels, ?Options) =
-//        let data' =
-//            data
-//            |> Seq.map Datum.New
-//            |> Series.New None
-//        GoogleChart.Create [data'] Labels (defaultArg Options <| Configuration.Options()) ChartGallery.Sankey
+    static member Sankey(data:seq<string * string * #value>, ?Labels, ?Options) =
+        let data' =
+            data
+            |> Seq.map Datum.New
+            |> Series.New None
+        GoogleChart.Create [data'] Labels (defaultArg Options <| Configuration.Options()) ChartGallery.Sankey
         
 type Chart with
 
