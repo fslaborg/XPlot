@@ -1,0 +1,22 @@
+﻿
+<html>
+<head>
+    <title>Google Chart</title>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        google.load("visualization", "1.1", { packages: ["sankey"] })
+        google.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data = new google.visualization.DataTable({ "cols": [{ "type": "string", "id": "Column 0" }, { "type": "string", "id": "Column 1" }, { "type": "number", "id": "Column 2" }], "rows": [{ "c": [{ "v": "A" }, { "v": "X" }, { "v": 5 }] }, { "c": [{ "v": "A" }, { "v": "Y" }, { "v": 7 }] }, { "c": [{ "v": "A" }, { "v": "Z" }, { "v": 6 }] }, { "c": [{ "v": "B" }, { "v": "X" }, { "v": 2 }] }, { "c": [{ "v": "B" }, { "v": "Y" }, { "v": 9 }] }, { "c": [{ "v": "B" }, { "v": "Z" }, { "v": 4 }] }] });
+
+            var options = { "legend": { "position": "none" } }
+
+            var chart = new google.visualization.Sankey(document.getElementById('3777303b-d2eb-4575-8c0d-0d917268860b'));
+            chart.draw(data, options);
+        }
+    </script>
+</head>
+<body>
+    <div id="3777303b-d2eb-4575-8c0d-0d917268860b" style="width: 900px; height: 500px;"></div>
+</body>
+</html>

@@ -120,6 +120,16 @@ module Site =
                 13
                 "Google Map Chart"
                 [Demo.New "e723a85381063a9f9e16" "Google Map Chart"]
+            chartSitelet
+                "/chart/google-pie-chart"
+                14
+                "Google Pie Chart"
+                [Demo.New "59d5f8a0ba8cf3ada86e" "Google Pie Chart"]
+            chartSitelet
+                "/chart/google-sankey-diagram"
+                15
+                "Google Sankey Diagram"
+                [Demo.New "cead0cdd0e153a7c078e" "Google Sankey Diagram"]
 
         ]
 
@@ -132,7 +142,7 @@ type Website() =
                 yield Home
                 yield GoogleCharts
                 yield Highcharts
-                for x in 1 .. 13 -> Chart x
+                for x in 1 .. 15 -> Chart x
             ]
 
 [<assembly: Website(typeof<Website>)>]
