@@ -1058,7 +1058,115 @@ module Configuration =
         member __.ShouldSerializecolor() = not colorField.IsNone
         member __.ShouldSerializeoffset() = not offsetField.IsNone
         member __.ShouldSerializetextStyle() = not textStyleField.IsNone    
-               
+
+    type Color() =
+        let mutable fillField : string option = None
+        let mutable fillOpacityField : float option = None
+        let mutable strokeField : string option = None
+        let mutable strokeWidthField : int option = None
+
+        member __.fill
+            with get() = fillField.Value
+            and set(value) = fillField <- Some value
+
+        member __.fillOpacity
+            with get() = fillOpacityField.Value
+            and set(value) = fillOpacityField <- Some value
+
+        member __.stroke
+            with get() = strokeField.Value
+            and set(value) = strokeField <- Some value
+
+        member __.strokeWidth
+            with get() = strokeWidthField.Value
+            and set(value) = strokeWidthField <- Some value
+
+        member __.ShouldSerializefill() = not fillField.IsNone
+        member __.ShouldSerializefillOpacity() = not fillOpacityField.IsNone
+        member __.ShouldSerializestroke() = not strokeField.IsNone
+        member __.ShouldSerializestrokeWidth() = not strokeWidthField.IsNone
+
+    type Label() =
+        let mutable fontNameField : string option = None
+        let mutable fontSizeField : int option = None
+        let mutable colorField : string option = None
+        let mutable boldField : bool option = None
+        let mutable italicField : bool option = None
+
+        member __.fontName
+            with get() = fontNameField.Value
+            and set(value) = fontNameField <- Some value
+
+        member __.fontSize
+            with get() = fontSizeField.Value
+            and set(value) = fontSizeField <- Some value
+
+        member __.color
+            with get() = colorField.Value
+            and set(value) = colorField <- Some value
+
+        member __.bold
+            with get() = boldField.Value
+            and set(value) = boldField <- Some value
+
+        member __.italic
+            with get() = italicField.Value
+            and set(value) = italicField <- Some value
+
+        member __.ShouldSerializefontName() = not fontNameField.IsNone
+        member __.ShouldSerializefontSize() = not fontSizeField.IsNone
+        member __.ShouldSerializecolor() = not colorField.IsNone
+        member __.ShouldSerializebold() = not boldField.IsNone
+        member __.ShouldSerializeitalic() = not italicField.IsNone
+
+    type Node() =
+        let mutable labelField : Label option = None
+        let mutable labelPaddingField : int option = None
+        let mutable nodePaddingField : int option = None
+        let mutable widthField : int option = None
+
+        member __.label
+            with get() = labelField.Value
+            and set(value) = labelField <- Some value
+
+        member __.labelPadding
+            with get() = labelPaddingField.Value
+            and set(value) = labelPaddingField <- Some value
+
+        member __.nodePadding
+            with get() = nodePaddingField.Value
+            and set(value) = nodePaddingField <- Some value
+
+        member __.width
+            with get() = widthField.Value
+            and set(value) = widthField <- Some value
+
+        member __.ShouldSerializelabel() = not labelField.IsNone
+        member __.ShouldSerializelabelPadding() = not labelPaddingField.IsNone
+        member __.ShouldSerializenodePadding() = not nodePaddingField.IsNone
+        member __.ShouldSerializewidth() = not widthField.IsNone
+
+    type Sankey() =
+        let mutable iterationsField : int option = None
+        let mutable linkField : Color option = None
+        let mutable nodeField : Node option = None
+
+        member __.iterations
+            with get() = iterationsField.Value
+            and set(value) = iterationsField <- Some value
+
+        member __.link
+            with get() = linkField.Value
+            and set(value) = linkField <- Some value
+
+        member __.node
+            with get() = nodeField.Value
+            and set(value) = nodeField <- Some value
+
+        member __.ShouldSerializeiterations() = not iterationsField.IsNone
+        member __.ShouldSerializelink() = not linkField.IsNone
+        member __.ShouldSerializenode() = not nodeField.IsNone
+                   
     type Options() =
 
         let mutable aggregationTargetField : string option = None
@@ -1178,6 +1286,8 @@ module Configuration =
         let mutable pieResidueSliceLabelField : string option = None
         let mutable slicesField : Slice option = None
         let mutable sliceVisibilityThresholdField : int option = None
+        // Sankey
+        let mutable sankeyField : Sankey option = None
 
         member __.aggregationTarget
             with get() = aggregationTargetField.Value
@@ -1600,6 +1710,10 @@ module Configuration =
             with get() = sliceVisibilityThresholdField.Value
             and set(value) = sliceVisibilityThresholdField <- Some value
 
+        member __.sankey
+            with get() = sankeyField.Value
+            and set(value) = sankeyField <- Some value
+
         member __.ShouldSerializeaggregationTarget() = not aggregationTargetField.IsNone
         member __.ShouldSerializeanimation() = not animationField.IsNone
         member __.ShouldSerializeannotations() = not annotationsField.IsNone
@@ -1705,6 +1819,7 @@ module Configuration =
         member __.ShouldSerializepieResidueSliceLabel() = not pieResidueSliceLabelField.IsNone
         member __.ShouldSerializeslices() = not slicesField.IsNone
         member __.ShouldSerializesliceVisibilityThreshold() = not sliceVisibilityThresholdField.IsNone
+        member __.ShouldSerializesankey() = not sankeyField.IsNone
 
 let jsTemplate =
     """google.setOnLoadCallback(drawChart);
@@ -1747,6 +1862,7 @@ type ChartGallery =
     | Line
     | Map
     | Pie
+    | Sankey
 
     override __.ToString() =
         match FSharpValue.GetUnionFields(__, typeof<ChartGallery>) with
@@ -1757,6 +1873,7 @@ type ChartGallery =
             | "Gauge" -> name
             | "Histogram" -> name
             | "Map" -> name
+            | "Sankey" -> name
             | _ -> name + "Chart"
 
 type GoogleChart() =
@@ -1805,7 +1922,7 @@ type GoogleChart() =
     member __.Html =
         let version =
             match __.``type`` with
-            | Calendar -> "1.1"            
+            | Calendar | Sankey -> "1.1"            
             | _ -> "1"
         let packages =
             match __.``type`` with
@@ -1814,6 +1931,7 @@ type GoogleChart() =
             | Gauge -> "gauge"
             | Geo -> "geochart"
             | Map -> "map"
+            | Sankey -> "sankey"
             | _ -> "corechart"
         template.Replace("{VERSION}", version)
             .Replace("{PACKAGES}", packages)
@@ -2180,6 +2298,17 @@ type Chart =
             | None -> None
             | Some label -> [label] |> List.toSeq |> Some
         GoogleChart.Create [data'] labels (defaultArg Options <| Configuration.Options()) ChartGallery.Pie
+
+    /// <summary>Creates a sankey diagram.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">The data clumns labels.</param>
+    /// <param name="Options">The chart's options.</param>
+//    static member Sankey(data:seq<string * string * #value>, ?Labels, ?Options) =
+//        let data' =
+//            data
+//            |> Seq.map Datum.New
+//            |> Series.New None
+//        GoogleChart.Create [data'] Labels (defaultArg Options <| Configuration.Options()) ChartGallery.Sankey
         
 type Chart with
 
