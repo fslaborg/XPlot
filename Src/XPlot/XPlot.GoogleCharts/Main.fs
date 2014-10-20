@@ -1184,7 +1184,64 @@ module Configuration =
         member __.ShouldSerializeiterations() = not iterationsField.IsNone
         member __.ShouldSerializelink() = not linkField.IsNone
         member __.ShouldSerializenode() = not nodeField.IsNone
-                   
+
+    type Trendline() =
+        let mutable colorField : string option = None
+        let mutable degreeField : int option = None
+        let mutable labelInLegendField : string option = None
+        let mutable lineWidthField : int option = None
+        let mutable opacityField : float option = None
+        let mutable pointSizeField : int option = None
+        let mutable showR2Field : bool option = None
+        let mutable typeField : string option = None
+        let mutable visibleInLegendField : bool option = None
+
+        member __.color
+            with get() = colorField.Value
+            and set(value) = colorField <- Some value
+
+        member __.degree
+            with get() = degreeField.Value
+            and set(value) = degreeField <- Some value
+
+        member __.labelInLegend
+            with get() = labelInLegendField.Value
+            and set(value) = labelInLegendField <- Some value
+
+        member __.lineWidth
+            with get() = lineWidthField.Value
+            and set(value) = lineWidthField <- Some value
+
+        member __.opacity
+            with get() = opacityField.Value
+            and set(value) = opacityField <- Some value
+
+        member __.pointSize
+            with get() = pointSizeField.Value
+            and set(value) = pointSizeField <- Some value
+
+        member __.showR2
+            with get() = showR2Field.Value
+            and set(value) = showR2Field <- Some value
+
+        member __.``type``
+            with get() = typeField.Value
+            and set(value) = typeField <- Some value
+
+        member __.visibleInLegend
+            with get() = visibleInLegendField.Value
+            and set(value) = visibleInLegendField <- Some value
+
+        member __.ShouldSerializecolor() = not colorField.IsNone    
+        member __.ShouldSerializedegree() = not degreeField.IsNone
+        member __.ShouldSerializelabelInLegend() = not labelInLegendField.IsNone
+        member __.ShouldSerializelineWidth() = not lineWidthField.IsNone
+        member __.ShouldSerializeopacity() = not opacityField.IsNone
+        member __.ShouldSerializepointSize() = not pointSizeField.IsNone                       
+        member __.ShouldSerializeshowR2() = not showR2Field.IsNone
+        member __.ShouldSerializetype() = not typeField.IsNone
+        member __.ShouldSerializevisibleInLegend() = not visibleInLegendField.IsNone
+
     type Options() =
 
         let mutable aggregationTargetField : string option = None
@@ -1306,6 +1363,8 @@ module Configuration =
         let mutable sliceVisibilityThresholdField : int option = None
         // Sankey
         let mutable sankeyField : Sankey option = None
+        // Scatter
+        let mutable trendlinesField : Trendline [] option = None
 
         member __.aggregationTarget
             with get() = aggregationTargetField.Value
@@ -1732,6 +1791,10 @@ module Configuration =
             with get() = sankeyField.Value
             and set(value) = sankeyField <- Some value
 
+        member __.trendlines
+            with get() = trendlinesField.Value
+            and set(value) = trendlinesField <- Some value
+
         member __.ShouldSerializeaggregationTarget() = not aggregationTargetField.IsNone
         member __.ShouldSerializeanimation() = not animationField.IsNone
         member __.ShouldSerializeannotations() = not annotationsField.IsNone
@@ -1838,6 +1901,7 @@ module Configuration =
         member __.ShouldSerializeslices() = not slicesField.IsNone
         member __.ShouldSerializesliceVisibilityThreshold() = not sliceVisibilityThresholdField.IsNone
         member __.ShouldSerializesankey() = not sankeyField.IsNone
+        member __.ShouldSerializetrendlines() = not trendlinesField.IsNone
 
 let jsTemplate =
     """google.setOnLoadCallback(drawChart);
@@ -1881,6 +1945,7 @@ type ChartGallery =
     | Map
     | Pie
     | Sankey
+    | Scatter
 
     override __.ToString() =
         match FSharpValue.GetUnionFields(__, typeof<ChartGallery>) with
@@ -1929,9 +1994,12 @@ type GoogleChart() =
     /// visualization package. 
     member __.Js =
         let groupKeys =
-            match __.``type`` with
-            | Histogram | Sankey -> false
-            | _ -> true
+            match Seq.length __.data with
+            | 1 -> false
+            | _ ->
+                match __.``type`` with
+                | Histogram | Sankey -> false
+                | _ -> true
         let dt = makeDataTable __.data __.labels groupKeys
         let dataJson = dt.GetJson()         
         let optionsJson = JsonConvert.SerializeObject(__.options)
@@ -2331,6 +2399,34 @@ type Chart =
             |> Seq.map Datum.New
             |> Series.New None
         GoogleChart.Create [data'] Labels (defaultArg Options <| Configuration.Options()) ChartGallery.Sankey
+
+    /// <summary>Creates a scatter chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Label">The data column label.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Scatter(data:seq<#key * #value>, ?Label:string, ?Options) =
+        let data' =
+            data
+            |> Seq.map Datum.New
+            |> Series.New None
+        let labels =
+            match Label with
+            | None -> None
+            | Some label -> [label] |> List.toSeq |> Some
+        GoogleChart.Create [data'] labels (defaultArg Options <| Configuration.Options()) ChartGallery.Scatter
+
+    /// <summary>Creates a scatter chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">The data clumns labels.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Scatter(data:seq<#seq<'K * 'V>> when 'K :> key and 'V :> value, ?Labels:seq<string>, ?Options) =
+        let data' =
+            data
+            |> Seq.map (fun x ->
+                x 
+                |> Seq.map Datum.New
+                |> Series.New None)
+        GoogleChart.Create data' Labels (defaultArg Options <| Configuration.Options()) ChartGallery.Scatter
         
 type Chart with
 
