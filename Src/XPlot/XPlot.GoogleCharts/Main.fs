@@ -1365,6 +1365,8 @@ module Configuration =
         let mutable sankeyField : Sankey option = None
         // Scatter
         let mutable trendlinesField : Trendline [] option = None
+        // Stepped Area
+        let mutable connectStepsField : bool option = None
 
         member __.aggregationTarget
             with get() = aggregationTargetField.Value
@@ -1795,6 +1797,10 @@ module Configuration =
             with get() = trendlinesField.Value
             and set(value) = trendlinesField <- Some value
 
+        member __.connectSteps
+            with get() = connectStepsField.Value
+            and set(value) = connectStepsField <- Some value
+
         member __.ShouldSerializeaggregationTarget() = not aggregationTargetField.IsNone
         member __.ShouldSerializeanimation() = not animationField.IsNone
         member __.ShouldSerializeannotations() = not annotationsField.IsNone
@@ -1902,6 +1908,7 @@ module Configuration =
         member __.ShouldSerializesliceVisibilityThreshold() = not sliceVisibilityThresholdField.IsNone
         member __.ShouldSerializesankey() = not sankeyField.IsNone
         member __.ShouldSerializetrendlines() = not trendlinesField.IsNone
+        member __.ShouldSerializeconnectSteps() = not connectStepsField.IsNone
 
 let jsTemplate =
     """google.setOnLoadCallback(drawChart);
@@ -1946,6 +1953,7 @@ type ChartGallery =
     | Pie
     | Sankey
     | Scatter
+    | SteppedArea
 
     override __.ToString() =
         match FSharpValue.GetUnionFields(__, typeof<ChartGallery>) with
@@ -2427,6 +2435,34 @@ type Chart =
                 |> Seq.map Datum.New
                 |> Series.New None)
         GoogleChart.Create data' Labels (defaultArg Options <| Configuration.Options()) ChartGallery.Scatter
+
+    /// <summary>Creates a stepped area chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Label">The data column label.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member SteppedArea(data:seq<#key * #value>, ?Label:string, ?Options) =
+        let data' =
+            data
+            |> Seq.map Datum.New
+            |> Series.New None
+        let labels =
+            match Label with
+            | None -> None
+            | Some label -> [label] |> List.toSeq |> Some
+        GoogleChart.Create [data'] labels (defaultArg Options <| Configuration.Options()) ChartGallery.SteppedArea
+
+    /// <summary>Creates a stepped area chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">The data clumns labels.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member SteppedArea(data:seq<#seq<'K * 'V>> when 'K :> key and 'V :> value, ?Labels:seq<string>, ?Options) =
+        let data' =
+            data
+            |> Seq.map (fun x ->
+                x 
+                |> Seq.map Datum.New
+                |> Series.New None)
+        GoogleChart.Create data' Labels (defaultArg Options <| Configuration.Options()) ChartGallery.SteppedArea
         
 type Chart with
 
