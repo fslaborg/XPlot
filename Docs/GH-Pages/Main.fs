@@ -130,6 +130,21 @@ module Site =
                 15
                 "Google Sankey Diagram"
                 [Demo.New "cead0cdd0e153a7c078e" "Google Sankey Diagram"]
+            chartSitelet
+                "/chart/google-scatter-chart"
+                16
+                "Google Scatter Chart"
+                [Demo.New "a272c947396e3c67ddf4" "Google Scatter Chart"]
+            chartSitelet
+                "/chart/google-stepped-area-chart"
+                17
+                "Google Stepped Area"
+                [Demo.New "734c913a859cadca6387" "Google Stepped Area"]
+            chartSitelet
+                "/chart/google-timeline-chart"
+                18
+                "Google Timeline Chart"
+                [Demo.New "d23a9ff69ea5eb0d1b81" "Google Timeline Chart"]
 
         ]
 
@@ -142,7 +157,7 @@ type Website() =
                 yield Home
                 yield GoogleCharts
                 yield Highcharts
-                for x in 1 .. 15 -> Chart x
+                for x in 1 .. 18 -> Chart x
             ]
 
 [<assembly: Website(typeof<Website>)>]

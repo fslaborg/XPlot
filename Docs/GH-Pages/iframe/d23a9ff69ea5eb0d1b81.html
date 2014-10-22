@@ -1,0 +1,21 @@
+﻿<html>
+<head>
+    <title>Google Chart</title>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        google.load("visualization", "1", { packages: ["timeline"] })
+        google.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data = new google.visualization.DataTable({ "cols": [{ "type": "string", "id": "Column 0", "label": "Column 1" }, { "type": "datetime", "id": "Column 1", "label": "Start" }, { "type": "datetime", "id": "Column 2", "label": "End" }], "rows": [{ "c": [{ "v": "Washington" }, { "v": "Date(1789, 3, 29, 0, 0, 0)" }, { "v": "Date(1797, 2, 3, 0, 0, 0)" }] }, { "c": [{ "v": "Adams" }, { "v": "Date(1797, 2, 3, 0, 0, 0)" }, { "v": "Date(1801, 2, 3, 0, 0, 0)" }] }, { "c": [{ "v": "Jefferson" }, { "v": "Date(1801, 2, 3, 0, 0, 0)" }, { "v": "Date(1809, 2, 3, 0, 0, 0)" }] }] });
+
+            var options = { "legend": { "position": "none" } }
+
+            var chart = new google.visualization.Timeline(document.getElementById('841c9104-dc6d-48c8-bfcb-8b0af9f49906'));
+            chart.draw(data, options);
+        }
+    </script>
+</head>
+<body>
+    <div id="841c9104-dc6d-48c8-bfcb-8b0af9f49906" style="width: 900px; height: 500px;"></div>
+</body>
+</html>

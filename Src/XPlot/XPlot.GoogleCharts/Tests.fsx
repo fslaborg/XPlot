@@ -620,8 +620,8 @@ module Timeline =
     let timeline1 =
         [
             "Washington", DateTime(1789, 4, 29), DateTime(1797, 3, 3)
-            "Adams", DateTime(1797, 3, 3),  DateTime(1801, 3, 3) 
-            "Jefferson", DateTime(1801, 3, 3),  DateTime(1809, 3, 3)        
+            "Adams", DateTime(1797, 3, 3), DateTime(1801, 3, 3) 
+            "Jefferson", DateTime(1801, 3, 3), DateTime(1809, 3, 3)        
         ]
         |> Chart.Timeline
         |> Chart.WithLabels ["Start"; "End"]
@@ -630,8 +630,8 @@ module Timeline =
     let timeline2 =
         [
             "1", "George Washington", DateTime(1789, 4, 29), DateTime(1797, 3, 3)
-            "2", "John Adams", DateTime(1797, 3, 3),  DateTime(1801, 3, 3) 
-            "3", "Thomas Jefferson", DateTime(1801, 3, 3),  DateTime(1809, 3, 3)        
+            "2", "John Adams", DateTime(1797, 3, 3), DateTime(1801, 3, 3) 
+            "3", "Thomas Jefferson", DateTime(1801, 3, 3), DateTime(1809, 3, 3)        
         ]
         |> Chart.Timeline
         |> Chart.WithLabels ["Name"; "Start"; "End"]
