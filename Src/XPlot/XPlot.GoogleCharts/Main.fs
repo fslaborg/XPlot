@@ -1242,6 +1242,72 @@ module Configuration =
         member __.ShouldSerializetype() = not typeField.IsNone
         member __.ShouldSerializevisibleInLegend() = not visibleInLegendField.IsNone
 
+    type LabelStyle() =
+        let mutable colorField : string option = None
+        let mutable fontNameField : string option = None
+        let mutable fontSizeField : string option = None
+
+        member __.color
+            with get() = colorField.Value
+            and set(value) = colorField <- Some value
+
+        member __.fontName
+            with get() = fontNameField.Value
+            and set(value) = fontNameField <- Some value
+
+        member __.fontSize
+            with get() = fontSizeField.Value
+            and set(value) = fontSizeField <- Some value
+
+        member __.ShouldSerializecolor() = not colorField.IsNone
+        member __.ShouldSerializefontName() = not fontNameField.IsNone
+        member __.ShouldSerializefontSize() = not fontSizeField.IsNone
+
+    type Timeline() =
+        let mutable barLabelStyleField : LabelStyle option = None
+        let mutable colorByRowLabelField : bool option = None
+        let mutable groupByRowLabelField : bool option = None
+        let mutable rowLabelStyleField : LabelStyle option = None
+        let mutable showBarLabelsField : bool option = None
+        let mutable showRowLabelsField : bool option = None
+        let mutable singleColorField : string option = None
+
+        member __.barLabelStyle
+            with get() = barLabelStyleField.Value
+            and set(value) = barLabelStyleField <- Some value
+
+        member __.colorByRowLabel
+            with get() = colorByRowLabelField.Value
+            and set(value) = colorByRowLabelField <- Some value
+
+        member __.groupByRowLabel
+            with get() = groupByRowLabelField.Value
+            and set(value) = groupByRowLabelField <- Some value
+
+        member __.rowLabelStyle
+            with get() = rowLabelStyleField.Value
+            and set(value) = rowLabelStyleField <- Some value
+
+        member __.showBarLabels
+            with get() = showBarLabelsField.Value
+            and set(value) = showBarLabelsField <- Some value
+
+        member __.showRowLabels
+            with get() = showRowLabelsField.Value
+            and set(value) = showRowLabelsField <- Some value
+
+        member __.singleColor
+            with get() = singleColorField.Value
+            and set(value) = singleColorField <- Some value
+
+        member __.ShouldSerializebarLabelStyle() = not barLabelStyleField.IsNone
+        member __.ShouldSerializecolorByRowLabel() = not colorByRowLabelField.IsNone
+        member __.ShouldSerializegroupByRowLabel() = not groupByRowLabelField.IsNone
+        member __.ShouldSerializerowLabelStyle() = not rowLabelStyleField.IsNone
+        member __.ShouldSerializeshowBarLabels() = not showBarLabelsField.IsNone
+        member __.ShouldSerializeshowRowLabels() = not showRowLabelsField.IsNone
+        member __.ShouldSerializesingleColor() = not singleColorField.IsNone
+
     type Options() =
 
         let mutable aggregationTargetField : string option = None
@@ -1367,6 +1433,9 @@ module Configuration =
         let mutable trendlinesField : Trendline [] option = None
         // Stepped Area
         let mutable connectStepsField : bool option = None
+        // Timeline
+        let mutable avoidOverlappingGridLinesField : bool option = None
+        let mutable timelineField : Timeline option = None
 
         member __.aggregationTarget
             with get() = aggregationTargetField.Value
@@ -1801,6 +1870,14 @@ module Configuration =
             with get() = connectStepsField.Value
             and set(value) = connectStepsField <- Some value
 
+        member __.avoidOverlappingGridLines
+            with get() = avoidOverlappingGridLinesField.Value
+            and set(value) = avoidOverlappingGridLinesField <- Some value
+
+        member __.timeline
+            with get() = timelineField.Value
+            and set(value) = timelineField <- Some value
+
         member __.ShouldSerializeaggregationTarget() = not aggregationTargetField.IsNone
         member __.ShouldSerializeanimation() = not animationField.IsNone
         member __.ShouldSerializeannotations() = not annotationsField.IsNone
@@ -1909,6 +1986,8 @@ module Configuration =
         member __.ShouldSerializesankey() = not sankeyField.IsNone
         member __.ShouldSerializetrendlines() = not trendlinesField.IsNone
         member __.ShouldSerializeconnectSteps() = not connectStepsField.IsNone
+        member __.ShouldSerializeavoidOverlappingGridLines() = not avoidOverlappingGridLinesField.IsNone
+        member __.ShouldSerializetimeline() = not timelineField.IsNone
 
 let jsTemplate =
     """google.setOnLoadCallback(drawChart);
@@ -1954,6 +2033,8 @@ type ChartGallery =
     | Sankey
     | Scatter
     | SteppedArea
+//    | Table
+    | Timeline
 
     override __.ToString() =
         match FSharpValue.GetUnionFields(__, typeof<ChartGallery>) with
@@ -1965,6 +2046,8 @@ type ChartGallery =
             | "Histogram" -> name
             | "Map" -> name
             | "Sankey" -> name
+//            | "Table" -> name
+            | "Timeline" -> name
             | _ -> name + "Chart"
 
 type GoogleChart() =
@@ -2030,6 +2113,8 @@ type GoogleChart() =
             | Geo -> "geochart"
             | Map -> "map"
             | Sankey -> "sankey"
+//            | Table -> "table"
+            | Timeline -> "timeline"
             | _ -> "corechart"
         template.Replace("{VERSION}", version)
             .Replace("{PACKAGES}", packages)
@@ -2463,6 +2548,28 @@ type Chart =
                 |> Seq.map Datum.New
                 |> Series.New None)
         GoogleChart.Create data' Labels (defaultArg Options <| Configuration.Options()) ChartGallery.SteppedArea
+
+    /// <summary>Creates a timeline chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">The data clumns labels.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Timeline(data:seq<string * #value * #value>, ?Labels, ?Options) =
+        let data' =
+            data
+            |> Seq.map Datum.New
+            |> Series.New None
+        GoogleChart.Create [data'] Labels (defaultArg Options <| Configuration.Options()) ChartGallery.Timeline
+
+    /// <summary>Creates a timeline chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">The data clumns labels.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Timeline(data:seq<string * string * #value * #value>, ?Labels, ?Options) =
+        let data' =
+            data
+            |> Seq.map Datum.New
+            |> Series.New None
+        GoogleChart.Create [data'] Labels (defaultArg Options <| Configuration.Options()) ChartGallery.Timeline
         
 type Chart with
 
