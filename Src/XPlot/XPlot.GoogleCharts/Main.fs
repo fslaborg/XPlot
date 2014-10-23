@@ -2184,6 +2184,12 @@ type GoogleChart() =
     /// Sets the chart's configuration options.
     member __.WithOptions options = __.options <- options
 
+    /// Sets the chart's height.
+    member __.WithHeight height = __.height <- height
+
+    /// Sets the chart's width.
+    member __.WithWidth width = __.width <- width
+
 type Chart =
 
     /// <summary>Creates an annotation chart.</summary>
@@ -2618,4 +2624,14 @@ type Chart with
     /// Sets the chart's configuration options.
     static member WithOptions options (chart:GoogleChart) =
         chart.WithOptions options
+        chart
+
+    /// Sets the chart's height.
+    static member WithHeight height (chart:GoogleChart) =
+        chart.WithHeight height
+        chart
+
+    /// Sets the chart's width.
+    member __.WithWidth width (chart:GoogleChart) =
+        chart.WithWidth width
         chart

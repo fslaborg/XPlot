@@ -496,7 +496,8 @@ module Map =
         ]
         |> Chart.Map
         |> Chart.WithOptions options
-        |> Chart.Show 
+        |> Chart.WithHeight 420
+        |> Chart.Show
             
     let chart2 =
         [
