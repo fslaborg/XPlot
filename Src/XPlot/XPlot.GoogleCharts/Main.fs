@@ -1308,6 +1308,57 @@ module Configuration =
         member __.ShouldSerializeshowRowLabels() = not showRowLabelsField.IsNone
         member __.ShouldSerializesingleColor() = not singleColorField.IsNone
 
+    type ClassNames() =
+        let mutable headerRowField : string option = None
+        let mutable tableRowField : string option = None
+        let mutable oddTableRowField : bool option = None
+        let mutable selectedTableRowField : string option = None
+        let mutable hoverTableRowField : string option = None
+        let mutable headerCellField : string option = None
+        let mutable tableCellField : string option = None
+        let mutable rowNumberCellField : string option = None
+
+        member __.headerRow
+            with get() = headerRowField.Value
+            and set(value) = headerRowField <- Some value
+
+        member __.tableRow
+            with get() = tableRowField.Value
+            and set(value) = tableRowField <- Some value
+
+        member __.oddTableRow
+            with get() = oddTableRowField.Value
+            and set(value) = oddTableRowField <- Some value
+
+        member __.selectedTableRow
+            with get() = selectedTableRowField.Value
+            and set(value) = selectedTableRowField <- Some value
+
+        member __.hoverTableRow
+            with get() = hoverTableRowField.Value
+            and set(value) = hoverTableRowField <- Some value
+
+        member __.headerCell
+            with get() = headerCellField.Value
+            and set(value) = headerCellField <- Some value
+
+        member __.tableCell
+            with get() = tableCellField.Value
+            and set(value) = tableCellField <- Some value
+
+        member __.rowNumberCell
+            with get() = rowNumberCellField.Value
+            and set(value) = rowNumberCellField <- Some value
+
+        member __.ShouldSerializeheaderRow() = not headerRowField.IsNone
+        member __.ShouldSerializetableRow() = not tableRowField.IsNone
+        member __.ShouldSerializeoddTableRow() = not oddTableRowField.IsNone
+        member __.ShouldSerializeselectedTableRow() = not selectedTableRowField.IsNone
+        member __.ShouldSerializehoverTableRow() = not hoverTableRowField.IsNone
+        member __.ShouldSerializeheaderCell() = not headerCellField.IsNone
+        member __.ShouldSerializetableCell() = not tableCellField.IsNone
+        member __.ShouldSerializerowNumberCell() = not rowNumberCellField.IsNone
+
     type Options() =
 
         let mutable aggregationTargetField : string option = None
@@ -1433,6 +1484,19 @@ module Configuration =
         let mutable trendlinesField : Trendline [] option = None
         // Stepped Area
         let mutable connectStepsField : bool option = None
+        // Table
+        let mutable alternatingRowStyleField : bool option = None
+        let mutable cssClassNamesField : ClassNames option = None
+        let mutable firstRowNumberField : int option = None
+        let mutable pageField : string option = None
+        let mutable pageSizeField : string option = None
+        let mutable rtlTableField : bool option = None
+        let mutable scrollLeftStartPositionField : int option = None
+        let mutable showRowNumberField : bool option = None
+        let mutable sortField : string option = None
+        let mutable sortAscendingField : bool option = None
+        let mutable sortColumnField : int option = None
+        let mutable startPageField : int option = None
         // Timeline
         let mutable avoidOverlappingGridLinesField : bool option = None
         let mutable timelineField : Timeline option = None
@@ -1870,6 +1934,54 @@ module Configuration =
             with get() = connectStepsField.Value
             and set(value) = connectStepsField <- Some value
 
+        member __.alternatingRowStyle
+            with get() = alternatingRowStyleField.Value
+            and set(value) = alternatingRowStyleField <- Some value
+
+        member __.cssClassNames
+            with get() = cssClassNamesField.Value
+            and set(value) = cssClassNamesField <- Some value
+
+        member __.firstRowNumber
+            with get() = firstRowNumberField.Value
+            and set(value) = firstRowNumberField <- Some value
+
+        member __.page
+            with get() = pageField.Value
+            and set(value) = pageField <- Some value
+
+        member __.pageSize
+            with get() = pageSizeField.Value
+            and set(value) = pageSizeField <- Some value
+
+        member __.rtlTable
+            with get() = rtlTableField.Value
+            and set(value) = rtlTableField <- Some value
+
+        member __.scrollLeftStartPosition
+            with get() = scrollLeftStartPositionField.Value
+            and set(value) = scrollLeftStartPositionField <- Some value
+
+        member __.showRowNumber
+            with get() = showRowNumberField.Value
+            and set(value) = showRowNumberField <- Some value
+
+        member __.sort
+            with get() = sortField.Value
+            and set(value) = sortField <- Some value
+
+        member __.sortAscending
+            with get() = sortAscendingField.Value
+            and set(value) = sortAscendingField <- Some value
+
+        member __.sortColumn
+            with get() = sortColumnField.Value
+            and set(value) = sortColumnField <- Some value
+
+        member __.startPage
+            with get() = startPageField.Value
+            and set(value) = startPageField <- Some value
+
         member __.avoidOverlappingGridLines
             with get() = avoidOverlappingGridLinesField.Value
             and set(value) = avoidOverlappingGridLinesField <- Some value
@@ -1986,6 +2098,18 @@ module Configuration =
         member __.ShouldSerializesankey() = not sankeyField.IsNone
         member __.ShouldSerializetrendlines() = not trendlinesField.IsNone
         member __.ShouldSerializeconnectSteps() = not connectStepsField.IsNone
+        member __.ShouldSerializealternatingRowStyle() = not alternatingRowStyleField.IsNone
+        member __.ShouldSerializecssClassNames() = not cssClassNamesField.IsNone
+        member __.ShouldSerializefirstRowNumber() = not firstRowNumberField.IsNone
+        member __.ShouldSerializepage() = not pageField.IsNone
+        member __.ShouldSerializepageSize() = not pageSizeField.IsNone
+        member __.ShouldSerializertlTable() = not rtlTableField.IsNone
+        member __.ShouldSerializescrollLeftStartPosition() = not scrollLeftStartPositionField.IsNone
+        member __.ShouldSerializeshowRowNumber() = not showRowNumberField.IsNone
+        member __.ShouldSerializesort() = not sortField.IsNone
+        member __.ShouldSerializesortAscending() = not sortAscendingField.IsNone
+        member __.ShouldSerializesortColumn() = not sortColumnField.IsNone
+        member __.ShouldSerializestartPage() = not startPageField.IsNone
         member __.ShouldSerializeavoidOverlappingGridLines() = not avoidOverlappingGridLinesField.IsNone
         member __.ShouldSerializetimeline() = not timelineField.IsNone
 
@@ -2033,7 +2157,7 @@ type ChartGallery =
     | Sankey
     | Scatter
     | SteppedArea
-//    | Table
+    | Table
     | Timeline
 
     override __.ToString() =
@@ -2046,7 +2170,7 @@ type ChartGallery =
             | "Histogram" -> name
             | "Map" -> name
             | "Sankey" -> name
-//            | "Table" -> name
+            | "Table" -> name
             | "Timeline" -> name
             | _ -> name + "Chart"
 
@@ -2113,7 +2237,7 @@ type GoogleChart() =
             | Geo -> "geochart"
             | Map -> "map"
             | Sankey -> "sankey"
-//            | Table -> "table"
+            | Table -> "table"
             | Timeline -> "timeline"
             | _ -> "corechart"
         template.Replace("{VERSION}", version)
@@ -2554,6 +2678,34 @@ type Chart =
                 |> Seq.map Datum.New
                 |> Series.New None)
         GoogleChart.Create data' Labels (defaultArg Options <| Configuration.Options()) ChartGallery.SteppedArea
+
+//    /// <summary>Creates a table chart.</summary>
+//    /// <param name="data">The chart's data.</param>
+//    /// <param name="Label">The data column label.</param>
+//    /// <param name="Options">The chart's options.</param>
+//    static member Table(data:seq<#key * #value>, ?Label:string, ?Options) =
+//        let data' =
+//            data
+//            |> Seq.map Datum.New
+//            |> Series.New None
+//        let labels =
+//            match Label with
+//            | None -> None
+//            | Some label -> [label] |> List.toSeq |> Some
+//        GoogleChart.Create [data'] labels (defaultArg Options <| Configuration.Options()) ChartGallery.Table
+//
+//    /// <summary>Creates a table chart.</summary>
+//    /// <param name="data">The chart's data.</param>
+//    /// <param name="Labels">The data clumns labels.</param>
+//    /// <param name="Options">The chart's options.</param>
+//    static member Table(data:seq<#seq<'K * 'V>> when 'K :> key and 'V :> value, ?Labels:seq<string>, ?Options) =
+//        let data' =
+//            data
+//            |> Seq.map (fun x ->
+//                x 
+//                |> Seq.map Datum.New
+//                |> Series.New None)
+//        GoogleChart.Create data' Labels (defaultArg Options <| Configuration.Options()) ChartGallery.Table
 
     /// <summary>Creates a timeline chart.</summary>
     /// <param name="data">The chart's data.</param>
