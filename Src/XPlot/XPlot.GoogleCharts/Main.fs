@@ -2679,33 +2679,33 @@ type Chart =
                 |> Series.New None)
         GoogleChart.Create data' Labels (defaultArg Options <| Configuration.Options()) ChartGallery.SteppedArea
 
-//    /// <summary>Creates a table chart.</summary>
-//    /// <param name="data">The chart's data.</param>
-//    /// <param name="Label">The data column label.</param>
-//    /// <param name="Options">The chart's options.</param>
-//    static member Table(data:seq<#key * #value>, ?Label:string, ?Options) =
-//        let data' =
-//            data
-//            |> Seq.map Datum.New
-//            |> Series.New None
-//        let labels =
-//            match Label with
-//            | None -> None
-//            | Some label -> [label] |> List.toSeq |> Some
-//        GoogleChart.Create [data'] labels (defaultArg Options <| Configuration.Options()) ChartGallery.Table
-//
-//    /// <summary>Creates a table chart.</summary>
-//    /// <param name="data">The chart's data.</param>
-//    /// <param name="Labels">The data clumns labels.</param>
-//    /// <param name="Options">The chart's options.</param>
-//    static member Table(data:seq<#seq<'K * 'V>> when 'K :> key and 'V :> value, ?Labels:seq<string>, ?Options) =
-//        let data' =
-//            data
-//            |> Seq.map (fun x ->
-//                x 
-//                |> Seq.map Datum.New
-//                |> Series.New None)
-//        GoogleChart.Create data' Labels (defaultArg Options <| Configuration.Options()) ChartGallery.Table
+    /// <summary>Creates a table chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Label">The data column label.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Table(data:seq<#key * #value>, ?Label:string, ?Options) =
+        let data' =
+            data
+            |> Seq.map Datum.New
+            |> Series.New None
+        let labels =
+            match Label with
+            | None -> None
+            | Some label -> [label] |> List.toSeq |> Some
+        GoogleChart.Create [data'] labels (defaultArg Options <| Configuration.Options()) ChartGallery.Table
+
+    /// <summary>Creates a table chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">The data clumns labels.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Table(data:seq<#seq<'K * 'V>> when 'K :> key and 'V :> value, ?Labels:seq<string>, ?Options) =
+        let data' =
+            data
+            |> Seq.map (fun x ->
+                x 
+                |> Seq.map Datum.New
+                |> Series.New None)
+        GoogleChart.Create data' Labels (defaultArg Options <| Configuration.Options()) ChartGallery.Table
 
     /// <summary>Creates a timeline chart.</summary>
     /// <param name="data">The chart's data.</param>
