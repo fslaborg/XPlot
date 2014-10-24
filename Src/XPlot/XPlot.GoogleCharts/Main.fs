@@ -1500,6 +1500,28 @@ module Configuration =
         // Timeline
         let mutable avoidOverlappingGridLinesField : bool option = None
         let mutable timelineField : Timeline option = None
+        // Treemap
+        let mutable fontColorField : string option = None
+        let mutable fontFamilyField : string option = None
+        let mutable headerColorField : string option = None
+        let mutable headerHeightField : int option = None
+        let mutable headerHighlightColorField : string option = None
+        let mutable hintOpacityField : float option = None
+        let mutable maxColorField : string option = None
+        let mutable maxDepthField : int option = None
+        let mutable maxHighlightColorField : string option = None
+        let mutable maxPostDepthField : int option = None
+        let mutable maxColorValueField : int option = None
+        let mutable midColorField : string option = None
+        let mutable midHighlightColorField : string option = None
+        let mutable minColorField : string option = None
+        let mutable minHighlightColorField : string option = None
+        let mutable minColorValueField : int option = None
+        let mutable noColorField : string option = None
+        let mutable noHighlightColorField : string option = None
+        let mutable showScaleField : bool option = None
+        let mutable showTooltipsField : bool option = None
+        let mutable useWeightedAverageForAggregationField : bool option = None
 
         member __.aggregationTarget
             with get() = aggregationTargetField.Value
@@ -1990,6 +2012,91 @@ module Configuration =
             with get() = timelineField.Value
             and set(value) = timelineField <- Some value
 
+
+        member __.fontColor
+            with get() = fontColorField.Value
+            and set(value) = fontColorField <- Some value
+
+        member __.fontFamily
+            with get() = fontFamilyField.Value
+            and set(value) = fontFamilyField <- Some value
+
+        member __.headerColor
+            with get() = headerColorField.Value
+            and set(value) = headerColorField <- Some value
+
+        member __.headerHeight
+            with get() = headerHeightField.Value
+            and set(value) = headerHeightField <- Some value
+
+        member __.headerHighlightColor
+            with get() = headerHighlightColorField.Value
+            and set(value) = headerHighlightColorField <- Some value
+
+        member __.hintOpacity
+            with get() = hintOpacityField.Value
+            and set(value) = hintOpacityField <- Some value
+
+        member __.maxColor
+            with get() = maxColorField.Value
+            and set(value) = maxColorField <- Some value
+
+        member __.maxDepth
+            with get() = maxDepthField.Value
+            and set(value) = maxDepthField <- Some value
+
+        member __.maxHighlightColor
+            with get() = maxHighlightColorField.Value
+            and set(value) = maxHighlightColorField <- Some value
+
+        member __.maxPostDepth
+            with get() = maxPostDepthField.Value
+            and set(value) = maxPostDepthField <- Some value
+
+        member __.maxColorValue
+            with get() = maxColorValueField.Value
+            and set(value) = maxColorValueField <- Some value
+
+        member __.midColor
+            with get() = midColorField.Value
+            and set(value) = midColorField <- Some value
+
+        member __.midHighlightColor
+            with get() = midHighlightColorField.Value
+            and set(value) = midHighlightColorField <- Some value
+
+        member __.minColor
+            with get() = minColorField.Value
+            and set(value) = minColorField <- Some value
+
+        member __.minHighlightColor
+            with get() = minHighlightColorField.Value
+            and set(value) = minHighlightColorField <- Some value
+
+        member __.minColorValue
+            with get() = minColorValueField.Value
+            and set(value) = minColorValueField <- Some value
+
+        member __.noColor
+            with get() = noColorField.Value
+            and set(value) = noColorField <- Some value
+
+        member __.noHighlightColor
+            with get() = noHighlightColorField.Value
+            and set(value) = noHighlightColorField <- Some value
+
+        member __.showScale
+            with get() = showScaleField.Value
+            and set(value) = showScaleField <- Some value
+
+        member __.showTooltips
+            with get() = showTooltipsField.Value
+            and set(value) = showTooltipsField <- Some value
+
+        member __.useWeightedAverageForAggregation
+            with get() = useWeightedAverageForAggregationField.Value
+            and set(value) = useWeightedAverageForAggregationField <- Some value
+
         member __.ShouldSerializeaggregationTarget() = not aggregationTargetField.IsNone
         member __.ShouldSerializeanimation() = not animationField.IsNone
         member __.ShouldSerializeannotations() = not annotationsField.IsNone
@@ -2112,6 +2219,27 @@ module Configuration =
         member __.ShouldSerializestartPage() = not startPageField.IsNone
         member __.ShouldSerializeavoidOverlappingGridLines() = not avoidOverlappingGridLinesField.IsNone
         member __.ShouldSerializetimeline() = not timelineField.IsNone
+        member __.ShouldSerializefontColor() = not fontColorField.IsNone
+        member __.ShouldSerializefontFamily() = not fontFamilyField.IsNone
+        member __.ShouldSerializeheaderColor() = not headerColorField.IsNone
+        member __.ShouldSerializeheaderHeight() = not headerHeightField.IsNone
+        member __.ShouldSerializeheaderHighlightColor() = not headerHighlightColorField.IsNone
+        member __.ShouldSerializehintOpacity() = not hintOpacityField.IsNone
+        member __.ShouldSerializemaxColor() = not maxColorField.IsNone
+        member __.ShouldSerializemaxDepth() = not maxDepthField.IsNone
+        member __.ShouldSerializemaxHighlightColor() = not maxHighlightColorField.IsNone
+        member __.ShouldSerializemaxPostDepth() = not maxPostDepthField.IsNone
+        member __.ShouldSerializemaxColorValue() = not maxColorValueField.IsNone
+        member __.ShouldSerializemidColor() = not midColorField.IsNone
+        member __.ShouldSerializemidHighlightColor() = not midHighlightColorField.IsNone
+        member __.ShouldSerializeminColor() = not minColorField.IsNone
+        member __.ShouldSerializeminHighlightColor() = not minHighlightColorField.IsNone
+        member __.ShouldSerializeminColorValue() = not minColorValueField.IsNone
+        member __.ShouldSerializenoColor() = not noColorField.IsNone
+        member __.ShouldSerializenoHighlightColor() = not noHighlightColorField.IsNone
+        member __.ShouldSerializeshowScale() = not showScaleField.IsNone
+        member __.ShouldSerializeshowTooltips() = not showTooltipsField.IsNone
+        member __.ShouldSerializeuseWeightedAverageForAggregation() = not useWeightedAverageForAggregationField.IsNone
 
 let jsTemplate =
     """google.setOnLoadCallback(drawChart);
@@ -2159,6 +2287,7 @@ type ChartGallery =
     | SteppedArea
     | Table
     | Timeline
+    | TreeMap
 
     override __.ToString() =
         match FSharpValue.GetUnionFields(__, typeof<ChartGallery>) with
@@ -2172,6 +2301,7 @@ type ChartGallery =
             | "Sankey" -> name
             | "Table" -> name
             | "Timeline" -> name
+            | "TreeMap" -> name
             | _ -> name + "Chart"
 
 type GoogleChart() =
@@ -2239,6 +2369,7 @@ type GoogleChart() =
             | Sankey -> "sankey"
             | Table -> "table"
             | Timeline -> "timeline"
+            | TreeMap -> "treemap"
             | _ -> "corechart"
         template.Replace("{VERSION}", version)
             .Replace("{PACKAGES}", packages)
@@ -2728,6 +2859,28 @@ type Chart =
             |> Seq.map Datum.New
             |> Series.New None
         GoogleChart.Create [data'] Labels (defaultArg Options <| Configuration.Options()) ChartGallery.Timeline
+
+    /// <summary>Creates a treemap chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">The data clumns labels.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Treemap(data:seq<string * string * #value>, ?Labels, ?Options) =
+        let data' =
+            data
+            |> Seq.map Datum.New
+            |> Series.New None
+        GoogleChart.Create [data'] Labels (defaultArg Options <| Configuration.Options()) ChartGallery.TreeMap
+
+    /// <summary>Creates a treemap chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">The data clumns labels.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Treemap(data:seq<string * string * #value * #value>, ?Labels, ?Options) =
+        let data' =
+            data
+            |> Seq.map Datum.New
+            |> Series.New None
+        GoogleChart.Create [data'] Labels (defaultArg Options <| Configuration.Options()) ChartGallery.TreeMap
         
 type Chart with
 
