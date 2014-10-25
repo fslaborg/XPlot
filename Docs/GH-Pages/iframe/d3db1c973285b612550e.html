@@ -1,0 +1,22 @@
+﻿
+<html>
+<head>
+    <title>Google Chart</title>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        google.load("visualization", "1", { packages: ["table"] })
+        google.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data = new google.visualization.DataTable({ "cols": [{ "type": "string", "id": "Column 0", "label": "Name" }, { "type": "number", "id": "Column 1", "label": "Salary" }, { "type": "boolean", "id": "Column 2", "label": "Full Time Employee" }], "rows": [{ "c": [{ "v": "Mike" }, { "v": 10000 }, { "v": true }] }, { "c": [{ "v": "Jim" }, { "v": 8000 }, { "v": false }] }, { "c": [{ "v": "Alice" }, { "v": 12500 }, { "v": true }] }, { "c": [{ "v": "Bob" }, { "v": 7000 }, { "v": true }] }] });
+
+            var options = { "legend": { "position": "none" }, "showRowNumber": true }
+
+            var chart = new google.visualization.Table(document.getElementById('a950ff6d-bfd4-42b4-8331-06b98004c449'));
+            chart.draw(data, options);
+        }
+    </script>
+</head>
+<body>
+    <div id="a950ff6d-bfd4-42b4-8331-06b98004c449" style="width: 900px; height: 500px;"></div>
+</body>
+</html>

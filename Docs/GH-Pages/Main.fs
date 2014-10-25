@@ -145,6 +145,12 @@ module Site =
                 18
                 "Google Timeline Chart"
                 [Demo.New "d23a9ff69ea5eb0d1b81" "Google Timeline Chart"]
+            chartSitelet
+                "/chart/google-table-chart"
+                19
+                "Google Table Chart"
+                [Demo.New "d3db1c973285b612550e" "Google Table Chart"]
+
 
         ]
 
@@ -157,7 +163,7 @@ type Website() =
                 yield Home
                 yield GoogleCharts
                 yield Highcharts
-                for x in 1 .. 18 -> Chart x
+                for x in 1 .. 19 -> Chart x
             ]
 
 [<assembly: Website(typeof<Website>)>]
