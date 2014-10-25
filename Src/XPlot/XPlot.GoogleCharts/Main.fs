@@ -116,6 +116,28 @@ module Data =
             dt
         dataTable
 
+//============================
+// TODO: build Google data tables from System.Data.DataTable
+//let sysDt = new System.Data.DataTable()
+//
+//let ``type`` = typeof<string>
+//sysDt.Columns.Add("firstcolumn", ``type``) |> ignore
+//sysDt.Columns.Add("secondcolumn", typeof<int>) |> ignore
+//sysDt.Columns.Add("thirdcolumn", typeof<decimal>) |> ignore
+//sysDt.Locale = System.Globalization.CultureInfo.InvariantCulture |> ignore
+// 
+//let row1 = sysDt.NewRow()
+//row1.[0] <- "Ciao"
+//row1.[1] <- 10
+//row1.[2] <- 2.2
+//sysDt.Rows.Add(row1)
+// 
+//let dataTable = sysDt.ToGoogleDataTable()
+//     
+//let json = dataTable.GetJson()
+
+//=============================
+
 [<AutoOpen>]
 module Configuration =
 

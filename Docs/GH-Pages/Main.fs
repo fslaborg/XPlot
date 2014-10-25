@@ -150,8 +150,11 @@ module Site =
                 19
                 "Google Table Chart"
                 [Demo.New "d3db1c973285b612550e" "Google Table Chart"]
-
-
+            chartSitelet
+                "/chart/google-treemap-chart"
+                20
+                "Google Treemap Chart"
+                [Demo.New "7a0f8caf46e0b4461cce" "Google Treemap Chart"]
         ]
 
 [<Sealed>]

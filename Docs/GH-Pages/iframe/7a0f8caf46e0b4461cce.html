@@ -1,0 +1,22 @@
+﻿
+<html>
+<head>
+    <title>Google Chart</title>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        google.load("visualization", "1", { packages: ["treemap"] })
+        google.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data = new google.visualization.DataTable({ "cols": [{ "type": "string", "id": "Column 0", "label": "Location" }, { "type": "string", "id": "Column 1", "label": "Parent" }, { "type": "number", "id": "Column 2", "label": "Market trade volume (size)" }, { "type": "number", "id": "Column 3", "label": "Market increase/decrease (color)" }], "rows": [{ "c": [{ "v": "Global" }, { "v": "" }, { "v": 0 }, { "v": 0 }] }, { "c": [{ "v": "America" }, { "v": "Global" }, { "v": 0 }, { "v": 0 }] }, { "c": [{ "v": "Europe" }, { "v": "Global" }, { "v": 0 }, { "v": 0 }] }, { "c": [{ "v": "Asia" }, { "v": "Global" }, { "v": 0 }, { "v": 0 }] }, { "c": [{ "v": "Australia" }, { "v": "Global" }, { "v": 0 }, { "v": 0 }] }, { "c": [{ "v": "Africa" }, { "v": "Global" }, { "v": 0 }, { "v": 0 }] }, { "c": [{ "v": "Brazil" }, { "v": "America" }, { "v": 11 }, { "v": 10 }] }, { "c": [{ "v": "USA" }, { "v": "America" }, { "v": 52 }, { "v": 31 }] }, { "c": [{ "v": "Mexico" }, { "v": "America" }, { "v": 24 }, { "v": 12 }] }, { "c": [{ "v": "Canada" }, { "v": "America" }, { "v": 16 }, { "v": -23 }] }, { "c": [{ "v": "France" }, { "v": "Europe" }, { "v": 42 }, { "v": -11 }] }, { "c": [{ "v": "Germany" }, { "v": "Europe" }, { "v": 31 }, { "v": -2 }] }, { "c": [{ "v": "Sweden" }, { "v": "Europe" }, { "v": 22 }, { "v": -13 }] }, { "c": [{ "v": "Italy" }, { "v": "Europe" }, { "v": 17 }, { "v": 4 }] }, { "c": [{ "v": "UK" }, { "v": "Europe" }, { "v": 21 }, { "v": -5 }] }, { "c": [{ "v": "China" }, { "v": "Asia" }, { "v": 36 }, { "v": 4 }] }, { "c": [{ "v": "Japan" }, { "v": "Asia" }, { "v": 20 }, { "v": -12 }] }, { "c": [{ "v": "India" }, { "v": "Asia" }, { "v": 40 }, { "v": 63 }] }, { "c": [{ "v": "Laos" }, { "v": "Asia" }, { "v": 4 }, { "v": 34 }] }, { "c": [{ "v": "Mongolia" }, { "v": "Asia" }, { "v": 1 }, { "v": -5 }] }, { "c": [{ "v": "Israel" }, { "v": "Asia" }, { "v": 12 }, { "v": 24 }] }, { "c": [{ "v": "Iran" }, { "v": "Asia" }, { "v": 18 }, { "v": 13 }] }, { "c": [{ "v": "Pakistan" }, { "v": "Asia" }, { "v": 11 }, { "v": -52 }] }, { "c": [{ "v": "Egypt" }, { "v": "Africa" }, { "v": 21 }, { "v": 0 }] }, { "c": [{ "v": "S. Africa" }, { "v": "Africa" }, { "v": 30 }, { "v": 43 }] }, { "c": [{ "v": "Sudan" }, { "v": "Africa" }, { "v": 12 }, { "v": 2 }] }, { "c": [{ "v": "Congo" }, { "v": "Africa" }, { "v": 10 }, { "v": 12 }] }, { "c": [{ "v": "Zaire" }, { "v": "Africa" }, { "v": 8 }, { "v": 10 }] }] });
+
+            var options = { "legend": { "position": "none" }, "fontColor": "black", "headerHeight": 15, "maxColor": "#0d0", "midColor": "#ddd", "minColor": "#f00", "showScale": true }
+
+            var chart = new google.visualization.TreeMap(document.getElementById('1cb5198a-f63f-4292-a896-95e159b22f8c'));
+            chart.draw(data, options);
+        }
+    </script>
+</head>
+<body>
+    <div id="1cb5198a-f63f-4292-a896-95e159b22f8c" style="width: 900px; height: 500px;"></div>
+</body>
+</html>
