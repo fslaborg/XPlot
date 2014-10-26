@@ -2236,14 +2236,14 @@ module Configuration =
 
 let jsTemplate =
     """google.setOnLoadCallback(drawChart);
-            function drawChart() {
-                var data = new google.visualization.DataTable({DATA});
+        function drawChart() {
+            var data = new google.visualization.DataTable({DATA});
 
-                var options = {OPTIONS} 
+            var options = {OPTIONS} 
 
-                var chart = new google.visualization.{TYPE}(document.getElementById('{GUID}'));
-                chart.draw(data, options);
-            }"""
+            var chart = new google.visualization.{TYPE}(document.getElementById('{GUID}'));
+            chart.draw(data, options);
+        }"""
 
 let template =
     """<html>
