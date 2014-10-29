@@ -2431,8 +2431,6 @@ type GoogleChart() =
     /// Sets the chart's width.
     member __.WithWidth width = __.Width <- width
 
-let defaultOptions = Options()
-
 type Chart =
 
     /// <summary>Creates an annotation chart.</summary>
@@ -2444,7 +2442,7 @@ type Chart =
             data
             |> Seq.map Datum.New
             |> Series.New
-        let options = defaultArg Options defaultOptions
+        let options = defaultArg Options <| Configuration.Options()
         GoogleChart.Create [series] Labels options Annotation
 
     /// <summary>Creates an annotation chart.</summary>
@@ -2455,10 +2453,10 @@ type Chart =
         let series =
             data
             |> Seq.map (fun x ->
-                x 
+                x
                 |> Seq.map Datum.New
                 |> Series.New)
-        let options = defaultArg Options defaultOptions
+        let options = defaultArg Options <| Configuration.Options()
         GoogleChart.Create series Labels options Annotation
 
     /// <summary>Creates an area chart.</summary>
@@ -2470,7 +2468,7 @@ type Chart =
             data
             |> Seq.map Datum.New
             |> Series.New
-        let options = defaultArg Options defaultOptions
+        let options = defaultArg Options <| Configuration.Options()
         GoogleChart.Create [series] Labels options Area
 
     /// <summary>Creates an area chart.</summary>
@@ -2484,7 +2482,7 @@ type Chart =
                 x 
                 |> Seq.map Datum.New
                 |> Series.New)
-        let options = defaultArg Options defaultOptions
+        let options = defaultArg Options <| Configuration.Options()
         GoogleChart.Create series Labels options Area
 
     /// <summary>Creates a bar chart.</summary>
@@ -2496,7 +2494,7 @@ type Chart =
             data
             |> Seq.map Datum.New
             |> Series.New
-        let options = defaultArg Options defaultOptions
+        let options = defaultArg Options <| Configuration.Options()
         GoogleChart.Create [series] Labels options Bar
 
     /// <summary>Creates a bar chart.</summary>
@@ -2510,8 +2508,32 @@ type Chart =
                 x 
                 |> Seq.map Datum.New
                 |> Series.New)
-        let options = defaultArg Options defaultOptions
+        let options = defaultArg Options <| Configuration.Options()
         GoogleChart.Create series Labels options Bar
+
+    /// <summary>Creates a bubble chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">Labels for the data table columns.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Bubble(data:seq<string * #value * #value>, ?Labels, ?Options) =
+        let series =
+            data
+            |> Seq.map Datum.New
+            |> Series.New
+        let options = defaultArg Options <| Configuration.Options()
+        GoogleChart.Create [series] Labels options Bubble
+
+    /// <summary>Creates a bubble chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">Labels for the data table columns.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Bubble(data:seq<string * #value * #value * #value>, ?Labels, ?Options) =
+        let series =
+            data
+            |> Seq.map Datum.New
+            |> Series.New
+        let options = defaultArg Options <| Configuration.Options()
+        GoogleChart.Create [series] Labels options Bubble
 
     /// <summary>Creates a bubble chart.</summary>
     /// <param name="data">The chart's data.</param>
@@ -2522,7 +2544,7 @@ type Chart =
             data
             |> Seq.map Datum.New
             |> Series.New
-        let options = defaultArg Options defaultOptions
+        let options = defaultArg Options <| Configuration.Options()
         GoogleChart.Create [series] Labels options Bubble
      
     /// <summary>Creates a calendar chart.</summary>
@@ -2534,7 +2556,7 @@ type Chart =
             data
             |> Seq.map Datum.New
             |> Series.New
-        let options = defaultArg Options defaultOptions
+        let options = defaultArg Options <| Configuration.Options()
         GoogleChart.Create [series] Labels options Calendar
  
     /// <summary>Creates a candlestick chart.</summary>
@@ -2546,7 +2568,7 @@ type Chart =
             data
             |> Seq.map Datum.New
             |> Series.New
-        let options = defaultArg Options defaultOptions
+        let options = defaultArg Options <| Configuration.Options()
         GoogleChart.Create [series] Labels options Candlestick
 
     /// <summary>Creates a candlestick chart.</summary>
@@ -2560,7 +2582,7 @@ type Chart =
                 x 
                 |> Seq.map Datum.New
                 |> Series.New)
-        let options = defaultArg Options defaultOptions
+        let options = defaultArg Options <| Configuration.Options()
         GoogleChart.Create series Labels options Candlestick
 
     /// <summary>Creates a column chart.</summary>
@@ -2572,7 +2594,7 @@ type Chart =
             data
             |> Seq.map Datum.New
             |> Series.New
-        let options = defaultArg Options defaultOptions
+        let options = defaultArg Options <| Configuration.Options()
         GoogleChart.Create [series] Labels options Column
 
     /// <summary>Creates a column chart.</summary>
@@ -2586,7 +2608,7 @@ type Chart =
                 x 
                 |> Seq.map Datum.New
                 |> Series.New)
-        let options = defaultArg Options defaultOptions
+        let options = defaultArg Options <| Configuration.Options()
         GoogleChart.Create series Labels options Column
 
     /// <summary>Creates a combo chart.</summary>
@@ -2600,7 +2622,7 @@ type Chart =
                 x 
                 |> Seq.map Datum.New
                 |> Series.New)
-        let options = defaultArg Options defaultOptions
+        let options = defaultArg Options <| Configuration.Options()
         GoogleChart.Create series Labels options Combo
 
     /// <summary>Creates a gauge chart.</summary>
@@ -2612,7 +2634,7 @@ type Chart =
             data
             |> Seq.map Datum.New
             |> Series.New
-        let options = defaultArg Options defaultOptions
+        let options = defaultArg Options <| Configuration.Options()
         GoogleChart.Create [series] Labels options Gauge
 
     /// <summary>Creates a geo chart.</summary>
@@ -2624,7 +2646,7 @@ type Chart =
             data
             |> Seq.map Datum.New
             |> Series.New
-        let options = defaultArg Options defaultOptions
+        let options = defaultArg Options <| Configuration.Options()
         GoogleChart.Create [series] Labels options Geo
 
     /// <summary>Creates a geo chart.</summary>
@@ -2636,7 +2658,7 @@ type Chart =
             data
             |> Seq.map Datum.New
             |> Series.New
-        let options = defaultArg Options defaultOptions
+        let options = defaultArg Options <| Configuration.Options()
         GoogleChart.Create [series] Labels options Geo
 
     /// <summary>Creates a histogram chart.</summary>
@@ -2648,7 +2670,7 @@ type Chart =
             data
             |> Seq.map Datum.New
             |> Series.New
-        let options = defaultArg Options defaultOptions
+        let options = defaultArg Options <| Configuration.Options()
         GoogleChart.Create [series] Labels options Histogram
 
     /// <summary>Creates a line chart.</summary>
@@ -2660,7 +2682,7 @@ type Chart =
             data
             |> Seq.map Datum.New
             |> Series.New
-        let options = defaultArg Options defaultOptions
+        let options = defaultArg Options <| Configuration.Options()
         GoogleChart.Create [series] Labels options Line
 
     /// <summary>Creates a line chart.</summary>
@@ -2674,7 +2696,7 @@ type Chart =
                 x 
                 |> Seq.map Datum.New
                 |> Series.New)
-        let options = defaultArg Options defaultOptions
+        let options = defaultArg Options <| Configuration.Options()
         GoogleChart.Create series Labels options Line
      
     /// <summary>Creates a map chart.</summary>
@@ -2686,7 +2708,7 @@ type Chart =
             data
             |> Seq.map Datum.New
             |> Series.New
-        let options = defaultArg Options defaultOptions
+        let options = defaultArg Options <| Configuration.Options()
         GoogleChart.Create [series] Labels options Map
 
     /// <summary>Creates a map chart.</summary>
@@ -2698,7 +2720,7 @@ type Chart =
             data
             |> Seq.map Datum.New
             |> Series.New
-        let options = defaultArg Options defaultOptions
+        let options = defaultArg Options <| Configuration.Options()
         GoogleChart.Create [series] Labels options Map
 
     /// <summary>Creates a pie chart.</summary>
@@ -2710,7 +2732,7 @@ type Chart =
             data
             |> Seq.map Datum.New
             |> Series.New
-        let options = defaultArg Options defaultOptions
+        let options = defaultArg Options <| Configuration.Options()
         GoogleChart.Create [series] Labels options Pie
 
     /// <summary>Creates a sankey diagram.</summary>
@@ -2722,7 +2744,7 @@ type Chart =
             data
             |> Seq.map Datum.New
             |> Series.New
-        let options = defaultArg Options defaultOptions
+        let options = defaultArg Options <| Configuration.Options()
         GoogleChart.Create [series] Labels options Sankey
 
     /// <summary>Creates a scatter chart.</summary>
@@ -2734,7 +2756,7 @@ type Chart =
             data
             |> Seq.map Datum.New
             |> Series.New
-        let options = defaultArg Options defaultOptions
+        let options = defaultArg Options <| Configuration.Options()
         GoogleChart.Create [series] Labels options Scatter
 
     /// <summary>Creates a scatter chart.</summary>
@@ -2748,7 +2770,7 @@ type Chart =
                 x 
                 |> Seq.map Datum.New
                 |> Series.New)
-        let options = defaultArg Options defaultOptions
+        let options = defaultArg Options <| Configuration.Options()
         GoogleChart.Create series Labels options Scatter
 
     /// <summary>Creates a stepped area chart.</summary>
@@ -2760,7 +2782,7 @@ type Chart =
             data
             |> Seq.map Datum.New
             |> Series.New
-        let options = defaultArg Options defaultOptions
+        let options = defaultArg Options <| Configuration.Options()
         GoogleChart.Create [series] Labels options SteppedArea
 
     /// <summary>Creates a stepped area chart.</summary>
@@ -2774,7 +2796,7 @@ type Chart =
                 x 
                 |> Seq.map Datum.New
                 |> Series.New)
-        let options = defaultArg Options defaultOptions
+        let options = defaultArg Options <| Configuration.Options()
         GoogleChart.Create series Labels options SteppedArea
 
     /// <summary>Creates a table chart.</summary>
@@ -2786,7 +2808,7 @@ type Chart =
             data
             |> Seq.map Datum.New
             |> Series.New
-        let options = defaultArg Options defaultOptions
+        let options = defaultArg Options <| Configuration.Options()
         GoogleChart.Create [series] Labels options Table
 
     /// <summary>Creates a table chart.</summary>
@@ -2800,7 +2822,7 @@ type Chart =
                 x 
                 |> Seq.map Datum.New
                 |> Series.New)
-        let options = defaultArg Options defaultOptions
+        let options = defaultArg Options <| Configuration.Options()
         GoogleChart.Create series Labels options Table
 
     /// <summary>Creates a timeline chart.</summary>
@@ -2812,7 +2834,7 @@ type Chart =
             data
             |> Seq.map Datum.New
             |> Series.New
-        let options = defaultArg Options defaultOptions
+        let options = defaultArg Options <| Configuration.Options()
         GoogleChart.Create [series] Labels options Timeline
 
     /// <summary>Creates a timeline chart.</summary>
@@ -2824,7 +2846,7 @@ type Chart =
             data
             |> Seq.map Datum.New
             |> Series.New
-        let options = defaultArg Options defaultOptions
+        let options = defaultArg Options <| Configuration.Options()
         GoogleChart.Create [series] Labels options Timeline
 
     /// <summary>Creates a treemap chart.</summary>
@@ -2836,7 +2858,7 @@ type Chart =
             data
             |> Seq.map Datum.New
             |> Series.New
-        let options = defaultArg Options defaultOptions
+        let options = defaultArg Options <| Configuration.Options()
         GoogleChart.Create [series] Labels options TreeMap
 
     /// <summary>Creates a treemap chart.</summary>
@@ -2848,7 +2870,7 @@ type Chart =
             data
             |> Seq.map Datum.New
             |> Series.New
-        let options = defaultArg Options defaultOptions
+        let options = defaultArg Options <| Configuration.Options()
         GoogleChart.Create [series] Labels options TreeMap
         
 type Chart with

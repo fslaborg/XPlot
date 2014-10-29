@@ -5,42 +5,39 @@ open XPlot.GoogleCharts
 
 module Annotation =
 
-    let chart1 =
+    let options = Options(displayAnnotations = true)
+
+    let kepler =
         [
-            DateTime(2314, 2, 15), 12400, "", ""
-            DateTime(2314, 2, 16), 24045, "Lalibertines", "First encounter"
-            DateTime(2314, 2, 17), 35022, "Lalibertines", "They are very tall"
-            DateTime(2314, 2, 18), 12284, "Lalibertines", "Attack on our crew!"
-            DateTime(2314, 2, 19), 8476, "Lalibertines", "Heavy casualties"
-            DateTime(2314, 2, 20), 0, "Lalibertines", "All crew lost"
+            DateTime(2314, 3, 15), 12400, "", ""
+            DateTime(2314, 3, 16), 24045, "Lalibertines", "First encounter"
+            DateTime(2314, 3, 17), 35022, "Lalibertines", "They are very tall"
+            DateTime(2314, 3, 18), 12284, "Lalibertines", "Attack on our crew!"
+            DateTime(2314, 3, 19), 8476, "Lalibertines", "Heavy casualties"
+            DateTime(2314, 3, 20), 0, "Lalibertines", "All crew lost"
         ]
+
+    let gliese =
+        [
+            DateTime(2314, 3, 15), 10645, "", ""
+            DateTime(2314, 3, 16), 12374, "", ""
+            DateTime(2314, 3, 17), 15766, "Gallantors", "First Encounter"
+            DateTime(2314, 3, 18), 34334, "Gallantors", "Statement of shared principles"
+            DateTime(2314, 3, 19), 66467, "Gallantors", "Mysteries revealed"
+            DateTime(2314, 3, 20), 79463, "Gallantors", "Omniscience achieved"
+        ]
+
+    let chart1 =
+        kepler
         |> Chart.Annotation
-        |> Chart.WithOptions(Options(displayAnnotations = true))
+        |> Chart.WithOptions options
         |> Chart.WithLabels ["Kepler-22b mission"; "Kepler-22b title"; "Kepler-22b text"]
         |> Chart.Show
 
     let chart2 =
-        let kepler =
-            [
-                DateTime(2314, 3, 15), 12400, "", ""
-                DateTime(2314, 3, 16), 24045, "Lalibertines", "First encounter"
-                DateTime(2314, 3, 17), 35022, "Lalibertines", "They are very tall"
-                DateTime(2314, 3, 18), 12284, "Lalibertines", "Attack on our crew!"
-                DateTime(2314, 3, 19), 8476, "Lalibertines", "Heavy casualties"
-                DateTime(2314, 3, 20), 0, "Lalibertines", "All crew lost"
-            ]
-        let gliese =
-            [
-                DateTime(2314, 3, 15), 10645, "", ""
-                DateTime(2314, 3, 16), 12374, "", ""
-                DateTime(2314, 3, 17), 15766, "Gallantors", "First Encounter"
-                DateTime(2314, 3, 18), 34334, "Gallantors", "Statement of shared principles"
-                DateTime(2314, 3, 19), 66467, "Gallantors", "Mysteries revealed"
-                DateTime(2314, 3, 20), 79463, "Gallantors", "Omniscience achieved"
-            ]
         [kepler; gliese]
         |> Chart.Annotation
-        |> Chart.WithOptions(Options(displayAnnotations = true))
+        |> Chart.WithOptions options
         |> Chart.WithLabels
             [
                 "Kepler-22b mission"; "Kepler-22b title"; "Kepler-22b text"
@@ -116,7 +113,6 @@ module Bar =
         |> Chart.WithTitle "Company Performance"
         |> Chart.WithXTitle "Amount"
         |> Chart.WithYTitle "Year"
-        |> Chart.WithLegend true
         |> Chart.Show
 
     // custom options
@@ -181,13 +177,39 @@ module Bubble =
             bubble = Bubble(textStyle = TextStyle(fontSize = 11))
         )
 
-    let chart =
+    let chart1 =
         data
         |> Chart.Bubble
         |> Chart.WithOptions options
         |> Chart.WithLabels ["Life Expectancy"; "Fertility Rat"; "Region"; "Population"]
         |> Chart.WithLegend true
         |> Chart.Show
+
+
+    let chart2 =
+        let options = Options(colorAxis = ColorAxis(colors = [|"yellow"; "red"|]))
+        [
+            "", 80, 167, 120
+            "", 79, 136, 130
+            "", 78, 184, 50
+            "", 72, 278, 230
+            "", 81, 200, 210
+            "", 72, 170, 100
+            "", 68, 477, 80        
+        ]
+        |> Chart.Bubble
+        |> Chart.WithOptions options
+        |> Chart.WithLabels []
+        |> Chart.WithLegend true
+        |> Chart.Show
+
+
+
+
+
+
+
+
 
 module Calendar =
 
