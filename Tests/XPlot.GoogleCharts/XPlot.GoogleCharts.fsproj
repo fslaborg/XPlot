@@ -50,6 +50,15 @@
   <Import Project="$(FSharpTargetsPath)" />
   <ItemGroup>
     <None Include="Annotation.fsx" />
+    <None Include="Area.fsx" />
+    <None Include="Bar.fsx" />
+    <None Include="Bubble.fsx" />
+    <None Include="Calendar.fsx" />
+    <None Include="Candlestick.fsx" />
+    <None Include="Column.fsx" />
+    <None Include="Combo.fsx" />
+    <None Include="Gauge.fsx" />
+    <None Include="Geo.fsx" />
     <Content Include="packages.config" />
     <Content Include="Google.DataTable.Net.Wrapper.XML" />
     <None Include="XPlot.GoogleCharts.fsx" />

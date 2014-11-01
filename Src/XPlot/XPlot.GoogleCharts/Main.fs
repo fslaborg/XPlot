@@ -1126,10 +1126,15 @@ module Configuration =
 
     type Node() =
 
+        let mutable colorField : Color option = None
         let mutable labelField : Label option = None
         let mutable labelPaddingField : int option = None
         let mutable nodePaddingField : int option = None
         let mutable widthField : int option = None
+
+        member __.color
+            with get() = colorField.Value
+            and set(value) = colorField <- Some value
 
         member __.label
             with get() = labelField.Value
@@ -1147,15 +1152,25 @@ module Configuration =
             with get() = widthField.Value
             and set(value) = widthField <- Some value
 
+        member __.ShouldSerializecolor() = not colorField.IsNone
         member __.ShouldSerializelabel() = not labelField.IsNone
         member __.ShouldSerializelabelPadding() = not labelPaddingField.IsNone
         member __.ShouldSerializenodePadding() = not nodePaddingField.IsNone
         member __.ShouldSerializewidth() = not widthField.IsNone
 
+    type Link() =
+        let mutable colorField : Color option = None
+
+        member __.color
+            with get() = colorField.Value
+            and set(value) = colorField <- Some value
+
+        member __.ShouldSerializecolor() = not colorField.IsNone
+
     type Sankey() =
 
         let mutable iterationsField : int option = None
-        let mutable linkField : Color option = None
+        let mutable linkField : Link option = None
         let mutable nodeField : Node option = None
 
         member __.iterations

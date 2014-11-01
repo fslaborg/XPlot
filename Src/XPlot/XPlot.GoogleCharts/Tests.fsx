@@ -199,17 +199,9 @@ module Bubble =
         ]
         |> Chart.Bubble
         |> Chart.WithOptions options
-        |> Chart.WithLabels []
+        |> Chart.WithLabels ["X"; "Y"; "Temperature"]
         |> Chart.WithLegend true
         |> Chart.Show
-
-
-
-
-
-
-
-
 
 module Calendar =
 
@@ -227,7 +219,14 @@ module Calendar =
             height = 350
         )
 
-    let chart =
+    let chart1 =
+        data
+        |> Chart.Calendar
+        |> Chart.WithOptions options
+        |> Chart.Show
+
+    let chart2 =
+        options.calendar <- Calendar(cellSize = 10)
         data
         |> Chart.Calendar
         |> Chart.WithOptions options
@@ -235,7 +234,7 @@ module Calendar =
 
 module Candlestick =
     
-    let data =
+    let chart =
         [
             "Mon", 20, 28, 38, 45
             "Tue", 31, 38, 55, 66
@@ -243,11 +242,9 @@ module Candlestick =
             "Thu", 77, 77, 66, 50
             "Fri", 68, 66, 22, 15        
         ]
-        
-    let chart =
-        Chart.Candlestick data
+        |> Chart.Candlestick
         |> Chart.Show     
-        
+
 module Column =
 
     let sales = ["2013", 1000; "2014", 1170; "2015", 660; "2016", 1030]
@@ -314,6 +311,8 @@ module Combo =
     [Bolivia; Ecuador; Madagascar; ``Papua New Guinea``; Rwanda; average]
     |> Chart.Combo
     |> Chart.WithOptions options
+    |> Chart.WithLabels ["Bolivia"; "Ecuador"; "Madagascar"; "Papua New Guinea"; "Rwanda"; "Average"]
+    |> Chart.WithLegend true
     |> Chart.Show
 
 module Gauge =
@@ -352,7 +351,13 @@ module Geo =
         |> Chart.Show
 
     // marker geochart
-    let data =
+    let chart2 =
+        let options =
+            Options(
+                region = "IT",
+                displayMode = "markers",
+                colorAxis = ColorAxis(colors = [|"green"; "blue"|])
+            ) 
         [
             "Rome", 2761477, 1285.31
             "Milan", 1324110, 181.76
@@ -366,16 +371,6 @@ module Geo =
             "Anzio", 52192, 43.43
             "Ciampino", 38262, 11.
         ]
-
-    let options =
-        Options(
-            region = "IT",
-            displayMode = "markers",
-            colorAxis = ColorAxis(colors = [|"green"; "blue"|])
-        ) 
-
-    let chart =
-        data
         |> Chart.Geo
         |> Chart.WithLabels ["Population"; "Area"]
         |> Chart.WithOptions options
@@ -383,30 +378,27 @@ module Geo =
 
 
     // Displaying Proportional Markers
-    let data' =
+    let chart3 =
+        let options =
+            Options(
+                sizeAxis = SizeAxis(minValue = 0, maxValue = 100),
+                region = "155",
+                displayMode = "markers",
+                colorAxis = ColorAxis(colors = [|"#e7711c"; "#4374e0"|])
+            ) 
         [
             "France", 65700000, 50
             "Germany", 81890000, 27
             "Poland", 38540000, 23
         ]
-
-    let options' =
-        Options(
-            sizeAxis = SizeAxis(minValue = 0, maxValue = 100),
-            region = "155",
-            displayMode = "markers",
-            colorAxis = ColorAxis(colors = [|"#e7711c"; "#4374e0"|])
-        ) 
-
-    let chart3 =
-        data'
         |> Chart.Geo
         |> Chart.WithLabels ["Population"; "Area Percentage"]
-        |> Chart.WithOptions options'
+        |> Chart.WithOptions options
         |> Chart.Show
 
-    // Text Geochart
-    let data'' =
+    // Text Geochart     
+    let chart4 =
+        let options = Options(displayMode = "text")
         [
             "South America", 600
             "Canada", 500
@@ -414,14 +406,9 @@ module Geo =
             "Russia", 700
             "Australia", 600
         ]
-
-    let options'' = Options(displayMode = "text")
-     
-    let chart4 =
-        data''
         |> Chart.Geo
         |> Chart.WithLabel "Popularity"
-        |> Chart.WithOptions options''
+        |> Chart.WithOptions options
         |> Chart.Show
 
 module Histogram =
@@ -467,6 +454,8 @@ module Histogram =
         |> Chart.WithLabel "Length"
         |> Chart.Show
 
+
+
 module Line =
 
     let sales = ["2013", 1000; "2014", 1170; "2015", 660; "2016", 1030]
@@ -483,6 +472,8 @@ module Line =
         [sales; expenses]
         |> Chart.Line
         |> Chart.WithTitle "Company Performance"
+        |> Chart.WithLabels ["Sales"; "Expenses"]
+        |> Chart.WithLegend true
         |> Chart.Show
         
     // spline
@@ -498,7 +489,7 @@ module Line =
         |> Chart.WithOptions options
         |> Chart.WithLabels ["Sales"; "Expenses"]
         |> Chart.Show
-        
+
 module Map =
 
     let options = Options(showTip = true)
@@ -544,6 +535,7 @@ module Pie =
         ]
         |> Chart.Pie
         |> Chart.WithTitle "My Daily Activities"
+        |> Chart.WithLegend true
         |> Chart.Show
 
     let chart2 =
@@ -561,6 +553,7 @@ module Pie =
         ]
         |> Chart.Pie
         |> Chart.WithOptions options
+        |> Chart.WithLegend true
         |> Chart.Show
 
     let chart3 =
@@ -578,11 +571,29 @@ module Pie =
         ]
         |> Chart.Pie
         |> Chart.WithOptions options
+        |> Chart.WithLegend true
+        |> Chart.Show
+
+    let chart4 =
+        let options =
+            Options(
+                pieSliceText = "label",
+                title = "Swiss Language Use (100 degree rotation)",
+                pieStartAngle = 100
+            )
+        [
+            "German", 5.85
+            "French", 1.66
+            "Italian", 0.316
+            "Romansh", 0.0791        
+        ]
+        |> Chart.Pie
+        |> Chart.WithOptions options
         |> Chart.Show
 
 module Sankey =
     
-    let diagram =
+    let diagram1 =
         [
             "A", "X", 5 
             "A", "Y", 7 
@@ -592,6 +603,77 @@ module Sankey =
             "B", "Z", 4
         ]
         |> Chart.Sankey
+        |> Chart.WithHeight 300
+        |> Chart.Show
+
+    let diagram2 =
+        let options =
+            Options(
+                width = 600,
+                sankey =
+                    Sankey(
+                        link =
+                            Link(
+                                color = Color(fill = "#d799ae")
+                            ),
+                        node =
+                            Node(
+                                color = Color(fill = "#a61d4c"),
+                                label = Label(color = "#871b47")
+                            )
+                    )                
+            )
+        [
+            "Brazil", "Portugal", 5 
+            "Brazil", "France", 1 
+            "Brazil", "Spain", 1 
+            "Brazil", "England", 1 
+            "Canada", "Portugal", 1 
+            "Canada", "France", 5 
+            "Canada", "England", 1 
+            "Mexico", "Portugal", 1 
+            "Mexico", "France", 1 
+            "Mexico", "Spain", 5 
+            "Mexico", "England", 1 
+            "USA", "Portugal", 1 
+            "USA", "France", 1 
+            "USA", "Spain", 1 
+            "USA", "England", 5 
+            "Portugal", "Angola", 2 
+            "Portugal", "Senegal", 1 
+            "Portugal", "Morocco", 1 
+            "Portugal", "South Africa", 3 
+            "France", "Angola", 1 
+            "France", "Senegal", 3 
+            "France", "Mali", 3 
+            "France", "Morocco", 3 
+            "France", "South Africa", 1 
+            "Spain", "Senegal", 1 
+            "Spain", "Morocco", 3 
+            "Spain", "South Africa", 1 
+            "England", "Angola", 1 
+            "England", "Senegal", 1 
+            "England", "Morocco", 2 
+            "England", "South Africa", 7 
+            "South Africa", "China", 5 
+            "South Africa", "India", 1 
+            "South Africa", "Japan", 3 
+            "Angola", "China", 5 
+            "Angola", "India", 1 
+            "Angola", "Japan", 3 
+            "Senegal", "China", 5 
+            "Senegal", "India", 1 
+            "Senegal", "Japan", 3 
+            "Mali", "China", 5 
+            "Mali", "India", 1 
+            "Mali", "Japan", 3 
+            "Morocco", "China", 5 
+            "Morocco", "India", 1 
+            "Morocco", "Japan", 3
+        ]
+        |> Chart.Sankey
+        |> Chart.WithHeight 300
+        |> Chart.WithOptions options
         |> Chart.Show
 
 module Scatter =
@@ -695,6 +777,43 @@ module Timeline =
         ]
         |> Chart.Timeline
         |> Chart.WithLabels ["Name"; "Start"; "End"]
+        |> Chart.Show
+
+    let timeline3 =
+        let options =
+            Options(
+                timeline = Timeline(showRowLabels = false)
+            )
+        [
+            "1", "George Washington", DateTime(1789, 4, 29), DateTime(1797, 3, 3)
+            "2", "John Adams", DateTime(1797, 3, 3), DateTime(1801, 3, 3) 
+            "3", "Thomas Jefferson", DateTime(1801, 3, 3), DateTime(1809, 3, 3)        
+        ]
+        |> Chart.Timeline
+        |> Chart.WithLabels ["Name"; "Start"; "End"]
+        |> Chart.WithOptions options
+        |> Chart.Show
+
+    let timeline4 =
+        [
+            "President", "George Washington", DateTime(1789, 4, 29), DateTime(1797, 3, 3)
+            "President", "John Adams", DateTime(1797, 3, 3), DateTime(1801, 3, 3)
+            "President", "Thomas Jefferson", DateTime(1801, 3, 3), DateTime(1809, 3, 3)
+            "Vice President", "John Adams", DateTime(1789, 4, 20), DateTime(1797, 3, 3)
+            "Vice President", "Thomas Jefferson", DateTime(1797, 3, 3), DateTime(1801, 3, 3)
+            "Vice President", "Aaron Burr", DateTime(1801, 3, 3), DateTime(1805, 3, 3)
+            "Vice President", "George Clinton", DateTime(1805, 3, 3), DateTime(1812, 4, 19)
+            "Secretary of State", "John Jay", DateTime(1789, 9, 25), DateTime(1790, 3, 21)
+            "Secretary of State", "Thomas Jefferson", DateTime(1790, 3, 21), DateTime(1793, 12, 30)
+            "Secretary of State", "Edmund Randolph", DateTime(1794, 1, 1), DateTime(1795, 8, 19)
+            "Secretary of State", "Timothy Pickering", DateTime(1795, 8, 19), DateTime(1800, 5, 11)
+            "Secretary of State", "Charles Lee", DateTime(1800, 5, 12), DateTime(1800, 6, 4)
+            "Secretary of State", "John Marshall", DateTime(1800, 6, 12), DateTime(1801, 3, 3)
+            "Secretary of State", "Levi Lincoln", DateTime(1801, 3, 4), DateTime(1801, 5, 1)
+            "Secretary of State", "James Madison", DateTime(1801, 5, 1), DateTime(1809, 3, 2)
+        ]        
+        |> Chart.Timeline
+        |> Chart.WithLabels ["Position"; "Name"; "Start"; "End"]
         |> Chart.Show
 
 module Treemap =

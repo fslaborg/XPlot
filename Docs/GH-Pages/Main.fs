@@ -166,7 +166,7 @@ type Website() =
                 yield Home
                 yield GoogleCharts
                 yield Highcharts
-                for x in 1 .. 19 -> Chart x
+                for x in 1 .. 20 -> Chart x
             ]
 
 [<assembly: Website(typeof<Website>)>]
