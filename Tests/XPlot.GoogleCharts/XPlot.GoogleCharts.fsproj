@@ -59,6 +59,16 @@
     <None Include="Combo.fsx" />
     <None Include="Gauge.fsx" />
     <None Include="Geo.fsx" />
+    <None Include="Histogram.fsx" />
+    <None Include="Line.fsx" />
+    <None Include="Map.fsx" />
+    <None Include="Pie.fsx" />
+    <None Include="Sankey.fsx" />
+    <None Include="Scatter.fsx" />
+    <None Include="SteppedArea.fsx" />
+    <None Include="Timeline.fsx" />
+    <None Include="Table.fsx" />
+    <None Include="Treemap.fsx" />
     <Content Include="packages.config" />
     <Content Include="Google.DataTable.Net.Wrapper.XML" />
     <None Include="XPlot.GoogleCharts.fsx" />
@@ -80,7 +90,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Numerics" />
     <Reference Include="XPlot.GoogleCharts">
-      <HintPath>..\packages\XPlot.GoogleCharts.1.0.0-RC1\Lib\Net45\XPlot.GoogleCharts.dll</HintPath>
+      <HintPath>..\packages\XPlot.GoogleCharts.1.0.0-RC2\Lib\Net45\XPlot.GoogleCharts.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>

@@ -2943,7 +2943,7 @@ type Chart with
         chart
 
     /// Sets the chart's width.
-    member __.WithWidth width (chart:GoogleChart) =
+    static member WithWidth width (chart:GoogleChart) =
         chart.WithWidth width
         chart
 

@@ -9,14 +9,14 @@
         function drawChart() {
             var data = new google.visualization.DataTable({ "cols": [{ "type": "string", "id": "Column 0" }, { "type": "number", "id": "Column 1" }], "rows": [{ "c": [{ "v": "Work" }, { "v": 11 }] }, { "c": [{ "v": "Eat" }, { "v": 2 }] }, { "c": [{ "v": "Commute" }, { "v": 2 }] }, { "c": [{ "v": "Watch TV" }, { "v": 2 }] }, { "c": [{ "v": "Sleep" }, { "v": 7 }] }] });
 
-            var options = { "legend": { "position": "none" }, "title": "My Daily Activities" }
+            var options = { "legend": { "position": "right" }, "title": "My Daily Activities" }
 
-            var chart = new google.visualization.PieChart(document.getElementById('5e1fb029-02b3-4e37-b58d-9aa8eecb759a'));
+            var chart = new google.visualization.PieChart(document.getElementById('7f8faf7b-823a-4c30-9b3f-81417fc2aa7c'));
             chart.draw(data, options);
         }
     </script>
 </head>
 <body>
-    <div id="5e1fb029-02b3-4e37-b58d-9aa8eecb759a" style="width: 900px; height: 500px;"></div>
+    <div id="7f8faf7b-823a-4c30-9b3f-81417fc2aa7c" style="width: 900px; height: 500px;"></div>
 </body>
 </html>
