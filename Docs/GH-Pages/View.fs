@@ -5,7 +5,7 @@ open HtmlApp.Skin
 open IntelliFactory.Html
 
 let home =
-    Skin.withHomeTemplate "XPlot" <| fun ctx ->
+    Skin.withHomeTemplate "XPlot · F# Data Visualization" <| fun ctx ->
         [
 
         ]

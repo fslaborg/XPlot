@@ -17,9 +17,8 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body id="home-body">
-    <!-- Navigation -->
-    <nav class="navbar navbar-default" role="navigation">
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
@@ -30,77 +29,63 @@
                 </button>
                 <a class="navbar-brand" href="/">XPlot</a>
             </div>
-
             <div class="collapse navbar-collapse" id="navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="/">Home</a></li>
                     <li><a href="google-charts.html">Google Charts</a></li>
-                    <!--<li><a href="highcharts.html">Highcharts</a></li>-->
                 </ul>
             </div>
         </div>
     </nav>
 
-    <div class="container">
+    <section id="jumbotron">
         <div class="jumbotron text-center">
-            <h1>XPlot <small>Data visualization for F#</small></h1>
+            <h1>XPlot</h1>
+            <p>F# Data Visualization Package</p>
         </div>
-        <div class="row">
-            <div class="col-md-9">
-                <p class="lead">XPlot is data visualization component for F# using popular JavaScript charting libraries. XPlot aims to circumvent the lack of configuration options support in <a href="http://tahahachana.github.io/FsPlot/" target="_blank">FsPlot</a>.</p>
+    </section>
+
+    <section id="lead" class="home-section">
+        <div class="container">
+            <div id="lead-text">
+                <p class="lead">XPlot is a data visualization package for the F# programming language powered by popular JavaScript charting libraries that aims to circumvent the lack of configuration options support in the <a href="http://tahahachana.github.io/FsPlot/" target="_blank">FsPlot</a> sister project.</p>
                 <a href="https://github.com/TahaHachana/XPlot" target="_blank" class="btn btn-primary btn-lg">Fork me on GitHub</a>
-                <section id="libs">
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div id="main">
+            <section id="libs" class="home-section">
                     <div class="page-header">
                         <h2>Supported JavaScript Libraries</h2>
                     </div>
                     <h3><a href="google-charts.html">Google Charts</a></h3>
                     <p>Google's powerful and free data visualization library based on HTML5/SVG technology.</p>
-                    <!--<h3><a href="highcharts.html">Highcharts</a></h3>
-                    <p>A powerful HTML5 charting library for creating rich interactive charts. Free for non-commercial use.</p>-->
-                </section>
-                <section id="nuget">
+            </section>
+
+            <section id="nuget" class="home-section">
                     <div class="page-header">
                         <h2>Nuget</h2>
                     </div>
                     <h3>Google Charts</h3>
                     <kbd>PM> Install-Package XPlot.GoogleCharts</kbd>
-                </section>
-                <!--<section id="share">
-                    <div class="page-header">
-                        <h2>Sharing Charts</h2>
-                    </div>
-                    <p>You have two options for sharing the charts you create:</p>
-                    <ul>
-                        <li>Upload the chart's HTML source online ;</li>
-                        <li>Export a PNG screenshot of the chart as shown in the example below.</li>
-                    </ul>
-                    <h3>Code</h3>
-                    <script src="https://gist.github.com/TahaHachana/6d087bb4c0c33bfcedd9.js"></script>
-                    <h3>Screenshot</h3>
-                    <div><img class="thumbnail" src="screenshot.png" alt="chart-screenshot" /></div>
-                </section>
-                <section id="system">
-                    <div class="page-header">
-                        <h2>System Requirements</h2>
-                    </div>
-                    <ul>
-                        <li>.NET 4.5</li>
-                        <li>Firefox</li>
-                    </ul>
-                </section>-->
+            </section>
+        </div>
+    </div>
 
+    <div data-replace="body"></div>
+
+    <div id="push"></div>
+
+    <section id="footer">
+        <div class="footer">
+            <div class="container">
+                <p class="text-muted">Built with <a href="http://www.websharper.com/" target="_blank">WebSharper</a></p>
             </div>
         </div>
-        <div data-replace="body">
-        </div>
+    </section>
 
-    </div>
-    <div id="push"></div>
-    <div class="footer">
-        <div class="container">
-            <p class="text-muted">Built with <a href="http://www.websharper.com/" target="_blank">WebSharper</a></p>
-        </div>
-    </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-50af450141ce9366"></script>
