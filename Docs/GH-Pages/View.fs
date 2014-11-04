@@ -15,7 +15,6 @@ let googleCharts =
         [
         ]
 
-
 let highcharts =
     Skin.withHighchartsTemplate "XPlot · Highcharts Support" <| fun ctx ->
         [
@@ -76,4 +75,3 @@ let mapchart title (demos:Demo list) =
                     IFrame [Src <| "../iframe/" + demoId + ".html"; Class "map-chart-iframe"]
                 ]
         ]
-

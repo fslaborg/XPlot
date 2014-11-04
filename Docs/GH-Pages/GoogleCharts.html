@@ -18,7 +18,7 @@
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-default-inner" role="navigation">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
@@ -40,53 +40,53 @@
         </div>
     </nav>
 
-    <div class="jumbotron inner-jumbotron">
+    <div class="jumbotron">
         <div class="container">
             <h1>Google Charts</h1>
         </div>
     </div>
 
     <div class="container">
-        <div class="row">
-            <div class="col-md-9">
-                <h2 class="page-header">Nuget</h2>
-                <kbd>Install-Package XPlot.GoogleCharts</kbd>
-                <h2 class="page-header">Supported Charts</h2>
-                <p>XPlot supports the following charts from the Google Charts gallery:</p>
-                <ul class="list-unstyled">
-                    <li><h4><a href="chart/google-annotation-chart.html">Annotation Chart</a></h4></li>
-                    <li><h4><a href="chart/google-area-chart.html">Area Chart</a></h4></li>
-                    <li><h4><a href="chart/google-bar-chart.html">Bar Chart</a></h4></li>
-                    <li><h4><a href="chart/google-bubble-chart.html">Bubble Chart</a></h4></li>
-                    <li><h4><a href="chart/google-calendar-chart.html">Calendar Chart</a></h4></li>
-                    <li><h4><a href="chart/google-candlestick-chart.html">Candlestick Chart</a></h4></li>
-                    <li><h4><a href="chart/google-column-chart.html">Column Chart</a></h4></li>
-                    <li><h4><a href="chart/google-combo-chart.html">Combo Chart</a></h4></li>
-                    <li><h4><a href="chart/google-gauge-chart.html">Gauge Chart</a></h4></li>
-                    <li><h4><a href="chart/google-geo-chart.html">Geo Chart</a></h4></li>
-                    <li><h4><a href="chart/google-histogram-chart.html">Histogram Chart</a></h4></li>
-                    <li><h4><a href="chart/google-line-chart.html">Line Chart</a></h4></li>
-                    <li><h4><a href="chart/google-map-chart.html">Map Chart</a></h4></li>
-                    <li><h4><a href="chart/google-pie-chart.html">Pie Chart</a></h4></li>
-                    <li><h4><a href="chart/google-sankey-diagram.html">Sankey Diagram</a></h4></li>
-                    <li><h4><a href="chart/google-scatter-chart.html">Scatter Chart</a></h4></li>
-                    <li><h4><a href="chart/google-stepped-area-chart.html">Stepped Area Chart</a></h4></li>
-                    <li><h4><a href="chart/google-timeline-chart.html">Timeline</a></h4></li>
-                    <li><h4><a href="chart/google-table-chart.html">Table</a></h4></li>
-                    <li><h4><a href="chart/google-treemap-chart.html">Treemap</a></h4></li>
-
-                </ul>
-            </div>
-        </div>
-        <div data-replace="body">
+        <div id="main">
+            <h2 class="page-header">Nuget</h2>
+            <kbd>Install-Package XPlot.GoogleCharts</kbd>
+            <h2 class="page-header">Supported Charts</h2>
+            <p>XPlot supports the following charts from the <a href="https://developers.google.com/chart/interactive/docs/gallery" target="_blank">Google Charts gallery</a>:</p>
+            <ul class="list-unstyled">
+                <li><h4><a href="chart/google-annotation-chart.html">Annotation Chart</a></h4></li>
+                <li><h4><a href="chart/google-area-chart.html">Area Chart</a></h4></li>
+                <li><h4><a href="chart/google-bar-chart.html">Bar Chart</a></h4></li>
+                <li><h4><a href="chart/google-bubble-chart.html">Bubble Chart</a></h4></li>
+                <li><h4><a href="chart/google-calendar-chart.html">Calendar Chart</a></h4></li>
+                <li><h4><a href="chart/google-candlestick-chart.html">Candlestick Chart</a></h4></li>
+                <li><h4><a href="chart/google-column-chart.html">Column Chart</a></h4></li>
+                <li><h4><a href="chart/google-combo-chart.html">Combo Chart</a></h4></li>
+                <li><h4><a href="chart/google-gauge-chart.html">Gauge Chart</a></h4></li>
+                <li><h4><a href="chart/google-geo-chart.html">Geo Chart</a></h4></li>
+                <li><h4><a href="chart/google-histogram-chart.html">Histogram Chart</a></h4></li>
+                <li><h4><a href="chart/google-line-chart.html">Line Chart</a></h4></li>
+                <li><h4><a href="chart/google-map-chart.html">Map Chart</a></h4></li>
+                <li><h4><a href="chart/google-pie-chart.html">Pie Chart</a></h4></li>
+                <li><h4><a href="chart/google-sankey-diagram.html">Sankey Diagram</a></h4></li>
+                <li><h4><a href="chart/google-scatter-chart.html">Scatter Chart</a></h4></li>
+                <li><h4><a href="chart/google-stepped-area-chart.html">Stepped Area Chart</a></h4></li>
+                <li><h4><a href="chart/google-timeline-chart.html">Timeline</a></h4></li>
+                <li><h4><a href="chart/google-table-chart.html">Table</a></h4></li>
+                <li><h4><a href="chart/google-treemap-chart.html">Treemap</a></h4></li>
+            </ul>
         </div>
     </div>
+
+    <div data-replace="body"></div>
+
     <div id="push"></div>
-    <div class="footer">
+
+    <section class="footer">
         <div class="container">
             <p class="text-muted">Built with <a href="http://www.websharper.com/" target="_blank">WebSharper</a></p>
         </div>
-    </div>
+    </section>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-50af450141ce9366"></script>
