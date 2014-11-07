@@ -1,6 +1,7 @@
-#r """..\packages\Google.DataTable.Net.Wrapper.3.1.0.0\lib\Google.DataTable.Net.Wrapper.dll"""
-#r """..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll"""
-#r """..\packages\XPlot.GoogleCharts.1.0.0\Lib\Net45\XPlot.GoogleCharts.dll"""
+#I __SOURCE_DIRECTORY__
+#r """..\..\..\packages\Google.DataTable.Net.Wrapper.3.1.0.0\lib\Google.DataTable.Net.Wrapper.dll"""
+#r """..\..\..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll"""
+#r """..\..\..\packages\XPlot.GoogleCharts.1.0.0\Lib\Net45\XPlot.GoogleCharts.dll"""
 
 open XPlot.GoogleCharts
 
