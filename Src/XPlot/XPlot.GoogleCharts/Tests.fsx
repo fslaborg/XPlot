@@ -185,7 +185,6 @@ module Bubble =
         |> Chart.WithLegend true
         |> Chart.Show
 
-
     let chart2 =
         let options = Options(colorAxis = ColorAxis(colors = [|"yellow"; "red"|]))
         [
@@ -453,8 +452,6 @@ module Histogram =
         |> Chart.WithOptions options
         |> Chart.WithLabel "Length"
         |> Chart.Show
-
-
 
 module Line =
 

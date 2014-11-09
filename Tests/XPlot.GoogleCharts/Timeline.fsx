@@ -1,4 +1,4 @@
-﻿#load "XPlot.GoogleCharts.fsx"
+﻿#load "../packages/XPlot.GoogleCharts.1.0.1/XPlot.GoogleCharts.fsx"
  
 open System 
 open XPlot.GoogleCharts

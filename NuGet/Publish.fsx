@@ -7,7 +7,7 @@ let nuspec = Path.Combine(__SOURCE_DIRECTORY__, "XPlot.GoogleCharts.nuspec")
 
 let nuspecText = File.ReadAllText nuspec
 
-let package = 
+let package =
     Regex("<id>(.+?)</id>")
         .Match(nuspecText)
         .Groups
