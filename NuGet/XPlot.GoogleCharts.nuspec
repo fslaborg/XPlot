@@ -2,17 +2,18 @@
 <package >
   <metadata>
     <id>XPlot.GoogleCharts</id>
-    <version>1.0.1</version>
+    <version>1.1.0-RC1</version>
     <authors>Taha Hachana</authors>
     <owners>Taha Hachana</owners>
     <projectUrl>https://github.com/TahaHachana/XPlot</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/TahaHachana/XPlot/master/Src/XPlot/XPlot.GoogleCharts/XPlot.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>F# Data Visualization Library</description>
-    <releaseNotes>Remove Json.NET version constraint.</releaseNotes>
-    <tags>F#, FSHARP, DATA, VISUALIZATION, HTML5, JAVASCRIPT, DATAVIS, GOOGLE</tags>
+    <description>Data visualization library for F#.</description>
+    <releaseNotes>Use System.Data.DataTable for internal data storage, add a logo and a bootstrapping script for Paket.</releaseNotes>
+    <tags>F#, FSHARP, DATA, VISUALIZATION, HTML5, JAVASCRIPT, DATAVIS, GOOGLE, CHART</tags>
     <dependencies>
       <dependency id="Newtonsoft.Json" version="6.0.6" />
-      <dependency id="Google.DataTable.Net.Wrapper" version="[3.1.0]" />
+      <dependency id="Google.DataTable.Net.Wrapper" version="3.1.2.0" />
     </dependencies>
   </metadata>
 </package>
