@@ -1,16 +1,12 @@
 ﻿module XPlot.GoogleCharts
 
-#if INTERACTIVE
-#r """..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll"""
-#r """..\packages\Google.DataTable.Net.Wrapper.3.1.0.0\lib\Google.DataTable.Net.Wrapper.dll"""
-#endif
-
-open Google.DataTable.Net.Wrapper
 open Google.DataTable.Net.Wrapper.Extension
 open Microsoft.FSharp.Reflection
 open Newtonsoft.Json
 open System
+open System.Data
 open System.Diagnostics
+open System.Globalization
 open System.IO
 
 type key = IConvertible
@@ -44,6 +40,7 @@ module Data =
         static member New dps = {DataPoints = dps}
 
     let makeDataTable series labels =
+    
         let rows =
             let dps =
                 series
@@ -75,45 +72,119 @@ module Data =
                     ]
                 )
 
-        let dataTable =
-            let dt = DataTable()
-            let firstRow = Seq.head rows
-            let labels' =
-                match labels with
-                | None -> None
-                | Some labelsSeq ->
-                    match (Seq.length labelsSeq) = firstRow.Length with
-                    | false -> Some <| Seq.append ["Column 1"] labelsSeq
-                    | true -> Some labelsSeq
-            firstRow
-            |> List.iteri (fun idx x ->
-                let typeCode = x.GetTypeCode()
-                let columnType =
-                    match typeCode with
-                    | TypeCode.Boolean -> ColumnType.Boolean
-                    | TypeCode.DateTime -> ColumnType.Datetime
-                    | TypeCode.String -> ColumnType.String
-                    | _ -> ColumnType.Number
-                let column = Column(columnType)
-                match labels' with
-                | None -> ()
-                | Some labelsSeq -> column.Label <- Seq.nth idx labelsSeq
-                dt.AddColumn column |> ignore        
-            )
-        
-            rows
-            |> Seq.iter (fun values -> 
-                let row = dt.NewRow()
-                values
-                |> Seq.iter (fun v ->
-                    Cell v
-                    |> row.AddCell
-                    |> ignore
-                )
-                dt.AddRow row |> ignore
-            )
-            dt
-        dataTable
+        let sysDt = new System.Data.DataTable()
+        sysDt.Locale <- CultureInfo.InvariantCulture
+
+        let firstRow = Seq.head rows
+
+        let labels' =
+            match labels with
+            | None -> seq {for x in 1 .. firstRow.Length -> "Column " + string x}
+            | Some labelsSeq ->
+                match (Seq.length labelsSeq) = firstRow.Length with
+                | false -> Seq.append ["Column 1"] labelsSeq
+                | true -> labelsSeq
+
+        firstRow
+        |> List.iteri (fun idx x ->
+    //        let typeCode = x.GetTypeCode()
+    //        let columnType =
+    //            match typeCode with
+    //            | TypeCode.Boolean -> typeof<bool>
+    //            | TypeCode.DateTime -> typeof<DateTime>
+    //            | TypeCode.String -> typeof<string>
+    //            | TypeCode.Decimal -> typeof<Decimal>
+    //            | TypeCode.Double -> typeof<Double>
+    //            | TypeCode.Int16 -> typeof<Int16>
+    //            | TypeCode.Int32 -> typeof<Int32>
+    //            | TypeCode.Int64 -> typeof<Int64>
+    //            | TypeCode.UInt16 -> typeof<UInt16>
+    //            | TypeCode.UInt32 -> typeof<UInt32>
+    //            | _ -> typeof<UInt64>
+            sysDt.Columns.Add(Seq.nth idx labels', x.GetType()) |> ignore
+        )
+
+        rows
+        |> Seq.iter (fun values -> 
+            let row = sysDt.NewRow()
+            values
+            |> Seq.iteri (fun idx v -> row.[idx] <- v)
+            sysDt.Rows.Add(row)
+        )
+    
+        sysDt
+
+//    let makeDataTable series labels =
+//        let rows =
+//            let dps =
+//                series
+//                |> Seq.map (fun x -> x.DataPoints)
+//                |> Seq.concat
+//            match Seq.length series with
+//            | 1 ->
+//                dps
+//                |> Seq.map (fun x ->
+//                    [
+//                        yield x.X
+//                        yield x.Y1
+//                        if x.Y2.IsSome then yield x.Y2.Value
+//                        if x.Y3.IsSome then yield x.Y3.Value
+//                        if x.Y4.IsSome then yield x.Y4.Value
+//                    ]
+//                )
+//            | _ ->
+//                dps
+//                |> Seq.groupBy (fun x -> x.X)
+//                |> Seq.map (fun (key, dps) ->
+//                    [
+//                        yield key
+//                        for x in dps do
+//                            yield x.Y1
+//                            if x.Y2.IsSome then yield x.Y2.Value
+//                            if x.Y3.IsSome then yield x.Y3.Value
+//                            if x.Y4.IsSome then yield x.Y4.Value
+//                    ]
+//                )
+//
+//        let dataTable =
+//            let dt = DataTable()
+//            let firstRow = Seq.head rows
+//            let labels' =
+//                match labels with
+//                | None -> None
+//                | Some labelsSeq ->
+//                    match (Seq.length labelsSeq) = firstRow.Length with
+//                    | false -> Some <| Seq.append ["Column 1"] labelsSeq
+//                    | true -> Some labelsSeq
+//            firstRow
+//            |> List.iteri (fun idx x ->
+//                let typeCode = x.GetTypeCode()
+//                let columnType =
+//                    match typeCode with
+//                    | TypeCode.Boolean -> ColumnType.Boolean
+//                    | TypeCode.DateTime -> ColumnType.Datetime
+//                    | TypeCode.String -> ColumnType.String
+//                    | _ -> ColumnType.Number
+//                let column = Column(columnType)
+//                match labels' with
+//                | None -> ()
+//                | Some labelsSeq -> column.Label <- Seq.nth idx labelsSeq
+//                dt.AddColumn column |> ignore        
+//            )
+//        
+//            rows
+//            |> Seq.iter (fun values -> 
+//                let row = dt.NewRow()
+//                values
+//                |> Seq.iter (fun v ->
+//                    Cell v
+//                    |> row.AddCell
+//                    |> ignore
+//                )
+//                dt.AddRow row |> ignore
+//            )
+//            dt
+//        dataTable
 
 [<AutoOpen>]
 module Configuration =
@@ -2315,16 +2386,13 @@ type ChartGallery =
 type GoogleChart() =
 
     [<DefaultValue>]
-    val mutable private data : seq<Data.Series>
+    val mutable private dataTable : DataTable
     
     [<DefaultValue>]
     val mutable private options : Options
 
     [<DefaultValue>]
     val mutable private ``type`` : ChartGallery
-
-    /// The labels of the chart's data columns.
-    member val Labels : seq<string> option = None with get, set
     
     /// The chart's container div id.
     member val Id =
@@ -2338,9 +2406,9 @@ type GoogleChart() =
     member val Width = 900 with get, set
 
     static member internal Create data labels options ``type`` =
+        let dt = makeDataTable data labels
         let gc = GoogleChart()
-        gc.data <- data
-        gc.Labels <- labels
+        gc.dataTable <- dt
         gc.options <- options
         gc.``type`` <- ``type``
         gc
@@ -2349,15 +2417,7 @@ type GoogleChart() =
     /// necessary line for loading the appropiate Google
     /// visualization package. 
     member __.Js =
-//        let groupKeys =
-//            match Seq.length __.data with
-//            | 1 -> false
-//            | _ ->
-//                match __.``type`` with
-//                | Histogram | Sankey -> false
-//                | _ -> true
-        let dt = makeDataTable __.data __.Labels //groupKeys
-        let dataJson = dt.GetJson()         
+        let dataJson = __.dataTable.ToGoogleDataTable().GetJson()         
         let optionsJson = JsonConvert.SerializeObject(__.options)
         jsTemplate.Replace("{DATA}", dataJson)
             .Replace("{OPTIONS}", optionsJson)
@@ -2398,12 +2458,21 @@ type GoogleChart() =
 
     /// Sets the data series label. Use this member if the
     /// chart's data is a single series.
-    member __.WithLabel label = __.Labels <- Some <| seq {yield label}
+    member __.WithLabel label =
+        let columns = __.dataTable.Columns
+        columns.[1].ColumnName <- label
 
     /// Sets the data series labels. Use this member if the
     /// chart's data is a series collection.
-    member __.WithLabels labels = __.Labels <- Some labels
-
+    member __.WithLabels labels =
+        let columns = __.dataTable.Columns
+        let names =
+            match (Seq.length labels) = columns.Count with
+            | false -> Seq.append ["Column 1"] labels
+            | true -> labels
+        names
+        |> Seq.iteri (fun idx x -> columns.[idx].ColumnName <- x)
+            
     /// Sets the chart's title.
     member __.WithTitle title =
         __.options.title <- title

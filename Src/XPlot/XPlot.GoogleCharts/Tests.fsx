@@ -518,7 +518,7 @@ module Map =
         ]
         |> Chart.Map
         |> Chart.WithOptions options
-        |> Chart.Show 
+        |> Chart.Show
 
 module Pie =
 
