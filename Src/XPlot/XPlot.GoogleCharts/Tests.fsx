@@ -1,4 +1,4 @@
-﻿#r """.\bin\Release\XPlot.GoogleCharts.dll"""
+﻿#r """./bin/Release/XPlot.GoogleCharts.dll"""
 
 open System
 open XPlot.GoogleCharts

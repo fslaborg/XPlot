@@ -52,14 +52,14 @@
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="Main.fs" />
     <None Include="Tests.fsx" />
-    <Content Include="Google.DataTable.Net.Wrapper.XML" />
     <Content Include="packages.config" />
     <Content Include="app.config" />
     <None Include="Script1.fsx" />
+    <Content Include="Google.DataTable.Net.Wrapper.XML" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Google.DataTable.Net.Wrapper">
-      <HintPath>..\packages\Google.DataTable.Net.Wrapper.3.1.0.0\lib\Google.DataTable.Net.Wrapper.dll</HintPath>
+      <HintPath>..\packages\Google.DataTable.Net.Wrapper.3.1.2.0\lib\Google.DataTable.Net.Wrapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="mscorlib" />

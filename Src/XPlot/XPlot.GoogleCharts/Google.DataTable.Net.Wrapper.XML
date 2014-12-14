@@ -99,7 +99,8 @@
             </summary>
         </member>
         <member name="P:Google.DataTable.Net.Wrapper.Cell.Formatted">
-            <summary> [Optional] A string version of the v value, formatted for display. 
+            <summary>
+            [Optional] A string version of the v value, formatted for display. 
              The values should match, so if you specify Date(2008, 0, 1) for v, 
              you should specify "January 1, 2008" or some such string for this property. 
              This value is not checked against the v value. The visualization will not use this value 
