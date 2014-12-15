@@ -25,21 +25,38 @@ and prevent Google Charts from falling back to VML.
 *)
 
 open Microsoft.Win32
+open System.Diagnostics
 
-let subKeyPath = @"SOFTWARE\Microsoft\Internet Explorer\MAIN\FeatureControl\FEATURE_BROWSER_EMULATION"
-let keyName = "FsiAnyCPU.exe"
+type Architecture = ThirtyTwo | SixtyFour
+
+let fsi =
+    Process.GetProcessesByName "FsiAnyCPU"
+    |> function
+    | [||] -> ThirtyTwo
+    | _ -> SixtyFour
+
+let path =
+    match fsi with
+    | ThirtyTwo -> @"SOFTWARE\Wow6432Node\Microsoft\Internet Explorer\MAIN\FeatureControl\FEATURE_BROWSER_EMULATION"
+    | SixtyFour -> @"SOFTWARE\Microsoft\Internet Explorer\MAIN\FeatureControl\FEATURE_BROWSER_EMULATION"
+
+let name =
+    match fsi with
+    | ThirtyTwo -> "Fsi.exe"
+    | SixtyFour -> "FsiAnyCPU.exe"
+
 let localMachine = Registry.LocalMachine
 
-try
-    let keyExists =
-        let subKey = localMachine.OpenSubKey(subKeyPath)
-        subKey.GetValueNames()
-        |> Array.exists (fun x -> x = keyName)
-
-    match keyExists with
+let addKey path name =
+    let subKey = localMachine.OpenSubKey(path)
+    subKey.GetValueNames()
+    |> Array.exists (fun x -> x = name)
+    |> function
     | false ->
-        let key = localMachine.CreateSubKey(subKeyPath, RegistryKeyPermissionCheck.ReadWriteSubTree)
-        key.SetValue(keyName, 11001, RegistryValueKind.DWord)
+        let key = localMachine.CreateSubKey(path, RegistryKeyPermissionCheck.ReadWriteSubTree)
+        key.SetValue(name, 11001, RegistryValueKind.DWord)
         key.Close()
     | true -> ()
+
+try addKey path name
 with _ -> printfn "Failed to instruct FSI to use the IE11 Standards mode."
