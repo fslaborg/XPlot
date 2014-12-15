@@ -8,6 +8,8 @@ open System.Data
 open System.Diagnostics
 open System.Globalization
 open System.IO
+open System.Windows
+open System.Windows.Controls
 
 type key = IConvertible
 type value = IConvertible
@@ -2449,12 +2451,18 @@ type GoogleChart() =
             .Replace("{WIDTH}", string(__.Width))
             .Replace("{HEIGHT}", string(__.Height))
 
-    /// Displays the chart in the default browser.
+    /// Displays the chart in a window.
     member __.Show() =
-        let htmlFile = Path.GetTempPath() + __.Id + ".html"
-        File.WriteAllText(htmlFile, __.Html)
-        Process.Start htmlFile
-        |> ignore
+        let wnd = Window()
+        wnd.Height <- 600.
+        wnd.Width <- 1000.
+        wnd.Topmost <- true
+        wnd.WindowStartupLocation <- WindowStartupLocation.CenterScreen 
+        let browser = new WebBrowser()
+        browser.NavigateToString __.Html
+        wnd.Content <- browser
+        wnd.Show()
+        wnd.Topmost <- false
 
     /// Sets the data series label. Use this member if the
     /// chart's data is a single series.
