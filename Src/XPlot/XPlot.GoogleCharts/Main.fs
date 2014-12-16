@@ -10,6 +10,7 @@ open System.Globalization
 open System.IO
 open System.Windows
 open System.Windows.Controls
+open System.Windows.Media.Imaging
 
 type key = IConvertible
 type value = IConvertible
@@ -2385,6 +2386,12 @@ type ChartGallery =
             | "TreeMap" -> name
             | _ -> name + "Chart"
 
+/// Creates the bitmap frame used to set the chart's window icon.
+let private icon =
+    let uriString = @"pack://application:,,,/XPlot.GoogleCharts;component/XPlot.ico"
+    let iconUri = Uri(uriString, UriKind.RelativeOrAbsolute)
+    BitmapFrame.Create(iconUri)
+
 type GoogleChart() =
 
     [<DefaultValue>]
@@ -2454,6 +2461,7 @@ type GoogleChart() =
     /// Displays the chart in a window.
     member __.Show() =
         let wnd = Window()
+        wnd.Icon <- icon
         wnd.Height <- 600.
         wnd.Width <- 1000.
         wnd.Topmost <- true

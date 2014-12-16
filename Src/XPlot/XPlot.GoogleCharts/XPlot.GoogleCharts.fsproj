@@ -59,6 +59,9 @@
     <None Include="XPlotOld.svg" />
     <None Include="XPlot.png" />
     <None Include="XPlot.svg" />
+    <Resource Include="XPlot.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Google.DataTable.Net.Wrapper">
