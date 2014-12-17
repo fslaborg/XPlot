@@ -375,7 +375,6 @@ module Geo =
         |> Chart.WithOptions options
         |> Chart.Show
 
-
     // Displaying Proportional Markers
     let chart3 =
         let options =

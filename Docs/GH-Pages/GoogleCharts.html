@@ -27,7 +27,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">XPlot</a>
+                <a class="navbar-brand" href="/"><img src="./XPlot.png" alt="XPlot" id="logo" /></a>
             </div>
 
             <div class="collapse navbar-collapse" id="#navbar-collapse">
@@ -50,6 +50,8 @@
         <div id="main">
             <h2 class="page-header">Nuget</h2>
             <kbd>Install-Package XPlot.GoogleCharts</kbd>
+            <h2 class="page-header">Bootstrapping Script</h2>
+            <p>The package comes with a bootstrapping script that references the necessary components and instructs FSI to use the IE11 Standards mode for WPF browser controls thus preventing Google Charts from falling back to VML. If you're using NuGet then load the XPlot.GoogleCharts.fsx script. If you're managing packages with Paket then load the XPlot.GoogleCharts.Paket.fsx script.</p>
             <h2 class="page-header">Supported Charts</h2>
             <p>XPlot supports the following charts from the <a href="https://developers.google.com/chart/interactive/docs/gallery" target="_blank">Google Charts gallery</a>:</p>
             <ul class="list-unstyled">

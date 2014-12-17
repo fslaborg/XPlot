@@ -41,4 +41,3 @@ Directory.EnumerateFiles(path, "*.html", SearchOption.AllDirectories)
 )
 |> List.concat
 |> List.iter(fun x -> printfn "%s" x)
-

@@ -9,7 +9,6 @@
     <WebSharperHtmlDirectory>$(MSBuildThisFileDirectory)bin\html</WebSharperHtmlDirectory>
     <NuGetPackageImportStamp>1a0e14cc</NuGetPackageImportStamp>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
@@ -39,35 +38,58 @@
     <Compile Include="Skin.fs" />
     <Compile Include="View.fs" />
     <Compile Include="Main.fs" />
-    <None Include="extra.files" />
     <Content Include="Home.html" />
-    <Content Include="robots.txt" />
-    <None Include="style.css" />
     <None Include="GoogleCharts.html" />
     <None Include="Highcharts.html" />
     <None Include="Chart.html" />
-    <None Include="RelativeLinks.fsx" />
-    <None Include="iframe\a78621f0f95f4b411fa5.html" />
-    <None Include="iframe\c5840517d75dcff6c83b.html" />
-    <None Include="iframe\4874aebfce1f4b588f5e.html" />
-    <None Include="iframe\d07cbc8b0233ef94ebf8.html" />
-    <None Include="iframe\e83e6f4f6e5bc05e9933.html" />
-    <None Include="iframe\b740f58188f4cddfc0ba.html" />
-    <None Include="iframe\b2135ec0e93d28295bbb.html" />
-    <None Include="iframe\0cb2f60010398f1be9ab.html" />
-    <None Include="iframe\6fc88dd6024cf683a33f.html" />
-    <None Include="iframe\86f6a6dcf9ec4bf88930.html" />
-    <None Include="iframe\9d202603aae1df40303b.html" />
-    <None Include="iframe\8a8e831364c2a965f646.html" />
-    <None Include="iframe\e723a85381063a9f9e16.html" />
-    <None Include="iframe\59d5f8a0ba8cf3ada86e.html" />
-    <None Include="iframe\cead0cdd0e153a7c078e.html" />
-    <None Include="iframe\a272c947396e3c67ddf4.html" />
-    <None Include="iframe\734c913a859cadca6387.html" />
-    <None Include="iframe\d23a9ff69ea5eb0d1b81.html" />
-    <None Include="iframe\d3db1c973285b612550e.html" />
-    <None Include="iframe\7a0f8caf46e0b4461cce.html" />
+    <Content Include="highlight.pack.js" />
+    <None Include="style.css" />
+    <Content Include="vs.css" />
+    <None Include="XPlot.png" />
+    <Content Include="robots.txt" />
+    <None Include="iframe\GoogleArea.html" />
+    <None Include="iframe\GoogleAnnotation.html" />
+    <None Include="iframe\GoogleBar.html" />
+    <None Include="iframe\GoogleBubble.html" />
+    <None Include="iframe\GoogleCalendar.html" />
+    <None Include="iframe\GoogleCandlestick.html" />
+    <None Include="iframe\GoogleColumn.html" />
+    <None Include="iframe\GoogleCombo.html" />
+    <None Include="iframe\GoogleGauge.html" />
+    <None Include="iframe\GoogleGeo.html" />
+    <None Include="iframe\GoogleHistogram.html" />
+    <None Include="iframe\GoogleLine.html" />
+    <None Include="iframe\GoogleMap.html" />
+    <None Include="iframe\GooglePie.html" />
+    <None Include="iframe\GoogleSankey.html" />
+    <None Include="iframe\GoogleScatter.html" />
+    <None Include="iframe\GoogleSteppedArea.html" />
+    <None Include="iframe\GoogleTimeline.html" />
+    <None Include="iframe\GoogleTable.html" />
+    <None Include="iframe\GoogleTreemap.html" />
+    <Content Include="Code\GoogleAnnotation.txt" />
+    <Content Include="Code\GoogleArea.txt" />
+    <Content Include="Code\GoogleBar.txt" />
+    <Content Include="Code\GoogleBubble.txt" />
+    <Content Include="Code\GoogleCalendar.txt" />
+    <Content Include="Code\GoogleCandlestick.txt" />
+    <Content Include="Code\GoogleColumn.txt" />
+    <Content Include="Code\GoogleCombo.txt" />
+    <Content Include="Code\GoogleGauge.txt" />
+    <Content Include="Code\GoogleGeo.txt" />
+    <Content Include="Code\GoogleHistogram.txt" />
+    <Content Include="Code\GoogleLine.txt" />
+    <Content Include="Code\GoogleMap.txt" />
+    <Content Include="Code\GooglePie.txt" />
+    <Content Include="Code\GoogleSankey.txt" />
+    <Content Include="Code\GoogleScatter.txt" />
+    <Content Include="Code\GoogleSteppedArea.txt" />
+    <Content Include="Code\GoogleTimeline.txt" />
+    <Content Include="Code\GoogleTable.txt" />
+    <Content Include="Code\GoogleTreemap.txt" />
+    <None Include="extra.files" />
     <Content Include="packages.config" />
+    <None Include="RelativeLinks.fsx" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
@@ -90,13 +112,5 @@
     </Otherwise>
   </Choose>
   <Import Project="$(FSharpTargetsPath)" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
-    <Error Condition="!Exists('..\packages\WebSharper.2.5.119.54\build\WebSharper.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\WebSharper.2.5.119.54\build\WebSharper.targets'))" />
-  </Target>
-  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Import Project="..\packages\WebSharper.2.5.119.54\build\WebSharper.targets" Condition="Exists('..\packages\WebSharper.2.5.119.54\build\WebSharper.targets')" />
 </Project>

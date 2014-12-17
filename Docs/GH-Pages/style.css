@@ -11,6 +11,14 @@ body {
     margin-bottom: 0;
 }
 
+.navbar-brand {
+    padding: 10px;
+}
+
+#logo {
+    height: 30px;
+}
+
 #push {
     height: 100px;
 }
@@ -27,51 +35,30 @@ body {
     padding-top: 100px;
 }
 
-#main {width: 75%;}
+#main {
+    width: 75%;
+}
 
 .home-section {
     padding-bottom: 10px;
     padding-top: 10px;
 }
 
-#lead-text {width: 80%; margin: 0 auto; text-align: center;}
-
-/* Sub Page */
-/*.inner-jumbotron {
-    padding-top: 40px;
-}*/
+#lead-text {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+}
 
 /* Chart Page */
 .demo-header {
     width: 80%;
 }
 
-#gist {
+pre {
+    background-color: white;
+    padding: 0;
     width: 75%;
-}
-
-.chart-iframe {
-    width: 100%;
-    height: 600px;
-    border: none;
-}
-
-.map-chart-iframe {
-    width: 100%;
-    height: 500px;
-    border: none;
-}
-
-.gist .file-data {
-    font-size: 13px !important;
-}
-
-.gist .gist-data {
-    border-bottom: none !important;
-}
-
-.gist .gist-meta {
-    display: none;
 }
 
 /* Sticky footer styles
