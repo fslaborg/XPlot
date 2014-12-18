@@ -5,9 +5,7 @@ open Microsoft.FSharp.Reflection
 open Newtonsoft.Json
 open System
 open System.Data
-open System.Diagnostics
 open System.Globalization
-open System.IO
 open System.Windows
 open System.Windows.Controls
 open System.Windows.Media.Imaging
@@ -117,78 +115,6 @@ module Data =
     
         sysDt
 
-//    let makeDataTable series labels =
-//        let rows =
-//            let dps =
-//                series
-//                |> Seq.map (fun x -> x.DataPoints)
-//                |> Seq.concat
-//            match Seq.length series with
-//            | 1 ->
-//                dps
-//                |> Seq.map (fun x ->
-//                    [
-//                        yield x.X
-//                        yield x.Y1
-//                        if x.Y2.IsSome then yield x.Y2.Value
-//                        if x.Y3.IsSome then yield x.Y3.Value
-//                        if x.Y4.IsSome then yield x.Y4.Value
-//                    ]
-//                )
-//            | _ ->
-//                dps
-//                |> Seq.groupBy (fun x -> x.X)
-//                |> Seq.map (fun (key, dps) ->
-//                    [
-//                        yield key
-//                        for x in dps do
-//                            yield x.Y1
-//                            if x.Y2.IsSome then yield x.Y2.Value
-//                            if x.Y3.IsSome then yield x.Y3.Value
-//                            if x.Y4.IsSome then yield x.Y4.Value
-//                    ]
-//                )
-//
-//        let dataTable =
-//            let dt = DataTable()
-//            let firstRow = Seq.head rows
-//            let labels' =
-//                match labels with
-//                | None -> None
-//                | Some labelsSeq ->
-//                    match (Seq.length labelsSeq) = firstRow.Length with
-//                    | false -> Some <| Seq.append ["Column 1"] labelsSeq
-//                    | true -> Some labelsSeq
-//            firstRow
-//            |> List.iteri (fun idx x ->
-//                let typeCode = x.GetTypeCode()
-//                let columnType =
-//                    match typeCode with
-//                    | TypeCode.Boolean -> ColumnType.Boolean
-//                    | TypeCode.DateTime -> ColumnType.Datetime
-//                    | TypeCode.String -> ColumnType.String
-//                    | _ -> ColumnType.Number
-//                let column = Column(columnType)
-//                match labels' with
-//                | None -> ()
-//                | Some labelsSeq -> column.Label <- Seq.nth idx labelsSeq
-//                dt.AddColumn column |> ignore        
-//            )
-//        
-//            rows
-//            |> Seq.iter (fun values -> 
-//                let row = dt.NewRow()
-//                values
-//                |> Seq.iter (fun v ->
-//                    Cell v
-//                    |> row.AddCell
-//                    |> ignore
-//                )
-//                dt.AddRow row |> ignore
-//            )
-//            dt
-//        dataTable
-
 [<AutoOpen>]
 module Configuration =
 
@@ -235,12 +161,12 @@ module Configuration =
             and set(value) = y1Field <- Some value
 
         member __.x2
-            with get() = x1Field.Value
-            and set(value) = x1Field <- Some value
+            with get() = x2Field.Value
+            and set(value) = x2Field <- Some value
 
         member __.y2
-            with get() = y1Field.Value
-            and set(value) = y1Field <- Some value
+            with get() = y2Field.Value
+            and set(value) = y2Field <- Some value
 
         member __.useObjectBoundingBoxUnits
             with get() = useObjectBoundingBoxUnitsField.Value
@@ -1861,6 +1787,10 @@ module Configuration =
             with get() = noDataPatternField.Value
             and set(value) = noDataPatternField <- Some value
 
+        member __.candlestick
+            with get() = candlestickField.Value
+            and set(value) = candlestickField <- Some value
+
         member __.curveType
             with get() = curveTypeField.Value
             and set(value) = curveTypeField <- Some value
@@ -2243,6 +2173,7 @@ module Configuration =
         member __.ShouldSerializecolorAxis() = not colorAxisField.IsNone
         member __.ShouldSerializecalendar() = not calendarField.IsNone
         member __.ShouldSerializenoDataPattern() = not noDataPatternField.IsNone
+        member __.ShouldSerializecandlestick() = not candlestickField.IsNone
         member __.ShouldSerializecurveType() = not curveTypeField.IsNone
         member __.ShouldSerializeseriesType() = not seriesTypeField.IsNone
         member __.ShouldSerializegreenColor() = not greenColorField.IsNone
@@ -2418,6 +2349,13 @@ type GoogleChart() =
         let dt = makeDataTable data labels
         let gc = GoogleChart()
         gc.dataTable <- dt
+        gc.options <- options
+        gc.``type`` <- ``type``
+        gc
+
+    static member FromDataTable dataTable options ``type`` =
+        let gc = GoogleChart()
+        gc.dataTable <- dataTable
         gc.options <- options
         gc.``type`` <- ``type``
         gc

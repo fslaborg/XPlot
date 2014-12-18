@@ -2,14 +2,14 @@
 <package >
   <metadata>
     <id>XPlot.GoogleCharts</id>
-    <version>1.1.0-RC3</version>
+    <version>1.1.2</version>
     <authors>Taha Hachana</authors>
     <owners>Taha Hachana</owners>
     <projectUrl>https://github.com/TahaHachana/XPlot</projectUrl>
     <iconUrl>https://raw.githubusercontent.com/TahaHachana/XPlot/master/Src/XPlot/XPlot.GoogleCharts/XPlot.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Data visualization library for F#.</description>
-    <releaseNotes>Use System.Data.DataTable for internal data storage, add a logo and a bootstrapping script for Paket, use a WPF window for default display and ensure that FSI uses IE 11 standards mode.</releaseNotes>
+    <releaseNotes>Update bootstrapping script.</releaseNotes>
     <tags>F#, FSHARP, DATA, VISUALIZATION, HTML5, JAVASCRIPT, DATAVIS, GOOGLE, CHART</tags>
     <dependencies>
       <dependency id="Newtonsoft.Json" version="6.0.6" />
