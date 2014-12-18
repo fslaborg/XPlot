@@ -2345,7 +2345,7 @@ type GoogleChart() =
     /// The width of the chart container element.
     member val Width = 900 with get, set
 
-    static member internal Create data labels options ``type`` =
+    static member Create data labels options ``type`` =
         let dt = makeDataTable data labels
         let gc = GoogleChart()
         gc.dataTable <- dt
@@ -2353,7 +2353,7 @@ type GoogleChart() =
         gc.``type`` <- ``type``
         gc
 
-    static member FromDataTable dataTable options ``type`` =
+    static member CreateFromDataTable dataTable options ``type`` =
         let gc = GoogleChart()
         gc.dataTable <- dataTable
         gc.options <- options

@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2013 for Web
-VisualStudioVersion = 12.0.30501.0
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "XPlot.GoogleCharts", "XPlot.GoogleCharts\XPlot.GoogleCharts.fsproj", "{5804E6A2-EDF3-4939-89C9-5BC7F2CC336A}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "XPlot.GoogleCharts.Deedle", "XPlot.GoogleCharts.Deedle\XPlot.GoogleCharts.Deedle.fsproj", "{F6FBA7C2-8411-47E1-997C-3EE7AA709FEF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{5804E6A2-EDF3-4939-89C9-5BC7F2CC336A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5804E6A2-EDF3-4939-89C9-5BC7F2CC336A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5804E6A2-EDF3-4939-89C9-5BC7F2CC336A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6FBA7C2-8411-47E1-997C-3EE7AA709FEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6FBA7C2-8411-47E1-997C-3EE7AA709FEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6FBA7C2-8411-47E1-997C-3EE7AA709FEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6FBA7C2-8411-47E1-997C-3EE7AA709FEF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
