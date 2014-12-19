@@ -352,3 +352,70 @@ module Gauge =
         |> Chart.Gauge
         |> Chart.WithOptions options
         |> Chart.Show
+
+module Geo =
+
+    let chart1 =
+        [
+            "Germany", 200
+            "United States", 300
+            "Brazil", 400
+            "Canada", 500
+            "France", 600
+            "RU", 700
+        ]
+        |> series
+        |> Chart.Geo
+        |> Chart.WithLabel "Popularity"
+        |> Chart.Show
+
+    let population =
+        series [
+            "Rome", 2761477.
+            "Milan", 1324110.
+            "Naples", 959574.
+            "Turin", 907563.
+            "Palermo", 655875.
+            "Genoa", 607906.
+            "Bologna", 380181.
+            "Florence", 371282.
+            "Fiumicino", 67370.
+            "Anzio", 52192.
+            "Ciampino", 38262.
+        ]
+
+    let area =
+        series [
+            "Rome", 1285.31
+            "Milan", 181.76
+            "Naples", 117.27
+            "Turin", 130.17
+            "Palermo", 158.9
+            "Genoa", 243.60
+            "Bologna", 140.7
+            "Florence", 102.41
+            "Fiumicino", 213.44
+            "Anzio", 43.43
+            "Ciampino", 11.
+        ]
+
+    let options =
+        Options(
+            region = "IT",
+            displayMode = "markers",
+            colorAxis = ColorAxis(colors = [|"green"; "blue"|])
+        )
+
+    let chart2 =
+        [population; area]
+        |> Chart.Geo
+        |> Chart.WithLabels ["Population"; "Area"]
+        |> Chart.WithOptions options
+        |> Chart.Show
+
+    let chart3 =
+        ["Population" => population; "Area" => area]
+        |> Frame.ofColumns
+        |> Chart.Geo
+        |> Chart.WithOptions options
+        |> Chart.Show

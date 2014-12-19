@@ -178,3 +178,39 @@ type Chart with
             |> Series.New
         let options = defaultArg Options <| Configuration.Options()
         GoogleChart.Create [series] Labels options ChartGallery.Gauge
+
+    /// <summary>Creates a geo chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">Labels for the data table columns.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Geo(data:Series<'K, 'V>, ?Labels, ?Options) =
+        let series =
+            data
+            |> Series.observations
+            |> Seq.map Datum.New
+            |> Series.New
+        let options = defaultArg Options <| Configuration.Options()
+        GoogleChart.Create [series] Labels options ChartGallery.Geo
+
+    /// <summary>Creates a geo chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">Labels for the data table columns.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Geo(data:seq<Series<'K, 'V>> when 'K :> key and 'V :> value, ?Labels, ?Options) =
+        let series =
+            data
+            |> Seq.map (fun x ->
+                x 
+                |> Series.observations
+                |> Seq.map Datum.New
+                |> Series.New)
+        let options = defaultArg Options <| Configuration.Options()
+        GoogleChart.Create series Labels options ChartGallery.Geo
+
+    /// <summary>Creates a geo chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Geo(data:Frame<'K, 'V>, ?Options) =
+        let dt = data.ToDataTable(["Key"])
+        let options = defaultArg Options <| Configuration.Options()
+        GoogleChart.CreateFromDataTable dt options ChartGallery.Geo
