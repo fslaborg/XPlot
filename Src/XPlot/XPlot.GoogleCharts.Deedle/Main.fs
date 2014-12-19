@@ -99,3 +99,10 @@ type Chart with
         let options = defaultArg Options <| Configuration.Options()
         GoogleChart.Create [series] Labels options ChartGallery.Calendar
 
+    /// <summary>Creates a candlestick chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Candlestick(data:Frame<'K, 'V>, ?Options) =
+        let dt = data.ToDataTable(["Key"])
+        let options = defaultArg Options <| Configuration.Options()
+        GoogleChart.CreateFromDataTable dt options ChartGallery.Candlestick
