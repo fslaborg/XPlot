@@ -77,3 +77,11 @@ type Chart with
         let dt = data.ToDataTable(["Key"])
         let options = defaultArg Options <| Configuration.Options()
         GoogleChart.CreateFromDataTable dt options ChartGallery.Bar
+
+    /// <summary>Creates a bubble chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Bubble(data:Frame<'K, 'V>, ?Options) =
+        let dt = data.ToDataTable(["Key"])
+        let options = defaultArg Options <| Configuration.Options()
+        GoogleChart.CreateFromDataTable dt options ChartGallery.Bubble

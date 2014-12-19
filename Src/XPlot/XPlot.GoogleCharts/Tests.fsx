@@ -181,7 +181,7 @@ module Bubble =
         data
         |> Chart.Bubble
         |> Chart.WithOptions options
-        |> Chart.WithLabels ["Life Expectancy"; "Fertility Rat"; "Region"; "Population"]
+        |> Chart.WithLabels ["Life Expectancy"; "Fertility Rate"; "Region"; "Population"]
         |> Chart.WithLegend true
         |> Chart.Show
 
