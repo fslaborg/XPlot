@@ -2,8 +2,10 @@
 #r """../packages/Deedle.1.0.6/lib/net40/Deedle.dll"""
 #r """./bin/Release/XPlot.GoogleCharts.Deedle.dll"""
 
-open XPlot.GoogleCharts
 open Deedle
+open XPlot.GoogleCharts
+open XPlot.GoogleCharts.Deedle
+open System
 
 module Area =
 
@@ -97,12 +99,12 @@ module Bar =
         |> Chart.Show
 
     let chart4 =
-        let fantasy = ["2010" => 10; "2020" => 16; "2030" => 28]
-        let romance = ["2010" => 24; "2020" => 22; "2030" => 19]
-        let mystery = ["2010" => 20; "2020" => 23; "2030" => 29]
-        let general = ["2010" => 32; "2020" => 30; "2030" => 30]
-        let western = ["2010" => 18; "2020" => 16; "2030" => 12]
-        let literature = ["2010" => 5; "2020" => 9; "2030" => 13]
+        let fantasy = series ["2010" => 10; "2020" => 16; "2030" => 28]
+        let romance = series ["2010" => 24; "2020" => 22; "2030" => 19]
+        let mystery = series ["2010" => 20; "2020" => 23; "2030" => 29]
+        let general = series ["2010" => 32; "2020" => 30; "2030" => 30]
+        let western = series ["2010" => 18; "2020" => 16; "2030" => 12]
+        let literature = series ["2010" => 5; "2020" => 9; "2030" => 13]
 
         let options =
             Options(
@@ -167,4 +169,26 @@ module Bubble =
         |> Chart.WithOptions options
         |> Chart.WithLabels ["Life Expectancy"; "Fertility Rate"; "Region"; "Population"]
         |> Chart.WithLegend true
+        |> Chart.Show
+
+module Calendar =
+
+    let rnd = Random()
+
+    let data =
+        series [
+            for x in 1. .. 500. ->
+                DateTime(2013, 1, 9).AddDays(x) => rnd.Next(0, 9)
+        ]
+
+    let options =
+        Options(
+            title = "GitHub Contributions",
+            height = 350
+        )
+
+    let chart1 =
+        data
+        |> Chart.Calendar
+        |> Chart.WithOptions options
         |> Chart.Show
