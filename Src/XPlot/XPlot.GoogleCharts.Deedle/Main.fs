@@ -3,6 +3,7 @@
 open XPlot.GoogleCharts
 open Deedle
 open Deedle.FSharpFrameExtensions
+open System
 
 type Chart with
 
@@ -10,7 +11,7 @@ type Chart with
     /// <param name="data">The chart's data.</param>
     /// <param name="Labels">Labels for the data table columns.</param>
     /// <param name="Options">The chart's options.</param>
-    static member Area(data:Series<'K, 'V>, ?Labels, ?Options) =
+    static member Area(data:Series<'K, #value>, ?Labels, ?Options) =
         let series =
             data
             |> Series.observations
@@ -23,7 +24,7 @@ type Chart with
     /// <param name="data">The chart's data.</param>
     /// <param name="Labels">Labels for the data table columns.</param>
     /// <param name="Options">The chart's options.</param>
-    static member Area(data:seq<Series<'K, 'V>> when 'K :> key and 'V :> value, ?Labels, ?Options) =
+    static member Area(data:seq<Series<'K, #value>> when 'K :> key, ?Labels, ?Options) =
         let series =
             data
             |> Seq.map (fun x ->
@@ -46,7 +47,7 @@ type Chart with
     /// <param name="data">The chart's data.</param>
     /// <param name="Labels">Labels for the data table columns.</param>
     /// <param name="Options">The chart's options.</param>
-    static member Bar(data:Series<'K, 'V>, ?Labels, ?Options) =
+    static member Bar(data:Series<'K, #value>, ?Labels, ?Options) =
         let series =
             data
             |> Series.observations
@@ -59,7 +60,7 @@ type Chart with
     /// <param name="data">The chart's data.</param>
     /// <param name="Labels">Labels for the data table columns.</param>
     /// <param name="Options">The chart's options.</param>
-    static member Bar(data:seq<Series<'K, 'V>> when 'K :> key and 'V :> value, ?Labels, ?Options) =
+    static member Bar(data:seq<Series<'K, #value>> when 'K :> key, ?Labels, ?Options) =
         let series =
             data
             |> Seq.map (fun x ->
@@ -81,7 +82,7 @@ type Chart with
     /// <summary>Creates a bubble chart.</summary>
     /// <param name="data">The chart's data.</param>
     /// <param name="Options">The chart's options.</param>
-    static member Bubble(data:Frame<'K, 'V>, ?Options) =
+    static member Bubble(data:Frame<string, 'V>, ?Options) =
         let dt = data.ToDataTable(["Key"])
         let options = defaultArg Options <| Configuration.Options()
         GoogleChart.CreateFromDataTable dt options ChartGallery.Bubble
@@ -90,7 +91,7 @@ type Chart with
     /// <param name="data">The chart's data.</param>
     /// <param name="Labels">Labels for the data table columns.</param>
     /// <param name="Options">The chart's options.</param>
-    static member Calendar(data:Series<'K, 'V>, ?Labels, ?Options) =
+    static member Calendar(data:Series<DateTime, 'V>, ?Labels, ?Options) =
         let series =
             data
             |> Series.observations
@@ -111,7 +112,7 @@ type Chart with
     /// <param name="data">The chart's data.</param>
     /// <param name="Labels">Labels for the data table columns.</param>
     /// <param name="Options">The chart's options.</param>
-    static member Column(data:Series<'K, 'V>, ?Labels, ?Options) =
+    static member Column(data:Series<'K, #value>, ?Labels, ?Options) =
         let series =
             data
             |> Series.observations
@@ -124,7 +125,7 @@ type Chart with
     /// <param name="data">The chart's data.</param>
     /// <param name="Labels">Labels for the data table columns.</param>
     /// <param name="Options">The chart's options.</param>
-    static member Column(data:seq<Series<'K, 'V>> when 'K :> key and 'V :> value, ?Labels, ?Options) =
+    static member Column(data:seq<Series<'K, #value>> when 'K :> key, ?Labels, ?Options) =
         let series =
             data
             |> Seq.map (fun x ->
@@ -147,7 +148,7 @@ type Chart with
     /// <param name="data">The chart's data.</param>
     /// <param name="Labels">Labels for the data table columns.</param>
     /// <param name="Options">The chart's options.</param>
-    static member Combo(data:seq<Series<'K, 'V>> when 'K :> key and 'V :> value, ?Labels, ?Options) =
+    static member Combo(data:seq<Series<'K, #value>> when 'K :> key, ?Labels, ?Options) =
         let series =
             data
             |> Seq.map (fun x ->
@@ -170,7 +171,7 @@ type Chart with
     /// <param name="data">The chart's data.</param>
     /// <param name="Labels">Labels for the data table columns.</param>
     /// <param name="Options">The chart's options.</param>
-    static member Gauge(data:Series<'K, 'V>, ?Labels, ?Options) =
+    static member Gauge(data:Series<string, #value>, ?Labels, ?Options) =
         let series =
             data
             |> Series.observations
@@ -183,7 +184,7 @@ type Chart with
     /// <param name="data">The chart's data.</param>
     /// <param name="Labels">Labels for the data table columns.</param>
     /// <param name="Options">The chart's options.</param>
-    static member Geo(data:Series<'K, 'V>, ?Labels, ?Options) =
+    static member Geo(data:Series<string, #value>, ?Labels, ?Options) =
         let series =
             data
             |> Series.observations
@@ -196,7 +197,7 @@ type Chart with
     /// <param name="data">The chart's data.</param>
     /// <param name="Labels">Labels for the data table columns.</param>
     /// <param name="Options">The chart's options.</param>
-    static member Geo(data:seq<Series<'K, 'V>> when 'K :> key and 'V :> value, ?Labels, ?Options) =
+    static member Geo(data:seq<Series<string, #value>> when 'K :> key, ?Labels, ?Options) =
         let series =
             data
             |> Seq.map (fun x ->
@@ -210,7 +211,21 @@ type Chart with
     /// <summary>Creates a geo chart.</summary>
     /// <param name="data">The chart's data.</param>
     /// <param name="Options">The chart's options.</param>
-    static member Geo(data:Frame<'K, 'V>, ?Options) =
+    static member Geo(data:Frame<string, 'V>, ?Options) =
         let dt = data.ToDataTable(["Key"])
         let options = defaultArg Options <| Configuration.Options()
         GoogleChart.CreateFromDataTable dt options ChartGallery.Geo
+
+    /// <summary>Creates a histogram chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">Labels for the data table columns.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Histogram(data:Series<string, #value>, ?Labels, ?Options) =
+        let series =
+            data
+            |> Series.observations
+            |> Seq.map Datum.New
+            |> Series.New
+        let options = defaultArg Options <| Configuration.Options()
+        GoogleChart.Create [series] Labels options ChartGallery.Histogram
+
