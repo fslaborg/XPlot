@@ -285,3 +285,16 @@ type Chart with
         let dt = data.ToDataTable(["Key"])
         let options = defaultArg Options <| Configuration.Options()
         GoogleChart.CreateFromDataTable dt options ChartGallery.Map
+
+    /// <summary>Creates a pie chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">Labels for the data table columns.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Pie(data:Series<string, #value>, ?Labels, ?Options) =
+        let series =
+            data
+            |> Series.observations
+            |> Seq.map Datum.New
+            |> Series.New
+        let options = defaultArg Options <| Configuration.Options()
+        GoogleChart.Create [series] Labels options ChartGallery.Pie
