@@ -298,3 +298,12 @@ type Chart with
             |> Series.New
         let options = defaultArg Options <| Configuration.Options()
         GoogleChart.Create [series] Labels options ChartGallery.Pie
+
+    /// <summary>Creates a sankey diagram.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Sankey(data:Frame<'K, 'V>, ?Options) =
+        let dt = data.ToDataTable(["Key"])
+        let options = defaultArg Options <| Configuration.Options()
+        GoogleChart.CreateFromDataTable dt options ChartGallery.Sankey
+
