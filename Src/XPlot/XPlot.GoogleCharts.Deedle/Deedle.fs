@@ -307,3 +307,38 @@ type Chart with
         let options = defaultArg Options <| Configuration.Options()
         GoogleChart.CreateFromDataTable dt options ChartGallery.Sankey
 
+    /// <summary>Creates a scatter chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">Labels for the data table columns.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Scatter(data:Series<'K, #value>, ?Labels, ?Options) =
+        let series =
+            data
+            |> Series.observations
+            |> Seq.map Datum.New
+            |> Series.New
+        let options = defaultArg Options <| Configuration.Options()
+        GoogleChart.Create [series] Labels options ChartGallery.Scatter
+
+    /// <summary>Creates a scatter chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">Labels for the data table columns.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Scatter(data:seq<Series<'K, #value>> when 'K :> key, ?Labels, ?Options) =
+        let series =
+            data
+            |> Seq.map (fun x ->
+                x 
+                |> Series.observations
+                |> Seq.map Datum.New
+                |> Series.New)
+        let options = defaultArg Options <| Configuration.Options()
+        GoogleChart.Create series Labels options ChartGallery.Scatter
+
+    /// <summary>Creates a scatter chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Scatter(data:Frame<'K, 'V>, ?Options) =
+        let dt = data.ToDataTable(["Key"])
+        let options = defaultArg Options <| Configuration.Options()
+        GoogleChart.CreateFromDataTable dt options ChartGallery.Scatter

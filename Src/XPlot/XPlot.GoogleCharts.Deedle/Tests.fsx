@@ -728,3 +728,19 @@ module Sankey =
         |> Chart.WithHeight 300
         |> Chart.WithOptions options
         |> Chart.Show
+
+module Scatter =
+    
+    let options =
+        Options(
+            title = "Age vs. Weight comparison",
+            hAxis = Axis(title = "Age", minValue = 0, maxValue = 15),
+            vAxis = Axis(title = "Weight", minValue = 0, maxValue = 15)
+        )
+
+    let chart =
+        [8., 12.; 4., 5.5; 11., 14.; 4., 5.; 3., 3.5; 6.5, 7.]
+        |> series
+        |> Chart.Scatter
+        |> Chart.WithOptions options
+        |> Chart.Show
