@@ -193,6 +193,13 @@ module Calendar =
         |> Chart.WithOptions options
         |> Chart.Show
 
+    let chart2 =
+        ["GitHub Contributions" => data]
+        |> Frame.ofColumns
+        |> Chart.Calendar
+        |> Chart.WithOptions options
+        |> Chart.Show
+
 module Candlestick =
     
     type Marker =
@@ -347,8 +354,15 @@ module Gauge =
             minorTicks = 5
         )
 
-    let chart =
+    let chart1 =
         data
+        |> Chart.Gauge
+        |> Chart.WithOptions options
+        |> Chart.Show
+
+    let chart2 =
+        ["System" => data]
+        |> Frame.ofColumns
         |> Chart.Gauge
         |> Chart.WithOptions options
         |> Chart.Show
@@ -456,8 +470,16 @@ module Histogram =
 
     let options = Options(title = "Lengths of dinosaurs, in meters")
 
-    let chart =
+    let chart1 =
         data
+        |> Chart.Histogram
+        |> Chart.WithOptions options
+        |> Chart.WithLabel "Length"
+        |> Chart.Show
+
+    let chart2 =
+        ["Lengths of dinosaurs" => data]
+        |> Frame.ofColumns
         |> Chart.Histogram
         |> Chart.WithOptions options
         |> Chart.WithLabel "Length"
@@ -554,36 +576,27 @@ module Map =
 
 module Pie =
 
-    let chart1 =
-        [
+    let data =
+        series [
             "Work", 11
             "Eat", 2
             "Commute", 2
             "Watch TV", 2
             "Sleep", 7
         ]
-        |> series
+
+    let chart1 =
+        data
         |> Chart.Pie
         |> Chart.WithTitle "My Daily Activities"
         |> Chart.WithLegend true
         |> Chart.Show
 
     let chart2 =
-        let options =
-            Options(
-                title = "My Daily Activities",
-                is3D = true
-            )
-        [
-            "Work", 11
-            "Eat", 2
-            "Commute", 2
-            "Watch TV", 2
-            "Sleep", 7
-        ]
-        |> series
+        ["My Daily Activities" => data]
+        |> Frame.ofColumns
         |> Chart.Pie
-        |> Chart.WithOptions options
+        |> Chart.WithTitle "My Daily Activities"
         |> Chart.WithLegend true
         |> Chart.Show
 
@@ -591,22 +604,27 @@ module Pie =
         let options =
             Options(
                 title = "My Daily Activities",
-                pieHole = 0.4
+                is3D = true
             )
-        [
-            "Work", 11
-            "Eat", 2
-            "Commute", 2
-            "Watch TV", 2
-            "Sleep", 7
-        ]
-        |> series
+        data
         |> Chart.Pie
         |> Chart.WithOptions options
         |> Chart.WithLegend true
         |> Chart.Show
 
     let chart4 =
+        let options =
+            Options(
+                title = "My Daily Activities",
+                pieHole = 0.4
+            )
+        data
+        |> Chart.Pie
+        |> Chart.WithOptions options
+        |> Chart.WithLegend true
+        |> Chart.Show
+
+    let chart5 =
         let options =
             Options(
                 pieSliceText = "label",
@@ -743,4 +761,54 @@ module Scatter =
         |> series
         |> Chart.Scatter
         |> Chart.WithOptions options
+        |> Chart.Show
+
+module SteppedArea =
+    
+    let options =
+        Options(
+            title = "The decline of 'The 39 Steps'",
+            vAxis = Axis(title = "Accumulated Rating"),
+            isStacked = true
+        )
+
+    let rottenTomatoes =
+        series [
+            "Alfred Hitchcock (1935)", 8.4
+            "Ralph Thomas (1959)", 6.9
+            "Don Sharp (1978)", 6.5
+            "James Hawes (2008)", 4.4        
+        ]
+
+    let imdb =
+        series [
+            "Alfred Hitchcock (1935)", 7.9
+            "Ralph Thomas (1959)", 6.5
+            "Don Sharp (1978)", 6.4
+            "James Hawes (2008)", 6.2        
+        ]
+
+    let chart1 =
+        rottenTomatoes
+        |> Chart.SteppedArea
+        |> Chart.WithOptions options
+        |> Chart.WithLabels ["Rotten Tomatoes"; "IMDB"]
+        |> Chart.WithLegend true
+        |> Chart.Show
+
+    let chart2 =
+        [rottenTomatoes; imdb]
+        |> Chart.SteppedArea
+        |> Chart.WithOptions options
+        |> Chart.WithLabels ["Rotten Tomatoes"; "IMDB"]
+        |> Chart.WithLegend true
+        |> Chart.Show
+
+    let chart3 =
+        ["Rotten Tomatoes" => rottenTomatoes; "IMDB" => imdb]
+        |> Frame.ofColumns
+        |> Chart.SteppedArea
+        |> Chart.WithOptions options
+        |> Chart.WithLabels ["Rotten Tomatoes"; "IMDB"]
+        |> Chart.WithLegend true
         |> Chart.Show

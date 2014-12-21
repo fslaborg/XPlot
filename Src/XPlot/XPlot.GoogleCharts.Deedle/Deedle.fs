@@ -91,7 +91,7 @@ type Chart with
     /// <param name="data">The chart's data.</param>
     /// <param name="Labels">Labels for the data table columns.</param>
     /// <param name="Options">The chart's options.</param>
-    static member Calendar(data:Series<DateTime, 'V>, ?Labels, ?Options) =
+    static member Calendar(data:Series<DateTime, #value>, ?Labels, ?Options) =
         let series =
             data
             |> Series.observations
@@ -99,6 +99,14 @@ type Chart with
             |> Series.New
         let options = defaultArg Options <| Configuration.Options()
         GoogleChart.Create [series] Labels options ChartGallery.Calendar
+
+    /// <summary>Creates a calendar chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Calendar(data:Frame<DateTime, 'V>, ?Options) =
+        let dt = data.ToDataTable(["Key"])
+        let options = defaultArg Options <| Configuration.Options()
+        GoogleChart.CreateFromDataTable dt options ChartGallery.Calendar
 
     /// <summary>Creates a candlestick chart.</summary>
     /// <param name="data">The chart's data.</param>
@@ -180,6 +188,14 @@ type Chart with
         let options = defaultArg Options <| Configuration.Options()
         GoogleChart.Create [series] Labels options ChartGallery.Gauge
 
+    /// <summary>Creates a gauge chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Gauge(data:Frame<string, 'V>, ?Options) =
+        let dt = data.ToDataTable(["Key"])
+        let options = defaultArg Options <| Configuration.Options()
+        GoogleChart.CreateFromDataTable dt options ChartGallery.Gauge
+
     /// <summary>Creates a geo chart.</summary>
     /// <param name="data">The chart's data.</param>
     /// <param name="Labels">Labels for the data table columns.</param>
@@ -228,6 +244,14 @@ type Chart with
             |> Series.New
         let options = defaultArg Options <| Configuration.Options()
         GoogleChart.Create [series] Labels options ChartGallery.Histogram
+
+    /// <summary>Creates a histogram chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Histogram(data:Frame<string, 'V>, ?Options) =
+        let dt = data.ToDataTable(["Key"])
+        let options = defaultArg Options <| Configuration.Options()
+        GoogleChart.CreateFromDataTable dt options ChartGallery.Histogram
 
     /// <summary>Creates a line chart.</summary>
     /// <param name="data">The chart's data.</param>
@@ -299,6 +323,14 @@ type Chart with
         let options = defaultArg Options <| Configuration.Options()
         GoogleChart.Create [series] Labels options ChartGallery.Pie
 
+    /// <summary>Creates a pie chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Pie(data:Frame<string, #value>, ?Options) =
+        let dt = data.ToDataTable(["Key"])
+        let options = defaultArg Options <| Configuration.Options()
+        GoogleChart.CreateFromDataTable dt options ChartGallery.Pie
+
     /// <summary>Creates a sankey diagram.</summary>
     /// <param name="data">The chart's data.</param>
     /// <param name="Options">The chart's options.</param>
@@ -342,3 +374,39 @@ type Chart with
         let dt = data.ToDataTable(["Key"])
         let options = defaultArg Options <| Configuration.Options()
         GoogleChart.CreateFromDataTable dt options ChartGallery.Scatter
+
+    /// <summary>Creates a stepped area chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">Labels for the data table columns.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member SteppedArea(data:Series<'K, #value>, ?Labels, ?Options) =
+        let series =
+            data
+            |> Series.observations
+            |> Seq.map Datum.New
+            |> Series.New
+        let options = defaultArg Options <| Configuration.Options()
+        GoogleChart.Create [series] Labels options ChartGallery.SteppedArea
+
+    /// <summary>Creates a stepped area chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">Labels for the data table columns.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member SteppedArea(data:seq<Series<'K, #value>> when 'K :> key, ?Labels, ?Options) =
+        let series =
+            data
+            |> Seq.map (fun x ->
+                x 
+                |> Series.observations
+                |> Seq.map Datum.New
+                |> Series.New)
+        let options = defaultArg Options <| Configuration.Options()
+        GoogleChart.Create series Labels options ChartGallery.SteppedArea
+
+    /// <summary>Creates a stepped area chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member SteppedArea(data:Frame<'K, 'V>, ?Options) =
+        let dt = data.ToDataTable(["Key"])
+        let options = defaultArg Options <| Configuration.Options()
+        GoogleChart.CreateFromDataTable dt options ChartGallery.SteppedArea
