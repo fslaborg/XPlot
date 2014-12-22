@@ -856,3 +856,253 @@ module Table =
         |> Chart.WithOptions(Options(showRowNumber = true))
         |> Chart.WithLabels ["Name"; "Salary"; "Full Time Employee"]
         |> Chart.Show
+
+module Timeline =
+
+    type President =
+        {
+            name : string
+            start : DateTime
+            ``end`` : DateTime
+        }
+
+        static member New (n, s, e) =
+            {
+                name = n
+                start = s
+                ``end`` = e
+            }
+
+    let timeline1 =
+        [
+            "Washington", DateTime(1789, 4, 29), DateTime(1797, 3, 3)
+            "Adams", DateTime(1797, 3, 3), DateTime(1801, 3, 3) 
+            "Jefferson", DateTime(1801, 3, 3), DateTime(1809, 3, 3)        
+        ]
+        |> List.map President.New
+        |> Frame.ofRecords
+        |> Frame.indexRowsString "name"
+        |> Chart.Timeline
+        |> Chart.Show
+
+    type PresidentWithIndex =
+        {
+            index : string
+            name : string
+            start : DateTime
+            ``end`` : DateTime
+        }
+
+        static member New (i, n, s, e) =
+            {
+                index = i
+                name = n
+                start = s
+                ``end`` = e
+            }
+
+    let timeline2 =
+        [
+            "1", "George Washington", DateTime(1789, 4, 29), DateTime(1797, 3, 3)
+            "2", "John Adams", DateTime(1797, 3, 3), DateTime(1801, 3, 3) 
+            "3", "Thomas Jefferson", DateTime(1801, 3, 3), DateTime(1809, 3, 3)        
+        ]
+        |> List.map PresidentWithIndex.New
+        |> Frame.ofRecords
+        |> Frame.indexRowsString "index"
+        |> Chart.Timeline
+        |> Chart.Show
+
+    let timeline3 =
+        let options =
+            Options(
+                timeline = Timeline(showRowLabels = false)
+            )
+        [
+            "1", "George Washington", DateTime(1789, 4, 29), DateTime(1797, 3, 3)
+            "2", "John Adams", DateTime(1797, 3, 3), DateTime(1801, 3, 3) 
+            "3", "Thomas Jefferson", DateTime(1801, 3, 3), DateTime(1809, 3, 3)        
+        ]
+        |> List.map PresidentWithIndex.New
+        |> Frame.ofRecords
+        |> Frame.indexRowsString "index"
+        |> Chart.Timeline
+        |> Chart.WithOptions options
+        |> Chart.Show
+
+    type GovOfficer =
+        {
+            title : string
+            name : string
+            start : DateTime
+            ``end`` : DateTime
+        }
+
+        static member New (i, n, s, e) =
+            {
+                index = i
+                name = n
+                start = s
+                ``end`` = e
+            }
+
+    let timeline4 =
+        [
+            "President", "George Washington", DateTime(1789, 4, 29), DateTime(1797, 3, 3)
+            "President", "John Adams", DateTime(1797, 3, 3), DateTime(1801, 3, 3)
+            "President", "Thomas Jefferson", DateTime(1801, 3, 3), DateTime(1809, 3, 3)
+            "Vice President", "John Adams", DateTime(1789, 4, 20), DateTime(1797, 3, 3)
+            "Vice President", "Thomas Jefferson", DateTime(1797, 3, 3), DateTime(1801, 3, 3)
+            "Vice President", "Aaron Burr", DateTime(1801, 3, 3), DateTime(1805, 3, 3)
+            "Vice President", "George Clinton", DateTime(1805, 3, 3), DateTime(1812, 4, 19)
+            "Secretary of State", "John Jay", DateTime(1789, 9, 25), DateTime(1790, 3, 21)
+            "Secretary of State", "Thomas Jefferson", DateTime(1790, 3, 21), DateTime(1793, 12, 30)
+            "Secretary of State", "Edmund Randolph", DateTime(1794, 1, 1), DateTime(1795, 8, 19)
+            "Secretary of State", "Timothy Pickering", DateTime(1795, 8, 19), DateTime(1800, 5, 11)
+            "Secretary of State", "Charles Lee", DateTime(1800, 5, 12), DateTime(1800, 6, 4)
+            "Secretary of State", "John Marshall", DateTime(1800, 6, 12), DateTime(1801, 3, 3)
+            "Secretary of State", "Levi Lincoln", DateTime(1801, 3, 4), DateTime(1801, 5, 1)
+            "Secretary of State", "James Madison", DateTime(1801, 5, 1), DateTime(1809, 3, 2)
+        ]
+        |> List.map GovOfficer.New
+        |> Frame.ofRecords
+        |> Frame.indexRowsString "index"
+        |> Chart.Timeline
+        |> Chart.WithLabels ["Position"; "Name"; "Start"; "End"]
+        |> Chart.Show
+
+module Treemap =
+
+    type Market =
+        {
+            location : string
+            parent : string
+            volume : int
+        }
+        
+        static member New (l, p, v) =
+            {
+                location = l
+                parent = p
+                volume = v
+            }
+
+    let treemap1 =
+        let data =
+            [
+                "Global", "", 0
+                "America", "Global", 0
+                "Europe", "Global", 0
+                "Asia", "Global", 0
+                "Australia", "Global", 0
+                "Africa", "Global", 0
+                "Brazil", "America", 11
+                "USA", "America", 52
+                "Mexico", "America", 24
+                "Canada", "America", 16
+                "France", "Europe", 42
+                "Germany", "Europe", 31
+                "Sweden", "Europe", 22
+                "Italy", "Europe", 17
+                "UK", "Europe", 21
+                "China", "Asia", 36
+                "Japan", "Asia", 20
+                "India", "Asia", 40
+                "Laos", "Asia", 4
+                "Mongolia", "Asia", 1
+                "Israel", "Asia", 12
+                "Iran", "Asia", 18
+                "Pakistan", "Asia", 11
+                "Egypt", "Africa", 21
+                "S. Africa", "Africa", 30
+                "Sudan", "Africa", 12
+                "Congo", "Africa", 10
+                "Zaire", "Africa", 8
+            ]
+
+        let options =
+            Options(
+                minColor = "#f00",
+                midColor = "#ddd",
+                maxColor = "#0d0",
+                headerHeight = 15,
+                fontColor = "black",
+                showScale = true        
+            )
+
+        data
+        |> List.map Market.New
+        |> Frame.ofRecords
+        |> Frame.indexRowsString "location"
+        |> Chart.Treemap
+        |> Chart.WithLabels  ["Location"; "Parent"; "Market trade volume (size)"]
+        |> Chart.WithOptions options
+        |> Chart.Show
+
+    type MarketWithTrend =
+        {
+            location : string
+            parent : string
+            volume : int
+            trend : int
+        }
+        
+        static member New (l, p, v, t) =
+            {
+                location = l
+                parent = p
+                volume = v
+                trend = t
+            }
+
+    let treemap2 =
+        let data =
+            [
+                "Global", "", 0, 0
+                "America", "Global", 0, 0
+                "Europe", "Global", 0, 0
+                "Asia", "Global", 0, 0
+                "Australia", "Global", 0, 0
+                "Africa", "Global", 0, 0
+                "Brazil", "America", 11, 10
+                "USA", "America", 52, 31
+                "Mexico", "America", 24, 12
+                "Canada", "America", 16, -23
+                "France", "Europe", 42, -11
+                "Germany", "Europe", 31, -2
+                "Sweden", "Europe", 22, -13
+                "Italy", "Europe", 17, 4
+                "UK", "Europe", 21, -5
+                "China", "Asia", 36, 4
+                "Japan", "Asia", 20, -12
+                "India", "Asia", 40, 63
+                "Laos", "Asia", 4, 34
+                "Mongolia", "Asia", 1, -5
+                "Israel", "Asia", 12, 24
+                "Iran", "Asia", 18, 13
+                "Pakistan", "Asia", 11, -52
+                "Egypt", "Africa", 21, 0
+                "S. Africa", "Africa", 30, 43
+                "Sudan", "Africa", 12, 2
+                "Congo", "Africa", 10, 12
+                "Zaire", "Africa", 8, 10
+            ]
+
+        let options =
+            Options(
+                minColor = "#f00",
+                midColor = "#ddd",
+                maxColor = "#0d0",
+                headerHeight = 15,
+                fontColor = "black",
+                showScale = true        
+            )
+
+        data
+        |> List.map MarketWithTrend.New
+        |> Frame.ofRecords
+        |> Frame.indexRowsString "location"
+        |> Chart.Treemap
+        |> Chart.WithLabels  ["Location"; "Parent"; "Market trade volume (size)"; "Market increase/decrease (color)"]
+        |> Chart.WithOptions options
+        |> Chart.Show

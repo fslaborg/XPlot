@@ -446,3 +446,19 @@ type Chart with
         let dt = data.ToDataTable(["Key"])
         let options = defaultArg Options <| Configuration.Options()
         GoogleChart.CreateFromDataTable dt options ChartGallery.Table
+
+    /// <summary>Creates a timeline chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Timeline(data:Frame<'K, 'V>, ?Options) =
+        let dt = data.ToDataTable(["Key"])
+        let options = defaultArg Options <| Configuration.Options()
+        GoogleChart.CreateFromDataTable dt options ChartGallery.Timeline
+
+    /// <summary>Creates a treemap chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Treemap(data:Frame<'K, 'V>, ?Options) =
+        let dt = data.ToDataTable(["Key"])
+        let options = defaultArg Options <| Configuration.Options()
+        GoogleChart.CreateFromDataTable dt options ChartGallery.TreeMap
