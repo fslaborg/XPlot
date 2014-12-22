@@ -2268,6 +2268,7 @@ let jsTemplate =
 let template =
     """<html>
     <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <title>Google Chart</title>
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
         <script type="text/javascript">
