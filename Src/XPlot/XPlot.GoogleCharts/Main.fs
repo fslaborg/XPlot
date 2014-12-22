@@ -2266,7 +2266,8 @@ let jsTemplate =
         }"""
 
 let template =
-    """<html>
+    """<!DOCTYPE html>
+<html>
     <head>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <title>Google Chart</title>
