@@ -7,6 +7,14 @@ open System
 
 type Chart with
 
+    /// <summary>Creates an annotation chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Annotation(data:Frame<'K, 'V>, ?Options) =
+        let dt = data.ToDataTable(["Key"])
+        let options = defaultArg Options <| Configuration.Options()
+        GoogleChart.CreateFromDataTable dt options Annotation
+
     /// <summary>Creates an area chart.</summary>
     /// <param name="data">The chart's data.</param>
     /// <param name="Labels">Labels for the data table columns.</param>
