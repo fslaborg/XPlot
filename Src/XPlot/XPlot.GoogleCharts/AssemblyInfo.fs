@@ -4,10 +4,10 @@ open System.Reflection
 
 [<
     AssemblyDescription("F# Data Visualization Package");
-    AssemblyFileVersion("1.0.1");
+    AssemblyFileVersion("1.1.5");
     AssemblyProduct("XPlot.GoogleCharts");
     AssemblyTitle("XPlot.GoogleCharts");
-    AssemblyVersion("1.0.1")
+    AssemblyVersion("1.1.5")
 >]
 
 do ()

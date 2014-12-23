@@ -76,7 +76,9 @@ module Data =
         let sysDt = new System.Data.DataTable()
         sysDt.Locale <- CultureInfo.InvariantCulture
 
-        let firstRow = Seq.head rows
+        let firstRow =
+            rows
+            |> Seq.maxBy (fun x -> x.Length)
 
         let labels' =
             match labels with

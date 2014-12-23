@@ -1,4 +1,6 @@
-﻿* 0.4.0 - Pie, sankey, scatter and stepped area charts
+﻿* 0.5.0 - Table, timeline and treemap charts
+
+* 0.4.0 - Pie, sankey, scatter and stepped area charts
 
 * 0.3.0 - Histogram, line and map charts
 
