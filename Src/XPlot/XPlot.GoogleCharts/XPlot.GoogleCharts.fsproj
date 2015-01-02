@@ -56,12 +56,11 @@
     <Content Include="app.config" />
     <None Include="Script1.fsx" />
     <Content Include="Google.DataTable.Net.Wrapper.XML" />
-    <None Include="XPlotOld.svg" />
-    <None Include="XPlot.png" />
-    <None Include="XPlot.svg" />
     <Resource Include="XPlot.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <None Include="logo.png" />
+    <None Include="logo.svg" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Google.DataTable.Net.Wrapper">
