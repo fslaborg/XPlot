@@ -7,6 +7,8 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "XPlot.GoogleCharts", "XPlot
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "XPlot.GoogleCharts.Deedle", "XPlot.GoogleCharts.Deedle\XPlot.GoogleCharts.Deedle.fsproj", "{F6FBA7C2-8411-47E1-997C-3EE7AA709FEF}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "XPlot.Plotly", "XPlot.Plotly\XPlot.Plotly.fsproj", "{182232F3-9E9D-4342-A096-037F2CF2037F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{F6FBA7C2-8411-47E1-997C-3EE7AA709FEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6FBA7C2-8411-47E1-997C-3EE7AA709FEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6FBA7C2-8411-47E1-997C-3EE7AA709FEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{182232F3-9E9D-4342-A096-037F2CF2037F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{182232F3-9E9D-4342-A096-037F2CF2037F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{182232F3-9E9D-4342-A096-037F2CF2037F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{182232F3-9E9D-4342-A096-037F2CF2037F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
