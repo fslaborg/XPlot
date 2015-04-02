@@ -49,10 +49,14 @@
   </Choose>
   <Import Project="$(FSharpTargetsPath)" />
   <ItemGroup>
+    <Compile Include="Graph.fs" />
     <Compile Include="Main.fs" />
     <None Include="Tests.fsx" />
     <Content Include="packages.config" />
     <Content Include="app.config" />
+    <None Include="GraphObj.json" />
+    <None Include="Script1.fsx" />
+    <Content Include="GraphObjClass.txt" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="HttpClient">
