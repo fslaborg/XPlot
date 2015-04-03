@@ -130,6 +130,11 @@ module Site =
                     "Plotly Bar Chart"
                     [
                         PlotlyDemo.New "PlotlyBasicBarChart" "Basic Bar Chart" "https://plot.ly/~TahaHachana/130"
+                        PlotlyDemo.New "PlotlyGroupedBarChart" "Grouped Bar Chart" "https://plot.ly/~TahaHachana/145"
+                        PlotlyDemo.New "PlotlyStackedBarChart" "Stacked Bar Chart" "https://plot.ly/~TahaHachana/146"
+                        PlotlyDemo.New "ColoredStyledBarChart" "Colored and Styled Bar Chart" "https://plot.ly/~TahaHachana/147"
+                        PlotlyDemo.New "BarChartHoverText" "Bar Chart with Hover Text" "https://plot.ly/~TahaHachana/148"
+                        PlotlyDemo.New "CustomizingIndividualBarColors" "Customizing Individual Bar Colors" "https://plot.ly/~TahaHachana/149"
                     ]
             ]
 

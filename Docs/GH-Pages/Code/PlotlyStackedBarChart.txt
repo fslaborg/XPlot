@@ -1,0 +1,31 @@
+﻿#r """../packages/Http.fs.1.5.1/lib/net40/HttpClient.dll"""
+#r """../packages/XPlot.Plotly.0.1.0/Lib/Net45/XPlot.Plotly.dll"""
+
+open XPlot.Plotly
+
+Plotly.Signin("Username", "API Key")
+
+let trace1 =
+    Bar(
+        x = ["giraffes"; "orangutans"; "monkeys"],
+        y = [20; 14; 23],
+        name = "SF Zoo"
+    )
+
+let trace2 =
+    Bar(
+        x= ["giraffes"; "orangutans"; "monkeys"],
+        y= [12; 18; 29],
+        name = "LA Zoo"
+    )
+
+let data = Data [trace1; trace2]
+
+let layout = Layout(barmode = "stack")
+    
+let figure = Figure(data, layout)
+
+let plotlyResponse = figure.Plot("Stacked Bar Chart")
+
+figure.Show()
+
