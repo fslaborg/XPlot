@@ -55,13 +55,13 @@ let classes =
                     ``type`` =
                         match graphObj.val_types with
                         | "number: x > 0" | "number: x >= 0" | "number" -> "float"
-                        | x when x.StartsWith("a string") -> "string"
-                        | x when x.StartsWith("number: x in [") -> "float"
-                        | x when x.Contains("|") -> "string"
                         | "a boolean: TRUE | FALSE" -> "bool"
                         | "array of numbers" -> "seq<float>"
                         | "array of numbers, strings, datetimes" -> "seq<value>"
                         | "array of strings" -> "seq<string>"
+                        | x when x.StartsWith("a string") -> "string"
+                        | x when x.StartsWith("number: x in [") -> "float"
+                        | x when x.Contains("|") -> "string"
                         | x -> x
                     description = graphObj.description
                 }    

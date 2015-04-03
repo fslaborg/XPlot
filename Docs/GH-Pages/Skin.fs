@@ -19,8 +19,8 @@ let googleTemplate =
         .With("title", fun x -> x.Title)
         .With("body", fun x -> x.Body)
 
-let highchartsTemplate =
-    Content.Template<Page>("~/Highcharts.html")
+let plotlyTemplate =
+    Content.Template<Page>("~/Plotly.html")
         .With("title", fun x -> x.Title)
         .With("body", fun x -> x.Body)
 
@@ -38,5 +38,5 @@ let WithTemplate template title body : Content<Action> =
 
 let withHomeTemplate title body = WithTemplate MainTemplate title body
 let withGoogleTemplate title body  = WithTemplate googleTemplate title body
-let withHighchartsTemplate title body  = WithTemplate highchartsTemplate title body
+let withPlotlyTemplate title body  = WithTemplate plotlyTemplate title body
 let withChartTemplate title body  = WithTemplate chartTemplate title body

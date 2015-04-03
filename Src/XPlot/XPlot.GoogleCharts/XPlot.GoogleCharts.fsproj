@@ -52,15 +52,15 @@
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="Main.fs" />
     <None Include="Tests.fsx" />
-    <Content Include="packages.config" />
     <Content Include="app.config" />
     <None Include="Script1.fsx" />
-    <Content Include="Google.DataTable.Net.Wrapper.XML" />
     <Resource Include="XPlot.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <None Include="XPlot.png" />
     <None Include="logo.svg" />
+    <Content Include="packages.config" />
+    <Content Include="Google.DataTable.Net.Wrapper.XML" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Google.DataTable.Net.Wrapper">
@@ -76,7 +76,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="PresentationCore" />

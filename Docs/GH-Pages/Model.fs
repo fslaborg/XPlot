@@ -3,5 +3,5 @@
 type Action =
     | Home
     | GoogleCharts
-    | Highcharts
+    | Plotly
     | Chart of int
