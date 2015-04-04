@@ -3,6 +3,7 @@ module XPlot.Plotly.Graph
 
 open System
 
+type key = IConvertible
 type value = IConvertible
 
 type Trace() = do ()
@@ -249,10 +250,10 @@ type Line() =
 type Marker() =
 
     let mutable _color: obj option = None
-    let mutable _size: seq<float> option = None
+    let mutable _size: obj option = None
     let mutable _symbol: string option = None
     let mutable _line: Line option = None
-    let mutable _opacity: float option = None
+    let mutable _opacity: obj option = None
     let mutable _sizeref: float option = None
     let mutable _sizemode: string option = None
     let mutable _colorscale: string option = None
@@ -392,8 +393,9 @@ type Stream() =
     member __.ShouldSerializemaxpoints() = not _maxpoints.IsNone
 
 type Scatter() =
+    inherit Trace()
 
-    let mutable _x: seq<value> option = None
+    let mutable _x: seq<key> option = None
     let mutable _y: seq<value> option = None
     let mutable _r: seq<float> option = None
     let mutable _t: seq<value> option = None
@@ -573,7 +575,7 @@ type Scatter() =
 type Bar() =
     inherit Trace()
 
-    let mutable _x: seq<value> option = None
+    let mutable _x: seq<key> option = None
     let mutable _y: seq<value> option = None
     let mutable _name: string option = None
     let mutable _orientation: string option = None
@@ -760,7 +762,7 @@ type Ybins() =
 
 type Histogram() =
 
-    let mutable _x: seq<value> option = None
+    let mutable _x: seq<key> option = None
     let mutable _y: seq<value> option = None
     let mutable _histnorm: string option = None
     let mutable _histfunc: string option = None
@@ -941,7 +943,7 @@ type Box() =
 
     let mutable _y: seq<value> option = None
     let mutable _x0: float option = None
-    let mutable _x: seq<value> option = None
+    let mutable _x: seq<key> option = None
     let mutable _name: string option = None
     let mutable _boxmean: string option = None
     let mutable _boxpoints: string option = None
@@ -1100,7 +1102,7 @@ type Colorbar() =
     let mutable _autotick: string option = None
     let mutable _nticks: float option = None
     let mutable _ticks: string option = None
-    let mutable _showticklabels: string option = None
+    let mutable _showticklabels: bool option = None
     let mutable _tick0: float option = None
     let mutable _dtick: float option = None
     let mutable _ticklen: float option = None
@@ -1312,7 +1314,7 @@ type Colorbar() =
 type Heatmap() =
 
     let mutable _z: float [,] option = None
-    let mutable _x: seq<value> option = None
+    let mutable _x: seq<key> option = None
     let mutable _y: seq<value> option = None
     let mutable _name: string option = None
     let mutable _zauto: string option = None
@@ -1544,7 +1546,7 @@ type Contours() =
 type Contour() =
 
     let mutable _z: float [,] option = None
-    let mutable _x: seq<value> option = None
+    let mutable _x: seq<key> option = None
     let mutable _y: seq<value> option = None
     let mutable _name: string option = None
     let mutable _zauto: string option = None
@@ -1750,7 +1752,7 @@ type Contour() =
 
 type Histogram2d() =
 
-    let mutable _x: seq<value> option = None
+    let mutable _x: seq<key> option = None
     let mutable _y: seq<value> option = None
     let mutable _histnorm: string option = None
     let mutable _histfunc: string option = None
@@ -1950,7 +1952,7 @@ type Histogram2d() =
 
 type Histogram2dcontour() =
 
-    let mutable _x: seq<value> option = None
+    let mutable _x: seq<key> option = None
     let mutable _y: seq<value> option = None
     let mutable _histnorm: string option = None
     let mutable _histfunc: string option = None
@@ -2173,8 +2175,8 @@ type Angularaxis() =
 
     let mutable _range: float [] option = None
     let mutable _domain: float [] option = None
-    let mutable _showline: string option = None
-    let mutable _showticklabels: string option = None
+    let mutable _showline: bool option = None
+    let mutable _showticklabels: bool option = None
     let mutable _tickorientation: string option = None
     let mutable _tickcolor: string option = None
     let mutable _ticksuffix: string option = None
@@ -2241,8 +2243,8 @@ type Radialaxis() =
     let mutable _range: float [] option = None
     let mutable _domain: float [] option = None
     let mutable _orientation: float option = None
-    let mutable _showline: string option = None
-    let mutable _showticklabels: string option = None
+    let mutable _showline: bool option = None
+    let mutable _showticklabels: bool option = None
     let mutable _tickorientation: string option = None
     let mutable _ticklen: float option = None
     let mutable _tickcolor: string option = None
@@ -2664,13 +2666,13 @@ type Xaxis() =
     let mutable _type: string option = None
     let mutable _rangemode: string option = None
     let mutable _autorange: string option = None
-    let mutable _showgrid: string option = None
+    let mutable _showgrid: bool option = None
     let mutable _zeroline: bool option = None
-    let mutable _showline: string option = None
+    let mutable _showline: bool option = None
     let mutable _autotick: string option = None
     let mutable _nticks: float option = None
     let mutable _ticks: string option = None
-    let mutable _showticklabels: string option = None
+    let mutable _showticklabels: bool option = None
     let mutable _tick0: float option = None
     let mutable _dtick: float option = None
     let mutable _ticklen: float option = None
@@ -2941,13 +2943,13 @@ type Yaxis() =
     let mutable _type: string option = None
     let mutable _rangemode: string option = None
     let mutable _autorange: string option = None
-    let mutable _showgrid: string option = None
+    let mutable _showgrid: bool option = None
     let mutable _zeroline: bool option = None
-    let mutable _showline: string option = None
+    let mutable _showline: bool option = None
     let mutable _autotick: string option = None
     let mutable _nticks: float option = None
     let mutable _ticks: string option = None
-    let mutable _showticklabels: string option = None
+    let mutable _showticklabels: bool option = None
     let mutable _tick0: float option = None
     let mutable _dtick: float option = None
     let mutable _ticklen: float option = None
@@ -3218,13 +3220,13 @@ type Zaxis() =
     let mutable _type: string option = None
     let mutable _rangemode: string option = None
     let mutable _autorange: string option = None
-    let mutable _showgrid: string option = None
+    let mutable _showgrid: bool option = None
     let mutable _zeroline: bool option = None
-    let mutable _showline: string option = None
+    let mutable _showline: bool option = None
     let mutable _autotick: string option = None
     let mutable _nticks: float option = None
     let mutable _ticks: string option = None
-    let mutable _showticklabels: string option = None
+    let mutable _showticklabels: bool option = None
     let mutable _tick0: float option = None
     let mutable _dtick: float option = None
     let mutable _ticklen: float option = None

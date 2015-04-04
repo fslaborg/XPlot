@@ -51,6 +51,7 @@
   <Import Project="$(FSharpTargetsPath)" />
   <ItemGroup>
     <Compile Include="Graph.fs" />
+    <Compile Include="ChartWindow.fs" />
     <Compile Include="Main.fs" />
     <None Include="Tests.fsx" />
     <Content Include="app.config" />
@@ -58,6 +59,9 @@
     <None Include="Graph.fsx" />
     <Content Include="Graph.txt" />
     <Content Include="packages.config" />
+    <Resource Include="XPlot.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="HttpClient">

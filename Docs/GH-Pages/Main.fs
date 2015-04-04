@@ -125,7 +125,7 @@ module Site =
                     "Google Treemap Chart"
                     [Demo.New "GoogleTreemap" "Google Treemap Chart"]
                 plotlySitelet
-                    "/chart/plotly-bar-chart"
+                    "/chart/plotly-bar-charts"
                     21
                     "Plotly Bar Chart"
                     [
@@ -135,6 +135,16 @@ module Site =
                         PlotlyDemo.New "ColoredStyledBarChart" "Colored and Styled Bar Chart" "https://plot.ly/~TahaHachana/147"
                         PlotlyDemo.New "BarChartHoverText" "Bar Chart with Hover Text" "https://plot.ly/~TahaHachana/148"
                         PlotlyDemo.New "CustomizingIndividualBarColors" "Customizing Individual Bar Colors" "https://plot.ly/~TahaHachana/149"
+                    ]
+                plotlySitelet
+                    "/chart/plotly-line-scatter-plots"
+                    22
+                    "Plotly Line and Scatter Plots"
+                    [
+                        PlotlyDemo.New "BasicLinePlot" "Basic Line Plot" "https://plot.ly/~TahaHachana/173"
+                        PlotlyDemo.New "LineScatterPlot" "Line and Scatter Plot" "https://plot.ly/~TahaHachana/177"
+                        PlotlyDemo.New "ColoredStyledScatterPlot" "Colored and Styled Scatter Plot" "https://plot.ly/~TahaHachana/178"
+                        PlotlyDemo.New "LineShapeOptionsInterpolation" "Line Shape Options for Interpolation" "https://plot.ly/~TahaHachana/179"
                     ]
             ]
 
@@ -147,7 +157,7 @@ type Website() =
                 yield Home
                 yield GoogleCharts
                 yield Plotly
-                for x in 1 .. 21 -> Chart x
+                for x in 1 .. 22 -> Chart x
             ]
 
 [<assembly: Website(typeof<Website>)>]

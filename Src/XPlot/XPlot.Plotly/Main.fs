@@ -469,6 +469,28 @@ type Kwargs() =
     member __.ShouldSerializetraces() = not _traces.IsNone
     member __.ShouldSerializelayout() = not _layout.IsNone
 
+//module ChartWindow =
+
+//    open System
+//    open System.Windows.Media.Imaging
+//
+//    let icon =
+//        let uriString = @"pack://application:,,,/XPlot.Plotly;component/XPlot.ico"
+//        let iconUri = Uri(uriString, UriKind.RelativeOrAbsolute)
+//        BitmapFrame.Create(iconUri)
+//
+//    let show html =
+//            let wnd = Window()
+////            wnd.Icon <- icon
+//            wnd.Height <- 600.
+//            wnd.Width <- 1000.
+//            wnd.Topmost <- true
+//            wnd.WindowStartupLocation <- WindowStartupLocation.CenterScreen 
+//            let browser = new WebBrowser()
+//            browser.NavigateToString html
+//            wnd.Content <- browser
+//            wnd.Show()
+//            wnd.Topmost <- false
 
 type Figure(data:Data, ?Layout:Layout) =
     
@@ -529,19 +551,25 @@ type Figure(data:Data, ?Layout:Layout) =
         match response with
         | None -> printfn "Call the Plot member first."
         | Some resp ->
-            let wnd = Window()
-    //        wnd.Icon <- icon
-            wnd.Height <- 600.
-            wnd.Width <- 1000.
-            wnd.Topmost <- true
-            wnd.WindowStartupLocation <- WindowStartupLocation.CenterScreen 
-            let browser = new WebBrowser()
             let html =
-                """<html><head></head><body><iframe width="500" height="500" frameborder="0" seamless="seamless" scrolling="no" src="""
+                """<html><head></head><body><iframe width="100%" height="100%" frameborder="0" seamless="seamless" scrolling="no" src="""
                 + "\""
                 + resp.url
-                + """.embed?width=500&height=500"></iframe></body></html>"""
-            browser.NavigateToString html
-            wnd.Content <- browser
-            wnd.Show()
-            wnd.Topmost <- false
+                + """.embed?width=900&height=500"></iframe></body></html>"""        
+            ChartWindow.show html
+//            let wnd = Window()
+//    //        wnd.Icon <- icon
+//            wnd.Height <- 600.
+//            wnd.Width <- 1000.
+//            wnd.Topmost <- true
+//            wnd.WindowStartupLocation <- WindowStartupLocation.CenterScreen 
+//            let browser = new WebBrowser()
+//            let html =
+//                """<html><head></head><body><iframe width="500" height="500" frameborder="0" seamless="seamless" scrolling="no" src="""
+//                + "\""
+//                + resp.url
+//                + """.embed?width=500&height=500"></iframe></body></html>"""
+//            browser.NavigateToString html
+//            wnd.Content <- browser
+//            wnd.Show()
+//            wnd.Topmost <- false
