@@ -3,12 +3,12 @@ module XPlot.Plotly.Graph
 
 open System
 
-type key = IConvertible
-type value = IConvertible
+//type key = IConvertible
+//type value = IConvertible
 
 type Trace() = do ()
 //    let mutable xField : seq<string> option = None
-//    let mutable yField : seq<value> option = None
+//    let mutable yField : seq<_> option = None
 //
 //    member __.x
 //        with get() = xField.Value
@@ -22,9 +22,9 @@ type Error_y() =
 
     let mutable _type: string option = None
     let mutable _symmetric: string option = None
-    let mutable _array: seq<value> option = None
+    let mutable _array: seq<_> option = None
     let mutable _value: float option = None
-    let mutable _arrayminus: seq<value> option = None
+    let mutable _arrayminus: seq<_> option = None
     let mutable _valueminus: float option = None
     let mutable _color: string option = None
     let mutable _thickness: float option = None
@@ -103,9 +103,9 @@ type Error_x() =
 
     let mutable _type: string option = None
     let mutable _symmetric: string option = None
-    let mutable _array: seq<value> option = None
+    let mutable _array: seq<_> option = None
     let mutable _value: float option = None
-    let mutable _arrayminus: seq<value> option = None
+    let mutable _arrayminus: seq<_> option = None
     let mutable _valueminus: float option = None
     let mutable _color: string option = None
     let mutable _thickness: float option = None
@@ -395,10 +395,10 @@ type Stream() =
 type Scatter() =
     inherit Trace()
 
-    let mutable _x: seq<key> option = None
-    let mutable _y: seq<value> option = None
+    let mutable _x: _ option = None
+    let mutable _y: _ option = None
     let mutable _r: seq<float> option = None
-    let mutable _t: seq<value> option = None
+    let mutable _t: seq<_> option = None
     let mutable _mode: string option = None
     let mutable _name: string option = None
     let mutable _text: seq<string> option = None
@@ -575,8 +575,8 @@ type Scatter() =
 type Bar() =
     inherit Trace()
 
-    let mutable _x: seq<key> option = None
-    let mutable _y: seq<value> option = None
+    let mutable _x: _ option = None
+    let mutable _y: _ option = None
     let mutable _name: string option = None
     let mutable _orientation: string option = None
     let mutable _text: seq<string> option = None
@@ -592,7 +592,7 @@ type Bar() =
     let mutable _xsrc: string option = None
     let mutable _ysrc: string option = None
     let mutable _r: seq<float> option = None
-    let mutable _t: seq<value> option = None
+    let mutable _t: seq<_> option = None
     let mutable _type = Some "bar"
 
     /// Sets the x coordinates of the bars. If 'x' is linked to an array of strings, then the x coordinates are integers, 0, 1, 2, 3, ..., labeled on the x-axis by the array of strings linked to 'x'. If 'y' is not set, the bars are plotted horizontally, with their length determined by the array linked to 'x'.
@@ -762,8 +762,8 @@ type Ybins() =
 
 type Histogram() =
 
-    let mutable _x: seq<key> option = None
-    let mutable _y: seq<value> option = None
+    let mutable _x: _ option = None
+    let mutable _y: _ option = None
     let mutable _histnorm: string option = None
     let mutable _histfunc: string option = None
     let mutable _name: string option = None
@@ -940,10 +940,11 @@ type Histogram() =
     member __.ShouldSerializetype() = not _type.IsNone
 
 type Box() =
+    inherit Trace()
 
-    let mutable _y: seq<value> option = None
+    let mutable _y: _ option = None
     let mutable _x0: float option = None
-    let mutable _x: seq<key> option = None
+    let mutable _x: _ option = None
     let mutable _name: string option = None
     let mutable _boxmean: string option = None
     let mutable _boxpoints: string option = None
@@ -1313,9 +1314,9 @@ type Colorbar() =
 
 type Heatmap() =
 
-    let mutable _z: float [,] option = None
-    let mutable _x: seq<key> option = None
-    let mutable _y: seq<value> option = None
+    let mutable _z: obj option = None
+    let mutable _x: _ option = None
+    let mutable _y: _ option = None
     let mutable _name: string option = None
     let mutable _zauto: string option = None
     let mutable _zmin: float option = None
@@ -1545,9 +1546,9 @@ type Contours() =
 
 type Contour() =
 
-    let mutable _z: float [,] option = None
-    let mutable _x: seq<key> option = None
-    let mutable _y: seq<value> option = None
+    let mutable _z: obj option = None
+    let mutable _x: _ option = None
+    let mutable _y: _ option = None
     let mutable _name: string option = None
     let mutable _zauto: string option = None
     let mutable _zmin: float option = None
@@ -1752,8 +1753,8 @@ type Contour() =
 
 type Histogram2d() =
 
-    let mutable _x: seq<key> option = None
-    let mutable _y: seq<value> option = None
+    let mutable _x: _ option = None
+    let mutable _y: _ option = None
     let mutable _histnorm: string option = None
     let mutable _histfunc: string option = None
     let mutable _name: string option = None
@@ -1952,8 +1953,8 @@ type Histogram2d() =
 
 type Histogram2dcontour() =
 
-    let mutable _x: seq<key> option = None
-    let mutable _y: seq<value> option = None
+    let mutable _x: _ option = None
+    let mutable _y: _ option = None
     let mutable _histnorm: string option = None
     let mutable _histfunc: string option = None
     let mutable _name: string option = None
@@ -2322,7 +2323,7 @@ type Radialaxis() =
 type Area() =
 
     let mutable _r: seq<float> option = None
-    let mutable _t: seq<value> option = None
+    let mutable _t: seq<_> option = None
     let mutable _name: string option = None
     let mutable _marker: Marker option = None
     let mutable _showlegend: string option = None
@@ -2397,9 +2398,9 @@ type Error_z() =
 
     let mutable _type: string option = None
     let mutable _symmetric: string option = None
-    let mutable _array: seq<value> option = None
+    let mutable _array: seq<_> option = None
     let mutable _value: float option = None
-    let mutable _arrayminus: seq<value> option = None
+    let mutable _arrayminus: seq<_> option = None
     let mutable _valueminus: float option = None
     let mutable _color: string option = None
     let mutable _thickness: float option = None
@@ -2476,9 +2477,9 @@ type Error_z() =
 
 type Scatter3d() =
 
-    let mutable _x: value [,] option = None
-    let mutable _y: value [,] option = None
-    let mutable _z: value [,] option = None
+    let mutable _x: obj option = None
+    let mutable _y: obj option = None
+    let mutable _z: obj option = None
     let mutable _mode: string option = None
     let mutable _name: string option = None
     let mutable _text: seq<string> option = None
@@ -2592,9 +2593,9 @@ type Scatter3d() =
 
 type Surface() =
 
-    let mutable _z: float [,] option = None
-    let mutable _x: value [,] option = None
-    let mutable _y: value [,] option = None
+    let mutable _z: obj option = None
+    let mutable _x: obj option = None
+    let mutable _y: obj option = None
     let mutable _name: string option = None
     let mutable _colorscale: string option = None
     let mutable _scene: string option = None

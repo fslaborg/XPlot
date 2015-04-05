@@ -132,19 +132,28 @@ module Site =
                         PlotlyDemo.New "PlotlyBasicBarChart" "Basic Bar Chart" "https://plot.ly/~TahaHachana/130"
                         PlotlyDemo.New "PlotlyGroupedBarChart" "Grouped Bar Chart" "https://plot.ly/~TahaHachana/145"
                         PlotlyDemo.New "PlotlyStackedBarChart" "Stacked Bar Chart" "https://plot.ly/~TahaHachana/146"
-                        PlotlyDemo.New "ColoredStyledBarChart" "Colored and Styled Bar Chart" "https://plot.ly/~TahaHachana/147"
-                        PlotlyDemo.New "BarChartHoverText" "Bar Chart with Hover Text" "https://plot.ly/~TahaHachana/148"
-                        PlotlyDemo.New "CustomizingIndividualBarColors" "Customizing Individual Bar Colors" "https://plot.ly/~TahaHachana/149"
+                        PlotlyDemo.New "PlotlyColoredStyledBarChart" "Colored and Styled Bar Chart" "https://plot.ly/~TahaHachana/147"
+                        PlotlyDemo.New "PlotlyBarChartHoverText" "Bar Chart with Hover Text" "https://plot.ly/~TahaHachana/148"
+                        PlotlyDemo.New "PlotlyCustomizingIndividualBarColors" "Customizing Individual Bar Colors" "https://plot.ly/~TahaHachana/149"
                     ]
                 plotlySitelet
                     "/chart/plotly-line-scatter-plots"
                     22
                     "Plotly Line and Scatter Plots"
                     [
-                        PlotlyDemo.New "BasicLinePlot" "Basic Line Plot" "https://plot.ly/~TahaHachana/173"
-                        PlotlyDemo.New "LineScatterPlot" "Line and Scatter Plot" "https://plot.ly/~TahaHachana/177"
-                        PlotlyDemo.New "ColoredStyledScatterPlot" "Colored and Styled Scatter Plot" "https://plot.ly/~TahaHachana/178"
-                        PlotlyDemo.New "LineShapeOptionsInterpolation" "Line Shape Options for Interpolation" "https://plot.ly/~TahaHachana/179"
+                        PlotlyDemo.New "PlotlyBasicLinePlot" "Basic Line Plot" "https://plot.ly/~TahaHachana/173"
+                        PlotlyDemo.New "PlotlyLineScatterPlot" "Line and Scatter Plot" "https://plot.ly/~TahaHachana/177"
+                        PlotlyDemo.New "PlotlyColoredStyledScatterPlot" "Colored and Styled Scatter Plot" "https://plot.ly/~TahaHachana/178"
+                        PlotlyDemo.New "PlotlyLineShapeOptionsInterpolation" "Line Shape Options for Interpolation" "https://plot.ly/~TahaHachana/179"
+                    ]
+                plotlySitelet
+                    "/chart/plotly-box-plots"
+                    23
+                    "Plotly Box Plots"
+                    [
+                        PlotlyDemo.New "PlotlyBasicBoxPlot" "Basic Box Plot" "https://plot.ly/~TahaHachana/206"
+                        PlotlyDemo.New "PlotlyBoxPlotDisplaysUnderlyingData" "Box Plot That Displays the Underlying Data" "https://plot.ly/~TahaHachana/207"
+                        PlotlyDemo.New "PlotlyGroupedBoxPlot" "Grouped Box Plot" "https://plot.ly/~TahaHachana/208"
                     ]
             ]
 
@@ -157,7 +166,7 @@ type Website() =
                 yield Home
                 yield GoogleCharts
                 yield Plotly
-                for x in 1 .. 22 -> Chart x
+                for x in 1 .. 23 -> Chart x
             ]
 
 [<assembly: Website(typeof<Website>)>]

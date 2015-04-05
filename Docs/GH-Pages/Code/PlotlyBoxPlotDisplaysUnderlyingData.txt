@@ -1,0 +1,23 @@
+﻿#r """../packages/Http.fs.1.5.1/lib/net40/HttpClient.dll"""
+#r """../packages/XPlot.Plotly.0.3.0/Lib/Net45/XPlot.Plotly.dll"""
+
+open XPlot.Plotly
+
+Plotly.Signin("Username", "API Key")
+
+let trace =
+    Box(
+        y = [0; 1; 1; 2; 3; 5; 8; 13; 21],
+        boxpoints = "all",
+        jitter = 0.3,
+        pointpos = -1.8
+    )
+
+let data = Data [trace]
+
+let figure = Figure(data)
+
+let plotlyResponse = figure.Plot("Box Plot That Displays the Underlying Data")
+
+figure.Show()
+
