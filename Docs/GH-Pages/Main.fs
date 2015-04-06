@@ -162,6 +162,14 @@ module Site =
                     [
                         PlotlyDemo.New "PlotlyBubbleChart" "Marker Size, Color, and Symbol as an Array" "https://plot.ly/~TahaHachana/226"
                     ]
+                plotlySitelet
+                    "/chart/plotly-contour-plots"
+                    25
+                    "Plotly Contour Plots"
+                    [
+                        PlotlyDemo.New "PlotlyBasicContourPlot" "Basic Contour Plot" "https://plot.ly/~TahaHachana/268"
+                        PlotlyDemo.New "2DHistogramContourPlotHistogramSubplots" "2D Histogram Contour Plot with Histogram Subplots" "https://plot.ly/~TahaHachana/269"
+                    ]
             ]
 
 [<Sealed>]
@@ -173,7 +181,7 @@ type Website() =
                 yield Home
                 yield GoogleCharts
                 yield Plotly
-                for x in 1 .. 24 -> Chart x
+                for x in 1 .. 25 -> Chart x
             ]
 
 [<assembly: Website(typeof<Website>)>]

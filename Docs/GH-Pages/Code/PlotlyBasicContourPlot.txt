@@ -1,0 +1,36 @@
+﻿#r """../packages/Http.fs.1.5.1/lib/net40/HttpClient.dll"""
+#r """../packages/XPlot.Plotly.0.5.0/Lib/Net45/XPlot.Plotly.dll"""
+#r """../packages/MathNet.Numerics.3.6.0/lib/net40/MathNet.Numerics.dll"""
+
+open MathNet.Numerics
+open System
+open XPlot.Plotly
+
+Plotly.Signin("Username", "API Key")
+
+let size = 100
+
+let x = Generate.LinearSpaced(size, -2. * Math.PI, 2. * Math.PI)
+let y = Generate.LinearSpaced(size, -2. * Math.PI, 2. * Math.PI)
+let z = Array2D.create size size 0.
+
+for i in 0 .. 99 do
+    for j in 0 .. 99 do
+        let r2 = x.[i] ** 2. + y.[j] ** 2.
+        z.[i,j] <- sin x.[i] * cos y.[j] * sin r2 / log(r2 + 1.)
+
+let trace =
+    Contour(
+        z = z,
+        x = x,
+        y = y
+    )
+
+let data = Data [trace]
+
+let figure = Figure(data)
+
+let plotlyResponse = figure.Plot("Basic Contour Plot")
+
+figure.Show()
+
