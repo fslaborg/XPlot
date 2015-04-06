@@ -155,6 +155,13 @@ module Site =
                         PlotlyDemo.New "PlotlyBoxPlotDisplaysUnderlyingData" "Box Plot That Displays the Underlying Data" "https://plot.ly/~TahaHachana/207"
                         PlotlyDemo.New "PlotlyGroupedBoxPlot" "Grouped Box Plot" "https://plot.ly/~TahaHachana/208"
                     ]
+                plotlySitelet
+                    "/chart/plotly-bubble-charts"
+                    24
+                    "Plotly Bubble Charts"
+                    [
+                        PlotlyDemo.New "PlotlyBubbleChart" "Marker Size, Color, and Symbol as an Array" "https://plot.ly/~TahaHachana/226"
+                    ]
             ]
 
 [<Sealed>]
@@ -166,7 +173,7 @@ type Website() =
                 yield Home
                 yield GoogleCharts
                 yield Plotly
-                for x in 1 .. 23 -> Chart x
+                for x in 1 .. 24 -> Chart x
             ]
 
 [<assembly: Website(typeof<Website>)>]

@@ -53,7 +53,11 @@
     <Compile Include="Graph.fs" />
     <Compile Include="ChartWindow.fs" />
     <Compile Include="Main.fs" />
-    <None Include="Tests.fsx" />
+    <None Include="Credentials.fsx" />
+    <None Include="BarTests.fsx" />
+    <None Include="LineScatterTests.fsx" />
+    <None Include="BoxPlotsTests.fsx" />
+    <None Include="ContourPlotsTests.fsx" />
     <Content Include="app.config" />
     <None Include="Graph.json" />
     <None Include="Graph.fsx" />
@@ -66,6 +70,10 @@
   <ItemGroup>
     <Reference Include="HttpClient">
       <HintPath>..\packages\Http.fs.1.5.1\lib\net40\HttpClient.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MathNet.Numerics">
+      <HintPath>..\packages\MathNet.Numerics.3.6.0\lib\net40\MathNet.Numerics.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="mscorlib" />

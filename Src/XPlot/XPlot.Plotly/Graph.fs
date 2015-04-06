@@ -189,8 +189,8 @@ type Error_x() =
 
 type Line() =
 
-    let mutable _color: string option = None
-    let mutable _width: float option = None
+    let mutable _color: obj option = None
+    let mutable _width: obj option = None
     let mutable _dash: string option = None
     let mutable _opacity: float option = None
     let mutable _shape: string option = None
@@ -251,7 +251,7 @@ type Marker() =
 
     let mutable _color: obj option = None
     let mutable _size: obj option = None
-    let mutable _symbol: string option = None
+    let mutable _symbol: obj option = None
     let mutable _line: Line option = None
     let mutable _opacity: obj option = None
     let mutable _sizeref: float option = None
@@ -761,6 +761,7 @@ type Ybins() =
     member __.ShouldSerializesize() = not _size.IsNone
 
 type Histogram() =
+    inherit Trace()
 
     let mutable _x: _ option = None
     let mutable _y: _ option = None
@@ -1545,8 +1546,9 @@ type Contours() =
     member __.ShouldSerializecoloring() = not _coloring.IsNone
 
 type Contour() =
+    inherit Trace()
 
-    let mutable _z: obj option = None
+    let mutable _z: _ option = None
     let mutable _x: _ option = None
     let mutable _y: _ option = None
     let mutable _name: string option = None
@@ -1752,6 +1754,7 @@ type Contour() =
     member __.ShouldSerializetype() = not _type.IsNone
 
 type Histogram2d() =
+    inherit Trace()
 
     let mutable _x: _ option = None
     let mutable _y: _ option = None
@@ -1951,7 +1954,8 @@ type Histogram2d() =
     member __.ShouldSerializeysrc() = not _ysrc.IsNone
     member __.ShouldSerializetype() = not _type.IsNone
 
-type Histogram2dcontour() =
+type Histogram2dContour() =
+    inherit Trace()
 
     let mutable _x: _ option = None
     let mutable _y: _ option = None
@@ -1969,8 +1973,8 @@ type Histogram2dcontour() =
     let mutable _contours: Contours option = None
     let mutable _line: Line option = None
     let mutable _colorscale: string option = None
-    let mutable _reversescale: string option = None
-    let mutable _showscale: string option = None
+    let mutable _reversescale: bool option = None
+    let mutable _showscale: bool option = None
     let mutable _colorbar: Colorbar option = None
     let mutable _zauto: string option = None
     let mutable _zmin: float option = None
@@ -3826,11 +3830,16 @@ type Layout() =
     let mutable _titlefont: Font option = None
     let mutable _font: Font option = None
     let mutable _showlegend: bool option = None
-    let mutable _autosize: string option = None
+    let mutable _autosize: bool option = None
     let mutable _width: float option = None
     let mutable _height: float option = None
     let mutable _xaxis: Xaxis option = None
     let mutable _yaxis: Yaxis option = None
+    
+    // Not in the graph reference?
+    let mutable _xaxis2: Xaxis option = None
+    let mutable _yaxis2: Yaxis option = None
+
     let mutable _legend: Legend option = None
     let mutable _annotations: Annotation [] option = None
     let mutable _margin: Margin option = None
@@ -3897,6 +3906,16 @@ type Layout() =
     member __.yaxis
         with get () = Option.get _yaxis
         and set value = _yaxis <- Some value
+
+    /// Links a dictionary describing an x-axis (i.e. an horizontal axis). The first xaxis object can be entered into 'layout' by linking it to 'xaxis' OR 'xaxis1', both keys are identical to Plotly.  To create references other than x-axes, you need to define them in 'layout' using keys 'xaxis2', 'xaxis3' and so on. Note that in 3D plots, xaxis objects must be linked from a scene object.
+    member __.xaxis2
+        with get () = Option.get _xaxis2
+        and set value = _xaxis2 <- Some value
+
+    /// Links a dictionary describing an y-axis (i.e. an vertical axis). The first yaxis object can be entered into 'layout' by linking it to 'yaxis' OR 'yaxis1', both keys are identical to Plotly.  To create references other than y-axes, you need to define them in 'layout' using keys 'yaxis2', 'yaxis3' and so on. Note that in 3D plots, yaxis objects must be linked from a scene object.
+    member __.yaxis2
+        with get () = Option.get _yaxis2
+        and set value = _yaxis2 <- Some value
 
     /// Links a dictionary containing the legend parameters for this figure.
     member __.legend
@@ -4012,6 +4031,10 @@ type Layout() =
     member __.ShouldSerializeheight() = not _height.IsNone
     member __.ShouldSerializexaxis() = not _xaxis.IsNone
     member __.ShouldSerializeyaxis() = not _yaxis.IsNone
+
+    member __.ShouldSerializexaxis2() = not _xaxis.IsNone
+    member __.ShouldSerializeyaxis2() = not _yaxis.IsNone
+
     member __.ShouldSerializelegend() = not _legend.IsNone
     member __.ShouldSerializeannotations() = not _annotations.IsNone
     member __.ShouldSerializemargin() = not _margin.IsNone
