@@ -170,6 +170,13 @@ module Site =
                         PlotlyDemo.New "PlotlyBasicContourPlot" "Basic Contour Plot" "https://plot.ly/~TahaHachana/268"
                         PlotlyDemo.New "2DHistogramContourPlotHistogramSubplots" "2D Histogram Contour Plot with Histogram Subplots" "https://plot.ly/~TahaHachana/269"
                     ]
+                plotlySitelet
+                    "/chart/plotly-area-plots"
+                    26
+                    "Plotly Area Plots"
+                    [
+                        PlotlyDemo.New "PlotlyBasicArea" "Basic Overlaid Area Chart" "https://plot.ly/~TahaHachana/289"
+                    ]
             ]
 
 [<Sealed>]
@@ -181,7 +188,7 @@ type Website() =
                 yield Home
                 yield GoogleCharts
                 yield Plotly
-                for x in 1 .. 25 -> Chart x
+                for x in 1 .. 26 -> Chart x
             ]
 
 [<assembly: Website(typeof<Website>)>]
