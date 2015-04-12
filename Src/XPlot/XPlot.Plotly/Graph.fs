@@ -18,10 +18,10 @@ type Trace() = do ()
 //        with get() = yField.Value
 //        and set(value: seq<value>) = yField <- Some value
 
-type Error_y() =
+type ErrorY() =
 
     let mutable _type: string option = None
-    let mutable _symmetric: string option = None
+    let mutable _symmetric: bool option = None
     let mutable _array: seq<_> option = None
     let mutable _value: float option = None
     let mutable _arrayminus: seq<_> option = None
@@ -30,7 +30,7 @@ type Error_y() =
     let mutable _thickness: float option = None
     let mutable _width: float option = None
     let mutable _opacity: float option = None
-    let mutable _visible: string option = None
+    let mutable _visible: bool option = None
 
     /// Specify how the 'value' or 'array' key in this error bar will be used to render the bars. Using 'data' will set error bar lengths to the actual numbers specified in 'array'.  Using 'percent' will set bar lengths to the percent of error associated with 'value'. Using 'constant' will set each error bar length to the single value specified in 'value'. Using 'sqrt' will set each error bar length to the square root of the x data at each point ('value' and 'array' do not apply).
     member __.``type``
@@ -99,10 +99,10 @@ type Error_y() =
     member __.ShouldSerializeopacity() = not _opacity.IsNone
     member __.ShouldSerializevisible() = not _visible.IsNone
 
-type Error_x() =
+type ErrorX() =
 
     let mutable _type: string option = None
-    let mutable _symmetric: string option = None
+    let mutable _symmetric: bool option = None
     let mutable _array: seq<_> option = None
     let mutable _value: float option = None
     let mutable _arrayminus: seq<_> option = None
@@ -112,7 +112,7 @@ type Error_x() =
     let mutable _width: float option = None
     let mutable _opacity: float option = None
     let mutable _copy_ystyle: string option = None
-    let mutable _visible: string option = None
+    let mutable _visible: bool option = None
 
     /// Specify how the 'value' or 'array' key in this error bar will be used to render the bars. Using 'data' will set error bar lengths to the actual numbers specified in 'array'.  Using 'percent' will set bar lengths to the percent of error associated with 'value'. Using 'constant' will set each error bar length to the single value specified in 'value'. Using 'sqrt' will set each error bar length to the square root of the x data at each point ('value' and 'array' do not apply).
     member __.``type``
@@ -402,8 +402,8 @@ type Scatter() =
     let mutable _mode: string option = None
     let mutable _name: string option = None
     let mutable _text: seq<string> option = None
-    let mutable _error_y: Error_y option = None
-    let mutable _error_x: Error_x option = None
+    let mutable _error_y: ErrorY option = None
+    let mutable _error_x: ErrorX option = None
     let mutable _marker: Marker option = None
     let mutable _line: Line option = None
     let mutable _textposition: string option = None
@@ -580,8 +580,8 @@ type Bar() =
     let mutable _name: string option = None
     let mutable _orientation: string option = None
     let mutable _text: seq<string> option = None
-    let mutable _error_y: Error_y option = None
-    let mutable _error_x: Error_x option = None
+    let mutable _error_y: ErrorY option = None
+    let mutable _error_x: ErrorX option = None
     let mutable _marker: Marker option = None
     let mutable _opacity: float option = None
     let mutable _xaxis: string option = None
@@ -776,8 +776,8 @@ type Histogram() =
     let mutable _nbinsy: float option = None
     let mutable _ybins: Ybins option = None
     let mutable _text: seq<string> option = None
-    let mutable _error_y: Error_y option = None
-    let mutable _error_x: Error_x option = None
+    let mutable _error_y: ErrorY option = None
+    let mutable _error_x: ErrorX option = None
     let mutable _marker: Marker option = None
     let mutable _opacity: float option = None
     let mutable _xaxis: string option = None
@@ -2488,8 +2488,8 @@ type Scatter3d() =
     let mutable _name: string option = None
     let mutable _text: seq<string> option = None
     let mutable _error_z: Error_z option = None
-    let mutable _error_y: Error_y option = None
-    let mutable _error_x: Error_x option = None
+    let mutable _error_y: ErrorY option = None
+    let mutable _error_x: ErrorX option = None
     let mutable _marker: Marker option = None
     let mutable _line: Line option = None
     let mutable _textposition: string option = None
@@ -2662,7 +2662,7 @@ type Surface() =
     member __.ShouldSerializevisible() = not _visible.IsNone
     member __.ShouldSerializetype() = not _type.IsNone
 
-type Xaxis() =
+type XAxis() =
 
     let mutable _title: string option = None
     let mutable _titlefont: Font option = None
@@ -2939,7 +2939,7 @@ type Xaxis() =
     member __.ShouldSerializespikesides() = not _spikesides.IsNone
     member __.ShouldSerializespikethickness() = not _spikethickness.IsNone
 
-type Yaxis() =
+type YAxis() =
 
     let mutable _title: string option = None
     let mutable _titlefont: Font option = None
@@ -3495,8 +3495,8 @@ type Zaxis() =
 
 type Scene() =
 
-    let mutable _xaxis: Xaxis option = None
-    let mutable _yaxis: Yaxis option = None
+    let mutable _xaxis: XAxis option = None
+    let mutable _yaxis: YAxis option = None
     let mutable _zaxis: Zaxis option = None
     let mutable _cameraposition: float [] [] option = None
     let mutable _domain: string option option = None
@@ -3833,12 +3833,12 @@ type Layout() =
     let mutable _autosize: bool option = None
     let mutable _width: float option = None
     let mutable _height: float option = None
-    let mutable _xaxis: Xaxis option = None
-    let mutable _yaxis: Yaxis option = None
+    let mutable _xaxis: XAxis option = None
+    let mutable _yaxis: YAxis option = None
     
     // Not in the graph reference?
-    let mutable _xaxis2: Xaxis option = None
-    let mutable _yaxis2: Yaxis option = None
+    let mutable _xaxis2: XAxis option = None
+    let mutable _yaxis2: YAxis option = None
 
     let mutable _legend: Legend option = None
     let mutable _annotations: Annotation [] option = None

@@ -1,0 +1,43 @@
+﻿#r """../packages/Http.fs.1.5.1/lib/net40/HttpClient.dll"""
+#r """../packages/XPlot.Plotly.0.6.0/Lib/Net45/XPlot.Plotly.dll"""
+
+open XPlot.Plotly
+
+Plotly.Signin("Username", "API Key")
+
+let trace1 =
+    Bar(
+        x = ["Trial 1"; "Trial 2"; "Trial 3"],
+        y = [3; 6; 4],
+        name = "Control",
+        error_y=
+            ErrorY(
+                ``type`` = "data",
+                array = [1; 0.5; 1.5],
+                visible = true
+            )
+    )
+    
+let trace2 =
+    Bar(
+        x = ["Trial 1"; "Trial 2"; "Trial 3"],
+        y = [4; 7; 3],
+        name = "Experimental",
+        error_y =
+            ErrorY(
+                ``type`` = "data",
+                array = [0.5; 1; 2],
+                visible = true
+            )
+    )
+
+let data = Data([trace1; trace2])
+
+let layout = Layout(barmode = "group")
+
+let figure = Figure(data, layout)
+
+let plotlyResponse = figure.Plot("Bar Chart with Error Bars")
+
+figure.Show()
+

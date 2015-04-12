@@ -1,0 +1,29 @@
+﻿#r """../packages/Http.fs.1.5.1/lib/net40/HttpClient.dll"""
+#r """../packages/XPlot.Plotly.0.6.0/Lib/Net45/XPlot.Plotly.dll"""
+
+open XPlot.Plotly
+
+Plotly.Signin("Username", "API Key")
+
+let data =
+    Data(
+        [
+            Scatter(
+                x = [1; 2; 3; 4],
+                y = [2; 1; 3; 4],
+                error_y =
+                    ErrorY(
+                        ``type`` = "percent",
+                        symmetric = false,
+                        value = 15.,
+                        valueminus = 25.
+                    )
+            )
+        ]
+    )
+
+let figure = Figure(data)
+
+let plotlyResponse = figure.Plot("Asymmetric Error Bars with a Constant Offset")
+
+figure.Show()

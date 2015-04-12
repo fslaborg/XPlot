@@ -1,0 +1,29 @@
+﻿#r """../packages/Http.fs.1.5.1/lib/net40/HttpClient.dll"""
+#r """../packages/XPlot.Plotly.0.6.0/Lib/Net45/XPlot.Plotly.dll"""
+
+open XPlot.Plotly
+
+Plotly.Signin("Username", "API Key")
+
+let data =
+    Data(
+        [
+            Scatter(
+                x = [0; 1; 2],
+                y = [6; 10; 2],
+                error_y =
+                    ErrorY(
+                        ``type`` = "percent",
+                        value = 50.,
+                        visible = true
+                    )
+            )
+        ]
+    )
+
+let figure = Figure(data)
+
+let plotlyResponse = figure.Plot("Error Bars as a Percentage of the y-Value")
+
+figure.Show()
+

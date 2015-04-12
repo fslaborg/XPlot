@@ -177,6 +177,19 @@ module Site =
                     [
                         PlotlyDemo.New "PlotlyBasicArea" "Basic Overlaid Area Chart" "https://plot.ly/~TahaHachana/289"
                     ]
+                plotlySitelet
+                    "/chart/plotly-error-bars"
+                    27
+                    "Plotly Error Bars"
+                    [
+                        PlotlyDemo.New "PlotlyBasicSymmetricErrorBars" "Basic Symmetric Error Bars" "https://plot.ly/~TahaHachana/312"
+                        PlotlyDemo.New "PlotlyBarChartErrorBars" "Bar Chart with Error Bars" "https://plot.ly/~TahaHachana/319"
+                        PlotlyDemo.New "PlotlyHorizontalErrorBars" "Horizontal Error Bars" "https://plot.ly/~TahaHachana/320"
+                        PlotlyDemo.New "PlotlyAsymmetricErrorBars" "Asymmetric Error Bars" "https://plot.ly/~TahaHachana/321"
+                        PlotlyDemo.New "PlotlyColoredStyledErrorBars" "Colored and Styled Error Bars" "https://plot.ly/~TahaHachana/323"
+                        PlotlyDemo.New "PlotlyErrorBarsPercentageYValue" "Error Bars as a Percentage of the y-Value" "https://plot.ly/~TahaHachana/326"
+                        PlotlyDemo.New "PlotlyAsymmetricErrorBarsConstantOffset" "Asymmetric Error Bars with a Constant Offset" "https://plot.ly/~TahaHachana/327"
+                    ]
             ]
 
 [<Sealed>]
@@ -188,7 +201,7 @@ type Website() =
                 yield Home
                 yield GoogleCharts
                 yield Plotly
-                for x in 1 .. 26 -> Chart x
+                for x in 1 .. 27 -> Chart x
             ]
 
 [<assembly: Website(typeof<Website>)>]
