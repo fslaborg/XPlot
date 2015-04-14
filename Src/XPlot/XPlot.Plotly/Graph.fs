@@ -1314,15 +1314,16 @@ type Colorbar() =
     member __.ShouldSerializeypad() = not _ypad.IsNone
 
 type Heatmap() =
+    inherit Trace()
 
-    let mutable _z: obj option = None
+    let mutable _z: _ option = None
     let mutable _x: _ option = None
     let mutable _y: _ option = None
     let mutable _name: string option = None
     let mutable _zauto: string option = None
     let mutable _zmin: float option = None
     let mutable _zmax: float option = None
-    let mutable _colorscale: string option = None
+    let mutable _colorscale: _ option = None
     let mutable _reversescale: string option = None
     let mutable _showscale: string option = None
     let mutable _colorbar: Colorbar option = None

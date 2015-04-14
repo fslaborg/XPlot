@@ -190,6 +190,18 @@ module Site =
                         PlotlyDemo.New "PlotlyErrorBarsPercentageYValue" "Error Bars as a Percentage of the y-Value" "https://plot.ly/~TahaHachana/326"
                         PlotlyDemo.New "PlotlyAsymmetricErrorBarsConstantOffset" "Asymmetric Error Bars with a Constant Offset" "https://plot.ly/~TahaHachana/327"
                     ]
+                plotlySitelet
+                    "/chart/plotly-heatmaps"
+                    28
+                    "Plotly Heatmaps"
+                    [
+                        PlotlyDemo.New "PlotlyBasicHeatmap" "Basic Heatmap" "https://plot.ly/~TahaHachana/365"
+                        PlotlyDemo.New "PlotlyHeatmapCategoricalAxisLabels" "Heatmap with Categorical Axis Labels" "https://plot.ly/~TahaHachana/369"
+                        PlotlyDemo.New "PlotlyCustomColorscale" "Custom Colorscale" "https://plot.ly/~TahaHachana/370"
+                        PlotlyDemo.New "PlotlyEarthColorscale" "Earth Colorscale" "https://plot.ly/~TahaHachana/371"
+                        PlotlyDemo.New "PlotlyYIGnBuColorscale" "YIGnBu Colorscale" "https://plot.ly/~TahaHachana/372"
+                    ]
+
             ]
 
 [<Sealed>]
@@ -201,7 +213,7 @@ type Website() =
                 yield Home
                 yield GoogleCharts
                 yield Plotly
-                for x in 1 .. 27 -> Chart x
+                for x in 1 .. 28 -> Chart x
             ]
 
 [<assembly: Website(typeof<Website>)>]

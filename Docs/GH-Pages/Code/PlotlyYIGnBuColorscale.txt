@@ -1,0 +1,31 @@
+﻿#r """../packages/Http.fs.1.5.1/lib/net40/HttpClient.dll"""
+#r """../packages/XPlot.Plotly.0.7.0/Lib/Net45/XPlot.Plotly.dll"""
+
+open XPlot.Plotly
+
+Plotly.Signin("Username", "API Key")
+
+let z =
+    [
+        for x in 1 .. 50 ->
+            List.map (fun y -> y + x) [1..50]
+    ]
+
+let data =
+    Data(
+        [
+            Heatmap(
+                z = z,
+                colorscale = "YIGnBu"
+            )
+        ]
+    )
+
+let layout = Layout(title = "YIGnBu")
+
+let figure = Figure(data, layout)
+
+let plotlyResponse = figure.Plot("YIGnBu Colorscale")
+    
+figure.Show()
+
