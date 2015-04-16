@@ -212,6 +212,15 @@ module Site =
                         PlotlyDemo.New "PlotlyStackedHistograms" "Stacked Histograms" "https://plot.ly/~TahaHachana/394"
                         PlotlyDemo.New "PlotlyColoredStyledHistograms" "Colored and Styled Histograms" "https://plot.ly/~TahaHachana/395"
                     ]
+                plotlySitelet
+                    "/chart/plotly-2d-histograms"
+                    30
+                    "Plotly 2D Histograms"
+                    [
+                        PlotlyDemo.New "PlotlyHistogram2DBivariate" "2D Histogram of a Bivariate Normal Distribution" "https://plot.ly/~TahaHachana/411"
+                        PlotlyDemo.New "Plotly2DHistogramBinningStyling" "2D Histogram Binning and Styling Options" "https://plot.ly/~TahaHachana/414"
+                        PlotlyDemo.New "Plotly2DHistogramOverlaidScatter" "2D Histogram Overlaid with a Scatter Chart" "https://plot.ly/~TahaHachana/415"
+                    ]
             ]
 
 [<Sealed>]
@@ -223,7 +232,7 @@ type Website() =
                 yield Home
                 yield GoogleCharts
                 yield Plotly
-                for x in 1 .. 29 -> Chart x
+                for x in 1 .. 30 -> Chart x
             ]
 
 [<assembly: Website(typeof<Website>)>]

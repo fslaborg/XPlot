@@ -2,9 +2,7 @@
 #r @"..\packages\MathNet.Numerics.3.6.0\lib\net40\MathNet.Numerics.dll"
 #load "Credentials.fsx"
 
-open MathNet.Numerics
 open MathNet.Numerics.Distributions
-open System
 open XPlot.Plotly
 
 Plotly.Signin(Credentials.username, Credentials.key)

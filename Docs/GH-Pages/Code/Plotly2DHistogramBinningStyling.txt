@@ -1,0 +1,58 @@
+﻿#r """../packages/Http.fs.1.5.1/lib/net40/HttpClient.dll"""
+#r """../packages/XPlot.Plotly.0.9.0/Lib/Net45/XPlot.Plotly.dll"""
+#r """../packages/MathNet.Numerics.3.6.0/lib/net40/MathNet.Numerics.dll"""
+
+open MathNet.Numerics.Distributions
+open XPlot.Plotly
+
+Plotly.Signin("Username", "API Key")
+
+let normal = new Normal(0., 1.0)
+
+let x =
+    normal.Samples()
+    |> Seq.take 500
+
+let y =
+    normal.Samples()
+    |> Seq.take 500
+    |> Seq.map (fun x -> x + 1.)
+
+let data =
+    Data(
+        [
+            Histogram2d(
+                x = x,
+                y = y,
+                histnorm = "probability",
+                autobinx = false,
+                xbins =
+                    XBins(
+                        start = -3.,
+                        ``end`` = 3.,
+                        size = 0.1
+                    ),
+                autobiny = false,
+                ybins =
+                    YBins(
+                        start = -2.5,
+                        ``end`` = 4.,
+                        size = 0.1
+                    ),
+                colorscale =
+                    [
+                        [box 0; box "rgb(12,51,131)"]
+                        [0.25; "rgb(10,136,186)"]
+                        [0.5; "rgb(242,211,56)"]
+                        [0.75; "rgb(242,143,56)"]
+                        [1; "rgb(217,30,30)"]
+                    ]
+            )
+        ]
+    )
+
+let figure = Figure(data)
+
+let plotlyResponse = figure.Plot("2D Histogram Binning and Styling Options")
+
+figure.Show()
