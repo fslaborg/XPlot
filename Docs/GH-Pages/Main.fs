@@ -201,7 +201,17 @@ module Site =
                         PlotlyDemo.New "PlotlyEarthColorscale" "Earth Colorscale" "https://plot.ly/~TahaHachana/371"
                         PlotlyDemo.New "PlotlyYIGnBuColorscale" "YIGnBu Colorscale" "https://plot.ly/~TahaHachana/372"
                     ]
-
+                plotlySitelet
+                    "/chart/plotly-histograms"
+                    29
+                    "Plotly Histograms"
+                    [
+                        PlotlyDemo.New "PlotlyBasicHistogram" "Basic Histogram" "https://plot.ly/~TahaHachana/388"
+                        PlotlyDemo.New "PlotlyHorizontalHistogram" "Horizontal Histogram" "https://plot.ly/~TahaHachana/389"
+                        PlotlyDemo.New "PlotlyOverlaidHistogram" "Overlaid Histogram" "https://plot.ly/~TahaHachana/390"
+                        PlotlyDemo.New "PlotlyStackedHistograms" "Stacked Histograms" "https://plot.ly/~TahaHachana/394"
+                        PlotlyDemo.New "PlotlyColoredStyledHistograms" "Colored and Styled Histograms" "https://plot.ly/~TahaHachana/395"
+                    ]
             ]
 
 [<Sealed>]
@@ -213,7 +223,7 @@ type Website() =
                 yield Home
                 yield GoogleCharts
                 yield Plotly
-                for x in 1 .. 28 -> Chart x
+                for x in 1 .. 29 -> Chart x
             ]
 
 [<assembly: Website(typeof<Website>)>]

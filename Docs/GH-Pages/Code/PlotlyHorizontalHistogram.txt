@@ -1,0 +1,23 @@
+﻿#r """../packages/Http.fs.1.5.1/lib/net40/HttpClient.dll"""
+#r """../packages/XPlot.Plotly.0.8.0/Lib/Net45/XPlot.Plotly.dll"""
+#r """../packages/MathNet.Numerics.3.6.0/lib/net40/MathNet.Numerics.dll"""
+
+open MathNet.Numerics.Distributions
+open XPlot.Plotly
+
+Plotly.Signin("Username", "API Key")
+
+let normal = new Normal(0., 1.0)
+
+let y =
+    normal.Samples()
+    |> Seq.take 500
+    |> Seq.toArray
+
+let data = Data([Histogram(y = y)])
+
+let figure = Figure(data)
+
+let plotlyResponse = figure.Plot("Horizontal Histogram")
+
+figure.Show()

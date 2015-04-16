@@ -710,7 +710,7 @@ type Bar() =
     member __.ShouldSerializet() = not _t.IsNone
     member __.ShouldSerializetype() = not _type.IsNone
 
-type Xbins() =
+type XBins() =
 
     let mutable _start: float option = None
     let mutable _end: float option = None
@@ -735,7 +735,7 @@ type Xbins() =
     member __.ShouldSerializeend() = not _end.IsNone
     member __.ShouldSerializesize() = not _size.IsNone
 
-type Ybins() =
+type YBins() =
 
     let mutable _start: float option = None
     let mutable _end: float option = None
@@ -769,12 +769,12 @@ type Histogram() =
     let mutable _histfunc: string option = None
     let mutable _name: string option = None
     let mutable _orientation: string option = None
-    let mutable _autobinx: string option = None
+    let mutable _autobinx: bool option = None
     let mutable _nbinsx: float option = None
-    let mutable _xbins: Xbins option = None
+    let mutable _xbins: XBins option = None
     let mutable _autobiny: string option = None
     let mutable _nbinsy: float option = None
-    let mutable _ybins: Ybins option = None
+    let mutable _ybins: YBins option = None
     let mutable _text: seq<string> option = None
     let mutable _error_y: ErrorY option = None
     let mutable _error_x: ErrorX option = None
@@ -1764,10 +1764,10 @@ type Histogram2d() =
     let mutable _name: string option = None
     let mutable _autobinx: string option = None
     let mutable _nbinsx: float option = None
-    let mutable _xbins: Xbins option = None
+    let mutable _xbins: XBins option = None
     let mutable _autobiny: string option = None
     let mutable _nbinsy: float option = None
-    let mutable _ybins: Ybins option = None
+    let mutable _ybins: YBins option = None
     let mutable _colorscale: string option = None
     let mutable _reversescale: string option = None
     let mutable _showscale: string option = None
@@ -1965,10 +1965,10 @@ type Histogram2dContour() =
     let mutable _name: string option = None
     let mutable _autobinx: string option = None
     let mutable _nbinsx: float option = None
-    let mutable _xbins: Xbins option = None
+    let mutable _xbins: XBins option = None
     let mutable _autobiny: string option = None
     let mutable _nbinsy: float option = None
-    let mutable _ybins: Ybins option = None
+    let mutable _ybins: YBins option = None
     let mutable _autocontour: string option = None
     let mutable _ncontours: float option = None
     let mutable _contours: Contours option = None
@@ -3837,7 +3837,6 @@ type Layout() =
     let mutable _xaxis: XAxis option = None
     let mutable _yaxis: YAxis option = None
     
-    // Not in the graph reference?
     let mutable _xaxis2: XAxis option = None
     let mutable _yaxis2: YAxis option = None
 
@@ -4033,8 +4032,8 @@ type Layout() =
     member __.ShouldSerializexaxis() = not _xaxis.IsNone
     member __.ShouldSerializeyaxis() = not _yaxis.IsNone
 
-    member __.ShouldSerializexaxis2() = not _xaxis.IsNone
-    member __.ShouldSerializeyaxis2() = not _yaxis.IsNone
+    member __.ShouldSerializexaxis2() = not _xaxis2.IsNone
+    member __.ShouldSerializeyaxis2() = not _yaxis2.IsNone
 
     member __.ShouldSerializelegend() = not _legend.IsNone
     member __.ShouldSerializeannotations() = not _annotations.IsNone
