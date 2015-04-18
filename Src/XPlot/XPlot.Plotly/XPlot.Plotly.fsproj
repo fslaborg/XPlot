@@ -51,26 +51,12 @@
   <Import Project="$(FSharpTargetsPath)" />
   <ItemGroup>
     <Compile Include="Graph.fs" />
-    <Compile Include="ChartWindow.fs" />
     <Compile Include="Main.fs" />
-    <None Include="Credentials.fsx" />
-    <None Include="BarTests.fsx" />
-    <None Include="LineScatterTests.fsx" />
-    <None Include="BoxPlotsTests.fsx" />
-    <None Include="ContourPlotsTests.fsx" />
-    <None Include="AreaPlotsTests.fsx" />
-    <None Include="ErrorBarsTests.fsx" />
-    <None Include="HeatmapsTests.fsx" />
-    <None Include="HistogramsTests.fsx" />
-    <None Include="Histograms2DTests.fsx" />
     <Content Include="app.config" />
     <None Include="Graph.json" />
     <None Include="Graph.fsx" />
     <Content Include="Graph.txt" />
     <Content Include="packages.config" />
-    <Resource Include="XPlot.ico">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="HttpClient">
@@ -89,13 +75,9 @@
       <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Numerics" />
-    <Reference Include="System.Xaml" />
-    <Reference Include="WindowsBase" />
   </ItemGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

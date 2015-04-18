@@ -1,4 +1,5 @@
-﻿#r """./bin/Release/XPlot.GoogleCharts.dll"""
+﻿#r """./bin/Debug/XPlot.GoogleCharts.dll"""
+#r """./bin/Debug/XPlot.GoogleCharts.WPF.dll"""
 
 open System
 open XPlot.GoogleCharts
