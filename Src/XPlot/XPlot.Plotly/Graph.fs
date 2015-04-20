@@ -2482,6 +2482,7 @@ type Error_z() =
     member __.ShouldSerializevisible() = not _visible.IsNone
 
 type Scatter3d() =
+    inherit Trace()
 
     let mutable _x: obj option = None
     let mutable _y: obj option = None
