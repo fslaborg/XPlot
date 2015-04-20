@@ -16,6 +16,10 @@ NuGet
 
 * [Google Charts](http://www.nuget.org/packages/XPlot.GoogleCharts/)
 
+* [Deedle Helpers for Google Charts](http://www.nuget.org/packages/XPlot.GoogleCharts.Deedle/)
+
+* [Plotly](http://www.nuget.org/packages/XPlot.Plotly/)
+
 Contact
 -------
 

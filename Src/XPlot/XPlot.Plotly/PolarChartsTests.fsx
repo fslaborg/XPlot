@@ -1,4 +1,5 @@
 ﻿#r """.\.\bin\Release\XPlot.Plotly.dll"""
+#r """..\XPlot.Plotly.WPF\bin\Release\XPlot.Plotly.WPF.dll"""
 #r """..\packages\MathNet.Numerics.3.6.0\lib\net40\MathNet.Numerics.dll"""
 #load "Credentials.fsx"
 
