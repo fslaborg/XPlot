@@ -2177,7 +2177,7 @@ type Histogram2dContour() =
     member __.ShouldSerializeysrc() = not _ysrc.IsNone
     member __.ShouldSerializetype() = not _type.IsNone
 
-type Angularaxis() =
+type AngularAxis() =
 
     let mutable _range: float [] option = None
     let mutable _domain: float [] option = None
@@ -2244,7 +2244,7 @@ type Angularaxis() =
     member __.ShouldSerializeendpadding() = not _endpadding.IsNone
     member __.ShouldSerializevisible() = not _visible.IsNone
 
-type Radialaxis() =
+type RadialAxis() =
 
     let mutable _range: float [] option = None
     let mutable _domain: float [] option = None
@@ -2326,6 +2326,7 @@ type Radialaxis() =
     member __.ShouldSerializevisible() = not _visible.IsNone
 
 type Area() =
+    inherit Trace()
 
     let mutable _r: seq<float> option = None
     let mutable _t: seq<_> option = None
@@ -2334,8 +2335,8 @@ type Area() =
     let mutable _showlegend: string option = None
     let mutable _stream: Stream option = None
     let mutable _visible: string option = None
-    let mutable _angularaxis: Angularaxis option = None
-    let mutable _radialaxis: Radialaxis option = None
+    let mutable _angularaxis: AngularAxis option = None
+    let mutable _radialaxis: RadialAxis option = None
     let mutable _type = Some "area"
 
     /// Sets the radial coordinates of the circle sectors in this polar area trace about the origin; that is, the radial extent of each circle sector.
@@ -3855,8 +3856,8 @@ type Layout() =
     let mutable _boxmode: string option = None
     let mutable _boxgap: float option = None
     let mutable _boxgroupgap: float option = None
-    let mutable _radialaxis: Radialaxis option = None
-    let mutable _angularaxis: Angularaxis option = None
+    let mutable _radialaxis: RadialAxis option = None
+    let mutable _angularaxis: AngularAxis option = None
     let mutable _scene: Scene option = None
     let mutable _direction: string option = None
     let mutable _orientation: float option = None

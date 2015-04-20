@@ -221,6 +221,15 @@ module Site =
                         PlotlyDemo.New "Plotly2DHistogramBinningStyling" "2D Histogram Binning and Styling Options" "https://plot.ly/~TahaHachana/414"
                         PlotlyDemo.New "Plotly2DHistogramOverlaidScatter" "2D Histogram Overlaid with a Scatter Chart" "https://plot.ly/~TahaHachana/415"
                     ]
+                plotlySitelet
+                    "/chart/plotly-polar-charts"
+                    31
+                    "Plotly Polar Charts"
+                    [
+                        PlotlyDemo.New "PlotlyPolarLine" "Polar Line Chart" "https://plot.ly/~TahaHachana/439"
+                        PlotlyDemo.New "PlotlyPolarScatter" "Polar Scatter Chart" "https://plot.ly/~TahaHachana/443"
+                        PlotlyDemo.New "PlotlyPolarArea" "Polar Area Chart" "https://plot.ly/~TahaHachana/444"
+                    ]
             ]
 
 [<Sealed>]
@@ -232,7 +241,7 @@ type Website() =
                 yield Home
                 yield GoogleCharts
                 yield Plotly
-                for x in 1 .. 30 -> Chart x
+                for x in 1 .. 31 -> Chart x
             ]
 
 [<assembly: Website(typeof<Website>)>]

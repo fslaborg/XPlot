@@ -52,6 +52,17 @@
   <ItemGroup>
     <Compile Include="Graph.fs" />
     <Compile Include="Main.fs" />
+    <None Include="Credentials.fsx" />
+    <None Include="BarTests.fsx" />
+    <None Include="LineScatterTests.fsx" />
+    <None Include="BoxPlotsTests.fsx" />
+    <None Include="ContourPlotsTests.fsx" />
+    <None Include="AreaPlotsTests.fsx" />
+    <None Include="ErrorBarsTests.fsx" />
+    <None Include="HeatmapsTests.fsx" />
+    <None Include="HistogramsTests.fsx" />
+    <None Include="Histograms2DTests.fsx" />
+    <None Include="PolarChartsTests.fsx" />
     <Content Include="app.config" />
     <None Include="Graph.json" />
     <None Include="Graph.fsx" />

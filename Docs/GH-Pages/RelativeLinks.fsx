@@ -36,7 +36,7 @@ Directory.EnumerateFiles(path, "*.html", SearchOption.AllDirectories)
     |> Regex(linkPattern).Matches
     |> Seq.cast<Match>
     |> Seq.toList
-    |> List.map (fun m -> m.Groups.[2].Value)  
+    |> List.map (fun m -> m.Groups.[2].Value)
     |> List.filter (fun x -> x.Contains projectUrl)
 )
 |> List.concat
