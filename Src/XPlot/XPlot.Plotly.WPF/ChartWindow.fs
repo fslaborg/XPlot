@@ -6,7 +6,7 @@ open System.Windows.Controls
 open System.Windows.Media.Imaging
 
 let private icon =
-    let uriString = @"pack://application:,,,/XPlot.Plotly;component/XPlot.ico"
+    let uriString = @"pack://application:,,,/XPlot.Plotly.WPF;component/XPlot.ico"
     let iconUri = Uri(uriString, UriKind.RelativeOrAbsolute)
     BitmapFrame.Create(iconUri)
 

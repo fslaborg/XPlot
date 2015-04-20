@@ -5,14 +5,13 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>182232f3-9e9d-4342-a096-037f2cf2037f</ProjectGuid>
+    <ProjectGuid>c527a9e4-2b87-4ae8-b249-bcab2b65a75a</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>XPlot.Plotly</RootNamespace>
-    <AssemblyName>XPlot.Plotly</AssemblyName>
+    <RootNamespace>XPlot.GoogleCharts.WPF</RootNamespace>
+    <AssemblyName>XPlot.GoogleCharts.WPF</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFSharpCoreVersion>4.3.1.0</TargetFSharpCoreVersion>
-    <Name>XPlot.Plotly</Name>
-    <TargetFrameworkProfile />
+    <Name>XPlot.GoogleCharts.WPF</Name>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -22,7 +21,7 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
-    <DocumentationFile>bin\Debug\XPlot.Plotly.XML</DocumentationFile>
+    <DocumentationFile>bin\Debug\XPlot.GoogleCharts.WPF.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -31,7 +30,7 @@
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
-    <DocumentationFile>bin\Release\XPlot.Plotly.XML</DocumentationFile>
+    <DocumentationFile>bin\Release\XPlot.GoogleCharts.WPF.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>
@@ -50,46 +49,30 @@
   </Choose>
   <Import Project="$(FSharpTargetsPath)" />
   <ItemGroup>
-    <Compile Include="Graph.fs" />
-    <Compile Include="Main.fs" />
-    <None Include="Credentials.fsx" />
-    <None Include="BarTests.fsx" />
-    <None Include="LineScatterTests.fsx" />
-    <None Include="BoxPlotsTests.fsx" />
-    <None Include="ContourPlotsTests.fsx" />
-    <None Include="AreaPlotsTests.fsx" />
-    <None Include="ErrorBarsTests.fsx" />
-    <None Include="HeatmapsTests.fsx" />
-    <None Include="HistogramsTests.fsx" />
-    <None Include="Histograms2DTests.fsx" />
-    <None Include="PolarChartsTests.fsx" />
-    <None Include="TimeSeriesTests.fsx" />
-    <Content Include="app.config" />
-    <None Include="Graph.json" />
-    <None Include="Graph.fsx" />
-    <Content Include="Graph.txt" />
-    <Content Include="packages.config" />
+    <Compile Include="WpfExtensions.fs" />
+    <Resource Include="XPlot.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <None Include="Tests.fsx" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="HttpClient">
-      <HintPath>..\packages\Http.fs.1.5.1\lib\net40\HttpClient.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="MathNet.Numerics">
-      <HintPath>..\packages\MathNet.Numerics.3.6.0\lib\net40\MathNet.Numerics.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="FSharp.Core, Version=$(TargetFSharpCoreVersion), Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Numerics" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="WindowsBase" />
+    <ProjectReference Include="..\XPlot.GoogleCharts\XPlot.GoogleCharts.fsproj">
+      <Name>XPlot.GoogleCharts</Name>
+      <Project>{5804e6a2-edf3-4939-89c9-5bc7f2cc336a}</Project>
+      <Private>True</Private>
+    </ProjectReference>
   </ItemGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

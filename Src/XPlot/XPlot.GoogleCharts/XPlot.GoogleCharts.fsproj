@@ -51,13 +51,8 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="Main.fs" />
-    <None Include="Tests.fsx" />
     <Content Include="app.config" />
-    <None Include="Script1.fsx" />
     <None Include="XPlot.png" />
-    <Resource Include="XPlot.ico">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
     <None Include="logo.svg" />
     <Content Include="packages.config" />
     <Content Include="Google.DataTable.Net.Wrapper.XML" />
@@ -79,8 +74,6 @@
       <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
@@ -89,9 +82,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
-    <Reference Include="WindowsBase" />
   </ItemGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

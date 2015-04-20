@@ -9,6 +9,10 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "XPlot.GoogleCharts.Deedle",
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "XPlot.Plotly", "XPlot.Plotly\XPlot.Plotly.fsproj", "{182232F3-9E9D-4342-A096-037F2CF2037F}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "XPlot.GoogleCharts.WPF", "XPlot.GoogleCharts.WPF\XPlot.GoogleCharts.WPF.fsproj", "{C527A9E4-2B87-4AE8-B249-BCAB2B65A75A}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "XPlot.Plotly.WPF", "XPlot.Plotly.WPF\XPlot.Plotly.WPF.fsproj", "{2F1BB705-5937-41E1-A8A5-83EB6D636788}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{182232F3-9E9D-4342-A096-037F2CF2037F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{182232F3-9E9D-4342-A096-037F2CF2037F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{182232F3-9E9D-4342-A096-037F2CF2037F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C527A9E4-2B87-4AE8-B249-BCAB2B65A75A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C527A9E4-2B87-4AE8-B249-BCAB2B65A75A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C527A9E4-2B87-4AE8-B249-BCAB2B65A75A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C527A9E4-2B87-4AE8-B249-BCAB2B65A75A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F1BB705-5937-41E1-A8A5-83EB6D636788}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F1BB705-5937-41E1-A8A5-83EB6D636788}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F1BB705-5937-41E1-A8A5-83EB6D636788}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F1BB705-5937-41E1-A8A5-83EB6D636788}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

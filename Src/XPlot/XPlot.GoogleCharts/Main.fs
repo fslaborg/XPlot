@@ -7,8 +7,6 @@ open System
 open System.Data
 open System.Globalization
 open System.Windows
-open System.Windows.Controls
-open System.Windows.Media.Imaging
 
 type key = IConvertible
 type value = IConvertible
@@ -2321,12 +2319,6 @@ type ChartGallery =
             | "TreeMap" -> name
             | _ -> name + "Chart"
 
-/// Creates the bitmap frame used to set the chart's window icon.
-let private icon =
-    let uriString = @"pack://application:,,,/XPlot.GoogleCharts;component/XPlot.ico"
-    let iconUri = Uri(uriString, UriKind.RelativeOrAbsolute)
-    BitmapFrame.Create(iconUri)
-
 type GoogleChart() =
 
     [<DefaultValue>]
@@ -2399,20 +2391,6 @@ type GoogleChart() =
             .Replace("{GUID}", __.Id)
             .Replace("{WIDTH}", string(__.Width))
             .Replace("{HEIGHT}", string(__.Height))
-
-    /// Displays the chart in a window.
-    member __.Show() =
-        let wnd = Window()
-        wnd.Icon <- icon
-        wnd.Height <- 600.
-        wnd.Width <- 1000.
-        wnd.Topmost <- true
-        wnd.WindowStartupLocation <- WindowStartupLocation.CenterScreen 
-        let browser = new WebBrowser()
-        browser.NavigateToString __.Html
-        wnd.Content <- browser
-        wnd.Show()
-        wnd.Topmost <- false
 
     /// Sets the data series label. Use this member if the
     /// chart's data is a single series.
@@ -2916,11 +2894,6 @@ type Chart =
         GoogleChart.Create [series] Labels options TreeMap
         
 type Chart with
-
-    /// Displays the chart in the default browser.    
-    static member Show (chart:GoogleChart) =
-        chart.Show()
-        chart
 
     /// Sets the data series label. Use this member if the
     /// chart's data is a single series.
