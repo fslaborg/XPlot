@@ -2606,7 +2606,7 @@ type Scatter3d() =
     member __.ShouldSerializetype() = not _type.IsNone
 
 type Surface() =
-
+    inherit Trace()
     let mutable _z: obj option = None
     let mutable _x: obj option = None
     let mutable _y: obj option = None
