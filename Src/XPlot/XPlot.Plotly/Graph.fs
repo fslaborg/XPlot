@@ -2489,6 +2489,7 @@ type Scatter3d() =
     let mutable _mode: string option = None
     let mutable _name: string option = None
     let mutable _text: seq<string> option = None
+    let mutable _textfont: Font option = None
     let mutable _error_z: Error_z option = None
     let mutable _error_y: ErrorY option = None
     let mutable _error_x: ErrorX option = None
@@ -2529,6 +2530,11 @@ type Scatter3d() =
     member __.text
         with get () = Option.get _text
         and set value = _text <- Some value
+
+    /// Links a dictionary describing the font style of this scatter3d trace's text elements. Has only an effect if 'mode' is set and includes 'text'."
+    member __.textfont
+        with get () = Option.get _textfont
+        and set value = _textfont <- Some value
 
     /// Links a dictionary describing the z-axis error bars that can be drawn from the (x,y,z) coordinates of this 3D scatter trace.
     member __.error_z
@@ -2586,6 +2592,7 @@ type Scatter3d() =
     member __.ShouldSerializemode() = not _mode.IsNone
     member __.ShouldSerializename() = not _name.IsNone
     member __.ShouldSerializetext() = not _text.IsNone
+    member __.ShouldSerializetextfont() = not _textfont.IsNone
     member __.ShouldSerializeerror_z() = not _error_z.IsNone
     member __.ShouldSerializeerror_y() = not _error_y.IsNone
     member __.ShouldSerializeerror_x() = not _error_x.IsNone
