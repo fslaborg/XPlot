@@ -12,6 +12,11 @@
     <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
     <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
 
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1.1", { packages: ["corechart", "annotationchart", "calendar", "gauge", "geochart", "map", "sankey", "table", "timeline", "treemap"] })
+    </script>
+
     <link type="text/css" rel="stylesheet" href="@Root/content/style.css" />
     <script type="text/javascript" src="@Root/content/tips.js"></script>
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -34,7 +39,7 @@
           @RenderBody()
         </div>
         <div class="span3">
-          <img src="@Root/img/logo.png" alt="F# Project" style="width:150px;margin:10px" />  
+          <img src="@Root/img/logo.png" alt="F# Project" style="width:130px;margin:20px" />  
           <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
             <li class="nav-header">@Properties["project-name"]</li>
             <li><a href="@Root/index.html">Home page</a></li>

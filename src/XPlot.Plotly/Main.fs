@@ -27,8 +27,8 @@ open HttpClient
 open Graph
 
 type Data(traces:seq<Trace>) =
-
     member __.Json = JsonConvert.SerializeObject traces
+    static member From(traces:seq<#Trace>) = Data(Seq.map (fun t -> t :> _) traces)
 
 type PlotlyResponse =
     {
@@ -495,6 +495,9 @@ type Figure(data:Data, ?Layout:Layout) =
     let mutable response = None
     let mutable origin = "plot"
     let mutable fileopt = "new"
+    let mutable width = 900
+    let mutable height = 500
+    let mutable layout = Layout
 
     member __.Response = response
 
@@ -506,13 +509,25 @@ type Figure(data:Data, ?Layout:Layout) =
         with get () = fileopt
         and set(value) = fileopt <- value
 
+    member __.Width 
+        with get () = width
+        and set(value) = width <- value
+
+    member __.Height
+        with get () = height
+        and set(value) = height <- value
+
+    member __.Layout 
+        with get () = layout
+        and set (value) = layout <- value
+
     member __.Plot(filename) =
         let kwargs =
             Kwargs(
                 filename = filename,
                 fileopt = fileopt
             )
-        match Layout with
+        match layout with
         | None -> ()
         | Some x -> kwargs.layout <- x
         let body =
@@ -545,3 +560,12 @@ type Figure(data:Data, ?Layout:Layout) =
             | msg -> failwith msg
 //                printfn "%s" msg
 //                None
+
+    member __.GetInlineHtml(filename) =
+      let resp = __.Plot(filename)
+      """<iframe width="[WIDTH]" height="[HEIGHT]" frameborder="0" seamless="seamless" 
+           scrolling="no" src="[URL].embed?width=[WIDTH]&height=[HEIGHT]"></iframe>"""
+        .Replace("[WIDTH]", string width)
+        .Replace("[HEIGHT]", string height)
+        .Replace("[URL]", resp.Value.url)
+

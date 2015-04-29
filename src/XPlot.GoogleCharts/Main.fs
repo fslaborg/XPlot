@@ -672,7 +672,7 @@ module Configuration =
         member __.ShouldSerializestroke() = not strokeField.IsNone
         member __.ShouldSerializestrokeWidth() = not strokeWidthField.IsNone
 
-    type Series() =
+    type Series(?``type``) =
 
         let mutable annotationsField : Annotations option = None
         let mutable colorField : string option = None
@@ -687,7 +687,7 @@ module Configuration =
         let mutable risingColorField : CandleColor option = None
         // Combo
         let mutable curveTypeField : string option = None
-        let mutable typeField : string option = None
+        let mutable typeField : string option = ``type``
 
         member __.annotations
             with get() = annotationsField.Value
@@ -2265,6 +2265,13 @@ let jsTemplate =
             chart.draw(data, options);
         }"""
 
+
+let inlineTemplate = """
+<script type="text/javascript">
+    {JS}
+</script>
+<div id="{GUID}" style="width: {WIDTH}px; height: {HEIGHT}px;"></div>"""
+
 let template =
     """<!DOCTYPE html>
 <html>
@@ -2392,6 +2399,15 @@ type GoogleChart() =
             .Replace("{WIDTH}", string(__.Width))
             .Replace("{HEIGHT}", string(__.Height))
 
+    /// Inline HTML that can be embedded in a larger page (provided that the page
+    /// has a reference to Google APIs and loads required Google Charts)
+    member __.InlineHtml =
+        inlineTemplate
+            .Replace("{JS}", __.Js)
+            .Replace("{GUID}", __.Id)
+            .Replace("{WIDTH}", string(__.Width))
+            .Replace("{HEIGHT}", string(__.Height))
+
     /// Sets the data series label. Use this member if the
     /// chart's data is a single series.
     member __.WithLabel label =
@@ -2450,6 +2466,11 @@ type GoogleChart() =
 
     /// Sets the chart's width.
     member __.WithWidth width = __.Width <- width
+
+    /// Sets the chart's width and height.
+    member __.WithSize (width, height) = 
+      __.Height <- height
+      __.Width <- width
 
 type Chart =
 
@@ -2945,6 +2966,11 @@ type Chart with
     /// Sets the chart's width.
     static member WithWidth width (chart:GoogleChart) =
         chart.WithWidth width
+        chart
+
+    /// Sets the chart's height.
+    static member WithSize size (chart:GoogleChart) =
+        chart.WithSize size
         chart
 
 //============================

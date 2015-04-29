@@ -22,6 +22,7 @@ let info =
 
 #I "../../packages/FAKE/tools/"
 #load "../../packages/FSharp.Formatting/FSharp.Formatting.fsx"
+#load "formatters.fsx"
 #r "NuGet.Core.dll"
 #r "FakeLib.dll"
 open Fake
@@ -74,6 +75,7 @@ let buildReference () =
 
 // Build documentation from `fsx` and `md` files in `docs/content`
 let buildDocumentation () =
+  let fsiEval = Formatters.createFsiEvaluator root output "#.####"
   let subdirs = Directory.EnumerateDirectories(content, "*", SearchOption.AllDirectories)
   for dir in Seq.append [content] subdirs do
     let sub = if dir.Length > content.Length then dir.Substring(content.Length + 1) else "."
@@ -82,7 +84,7 @@ let buildDocumentation () =
         |> Array.exists(fun i -> i = lang)
     Literate.ProcessDirectory
       ( dir, docTemplate, output @@ sub, replacements = ("root", root)::info,
-        layoutRoots = layoutRoots,
+        layoutRoots = layoutRoots, fsiEvaluator = fsiEval,
         generateAnchors = true )
 
 // Generate

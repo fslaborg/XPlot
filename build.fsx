@@ -43,7 +43,7 @@ let authors = [ "Taha Hachana" ]
 // Tags for your project (for NuGet package)
 let tags = "F# fsharp data visualization html5 javascript datavis google chart plotly deedle frame dataframe"
 
-// File system information 
+// File system information
 let solutionFile  = "XPlot.sln"
 
 // Pattern specifying assemblies to be tested using NUnit
@@ -51,7 +51,7 @@ let testAssemblies = "tests/**/bin/Release/*Tests*.dll"
 
 // Git configuration (used for publishing documentation in gh-pages branch)
 // The profile where the project is posted
-let gitOwner = "TahaHachana" 
+let gitOwner = "tpetricek" // FOR TESTING DOCS! CHANGE BACK TO "TahaHachana"
 let gitHome = "https://github.com/" + gitOwner
 
 // The name of the project on GitHub
@@ -130,11 +130,11 @@ Target "RunTests" (fun _ ->
 Target "SourceLink" (fun _ ->
     let baseUrl = sprintf "%s/%s/{0}/%%var2%%" gitRaw (project.ToLower())
     use repo = new GitRepo(__SOURCE_DIRECTORY__)
-    
+
     !! "src/**/*.fsproj"
     |> Seq.map (fun pf -> pf, "**/AssemblyInfo.fs")
     |> Seq.iter (fun (projFile, assemblyInfo) ->
-        let proj = VsProj.LoadRelease projFile 
+        let proj = VsProj.LoadRelease projFile
         logfn "source linking %s" proj.OutputFilePdb
         let files = proj.Compiles -- assemblyInfo
         repo.VerifyChecksums files
@@ -150,7 +150,7 @@ Target "SourceLink" (fun _ ->
 // Build a NuGet package
 
 Target "NuGet" (fun _ ->
-    Paket.Pack(fun p -> 
+    Paket.Pack(fun p ->
         { p with
             OutputPath = "bin"
             Version = release.NugetVersion
@@ -158,7 +158,7 @@ Target "NuGet" (fun _ ->
 )
 
 Target "PublishNuget" (fun _ ->
-    Paket.Push(fun p -> 
+    Paket.Push(fun p ->
         { p with
             WorkingDir = "bin" })
 )
@@ -187,13 +187,14 @@ Target "GenerateHelp" (fun _ ->
     Rename "docs/content/release-notes.md" "docs/content/RELEASE_NOTES.md"
 
     DeleteFile "docs/content/license.md"
-    CopyFile "docs/content/" "LICENSE.txt"
-    Rename "docs/content/license.md" "docs/content/LICENSE.txt"
+    CopyFile "docs/content/" "LICENSE.md"
+    Rename "docs/content/license-lowercase.md" "docs/content/LICENSE.md"
+    Rename "docs/content/license.md" "docs/content/license-lowercase.md"
 
     generateHelp true
 )
 
-Target "KeepRunning" (fun _ ->    
+Target "KeepRunning" (fun _ ->
     use watcher = new FileSystemWatcher(DirectoryInfo("docs/content").FullName,"*.*")
     watcher.EnableRaisingEvents <- true
     watcher.Changed.Add(fun e -> generateHelp false)
@@ -233,11 +234,11 @@ Target "Release" (fun _ ->
 
     Branches.tag "" release.NugetVersion
     Branches.pushTag "" "origin" release.NugetVersion
-    
+
     // release on github
     createClient (getBuildParamOrDefault "github-user" "") (getBuildParamOrDefault "github-pw" "")
-    |> createDraft gitOwner gitName release.NugetVersion (release.SemVer.PreRelease <> None) release.Notes 
-    // TODO: |> uploadFile "PATH_TO_FILE"    
+    |> createDraft gitOwner gitName release.NugetVersion (release.SemVer.PreRelease <> None) release.Notes
+    // TODO: |> uploadFile "PATH_TO_FILE"
     |> releaseDraft
     |> Async.RunSynchronously
 )
@@ -258,7 +259,7 @@ Target "All" DoNothing
   ==> "All"
   =?> ("ReleaseDocs",isLocalBuild)
 
-"All" 
+"All"
 #if MONO
 #else
   //=?> ("SourceLink", Pdbstr.tryFind().IsSome )
@@ -273,7 +274,7 @@ Target "All" DoNothing
 
 "GenerateHelp"
   ==> "KeepRunning"
-    
+
 "ReleaseDocs"
   ==> "Release"
 
