@@ -1,7 +1,15 @@
 (*** hide ***)
 // This block of code is omitted in the generated HTML documentation. Use 
 // it to define helpers that you do not want to show in the documentation.
+#nowarn "211"
 #I "../../bin"
+
+#load "credentials.fsx"
+#r "XPlot.Plotly.dll"
+#r "XPlot.GoogleCharts.dll"
+open XPlot.GoogleCharts
+open XPlot.Plotly
+Plotly.Signin MyCredentials.userAndKey
 
 let Bolivia = ["2004/05", 165.; "2005/06", 135.; "2006/07", 157.; "2007/08", 139.; "2008/09", 136.]
 let Ecuador = ["2004/05", 938.; "2005/06", 1120.; "2006/07", 1167.; "2007/08", 1110.; "2008/09", 691.]
@@ -33,24 +41,29 @@ let HobbsPearson =
       Angular = [-66.53583632728323; -84.514422676922; -63.339741699567846; -24.146812744223833; -59.70124532256676; -88.06537267996578; -98.44420453532204; -49.15839681719936; -73.63622331202959; -17.923874678608904; -38.41239945460549; -66.34036237792131; -40.88883873919996; -52.46063321002169; -52.61046255912479; -7.039351050913894; -57.23545869215697; -71.64220350197985; -52.345396169095466; -92.78303867354904; -47.18716305503351; -41.969208462875166; -82.14422824993427; -59.43916560317718; -79.19482259319774; -62.29990853531319; -65.53790403937941; -48.9060554475786; -37.74831103800929; -78.05333345828834; -71.87311766307504; -41.891092825900685; -53.11545548549721; -52.997628097314845; -87.0843610179252; -43.61190483837573; -48.79799840560851; -82.56680315713163; -47.90996299570176; -46.57048558531105; -54.5004832176089; -65.90072712679752; -66.87331746360131; -75.48080725209734; -54.777693866880114; -42.5983345913628; -74.50816626907293; -47.11021844342552; -22.356873183328428; -84.19298674498425; -78.50528475620209; -65.0363717923471; -66.51373368133282; -63.52677656175937; -77.80907855131592; -68.51017974013602; -51.296869310885135; -68.33991302765452; -38.631733068443026; -77.85184858511114];
       Color = "rgb(230,171,2)" } ]
 (**
-XPlot
-======================
+XPlot: F# Data Visualization Package
+====================================
 
-XPlot is a data visualization package for the F# programming language powered by popular JavaScript charting libraries that aims to circumvent the lack of configuration options support in the FsPlot sister project.
+XPlot is a cross-platform data visualization package for the F# programming language powered by popular 
+JavaScript charting libraries [Google Charts](https://developers.google.com/chart/) and [Plotly](https://plot.ly/).
+The library provides a complete mapping for the configuration options of the underlying libraries and so
+you get a nice F# interface that gives you access to the full power of Google Charts and Plotly.
+The XPlot library can be used interactively from F# Interactive, but charts can equally easy be embedded
+in F# applications and in HTML reports. 
 
+ - To get XPlot, scroll down to [how to get XPlot](#How-to-get-XPlot) or get XPlot as part of the 
+   [FsLab data science package](http://fslab.org/download/).
+ - For detailed documentation, scroll down to [documentation](#Documentation) or follow links on the right.
 
+The next two demos show some of the more complex and advanced charts that can be created using XPlot.
+If you're getting started with XPlot, see the other [documentation](#Documentation) pages for 
+simpler charts.
 
-Documentation
+### XPlot Google Charts example
 
-Example
--------
-
-This example demonstrates using a function defined in this sample library.
-
+The following example uses the Google Charts library to create a combo chart showing coffee production
+in Bolivia, Ecuador and Madagascar (as bar plots), together with the average visualized as a line chart:
 *)
-#r "XPlot.GoogleCharts.dll"
-open XPlot.GoogleCharts
-
 (*** define-output:combochart ***) 
 let series = [ "bars"; "bars"; "bars"; "lines" ]
 let inputs = [ Bolivia; Ecuador; Madagascar; Average ]
@@ -63,19 +76,21 @@ inputs
 |> Chart.WithLabels 
      ["Bolivia"; "Ecuador"; "Madagascar"; "Average"]
 |> Chart.WithLegend true
-|> Chart.WithSize (700, 300)
+|> Chart.WithSize (600, 250)
 (*** include-it:combochart ***)
 (**
-Some more info
+The XPlot library uses the F# `|>` operator to configure charts. In the above example, we use `Chart.Combo`
+to create a basic chart and then we set a number of properties - `Chart.WithOptions` specifies how the
+chart looks, `Chart.WithLabels` and `Chart.WithLegend` adds the legend that annotates the individual
+chart series.
 
-One more example
-----------------
+### XPlot Plotly example
+
+The following example uses the Plotly online data analytics and visualization tool. It creates a scatter
+plot, rendered on a polar chart with different marker color for each of the trials stored in the `HobbsPearson`
+data set:
+
 *)
-#load "credentials.fsx"
-#r "XPlot.Plotly.dll"
-open XPlot.Plotly
-Plotly.Signin MyCredentials.userAndKey
-
 (*** define-output:polar ***) 
 let traces =
   [ for trial in HobbsPearson ->
@@ -86,10 +101,69 @@ let layout =
   Layout(title = "Hobbs-Pearson Trials", showlegend = false,
     plot_bgcolor = "rgb(223,223,223)")
 
-Figure(Data.From(traces), layout, Width=500, Height=400)
+Figure(Data.From(traces), layout, Width=400, Height=300)
 (*** include-it:polar ***)
 (**
+The code snippet creates one `Scatter` data series for each of the trials in the input. It sets the `r` and `t`
+properties to two lists of input values. If we wanted to produce an ordinary rectangular scatter plot, we could
+instead set the `x` and `y` properties.
 
-Some more stuff!
+How to get XPlot
+----------------
+
+### XPlot as part of FsLab
+
+If you want to get XPlot as part of larger package of F# and .NET tools for doing data science, then check out
+the [FsLab web site](http://www.fslab.org). This gives you a nice cross-platform environment where you can
+access data using [F# Data type providers](http://fsharp.github.io/FSharp.Data/), analyze the data using 
+[Deedle data frames and series](http://bluemountaincapital.github.io/Deedle/) and then visualize data using
+XPlot.
+
+### Stand alone XPlot packages
+
+Alternatively, you can reference [XPlot via a NuGet package](http://www.nuget.org/packages?q=XPlot). On 
+Windows, you can use the `XPlot.GoogleCharts.WPF` and `XPlot.Plotly.WPF` packages, which provide you with
+a `Chart.Show` method that opens a chart in a new WPF window.
+
+Assuming the packages are in your `packages` folder, you can reference the libraries as follows:
+*)
+#I "packages/XPlot.GoogleCharts.1.1.6/lib/net40"
+#I "packages/XPlot.GoogleCharts.WPF.1.1.6/lib/net40"
+#r "XPlot.GoogleCharts.dll"
+#r "XPlot.GoogleCharts.WPF.dll"
+open XPlot.GoogleCharts
+(**
+When using Plotly, you'll also need to create a user account at the [plot.ly](http://plot.ly) web site and
+pass your user name and API key to the `Plotly.Signin` function as follows:
+*)
+#I "packages/XPlot.Plotly.1.1.6/lib/net40"
+#r "XPlot.Plotly.dll"
+#load "credentials.fsx"
+open XPlot.Plotly
+Plotly.Signin MyCredentials.userAndKey
+(**
+Documentation
+-------------
+
+The documentation for the library is automatically generated from F# script files that you can find
+[in the `docs/content` folder on GitHub](https://github.com/tpetricek/XPlot/tree/master/docs/content). 
+The links in the right panel point to a number of tutorials that demonstrate some common scenarios.
+You can also copy the source code from GitHub.
+
+Additionally, the library also comes with an API reference that is generated from code comments. This
+is work in progress, so please help us & contribute comments and documentation! The most important types
+are:
+
+ - [Google Chart type](reference/xplot-googlecharts-chart.html) contains methods for creating charts like 
+   `Chart.Line` and for configuring charts like `Chart.WithOptions`.
+ - [Google Options type](reference/xplot-googlecharts-configuration-options.html) contains parameters for
+   charts that are specified using `Chart.WithOptions`.
+ - [Google Configuration module](reference/xplot-googlecharts-configuration.html) contains other types
+   that are used as parameters to `Chart.WithOptions`.
+
+ - [Plotly Graph module](reference/xplot-plotly-graph.html) contains methods for creating various kinds
+   of charts such as `Scatter` used above.
+ - [Plotly Layout type](reference/xplot-plotly-graph-layout.html) specifies common properties of Plotly
+   charts like title and color.
 
 *)

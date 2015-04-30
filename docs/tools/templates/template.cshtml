@@ -28,8 +28,11 @@
     <div class="container">
       <div class="masthead">
         <ul class="nav nav-pills pull-right">
-          <li><a href="http://fsharp.org">fsharp.org</a></li>
-          <li><a href="@Properties["project-github"]">github page</a></li>
+          <li><a href="http://fslab.org"><img height="16" width="16" src="http://fslab.org/img/thumbs/fslab.png" /> FsLab</a></li>
+          <li><a href="http://fsharp.github.io/FSharp.Data"><img height="16" width="16" src="http://fslab.org/img/thumbs/fsharpdata.png" /> F# Data</a></li>
+          <li><a href="http://bluemountaincapital.github.io/Deedle"><img height="16" width="16" src="http://fslab.org/img/thumbs/deedle.png" /> Deedle</a></li>
+          <li><a href="http://bluemountaincapital.github.io/FSharpRProvider"><img height="16" width="16" src="http://fslab.org/img/thumbs/rprovider.png" /> R Provider</a></li>
+          <li><a href="http://numerics.mathdotnet.com/"><img height="16" width="16" src="http://fslab.org/img/thumbs/mathnet.png" /> Math.NET</a></li>
         </ul>
         <h3 class="muted"><a href="@Root/index.html">@Properties["project-name"]</a></h3>
       </div>
@@ -44,16 +47,30 @@
             <li class="nav-header">@Properties["project-name"]</li>
             <li><a href="@Root/index.html">Home page</a></li>
             <li class="divider"></li>
-            <li><a href="@Properties["project-nuget"]">Get Library via NuGet</a></li>
+            <li><a href="http://www.nuget.org/packages?q=XPlot">Get Library via NuGet</a></li>
             <li><a href="@Properties["project-github"]">Source Code on GitHub</a></li>
-            <li><a href="@Root/license.html">License</a></li>
+            <li><a href="@Root/license.html">License (Apache 2.0)</a></li>
             <li><a href="@Root/release-notes.html">Release Notes</a></li>
             
-            <li class="nav-header">Getting started</li>
-            <li><a href="@Root/tutorial.html">Sample tutorial</a></li>
+            <li class="nav-header">Google Charts</li>
+            <li><a href="@Root/google/points-lines.html">Points and lines</a></li>
+            <li><a href="@Root/google/geo.html">Geo charts</a></li>
+
+            <li class="nav-header">Plotly Charts</li>
+            <li>Coming soon</li>
 
             <li class="nav-header">Documentation</li>
             <li><a href="@Root/reference/index.html">API Reference</a></li>
+            <li class="divider"></li>
+
+            <li><a href="@Root/reference/xplot-googlecharts-chart.html">Google Chart type</a></li>
+            <li><a href="@Root/reference/xplot-googlecharts-configuration-options.html">Google Option type</a></li>
+            <li><a href="@Root/reference/xplot-googlecharts-configuration.html">Google configuration module</a></li>
+
+            <li class="divider"></li>
+
+            <li><a href="@Root/reference/xplot-plotly-graph.html">Plotly Graph module</a></li>
+            <li><a href="@Root/reference/xplot-plotly-graph-layout.html">Plotly Layout type</a></li>
           </ul>
         </div>
       </div>

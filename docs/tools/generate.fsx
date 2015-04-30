@@ -32,7 +32,7 @@ open FSharp.Literate
 open FSharp.MetadataFormat
 
 // Binaries for which to generate XML documentation
-let binaries = !! "bin/XPlot.*.dll" |> List.ofSeq
+let binaries = !! (__SOURCE_DIRECTORY__ @@ "../../bin/XPlot.*.dll") |> List.ofSeq
 
 // When called from 'build.fsx', use the public project URL as <root>
 // otherwise, use the current 'output' directory.
