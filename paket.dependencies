@@ -1,0 +1,16 @@
+source https://nuget.org/api/v2
+
+nuget FSharp.Formatting
+nuget NUnit
+nuget NUnit.Runners
+nuget FAKE
+nuget SourceLink.Fake
+
+nuget Deedle
+nuget FSharp.Data
+nuget MathNet.Numerics
+nuget Google.DataTable.Net.Wrapper
+nuget Http.fs
+nuget Newtonsoft.Json
+
+github fsharp/FAKE modules/Octokit/Octokit.fsx
