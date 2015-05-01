@@ -153,7 +153,7 @@ Target "NuGet" (fun _ ->
     Paket.Pack(fun p ->
         { p with
             OutputPath = "bin"
-            Version = release.NugetVersion
+            Version = p.Version //release.NugetVersion
             ReleaseNotes = toLines release.Notes})
 )
 
@@ -213,15 +213,15 @@ Target "GenerateDocs" DoNothing
 // --------------------------------------------------------------------------------------
 // Release Scripts
 
-Target "ReleaseDocs" (fun _ ->
-    let tempDocsDir = "temp/gh-pages"
-    CleanDir tempDocsDir
-    Repository.cloneSingleBranch "" (gitHome + "/" + gitName + ".git") "gh-pages" tempDocsDir
-
-    CopyRecursive "docs/output" tempDocsDir true |> tracefn "%A"
-    StageAll tempDocsDir
-    Git.Commit.Commit tempDocsDir (sprintf "Update generated documentation for version %s" release.NugetVersion)
-    Branches.push tempDocsDir
+Target "ReleaseDocs" (fun _ -> ()
+//    let tempDocsDir = "temp/gh-pages"
+//    CleanDir tempDocsDir
+//    Repository.cloneSingleBranch "" (gitHome + "/" + gitName + ".git") "gh-pages" tempDocsDir
+//
+//    CopyRecursive "docs/output" tempDocsDir true |> tracefn "%A"
+//    StageAll tempDocsDir
+//    Git.Commit.Commit tempDocsDir (sprintf "Update generated documentation for version %s" release.NugetVersion)
+//    Branches.push tempDocsDir
 )
 
 #load "paket-files/fsharp/FAKE/modules/Octokit/Octokit.fsx"
@@ -236,11 +236,11 @@ Target "Release" (fun _ ->
     Branches.pushTag "" "origin" release.NugetVersion
 
     // release on github
-    createClient (getBuildParamOrDefault "github-user" "") (getBuildParamOrDefault "github-pw" "")
-    |> createDraft gitOwner gitName release.NugetVersion (release.SemVer.PreRelease <> None) release.Notes
-    // TODO: |> uploadFile "PATH_TO_FILE"
-    |> releaseDraft
-    |> Async.RunSynchronously
+//    createClient (getBuildParamOrDefault "github-user" "") (getBuildParamOrDefault "github-pw" "")
+//    |> createDraft gitOwner gitName release.NugetVersion (release.SemVer.PreRelease <> None) release.Notes
+//    // TODO: |> uploadFile "PATH_TO_FILE"
+//    |> releaseDraft
+//    |> Async.RunSynchronously
 )
 
 Target "BuildPackage" DoNothing
@@ -251,13 +251,13 @@ Target "BuildPackage" DoNothing
 Target "All" DoNothing
 
 "Clean"
-  ==> "AssemblyInfo"
+//  ==> "AssemblyInfo"
   ==> "Build"
-  ==> "RunTests"
-  =?> ("GenerateReferenceDocs",isLocalBuild)
-  =?> ("GenerateDocs",isLocalBuild)
+//  ==> "RunTests"
+//  =?> ("GenerateReferenceDocs",isLocalBuild)
+//  =?> ("GenerateDocs",isLocalBuild)
   ==> "All"
-  =?> ("ReleaseDocs",isLocalBuild)
+//  =?> ("ReleaseDocs",isLocalBuild)
 
 "All"
 #if MONO
