@@ -48,27 +48,6 @@
     </Otherwise>
   </Choose>
   <Import Project="$(FSharpTargetsPath)" />
-  <ItemGroup>
-    <Compile Include="AssemblyInfo.fs" />
-    <Compile Include="Main.fs" />
-    <Content Include="app.config" />
-    <Content Include="paket.references" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="mscorlib" />
-    <Reference Include="FSharp.Core, Version=$(TargetFSharpCoreVersion), Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Data.Entity" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Numerics" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
@@ -77,13 +56,6 @@
   </Target>
   -->
   <Import Project="..\..\.paket\paket.targets" />
-  <ItemGroup>
-    <Reference Include="Google.DataTable.Net.Wrapper">
-      <HintPath>..\..\packages\Google.DataTable.Net.Wrapper\lib\Google.DataTable.Net.Wrapper.dll</HintPath>
-      <Private>True</Private>
-      <Paket>True</Paket>
-    </Reference>
-  </ItemGroup>
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETCore'">
       <ItemGroup>
@@ -149,4 +121,50 @@
       </ItemGroup>
     </When>
   </Choose>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.fs" />
+    <Compile Include="Main.fs" />
+    <Content Include="app.config" />
+    <Content Include="paket.references" />
+    <None Include="tests\Annotation.fsx" />
+    <None Include="tests\Area.fsx" />
+    <None Include="tests\Bar.fsx" />
+    <None Include="tests\Bubble.fsx" />
+    <None Include="tests\Calendar.fsx" />
+    <None Include="tests\Candlestick.fsx" />
+    <None Include="tests\Column.fsx" />
+    <None Include="tests\Combo.fsx" />
+    <None Include="tests\Gauge.fsx" />
+    <None Include="tests\Geo.fsx" />
+    <None Include="tests\Histogram.fsx" />
+    <None Include="tests\Line.fsx" />
+    <None Include="tests\Map.fsx" />
+    <None Include="tests\Pie.fsx" />
+    <None Include="tests\Sankey.fsx" />
+    <None Include="tests\Scatter.fsx" />
+    <None Include="tests\SteppedArea.fsx" />
+    <None Include="tests\Table.fsx" />
+    <None Include="tests\Timeline.fsx" />
+    <None Include="tests\Treemap.fsx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="mscorlib" />
+    <Reference Include="FSharp.Core, Version=$(TargetFSharpCoreVersion), Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Google.DataTable.Net.Wrapper">
+      <HintPath>..\..\packages\Google.DataTable.Net.Wrapper\lib\Google.DataTable.Net.Wrapper.dll</HintPath>
+      <Private>True</Private>
+      <Paket>True</Paket>
+    </Reference>
+  </ItemGroup>
 </Project>
