@@ -6,7 +6,6 @@ open Newtonsoft.Json
 open System
 open System.Data
 open System.Globalization
-open System.Windows
 
 type key = IConvertible
 type value = IConvertible
@@ -39,80 +38,76 @@ module Data =
         static member New dps = {DataPoints = dps}
 
     let makeDataTable series labels =
-    
-        let rows =
-            let dps =
-                series
-                |> Seq.map (fun x -> x.DataPoints)
-                |> Seq.concat
-            match Seq.length series with
-            | 1 ->
-                dps
-                |> Seq.map (fun x ->
-                    [
-                        yield x.X
-                        yield x.Y1
-                        if x.Y2.IsSome then yield x.Y2.Value
-                        if x.Y3.IsSome then yield x.Y3.Value
-                        if x.Y4.IsSome then yield x.Y4.Value
-                    ]
-                )
-            | _ ->
-                dps
-                |> Seq.groupBy (fun x -> x.X)
-                |> Seq.map (fun (key, dps) ->
-                    [
-                        yield key
-                        for x in dps do
-                            yield x.Y1
-                            if x.Y2.IsSome then yield x.Y2.Value
-                            if x.Y3.IsSome then yield x.Y3.Value
-                            if x.Y4.IsSome then yield x.Y4.Value
-                    ]
-                )
 
+        let dps =
+            series
+            |> Seq.map (fun x -> x.DataPoints)
+            |> Seq.concat
+
+        let keys =
+            dps
+            |> Seq.map (fun x -> x.X)
+            |> Seq.distinct
+
+        let rows =
+            keys
+            |> Seq.map (fun key ->
+                let datapoints =
+                    series
+                    |> Seq.map (fun x -> Seq.tryFind (fun dp -> dp.X = key) x.DataPoints)
+                let fields' =
+                    [
+                        for x in datapoints do
+                            if x.IsSome then
+                                let x' = Option.get x
+                                yield Some x'.Y1
+                                if x'.Y2.IsSome then yield x'.Y2
+                                if x'.Y3.IsSome then yield x'.Y3
+                                if x'.Y4.IsSome then yield x'.Y4
+                            else yield None
+                    ]
+                    |> List.mapi (fun idx x -> x, idx + 1)
+                key, fields'
+            )
+            
         let sysDt = new System.Data.DataTable()
+
         sysDt.Locale <- CultureInfo.InvariantCulture
 
         let firstRow =
             rows
-            |> Seq.maxBy (fun x -> x.Length)
+            |> Seq.filter (fun (_, fields) ->
+                fields |> Seq.exists (fun (x, _) -> x.IsNone) = false
+            )
+            |> Seq.maxBy (fun (_, fields) -> Seq.length fields)
 
         let labels' =
+            let length = snd firstRow |> Seq.length
             match labels with
-            | None -> seq {for x in 1 .. firstRow.Length -> "Column " + string x}
+            | None -> seq {for x in 1 .. (length + 1) -> "Column " + string x}
             | Some labelsSeq ->
-                match (Seq.length labelsSeq) = firstRow.Length with
+                match (Seq.length labelsSeq) = length with
                 | false -> Seq.append ["Column 1"] labelsSeq
                 | true -> labelsSeq
 
-        firstRow
-        |> List.iteri (fun idx x ->
-    //        let typeCode = x.GetTypeCode()
-    //        let columnType =
-    //            match typeCode with
-    //            | TypeCode.Boolean -> typeof<bool>
-    //            | TypeCode.DateTime -> typeof<DateTime>
-    //            | TypeCode.String -> typeof<string>
-    //            | TypeCode.Decimal -> typeof<Decimal>
-    //            | TypeCode.Double -> typeof<Double>
-    //            | TypeCode.Int16 -> typeof<Int16>
-    //            | TypeCode.Int32 -> typeof<Int32>
-    //            | TypeCode.Int64 -> typeof<Int64>
-    //            | TypeCode.UInt16 -> typeof<UInt16>
-    //            | TypeCode.UInt32 -> typeof<UInt32>
-    //            | _ -> typeof<UInt64>
-            sysDt.Columns.Add(Seq.nth idx labels', x.GetType()) |> ignore
+        sysDt.Columns.Add(Seq.nth 0 labels', (fst firstRow).GetType())
+        |> ignore
+
+        (snd firstRow)
+        |> List.iteri (fun idx (value, _) ->
+            sysDt.Columns.Add(Seq.nth (idx + 1) labels', value.Value.GetType())
+            |> ignore
         )
 
         rows
-        |> Seq.iter (fun values -> 
+        |> Seq.iter (fun (key, values) -> 
             let row = sysDt.NewRow()
+            row.SetField(0, key)
             values
-            |> Seq.iteri (fun idx v -> row.[idx] <- v)
+            |> Seq.iter (fun (value, column) -> match value with Some v -> row.SetField(column, v) | _ -> ())
             sysDt.Rows.Add(row)
         )
-    
+
         sysDt
 
 [<AutoOpen>]
@@ -2972,24 +2967,3 @@ type Chart with
     static member WithSize size (chart:GoogleChart) =
         chart.WithSize size
         chart
-
-//============================
-// TODO: build Google data tables from System.Data.DataTable
-//let sysDt = new System.Data.DataTable()
-//
-//let ``type`` = typeof<string>
-//sysDt.Columns.Add("firstcolumn", ``type``) |> ignore
-//sysDt.Columns.Add("secondcolumn", typeof<int>) |> ignore
-//sysDt.Columns.Add("thirdcolumn", typeof<decimal>) |> ignore
-//sysDt.Locale = System.Globalization.CultureInfo.InvariantCulture |> ignore
-// 
-//let row1 = sysDt.NewRow()
-//row1.[0] <- "Ciao"
-//row1.[1] <- 10
-//row1.[2] <- 2.2
-//sysDt.Rows.Add(row1)
-// 
-//let dataTable = sysDt.ToGoogleDataTable()
-//     
-//let json = dataTable.GetJson()
-//=============================
