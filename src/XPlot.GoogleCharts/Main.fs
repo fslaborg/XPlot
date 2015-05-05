@@ -2408,6 +2408,7 @@ type GoogleChart() =
     member __.WithLabel label =
         let columns = __.dataTable.Columns
         columns.[1].ColumnName <- label
+        __.WithLegend true
 
     /// Sets the data series labels. Use this member if the
     /// chart's data is a series collection.
@@ -2419,6 +2420,7 @@ type GoogleChart() =
             | true -> labels
         names
         |> Seq.iteri (fun idx x -> columns.[idx].ColumnName <- x)
+        __.WithLegend true
             
     /// Sets the chart's title.
     member __.WithTitle title =
