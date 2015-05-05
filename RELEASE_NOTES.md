@@ -1,4 +1,10 @@
-﻿### 1.1.0-beta001 - May 1, 2015
+﻿### 1.1.8 - May 5, 2015
+* Fix data grouping when the series have different lengths
+* Show a legend for Google Charts when WithLabel[s] is called
+* Auto open the Deedle helpers module
+* Same version number for all packages
+
+### 1.1.0-beta001 - May 1, 2015
 * Testing ProjectScaffold's release process
 
 ### 1.0.0

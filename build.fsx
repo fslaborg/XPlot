@@ -38,7 +38,7 @@ let summary = "Data visualization library for F#"
 let description = "XPlot is a cross-platform data visualization library that supports creating charts using Google Charts and Plotly. The library provides a composable domain specific language for building charts and specifying their properties."
 
 // List of author names (for NuGet package)
-let authors = [ "Taha Hachana" ]
+let authors = [ "Taha Hachana"; "Tomas Petricek" ]
 
 // Tags for your project (for NuGet package)
 let tags = "F# fsharp data visualization html5 javascript datavis google chart plotly deedle frame dataframe"
@@ -153,7 +153,7 @@ Target "NuGet" (fun _ ->
     Paket.Pack(fun p ->
         { p with
             OutputPath = "bin"
-            Version = p.Version //release.NugetVersion
+            Version = release.NugetVersion
             ReleaseNotes = toLines release.Notes})
 )
 
@@ -162,7 +162,6 @@ Target "PublishNuget" (fun _ ->
         { p with
             WorkingDir = "bin" })
 )
-
 
 // --------------------------------------------------------------------------------------
 // Generate the documentation

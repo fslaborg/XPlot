@@ -23,7 +23,6 @@ let test2 =
     |> Chart.WithXTitle "Year"
     |> Chart.WithYTitle "Amount"
     |> Chart.WithId "my_chart"
-    |> Chart.WithLegend true
     |> Chart.Show
 
 let options =
@@ -40,7 +39,6 @@ let options =
 let test3 =
     [sales; expenses]
     |> Chart.Area
-    |> Chart.WithLabels ["Sales"; "Expenses"]
     |> Chart.WithOptions options
-    |> Chart.WithLegend true
+    |> Chart.WithLabels ["Sales"; "Expenses"]
     |> Chart.Show

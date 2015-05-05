@@ -1,8 +1,30 @@
 ﻿#I "../../../bin"
+#r "Deedle.dll"
 #r "XPlot.GoogleCharts.dll"
+#r "XPlot.GoogleCharts.Deedle.dll"
 #r "XPlot.GoogleCharts.WPF.dll"
 
+open Deedle
 open XPlot.GoogleCharts
+open XPlot.GoogleCharts.Deedle
+
+type Correlation =
+    {
+        country : string
+        lifeExpectancy : float
+        fertilityRate : float
+        region : string
+        population : int
+    }
+
+    static member New (c, l, f, r, p) =
+        {
+            country = c
+            lifeExpectancy = l
+            fertilityRate = f
+            region = r
+            population = p
+        }
 
 let data =
     [
@@ -14,6 +36,7 @@ let data =
         "RUS", 68.6, 1.54, "Europe", 141850000
         "USA", 78.09, 2.05, "North America", 307007000
     ]
+    |> List.map Correlation.New
 
 let options =
     Options(
@@ -23,27 +46,12 @@ let options =
         bubble = Bubble(textStyle = TextStyle(fontSize = 11))
     )
 
-let test1 =
+let chart1 =
     data
+    |> Frame.ofRecords
+    |> Frame.indexRowsString "country"     
     |> Chart.Bubble
     |> Chart.WithOptions options
     |> Chart.WithLabels ["Life Expectancy"; "Fertility Rate"; "Region"; "Population"]
-    |> Chart.WithLegend true
-    |> Chart.Show
-
-let chart2 =
-    let options = Options(colorAxis = ColorAxis(colors = [|"yellow"; "red"|]))
-    [
-        "1", 80, 167, 120
-        "2", 79, 136, 130
-        "3", 78, 184, 50
-        "4", 72, 278, 230
-        "5", 81, 200, 210
-        "6", 72, 170, 100
-        "7", 68, 477, 80        
-    ]
-    |> Chart.Bubble
-    |> Chart.WithOptions options
-    |> Chart.WithLabels ["X"; "Y"; "Temperature"]
     |> Chart.WithLegend true
     |> Chart.Show
