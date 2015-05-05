@@ -1,4 +1,5 @@
-﻿module XPlot.GoogleCharts.Deedle
+﻿[<AutoOpen>]
+module XPlot.GoogleCharts.Deedle
 
 open XPlot.GoogleCharts
 open Deedle
