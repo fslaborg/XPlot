@@ -102,7 +102,9 @@ let layout =
     plot_bgcolor = "rgb(223,223,223)")
 
 Figure(Data.From(traces), layout, Width=400, Height=300)
-(*** include-it:polar ***)
+(**
+<iframe width="640" height="480" frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~TahaHachana/443.embed?width=640&height=480" ></iframe>
+*)
 (**
 The code snippet creates one `Scatter` data series for each of the trials in the input. It sets the `r` and `t`
 properties to two lists of input values. If we wanted to produce an ordinary rectangular scatter plot, we could
