@@ -27,6 +27,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{83F16175
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{8E6D5255-776D-4B61-85F9-73C37AA1FB9A}"
 	ProjectSection(SolutionItems) = preProject
+		credentials.fsx = credentials.fsx
+		docs\content\chart\google-annotation-chart.fsx = docs\content\chart\google-annotation-chart.fsx
+		docs\content\google-charts.fsx = docs\content\google-charts.fsx
 		docs\content\index.fsx = docs\content\index.fsx
 		docs\content\tutorial.fsx = docs\content\tutorial.fsx
 	EndProjectSection
@@ -45,6 +48,8 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "XPlot.Plotly.WPF", "src\XPl
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "google", "google", "{CA29FA4F-144D-4498-A59F-81B0B0868349}"
 	ProjectSection(SolutionItems) = preProject
+		docs\content\google\annotation.fsx = docs\content\google\annotation.fsx
+		docs\content\google\area.fsx = docs\content\google\area.fsx
 		docs\content\google\geo.fsx = docs\content\google\geo.fsx
 		docs\content\google\points-lines.fsx = docs\content\google\points-lines.fsx
 	EndProjectSection

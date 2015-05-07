@@ -268,7 +268,7 @@ Target "All" DoNothing
 
 "CleanDocs"
   ==> "GenerateHelp"
-  ==> "GenerateReferenceDocs"
+//  ==> "GenerateReferenceDocs"
   ==> "GenerateDocs"
 
 "GenerateHelp"

@@ -140,7 +140,7 @@ let createFsiEvaluator root output (floatFormat:string) =
 
     | :? GoogleCharts.GoogleChart as ch ->
         // Just return the inline HTML of a Google chart
-        let ch = ch |> XPlot.GoogleCharts.Chart.WithSize(600, 300)
+        let ch = ch |> XPlot.GoogleCharts.Chart.WithSize(700, 400)
         Some [  InlineBlock ch.InlineHtml ]
 
     | :? Plotly.Figure as fig ->
