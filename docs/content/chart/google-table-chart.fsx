@@ -1,0 +1,34 @@
+﻿(*** hide ***)
+#I "../../../bin"
+#r "XPlot.GoogleCharts.dll"
+#r "XPlot.GoogleCharts.WPF.dll"
+open XPlot.GoogleCharts
+
+let salary =
+    [
+        "Mike", 10000
+        "Jim", 8000
+        "Alice", 12500
+        "Bob", 7000
+    ]
+    |> List.map (fun (x, y) -> x, y :> value)
+ 
+let fulltime =
+    [
+        "Mike", true
+        "Jim", false
+        "Alice", true
+        "Bob", true
+    ]
+    |> List.map (fun (x, y) -> x, y :> value)
+
+(**
+Google Table Chart
+==================
+*)
+(*** define-output:table ***) 
+[salary; fulltime]        
+|> Chart.Table
+|> Chart.WithOptions(Options(showRowNumber = true))
+|> Chart.WithLabels ["Name"; "Salary"; "Full Time Employee"]
+(*** include-it:bar ***)
