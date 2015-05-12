@@ -1112,8 +1112,12 @@ type Colorbar() =
     let mutable _tickcolor: string option = None
     let mutable _tickangle: float option = None
     let mutable _tickfont: Font option = None
-    let mutable _exponentformat: string option = None
     let mutable _showexponent: string option = None
+    let mutable _exponentformat: string option = None
+    let mutable _showtickprefix: string option = None
+    let mutable _tickprefix: string option = None
+    let mutable _showticksuffix: string option = None
+    let mutable _ticksuffix: string option = None
     let mutable _x: float option = None
     let mutable _y: float option = None
     let mutable _xanchor: string option = None
@@ -1216,15 +1220,35 @@ type Colorbar() =
         with get () = Option.get _tickfont
         and set value = _tickfont <- Some value
 
+    /// If set to 'all', ALL exponents will be shown appended to their significands. If set to 'first', the first tick's exponent will be appended to its significand, however no other exponents will appear--only the significands. If set to 'last', the last tick's exponent will be appended to its significand, however no other exponents will appear--only the significands. If set to 'none', no exponents will appear, only the significands.
+    member __.showexponent
+        with get () = Option.get _showexponent
+        and set value = _showexponent <- Some value
+
     /// Sets how exponents show up. Here's how the number 1000000000 (1 billion) shows up in each. If set to 'none': 1,000,000,000. If set to 'e': 1e+9. If set to 'E': 1E+9. If set to 'power': 1x10^9 (where the 9 will appear super-scripted). If set to 'SI': 1G. If set to 'B': 1B (useful when referring to currency).
     member __.exponentformat
         with get () = Option.get _exponentformat
         and set value = _exponentformat <- Some value
 
-    /// If set to 'all', ALL exponents will be shown appended to their significands. If set to 'first', the first tick's exponent will be appended to its significand, however no other exponents will appear--only the significands. If set to 'last', the last tick's exponent will be appended to its significand, however no other exponents will appear--only the significands. If set to 'none', no exponents will appear, only the significands.
-    member __.showexponent
-        with get () = Option.get _showexponent
-        and set value = _showexponent <- Some value
+    /// Same as 'showexponent' but for tick prefixes.
+    member __.showtickprefix
+        with get () = Option.get _showtickprefix
+        and set value = _showtickprefix <- Some value
+
+    /// Tick prefix.
+    member __.tickprefix
+        with get () = Option.get _tickprefix
+        and set value = _tickprefix <- Some value
+
+    /// Same as 'showexponent' but for tick suffixes.
+    member __.showticksuffix
+        with get () = Option.get _showticksuffix
+        and set value = _showticksuffix <- Some value
+
+    /// Tick suffix.
+    member __.ticksuffix
+        with get () = Option.get _ticksuffix
+        and set value = _ticksuffix <- Some value
 
     /// Sets the 'x' position of this colorbar.
     member __.x
@@ -1301,6 +1325,10 @@ type Colorbar() =
     member __.ShouldSerializetickfont() = not _tickfont.IsNone
     member __.ShouldSerializeexponentformat() = not _exponentformat.IsNone
     member __.ShouldSerializeshowexponent() = not _showexponent.IsNone
+    member __.ShouldSerializeshowtickprefix() = not _showtickprefix.IsNone
+    member __.ShouldSerializetickprefix() = not _tickprefix.IsNone
+    member __.ShouldSerializeshowticksuffix() = not _showticksuffix.IsNone
+    member __.ShouldSerializeticksuffix() = not _ticksuffix.IsNone
     member __.ShouldSerializex() = not _x.IsNone
     member __.ShouldSerializey() = not _y.IsNone
     member __.ShouldSerializexanchor() = not _xanchor.IsNone
@@ -2697,6 +2725,12 @@ type XAxis() =
     let mutable _tickfont: Font option = None
     let mutable _exponentformat: string option = None
     let mutable _showexponent: string option = None
+    let mutable _showtickprefix: string option = None
+    let mutable _tickprefix: string option = None
+    let mutable _showticksuffix: string option = None
+    let mutable _ticksuffix: string option = None
+    let mutable _tickformat: string option = None
+    let mutable _hoverformat: string option = None
     let mutable _mirror: string option = None
     let mutable _gridcolor: string option = None
     let mutable _gridwidth: float option = None
@@ -2829,6 +2863,36 @@ type XAxis() =
         with get () = Option.get _showexponent
         and set value = _showexponent <- Some value
 
+    /// Same as 'showexponent' but for tick prefixes.
+    member __.showtickprefix
+        with get () = Option.get _showtickprefix
+        and set value = _showtickprefix <- Some value
+
+    /// Tick prefix.
+    member __.tickprefix
+        with get () = Option.get _tickprefix
+        and set value = _tickprefix <- Some value
+
+    /// Same as 'showexponent' but for tick suffixes.
+    member __.showticksuffix
+        with get () = Option.get _showticksuffix
+        and set value = _showticksuffix <- Some value
+
+    /// Tick suffix.
+    member __.ticksuffix
+        with get () = Option.get _ticksuffix
+        and set value = _ticksuffix <- Some value
+
+    /// Custom tick datetime formatting.
+    member __.tickformat
+        with get () = Option.get _tickformat
+        and set value = _tickformat <- Some value
+
+    /// Custom hover datetime formatting.
+    member __.hoverformat
+        with get () = Option.get _hoverformat
+        and set value = _hoverformat <- Some value
+
     /// Toggle the axis line and/or ticks across the plots or subplots. If TRUE, mirror the axis line across the primary subplot (i.e. the axis that this axis is anchored to). If 'ticks', mirror the axis line and the ticks. If 'all', mirror the axis line to all subplots containing this axis. If 'allticks', mirror the line and ticks to all subplots containing this axis. If FALSE, don't mirror the axis or the ticks.
     member __.mirror
         with get () = Option.get _mirror
@@ -2932,6 +2996,12 @@ type XAxis() =
     member __.ShouldSerializetickfont() = not _tickfont.IsNone
     member __.ShouldSerializeexponentformat() = not _exponentformat.IsNone
     member __.ShouldSerializeshowexponent() = not _showexponent.IsNone
+    member __.ShouldSerializeshowtickprefix() = not _showtickprefix.IsNone
+    member __.ShouldSerializetickprefix() = not _tickprefix.IsNone
+    member __.ShouldSerializeshowticksuffix() = not _showticksuffix.IsNone
+    member __.ShouldSerializeticksuffix() = not _ticksuffix.IsNone
+    member __.ShouldSerializetickformat() = not _tickformat.IsNone
+    member __.ShouldSerializehoverformat() = not _hoverformat.IsNone
     member __.ShouldSerializemirror() = not _mirror.IsNone
     member __.ShouldSerializegridcolor() = not _gridcolor.IsNone
     member __.ShouldSerializegridwidth() = not _gridwidth.IsNone
@@ -2974,6 +3044,12 @@ type YAxis() =
     let mutable _tickfont: Font option = None
     let mutable _exponentformat: string option = None
     let mutable _showexponent: string option = None
+    let mutable _showtickprefix: string option = None
+    let mutable _tickprefix: string option = None
+    let mutable _showticksuffix: string option = None
+    let mutable _ticksuffix: string option = None
+    let mutable _tickformat: string option = None
+    let mutable _hoverformat: string option = None
     let mutable _mirror: string option = None
     let mutable _gridcolor: string option = None
     let mutable _gridwidth: float option = None
@@ -3106,6 +3182,36 @@ type YAxis() =
         with get () = Option.get _showexponent
         and set value = _showexponent <- Some value
 
+    /// Same as 'showexponent' but for tick prefixes.
+    member __.showtickprefix
+        with get () = Option.get _showtickprefix
+        and set value = _showtickprefix <- Some value
+
+    /// Tick prefix.
+    member __.tickprefix
+        with get () = Option.get _tickprefix
+        and set value = _tickprefix <- Some value
+
+    /// Same as 'showexponent' but for tick suffixes.
+    member __.showticksuffix
+        with get () = Option.get _showticksuffix
+        and set value = _showticksuffix <- Some value
+
+    /// Tick suffix.
+    member __.ticksuffix
+        with get () = Option.get _ticksuffix
+        and set value = _ticksuffix <- Some value
+
+    /// Custom tick datetime formatting.
+    member __.tickformat
+        with get () = Option.get _tickformat
+        and set value = _tickformat <- Some value
+
+    /// Custom hover datetime formatting.
+    member __.hoverformat
+        with get () = Option.get _hoverformat
+        and set value = _hoverformat <- Some value
+
     /// Toggle the axis line and/or ticks across the plots or subplots. If TRUE, mirror the axis line across the primary subplot (i.e. the axis that this axis is anchored to). If 'ticks', mirror the axis line and the ticks. If 'all', mirror the axis line to all subplots containing this axis. If 'allticks', mirror the line and ticks to all subplots containing this axis. If FALSE, don't mirror the axis or the ticks.
     member __.mirror
         with get () = Option.get _mirror
@@ -3209,6 +3315,12 @@ type YAxis() =
     member __.ShouldSerializetickfont() = not _tickfont.IsNone
     member __.ShouldSerializeexponentformat() = not _exponentformat.IsNone
     member __.ShouldSerializeshowexponent() = not _showexponent.IsNone
+    member __.ShouldSerializeshowtickprefix() = not _showtickprefix.IsNone
+    member __.ShouldSerializetickprefix() = not _tickprefix.IsNone
+    member __.ShouldSerializeshowticksuffix() = not _showticksuffix.IsNone
+    member __.ShouldSerializeticksuffix() = not _ticksuffix.IsNone
+    member __.ShouldSerializetickformat() = not _tickformat.IsNone
+    member __.ShouldSerializehoverformat() = not _hoverformat.IsNone
     member __.ShouldSerializemirror() = not _mirror.IsNone
     member __.ShouldSerializegridcolor() = not _gridcolor.IsNone
     member __.ShouldSerializegridwidth() = not _gridwidth.IsNone
@@ -3251,6 +3363,12 @@ type Zaxis() =
     let mutable _tickfont: Font option = None
     let mutable _exponentformat: string option = None
     let mutable _showexponent: string option = None
+    let mutable _showtickprefix: string option = None
+    let mutable _tickprefix: string option = None
+    let mutable _showticksuffix: string option = None
+    let mutable _ticksuffix: string option = None
+    let mutable _tickformat: string option = None
+    let mutable _hoverformat: string option = None
     let mutable _mirror: string option = None
     let mutable _gridcolor: string option = None
     let mutable _gridwidth: float option = None
@@ -3383,6 +3501,36 @@ type Zaxis() =
         with get () = Option.get _showexponent
         and set value = _showexponent <- Some value
 
+    /// Same as 'showexponent' but for tick prefixes.
+    member __.showtickprefix
+        with get () = Option.get _showtickprefix
+        and set value = _showtickprefix <- Some value
+
+    /// Tick prefix.
+    member __.tickprefix
+        with get () = Option.get _tickprefix
+        and set value = _tickprefix <- Some value
+
+    /// Same as 'showexponent' but for tick suffixes.
+    member __.showticksuffix
+        with get () = Option.get _showticksuffix
+        and set value = _showticksuffix <- Some value
+
+    /// Tick suffix.
+    member __.ticksuffix
+        with get () = Option.get _ticksuffix
+        and set value = _ticksuffix <- Some value
+
+    /// Custom tick datetime formatting.
+    member __.tickformat
+        with get () = Option.get _tickformat
+        and set value = _tickformat <- Some value
+
+    /// Custom hover datetime formatting.
+    member __.hoverformat
+        with get () = Option.get _hoverformat
+        and set value = _hoverformat <- Some value
+
     /// Has no effect in 3D plots.
     member __.mirror
         with get () = Option.get _mirror
@@ -3486,6 +3634,12 @@ type Zaxis() =
     member __.ShouldSerializetickfont() = not _tickfont.IsNone
     member __.ShouldSerializeexponentformat() = not _exponentformat.IsNone
     member __.ShouldSerializeshowexponent() = not _showexponent.IsNone
+    member __.ShouldSerializeshowtickprefix() = not _showtickprefix.IsNone
+    member __.ShouldSerializetickprefix() = not _tickprefix.IsNone
+    member __.ShouldSerializeshowticksuffix() = not _showticksuffix.IsNone
+    member __.ShouldSerializeticksuffix() = not _ticksuffix.IsNone
+    member __.ShouldSerializetickformat() = not _tickformat.IsNone
+    member __.ShouldSerializehoverformat() = not _hoverformat.IsNone
     member __.ShouldSerializemirror() = not _mirror.IsNone
     member __.ShouldSerializegridcolor() = not _gridcolor.IsNone
     member __.ShouldSerializegridwidth() = not _gridwidth.IsNone
