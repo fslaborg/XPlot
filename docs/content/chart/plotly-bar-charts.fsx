@@ -3,18 +3,23 @@
 // it to define helpers that you do not want to show in the documentation.
 #nowarn "211"
 #I "../../../bin"
-#I "../../../packages/MathNet.Numerics/lib/portable-net45+netcore45+MonoAndroid1+MonoTouch1"
 
 #load "../credentials.fsx"
 #r "XPlot.Plotly.dll"
 #r "XPlot.Plotly.WPF.dll"
-#r "MathNet.Numerics.dll"
 
 open XPlot.Plotly
 
 Plotly.Signin MyCredentials.userAndKey
 
-let data =
+(**
+Plotly Bar Charts
+=================
+
+Basic Bar Chart
+---------------
+*)
+let basicData =
     Data(
         [
             Bar(
@@ -24,100 +29,76 @@ let data =
         ]
     )
 
-let figure = Figure(data)
+Figure(basicData)
 
-let plotlyResponse = figure.Plot("Basic Bar Chart")
+(**
+<iframe width="640" height="480" frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~TahaHachana/130.embed?width=640&height=480" ></iframe>
+*)
 
-figure.Show()
-
-
-      
-
+(**
 Grouped Bar Chart
+-----------------
+*)
 
-       
-#r """../packages/Http.fs.1.5.1/lib/net40/HttpClient.dll"""
-#r """../packages/XPlot.Plotly.0.1.0/Lib/Net45/XPlot.Plotly.dll"""
-
-open XPlot.Plotly
-
-Plotly.Signin("Username", "API Key")
-
-let trace1 =
+let groupedTrace1 =
     Bar(
         x = ["giraffes"; "orangutans"; "monkeys"],
         y = [20; 14; 23],
         name= "SF Zoo"            
     )
 
-let trace2 =
+let groupedTrace2 =
     Bar(
         x = ["giraffes"; "orangutans"; "monkeys"],
         y = [12; 18; 29],
         name = "LA Zoo"
     )
 
-let data = Data [trace1; trace2]
+let data2 = Data [groupedTrace1; groupedTrace2]
 
-let layout = Layout(barmode = "group")
+let groupedLayout = Layout(barmode = "group")
 
-let figure = Figure(data, layout)
+Figure(data2, groupedLayout)
 
-let plotlyResponse = figure.Plot("Grouped Bar Chart")
+(**
+<iframe width="640" height="480" frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~TahaHachana/145.embed?width=640&height=480" ></iframe>
+*)
 
-figure.Show()
-
-
-      
-
+(**
 Stacked Bar Chart
+-----------------
+*)
 
-       
-#r """../packages/Http.fs.1.5.1/lib/net40/HttpClient.dll"""
-#r """../packages/XPlot.Plotly.0.1.0/Lib/Net45/XPlot.Plotly.dll"""
-
-open XPlot.Plotly
-
-Plotly.Signin("Username", "API Key")
-
-let trace1 =
+let stackedTrace1 =
     Bar(
         x = ["giraffes"; "orangutans"; "monkeys"],
         y = [20; 14; 23],
         name = "SF Zoo"
     )
 
-let trace2 =
+let stackedTrace2 =
     Bar(
         x= ["giraffes"; "orangutans"; "monkeys"],
         y= [12; 18; 29],
         name = "LA Zoo"
     )
 
-let data = Data [trace1; trace2]
+let stackedData = Data [stackedTrace1; stackedTrace2]
 
-let layout = Layout(barmode = "stack")
+let stackedLayout = Layout(barmode = "stack")
     
-let figure = Figure(data, layout)
+Figure(stackedData, stackedLayout)
 
-let plotlyResponse = figure.Plot("Stacked Bar Chart")
+(**
+<iframe width="640" height="480" frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~TahaHachana/146.embed?width=640&height=480" ></iframe>
+*)
 
-figure.Show()
-
-
-      
-
+(**
 Colored and Styled Bar Chart
+----------------------------
+*)
 
-       
-#r """../packages/Http.fs.1.5.1/lib/net40/HttpClient.dll"""
-#r """../packages/XPlot.Plotly.0.1.0/Lib/Net45/XPlot.Plotly.dll"""
-
-open XPlot.Plotly
-
-Plotly.Signin("Username", "API Key")
-
-let trace1 =
+let styledTrace1 =
     Bar(
         x = [1995; 1996; 1997; 1998; 1999; 2000; 2001; 2002; 2003; 2004; 2005; 2006; 2007; 2008; 2009; 2010; 2011; 2012],
         y = [219; 146; 112; 127; 124; 180; 236; 207; 236; 263; 350; 430; 474; 526; 488; 537; 500; 439],
@@ -125,7 +106,7 @@ let trace1 =
         marker = Marker(color = "rgb(55, 83, 109)")
     )
 
-let trace2 =
+let styledTrace2 =
     Bar(
         x = [1995; 1996; 1997; 1998; 1999; 2000; 2001; 2002; 2003; 2004; 2005; 2006; 2007; 2008; 2009; 2010; 2011; 2012],
         y = [16; 13; 10; 11; 28; 37; 43; 55; 56; 88; 105; 156; 270; 299; 340; 403; 549; 499],
@@ -133,13 +114,13 @@ let trace2 =
         marker = Marker(color = "rgb(26, 118, 255)")
     )
 
-let data = Data [trace1; trace2]
+let styledData = Data [styledTrace1; styledTrace2]
 
-let layout =
+let styledLayout =
     Layout(
         title = "US Export of Plastic Scrap",
         xaxis =
-            Xaxis(
+            XAxis(
                 tickfont =
                     Font(
                         size = 14.,
@@ -147,7 +128,7 @@ let layout =
                     )
             ),
         yaxis =
-            Yaxis(
+            YAxis(
                 title = "USD (millions)",
                 titlefont =
                     Font(
@@ -172,26 +153,18 @@ let layout =
         bargroupgap = 0.1
     )
 
-let figure = Figure(data, layout)
+Figure(styledData, styledLayout)
 
-let plotlyResponse = figure.Plot("Colored and Styled Bar Chart")
+(**
+<iframe width="640" height="480" frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~TahaHachana/147.embed?width=640&height=480" ></iframe>
+*)
 
-figure.Show()
-
-
-      
-
+(**
 Bar Chart with Hover Text
+-------------------------
+*)
 
-       
-#r """../packages/Http.fs.1.5.1/lib/net40/HttpClient.dll"""
-#r """../packages/XPlot.Plotly.0.1.0/Lib/Net45/XPlot.Plotly.dll"""
-
-open XPlot.Plotly
-
-Plotly.Signin("Username", "API Key")
-
-let trace =
+let hoverTrace =
     Bar(
         x = ["Liam"; "Sophie"; "Jacob"; "Mia"; "William"; "Olivia"],
         y = [8.0; 8.0; 12.0; 12.0; 13.0; 20.0],
@@ -199,42 +172,34 @@ let trace =
         marker = Marker(color = "rgb(142, 124, 195)")
     )
 
-let data = Data [trace]
+let hoverData = Data [hoverTrace]
 
-let layout =
+let hoverLayout =
     Layout(
         title = "Number of graphs made this week",
         font = Font(family = "Raleway, sans-serif"),
         showlegend = false,
-        xaxis= Xaxis(tickangle = -45.),
+        xaxis= XAxis(tickangle = -45.),
         yaxis=
-            Yaxis(
+            YAxis(
                 zeroline = false,
                 gridwidth = 2.
             ),
         bargap = 0.05
     )
 
-let figure = Figure(data, layout)
+Figure(hoverData, hoverLayout)
 
-let plotlyResponse = figure.Plot("Bar Chart with Hover Text")
+(**
+<iframe width="640" height="480" frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~TahaHachana/148.embed?width=640&height=480" ></iframe>
+*)
 
-figure.Show()
-
-
-      
-
+(**
 Customizing Individual Bar Colors
+---------------------------------
+*)
 
-       
-#r """../packages/Http.fs.1.5.1/lib/net40/HttpClient.dll"""
-#r """../packages/XPlot.Plotly.0.1.0/Lib/Net45/XPlot.Plotly.dll"""
-
-open XPlot.Plotly
-
-Plotly.Signin("Username", "API Key")
-
-let data =
+let customData =
     Data(
         [
             Bar(
@@ -245,11 +210,8 @@ let data =
         ]
     )
 
-let figure = Figure data
+Figure(customData)
 
-let plotlyResponse = figure.Plot("Customizing Individual Bar Colors")
-
-figure.Show()
-
-
-      
+(**
+<iframe width="640" height="480" frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~TahaHachana/149.embed?width=640&height=480" ></iframe>
+*)

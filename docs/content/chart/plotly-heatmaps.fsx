@@ -1,20 +1,25 @@
 ﻿(*** hide ***)
 // This block of code is omitted in the generated HTML documentation. Use 
 // it to define helpers that you do not want to show in the documentation.
-#nowarn "211"
 #I "../../../bin"
-#I "../../../packages/MathNet.Numerics/lib/portable-net45+netcore45+MonoAndroid1+MonoTouch1"
 
 #load "../credentials.fsx"
 #r "XPlot.Plotly.dll"
 #r "XPlot.Plotly.WPF.dll"
-#r "MathNet.Numerics.dll"
 
 open XPlot.Plotly
 
 Plotly.Signin MyCredentials.userAndKey
 
-let data =
+(**
+Plotly Line and Scatter Plots
+=============================
+
+Basic Line Plot
+---------------
+*)
+
+let basicData =
     Data(
         [
             Heatmap(
@@ -23,26 +28,20 @@ let data =
         ]
     )
 
-let figure = Figure(data)
+let basicLayout = Layout(title = "Basic Heatmap")
 
-let plotlyResponse = figure.Plot("Basic Heatmap")
-    
-figure.Show()
+Figure(basicData, basicLayout)
 
+(**
+<iframe width="640" height="480" frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~TahaHachana/365.embed?width=640&height=480" ></iframe>
+*)
 
-      
-
+(**
 Heatmap with Categorical Axis Labels
+------------------------------------
+*)
 
-       
-#r """../packages/Http.fs.1.5.1/lib/net40/HttpClient.dll"""
-#r """../packages/XPlot.Plotly.0.7.0/Lib/Net45/XPlot.Plotly.dll"""
-
-open XPlot.Plotly
-
-Plotly.Signin("Username", "API Key")
-
-let data =
+let categoricalData =
     Data(
         [
             Heatmap(
@@ -53,26 +52,20 @@ let data =
         ]
     )
 
-let figure = Figure(data)
+let categoricalLayout = Layout(title = "Heatmap with Categorical Axis Labels")
 
-let plotlyResponse = figure.Plot("Heatmap with Categorical Axis Labels")
-    
-figure.Show()
+Figure(categoricalData, categoricalLayout)
 
+(**
+<iframe width="640" height="480" frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~TahaHachana/369.embed?width=640&height=480" ></iframe>
+*)
 
-      
-
+(**
 Custom Colorscale
-
+-----------------
+*)
        
-#r """../packages/Http.fs.1.5.1/lib/net40/HttpClient.dll"""
-#r """../packages/XPlot.Plotly.0.7.0/Lib/Net45/XPlot.Plotly.dll"""
-
-open XPlot.Plotly
-
-Plotly.Signin("Username", "API Key")
-
-let z =
+let customZ =
     [
         for x in 1 .. 50 do
             let lst = List.map (fun y -> y + x) [1..50]
@@ -93,102 +86,77 @@ let colorScale =
         [1.0; "rgb(49,54,149)"]
     ]
 
-let data =
+let customData =
     Data(
         [
             Heatmap(
-                z = z,
+                z = customZ,
                 colorscale = colorScale
             )
         ]
     )
 
-let figure = Figure(data)
+let customLayout = Layout(title = "Custom Colorscale")
 
-let plotlyResponse = figure.Plot("Custom Colorscale")
-    
-figure.Show()
+Figure(customData, customLayout)
 
+(**
+<iframe width="640" height="480" frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~TahaHachana/370.embed?width=640&height=480" ></iframe>
+*)
 
-      
-
+(**
 Earth Colorscale
-
+*)
        
-#r """../packages/Http.fs.1.5.1/lib/net40/HttpClient.dll"""
-#r """../packages/XPlot.Plotly.0.7.0/Lib/Net45/XPlot.Plotly.dll"""
-
-open XPlot.Plotly
-
-Plotly.Signin("Username", "API Key")
-
-let z =
+let earthZ =
     [
         for x in 1 .. 50 ->
             List.map (fun y -> y + x) [1..50]
     ]
 
-let data =
+let earthData =
     Data(
         [
             Heatmap(
-                z = z,
+                z = earthZ,
                 colorscale = "Earth"
             )
         ]
     )
 
-let layout = Layout(title = "Earth")
+let earthLayout = Layout(title = "Earth Colorscale")
 
-let figure = Figure(data, layout)
+Figure(earthData, earthLayout)
 
-let plotlyResponse = figure.Plot("Earth Colorscale")
-    
-figure.Show()
+(**
+<iframe width="640" height="480" frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~TahaHachana/371.embed?width=640&height=480" ></iframe>
+*)
 
-      
-
+(**
 YIGnBu Colorscale
-
+-----------------
+*)
        
-#r """../packages/Http.fs.1.5.1/lib/net40/HttpClient.dll"""
-#r """../packages/XPlot.Plotly.0.7.0/Lib/Net45/XPlot.Plotly.dll"""
-
-open XPlot.Plotly
-
-Plotly.Signin("Username", "API Key")
-
-let z =
+let yignbuZ =
     [
         for x in 1 .. 50 ->
             List.map (fun y -> y + x) [1..50]
     ]
 
-let data =
+let yignbuData =
     Data(
         [
             Heatmap(
-                z = z,
+                z = yignbuZ,
                 colorscale = "YIGnBu"
             )
         ]
     )
 
-let layout = Layout(title = "YIGnBu")
+let yignbuLayout = Layout(title = "YIGnBu Colorscale")
 
-let figure = Figure(data, layout)
+Figure(yignbuData, yignbuLayout)
 
-let plotlyResponse = figure.Plot("YIGnBu Colorscale")
-    
-figure.Show()
-
-
-      
-
-Built with WebSharper
-
-Facebook
-Twitter
-Email
-Print
-More
+(**
+<iframe width="640" height="480" frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~TahaHachana/372.embed?width=640&height=480" ></iframe>
+*)

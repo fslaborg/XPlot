@@ -1,18 +1,23 @@
 ﻿(*** hide ***)
 // This block of code is omitted in the generated HTML documentation. Use 
 // it to define helpers that you do not want to show in the documentation.
-#nowarn "211"
 #I "../../../bin"
-#I "../../../packages/MathNet.Numerics/lib/portable-net45+netcore45+MonoAndroid1+MonoTouch1"
 
 #load "../credentials.fsx"
 #r "XPlot.Plotly.dll"
 #r "XPlot.Plotly.WPF.dll"
-#r "MathNet.Numerics.dll"
 
 open XPlot.Plotly
 
 Plotly.Signin MyCredentials.userAndKey
+
+(**
+Plotly Bubble Charts
+====================
+
+Marker Size, Color, and Symbol as an Array
+------------------------------------------
+*)
 
 let trace1 =
     Scatter(
@@ -56,13 +61,11 @@ let trace3 =
             )
     )
 
-let data = Data [trace1; trace2; trace3]
 
 let layout = Layout(showlegend = false)
 
-let figure = Figure(data, layout)
+Figure(Data.From [trace1; trace2; trace3], layout)
 
-let plotlyResponse = figure.Plot("Marker Size, Color, and Symbol as an Array")
-
-figure.Show()
-
+(**
+<iframe width="640" height="480" frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~TahaHachana/226.embed?width=640&height=480" ></iframe>
+*)

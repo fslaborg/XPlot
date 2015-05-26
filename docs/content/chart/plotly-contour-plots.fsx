@@ -1,9 +1,8 @@
 ﻿(*** hide ***)
 // This block of code is omitted in the generated HTML documentation. Use 
 // it to define helpers that you do not want to show in the documentation.
-#nowarn "211"
 #I "../../../bin"
-#I "../../../packages/MathNet.Numerics/lib/portable-net45+netcore45+MonoAndroid1+MonoTouch1"
+#I "../../../packages/MathNet.Numerics/lib/net40"
 
 #load "../credentials.fsx"
 #r "XPlot.Plotly.dll"
@@ -11,6 +10,9 @@
 #r "MathNet.Numerics.dll"
 
 open XPlot.Plotly
+open MathNet.Numerics
+open MathNet.Numerics.Distributions
+open System
 
 Plotly.Signin MyCredentials.userAndKey
 
@@ -25,37 +27,6 @@ for i in 0 .. 99 do
         let r2 = x.[i] ** 2. + y.[j] ** 2.
         z.[i,j] <- sin x.[i] * cos y.[j] * sin r2 / log(r2 + 1.)
 
-let trace =
-    Contour(
-        z = z,
-        x = x,
-        y = y
-    )
-
-let data = Data [trace]
-
-let figure = Figure(data)
-
-let plotlyResponse = figure.Plot("Basic Contour Plot")
-
-figure.Show()
-
-
-      
-
-2D Histogram Contour Plot with Histogram Subplots
-
-       
-#r """../packages/Http.fs.1.5.1/lib/net40/HttpClient.dll"""
-#r """../packages/XPlot.Plotly.0.5.0/Lib/Net45/XPlot.Plotly.dll"""
-#r """../packages/MathNet.Numerics.3.6.0/lib/net40/MathNet.Numerics.dll"""
-
-open MathNet.Numerics
-open MathNet.Numerics.Distributions
-open XPlot.Plotly
-
-Plotly.Signin("Username", "API Key")
-
 let t = Generate.LinearSpaced(2000, -1., 1.2)
 
 let normal = new Normal(0., 1.0)
@@ -65,13 +36,39 @@ let sample =
     |> Seq.take 2000
     |> Seq.toArray
 
-let x = Array.mapi (fun i x -> t.[i] ** 3. + 0.3 * x) sample
-let y = Array.mapi (fun i x -> t.[i] ** 6. + 0.3 * x) sample
+let x1 = Array.mapi (fun i x -> t.[i] ** 3. + 0.3 * x) sample
+let y1 = Array.mapi (fun i x -> t.[i] ** 6. + 0.3 * x) sample
+
+(**
+Plotly Contour Plots
+====================
+
+Basic Contour Plot
+------------------
+*)
+
+let trace =
+    Contour(
+        z = z,
+        x = x,
+        y = y
+    )
+
+Figure(Data.From [trace])
+
+(**
+<iframe width="640" height="480" frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~TahaHachana/268.embed?width=640&height=480" ></iframe>
+*)
+
+(**
+2D Histogram Contour Plot with Histogram Subplots
+-------------------------------------------------
+*)
 
 let trace1 =
     Scatter(
-        x = x,
-        y = y,
+        x = x1,
+        y = y1,
         mode = "markers",
         name = "points",
         marker =
@@ -84,8 +81,8 @@ let trace1 =
 
 let trace2 =
     Histogram2dContour(
-        x = x,
-        y = y,
+        x = x1,
+        y = y1,
         name = "density",
         ncontours = 20.,
         colorscale = "Hot",
@@ -95,7 +92,7 @@ let trace2 =
 
 let trace3 =
     Histogram(
-        x = x,
+        x = x1,
         name = "x density",
         marker = Marker(color = "rgb(102,0,0)"),
         yaxis = "y2"
@@ -103,13 +100,13 @@ let trace3 =
 
 let trace4 =
     Histogram(
-        y = y,
+        y = y1,
         name = "y density",
         marker = Marker(color = "rgb(102,0,0)"),
         xaxis = "x2"
     )
 
-let data = Data [trace1; trace2; trace3; trace4]
+let data' = Data [trace1; trace2; trace3; trace4]
 
 let layout =
     Layout(
@@ -118,13 +115,13 @@ let layout =
         width = 600.,
         height = 550.,
         xaxis =
-            Xaxis(
+            XAxis(
                 domain = [|0.; 0.85|],
                 showgrid = false,
                 zeroline = false
             ),
         yaxis =
-            Yaxis(
+            YAxis(
                 domain = [|0.; 0.85|],
                 showgrid = false,
                 zeroline = false
@@ -133,24 +130,21 @@ let layout =
         hovermode = "closest",
         bargap = 0.,
         xaxis2 =
-            Xaxis(
+            XAxis(
                 domain = [|0.85; 1.|],
                 showgrid = false,
                 zeroline = false
             ),
         yaxis2 =
-            Yaxis(
+            YAxis(
                 domain = [|0.85; 1.|],
                 showgrid = false,
                 zeroline = false
             )
     )
 
-let figure = Figure(data, layout)
+Figure(data', layout)
 
-let plotlyResponse = figure.Plot("2D Histogram Contour Plot with Histogram Subplots")
-
-figure.Show()
-
-
-      
+(**
+<iframe width="640" height="480" frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~TahaHachana/269.embed?width=640&height=480" ></iframe>
+*)

@@ -1,23 +1,17 @@
 (*** hide ***)
 // This block of code is omitted in the generated HTML documentation. Use 
 // it to define helpers that you do not want to show in the documentation.
-#nowarn "211"
 #I "../../../bin"
-#I "../../../packages/MathNet.Numerics/lib/portable-net45+netcore45+MonoAndroid1+MonoTouch1"
-
+#I "../../../packages/MathNet.Numerics/lib/net40"
 #load "../credentials.fsx"
 #r "XPlot.Plotly.dll"
 #r "XPlot.Plotly.WPF.dll"
 #r "MathNet.Numerics.dll"
 
 open XPlot.Plotly
+open MathNet.Numerics.Distributions
 
 Plotly.Signin MyCredentials.userAndKey
-
-open MathNet.Numerics.Distributions
-open XPlot.Plotly
-
-Plotly.Signin("Username", "API Key")
 
 let normal = new Normal(0., 1.0)
 
@@ -29,6 +23,38 @@ let y =
     normal.Samples()
     |> Seq.take 500
     |> Seq.map (fun x -> x + 1.)
+
+let x0 =
+    normal.Samples()
+    |> Seq.take 100
+    |> Seq.map (fun x -> x / 5. + 0.5)
+
+let y0 =
+    normal.Samples()
+    |> Seq.take 100
+    |> Seq.map (fun x -> x / 5. + 0.5)
+
+let uniform = new ContinuousUniform(0., 1.0)
+
+let x1 =
+    uniform.Samples()
+    |> Seq.take 50
+
+let y1 =
+    uniform.Samples()
+    |> Seq.take 50
+    |> Seq.map (fun x -> x + 1.)
+
+let x' = Seq.concat [x0; x1]
+let y' = Seq.concat [y0; y1]
+
+(**
+Plotly 2D Histograms
+====================
+
+2D Histogram of a Bivariate Normal Distribution
+-----------------------------------------------
+*)
 
 let data =
     Data(
@@ -40,38 +66,18 @@ let data =
         ]
     )
 
-let figure = Figure(data)
+Figure(data)
 
-let plotlyResponse = figure.Plot("2D Histogram of a Bivariate Normal Distribution")
+(**
+<iframe width="640" height="480" frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~TahaHachana/411.embed?width=640&height=480" ></iframe>
+*)
 
-figure.Show()
-
-      
-
+(**
 2D Histogram Binning and Styling Options
+----------------------------------------
+*)
 
-       
-#r """../packages/Http.fs.1.5.1/lib/net40/HttpClient.dll"""
-#r """../packages/XPlot.Plotly.0.9.0/Lib/Net45/XPlot.Plotly.dll"""
-#r """../packages/MathNet.Numerics.3.6.0/lib/net40/MathNet.Numerics.dll"""
-
-open MathNet.Numerics.Distributions
-open XPlot.Plotly
-
-Plotly.Signin("Username", "API Key")
-
-let normal = new Normal(0., 1.0)
-
-let x =
-    normal.Samples()
-    |> Seq.take 500
-
-let y =
-    normal.Samples()
-    |> Seq.take 500
-    |> Seq.map (fun x -> x + 1.)
-
-let data =
+let data' =
     Data(
         [
             Histogram2d(
@@ -104,51 +110,16 @@ let data =
         ]
     )
 
-let figure = Figure(data)
+Figure(data')
 
-let plotlyResponse = figure.Plot("2D Histogram Binning and Styling Options")
+(**
+<iframe width="640" height="480" frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~TahaHachana/414.embed?width=640&height=480" ></iframe>
+*)
 
-figure.Show()
-
-      
-
+(**
 2D Histogram Overlaid with a Scatter Chart
-
-       
-#r """../packages/Http.fs.1.5.1/lib/net40/HttpClient.dll"""
-#r """../packages/XPlot.Plotly.0.9.0/Lib/Net45/XPlot.Plotly.dll"""
-#r """../packages/MathNet.Numerics.3.6.0/lib/net40/MathNet.Numerics.dll"""
-
-open MathNet.Numerics.Distributions
-open XPlot.Plotly
-
-Plotly.Signin("Username", "API Key")
-
-let normal = new Normal(0., 1.0)
-
-let uniform = new ContinuousUniform(0., 1.0)
-
-let x0 =
-    normal.Samples()
-    |> Seq.take 100
-    |> Seq.map (fun x -> x / 5. + 0.5)
-
-let y0 =
-    normal.Samples()
-    |> Seq.take 100
-    |> Seq.map (fun x -> x / 5. + 0.5)
-
-let x1 =
-    uniform.Samples()
-    |> Seq.take 50
-
-let y1 =
-    uniform.Samples()
-    |> Seq.take 50
-    |> Seq.map (fun x -> x + 1.)
-
-let x = Seq.concat [x0; x1]
-let y = Seq.concat [y0; y1]
+------------------------------------------
+*)
 
 let trace1 =
     Scatter(
@@ -176,24 +147,14 @@ let trace2 =
 
 let trace3 =
     Histogram2d(
-        x = x,
-        y = y
+        x = x',
+        y = y'
     )
 
-let data = Data([trace1; trace2; trace3])
+let data'' = Data([trace1; trace2; trace3])
 
-let figure = Figure(data)
+Figure(data'')
 
-let plotlyResponse = figure.Plot("2D Histogram Overlaid with a Scatter Chart")
-
-figure.Show()
-
-      
-
-Built with WebSharper
-
-Facebook
-Twitter
-Email
-Print
-More
+(**
+<iframe width="640" height="480" frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~TahaHachana/415.embed?width=640&height=480" ></iframe>
+*)

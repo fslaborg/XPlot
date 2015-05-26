@@ -1,9 +1,8 @@
 ﻿(*** hide ***)
 // This block of code is omitted in the generated HTML documentation. Use 
 // it to define helpers that you do not want to show in the documentation.
-#nowarn "211"
 #I "../../../bin"
-#I "../../../packages/MathNet.Numerics/lib/portable-net45+netcore45+MonoAndroid1+MonoTouch1"
+#I "../../../packages/MathNet.Numerics/lib/net40"
 
 #load "../credentials.fsx"
 #r "XPlot.Plotly.dll"
@@ -11,162 +10,126 @@
 #r "MathNet.Numerics.dll"
 
 open XPlot.Plotly
+open MathNet.Numerics.Distributions
 
 Plotly.Signin MyCredentials.userAndKey
 
 let normal = new Normal(0., 1.0)
 
-let x =
+let basicX =
     normal.Samples()
     |> Seq.take 500
     |> Seq.toArray
 
-let data = Data([Histogram(x = x)])
+let horizontalY =
+    normal.Samples()
+    |> Seq.take 500
+    |> Seq.toArray
 
-let figure = Figure(data)
+let overlaidX0 =
+    normal.Samples()
+    |> Seq.take 500
+    |> Seq.toArray
 
-let plotlyResponse = figure.Plot("Basic Histogram")
+let overlaidX1 = Array.map (fun x -> x + 1.) overlaidX0
 
-figure.Show()
+let stackedX0 =
+    normal.Samples()
+    |> Seq.take 500
+    |> Seq.toArray
 
+let stackedX1 = Array.map (fun x -> x + 1.) stackedX0
 
+let coloredX0 =
+    normal.Samples()
+    |> Seq.take 500
+    |> Seq.toArray
+
+let coloredX1 = Array.map (fun x -> x + 1.) coloredX0
+
+(**
+Plotly Line and Scatter Plots
+=============================
+
+Basic Histogram
+---------------
+*)
+
+let basicData = Data([Histogram(x = basicX)])
+
+let basicLayout = Layout(title = "Basic Histogram")
+
+Figure(basicData, basicLayout)
+
+(**
+<iframe width="640" height="480" frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~TahaHachana/388.embed?width=640&height=480" ></iframe>
+*)
       
-
+(**
 Horizontal Histogram
-
+--------------------
+*)
        
-#r """../packages/Http.fs.1.5.1/lib/net40/HttpClient.dll"""
-#r """../packages/XPlot.Plotly.0.8.0/Lib/Net45/XPlot.Plotly.dll"""
-#r """../packages/MathNet.Numerics.3.6.0/lib/net40/MathNet.Numerics.dll"""
+let horizontalData = Data([Histogram(y = horizontalY)])
 
-open MathNet.Numerics.Distributions
-open XPlot.Plotly
+let horizontalLayout = Layout(title = "Horizontal Histogram")
 
-Plotly.Signin("Username", "API Key")
+Figure(horizontalData, horizontalLayout)
 
-let normal = new Normal(0., 1.0)
+(**
+<iframe width="640" height="480" frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~TahaHachana/389.embed?width=640&height=480" ></iframe>
+*)
 
-let y =
-    normal.Samples()
-    |> Seq.take 500
-    |> Seq.toArray
-
-let data = Data([Histogram(y = y)])
-
-let figure = Figure(data)
-
-let plotlyResponse = figure.Plot("Horizontal Histogram")
-
-figure.Show()
-
-      
-
+(**
 Overlaid Histogram
-
+------------------
+*)
        
-#r """../packages/Http.fs.1.5.1/lib/net40/HttpClient.dll"""
-#r """../packages/XPlot.Plotly.0.8.0/Lib/Net45/XPlot.Plotly.dll"""
-#r """../packages/MathNet.Numerics.3.6.0/lib/net40/MathNet.Numerics.dll"""
-
-open MathNet.Numerics.Distributions
-open XPlot.Plotly
-
-Plotly.Signin("Username", "API Key")
-
-let normal = new Normal(0., 1.0)
-
-let x0 =
-    normal.Samples()
-    |> Seq.take 500
-    |> Seq.toArray
-
-let x1 = Array.map (fun x -> x + 1.) x0
-    
-let trace1 =
+let overlaidTrace1 =
     Histogram(
-        x = x0,
+        x = overlaidX0,
         opacity = 0.75
     )
 
-let trace2 =
+let overlaidTrace2 =
     Histogram(
-        x = x1,
+        x = overlaidX1,
         opacity = 0.75
     )
 
-let data = Data([trace1; trace2])
+let overlaidLayout = Layout(barmode = "overlay", title = "Overlaid Histogram")
 
-let layout = Layout(barmode = "overlay")
+Figure(Data.From [overlaidTrace1; overlaidTrace2], overlaidLayout)
 
-let figure = Figure(data, layout)
+(**
+<iframe width="640" height="480" frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~TahaHachana/390.embed?width=640&height=480" ></iframe>
+*)
 
-let plotlyResponse = figure.Plot("Overlaid Histogram")
-
-figure.Show()
-
-      
-
+(**
 Stacked Histograms
-
+------------------
+*)
        
-#r """../packages/Http.fs.1.5.1/lib/net40/HttpClient.dll"""
-#r """../packages/XPlot.Plotly.0.8.0/Lib/Net45/XPlot.Plotly.dll"""
-#r """../packages/MathNet.Numerics.3.6.0/lib/net40/MathNet.Numerics.dll"""
+let stackedTrace1 = Histogram(x = stackedX0)
 
-open MathNet.Numerics.Distributions
-open XPlot.Plotly
+let stackedTrace2 = Histogram(x = stackedX1)
 
-Plotly.Signin("Username", "API Key")
+let stackedLayout = Layout(barmode = "stack", title = "Stacked Histograms")
 
-let normal = new Normal(0., 1.0)
+Figure(Data.From [stackedTrace1; stackedTrace2], stackedLayout)
 
-let x0 =
-    normal.Samples()
-    |> Seq.take 500
-    |> Seq.toArray
-
-let x1 = Array.map (fun x -> x + 1.) x0
-    
-let trace1 = Histogram(x = x0)
-
-let trace2 = Histogram(x = x1)
-
-let data = Data([trace1; trace2])
-
-let layout = Layout(barmode = "stack")
-
-let figure = Figure(data, layout)
-
-let plotlyResponse = figure.Plot("Stacked Histograms")
-
-figure.Show()
-
+(**
+<iframe width="640" height="480" frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~TahaHachana/394.embed?width=640&height=480" ></iframe>
+*)
       
-
+(**
 Colored and Styled Histograms
+-----------------------------
+*)
 
-       
-#r """../packages/Http.fs.1.5.1/lib/net40/HttpClient.dll"""
-#r """../packages/XPlot.Plotly.0.8.0/Lib/Net45/XPlot.Plotly.dll"""
-#r """../packages/MathNet.Numerics.3.6.0/lib/net40/MathNet.Numerics.dll"""
-
-open MathNet.Numerics.Distributions
-open XPlot.Plotly
-
-Plotly.Signin("Username", "API Key")
-
-let normal = new Normal(0., 1.0)
-
-let x0 =
-    normal.Samples()
-    |> Seq.take 500
-    |> Seq.toArray
-
-let x1 = Array.map (fun x -> x + 1.) x0
-
-let trace1 =
+let coloredTrace1 =
     Histogram(
-        x = x0,
+        x = coloredX0,
         histnorm = "count",
         name = "control",
         autobinx = false,
@@ -188,9 +151,9 @@ let trace1 =
             )
     )
 
-let trace2 =
+let coloredTrace2 =
     Histogram(
-        x = x1,
+        x = coloredX1,
         name = "experimental",
         autobinx = false,
         xbins =
@@ -203,11 +166,9 @@ let trace2 =
         opacity = 0.75
     )
 
-let data = Data([trace1; trace2])
-
-let layout =
+let coloredLayout =
     Layout(
-        title = "Sampled Results",
+        title = "Colored and Styled Histograms",
         xaxis = XAxis(title = "Value"),
         yaxis = YAxis(title = "Count"),
         barmode = "overlay",
@@ -215,18 +176,8 @@ let layout =
         bargroupgap = 0.3
     )
 
-let figure = Figure(data, layout)
+Figure(Data.From [coloredTrace1; coloredTrace2], coloredLayout)
 
-let plotlyResponse = figure.Plot("Colored and Styled Histograms")
-
-figure.Show()
-
-      
-
-Built with WebSharper
-
-Facebook
-Twitter
-Email
-Print
-More
+(**
+<iframe width="640" height="480" frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~TahaHachana/395.embed?width=640&height=480" ></iframe>
+*)

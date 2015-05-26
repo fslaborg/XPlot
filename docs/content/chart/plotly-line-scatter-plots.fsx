@@ -1,95 +1,80 @@
 ﻿(*** hide ***)
 // This block of code is omitted in the generated HTML documentation. Use 
 // it to define helpers that you do not want to show in the documentation.
-#nowarn "211"
 #I "../../../bin"
-#I "../../../packages/MathNet.Numerics/lib/portable-net45+netcore45+MonoAndroid1+MonoTouch1"
 
 #load "../credentials.fsx"
 #r "XPlot.Plotly.dll"
 #r "XPlot.Plotly.WPF.dll"
-#r "MathNet.Numerics.dll"
 
 open XPlot.Plotly
 
 Plotly.Signin MyCredentials.userAndKey
 
-let trace1 =
+(**
+Plotly Line and Scatter Plots
+=============================
+
+Basic Line Plot
+---------------
+*)
+
+let basicTrace1 =
     Scatter(
         x = [1; 2; 3; 4],
         y = [10; 15; 13; 17]
     )
 
-let trace2 =
+let basicTrace2 =
     Scatter(
         x = [1; 2; 3; 4],
         y = [16; 5; 11; 9]
     )
 
-let data = Data [trace1; trace2]
+Figure(Data.From [basicTrace1; basicTrace2])
 
-let figure = Figure data
+(**
+<iframe width="640" height="480" frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~TahaHachana/173.embed?width=640&height=480" ></iframe>
+*)
 
-let plotlyResponse = figure.Plot("Basic Line Plot")
-
-figure.Show()
-
-
-      
-
+(**
 Line and Scatter Plot
-
+---------------------
+*)
        
-#r """../packages/Http.fs.1.5.1/lib/net40/HttpClient.dll"""
-#r """../packages/XPlot.Plotly.0.2.0/Lib/Net45/XPlot.Plotly.dll"""
-
-open XPlot.Plotly
-
-Plotly.Signin("Username", "API Key")
-
-let trace1 =
+let lineTrace1 =
     Scatter(
         x = [1; 2; 3; 4],
         y = [10; 15; 13; 17],
         mode = "markers"
     )
 
-let trace2 =
+let lineTrace2 =
     Scatter(
         x = [2; 3; 4; 5],
         y = [16; 5; 11; 9],
         mode = "lines"
     )
 
-let trace3 =
+let lineTrace3 =
     Scatter(
         x = [1; 2; 3; 4],
         y = [12; 9; 15; 12],
         mode = "lines+markers"
     )
 
-let data = Data [trace1; trace2; trace3]
+Figure(Data.From [lineTrace1; lineTrace2; lineTrace3])
 
-let figure = Figure data
+(**
+<iframe width="640" height="480" frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~TahaHachana/177.embed?width=640&height=480" ></iframe>
+*)
 
-let plotlyResponse = figure.Plot("Line and Scatter Plot")
-
-figure.Show()
-
-
-      
-
+(**
 Colored and Styled Scatter Plot
+-------------------------------
+*)
 
-       
-#r """../packages/Http.fs.1.5.1/lib/net40/HttpClient.dll"""
-#r """../packages/XPlot.Plotly.0.2.0/Lib/Net45/XPlot.Plotly.dll"""
-
-open XPlot.Plotly
-
-Plotly.Signin("Username", "API Key")
-
-let trace1 =
+let styledTrace1 =
     Scatter(
         x = [52698; 43117],
         y = [53; 31],
@@ -108,7 +93,7 @@ let trace1 =
             )
     )
 
-let trace2 =
+let styledTrace2 =
     Scatter(
         x = [39317; 37236; 35650; 30066; 29570; 27159; 23557; 21046; 18007],
         y = [33; 20; 13; 19; 27; 19; 49; 44; 38],
@@ -127,7 +112,7 @@ let trace2 =
             )
     )
 
-let trace3 = 
+let styledTrace3 = 
     Scatter(
         x = [42952; 37037; 33106; 17478; 9813; 5253; 4692; 3899],
         y = [23; 42; 54; 89; 14; 99; 93; 70],
@@ -146,7 +131,7 @@ let trace3 =
             )
     )
 
-let trace4 =
+let styledTrace4 =
     Scatter(
         x = [19097; 18601; 15595; 13546; 12026; 7434; 5419],
         y = [43; 47; 56; 80; 86; 93; 80],
@@ -165,44 +150,34 @@ let trace4 =
             )
     )
 
-let data = Data [trace1; trace2; trace3; trace4]
-
-let layout =
+let styledLayout =
     Layout(
         title = "Quarter 1 Growth",
         xaxis =
-            Xaxis(
+            XAxis(
                 title = "GDP per Capita",
                 showgrid = false,
                 zeroline = false
             ),
         yaxis =
-            Yaxis(
+            YAxis(
                 title = "Percent",
                 showline = false
             )
     )
 
-let figure = Figure(data, layout)
+Figure(Data.From [styledTrace1; styledTrace2; styledTrace3; styledTrace4], styledLayout)
 
-let plotlyResponse = figure.Plot("Colored and Styled Scatter Plot")
+(**
+<iframe width="640" height="480" frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~TahaHachana/178.embed?width=640&height=480" ></iframe>
+*)
 
-figure.Show()
-
-
-      
-
+(**
 Line Shape Options for Interpolation
+------------------------------------
+*)
 
-       
-#r """../packages/Http.fs.1.5.1/lib/net40/HttpClient.dll"""
-#r """../packages/XPlot.Plotly.0.2.0/Lib/Net45/XPlot.Plotly.dll"""
-
-open XPlot.Plotly
-
-Plotly.Signin("Username", "API Key")
-
-let trace1 =
+let shapeTrace1 =
     Scatter(
         x = [1; 2; 3; 4; 5],
         y = [1; 3; 2; 3; 1],
@@ -211,7 +186,7 @@ let trace1 =
         line = Line(shape = "linear")
     )
 
-let trace2 =
+let shapeTrace2 =
     Scatter(
         x = [1; 2; 3; 4; 5],
         y = [6; 8; 7; 8; 6],
@@ -221,7 +196,7 @@ let trace2 =
         line = Line(shape = "spline")
     )
 
-let trace3 =
+let shapeTrace3 =
     Scatter(
         x = [1; 2; 3; 4; 5],
         y = [11; 13; 12; 13; 11],
@@ -230,7 +205,7 @@ let trace3 =
         line = Line(shape = "vhv")
     )
 
-let trace4 =
+let shapeTrace4 =
     Scatter(
         x = [1; 2; 3; 4; 5],
         y = [16; 18; 17; 18; 16],
@@ -239,7 +214,7 @@ let trace4 =
         line = Line(shape = "hvh")
     )
 
-let trace5 =
+let shapeTrace5 =
     Scatter(
         x = [1; 2; 3; 4; 5],
         y = [21; 23; 22; 23; 21],
@@ -248,7 +223,7 @@ let trace5 =
         line = Line(shape = "vh")
     )
 
-let trace6 =
+let shapeTrace6 =
     Scatter(
         x = [1; 2; 3; 4; 5],
         y = [26; 28; 27; 28; 26],
@@ -257,9 +232,9 @@ let trace6 =
         line = Line(shape = "hv")
     )
 
-let data = Data [trace1; trace2; trace3; trace4; trace5; trace6]
+let data = Data [shapeTrace1; shapeTrace2; shapeTrace3; shapeTrace4; shapeTrace5; shapeTrace6]
         
-let layout =
+let shapeLayout =
     Layout(
         legend =
             Legend(
@@ -270,11 +245,8 @@ let layout =
             )
     )
 
-let figure = Figure(data, layout)
+Figure(data, shapeLayout)
 
-let plotlyResponse = figure.Plot("Line Shape Options for Interpolation")
-
-figure.Show()
-
-      
-
+(**
+<iframe width="640" height="480" frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~TahaHachana/179.embed?width=640&height=480" ></iframe>
+*)
