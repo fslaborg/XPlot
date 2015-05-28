@@ -1,4 +1,7 @@
-﻿### 1.1.8 - May 5, 2015
+﻿### 1.1.9 - May 28, 2015
+* Fix data table generation for sankey diagrams
+
+### 1.1.8 - May 5, 2015
 * Fix data grouping when the series have different lengths
 * Show a legend for Google Charts when WithLabel[s] is called
 * Auto open the Deedle helpers module

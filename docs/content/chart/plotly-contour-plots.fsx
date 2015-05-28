@@ -1,9 +1,6 @@
 ﻿(*** hide ***)
-// This block of code is omitted in the generated HTML documentation. Use 
-// it to define helpers that you do not want to show in the documentation.
 #I "../../../bin"
 #I "../../../packages/MathNet.Numerics/lib/net40"
-
 #load "../credentials.fsx"
 #r "XPlot.Plotly.dll"
 #r "XPlot.Plotly.WPF.dll"

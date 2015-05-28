@@ -1,8 +1,5 @@
 ﻿(*** hide ***)
-// This block of code is omitted in the generated HTML documentation. Use 
-// it to define helpers that you do not want to show in the documentation.
 #I "../../../bin"
-
 #load "../credentials.fsx"
 #r "XPlot.Plotly.dll"
 #r "XPlot.Plotly.WPF.dll"
@@ -99,7 +96,9 @@ let styledTrace2 =
         y = [33; 20; 13; 19; 27; 19; 49; 44; 38],
         mode = "markers",
         name = "Europe",
-        text = ["Germany"; "Britain"; "France"; "Spain"; "Italy"; "Czech Rep."; "Greece"; "Poland"],
+        text =
+            ["Germany"; "Britain"; "France"; "Spain"; "Italy"; "Czech Rep."; "Greece";
+             "Poland"],
         marker =
             Marker(
                 color = "rgb(255, 217, 102)",
@@ -118,7 +117,9 @@ let styledTrace3 =
         y = [23; 42; 54; 89; 14; 99; 93; 70],
         mode = "markers",
         name = "Asia/Pacific",
-        text = ["Australia"; "Japan"; "South Korea"; "Malaysia"; "China"; "Indonesia"; "Philippines"; "India"],
+        text =
+            ["Australia"; "Japan"; "South Korea"; "Malaysia"; "China"; "Indonesia";
+             "Philippines"; "India"],
         marker =
             Marker(
                 color = "rgb(234, 153, 153)",
@@ -137,7 +138,9 @@ let styledTrace4 =
         y = [43; 47; 56; 80; 86; 93; 80],
         mode = "markers",
         name = "Latin America",
-        text = ["Chile"; "Argentina"; "Mexico"; "Venezuela"; "Venezuela"; "El Salvador"; "Bolivia"],
+        text =
+            ["Chile"; "Argentina"; "Mexico"; "Venezuela"; "Venezuela"; "El Salvador";
+             "Bolivia"],
         marker = 
             Marker(
                 color = "rgb(142, 124, 195)",
@@ -166,7 +169,10 @@ let styledLayout =
             )
     )
 
-Figure(Data.From [styledTrace1; styledTrace2; styledTrace3; styledTrace4], styledLayout)
+Figure(
+    Data.From [styledTrace1; styledTrace2; styledTrace3; styledTrace4],
+    styledLayout
+)
 
 (**
 <iframe width="640" height="480" frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~TahaHachana/178.embed?width=640&height=480" ></iframe>
@@ -192,7 +198,13 @@ let shapeTrace2 =
         y = [6; 8; 7; 8; 6],
         mode = "lines+markers",
         name = "'spline'",
-        text = ["tweak line smoothness<br>with 'smoothing' in line object"; "tweak line smoothness<br>with 'smoothing' in line object"; "tweak line smoothness<br>with 'smoothing' in line object"; "tweak line smoothness<br>with 'smoothing' in line object"; "tweak line smoothness<br>with 'smoothing' in line object"; "tweak line smoothness<br>with 'smoothing' in line object"],
+        text =
+            ["tweak line smoothness<br>with 'smoothing' in line object";
+             "tweak line smoothness<br>with 'smoothing' in line object";
+             "tweak line smoothness<br>with 'smoothing' in line object";
+             "tweak line smoothness<br>with 'smoothing' in line object";
+             "tweak line smoothness<br>with 'smoothing' in line object";
+             "tweak line smoothness<br>with 'smoothing' in line object"],
         line = Line(shape = "spline")
     )
 
@@ -232,7 +244,10 @@ let shapeTrace6 =
         line = Line(shape = "hv")
     )
 
-let data = Data [shapeTrace1; shapeTrace2; shapeTrace3; shapeTrace4; shapeTrace5; shapeTrace6]
+let data =
+    Data([shapeTrace1; shapeTrace2; shapeTrace3;
+          shapeTrace4; shapeTrace5; shapeTrace6]
+    )
         
 let shapeLayout =
     Layout(

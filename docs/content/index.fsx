@@ -1,9 +1,5 @@
 (*** hide ***)
-// This block of code is omitted in the generated HTML documentation. Use 
-// it to define helpers that you do not want to show in the documentation.
-#nowarn "211"
 #I "../../bin"
-
 #load "credentials.fsx"
 #r "XPlot.Plotly.dll"
 #r "XPlot.GoogleCharts.dll"
@@ -41,8 +37,8 @@ let HobbsPearson =
       Angular = [-66.53583632728323; -84.514422676922; -63.339741699567846; -24.146812744223833; -59.70124532256676; -88.06537267996578; -98.44420453532204; -49.15839681719936; -73.63622331202959; -17.923874678608904; -38.41239945460549; -66.34036237792131; -40.88883873919996; -52.46063321002169; -52.61046255912479; -7.039351050913894; -57.23545869215697; -71.64220350197985; -52.345396169095466; -92.78303867354904; -47.18716305503351; -41.969208462875166; -82.14422824993427; -59.43916560317718; -79.19482259319774; -62.29990853531319; -65.53790403937941; -48.9060554475786; -37.74831103800929; -78.05333345828834; -71.87311766307504; -41.891092825900685; -53.11545548549721; -52.997628097314845; -87.0843610179252; -43.61190483837573; -48.79799840560851; -82.56680315713163; -47.90996299570176; -46.57048558531105; -54.5004832176089; -65.90072712679752; -66.87331746360131; -75.48080725209734; -54.777693866880114; -42.5983345913628; -74.50816626907293; -47.11021844342552; -22.356873183328428; -84.19298674498425; -78.50528475620209; -65.0363717923471; -66.51373368133282; -63.52677656175937; -77.80907855131592; -68.51017974013602; -51.296869310885135; -68.33991302765452; -38.631733068443026; -77.85184858511114];
       Color = "rgb(230,171,2)" } ]
 (**
-XPlot: F# Data Visualization Package
-====================================
+XPlot - F# Data Visualization Package
+=====================================
 
 XPlot is a cross-platform data visualization package for the F# programming language powered by popular 
 JavaScript charting libraries [Google Charts](https://developers.google.com/chart/) and [Plotly](https://plot.ly/).
@@ -59,7 +55,7 @@ The next two demos show some of the more complex and advanced charts that can be
 If you're getting started with XPlot, see the other [documentation](#Documentation) pages for 
 simpler charts.
 
-### XPlot Google Charts example
+### Google Charts example
 
 The following example uses the Google Charts library to create a combo chart showing coffee production
 in Bolivia, Ecuador and Madagascar (as bar plots), together with the average visualized as a line chart:
@@ -84,7 +80,7 @@ to create a basic chart and then we set a number of properties - `Chart.WithOpti
 chart looks, `Chart.WithLabels` and `Chart.WithLegend` adds the legend that annotates the individual
 chart series.
 
-### XPlot Plotly example
+### Plotly example
 
 The following example uses the Plotly online data analytics and visualization tool. It creates a scatter
 plot, rendered on a polar chart with different marker color for each of the trials stored in the `HobbsPearson`

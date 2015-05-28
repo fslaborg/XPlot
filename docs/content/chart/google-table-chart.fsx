@@ -31,4 +31,4 @@ Google Table Chart
 |> Chart.Table
 |> Chart.WithOptions(Options(showRowNumber = true))
 |> Chart.WithLabels ["Name"; "Salary"; "Full Time Employee"]
-(*** include-it:bar ***)
+(*** include-it:table ***)

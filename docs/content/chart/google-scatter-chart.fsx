@@ -13,7 +13,7 @@ points by multiplying two numbers for the X coordinate and two numbers for the Y
 (*** define-output:point1 ***) 
 let rnd = new System.Random() 
 let next() = rnd.NextDouble() * rnd.NextDouble()
-let points = [ for i in 0 .. 1000 -> next(), next() ]
+let points = [ for i in 0 .. 100 -> next(), next() ]
 
 points |> Chart.Scatter 
 (*** include-it:point1 ***)

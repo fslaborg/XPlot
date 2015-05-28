@@ -1,8 +1,5 @@
 ﻿(*** hide ***)
-// This block of code is omitted in the generated HTML documentation. Use 
-// it to define helpers that you do not want to show in the documentation.
 #I "../../../bin"
-
 #load "../credentials.fsx"
 #r "XPlot.Plotly.dll"
 #r "XPlot.Plotly.WPF.dll"
@@ -65,7 +62,9 @@ let trace2 =
 
 let multiData1 = Data([trace1; trace2])
 
-let multiLayout1 = Layout(title = "A Contour and Scatter Plot of the Method of Steepest Descent")
+let title = "A Contour and Scatter Plot of the Method of Steepest Descent"
+
+let multiLayout1 = Layout(title = title)
 
 Figure(multiData1, multiLayout1)
 

@@ -8,8 +8,8 @@ let sales = ["2013", 1000; "2014", 1170; "2015", 660; "2016", 1030]
 let expenses = ["2013", 400; "2014", 460; "2015", 1120; "2016", 540]
 
 (**
-Google Bar Chart
-=================
+Google Column Chart
+===================
 *)
 (*** define-output:column ***) 
 let options =

@@ -1,9 +1,5 @@
 ﻿(*** hide ***)
-// This block of code is omitted in the generated HTML documentation. Use 
-// it to define helpers that you do not want to show in the documentation.
-#nowarn "211"
 #I "../../../bin"
-
 #load "../credentials.fsx"
 #r "XPlot.Plotly.dll"
 #r "XPlot.Plotly.WPF.dll"
@@ -100,16 +96,24 @@ Colored and Styled Bar Chart
 
 let styledTrace1 =
     Bar(
-        x = [1995; 1996; 1997; 1998; 1999; 2000; 2001; 2002; 2003; 2004; 2005; 2006; 2007; 2008; 2009; 2010; 2011; 2012],
-        y = [219; 146; 112; 127; 124; 180; 236; 207; 236; 263; 350; 430; 474; 526; 488; 537; 500; 439],
+        x =
+            [1995; 1996; 1997; 1998; 1999; 2000; 2001; 2002; 2003; 2004; 2005; 2006;
+             2007; 2008; 2009; 2010; 2011; 2012],
+        y =
+            [219; 146; 112; 127; 124; 180; 236; 207; 236; 263; 350; 430; 474; 526; 488;
+            537; 500; 439],
         name = "Rest of world",
         marker = Marker(color = "rgb(55, 83, 109)")
     )
 
 let styledTrace2 =
     Bar(
-        x = [1995; 1996; 1997; 1998; 1999; 2000; 2001; 2002; 2003; 2004; 2005; 2006; 2007; 2008; 2009; 2010; 2011; 2012],
-        y = [16; 13; 10; 11; 28; 37; 43; 55; 56; 88; 105; 156; 270; 299; 340; 403; 549; 499],
+        x =
+            [1995; 1996; 1997; 1998; 1999; 2000; 2001; 2002; 2003; 2004; 2005; 2006;
+            2007; 2008; 2009; 2010; 2011; 2012],
+        y =
+            [16; 13; 10; 11; 28; 37; 43; 55; 56; 88; 105; 156; 270; 299; 340; 403; 549;
+            499],        
         name = "China",
         marker = Marker(color = "rgb(26, 118, 255)")
     )
@@ -168,7 +172,9 @@ let hoverTrace =
     Bar(
         x = ["Liam"; "Sophie"; "Jacob"; "Mia"; "William"; "Olivia"],
         y = [8.0; 8.0; 12.0; 12.0; 13.0; 20.0],
-        text = ["4.17 below the mean"; "4.17 below the mean"; "0.17 below the mean"; "0.17 below the mean"; "0.83 above the mean"; "7.83 above the mean"],
+        text =
+            ["4.17 below the mean"; "4.17 below the mean"; "0.17 below the mean";
+            "0.17 below the mean"; "0.83 above the mean"; "7.83 above the mean"],
         marker = Marker(color = "rgb(142, 124, 195)")
     )
 

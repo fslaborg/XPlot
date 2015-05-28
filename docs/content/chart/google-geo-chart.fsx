@@ -4,8 +4,8 @@
 #r "XPlot.GoogleCharts.WPF.dll"
 open XPlot.GoogleCharts
 (**
-XPlot Google: Geo charts
-========================
+Google Geo charts
+=================
 
 This example shows how to create geo charts and line charts using the 
 `XPlot.GoogleCharts` library.

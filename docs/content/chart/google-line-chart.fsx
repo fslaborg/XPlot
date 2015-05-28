@@ -4,8 +4,8 @@
 #r "XPlot.GoogleCharts.WPF.dll"
 open XPlot.GoogleCharts
 (**
-XPlot Google: Line and scatter charts
-=====================================
+Google Line Chart
+=================
 
 This example shows how to create scatter (point) charts and line charts using the 
 `XPlot.GoogleCharts` library.
