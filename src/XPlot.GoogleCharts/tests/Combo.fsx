@@ -25,5 +25,4 @@ let test =
     |> Chart.Combo
     |> Chart.WithOptions options
     |> Chart.WithLabels ["Bolivia"; "Ecuador"; "Madagascar"; "Papua New Guinea"; "Rwanda"; "Average"]
-    |> Chart.WithLegend true
     |> Chart.Show

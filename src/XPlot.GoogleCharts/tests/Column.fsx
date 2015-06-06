@@ -20,9 +20,8 @@ let options =
 let test1 =
     [sales; expenses]
     |> Chart.Column
-    |> Chart.WithLabels ["Sales"; "Expenses"]
     |> Chart.WithOptions options
-    |> Chart.WithLegend true
+    |> Chart.WithLabels ["Sales"; "Expenses"]
     |> Chart.Show
 
 let test2 =

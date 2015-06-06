@@ -98,6 +98,6 @@ let treemap2 =
 
     data
     |> Chart.Treemap
-    |> Chart.WithLabels  ["Location"; "Parent"; "Market trade volume (size)"; "Market increase/decrease (color)"]
     |> Chart.WithOptions options
+    |> Chart.WithLabels  ["Location"; "Parent"; "Market trade volume (size)"; "Market increase/decrease (color)"]
     |> Chart.Show

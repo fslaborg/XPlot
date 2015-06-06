@@ -89,18 +89,12 @@ module Data =
                 )
             
         let sysDt = new System.Data.DataTable()
-
         sysDt.Locale <- CultureInfo.InvariantCulture
 
-        let firstRow =
-            rows
-            |> Seq.filter (fun (_, fields) ->
-                fields |> Seq.exists (fun (x, _) -> x.IsNone) = false
-            )
-            |> Seq.maxBy (fun (_, fields) -> Seq.length fields)
+        let longestRow = Seq.maxBy (snd >> Seq.length) rows
 
         let labels' =
-            let length = snd firstRow |> Seq.length
+            let length = snd longestRow |> Seq.length
             match labels with
             | None -> seq {for x in 1 .. (length + 1) -> "Column " + string x}
             | Some labelsSeq ->
@@ -108,12 +102,22 @@ module Data =
                 | false -> Seq.append ["Column 1"] labelsSeq
                 | true -> labelsSeq
 
-        sysDt.Columns.Add(Seq.nth 0 labels', (fst firstRow).GetType())
+        sysDt.Columns.Add(Seq.nth 0 labels', (fst longestRow).GetType())
         |> ignore
 
-        (snd firstRow)
-        |> List.iteri (fun idx (value, _) ->
-            sysDt.Columns.Add(Seq.nth (idx + 1) labels', value.Value.GetType())
+        let values = Seq.map snd rows 
+
+        (snd longestRow)
+        |> List.iteri (fun idx _ ->
+            let columnType =
+                values
+                |> Seq.tryPick (fun x ->
+                    match x.Length with
+                    | l when l < idx + 1 -> None
+                    | _ -> fst x.[idx])
+                |> Option.get
+                |> fun x -> x.GetType()
+            sysDt.Columns.Add(Seq.nth (idx + 1) labels', columnType)
             |> ignore
         )
 
@@ -122,7 +126,11 @@ module Data =
             let row = sysDt.NewRow()
             row.SetField(0, key)
             values
-            |> Seq.iter (fun (value, column) -> match value with Some v -> row.SetField(column, v) | _ -> ())
+            |> Seq.iter (fun (value, column) ->
+                match value with
+                | Some v -> row.SetField(column, v)
+                | _ -> ()
+            )
             sysDt.Rows.Add(row)
         )
 
@@ -227,7 +235,7 @@ type GoogleChart() =
     static member Create data labels options ``type`` =
         let dt =
             match ``type`` with
-            | Sankey -> makeDataTable data labels false
+            | Sankey | Timeline -> makeDataTable data labels false
             | _ -> makeDataTable data labels true
         let gc = GoogleChart()
         gc.dataTable <- dt

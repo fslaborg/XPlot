@@ -1,4 +1,7 @@
-﻿### 1.1.9 - May 28, 2015
+﻿### 1.2.0 - June 6, 2015
+* Fix data table generation for non-overlapping series
+
+### 1.1.9 - May 28, 2015
 * Fix data table generation for sankey diagrams
 
 ### 1.1.8 - May 5, 2015

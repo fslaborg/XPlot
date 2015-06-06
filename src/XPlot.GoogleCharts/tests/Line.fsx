@@ -19,7 +19,6 @@ let chart2 =
     |> Chart.Line
     |> Chart.WithTitle "Company Performance"
     |> Chart.WithLabels ["Sales"; "Expenses"]
-    |> Chart.WithLegend true
     |> Chart.Show
         
 // spline

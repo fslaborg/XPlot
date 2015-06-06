@@ -3,10 +3,10 @@ open System.Reflection
 
 [<assembly: AssemblyTitleAttribute("XPlot.Plotly")>]
 [<assembly: AssemblyProductAttribute("XPlot")>]
-[<assembly: AssemblyDescriptionAttribute("F# wrapper for Plotly.")>]
-[<assembly: AssemblyVersionAttribute("1.0.1")>]
-[<assembly: AssemblyFileVersionAttribute("1.0.1")>]
+[<assembly: AssemblyDescriptionAttribute("Data visualization library for F#")>]
+[<assembly: AssemblyVersionAttribute("1.2.0")>]
+[<assembly: AssemblyFileVersionAttribute("1.2.0")>]
 do ()
 
 module internal AssemblyVersionInformation =
-    let [<Literal>] Version = "1.0.1"
+    let [<Literal>] Version = "1.2.0"

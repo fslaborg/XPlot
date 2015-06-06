@@ -29,5 +29,4 @@ let chart =
     |> Chart.SteppedArea
     |> Chart.WithOptions options
     |> Chart.WithLabels ["Rotten Tomatoes"; "IMDB"]
-    |> Chart.WithLegend true
     |> Chart.Show

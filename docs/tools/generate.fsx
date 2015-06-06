@@ -4,17 +4,17 @@
 // --------------------------------------------------------------------------------------
 
 // Web site location for the generated documentation
-let website = "" //"/XPlot"
+let website = "/XPlot"
 
 let githubLink = "http://github.com/TahaHachana/XPlot"
 
 // Specify more information about your project
 let info =
   [ "project-name", "XPlot"
-    "project-author", "Taha Hachana"
+    "project-author", "Taha Hachana; Tomas Petricek"
     "project-summary", "Data visualization library for F#"
     "project-github", githubLink
-    "project-nuget", "http://nuget.org/packages/XPlot" ]
+    "project-nuget", "http://www.nuget.org/packages?q=XPlot" ]
 
 // --------------------------------------------------------------------------------------
 // For typical project, no changes are needed below

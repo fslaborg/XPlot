@@ -45,8 +45,8 @@ let coloredX0 =
 let coloredX1 = Array.map (fun x -> x + 1.) coloredX0
 
 (**
-Plotly Line and Scatter Plots
-=============================
+Plotly Histograms
+=================
 
 Basic Histogram
 ---------------

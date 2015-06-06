@@ -41,7 +41,7 @@ let description = "XPlot is a cross-platform data visualization library that sup
 let authors = [ "Taha Hachana"; "Tomas Petricek" ]
 
 // Tags for your project (for NuGet package)
-let tags = "F# fsharp data visualization html5 javascript datavis google chart plotly deedle frame dataframe"
+let tags = "f# fsharp data visualization html5 javascript datavis google chart plotly deedle frame dataframe"
 
 // File system information
 let solutionFile  = "XPlot.sln"
@@ -213,15 +213,15 @@ Target "GenerateDocs" DoNothing
 // --------------------------------------------------------------------------------------
 // Release Scripts
 
-Target "ReleaseDocs" (fun _ -> ()
-//    let tempDocsDir = "temp/gh-pages"
-//    CleanDir tempDocsDir
-//    Repository.cloneSingleBranch "" (gitHome + "/" + gitName + ".git") "gh-pages" tempDocsDir
-//
-//    CopyRecursive "docs/output" tempDocsDir true |> tracefn "%A"
-//    StageAll tempDocsDir
-//    Git.Commit.Commit tempDocsDir (sprintf "Update generated documentation for version %s" release.NugetVersion)
-//    Branches.push tempDocsDir
+Target "ReleaseDocs" (fun _ ->
+    let tempDocsDir = "temp/gh-pages"
+    CleanDir tempDocsDir
+    Repository.cloneSingleBranch "" (gitHome + "/" + gitName + ".git") "gh-pages" tempDocsDir
+
+    CopyRecursive "docs/output" tempDocsDir true |> tracefn "%A"
+    StageAll tempDocsDir
+    Git.Commit.Commit tempDocsDir (sprintf "Update generated documentation for version %s" release.NugetVersion)
+    Branches.push tempDocsDir
 )
 
 #load "paket-files/fsharp/FAKE/modules/Octokit/Octokit.fsx"
@@ -251,13 +251,13 @@ Target "BuildPackage" DoNothing
 Target "All" DoNothing
 
 "Clean"
-//  ==> "AssemblyInfo"
+  ==> "AssemblyInfo"
   ==> "Build"
 //  ==> "RunTests"
-//  =?> ("GenerateReferenceDocs",isLocalBuild)
-//  =?> ("GenerateDocs",isLocalBuild)
+  =?> ("GenerateReferenceDocs",isLocalBuild)
+  =?> ("GenerateDocs",isLocalBuild)
   ==> "All"
-//  =?> ("ReleaseDocs",isLocalBuild)
+  =?> ("ReleaseDocs",isLocalBuild)
 
 "All"
 #if MONO
@@ -269,7 +269,7 @@ Target "All" DoNothing
 
 "CleanDocs"
   ==> "GenerateHelp"
-//  ==> "GenerateReferenceDocs"
+  ==> "GenerateReferenceDocs"
   ==> "GenerateDocs"
 
 "GenerateHelp"

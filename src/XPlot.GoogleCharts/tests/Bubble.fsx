@@ -28,7 +28,6 @@ let test1 =
     |> Chart.Bubble
     |> Chart.WithOptions options
     |> Chart.WithLabels ["Life Expectancy"; "Fertility Rate"; "Region"; "Population"]
-    |> Chart.WithLegend true
     |> Chart.Show
 
 let chart2 =
@@ -45,5 +44,4 @@ let chart2 =
     |> Chart.Bubble
     |> Chart.WithOptions options
     |> Chart.WithLabels ["X"; "Y"; "Temperature"]
-    |> Chart.WithLegend true
     |> Chart.Show

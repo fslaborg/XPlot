@@ -9,11 +9,11 @@ open XPlot.Plotly
 Plotly.Signin MyCredentials.userAndKey
 
 (**
-Plotly Line and Scatter Plots
-=============================
+Plotly Heatmaps
+===============
 
-Basic Line Plot
----------------
+Basic Heatmap
+-------------
 *)
 
 let basicData =
@@ -103,6 +103,7 @@ Figure(customData, customLayout)
 
 (**
 Earth Colorscale
+----------------
 *)
        
 let earthZ =
