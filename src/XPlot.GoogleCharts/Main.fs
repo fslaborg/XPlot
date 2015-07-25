@@ -160,6 +160,7 @@ module Templates =
         """<!DOCTYPE html>
     <html>
         <head>
+            <meta charset="UTF-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge" />
             <title>Google Chart</title>
             <script type="text/javascript" src="https://www.google.com/jsapi"></script>
