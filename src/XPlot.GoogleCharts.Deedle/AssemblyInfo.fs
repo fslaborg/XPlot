@@ -4,9 +4,9 @@ open System.Reflection
 [<assembly: AssemblyTitleAttribute("XPlot.GoogleCharts.Deedle")>]
 [<assembly: AssemblyProductAttribute("XPlot")>]
 [<assembly: AssemblyDescriptionAttribute("Data visualization library for F#")>]
-[<assembly: AssemblyVersionAttribute("1.2.1")>]
-[<assembly: AssemblyFileVersionAttribute("1.2.1")>]
+[<assembly: AssemblyVersionAttribute("1.2.2")>]
+[<assembly: AssemblyFileVersionAttribute("1.2.2")>]
 do ()
 
 module internal AssemblyVersionInformation =
-    let [<Literal>] Version = "1.2.1"
+    let [<Literal>] Version = "1.2.2"

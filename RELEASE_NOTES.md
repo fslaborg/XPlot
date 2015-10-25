@@ -1,4 +1,7 @@
-﻿### 1.2.1 - August 25, 2015
+﻿### 1.2.2 - October 25, 2015
+* Fix the Annotation.showarrow type annotation in Plotly's API
+
+### 1.2.1 - August 25, 2015
 * Set HTML charset attribute to UTF-8 in template
 
 ### 1.2.0 - June 6, 2015
