@@ -1,22 +1,7 @@
 ﻿[<AutoOpen>]
 module XPlot.Plotly.Graph
 
-open System
-
-//type key = IConvertible
-//type value = IConvertible
-
 type Trace() = do ()
-//    let mutable xField : seq<string> option = None
-//    let mutable yField : seq<_> option = None
-//
-//    member __.x
-//        with get() = xField.Value
-//        and set(value) = xField <- Some value
-//
-//    member __.y
-//        with get() = yField.Value
-//        and set(value: seq<value>) = yField <- Some value
 
 type ErrorY() =
 
