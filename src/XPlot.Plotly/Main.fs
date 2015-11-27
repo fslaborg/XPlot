@@ -125,5 +125,5 @@ module Test =
     |> Plotly.Show
 
     (*  IFsharp Notebook useage  *) 
-    //Plotly.init_notebook_mode () |> Util.Html
+    //Plotly.InitaliseNotebook () |> Util.Html
     // ([trace1; trace2], layout) |> Plotly.Plot |> Plotly.IShow |> Util.Html
