@@ -4,24 +4,16 @@ open Graph
 open Newtonsoft.Json
 
 module HTML =
-
-    let template =
-        """<head>
-  <!-- Plotly.js -->
-  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-</head>
-
-<body>
-  
-  <div id="chart" style="width: 900px; height: 500px;"><!-- Plotly chart will be drawn inside this DIV --></div>
-  <script>
-    var data = [DATA];
-    var layout = [LAYOUT];
-    Plotly.newPlot('chart', data, layout);
-  </script>
-</body>"""
-
     let plotly_url = "https://cdn.plot.ly/plotly-latest.min.js"
+    let plotly_reference = """<script src="[URL]"></script>""".Replace("[URL]", plotly_url)
+    let file_template =
+        """<head>
+    [PLOTLY_REF]
+</head>
+<body>
+    [CHART]
+</body>"""
+  
     let plotly_include = """<script type="text/javascript">
     require=requirejs=define=undefined;
 </script>
@@ -29,15 +21,13 @@ module HTML =
     [PLOTLY_JS]
 </script>"""
             
-
     let script_template = 
         """Plotly.plot("[ID]", [DATA], [LAYOUT], [CONFIG]).then(function() {
     $(".[ID].loading").remove()
 })"""
                     
-
-    let jupyter_template =
-        """<div class="[ID] loading" style="color: rgb(50,50,50);">Drawing...</div>
+    let chart_template =
+        """
 <div id="[ID]" style="height: [HEIGHT]; width: [WIDTH];" class="plotly-graph-div"></div>
 <script type="text/javascript">[SCRIPT]</script>"""
 
@@ -59,17 +49,6 @@ type PlotlyChart() =
             match Layout with
             | None -> "\"\""
             | Some x -> JsonConvert.SerializeObject x
-        let html =
-            HTML.template.Replace("[DATA]", dataJson)
-                         .Replace("[LAYOUT]", layoutJson)
-        __.chartHtml <- html
-
-    member __.IPlot(data:seq<#Trace>, ?Layout:Layout) =
-        let dataJson = JsonConvert.SerializeObject data
-        let layoutJson =
-            match Layout with
-            | None -> "\"\""
-            | Some x -> JsonConvert.SerializeObject x
         let script = 
             HTML.script_template.Replace("[ID]", div_id) 
                                 .Replace("[DATA]", dataJson)
@@ -77,11 +56,10 @@ type PlotlyChart() =
                                 .Replace("[CONFIG]", "\"\"") 
 
         let html =
-            HTML.jupyter_template.Replace("[SCRIPT]", script)
-                                 .Replace("[ID]", div_id) //hardcode
-                                 .Replace("[WIDTH]", "200") //hardcode
-                                 .Replace("[HEIGHT]", "100") //hardcode
-                               
+            HTML.chart_template.Replace("[SCRIPT]", script)
+                               .Replace("[ID]", div_id) 
+                               .Replace("[WIDTH]", "900px") //hardcode
+                               .Replace("[HEIGHT]", "500px") //hardcode
         __.chartHtml <- html
 
 
@@ -90,7 +68,9 @@ type PlotlyChart() =
         let pid = System.Diagnostics.Process.GetCurrentProcess().Id
         let file = sprintf "show_%d_%d.html" pid counter.Value
         let path = Path.Combine(tempDir, file)
-        File.WriteAllText(path, __.chartHtml)
+        let html = HTML.file_template.Replace("[PLOTLY_REF]", HTML.plotly_reference)
+                                     .Replace("[CHART]",  __.chartHtml)
+        File.WriteAllText(path, html)
         System.Diagnostics.Process.Start(path) |> ignore
         incr counter
 
@@ -116,17 +96,10 @@ type Plotly =
 
     static member Show(chart:PlotlyChart) = chart.Show()
 
-    static member IPlot(data) =
-        let chart = PlotlyChart()
-        chart.IPlot(data)
-        chart.ChartHtml()
+    static member IShow(chart:PlotlyChart) = chart.ChartHtml()
 
-    static member IPlot(data, layout) =
-        let chart = PlotlyChart()
-        chart.IPlot(data, layout)
-        chart.ChartHtml()
 
-    static member init_notebook_mode () = 
+    static member InitaliseNotebook () = 
         let wc = new System.Net.WebClient()
         let plotlyjs = wc.DownloadString(HTML.plotly_url)
         HTML.plotly_include.Replace("[PLOTLY_JS]", plotlyjs)
@@ -153,4 +126,4 @@ module Test =
 
     (*  IFsharp Notebook useage  *) 
     //Plotly.init_notebook_mode () |> Util.Html
-    // ([trace1; trace2], layout) |> Plotly.IPlot |> Util.Html
+    // ([trace1; trace2], layout) |> Plotly.Plot |> Plotly.IShow |> Util.Html
