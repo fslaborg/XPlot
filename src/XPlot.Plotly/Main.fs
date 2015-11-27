@@ -21,6 +21,26 @@ module HTML =
   </script>
 </body>"""
 
+    let plotly_url = "https://cdn.plot.ly/plotly-latest.min.js"
+    let plotly_include = """<script type="text/javascript">
+    require=requirejs=define=undefined;
+</script>
+<script type="text/javascript">
+    [PLOTLY_JS]
+</script>"""
+            
+
+    let script_template = 
+        """Plotly.plot("[ID]", [DATA], [LAYOUT], [CONFIG]).then(function() {
+    $(".[ID].loading").remove()
+})"""
+                    
+
+    let jupyter_template =
+        """<div class="[ID] loading" style="color: rgb(50,50,50);">Drawing...</div>
+<div id="[ID]" style="height: [HEIGHT]; width: [WIDTH];" class="plotly-graph-div"></div>
+<script type="text/javascript">[SCRIPT]</script>"""
+
 open System.IO
 
 type PlotlyChart() =
@@ -28,7 +48,9 @@ type PlotlyChart() =
     [<DefaultValue>]
     val mutable private chartHtml: string
 
-    let counter = ref 1
+    member __.ChartHtml () = __.chartHtml
+
+    let div_id = System.Guid.NewGuid().ToString()
 
     member __.Plot(data:seq<#Trace>, ?Layout:Layout) =
         let dataJson = JsonConvert.SerializeObject data
@@ -38,17 +60,37 @@ type PlotlyChart() =
             | Some x -> JsonConvert.SerializeObject x
         let html =
             HTML.template.Replace("[DATA]", dataJson)
-                .Replace("[LAYOUT]", layoutJson)
+                         .Replace("[LAYOUT]", layoutJson)
         __.chartHtml <- html
+
+    member __.IPlot(data:seq<#Trace>, ?Layout:Layout) =
+        let dataJson = JsonConvert.SerializeObject data
+        let layoutJson =
+            match Layout with
+            | None -> "\"\""
+            | Some x -> JsonConvert.SerializeObject x
+        let script = 
+            HTML.script_template.Replace("[ID]", div_id) 
+                                .Replace("[DATA]", dataJson)
+                                .Replace("[LAYOUT]", layoutJson)
+                                .Replace("[CONFIG]", "\"\"") 
+
+        let html =
+            HTML.jupyter_template.Replace("[SCRIPT]", script)
+                                 .Replace("[ID]", div_id) //hardcode
+                                 .Replace("[WIDTH]", "200") //hardcode
+                                 .Replace("[HEIGHT]", "100") //hardcode
+                               
+        __.chartHtml <- html
+
 
     member __.Show() =
         let tempDir = Path.GetTempPath()
         let pid = System.Diagnostics.Process.GetCurrentProcess().Id
-        let file = sprintf "show_%d_%d.html" pid counter.Value
+        let file = sprintf "show_%d_%s.html" pid div_id
         let path = Path.Combine(tempDir, file)
         File.WriteAllText(path, __.chartHtml)
         System.Diagnostics.Process.Start(path) |> ignore
-        incr counter
 
 //    member __.GetInlineHtml(filename) =
 //      let resp = __.Plot(filename)
@@ -72,6 +114,21 @@ type Plotly =
 
     static member Show(chart:PlotlyChart) = chart.Show()
 
+    static member IPlot(data) =
+        let chart = PlotlyChart()
+        chart.IPlot(data)
+        chart.ChartHtml()
+
+    static member IPlot(data, layout) =
+        let chart = PlotlyChart()
+        chart.IPlot(data, layout)
+        chart.ChartHtml()
+
+    static member init_notebook_mode () = 
+        let wc = new System.Net.WebClient()
+        let plotlyjs = wc.DownloadString(HTML.plotly_url)
+        HTML.plotly_include.Replace("[PLOTLY_JS]", plotlyjs)
+
 module Test =
 
     let trace1 =
@@ -91,3 +148,7 @@ module Test =
     ([trace1; trace2], layout)
     |> Plotly.Plot
     |> Plotly.Show
+
+    (*  IFsharp Notebook useage  *) 
+    //Plotly.init_notebook_mode () |> Util.Html
+    // ([trace1; trace2], layout) |> Plotly.IPlot |> Util.Html
