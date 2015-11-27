@@ -51,6 +51,7 @@ type PlotlyChart() =
     member __.ChartHtml () = __.chartHtml
 
     let div_id = System.Guid.NewGuid().ToString()
+    let counter = ref 1
 
     member __.Plot(data:seq<#Trace>, ?Layout:Layout) =
         let dataJson = JsonConvert.SerializeObject data
@@ -87,10 +88,11 @@ type PlotlyChart() =
     member __.Show() =
         let tempDir = Path.GetTempPath()
         let pid = System.Diagnostics.Process.GetCurrentProcess().Id
-        let file = sprintf "show_%d_%s.html" pid div_id
+        let file = sprintf "show_%d_%d.html" pid counter.Value
         let path = Path.Combine(tempDir, file)
         File.WriteAllText(path, __.chartHtml)
         System.Diagnostics.Process.Start(path) |> ignore
+        incr counter
 
 //    member __.GetInlineHtml(filename) =
 //      let resp = __.Plot(filename)
