@@ -1,7 +1,29 @@
-﻿#r @".\.\bin\Release\XPlot.Plotly.dll"
-#load "Credentials.fsx"
+﻿#r @"../../bin/XPlot.Plotly.dll"
+
 
 open XPlot.Plotly
+
+module Test =
+
+    let trace1 =
+        Scatter(
+            x = [1; 2; 3; 4],
+            y = [10; 15; 13; 17]
+        )
+
+    let trace2 =
+        Scatter(
+            x = [1; 2; 3; 4],
+            y = [16; 5; 11; 9]
+        )
+
+    let layout = Layout(title = "Test")
+
+    ([trace1; trace2], layout)
+    |> Plotly.Plot
+    |> Plotly.Show
+
+#load "Credentials.fsx"
 
 Plotly.Signin(Credentials.username, Credentials.key)
 

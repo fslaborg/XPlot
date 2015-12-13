@@ -34,3 +34,11 @@ let chart3 =
     |> Chart.WithOptions options
     |> Chart.WithLabels ["Sales"; "Expenses"]
     |> Chart.Show
+
+let a = [1, 10.0; 2, 11.0; 3, 12.0]
+let b = [0, 5.0; 1, 6.0; 2, 7.0; 3, 8.0]
+
+[a; b]
+|> Chart.Line
+|> Chart.Show
+

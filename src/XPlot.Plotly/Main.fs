@@ -72,22 +72,3 @@ type Plotly =
 
     static member Show(chart:PlotlyChart) = chart.Show()
 
-module Test =
-
-    let trace1 =
-        Scatter(
-            x = [1; 2; 3; 4],
-            y = [10; 15; 13; 17]
-        )
-
-    let trace2 =
-        Scatter(
-            x = [1; 2; 3; 4],
-            y = [16; 5; 11; 9]
-        )
-
-    let layout = Layout(title = "Test")
-
-    ([trace1; trace2], layout)
-    |> Plotly.Plot
-    |> Plotly.Show
