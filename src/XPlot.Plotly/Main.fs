@@ -15,7 +15,6 @@ module HTML =
 </body>"""
   
     let plotly_include = """<script type="text/javascript">
-    require=requirejs=define=undefined;
 </script>
 <script type="text/javascript">
     [PLOTLY_JS]
@@ -99,7 +98,7 @@ type Plotly =
     static member IShow(chart:PlotlyChart) = chart.ChartHtml()
 
 
-    static member InitaliseNotebook () = 
+    static member InitialiseNotebook () = 
         let wc = new System.Net.WebClient()
         let plotlyjs = wc.DownloadString(HTML.plotly_url)
         HTML.plotly_include.Replace("[PLOTLY_JS]", plotlyjs)
