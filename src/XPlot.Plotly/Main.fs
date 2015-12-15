@@ -104,26 +104,3 @@ type Plotly =
         let plotlyjs = wc.DownloadString(HTML.plotly_url)
         HTML.plotly_include.Replace("[PLOTLY_JS]", plotlyjs)
 
-module Test =
-
-    let trace1 =
-        Scatter(
-            x = [1; 2; 3; 4],
-            y = [10; 15; 13; 17]
-        )
-
-    let trace2 =
-        Scatter(
-            x = [1; 2; 3; 4],
-            y = [16; 5; 11; 9]
-        )
-
-    let layout = Layout(title = "Test")
-
-    ([trace1; trace2], layout)
-    |> Plotly.Plot
-    |> Plotly.Show
-
-    (*  IFsharp Notebook useage  *) 
-    //Plotly.InitaliseNotebook () |> Util.Html
-    // ([trace1; trace2], layout) |> Plotly.Plot |> Plotly.IShow |> Util.Html

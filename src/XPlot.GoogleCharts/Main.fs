@@ -7,6 +7,8 @@ open System
 open System.Data
 open System.Globalization
 
+//Google.DataTable.Net.Wrapper.Extension
+
 type key = IConvertible
 type value = IConvertible
 
@@ -37,21 +39,11 @@ module Data =
 
         static member New dps = {DataPoints = dps}
 
-    let makeDataTable series labels groupByKey =
-
-        let dps =
-            series
-            |> Seq.map (fun x -> x.DataPoints)
-            |> Seq.concat
-
-        let keys =
-            dps
-            |> Seq.map (fun x -> x.X)
-            |> Seq.distinct
+    let makeDataTable series labels =
 
         let rows =
-            match groupByKey with
-            | false ->
+            match Seq.length series with
+            | 1 ->
                 series
                 |> Seq.nth 0
                 |> fun x ->
@@ -67,7 +59,17 @@ module Data =
                             ]
                             |> List.mapi (fun idx x -> x, idx + 1)
                         key, fields)
-            | true ->
+            | _ ->
+                let dps =
+                    series
+                    |> Seq.map (fun x -> x.DataPoints)
+                    |> Seq.concat
+
+                let keys =
+                    dps
+                    |> Seq.map (fun x -> x.X)
+                    |> Seq.distinct
+
                 keys
                 |> Seq.map (fun key ->
                     let datapoints =
@@ -234,10 +236,7 @@ type GoogleChart() =
     member val Width = 900 with get, set
 
     static member Create data labels options ``type`` =
-        let dt =
-            match ``type`` with
-            | Sankey | Timeline -> makeDataTable data labels false
-            | _ -> makeDataTable data labels true
+        let dt = makeDataTable data labels
         let gc = GoogleChart()
         gc.dataTable <- dt
         gc.options <- options

@@ -16,3 +16,11 @@ let chart =
     |> Chart.Scatter
     |> Chart.WithOptions options
     |> Chart.Show
+
+
+let rnd = new System.Random(0)
+let data = [for i in 1 .. 1000 -> (rnd.Next(10),rnd.Next(10))]
+
+[data]
+|> Chart.Scatter
+|> Chart.Show

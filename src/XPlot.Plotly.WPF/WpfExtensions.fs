@@ -5,20 +5,22 @@ open System.Windows
 open System.Windows.Controls
 open System.Windows.Media.Imaging
 
-[<AutoOpen>]
-module WpfExtensions = 
-  type XPlot.Plotly.Figure with
-    /// Displays the Figure in a window.
-    member __.Show() =
-        match __.Response with
-        | None -> printfn "Call the Plot member first."
-        | Some resp ->
-            let html =
-                """<html><head></head><body><iframe width="100%" height="100%" frameborder="0" seamless="seamless" scrolling="no" src="""
-                + "\""
-                + resp.url
-                + """.embed?width=900&height=500"></iframe></body></html>"""        
-            ChartWindow.show html
+do ()
+
+//[<AutoOpen>]
+//module WpfExtensions = 
+//  type XPlot.Plotly.Figure with
+//    /// Displays the Figure in a window.
+//    member __.Show() =
+//        match __.Response with
+//        | None -> printfn "Call the Plot member first."
+//        | Some resp ->
+//            let html =
+//                """<html><head></head><body><iframe width="100%" height="100%" frameborder="0" seamless="seamless" scrolling="no" src="""
+//                + "\""
+//                + resp.url
+//                + """.embed?width=900&height=500"></iframe></body></html>"""        
+//            ChartWindow.show html
 //            let wnd = Window()
 //    //        wnd.Icon <- icon
 //            wnd.Height <- 600.
