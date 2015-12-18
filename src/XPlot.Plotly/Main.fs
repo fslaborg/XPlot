@@ -13,18 +13,20 @@ module HTML =
 <body>
     [CHART]
 </body>"""
-  
-    let plotly_include = """<script type="text/javascript">
-</script>
+
+    let react_save = """var require_save = require; var requirejs_save = requirejs; var define_save = define; require=requirejs=define=undefined; """
+    let react_restore = """require = require_save; requirejs = requirejs_save; define = define_save;"""
+
+    let plotly_include = """
 <script type="text/javascript">
     [PLOTLY_JS]
 </script>"""
-            
-    let script_template = 
+
+    let script_template =
         """Plotly.plot("[ID]", [DATA], [LAYOUT], [CONFIG]).then(function() {
     $(".[ID].loading").remove()
 })"""
-                    
+
     let chart_template =
         """
 <div id="[ID]" style="height: [HEIGHT]; width: [WIDTH];" class="plotly-graph-div"></div>
@@ -33,7 +35,7 @@ module HTML =
 open System.IO
 
 type PlotlyChart() =
-    
+
     [<DefaultValue>]
     val mutable private chartHtml: string
 
@@ -48,15 +50,15 @@ type PlotlyChart() =
             match Layout with
             | None -> "\"\""
             | Some x -> JsonConvert.SerializeObject x
-        let script = 
-            HTML.script_template.Replace("[ID]", div_id) 
+        let script =
+            HTML.script_template.Replace("[ID]", div_id)
                                 .Replace("[DATA]", dataJson)
                                 .Replace("[LAYOUT]", layoutJson)
-                                .Replace("[CONFIG]", "\"\"") 
+                                .Replace("[CONFIG]", "\"\"")
 
         let html =
             HTML.chart_template.Replace("[SCRIPT]", script)
-                               .Replace("[ID]", div_id) 
+                               .Replace("[ID]", div_id)
                                .Replace("[WIDTH]", "900px") //hardcode
                                .Replace("[HEIGHT]", "500px") //hardcode
         __.chartHtml <- html
@@ -75,7 +77,7 @@ type PlotlyChart() =
 
 //    member __.GetInlineHtml(filename) =
 //      let resp = __.Plot(filename)
-//      """<iframe width="[WIDTH]" height="[HEIGHT]" frameborder="0" seamless="seamless" 
+//      """<iframe width="[WIDTH]" height="[HEIGHT]" frameborder="0" seamless="seamless"
 //           scrolling="no" src="[URL].embed?width=[WIDTH]&height=[HEIGHT]"></iframe>"""
 //        .Replace("[WIDTH]", string width)
 //        .Replace("[HEIGHT]", string height)
@@ -87,7 +89,7 @@ type Plotly =
         let chart = PlotlyChart()
         chart.Plot(data)
         chart
-    
+
     static member Plot(data, layout) =
         let chart = PlotlyChart()
         chart.Plot(data, layout)
@@ -98,8 +100,7 @@ type Plotly =
     static member IShow(chart:PlotlyChart) = chart.ChartHtml()
 
 
-    static member InitialiseNotebook () = 
+    static member InitialiseNotebook () =
         let wc = new System.Net.WebClient()
-        let plotlyjs = wc.DownloadString(HTML.plotly_url)
+        let plotlyjs = HTML.react_save + wc.DownloadString(HTML.plotly_url) + HTML.react_restore
         HTML.plotly_include.Replace("[PLOTLY_JS]", plotlyjs)
-
