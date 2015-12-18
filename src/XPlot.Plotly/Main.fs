@@ -29,8 +29,35 @@ module HTML =
 
     let chart_template =
         """
-<div id="[ID]" style="height: [HEIGHT]; width: [WIDTH];" class="plotly-graph-div"></div>
+<div id="[ID]" style="height: [HEIGHT]; width: [WIDTH];" class="plotly-graph-div">
+<button onclick="save_svg($(this))">save svg</button>
+</div>
 <script type="text/javascript">[SCRIPT]</script>"""
+
+
+    let save_svg = """
+<script type="text/javascript">
+function download(filename, text) {
+  var element = document.createElement('a');
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+  element.setAttribute('download', filename);
+
+  element.style.display = 'none';
+  document.body.appendChild(element);
+
+  element.click();
+
+  document.body.removeChild(element);
+}
+
+function save_svg(button){
+    var guid_of_plot = button.parent().attr("id");
+    var svg_node = $('#'+guid_of_plot + " svg.main-svg")[0];
+    var svg_code = (new window.XMLSerializer()).serializeToString(svg_node);
+    download("image.svg", svg_code);
+}
+</script>
+"""
 
 open System.IO
 
@@ -103,4 +130,4 @@ type Plotly =
     static member InitialiseNotebook () =
         let wc = new System.Net.WebClient()
         let plotlyjs = HTML.react_save + wc.DownloadString(HTML.plotly_url) + HTML.react_restore
-        HTML.plotly_include.Replace("[PLOTLY_JS]", plotlyjs)
+        HTML.save_svg + HTML.plotly_include.Replace("[PLOTLY_JS]", plotlyjs)
