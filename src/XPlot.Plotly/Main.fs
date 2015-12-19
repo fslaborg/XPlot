@@ -2,6 +2,7 @@
 
 open Graph
 open Newtonsoft.Json
+open System
 
 module HTML =
 
@@ -13,62 +14,70 @@ module HTML =
 
 <body>
   
-  <div id="chart" style="width: 900px; height: 500px;"><!-- Plotly chart will be drawn inside this DIV --></div>
+  <div id="[ID]" style="width: 900px; height: 500px;"><!-- Plotly chart will be drawn inside this DIV --></div>
   <script>
     var data = [DATA];
     var layout = [LAYOUT];
-    Plotly.newPlot('chart', data, layout);
+    Plotly.newPlot('[ID]', data, layout);
   </script>
 </body>"""
+
+    let inlineTemplate =
+        """<div id="[ID]" style="width: 900px; height: 500px;"><!-- Plotly chart will be drawn inside this DIV --></div>
+  <script>
+    var data = [DATA];
+    var layout = [LAYOUT];
+    Plotly.newPlot('[ID]', data, layout);
+  </script>"""
 
 open System.IO
 
 type PlotlyChart() =
-    
-    [<DefaultValue>]
-    val mutable private chartHtml: string
+    let guid = Guid.NewGuid().ToString()
 
-    let counter = ref 1
+    [<DefaultValue>]
+    val mutable private dataJson: string
+
+    [<DefaultValue>]
+    val mutable private layoutJson: string
 
     member __.Plot(data:seq<#Trace>, ?Layout:Layout) =
         let dataJson = JsonConvert.SerializeObject data
+        __.dataJson <- dataJson
         let layoutJson =
             match Layout with
             | None -> "\"\""
             | Some x -> JsonConvert.SerializeObject x
-        let html =
-            HTML.template.Replace("[DATA]", dataJson)
-                .Replace("[LAYOUT]", layoutJson)
-        __.chartHtml <- html
+        __.layoutJson <- layoutJson
 
     member __.Show() =
-        let tempDir = Path.GetTempPath()
-        let pid = System.Diagnostics.Process.GetCurrentProcess().Id
-        let file = sprintf "show_%d_%d.html" pid counter.Value
-        let path = Path.Combine(tempDir, file)
-        File.WriteAllText(path, __.chartHtml)
+        let html =
+            HTML.template
+                .Replace("[ID]", guid)
+                .Replace("[DATA]", __.dataJson)
+                .Replace("[LAYOUT]", __.layoutJson)
+        let tempPath = Path.GetTempPath()
+        let file = sprintf "%s.html" guid
+        let path = Path.Combine(tempPath, file)
+        File.WriteAllText(path, html)
         System.Diagnostics.Process.Start(path) |> ignore
-        incr counter
 
-//    member __.GetInlineHtml(filename) =
-//      let resp = __.Plot(filename)
-//      """<iframe width="[WIDTH]" height="[HEIGHT]" frameborder="0" seamless="seamless" 
-//           scrolling="no" src="[URL].embed?width=[WIDTH]&height=[HEIGHT]"></iframe>"""
-//        .Replace("[WIDTH]", string width)
-//        .Replace("[HEIGHT]", string height)
-//        .Replace("[URL]", resp.Value.url)
+    member __.GetInlineHtml() =
+        HTML.inlineTemplate
+            .Replace("[ID]", guid)
+            .Replace("[DATA]", __.dataJson)
+            .Replace("[LAYOUT]", __.layoutJson)
 
 type Plotly =
 
-    static member Plot(data) =
+    static member Plot(data) = 
         let chart = PlotlyChart()
-        chart.Plot(data)
+        chart.Plot data
         chart
-    
+
     static member Plot(data, layout) =
         let chart = PlotlyChart()
         chart.Plot(data, layout)
         chart
 
     static member Show(chart:PlotlyChart) = chart.Show()
-
