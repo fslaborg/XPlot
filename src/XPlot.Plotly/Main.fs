@@ -6,24 +6,18 @@ open System
 
 module HTML =
 
-    let template =
+    let doc =
         """<head>
   <!-- Plotly.js -->
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 
 <body>
-  
-  <div id="[ID]" style="width: 900px; height: 500px;"><!-- Plotly chart will be drawn inside this DIV --></div>
-  <script>
-    var data = [DATA];
-    var layout = [LAYOUT];
-    Plotly.newPlot('[ID]', data, layout);
-  </script>
+  [CHART]
 </body>"""
 
-    let inlineTemplate =
-        """<div id="[ID]" style="width: 900px; height: 500px;"><!-- Plotly chart will be drawn inside this DIV --></div>
+    let chart =
+        """<div id="[ID]" style="width: [WIDTH]px; height: [HEIGHT]px;"><!-- Plotly chart will be drawn inside this DIV --></div>
   <script>
     var data = [DATA];
     var layout = [LAYOUT];
@@ -34,6 +28,10 @@ open System.IO
 
 type PlotlyChart() =
     let guid = Guid.NewGuid().ToString()
+
+    let mutable width = "900"
+
+    let mutable height = "500"
 
     [<DefaultValue>]
     val mutable private dataJson: string
@@ -52,10 +50,14 @@ type PlotlyChart() =
 
     member __.Show() =
         let html =
-            HTML.template
-                .Replace("[ID]", guid)
-                .Replace("[DATA]", __.dataJson)
-                .Replace("[LAYOUT]", __.layoutJson)
+            let chartMarkup =
+                HTML.chart
+                    .Replace("[ID]", guid)
+                    .Replace("[WIDTH]", width)
+                    .Replace("[HEIGHT]", height)
+                    .Replace("[DATA]", __.dataJson)
+                    .Replace("[LAYOUT]", __.layoutJson)
+            HTML.doc.Replace("[CHART]", chartMarkup)
         let tempPath = Path.GetTempPath()
         let file = sprintf "%s.html" guid
         let path = Path.Combine(tempPath, file)
@@ -63,10 +65,16 @@ type PlotlyChart() =
         System.Diagnostics.Process.Start(path) |> ignore
 
     member __.GetInlineHtml() =
-        HTML.inlineTemplate
+        HTML.chart
             .Replace("[ID]", guid)
+            .Replace("[WIDTH]", width)
+            .Replace("[HEIGHT]", height)
             .Replace("[DATA]", __.dataJson)
             .Replace("[LAYOUT]", __.layoutJson)
+
+    member __.WithWidth(widthValue: int) = width <- string widthValue
+
+    member __.WithHeight(heightValue: int) = height <- string heightValue
 
 type Plotly =
 
@@ -81,3 +89,11 @@ type Plotly =
         chart
 
     static member Show(chart:PlotlyChart) = chart.Show()
+
+    static member WithWidth width (chart:PlotlyChart) =
+        chart.WithWidth width
+        chart
+
+    static member WithHeight height (chart:PlotlyChart) =
+        chart.WithHeight height
+        chart
