@@ -1,4 +1,7 @@
-﻿### 1.2.2 - October 25, 2015
+﻿### 1.3.0 - December 12, 2015
+* Plotly.js support
+
+### 1.2.2 - October 25, 2015
 * Fix the Annotation.showarrow type annotation in Plotly's API
 
 ### 1.2.1 - August 25, 2015

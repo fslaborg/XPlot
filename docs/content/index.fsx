@@ -5,7 +5,6 @@
 #r "XPlot.GoogleCharts.dll"
 open XPlot.GoogleCharts
 open XPlot.Plotly
-Plotly.Signin MyCredentials.userAndKey
 
 let Bolivia = ["2004/05", 165.; "2005/06", 135.; "2006/07", 157.; "2007/08", 139.; "2008/09", 136.]
 let Ecuador = ["2004/05", 938.; "2005/06", 1120.; "2006/07", 1167.; "2007/08", 1110.; "2008/09", 691.]
@@ -97,10 +96,9 @@ let layout =
   Layout(title = "Hobbs-Pearson Trials", showlegend = false,
     plot_bgcolor = "rgb(223,223,223)")
 
-Figure(Data.From(traces), layout, Width=400, Height=300)
-(**
-<iframe width="640" height="480" frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~TahaHachana/443.embed?width=640&height=480" ></iframe>
-*)
+Plotly.Plot(traces, layout)
+(*** include-it:polar ***)
+
 (**
 The code snippet creates one `Scatter` data series for each of the trials in the input. It sets the `r` and `t`
 properties to two lists of input values. If we wanted to produce an ordinary rectangular scatter plot, we could
@@ -119,26 +117,9 @@ XPlot.
 
 ### Stand alone XPlot packages
 
-Alternatively, you can reference [XPlot via a NuGet package](http://www.nuget.org/packages?q=XPlot). On 
-Windows, you can use the `XPlot.GoogleCharts.WPF` and `XPlot.Plotly.WPF` packages, which provide you with
-a `Chart.Show` method that opens a chart in a new WPF window.
+Alternatively, you can reference [XPlot via a NuGet package](http://www.nuget.org/packages?q=XPlot).
+*)
 
-Assuming the packages are in your `packages` folder, you can reference the libraries as follows:
-*)
-#I "packages/XPlot.GoogleCharts.1.1.6/lib/net40"
-#I "packages/XPlot.GoogleCharts.WPF.1.1.6/lib/net40"
-#r "XPlot.GoogleCharts.dll"
-#r "XPlot.GoogleCharts.WPF.dll"
-open XPlot.GoogleCharts
-(**
-When using Plotly, you'll also need to create a user account at the [plot.ly](http://plot.ly) web site and
-pass your user name and API key to the `Plotly.Signin` function as follows:
-*)
-#I "packages/XPlot.Plotly.1.1.6/lib/net40"
-#r "XPlot.Plotly.dll"
-#load "credentials.fsx"
-open XPlot.Plotly
-Plotly.Signin MyCredentials.userAndKey
 (**
 Documentation
 -------------

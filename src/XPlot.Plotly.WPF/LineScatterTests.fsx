@@ -1,6 +1,5 @@
 ﻿#r @"../../bin/XPlot.Plotly.dll"
 
-
 open XPlot.Plotly
 
 module Test =
@@ -21,6 +20,8 @@ module Test =
 
     ([trace1; trace2], layout)
     |> Plotly.Plot
+    |> Plotly.WithWidth 400
+    |> Plotly.WithHeight 400
     |> Plotly.Show
 
 #load "Credentials.fsx"

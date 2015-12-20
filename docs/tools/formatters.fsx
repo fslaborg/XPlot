@@ -143,15 +143,16 @@ let createFsiEvaluator root output (floatFormat:string) =
         let ch = ch |> XPlot.GoogleCharts.Chart.WithSize(700, 400)
         Some [  InlineBlock ch.InlineHtml ]
 
-    | :? Plotly.Figure as fig ->
+    | :? Plotly.PlotlyChart as chart ->
         // Just return the inline HTML for a Plotly chart
-        let name = 
-          match fig.Layout with
-          | Some ly -> ly.title
-          | None -> sprintf "XPlot Generated Chart %d" (imageCounter())
-        fig.Width <- 600
-        fig.Height <- 300
-        Some [ InlineBlock (fig.GetInlineHtml(name)) ]
+//        let name = 
+//          match fig.Layout with
+//          | Some ly -> ly.title
+//          | None -> sprintf "XPlot Generated Chart %d" (imageCounter())
+//        fig.Width <- 600
+//        fig.Height <- 300
+//        Some [ InlineBlock (fig.GetInlineHtml(name)) ]
+        Some [ InlineBlock <| chart.GetInlineHtml() ]
 
     | SeriesValues s ->
         // Pretty print series!
