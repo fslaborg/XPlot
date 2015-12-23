@@ -3,6 +3,42 @@ module XPlot.Plotly.Graph
 
 type Trace() = do ()
 
+type Font() =
+
+    let mutable _family: string option = None
+    let mutable _size: float option = None
+    let mutable _color: string option = None
+    let mutable _description: string option = Some "Sets the global font. Note that fonts used in traces and other layout components inherit from the global font."
+    let mutable _role: string option = Some "object"
+
+    /// HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.
+    member __.family
+        with get () = Option.get _family
+        and set value = _family <- Some value
+
+    member __.size
+        with get () = Option.get _size
+        and set value = _size <- Some value
+
+    member __.color
+        with get () = Option.get _color
+        and set value = _color <- Some value
+
+    member __.description
+        with get () = Option.get _description
+        and set value = _description <- Some value
+
+    member __.role
+        with get () = Option.get _role
+        and set value = _role <- Some value
+
+
+    member __.ShouldSerializefamily() = not _family.IsNone
+    member __.ShouldSerializesize() = not _size.IsNone
+    member __.ShouldSerializecolor() = not _color.IsNone
+    member __.ShouldSerializedescription() = not _description.IsNone
+    member __.ShouldSerializerole() = not _role.IsNone
+
 type Lighting() =
 
     let mutable _ambient: float option = None
@@ -1109,7 +1145,7 @@ type Colorbar() =
     let mutable _tickwidth: float option = None
     let mutable _tickcolor: string option = None
     let mutable _showticklabels: bool option = None
-    let mutable _tickfont: Tickfont option = None
+    let mutable _tickfont: Font option = None
     let mutable _tickangle: float option = None
     let mutable _tickformat: string option = None
     let mutable _tickprefix: string option = None
@@ -1119,7 +1155,7 @@ type Colorbar() =
     let mutable _exponentformat: _ option = None
     let mutable _showexponent: _ option = None
     let mutable _title: string option = None
-    let mutable _titlefont: Titlefont option = None
+    let mutable _titlefont: Font option = None
     let mutable _titleside: _ option = None
     let mutable _role: string option = Some "object"
     let mutable _tickvalssrc: string option = None
@@ -5370,41 +5406,6 @@ type Area() =
 
 
 
-type Font() =
-
-    let mutable _family: string option = None
-    let mutable _size: float option = None
-    let mutable _color: string option = None
-    let mutable _description: string option = Some "Sets the global font. Note that fonts used in traces and other layout components inherit from the global font."
-    let mutable _role: string option = Some "object"
-
-    /// HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.
-    member __.family
-        with get () = Option.get _family
-        and set value = _family <- Some value
-
-    member __.size
-        with get () = Option.get _size
-        and set value = _size <- Some value
-
-    member __.color
-        with get () = Option.get _color
-        and set value = _color <- Some value
-
-    member __.description
-        with get () = Option.get _description
-        and set value = _description <- Some value
-
-    member __.role
-        with get () = Option.get _role
-        and set value = _role <- Some value
-
-
-    member __.ShouldSerializefamily() = not _family.IsNone
-    member __.ShouldSerializesize() = not _size.IsNone
-    member __.ShouldSerializecolor() = not _color.IsNone
-    member __.ShouldSerializedescription() = not _description.IsNone
-    member __.ShouldSerializerole() = not _role.IsNone
 
 type Margin() =
 
@@ -5460,7 +5461,7 @@ type Margin() =
 type Xaxis() =
 
     let mutable _title: string option = None
-    let mutable _titlefont: Titlefont option = None
+    let mutable _titlefont: Font option = None
     let mutable _type: _ option = None
     let mutable _autorange: _ option = None
     let mutable _rangemode: _ option = None
@@ -5478,7 +5479,7 @@ type Xaxis() =
     let mutable _tickwidth: float option = None
     let mutable _tickcolor: string option = None
     let mutable _showticklabels: bool option = None
-    let mutable _tickfont: Tickfont option = None
+    let mutable _tickfont: Font option = None
     let mutable _tickangle: float option = None
     let mutable _tickprefix: string option = None
     let mutable _showtickprefix: _ option = None
@@ -5838,7 +5839,7 @@ type Xaxis() =
 type Yaxis() =
 
     let mutable _title: string option = None
-    let mutable _titlefont: Titlefont option = None
+    let mutable _titlefont: Font option = None
     let mutable _type: _ option = None
     let mutable _autorange: _ option = None
     let mutable _rangemode: _ option = None
@@ -5856,7 +5857,7 @@ type Yaxis() =
     let mutable _tickwidth: float option = None
     let mutable _tickcolor: string option = None
     let mutable _showticklabels: bool option = None
-    let mutable _tickfont: Tickfont option = None
+    let mutable _tickfont: Font option = None
     let mutable _tickangle: float option = None
     let mutable _tickprefix: string option = None
     let mutable _showtickprefix: _ option = None
@@ -6391,7 +6392,7 @@ type Zaxis() =
     let mutable _backgroundcolor: string option = None
     let mutable _showaxeslabels: bool option = None
     let mutable _title: string option = None
-    let mutable _titlefont: Titlefont option = None
+    let mutable _titlefont: Font option = None
     let mutable _type: _ option = None
     let mutable _autorange: _ option = None
     let mutable _rangemode: _ option = None
@@ -6409,7 +6410,7 @@ type Zaxis() =
     let mutable _tickwidth: float option = None
     let mutable _tickcolor: string option = None
     let mutable _showticklabels: bool option = None
-    let mutable _tickfont: Tickfont option = None
+    let mutable _tickfont: Font option = None
     let mutable _tickangle: float option = None
     let mutable _tickprefix: string option = None
     let mutable _showtickprefix: _ option = None
@@ -7650,7 +7651,7 @@ type Layout() =
 
     let mutable _font: Font option = None
     let mutable _title: string option = None
-    let mutable _titlefont: Titlefont option = None
+    let mutable _titlefont: Font option = None
     let mutable _autosize: _ option = None
     let mutable _width: float option = None
     let mutable _height: float option = None
