@@ -8,8 +8,8 @@ type Font() =
     let mutable _family: string option = None
     let mutable _size: float option = None
     let mutable _color: string option = None
-    let mutable _description: string option = Some "Sets the global font. Note that fonts used in traces and other layout components inherit from the global font."
-    let mutable _role: string option = Some "object"
+    //let mutable _description: string option = Some "Sets the global font. Note that fonts used in traces and other layout components inherit from the global font."
+    //let mutable _role: string option = Some "object"
 
     /// HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.
     member __.family
@@ -24,20 +24,20 @@ type Font() =
         with get () = Option.get _color
         and set value = _color <- Some value
 
-    member __.description
-        with get () = Option.get _description
-        and set value = _description <- Some value
-
-    member __.role
-        with get () = Option.get _role
-        and set value = _role <- Some value
+////    member __.description
+////        with get () = Option.get _description
+////        and set value = _description <- Some value
+//
+////    member __.role
+////        with get () = Option.get _role
+////        and set value = _role <- Some value
 
 
     member __.ShouldSerializefamily() = not _family.IsNone
     member __.ShouldSerializesize() = not _size.IsNone
     member __.ShouldSerializecolor() = not _color.IsNone
-    member __.ShouldSerializedescription() = not _description.IsNone
-    member __.ShouldSerializerole() = not _role.IsNone
+    //member __.ShouldSerializedescription() = not _description.IsNone
+    //member __.ShouldSerializerole() = not _role.IsNone
 
 type Lighting() =
 
@@ -46,7 +46,7 @@ type Lighting() =
     let mutable _specular: float option = None
     let mutable _roughness: float option = None
     let mutable _fresnel: float option = None
-    let mutable _role: string option = Some "object"
+    //let mutable _role: string option = Some "object"
 
     member __.ambient
         with get () = Option.get _ambient
@@ -68,23 +68,23 @@ type Lighting() =
         with get () = Option.get _fresnel
         and set value = _fresnel <- Some value
 
-    member __.role
-        with get () = Option.get _role
-        and set value = _role <- Some value
+////    member __.role
+////        with get () = Option.get _role
+////        and set value = _role <- Some value
 
     member __.ShouldSerializeambient() = not _ambient.IsNone
     member __.ShouldSerializediffuse() = not _diffuse.IsNone
     member __.ShouldSerializespecular() = not _specular.IsNone
     member __.ShouldSerializeroughness() = not _roughness.IsNone
     member __.ShouldSerializefresnel() = not _fresnel.IsNone
-    member __.ShouldSerializerole() = not _role.IsNone
+    //member __.ShouldSerializerole() = not _role.IsNone
 
 type Rotation() =
 
     let mutable _lon: float option = None
     let mutable _lat: float option = None
     let mutable _roll: float option = None
-    let mutable _role: string option = Some "object"
+    //let mutable _role: string option = Some "object"
 
     /// Rotates the map along parallels (in degrees East).
     member __.lon
@@ -101,14 +101,14 @@ type Rotation() =
         with get () = Option.get _roll
         and set value = _roll <- Some value
 
-    member __.role
-        with get () = Option.get _role
-        and set value = _role <- Some value
+////    member __.role
+////        with get () = Option.get _role
+////        and set value = _role <- Some value
 
     member __.ShouldSerializelon() = not _lon.IsNone
     member __.ShouldSerializelat() = not _lat.IsNone
     member __.ShouldSerializeroll() = not _roll.IsNone
-    member __.ShouldSerializerole() = not _role.IsNone
+    //member __.ShouldSerializerole() = not _role.IsNone
 
 
 
@@ -128,7 +128,7 @@ type Error_z() =
     let mutable _color: string option = None
     let mutable _thickness: float option = None
     let mutable _width: float option = None
-    let mutable _role: string option = Some "object"
+    //let mutable _role: string option = Some "object"
     let mutable _arraysrc: string option = None
     let mutable _arrayminussrc: string option = None
 
@@ -198,10 +198,10 @@ type Error_z() =
         with get () = Option.get _width
         and set value = _width <- Some value
 
-    member __.role
-        with get () = Option.get _role
-        and set value = _role <- Some value
-
+////    member __.role
+////        with get () = Option.get _role
+////        and set value = _role <- Some value
+//
     /// Sets the source reference on plot.ly for  array .
     member __.arraysrc
         with get () = Option.get _arraysrc
@@ -226,7 +226,7 @@ type Error_z() =
     member __.ShouldSerializecolor() = not _color.IsNone
     member __.ShouldSerializethickness() = not _thickness.IsNone
     member __.ShouldSerializewidth() = not _width.IsNone
-    member __.ShouldSerializerole() = not _role.IsNone
+    //member __.ShouldSerializerole() = not _role.IsNone
     member __.ShouldSerializearraysrc() = not _arraysrc.IsNone
     member __.ShouldSerializearrayminussrc() = not _arrayminussrc.IsNone
 
@@ -235,7 +235,7 @@ type Project() =
     let mutable _x: bool option = None
     let mutable _y: bool option = None
     let mutable _z: bool option = None
-    let mutable _role: string option = Some "object"
+    //let mutable _role: string option = Some "object"
 
     /// Sets whether or not the dynamic contours are projected along the x axis.
     member __.x
@@ -252,21 +252,21 @@ type Project() =
         with get () = Option.get _z
         and set value = _z <- Some value
 
-    member __.role
-        with get () = Option.get _role
-        and set value = _role <- Some value
+////    member __.role
+////        with get () = Option.get _role
+////        and set value = _role <- Some value
 
     member __.ShouldSerializex() = not _x.IsNone
     member __.ShouldSerializey() = not _y.IsNone
     member __.ShouldSerializez() = not _z.IsNone
-    member __.ShouldSerializerole() = not _role.IsNone
+    //member __.ShouldSerializerole() = not _role.IsNone
 
 type X() =
 
     let mutable _show: bool option = None
     let mutable _opacity: float option = None
     let mutable _scale: float option = None
-    let mutable _role: string option = Some "object"
+    //let mutable _role: string option = Some "object"
     let mutable _project: Project option = None
     let mutable _color: string option = None
     let mutable _usecolormap: bool option = None
@@ -290,9 +290,9 @@ type X() =
         with get () = Option.get _scale
         and set value = _scale <- Some value
 
-    member __.role
-        with get () = Option.get _role
-        and set value = _role <- Some value
+////    member __.role
+////        with get () = Option.get _role
+////        and set value = _role <- Some value
 
     member __.project
         with get () = Option.get _project
@@ -325,7 +325,7 @@ type X() =
     member __.ShouldSerializeshow() = not _show.IsNone
     member __.ShouldSerializeopacity() = not _opacity.IsNone
     member __.ShouldSerializescale() = not _scale.IsNone
-    member __.ShouldSerializerole() = not _role.IsNone
+    //member __.ShouldSerializerole() = not _role.IsNone
     member __.ShouldSerializeproject() = not _project.IsNone
     member __.ShouldSerializecolor() = not _color.IsNone
     member __.ShouldSerializeusecolormap() = not _usecolormap.IsNone
@@ -339,7 +339,7 @@ type Y() =
     let mutable _show: bool option = None
     let mutable _opacity: float option = None
     let mutable _scale: float option = None
-    let mutable _role: string option = Some "object"
+    //let mutable _role: string option = Some "object"
     let mutable _project: Project option = None
     let mutable _color: string option = None
     let mutable _usecolormap: bool option = None
@@ -363,9 +363,9 @@ type Y() =
         with get () = Option.get _scale
         and set value = _scale <- Some value
 
-    member __.role
-        with get () = Option.get _role
-        and set value = _role <- Some value
+////    member __.role
+////        with get () = Option.get _role
+////        and set value = _role <- Some value
 
     member __.project
         with get () = Option.get _project
@@ -398,7 +398,7 @@ type Y() =
     member __.ShouldSerializeshow() = not _show.IsNone
     member __.ShouldSerializeopacity() = not _opacity.IsNone
     member __.ShouldSerializescale() = not _scale.IsNone
-    member __.ShouldSerializerole() = not _role.IsNone
+    //member __.ShouldSerializerole() = not _role.IsNone
     member __.ShouldSerializeproject() = not _project.IsNone
     member __.ShouldSerializecolor() = not _color.IsNone
     member __.ShouldSerializeusecolormap() = not _usecolormap.IsNone
@@ -412,7 +412,7 @@ type Z() =
     let mutable _show: bool option = None
     let mutable _opacity: float option = None
     let mutable _scale: float option = None
-    let mutable _role: string option = Some "object"
+    //let mutable _role: string option = Some "object"
     let mutable _project: Project option = None
     let mutable _color: string option = None
     let mutable _usecolormap: bool option = None
@@ -436,9 +436,9 @@ type Z() =
         with get () = Option.get _scale
         and set value = _scale <- Some value
 
-    member __.role
-        with get () = Option.get _role
-        and set value = _role <- Some value
+////    member __.role
+////        with get () = Option.get _role
+////        and set value = _role <- Some value
 
     member __.project
         with get () = Option.get _project
@@ -471,7 +471,7 @@ type Z() =
     member __.ShouldSerializeshow() = not _show.IsNone
     member __.ShouldSerializeopacity() = not _opacity.IsNone
     member __.ShouldSerializescale() = not _scale.IsNone
-    member __.ShouldSerializerole() = not _role.IsNone
+    //member __.ShouldSerializerole() = not _role.IsNone
     member __.ShouldSerializeproject() = not _project.IsNone
     member __.ShouldSerializecolor() = not _color.IsNone
     member __.ShouldSerializeusecolormap() = not _usecolormap.IsNone
@@ -485,7 +485,7 @@ type Projection() =
     let mutable _x: X option = None
     let mutable _y: Y option = None
     let mutable _z: Z option = None
-    let mutable _role: string option = Some "object"
+    //let mutable _role: string option = Some "object"
     let mutable _type: _ option = None
     let mutable _rotation: Rotation option = None
     let mutable _parallels: _ option = None
@@ -503,9 +503,9 @@ type Projection() =
         with get () = Option.get _z
         and set value = _z <- Some value
 
-    member __.role
-        with get () = Option.get _role
-        and set value = _role <- Some value
+////    member __.role
+////        with get () = Option.get _role
+////        and set value = _role <- Some value
 
     /// Sets the projection type.
     member __.``type``
@@ -529,7 +529,7 @@ type Projection() =
     member __.ShouldSerializex() = not _x.IsNone
     member __.ShouldSerializey() = not _y.IsNone
     member __.ShouldSerializez() = not _z.IsNone
-    member __.ShouldSerializerole() = not _role.IsNone
+    //member __.ShouldSerializerole() = not _role.IsNone
     member __.ShouldSerializetype() = not _type.IsNone
     member __.ShouldSerializerotation() = not _rotation.IsNone
     member __.ShouldSerializeparallels() = not _parallels.IsNone
@@ -542,7 +542,7 @@ type Contours() =
     let mutable _size: float option = None
     let mutable _coloring: _ option = None
     let mutable _showlines: bool option = None
-    let mutable _role: string option = Some "object"
+    //let mutable _role: string option = Some "object"
     let mutable _x: X option = None
     let mutable _y: Y option = None
     let mutable _z: Z option = None
@@ -572,9 +572,9 @@ type Contours() =
         with get () = Option.get _showlines
         and set value = _showlines <- Some value
 
-    member __.role
-        with get () = Option.get _role
-        and set value = _role <- Some value
+////    member __.role
+////        with get () = Option.get _role
+////        and set value = _role <- Some value
 
     member __.x
         with get () = Option.get _x
@@ -593,7 +593,7 @@ type Contours() =
     member __.ShouldSerializesize() = not _size.IsNone
     member __.ShouldSerializecoloring() = not _coloring.IsNone
     member __.ShouldSerializeshowlines() = not _showlines.IsNone
-    member __.ShouldSerializerole() = not _role.IsNone
+    //member __.ShouldSerializerole() = not _role.IsNone
     member __.ShouldSerializex() = not _x.IsNone
     member __.ShouldSerializey() = not _y.IsNone
     member __.ShouldSerializez() = not _z.IsNone
@@ -603,8 +603,8 @@ type Insidetextfont() =
     let mutable _family: string option = None
     let mutable _size: float option = None
     let mutable _color: string option = None
-    let mutable _description: string option = Some "Sets the font used for `textinfo` lying inside the pie."
-    let mutable _role: string option = Some "object"
+    //let mutable _description: string option = Some "Sets the font used for `textinfo` lying inside the pie."
+    //let mutable _role: string option = Some "object"
 
     /// HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.
     member __.family
@@ -619,27 +619,27 @@ type Insidetextfont() =
         with get () = Option.get _color
         and set value = _color <- Some value
 
-    member __.description
-        with get () = Option.get _description
-        and set value = _description <- Some value
-
-    member __.role
-        with get () = Option.get _role
-        and set value = _role <- Some value
+////    member __.description
+////        with get () = Option.get _description
+////        and set value = _description <- Some value
+//
+////    member __.role
+////        with get () = Option.get _role
+////        and set value = _role <- Some value
 
     member __.ShouldSerializefamily() = not _family.IsNone
     member __.ShouldSerializesize() = not _size.IsNone
     member __.ShouldSerializecolor() = not _color.IsNone
-    member __.ShouldSerializedescription() = not _description.IsNone
-    member __.ShouldSerializerole() = not _role.IsNone
+    //member __.ShouldSerializedescription() = not _description.IsNone
+    //member __.ShouldSerializerole() = not _role.IsNone
 
 type Outsidetextfont() =
 
     let mutable _family: string option = None
     let mutable _size: float option = None
     let mutable _color: string option = None
-    let mutable _description: string option = Some "Sets the font used for `textinfo` lying outside the pie."
-    let mutable _role: string option = Some "object"
+    //let mutable _description: string option = Some "Sets the font used for `textinfo` lying outside the pie."
+    //let mutable _role: string option = Some "object"
 
     /// HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.
     member __.family
@@ -654,25 +654,25 @@ type Outsidetextfont() =
         with get () = Option.get _color
         and set value = _color <- Some value
 
-    member __.description
-        with get () = Option.get _description
-        and set value = _description <- Some value
-
-    member __.role
-        with get () = Option.get _role
-        and set value = _role <- Some value
+////    member __.description
+////        with get () = Option.get _description
+////        and set value = _description <- Some value
+//
+////    member __.role
+////        with get () = Option.get _role
+////        and set value = _role <- Some value
 
     member __.ShouldSerializefamily() = not _family.IsNone
     member __.ShouldSerializesize() = not _size.IsNone
     member __.ShouldSerializecolor() = not _color.IsNone
-    member __.ShouldSerializedescription() = not _description.IsNone
-    member __.ShouldSerializerole() = not _role.IsNone
+    //member __.ShouldSerializedescription() = not _description.IsNone
+    //member __.ShouldSerializerole() = not _role.IsNone
 
 type Domain() =
 
     let mutable _x: _ option = None
     let mutable _y: _ option = None
-    let mutable _role: string option = Some "object"
+    //let mutable _role: string option = Some "object"
 
     /// Sets the horizontal domain of this pie trace (in plot fraction).
     member __.x
@@ -684,20 +684,20 @@ type Domain() =
         with get () = Option.get _y
         and set value = _y <- Some value
 
-    member __.role
-        with get () = Option.get _role
-        and set value = _role <- Some value
+////    member __.role
+////        with get () = Option.get _role
+////        and set value = _role <- Some value
 
     member __.ShouldSerializex() = not _x.IsNone
     member __.ShouldSerializey() = not _y.IsNone
-    member __.ShouldSerializerole() = not _role.IsNone
+    //member __.ShouldSerializerole() = not _role.IsNone
 
 type Xbins() =
 
     let mutable _start: float option = None
     let mutable _end: float option = None
     let mutable _size: _ option = None
-    let mutable _role: string option = Some "object"
+    //let mutable _role: string option = Some "object"
 
     /// Sets the starting value for the x axis bins.
     member __.start
@@ -714,21 +714,21 @@ type Xbins() =
         with get () = Option.get _size
         and set value = _size <- Some value
 
-    member __.role
-        with get () = Option.get _role
-        and set value = _role <- Some value
+////    member __.role
+////        with get () = Option.get _role
+////        and set value = _role <- Some value
 
     member __.ShouldSerializestart() = not _start.IsNone
     member __.ShouldSerializeend() = not _end.IsNone
     member __.ShouldSerializesize() = not _size.IsNone
-    member __.ShouldSerializerole() = not _role.IsNone
+    //member __.ShouldSerializerole() = not _role.IsNone
 
 type Ybins() =
 
     let mutable _start: float option = None
     let mutable _end: float option = None
     let mutable _size: _ option = None
-    let mutable _role: string option = Some "object"
+    //let mutable _role: string option = Some "object"
 
     /// Sets the starting value for the y axis bins.
     member __.start
@@ -745,14 +745,14 @@ type Ybins() =
         with get () = Option.get _size
         and set value = _size <- Some value
 
-    member __.role
-        with get () = Option.get _role
-        and set value = _role <- Some value
+////    member __.role
+////        with get () = Option.get _role
+////        and set value = _role <- Some value
 
     member __.ShouldSerializestart() = not _start.IsNone
     member __.ShouldSerializeend() = not _end.IsNone
     member __.ShouldSerializesize() = not _size.IsNone
-    member __.ShouldSerializerole() = not _role.IsNone
+    //member __.ShouldSerializerole() = not _role.IsNone
 
 type Error_y() =
 
@@ -770,7 +770,7 @@ type Error_y() =
     let mutable _color: string option = None
     let mutable _thickness: float option = None
     let mutable _width: float option = None
-    let mutable _role: string option = Some "object"
+    //let mutable _role: string option = Some "object"
     let mutable _arraysrc: string option = None
     let mutable _arrayminussrc: string option = None
 
@@ -840,9 +840,9 @@ type Error_y() =
         with get () = Option.get _width
         and set value = _width <- Some value
 
-    member __.role
-        with get () = Option.get _role
-        and set value = _role <- Some value
+////    member __.role
+////        with get () = Option.get _role
+////        and set value = _role <- Some value
 
     /// Sets the source reference on plot.ly for  array .
     member __.arraysrc
@@ -868,7 +868,7 @@ type Error_y() =
     member __.ShouldSerializecolor() = not _color.IsNone
     member __.ShouldSerializethickness() = not _thickness.IsNone
     member __.ShouldSerializewidth() = not _width.IsNone
-    member __.ShouldSerializerole() = not _role.IsNone
+    //member __.ShouldSerializerole() = not _role.IsNone
     member __.ShouldSerializearraysrc() = not _arraysrc.IsNone
     member __.ShouldSerializearrayminussrc() = not _arrayminussrc.IsNone
 
@@ -888,7 +888,7 @@ type Error_x() =
     let mutable _color: string option = None
     let mutable _thickness: float option = None
     let mutable _width: float option = None
-    let mutable _role: string option = Some "object"
+    //let mutable _role: string option = Some "object"
     let mutable _arraysrc: string option = None
     let mutable _arrayminussrc: string option = None
 
@@ -958,9 +958,9 @@ type Error_x() =
         with get () = Option.get _width
         and set value = _width <- Some value
 
-    member __.role
-        with get () = Option.get _role
-        and set value = _role <- Some value
+//    member __.role
+//        with get () = Option.get _role
+//        and set value = _role <- Some value
 
     /// Sets the source reference on plot.ly for  array .
     member __.arraysrc
@@ -986,7 +986,7 @@ type Error_x() =
     member __.ShouldSerializecolor() = not _color.IsNone
     member __.ShouldSerializethickness() = not _thickness.IsNone
     member __.ShouldSerializewidth() = not _width.IsNone
-    member __.ShouldSerializerole() = not _role.IsNone
+    //member __.ShouldSerializerole() = not _role.IsNone
     member __.ShouldSerializearraysrc() = not _arraysrc.IsNone
     member __.ShouldSerializearrayminussrc() = not _arrayminussrc.IsNone
 
@@ -995,8 +995,8 @@ type Textfont() =
     let mutable _family: string option = None
     let mutable _size: float option = None
     let mutable _color: string option = None
-    let mutable _description: string option = Some "Sets the text font."
-    let mutable _role: string option = Some "object"
+    //let mutable _description: string option = Some "Sets the text font."
+    //let mutable _role: string option = Some "object"
     let mutable _familysrc: string option = None
     let mutable _sizesrc: string option = None
     let mutable _colorsrc: string option = None
@@ -1013,13 +1013,13 @@ type Textfont() =
         with get () = Option.get _color
         and set value = _color <- Some value
 
-    member __.description
-        with get () = Option.get _description
-        and set value = _description <- Some value
+//    member __.description
+//        with get () = Option.get _description
+//        and set value = _description <- Some value
 
-    member __.role
-        with get () = Option.get _role
-        and set value = _role <- Some value
+//    member __.role
+//        with get () = Option.get _role
+//        and set value = _role <- Some value
 
     /// Sets the source reference on plot.ly for  family .
     member __.familysrc
@@ -1040,8 +1040,8 @@ type Textfont() =
     member __.ShouldSerializefamily() = not _family.IsNone
     member __.ShouldSerializesize() = not _size.IsNone
     member __.ShouldSerializecolor() = not _color.IsNone
-    member __.ShouldSerializedescription() = not _description.IsNone
-    member __.ShouldSerializerole() = not _role.IsNone
+    //member __.ShouldSerializedescription() = not _description.IsNone
+    //member __.ShouldSerializerole() = not _role.IsNone
     member __.ShouldSerializefamilysrc() = not _familysrc.IsNone
     member __.ShouldSerializesizesrc() = not _sizesrc.IsNone
     member __.ShouldSerializecolorsrc() = not _colorsrc.IsNone
@@ -1051,8 +1051,8 @@ type Titlefont() =
     let mutable _family: string option = None
     let mutable _size: float option = None
     let mutable _color: string option = None
-    let mutable _description: string option = Some "Sets this color bar's title font."
-    let mutable _role: string option = Some "object"
+    //let mutable _description: string option = Some "Sets this color bar's title font."
+    //let mutable _role: string option = Some "object"
 
     /// HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.
     member __.family
@@ -1067,28 +1067,28 @@ type Titlefont() =
         with get () = Option.get _color
         and set value = _color <- Some value
 
-    member __.description
-        with get () = Option.get _description
-        and set value = _description <- Some value
+//    member __.description
+//        with get () = Option.get _description
+//        and set value = _description <- Some value
 
-    member __.role
-        with get () = Option.get _role
-        and set value = _role <- Some value
+//    member __.role
+////        with get () = Option.get _role
+//        and set value = _role <- Some value
 
 
     member __.ShouldSerializefamily() = not _family.IsNone
     member __.ShouldSerializesize() = not _size.IsNone
     member __.ShouldSerializecolor() = not _color.IsNone
-    member __.ShouldSerializedescription() = not _description.IsNone
-    member __.ShouldSerializerole() = not _role.IsNone
+    //member __.ShouldSerializedescription() = not _description.IsNone
+    //member __.ShouldSerializerole() = not _role.IsNone
 
 type Tickfont() =
 
     let mutable _family: string option = None
     let mutable _size: float option = None
     let mutable _color: string option = None
-    let mutable _description: string option = Some "Sets the tick font."
-    let mutable _role: string option = Some "object"
+    //let mutable _description: string option = Some "Sets the tick font."
+    //let mutable _role: string option = Some "object"
 
     /// HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.
     member __.family
@@ -1103,19 +1103,19 @@ type Tickfont() =
         with get () = Option.get _color
         and set value = _color <- Some value
 
-    member __.description
-        with get () = Option.get _description
-        and set value = _description <- Some value
+//    member __.description
+//        with get () = Option.get _description
+//        and set value = _description <- Some value
 
-    member __.role
-        with get () = Option.get _role
-        and set value = _role <- Some value
+//    member __.role
+//        with get () = Option.get _role
+//        and set value = _role <- Some value
 
     member __.ShouldSerializefamily() = not _family.IsNone
     member __.ShouldSerializesize() = not _size.IsNone
     member __.ShouldSerializecolor() = not _color.IsNone
-    member __.ShouldSerializedescription() = not _description.IsNone
-    member __.ShouldSerializerole() = not _role.IsNone
+    //member __.ShouldSerializedescription() = not _description.IsNone
+    //member __.ShouldSerializerole() = not _role.IsNone
 
 type Colorbar() =
 
@@ -1157,7 +1157,7 @@ type Colorbar() =
     let mutable _title: string option = None
     let mutable _titlefont: Font option = None
     let mutable _titleside: _ option = None
-    let mutable _role: string option = Some "object"
+    //let mutable _role: string option = Some "object"
     let mutable _tickvalssrc: string option = None
     let mutable _ticktextsrc: string option = None
 
@@ -1349,9 +1349,9 @@ type Colorbar() =
         with get () = Option.get _titleside
         and set value = _titleside <- Some value
 
-    member __.role
-        with get () = Option.get _role
-        and set value = _role <- Some value
+//    member __.role
+//        with get () = Option.get _role
+//        and set value = _role <- Some value
 
     /// Sets the source reference on plot.ly for  tickvals .
     member __.tickvalssrc
@@ -1401,7 +1401,7 @@ type Colorbar() =
     member __.ShouldSerializetitle() = not _title.IsNone
     member __.ShouldSerializetitlefont() = not _titlefont.IsNone
     member __.ShouldSerializetitleside() = not _titleside.IsNone
-    member __.ShouldSerializerole() = not _role.IsNone
+    //member __.ShouldSerializerole() = not _role.IsNone
     member __.ShouldSerializetickvalssrc() = not _tickvalssrc.IsNone
     member __.ShouldSerializeticktextsrc() = not _ticktextsrc.IsNone
 
@@ -1412,7 +1412,7 @@ type Line() =
     let mutable _shape: _ option = None
     let mutable _smoothing: float option = None
     let mutable _dash: string option = None
-    let mutable _role: string option = Some "object"
+    //let mutable _role: string option = Some "object"
     let mutable _colorscale: _ option = None
     let mutable _cauto: bool option = None
     let mutable _cmax: float option = None
@@ -1449,9 +1449,9 @@ type Line() =
         with get () = Option.get _dash
         and set value = _dash <- Some value
 
-    member __.role
-        with get () = Option.get _role
-        and set value = _role <- Some value
+//    member __.role
+//        with get () = Option.get _role
+//        and set value = _role <- Some value
 
 
     /// Has only an effect if `marker.line.color` is set to a numerical array. Sets the colorscale.
@@ -1514,7 +1514,7 @@ type Line() =
     member __.ShouldSerializeshape() = not _shape.IsNone
     member __.ShouldSerializesmoothing() = not _smoothing.IsNone
     member __.ShouldSerializedash() = not _dash.IsNone
-    member __.ShouldSerializerole() = not _role.IsNone
+    //member __.ShouldSerializerole() = not _role.IsNone
     member __.ShouldSerializecolorscale() = not _colorscale.IsNone
     member __.ShouldSerializecauto() = not _cauto.IsNone
     member __.ShouldSerializecmax() = not _cmax.IsNone
@@ -1545,7 +1545,7 @@ type Marker() =
     let mutable _showscale: bool option = None
     let mutable _line: Line option = None
     let mutable _colorbar: Colorbar option = None
-    let mutable _role: string option = Some "object"
+    //let mutable _role: string option = Some "object"
     let mutable _symbolsrc: string option = None
     let mutable _opacitysrc: string option = None
     let mutable _sizesrc: string option = None
@@ -1637,9 +1637,9 @@ type Marker() =
         with get () = Option.get _colorbar
         and set value = _colorbar <- Some value
 
-    member __.role
-        with get () = Option.get _role
-        and set value = _role <- Some value
+//    member __.role
+//        with get () = Option.get _role
+//        and set value = _role <- Some value
 
     /// Sets the source reference on plot.ly for  symbol .
     member __.symbolsrc
@@ -1694,7 +1694,7 @@ type Marker() =
     member __.ShouldSerializeshowscale() = not _showscale.IsNone
     member __.ShouldSerializeline() = not _line.IsNone
     member __.ShouldSerializecolorbar() = not _colorbar.IsNone
-    member __.ShouldSerializerole() = not _role.IsNone
+    //member __.ShouldSerializerole() = not _role.IsNone
     member __.ShouldSerializesymbolsrc() = not _symbolsrc.IsNone
     member __.ShouldSerializeopacitysrc() = not _opacitysrc.IsNone
     member __.ShouldSerializesizesrc() = not _sizesrc.IsNone
@@ -1707,7 +1707,7 @@ type Stream() =
 
     let mutable _token: string option = None
     let mutable _maxpoints: float option = None
-    let mutable _role: string option = Some "object"
+    //let mutable _role: string option = Some "object"
 
     /// The stream id number links a data trace on a plot with a stream. See https://plot.ly/settings for more details.
     member __.token
@@ -1719,13 +1719,13 @@ type Stream() =
         with get () = Option.get _maxpoints
         and set value = _maxpoints <- Some value
 
-    member __.role
-        with get () = Option.get _role
-        and set value = _role <- Some value
+//    member __.role
+//        with get () = Option.get _role
+//        and set value = _role <- Some value
 
     member __.ShouldSerializetoken() = not _token.IsNone
     member __.ShouldSerializemaxpoints() = not _maxpoints.IsNone
-    member __.ShouldSerializerole() = not _role.IsNone
+    //member __.ShouldSerializerole() = not _role.IsNone
 
 type Scatter() =
     inherit Trace()
@@ -3488,7 +3488,7 @@ type Contour() =
     let mutable _show: bool option = None
     let mutable _color: string option = None
     let mutable _width: float option = None
-    let mutable _role: string option = Some "object"
+    //let mutable _role: string option = Some "object"
 
     member __.``type``
         with get () = Option.get _type
@@ -3696,9 +3696,9 @@ type Contour() =
         with get () = Option.get _width
         and set value = _width <- Some value
 
-    member __.role
-        with get () = Option.get _role
-        and set value = _role <- Some value
+//    member __.role
+//        with get () = Option.get _role
+//        and set value = _role <- Some value
 
     member __.ShouldSerializetype() = not _type.IsNone
     member __.ShouldSerializevisible() = not _visible.IsNone
@@ -3743,7 +3743,7 @@ type Contour() =
     member __.ShouldSerializeshow() = not _show.IsNone
     member __.ShouldSerializecolor() = not _color.IsNone
     member __.ShouldSerializewidth() = not _width.IsNone
-    member __.ShouldSerializerole() = not _role.IsNone
+    //member __.ShouldSerializerole() = not _role.IsNone
 
 
 
@@ -5415,7 +5415,7 @@ type Margin() =
     let mutable _b: float option = None
     let mutable _pad: float option = None
     let mutable _autoexpand: bool option = None
-    let mutable _role: string option = Some "object"
+    //let mutable _role: string option = Some "object"
 
     /// Sets the left margin (in px).
     member __.l
@@ -5446,9 +5446,9 @@ type Margin() =
         with get () = Option.get _autoexpand
         and set value = _autoexpand <- Some value
 
-    member __.role
-        with get () = Option.get _role
-        and set value = _role <- Some value
+//    member __.role
+//        with get () = Option.get _role
+//        and set value = _role <- Some value
 
     member __.ShouldSerializel() = not _l.IsNone
     member __.ShouldSerializer() = not _r.IsNone
@@ -5456,7 +5456,7 @@ type Margin() =
     member __.ShouldSerializeb() = not _b.IsNone
     member __.ShouldSerializepad() = not _pad.IsNone
     member __.ShouldSerializeautoexpand() = not _autoexpand.IsNone
-    member __.ShouldSerializerole() = not _role.IsNone
+    //member __.ShouldSerializerole() = not _role.IsNone
 
 type Xaxis() =
 
@@ -5504,7 +5504,7 @@ type Xaxis() =
     let mutable _domain: _ option = None
     let mutable _position: float option = None
     let mutable __isSubplotObj: bool option = Some true
-    let mutable _role: string option = Some "object"
+    //let mutable _role: string option = Some "object"
     let mutable _tickvalssrc: string option = None
     let mutable _ticktextsrc: string option = None
     let mutable _showspikes: bool option = None
@@ -5732,9 +5732,9 @@ type Xaxis() =
         with get () = Option.get __isSubplotObj
         and set value = __isSubplotObj <- Some value
 
-    member __.role
-        with get () = Option.get _role
-        and set value = _role <- Some value
+//    member __.role
+//        with get () = Option.get _role
+//        and set value = _role <- Some value
 
     /// Sets the source reference on plot.ly for  tickvals .
     member __.tickvalssrc
@@ -5825,7 +5825,7 @@ type Xaxis() =
     member __.ShouldSerializedomain() = not _domain.IsNone
     member __.ShouldSerializeposition() = not _position.IsNone
     member __.ShouldSerialize_isSubplotObj() = not __isSubplotObj.IsNone
-    member __.ShouldSerializerole() = not _role.IsNone
+    //member __.ShouldSerializerole() = not _role.IsNone
     member __.ShouldSerializetickvalssrc() = not _tickvalssrc.IsNone
     member __.ShouldSerializeticktextsrc() = not _ticktextsrc.IsNone
     member __.ShouldSerializeshowspikes() = not _showspikes.IsNone
@@ -5882,7 +5882,7 @@ type Yaxis() =
     let mutable _domain: _ option = None
     let mutable _position: float option = None
     let mutable __isSubplotObj: bool option = Some true
-    let mutable _role: string option = Some "object"
+    //let mutable _role: string option = Some "object"
     let mutable _tickvalssrc: string option = None
     let mutable _ticktextsrc: string option = None
     let mutable _showspikes: bool option = None
@@ -6110,9 +6110,9 @@ type Yaxis() =
         with get () = Option.get __isSubplotObj
         and set value = __isSubplotObj <- Some value
 
-    member __.role
-        with get () = Option.get _role
-        and set value = _role <- Some value
+//    member __.role
+//        with get () = Option.get _role
+//        and set value = _role <- Some value
 
     /// Sets the source reference on plot.ly for  tickvals .
     member __.tickvalssrc
@@ -6203,7 +6203,7 @@ type Yaxis() =
     member __.ShouldSerializedomain() = not _domain.IsNone
     member __.ShouldSerializeposition() = not _position.IsNone
     member __.ShouldSerialize_isSubplotObj() = not __isSubplotObj.IsNone
-    member __.ShouldSerializerole() = not _role.IsNone
+    //member __.ShouldSerializerole() = not _role.IsNone
     member __.ShouldSerializetickvalssrc() = not _tickvalssrc.IsNone
     member __.ShouldSerializeticktextsrc() = not _ticktextsrc.IsNone
     member __.ShouldSerializeshowspikes() = not _showspikes.IsNone
@@ -6223,8 +6223,8 @@ type Up() =
     let mutable _x: float option = None
     let mutable _y: float option = None
     let mutable _z: float option = None
-    let mutable _description: string option = Some "Sets the (x,y,z) components of the 'up' camera vector. This vector determines the up direction of this scene with respect to the page. The default is *{x: 0, y: 0, z: 1}* which means that the z axis points up."
-    let mutable _role: string option = Some "object"
+    //let mutable _description: string option = Some "Sets the (x,y,z) components of the 'up' camera vector. This vector determines the up direction of this scene with respect to the page. The default is *{x: 0, y: 0, z: 1}* which means that the z axis points up."
+    //let mutable _role: string option = Some "object"
 
     member __.x
         with get () = Option.get _x
@@ -6238,27 +6238,27 @@ type Up() =
         with get () = Option.get _z
         and set value = _z <- Some value
 
-    member __.description
-        with get () = Option.get _description
-        and set value = _description <- Some value
+//    member __.description
+//        with get () = Option.get _description
+//        and set value = _description <- Some value
 
-    member __.role
-        with get () = Option.get _role
-        and set value = _role <- Some value
+//    member __.role
+//        with get () = Option.get _role
+//        and set value = _role <- Some value
 
     member __.ShouldSerializex() = not _x.IsNone
     member __.ShouldSerializey() = not _y.IsNone
     member __.ShouldSerializez() = not _z.IsNone
-    member __.ShouldSerializedescription() = not _description.IsNone
-    member __.ShouldSerializerole() = not _role.IsNone
+    //member __.ShouldSerializedescription() = not _description.IsNone
+    //member __.ShouldSerializerole() = not _role.IsNone
 
 type Center() =
 
     let mutable _x: float option = None
     let mutable _y: float option = None
     let mutable _z: float option = None
-    let mutable _description: string option = Some "Sets the (x,y,z) components of the 'center' camera vector This vector determines the translation (x,y,z) space about the center of this scene. By default, there is no such translation."
-    let mutable _role: string option = Some "object"
+    //let mutable _description: string option = Some "Sets the (x,y,z) components of the 'center' camera vector This vector determines the translation (x,y,z) space about the center of this scene. By default, there is no such translation."
+    //let mutable _role: string option = Some "object"
 
     member __.x
         with get () = Option.get _x
@@ -6272,27 +6272,27 @@ type Center() =
         with get () = Option.get _z
         and set value = _z <- Some value
 
-    member __.description
-        with get () = Option.get _description
-        and set value = _description <- Some value
+//    member __.description
+//        with get () = Option.get _description
+//        and set value = _description <- Some value
 
-    member __.role
-        with get () = Option.get _role
-        and set value = _role <- Some value
+//    member __.role
+//        with get () = Option.get _role
+//        and set value = _role <- Some value
 
     member __.ShouldSerializex() = not _x.IsNone
     member __.ShouldSerializey() = not _y.IsNone
     member __.ShouldSerializez() = not _z.IsNone
-    member __.ShouldSerializedescription() = not _description.IsNone
-    member __.ShouldSerializerole() = not _role.IsNone
+    //member __.ShouldSerializedescription() = not _description.IsNone
+    //member __.ShouldSerializerole() = not _role.IsNone
 
 type Eye() =
 
     let mutable _x: float option = None
     let mutable _y: float option = None
     let mutable _z: float option = None
-    let mutable _description: string option = Some "Sets the (x,y,z) components of the 'eye' camera vector. This vector determines the view point about the origin of this scene."
-    let mutable _role: string option = Some "object"
+    //let mutable _description: string option = Some "Sets the (x,y,z) components of the 'eye' camera vector. This vector determines the view point about the origin of this scene."
+    //let mutable _role: string option = Some "object"
 
     member __.x
         with get () = Option.get _x
@@ -6306,27 +6306,27 @@ type Eye() =
         with get () = Option.get _z
         and set value = _z <- Some value
 
-    member __.description
-        with get () = Option.get _description
-        and set value = _description <- Some value
+//    member __.description
+//        with get () = Option.get _description
+//        and set value = _description <- Some value
 
-    member __.role
-        with get () = Option.get _role
-        and set value = _role <- Some value
+//    member __.role
+//        with get () = Option.get _role
+//        and set value = _role <- Some value
 
     member __.ShouldSerializex() = not _x.IsNone
     member __.ShouldSerializey() = not _y.IsNone
     member __.ShouldSerializez() = not _z.IsNone
-    member __.ShouldSerializedescription() = not _description.IsNone
-    member __.ShouldSerializerole() = not _role.IsNone
+    //member __.ShouldSerializedescription() = not _description.IsNone
+    //member __.ShouldSerializerole() = not _role.IsNone
 
 type Aspectratio() =
 
     let mutable _x: float option = None
     let mutable _y: float option = None
     let mutable _z: float option = None
-    let mutable _description: string option = Some "Sets this scene's axis aspectratio."
-    let mutable _role: string option = Some "object"
+    //let mutable _description: string option = Some "Sets this scene's axis aspectratio."
+    //let mutable _role: string option = Some "object"
 
     member __.x
         with get () = Option.get _x
@@ -6340,26 +6340,26 @@ type Aspectratio() =
         with get () = Option.get _z
         and set value = _z <- Some value
 
-    member __.description
-        with get () = Option.get _description
-        and set value = _description <- Some value
+//    member __.description
+//        with get () = Option.get _description
+//        and set value = _description <- Some value
 
-    member __.role
-        with get () = Option.get _role
-        and set value = _role <- Some value
+//    member __.role
+//        with get () = Option.get _role
+//        and set value = _role <- Some value
 
     member __.ShouldSerializex() = not _x.IsNone
     member __.ShouldSerializey() = not _y.IsNone
     member __.ShouldSerializez() = not _z.IsNone
-    member __.ShouldSerializedescription() = not _description.IsNone
-    member __.ShouldSerializerole() = not _role.IsNone
+    //member __.ShouldSerializedescription() = not _description.IsNone
+    //member __.ShouldSerializerole() = not _role.IsNone
 
 type Camera() =
 
     let mutable _up: Up option = None
     let mutable _center: Center option = None
     let mutable _eye: Eye option = None
-    let mutable _role: string option = Some "object"
+    //let mutable _role: string option = Some "object"
 
     member __.up
         with get () = Option.get _up
@@ -6373,14 +6373,14 @@ type Camera() =
         with get () = Option.get _eye
         and set value = _eye <- Some value
 
-    member __.role
-        with get () = Option.get _role
-        and set value = _role <- Some value
+//    member __.role
+//        with get () = Option.get _role
+//        and set value = _role <- Some value
 
     member __.ShouldSerializeup() = not _up.IsNone
     member __.ShouldSerializecenter() = not _center.IsNone
     member __.ShouldSerializeeye() = not _eye.IsNone
-    member __.ShouldSerializerole() = not _role.IsNone
+    //member __.ShouldSerializerole() = not _role.IsNone
 
 type Zaxis() =
 
@@ -6429,7 +6429,7 @@ type Zaxis() =
     let mutable _zeroline: bool option = None
     let mutable _zerolinecolor: string option = None
     let mutable _zerolinewidth: float option = None
-    let mutable _role: string option = Some "object"
+    //let mutable _role: string option = Some "object"
     let mutable _tickvalssrc: string option = None
     let mutable _ticktextsrc: string option = None
 
@@ -6656,9 +6656,9 @@ type Zaxis() =
         with get () = Option.get _zerolinewidth
         and set value = _zerolinewidth <- Some value
 
-    member __.role
-        with get () = Option.get _role
-        and set value = _role <- Some value
+//    member __.role
+//        with get () = Option.get _role
+//        and set value = _role <- Some value
 
     /// Sets the source reference on plot.ly for  tickvals .
     member __.tickvalssrc
@@ -6715,7 +6715,7 @@ type Zaxis() =
     member __.ShouldSerializezeroline() = not _zeroline.IsNone
     member __.ShouldSerializezerolinecolor() = not _zerolinecolor.IsNone
     member __.ShouldSerializezerolinewidth() = not _zerolinewidth.IsNone
-    member __.ShouldSerializerole() = not _role.IsNone
+    //member __.ShouldSerializerole() = not _role.IsNone
     member __.ShouldSerializetickvalssrc() = not _tickvalssrc.IsNone
     member __.ShouldSerializeticktextsrc() = not _ticktextsrc.IsNone
 
@@ -6730,7 +6730,7 @@ type Scene() =
     let mutable _yaxis: Yaxis option = None
     let mutable _zaxis: Zaxis option = None
     let mutable __isSubplotObj: bool option = Some true
-    let mutable _role: string option = Some "object"
+    //let mutable _role: string option = Some "object"
 
     member __.bgcolor
         with get () = Option.get _bgcolor
@@ -6769,9 +6769,9 @@ type Scene() =
         with get () = Option.get __isSubplotObj
         and set value = __isSubplotObj <- Some value
 
-    member __.role
-        with get () = Option.get _role
-        and set value = _role <- Some value
+//    member __.role
+//        with get () = Option.get _role
+//        and set value = _role <- Some value
 
     member __.ShouldSerializebgcolor() = not _bgcolor.IsNone
     member __.ShouldSerializecamera() = not _camera.IsNone
@@ -6782,7 +6782,7 @@ type Scene() =
     member __.ShouldSerializeyaxis() = not _yaxis.IsNone
     member __.ShouldSerializezaxis() = not _zaxis.IsNone
     member __.ShouldSerialize_isSubplotObj() = not __isSubplotObj.IsNone
-    member __.ShouldSerializerole() = not _role.IsNone
+    //member __.ShouldSerializerole() = not _role.IsNone
 
 type Lonaxis() =
 
@@ -6792,7 +6792,7 @@ type Lonaxis() =
     let mutable _dtick: float option = None
     let mutable _gridcolor: string option = None
     let mutable _gridwidth: float option = None
-    let mutable _role: string option = Some "object"
+    //let mutable _role: string option = Some "object"
 
     /// Sets the range of this axis (in degrees).
     member __.range
@@ -6824,9 +6824,9 @@ type Lonaxis() =
         with get () = Option.get _gridwidth
         and set value = _gridwidth <- Some value
 
-    member __.role
-        with get () = Option.get _role
-        and set value = _role <- Some value
+//    member __.role
+//        with get () = Option.get _role
+//        and set value = _role <- Some value
 
     member __.ShouldSerializerange() = not _range.IsNone
     member __.ShouldSerializeshowgrid() = not _showgrid.IsNone
@@ -6834,7 +6834,7 @@ type Lonaxis() =
     member __.ShouldSerializedtick() = not _dtick.IsNone
     member __.ShouldSerializegridcolor() = not _gridcolor.IsNone
     member __.ShouldSerializegridwidth() = not _gridwidth.IsNone
-    member __.ShouldSerializerole() = not _role.IsNone
+    //member __.ShouldSerializerole() = not _role.IsNone
 
 type Lataxis() =
 
@@ -6844,7 +6844,7 @@ type Lataxis() =
     let mutable _dtick: float option = None
     let mutable _gridcolor: string option = None
     let mutable _gridwidth: float option = None
-    let mutable _role: string option = Some "object"
+    //let mutable _role: string option = Some "object"
 
     /// Sets the range of this axis (in degrees).
     member __.range
@@ -6876,9 +6876,9 @@ type Lataxis() =
         with get () = Option.get _gridwidth
         and set value = _gridwidth <- Some value
 
-    member __.role
-        with get () = Option.get _role
-        and set value = _role <- Some value
+//    member __.role
+//        with get () = Option.get _role
+//        and set value = _role <- Some value
 
     member __.ShouldSerializerange() = not _range.IsNone
     member __.ShouldSerializeshowgrid() = not _showgrid.IsNone
@@ -6886,7 +6886,7 @@ type Lataxis() =
     member __.ShouldSerializedtick() = not _dtick.IsNone
     member __.ShouldSerializegridcolor() = not _gridcolor.IsNone
     member __.ShouldSerializegridwidth() = not _gridwidth.IsNone
-    member __.ShouldSerializerole() = not _role.IsNone
+    //member __.ShouldSerializerole() = not _role.IsNone
 
 type Geo() =
 
@@ -6919,7 +6919,7 @@ type Geo() =
     let mutable _lonaxis: Lonaxis option = None
     let mutable _lataxis: Lataxis option = None
     let mutable __isSubplotObj: bool option = Some true
-    let mutable _role: string option = Some "object"
+    //let mutable _role: string option = Some "object"
 
     member __.domain
         with get () = Option.get _domain
@@ -7061,9 +7061,9 @@ type Geo() =
         with get () = Option.get __isSubplotObj
         and set value = __isSubplotObj <- Some value
 
-    member __.role
-        with get () = Option.get _role
-        and set value = _role <- Some value
+//    member __.role
+//        with get () = Option.get _role
+//        and set value = _role <- Some value
 
     member __.ShouldSerializedomain() = not _domain.IsNone
     member __.ShouldSerializeresolution() = not _resolution.IsNone
@@ -7094,7 +7094,7 @@ type Geo() =
     member __.ShouldSerializelonaxis() = not _lonaxis.IsNone
     member __.ShouldSerializelataxis() = not _lataxis.IsNone
     member __.ShouldSerialize_isSubplotObj() = not __isSubplotObj.IsNone
-    member __.ShouldSerializerole() = not _role.IsNone
+    //member __.ShouldSerializerole() = not _role.IsNone
 
 
 
@@ -7112,7 +7112,7 @@ type Legend() =
     let mutable _xanchor: _ option = None
     let mutable _y: float option = None
     let mutable _yanchor: _ option = None
-    let mutable _role: string option = Some "object"
+    //let mutable _role: string option = Some "object"
 
     /// Sets the legend background color.
     member __.bgcolor
@@ -7163,9 +7163,9 @@ type Legend() =
         with get () = Option.get _yanchor
         and set value = _yanchor <- Some value
 
-    member __.role
-        with get () = Option.get _role
-        and set value = _role <- Some value
+//    member __.role
+//        with get () = Option.get _role
+//        and set value = _role <- Some value
 
     member __.ShouldSerializebgcolor() = not _bgcolor.IsNone
     member __.ShouldSerializebordercolor() = not _bordercolor.IsNone
@@ -7177,7 +7177,7 @@ type Legend() =
     member __.ShouldSerializexanchor() = not _xanchor.IsNone
     member __.ShouldSerializey() = not _y.IsNone
     member __.ShouldSerializeyanchor() = not _yanchor.IsNone
-    member __.ShouldSerializerole() = not _role.IsNone
+    //member __.ShouldSerializerole() = not _role.IsNone
 
 type Annotation() =
 
@@ -7203,7 +7203,7 @@ type Annotation() =
     let mutable _yref: _ option = None
     let mutable _y: float option = None
     let mutable _yanchor: _ option = None
-    let mutable _role: string option = Some "object"
+    //let mutable _role: string option = Some "object"
 
     /// Sets the text associated with this annotation. Plotly uses a subset of HTML tags to do things like newline (<br>), bold (<b></b>), italics (<i></i>), hyperlinks (<a href='...'></a>). Tags <em>, <sup>, <sub> <span> are also supported.
     member __.text
@@ -7314,9 +7314,9 @@ type Annotation() =
         with get () = Option.get _yanchor
         and set value = _yanchor <- Some value
 
-    member __.role
-        with get () = Option.get _role
-        and set value = _role <- Some value
+//    member __.role
+//        with get () = Option.get _role
+//        and set value = _role <- Some value
 
     member __.ShouldSerializetext() = not _text.IsNone
     member __.ShouldSerializetextangle() = not _textangle.IsNone
@@ -7340,7 +7340,7 @@ type Annotation() =
     member __.ShouldSerializeyref() = not _yref.IsNone
     member __.ShouldSerializey() = not _y.IsNone
     member __.ShouldSerializeyanchor() = not _yanchor.IsNone
-    member __.ShouldSerializerole() = not _role.IsNone
+    //member __.ShouldSerializerole() = not _role.IsNone
 
 type Shape() =
 
@@ -7355,7 +7355,7 @@ type Shape() =
     let mutable _opacity: float option = None
     let mutable _line: Line option = None
     let mutable _fillcolor: string option = None
-    let mutable _role: string option = Some "object"
+    //let mutable _role: string option = Some "object"
 
     /// Specifies the shape type to be drawn. If *line*, a line is drawn from (`x0`,`y0`) to (`x1`,`y1`) If *circle*, a circle is drawn from ((`x0`+`x1`)/2, (`y0`+`y1`)/2)) with radius (|(`x0`+`x1`)/2 - `x0`|, |(`y0`+`y1`)/2 -`y0`)|) If *rect*, a rectangle is drawn linking (`x0`,`y0`), (`x1`,`y0`), (`x1`,`y1`), (`x0`,`y1`), (`x0`,`y0`) If *path*, draw a custom SVG path using `path`.
     member __.``type``
@@ -7411,9 +7411,9 @@ type Shape() =
         with get () = Option.get _fillcolor
         and set value = _fillcolor <- Some value
 
-    member __.role
-        with get () = Option.get _role
-        and set value = _role <- Some value
+//    member __.role
+//        with get () = Option.get _role
+//        and set value = _role <- Some value
 
     member __.ShouldSerializetype() = not _type.IsNone
     member __.ShouldSerializexref() = not _xref.IsNone
@@ -7426,7 +7426,7 @@ type Shape() =
     member __.ShouldSerializeopacity() = not _opacity.IsNone
     member __.ShouldSerializeline() = not _line.IsNone
     member __.ShouldSerializefillcolor() = not _fillcolor.IsNone
-    member __.ShouldSerializerole() = not _role.IsNone
+    //member __.ShouldSerializerole() = not _role.IsNone
 
 type Items() =
 
@@ -7447,18 +7447,18 @@ type Items() =
 type Annotations() =
 
     let mutable _items: Items option = None
-    let mutable _role: string option = Some "object"
+    //let mutable _role: string option = Some "object"
 
     member __.items
         with get () = Option.get _items
         and set value = _items <- Some value
 
-    member __.role
-        with get () = Option.get _role
-        and set value = _role <- Some value
+//    member __.role
+//        with get () = Option.get _role
+//        and set value = _role <- Some value
 
     member __.ShouldSerializeitems() = not _items.IsNone
-    member __.ShouldSerializerole() = not _role.IsNone
+    //member __.ShouldSerializerole() = not _role.IsNone
 
 
 
@@ -7467,18 +7467,18 @@ type Annotations() =
 type Shapes() =
 
     let mutable _items: Items option = None
-    let mutable _role: string option = Some "object"
+    //let mutable _role: string option = Some "object"
 
     member __.items
         with get () = Option.get _items
         and set value = _items <- Some value
 
-    member __.role
-        with get () = Option.get _role
-        and set value = _role <- Some value
+//    member __.role
+//        with get () = Option.get _role
+//        and set value = _role <- Some value
 
     member __.ShouldSerializeitems() = not _items.IsNone
-    member __.ShouldSerializerole() = not _role.IsNone
+    //member __.ShouldSerializerole() = not _role.IsNone
 
 
 
@@ -7495,7 +7495,7 @@ type Radialaxis() =
     let mutable _ticksuffix: string option = None
     let mutable _endpadding: float option = None
     let mutable _visible: bool option = None
-    let mutable _role: string option = Some "object"
+    //let mutable _role: string option = Some "object"
 
     /// Defines the start and end point of this radial axis.
     member __.range
@@ -7551,9 +7551,9 @@ type Radialaxis() =
         with get () = Option.get _visible
         and set value = _visible <- Some value
 
-    member __.role
-        with get () = Option.get _role
-        and set value = _role <- Some value
+//    member __.role
+//        with get () = Option.get _role
+//        and set value = _role <- Some value
 
     member __.ShouldSerializerange() = not _range.IsNone
     member __.ShouldSerializedomain() = not _domain.IsNone
@@ -7566,7 +7566,7 @@ type Radialaxis() =
     member __.ShouldSerializeticksuffix() = not _ticksuffix.IsNone
     member __.ShouldSerializeendpadding() = not _endpadding.IsNone
     member __.ShouldSerializevisible() = not _visible.IsNone
-    member __.ShouldSerializerole() = not _role.IsNone
+    //member __.ShouldSerializerole() = not _role.IsNone
 
 type Angularaxis() =
 
@@ -7580,7 +7580,7 @@ type Angularaxis() =
     let mutable _ticksuffix: string option = None
     let mutable _endpadding: float option = None
     let mutable _visible: bool option = None
-    let mutable _role: string option = Some "object"
+    //let mutable _role: string option = Some "object"
 
     /// Defines the start and end point of this angular axis.
     member __.range
@@ -7631,9 +7631,9 @@ type Angularaxis() =
         with get () = Option.get _visible
         and set value = _visible <- Some value
 
-    member __.role
-        with get () = Option.get _role
-        and set value = _role <- Some value
+//    member __.role
+//        with get () = Option.get _role
+//        and set value = _role <- Some value
 
     member __.ShouldSerializerange() = not _range.IsNone
     member __.ShouldSerializedomain() = not _domain.IsNone
@@ -7645,7 +7645,7 @@ type Angularaxis() =
     member __.ShouldSerializeticksuffix() = not _ticksuffix.IsNone
     member __.ShouldSerializeendpadding() = not _endpadding.IsNone
     member __.ShouldSerializevisible() = not _visible.IsNone
-    member __.ShouldSerializerole() = not _role.IsNone
+    //member __.ShouldSerializerole() = not _role.IsNone
 
 type Layout() =
 
@@ -7669,12 +7669,13 @@ type Layout() =
     let mutable _scene: Scene option = None
     let mutable _geo: Geo option = None
     let mutable _legend: Legend option = None
-    let mutable _annotations: Annotations option = None
-    let mutable _shapes: Shapes option = None
+    let mutable _annotations: seq<Annotation> option = None
+    let mutable _shapes: seq<Shape> option = None
     let mutable _radialaxis: Radialaxis option = None
     let mutable _angularaxis: Angularaxis option = None
     let mutable _direction: _ option = None
     let mutable _orientation: float option = None
+    let mutable _barmode: string option = None
 
     member __.font
         with get () = Option.get _font
@@ -7793,6 +7794,10 @@ type Layout() =
         with get () = Option.get _orientation
         and set value = _orientation <- Some value
 
+    member __.barmode
+        with get () = Option.get _barmode
+        and set value = _barmode <- Some value
+
     member __.ShouldSerializefont() = not _font.IsNone
     member __.ShouldSerializetitle() = not _title.IsNone
     member __.ShouldSerializetitlefont() = not _titlefont.IsNone
@@ -7819,3 +7824,4 @@ type Layout() =
     member __.ShouldSerializeangularaxis() = not _angularaxis.IsNone
     member __.ShouldSerializedirection() = not _direction.IsNone
     member __.ShouldSerializeorientation() = not _orientation.IsNone
+    member __.ShouldSerializebarmode() = not _barmode.IsNone

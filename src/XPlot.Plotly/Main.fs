@@ -37,18 +37,18 @@ type PlotlyChart() =
     val mutable private dataJson: string
 
     [<DefaultValue>]
-    val mutable private layoutJson: string
+    val mutable private layout: Layout option
 
     member __.Plot(data:seq<#Trace>, ?Layout:Layout) =
         let dataJson = JsonConvert.SerializeObject data
         __.dataJson <- dataJson
-        let layoutJson =
-            match Layout with
-            | None -> "\"\""
-            | Some x -> JsonConvert.SerializeObject x
-        __.layoutJson <- layoutJson
+        __.layout <- Layout
 
     member __.Show() =
+        let layoutJson =
+            match __.layout with
+            | None -> "\"\""
+            | Some x -> JsonConvert.SerializeObject x
         let html =
             let chartMarkup =
                 HTML.chart
@@ -56,7 +56,7 @@ type PlotlyChart() =
                     .Replace("[WIDTH]", width)
                     .Replace("[HEIGHT]", height)
                     .Replace("[DATA]", __.dataJson)
-                    .Replace("[LAYOUT]", __.layoutJson)
+                    .Replace("[LAYOUT]", layoutJson)
             HTML.doc.Replace("[CHART]", chartMarkup)
         let tempPath = Path.GetTempPath()
         let file = sprintf "%s.html" guid
@@ -65,16 +65,22 @@ type PlotlyChart() =
         System.Diagnostics.Process.Start(path) |> ignore
 
     member __.GetInlineHtml() =
+        let layoutJson =
+            match __.layout with
+            | None -> "\"\""
+            | Some x -> JsonConvert.SerializeObject x
         HTML.chart
             .Replace("[ID]", guid)
             .Replace("[WIDTH]", width)
             .Replace("[HEIGHT]", height)
             .Replace("[DATA]", __.dataJson)
-            .Replace("[LAYOUT]", __.layoutJson)
+            .Replace("[LAYOUT]", layoutJson)
 
     member __.WithWidth(widthValue: int) = width <- string widthValue
 
     member __.WithHeight(heightValue: int) = height <- string heightValue
+
+    member __.WithLayout(layoutObj) = __.layout <- Some layoutObj
 
 type Plotly =
 
@@ -97,3 +103,8 @@ type Plotly =
     static member WithHeight height (chart:PlotlyChart) =
         chart.WithHeight height
         chart
+
+    static member WithLayout layout (chart:PlotlyChart) =
+        chart.WithLayout layout
+        chart
+

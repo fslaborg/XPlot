@@ -1,21 +1,15 @@
 ﻿(*** hide ***)
 #I "../../../bin"
-#load "../credentials.fsx"
 #r "XPlot.Plotly.dll"
-//#r "XPlot.Plotly.WPF.dll"
 
 open XPlot.Plotly
-
-//Plotly.Signin MyCredentials.userAndKey
 
 (**
 Plotly Line and Scatter Plots
 =============================
-
-Line and Scatter Plot
----------------------
 *)
-(*** define-output:scatter1 ***)    
+
+(*** define-output:chart ***)    
 let trace1 =
     Scatter(
         x = [1; 2; 3; 4],
@@ -39,7 +33,8 @@ let trace3 =
 
 [trace1; trace2; trace3]
 |> Plotly.Plot
-(*** include-it:scatter1 ***)
+(*** include-it:chart ***)
+
 
 (*** hide ***)
 //(**
