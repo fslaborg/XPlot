@@ -2008,7 +2008,7 @@ type Bar() =
     let mutable _y: _ option = None
     let mutable _y0: _ option = None
     let mutable _dy: float option = None
-    let mutable _text: string option = None
+    let mutable _text: _ option = None
     let mutable _orientation: _ option = None
     let mutable _marker: Marker option = None
     let mutable _r: _ option = None
@@ -7198,7 +7198,7 @@ type Annotation() =
     let mutable _ax: float option = None
     let mutable _ay: float option = None
     let mutable _xref: _ option = None
-    let mutable _x: float option = None
+    let mutable _x: _ option = None
     let mutable _xanchor: _ option = None
     let mutable _yref: _ option = None
     let mutable _y: float option = None
@@ -7676,6 +7676,7 @@ type Layout() =
     let mutable _direction: _ option = None
     let mutable _orientation: float option = None
     let mutable _barmode: string option = None
+    let mutable _bargap: float option = None
 
     member __.font
         with get () = Option.get _font
@@ -7798,6 +7799,10 @@ type Layout() =
         with get () = Option.get _barmode
         and set value = _barmode <- Some value
 
+    member __.bargap
+        with get () = Option.get _bargap
+        and set value = _bargap <- Some value
+
     member __.ShouldSerializefont() = not _font.IsNone
     member __.ShouldSerializetitle() = not _title.IsNone
     member __.ShouldSerializetitlefont() = not _titlefont.IsNone
@@ -7825,3 +7830,4 @@ type Layout() =
     member __.ShouldSerializedirection() = not _direction.IsNone
     member __.ShouldSerializeorientation() = not _orientation.IsNone
     member __.ShouldSerializebarmode() = not _barmode.IsNone
+    member __.ShouldSerializebargap() = not _bargap.IsNone
