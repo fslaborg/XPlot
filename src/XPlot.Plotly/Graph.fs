@@ -7201,7 +7201,7 @@ type Annotation() =
     let mutable _x: _ option = None
     let mutable _xanchor: _ option = None
     let mutable _yref: _ option = None
-    let mutable _y: float option = None
+    let mutable _y: _ option = None
     let mutable _yanchor: _ option = None
     //let mutable _role: string option = Some "object"
 
@@ -7665,6 +7665,9 @@ type Layout() =
     let mutable _dragmode: _ option = None
     let mutable _hovermode: _ option = None
     let mutable _xaxis: Xaxis option = None
+    let mutable _xaxis1: Xaxis option = None
+    let mutable _xaxis2: Xaxis option = None
+
     let mutable _yaxis: Yaxis option = None
     let mutable _scene: Scene option = None
     let mutable _geo: Geo option = None
@@ -7753,6 +7756,14 @@ type Layout() =
         with get () = Option.get _xaxis
         and set value = _xaxis <- Some value
 
+    member __.xaxis1
+        with get () = Option.get _xaxis1
+        and set value = _xaxis1 <- Some value
+
+    member __.xaxis2
+        with get () = Option.get _xaxis2
+        and set value = _xaxis2 <- Some value
+
     member __.yaxis
         with get () = Option.get _yaxis
         and set value = _yaxis <- Some value
@@ -7819,6 +7830,9 @@ type Layout() =
     member __.ShouldSerializedragmode() = not _dragmode.IsNone
     member __.ShouldSerializehovermode() = not _hovermode.IsNone
     member __.ShouldSerializexaxis() = not _xaxis.IsNone
+    member __.ShouldSerializexaxis1() = not _xaxis1.IsNone
+    member __.ShouldSerializexaxis2() = not _xaxis2.IsNone
+
     member __.ShouldSerializeyaxis() = not _yaxis.IsNone
     member __.ShouldSerializescene() = not _scene.IsNone
     member __.ShouldSerializegeo() = not _geo.IsNone
