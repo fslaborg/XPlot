@@ -1,4 +1,7 @@
-﻿### 1.3.0 - December 12, 2015
+﻿### 1.3.1 - January 13, 2016
+* Update the Plotly.js API
+
+### 1.3.0 - December 12, 2015
 * Plotly.js support
 
 ### 1.2.2 - October 25, 2015
