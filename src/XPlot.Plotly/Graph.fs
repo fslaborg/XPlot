@@ -7667,8 +7667,8 @@ type Layout() =
     let mutable _xaxis: Xaxis option = None
     let mutable _xaxis1: Xaxis option = None
     let mutable _xaxis2: Xaxis option = None
-
     let mutable _yaxis: Yaxis option = None
+    let mutable _yaxis2: Yaxis option = None
     let mutable _scene: Scene option = None
     let mutable _geo: Geo option = None
     let mutable _legend: Legend option = None
@@ -7768,6 +7768,10 @@ type Layout() =
         with get () = Option.get _yaxis
         and set value = _yaxis <- Some value
 
+    member __.yaxis2
+        with get () = Option.get _yaxis2
+        and set value = _yaxis <- Some value
+
     member __.scene
         with get () = Option.get _scene
         and set value = _scene <- Some value
@@ -7834,6 +7838,7 @@ type Layout() =
     member __.ShouldSerializexaxis2() = not _xaxis2.IsNone
 
     member __.ShouldSerializeyaxis() = not _yaxis.IsNone
+    member __.ShouldSerializeyaxis2() = not _yaxis2.IsNone
     member __.ShouldSerializescene() = not _scene.IsNone
     member __.ShouldSerializegeo() = not _geo.IsNone
     member __.ShouldSerializelegend() = not _legend.IsNone
