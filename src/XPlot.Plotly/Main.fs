@@ -89,9 +89,19 @@ type Plotly =
         chart.Plot data
         chart
 
+    static member Plot(data) = 
+        let chart = PlotlyChart()
+        chart.Plot [data]
+        chart
+
     static member Plot(data, layout) =
         let chart = PlotlyChart()
         chart.Plot(data, layout)
+        chart
+
+    static member Plot(data, layout) =
+        let chart = PlotlyChart()
+        chart.Plot([data], layout)
         chart
 
     static member Show(chart:PlotlyChart) = chart.Show()
