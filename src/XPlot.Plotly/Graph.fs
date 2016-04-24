@@ -1407,8 +1407,8 @@ type Colorbar() =
 
 type Line() =
 
-    let mutable _color: string option = None
-    let mutable _width: float option = None
+    let mutable _color: _ option = None
+    let mutable _width: _ option = None
     let mutable _shape: _ option = None
     let mutable _smoothing: float option = None
     let mutable _dash: string option = None
@@ -1529,8 +1529,8 @@ type Line() =
 type Marker() =
 
     let mutable _symbol: _ option = None
-    let mutable _opacity: float option = None
-    let mutable _size: float option = None
+    let mutable _opacity: _ option = None
+    let mutable _size: _ option = None
     let mutable _color: _ option = None
     let mutable _maxdisplayed: float option = None
     let mutable _sizeref: float option = None
