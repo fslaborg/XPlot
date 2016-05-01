@@ -138,3 +138,19 @@ type Plotly with
                 Scatter(x = x, y = y)
             )
         Plotly.Plot scatters
+
+    static member Scatter(data:seq<#key * #value>) =
+        let x = Seq.map fst data
+        let y = Seq.map snd data
+        let scatter = Scatter(x = x, y = y, mode = "markers")
+        Plotly.Plot [scatter]
+
+    static member Scatter(data:seq<#seq<#key * #value>>) =
+        let scatters =
+            data
+            |> Seq.map (fun series ->
+                let x = Seq.map fst series
+                let y = Seq.map snd series
+                Scatter(x = x, y = y, mode = "markers")
+            )
+        Plotly.Plot scatters

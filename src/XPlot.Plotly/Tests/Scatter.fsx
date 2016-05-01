@@ -223,3 +223,18 @@ module Chart5 =
     (data, layout)
     |> Plotly.Plot
     |> Plotly.Show
+
+// ====================
+// Pipeline stype tests
+// ====================
+
+[8., 12.; 4., 5.5; 11., 14.; 4., 5.; 3., 3.5; 6.5, 7.]
+|> Plotly.Scatter
+|> Plotly.Show
+
+let rnd = new System.Random(0)
+let data = [for i in 1 .. 1000 -> (rnd.Next(10),rnd.Next(10))]
+
+[data]
+|> Plotly.Scatter
+|> Plotly.Show

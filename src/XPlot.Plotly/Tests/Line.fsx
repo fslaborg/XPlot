@@ -693,3 +693,10 @@ let chart2 =
     [sales; expenses]
     |> Plotly.Line
     |> Plotly.Show
+
+let a = [1, 10.0; 2, 11.0; 3, 12.0]
+let b = [0, 5.0; 1, 6.0; 2, 7.0; 3, 8.0]
+
+[a; b]
+|> Plotly.Line
+|> Plotly.Show
