@@ -1,7 +1,14 @@
 ﻿[<AutoOpen>]
 module XPlot.Plotly.Graph
 
-type Trace() = do ()
+type Trace() =
+
+    let mutable _name: string option = None
+
+    /// Sets the trace name. The trace name appear as the legend item and on hover.
+    member __.name
+        with get () = Option.get _name
+        and set value = _name <- Some value
 
 type Font() =
 
@@ -1735,7 +1742,7 @@ type Scatter() =
     let mutable _showlegend: bool option = None
     let mutable _legendgroup: string option = None
     let mutable _opacity: float option = None
-    let mutable _name: string option = None
+//    let mutable _name: string option = None
     let mutable _uid: string option = None
     let mutable _hoverinfo: string option = None
     let mutable _stream: Stream option = None
@@ -1791,10 +1798,10 @@ type Scatter() =
         with get () = Option.get _opacity
         and set value = _opacity <- Some value
 
-    /// Sets the trace name. The trace name appear as the legend item and on hover.
-    member __.name
-        with get () = Option.get _name
-        and set value = _name <- Some value
+//    /// Sets the trace name. The trace name appear as the legend item and on hover.
+////    member __.name
+////        with get () = Option.get _name
+////        and set value = _name <- Some value
 
     member __.uid
         with get () = Option.get _uid
@@ -1944,7 +1951,7 @@ type Scatter() =
     member __.ShouldSerializeshowlegend() = not _showlegend.IsNone
     member __.ShouldSerializelegendgroup() = not _legendgroup.IsNone
     member __.ShouldSerializeopacity() = not _opacity.IsNone
-    member __.ShouldSerializename() = not _name.IsNone
+////    member __.ShouldSerializename() = not _name.IsNone
     member __.ShouldSerializeuid() = not _uid.IsNone
     member __.ShouldSerializehoverinfo() = not _hoverinfo.IsNone
     member __.ShouldSerializestream() = not _stream.IsNone
@@ -1998,7 +2005,7 @@ type Bar() =
     let mutable _showlegend: bool option = None
     let mutable _legendgroup: string option = None
     let mutable _opacity: float option = None
-    let mutable _name: string option = None
+//    let mutable _name: string option = None
     let mutable _uid: string option = None
     let mutable _hoverinfo: string option = None
     let mutable _stream: Stream option = None
@@ -2047,10 +2054,10 @@ type Bar() =
         with get () = Option.get _opacity
         and set value = _opacity <- Some value
 
-    /// Sets the trace name. The trace name appear as the legend item and on hover.
-    member __.name
-        with get () = Option.get _name
-        and set value = _name <- Some value
+//    /// Sets the trace name. The trace name appear as the legend item and on hover.
+////    member __.name
+////        with get () = Option.get _name
+////        and set value = _name <- Some value
 
     member __.uid
         with get () = Option.get _uid
@@ -2167,7 +2174,7 @@ type Bar() =
     member __.ShouldSerializeshowlegend() = not _showlegend.IsNone
     member __.ShouldSerializelegendgroup() = not _legendgroup.IsNone
     member __.ShouldSerializeopacity() = not _opacity.IsNone
-    member __.ShouldSerializename() = not _name.IsNone
+//    member __.ShouldSerializename() = not _name.IsNone
     member __.ShouldSerializeuid() = not _uid.IsNone
     member __.ShouldSerializehoverinfo() = not _hoverinfo.IsNone
     member __.ShouldSerializestream() = not _stream.IsNone
@@ -2200,7 +2207,7 @@ type Box() =
     let mutable _showlegend: bool option = None
     let mutable _legendgroup: string option = None
     let mutable _opacity: float option = None
-    let mutable _name: string option = None
+//    let mutable _name: string option = None
     let mutable _uid: string option = None
     let mutable _hoverinfo: string option = None
     let mutable _stream: Stream option = None
@@ -2247,9 +2254,9 @@ type Box() =
         and set value = _opacity <- Some value
 
     /// Sets the trace name. The trace name appear as the legend item and on hover.
-    member __.name
-        with get () = Option.get _name
-        and set value = _name <- Some value
+//    member __.name
+//        with get () = Option.get _name
+//        and set value = _name <- Some value
 
     member __.uid
         with get () = Option.get _uid
@@ -2352,7 +2359,7 @@ type Box() =
     member __.ShouldSerializeshowlegend() = not _showlegend.IsNone
     member __.ShouldSerializelegendgroup() = not _legendgroup.IsNone
     member __.ShouldSerializeopacity() = not _opacity.IsNone
-    member __.ShouldSerializename() = not _name.IsNone
+//    member __.ShouldSerializename() = not _name.IsNone
     member __.ShouldSerializeuid() = not _uid.IsNone
     member __.ShouldSerializehoverinfo() = not _hoverinfo.IsNone
     member __.ShouldSerializestream() = not _stream.IsNone
@@ -2382,7 +2389,7 @@ type Heatmap() =
     let mutable _showlegend: bool option = None
     let mutable _legendgroup: string option = None
     let mutable _opacity: float option = None
-    let mutable _name: string option = None
+//    let mutable _name: string option = None
     let mutable _uid: string option = None
     let mutable _hoverinfo: string option = None
     let mutable _stream: Stream option = None
@@ -2439,9 +2446,9 @@ type Heatmap() =
         and set value = _opacity <- Some value
 
     /// Sets the trace name. The trace name appear as the legend item and on hover.
-    member __.name
-        with get () = Option.get _name
-        and set value = _name <- Some value
+//    member __.name
+//        with get () = Option.get _name
+//        and set value = _name <- Some value
 
     member __.uid
         with get () = Option.get _uid
@@ -2595,7 +2602,7 @@ type Heatmap() =
     member __.ShouldSerializeshowlegend() = not _showlegend.IsNone
     member __.ShouldSerializelegendgroup() = not _legendgroup.IsNone
     member __.ShouldSerializeopacity() = not _opacity.IsNone
-    member __.ShouldSerializename() = not _name.IsNone
+//    member __.ShouldSerializename() = not _name.IsNone
     member __.ShouldSerializeuid() = not _uid.IsNone
     member __.ShouldSerializehoverinfo() = not _hoverinfo.IsNone
     member __.ShouldSerializestream() = not _stream.IsNone
@@ -2635,7 +2642,7 @@ type Histogram() =
     let mutable _showlegend: bool option = None
     let mutable _legendgroup: string option = None
     let mutable _opacity: float option = None
-    let mutable _name: string option = None
+//    let mutable _name: string option = None
     let mutable _uid: string option = None
     let mutable _hoverinfo: string option = None
     let mutable _stream: Stream option = None
@@ -2695,9 +2702,9 @@ type Histogram() =
         and set value = _opacity <- Some value
 
     /// Sets the trace name. The trace name appear as the legend item and on hover.
-    member __.name
-        with get () = Option.get _name
-        and set value = _name <- Some value
+//    member __.name
+//        with get () = Option.get _name
+//        and set value = _name <- Some value
 
     member __.uid
         with get () = Option.get _uid
@@ -2862,7 +2869,7 @@ type Histogram() =
     member __.ShouldSerializeshowlegend() = not _showlegend.IsNone
     member __.ShouldSerializelegendgroup() = not _legendgroup.IsNone
     member __.ShouldSerializeopacity() = not _opacity.IsNone
-    member __.ShouldSerializename() = not _name.IsNone
+//    member __.ShouldSerializename() = not _name.IsNone
     member __.ShouldSerializeuid() = not _uid.IsNone
     member __.ShouldSerializehoverinfo() = not _hoverinfo.IsNone
     member __.ShouldSerializestream() = not _stream.IsNone
@@ -2907,7 +2914,7 @@ type Histogram2d() =
     let mutable _showlegend: bool option = None
     let mutable _legendgroup: string option = None
     let mutable _opacity: float option = None
-    let mutable _name: string option = None
+//    let mutable _name: string option = None
     let mutable _uid: string option = None
     let mutable _hoverinfo: string option = None
     let mutable _stream: Stream option = None
@@ -2974,9 +2981,9 @@ type Histogram2d() =
         and set value = _opacity <- Some value
 
     /// Sets the trace name. The trace name appear as the legend item and on hover.
-    member __.name
-        with get () = Option.get _name
-        and set value = _name <- Some value
+//    member __.name
+//        with get () = Option.get _name
+//        and set value = _name <- Some value
 
     member __.uid
         with get () = Option.get _uid
@@ -3177,7 +3184,7 @@ type Histogram2d() =
     member __.ShouldSerializeshowlegend() = not _showlegend.IsNone
     member __.ShouldSerializelegendgroup() = not _legendgroup.IsNone
     member __.ShouldSerializeopacity() = not _opacity.IsNone
-    member __.ShouldSerializename() = not _name.IsNone
+//    member __.ShouldSerializename() = not _name.IsNone
     member __.ShouldSerializeuid() = not _uid.IsNone
     member __.ShouldSerializehoverinfo() = not _hoverinfo.IsNone
     member __.ShouldSerializestream() = not _stream.IsNone
@@ -3227,7 +3234,7 @@ type Pie() =
     let mutable _showlegend: bool option = None
     let mutable _legendgroup: string option = None
     let mutable _opacity: float option = None
-    let mutable _name: string option = None
+//    let mutable _name: string option = None
     let mutable _uid: string option = None
     let mutable _hoverinfo: string option = None
     let mutable _stream: Stream option = None
@@ -3280,9 +3287,9 @@ type Pie() =
         and set value = _opacity <- Some value
 
     /// Sets the trace name. The trace name appear as the legend item and on hover.
-    member __.name
-        with get () = Option.get _name
-        and set value = _name <- Some value
+//    member __.name
+//        with get () = Option.get _name
+//        and set value = _name <- Some value
 
     member __.uid
         with get () = Option.get _uid
@@ -3412,7 +3419,7 @@ type Pie() =
     member __.ShouldSerializeshowlegend() = not _showlegend.IsNone
     member __.ShouldSerializelegendgroup() = not _legendgroup.IsNone
     member __.ShouldSerializeopacity() = not _opacity.IsNone
-    member __.ShouldSerializename() = not _name.IsNone
+//    member __.ShouldSerializename() = not _name.IsNone
     member __.ShouldSerializeuid() = not _uid.IsNone
     member __.ShouldSerializehoverinfo() = not _hoverinfo.IsNone
     member __.ShouldSerializestream() = not _stream.IsNone
@@ -3450,7 +3457,7 @@ type Contour() =
     let mutable _showlegend: bool option = None
     let mutable _legendgroup: string option = None
     let mutable _opacity: float option = None
-    let mutable _name: string option = None
+//    let mutable _name: string option = None
     let mutable _uid: string option = None
     let mutable _hoverinfo: string option = None
     let mutable _stream: Stream option = None
@@ -3515,9 +3522,9 @@ type Contour() =
         and set value = _opacity <- Some value
 
     /// Sets the trace name. The trace name appear as the legend item and on hover.
-    member __.name
-        with get () = Option.get _name
-        and set value = _name <- Some value
+//    member __.name
+//        with get () = Option.get _name
+//        and set value = _name <- Some value
 
     member __.uid
         with get () = Option.get _uid
@@ -3705,7 +3712,7 @@ type Contour() =
     member __.ShouldSerializeshowlegend() = not _showlegend.IsNone
     member __.ShouldSerializelegendgroup() = not _legendgroup.IsNone
     member __.ShouldSerializeopacity() = not _opacity.IsNone
-    member __.ShouldSerializename() = not _name.IsNone
+//    member __.ShouldSerializename() = not _name.IsNone
     member __.ShouldSerializeuid() = not _uid.IsNone
     member __.ShouldSerializehoverinfo() = not _hoverinfo.IsNone
     member __.ShouldSerializestream() = not _stream.IsNone
@@ -3755,7 +3762,7 @@ type Histogram2dcontour() =
     let mutable _showlegend: bool option = None
     let mutable _legendgroup: string option = None
     let mutable _opacity: float option = None
-    let mutable _name: string option = None
+//    let mutable _name: string option = None
     let mutable _uid: string option = None
     let mutable _hoverinfo: string option = None
     let mutable _stream: Stream option = None
@@ -3826,9 +3833,9 @@ type Histogram2dcontour() =
         and set value = _opacity <- Some value
 
     /// Sets the trace name. The trace name appear as the legend item and on hover.
-    member __.name
-        with get () = Option.get _name
-        and set value = _name <- Some value
+//    member __.name
+//        with get () = Option.get _name
+//        and set value = _name <- Some value
 
     member __.uid
         with get () = Option.get _uid
@@ -4047,7 +4054,7 @@ type Histogram2dcontour() =
     member __.ShouldSerializeshowlegend() = not _showlegend.IsNone
     member __.ShouldSerializelegendgroup() = not _legendgroup.IsNone
     member __.ShouldSerializeopacity() = not _opacity.IsNone
-    member __.ShouldSerializename() = not _name.IsNone
+//    member __.ShouldSerializename() = not _name.IsNone
     member __.ShouldSerializeuid() = not _uid.IsNone
     member __.ShouldSerializehoverinfo() = not _hoverinfo.IsNone
     member __.ShouldSerializestream() = not _stream.IsNone
@@ -4101,7 +4108,7 @@ type Scatter3d() =
     let mutable _showlegend: bool option = None
     let mutable _legendgroup: string option = None
     let mutable _opacity: float option = None
-    let mutable _name: string option = None
+//    let mutable _name: string option = None
     let mutable _uid: string option = None
     let mutable _hoverinfo: string option = None
     let mutable _stream: Stream option = None
@@ -4152,9 +4159,9 @@ type Scatter3d() =
         and set value = _opacity <- Some value
 
     /// Sets the trace name. The trace name appear as the legend item and on hover.
-    member __.name
-        with get () = Option.get _name
-        and set value = _name <- Some value
+//    member __.name
+//        with get () = Option.get _name
+//        and set value = _name <- Some value
 
     member __.uid
         with get () = Option.get _uid
@@ -4272,7 +4279,7 @@ type Scatter3d() =
     member __.ShouldSerializeshowlegend() = not _showlegend.IsNone
     member __.ShouldSerializelegendgroup() = not _legendgroup.IsNone
     member __.ShouldSerializeopacity() = not _opacity.IsNone
-    member __.ShouldSerializename() = not _name.IsNone
+//    member __.ShouldSerializename() = not _name.IsNone
     member __.ShouldSerializeuid() = not _uid.IsNone
     member __.ShouldSerializehoverinfo() = not _hoverinfo.IsNone
     member __.ShouldSerializestream() = not _stream.IsNone
@@ -4308,7 +4315,7 @@ type Surface() =
     let mutable _showlegend: bool option = None
     let mutable _legendgroup: string option = None
     let mutable _opacity: float option = None
-    let mutable _name: string option = None
+//    let mutable _name: string option = None
     let mutable _uid: string option = None
     let mutable _hoverinfo: string option = None
     let mutable _stream: Stream option = None
@@ -4357,9 +4364,9 @@ type Surface() =
         and set value = _opacity <- Some value
 
     /// Sets the trace name. The trace name appear as the legend item and on hover.
-    member __.name
-        with get () = Option.get _name
-        and set value = _name <- Some value
+//    member __.name
+//        with get () = Option.get _name
+//        and set value = _name <- Some value
 
     member __.uid
         with get () = Option.get _uid
@@ -4475,7 +4482,7 @@ type Surface() =
     member __.ShouldSerializeshowlegend() = not _showlegend.IsNone
     member __.ShouldSerializelegendgroup() = not _legendgroup.IsNone
     member __.ShouldSerializeopacity() = not _opacity.IsNone
-    member __.ShouldSerializename() = not _name.IsNone
+//    member __.ShouldSerializename() = not _name.IsNone
     member __.ShouldSerializeuid() = not _uid.IsNone
     member __.ShouldSerializehoverinfo() = not _hoverinfo.IsNone
     member __.ShouldSerializestream() = not _stream.IsNone
@@ -4512,7 +4519,7 @@ type Mesh3d() =
     let mutable _showlegend: bool option = None
     let mutable _legendgroup: string option = None
     let mutable _opacity: float option = None
-    let mutable _name: string option = None
+//    let mutable _name: string option = None
     let mutable _uid: string option = None
     let mutable _hoverinfo: string option = None
     let mutable _stream: Stream option = None
@@ -4570,9 +4577,9 @@ type Mesh3d() =
         and set value = _opacity <- Some value
 
     /// Sets the trace name. The trace name appear as the legend item and on hover.
-    member __.name
-        with get () = Option.get _name
-        and set value = _name <- Some value
+//    member __.name
+//        with get () = Option.get _name
+//        and set value = _name <- Some value
 
     member __.uid
         with get () = Option.get _uid
@@ -4721,7 +4728,7 @@ type Mesh3d() =
     member __.ShouldSerializeshowlegend() = not _showlegend.IsNone
     member __.ShouldSerializelegendgroup() = not _legendgroup.IsNone
     member __.ShouldSerializeopacity() = not _opacity.IsNone
-    member __.ShouldSerializename() = not _name.IsNone
+//    member __.ShouldSerializename() = not _name.IsNone
     member __.ShouldSerializeuid() = not _uid.IsNone
     member __.ShouldSerializehoverinfo() = not _hoverinfo.IsNone
     member __.ShouldSerializestream() = not _stream.IsNone
@@ -4763,7 +4770,7 @@ type Scattergeo() =
     let mutable _showlegend: bool option = None
     let mutable _legendgroup: string option = None
     let mutable _opacity: float option = None
-    let mutable _name: string option = None
+//    let mutable _name: string option = None
     let mutable _uid: string option = None
     let mutable _hoverinfo: string option = None
     let mutable _stream: Stream option = None
@@ -4809,9 +4816,9 @@ type Scattergeo() =
         and set value = _opacity <- Some value
 
     /// Sets the trace name. The trace name appear as the legend item and on hover.
-    member __.name
-        with get () = Option.get _name
-        and set value = _name <- Some value
+//    member __.name
+//        with get () = Option.get _name
+//        and set value = _name <- Some value
 
     member __.uid
         with get () = Option.get _uid
@@ -4908,7 +4915,7 @@ type Scattergeo() =
     member __.ShouldSerializeshowlegend() = not _showlegend.IsNone
     member __.ShouldSerializelegendgroup() = not _legendgroup.IsNone
     member __.ShouldSerializeopacity() = not _opacity.IsNone
-    member __.ShouldSerializename() = not _name.IsNone
+//    member __.ShouldSerializename() = not _name.IsNone
     member __.ShouldSerializeuid() = not _uid.IsNone
     member __.ShouldSerializehoverinfo() = not _hoverinfo.IsNone
     member __.ShouldSerializestream() = not _stream.IsNone
@@ -4937,7 +4944,7 @@ type Choropleth() =
     let mutable _showlegend: bool option = None
     let mutable _legendgroup: string option = None
     let mutable _opacity: float option = None
-    let mutable _name: string option = None
+//    let mutable _name: string option = None
     let mutable _uid: string option = None
     let mutable _hoverinfo: string option = None
     let mutable _stream: Stream option = None
@@ -4984,9 +4991,9 @@ type Choropleth() =
         and set value = _opacity <- Some value
 
     /// Sets the trace name. The trace name appear as the legend item and on hover.
-    member __.name
-        with get () = Option.get _name
-        and set value = _name <- Some value
+//    member __.name
+//        with get () = Option.get _name
+//        and set value = _name <- Some value
 
     member __.uid
         with get () = Option.get _uid
@@ -5089,7 +5096,7 @@ type Choropleth() =
     member __.ShouldSerializeshowlegend() = not _showlegend.IsNone
     member __.ShouldSerializelegendgroup() = not _legendgroup.IsNone
     member __.ShouldSerializeopacity() = not _opacity.IsNone
-    member __.ShouldSerializename() = not _name.IsNone
+//    member __.ShouldSerializename() = not _name.IsNone
     member __.ShouldSerializeuid() = not _uid.IsNone
     member __.ShouldSerializehoverinfo() = not _hoverinfo.IsNone
     member __.ShouldSerializestream() = not _stream.IsNone
@@ -5119,7 +5126,7 @@ type Scattergl() =
     let mutable _showlegend: bool option = None
     let mutable _legendgroup: string option = None
     let mutable _opacity: float option = None
-    let mutable _name: string option = None
+//    let mutable _name: string option = None
     let mutable _uid: string option = None
     let mutable _hoverinfo: string option = None
     let mutable _stream: Stream option = None
@@ -5168,9 +5175,9 @@ type Scattergl() =
         and set value = _opacity <- Some value
 
     /// Sets the trace name. The trace name appear as the legend item and on hover.
-    member __.name
-        with get () = Option.get _name
-        and set value = _name <- Some value
+//    member __.name
+//        with get () = Option.get _name
+//        and set value = _name <- Some value
 
     member __.uid
         with get () = Option.get _uid
@@ -5281,7 +5288,7 @@ type Scattergl() =
     member __.ShouldSerializeshowlegend() = not _showlegend.IsNone
     member __.ShouldSerializelegendgroup() = not _legendgroup.IsNone
     member __.ShouldSerializeopacity() = not _opacity.IsNone
-    member __.ShouldSerializename() = not _name.IsNone
+//    member __.ShouldSerializename() = not _name.IsNone
     member __.ShouldSerializeuid() = not _uid.IsNone
     member __.ShouldSerializehoverinfo() = not _hoverinfo.IsNone
     member __.ShouldSerializestream() = not _stream.IsNone
@@ -5313,7 +5320,7 @@ type Area() =
     let mutable _showlegend: bool option = None
     let mutable _legendgroup: string option = None
     let mutable _opacity: float option = None
-    let mutable _name: string option = None
+//    let mutable _name: string option = None
     let mutable _uid: string option = None
     let mutable _hoverinfo: string option = None
     let mutable _stream: Stream option = None
@@ -5348,9 +5355,9 @@ type Area() =
         and set value = _opacity <- Some value
 
     /// Sets the trace name. The trace name appear as the legend item and on hover.
-    member __.name
-        with get () = Option.get _name
-        and set value = _name <- Some value
+//    member __.name
+//        with get () = Option.get _name
+//        and set value = _name <- Some value
 
     member __.uid
         with get () = Option.get _uid
@@ -5394,7 +5401,7 @@ type Area() =
     member __.ShouldSerializeshowlegend() = not _showlegend.IsNone
     member __.ShouldSerializelegendgroup() = not _legendgroup.IsNone
     member __.ShouldSerializeopacity() = not _opacity.IsNone
-    member __.ShouldSerializename() = not _name.IsNone
+//    member __.ShouldSerializename() = not _name.IsNone
     member __.ShouldSerializeuid() = not _uid.IsNone
     member __.ShouldSerializehoverinfo() = not _hoverinfo.IsNone
     member __.ShouldSerializestream() = not _stream.IsNone

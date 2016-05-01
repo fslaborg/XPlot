@@ -29,22 +29,37 @@ open System.IO
 type PlotlyChart() =
     let guid = Guid.NewGuid().ToString()
 
+    let mutable height = "500"
     let mutable width = "900"
 
-    let mutable height = "500"
-
     [<DefaultValue>]
-    val mutable private dataJson: string
+    val mutable private traces: seq<Trace>
 
     [<DefaultValue>]
     val mutable private layout: Layout option
 
-    member __.Plot(data:seq<#Trace>, ?Layout:Layout) =
-        let dataJson = JsonConvert.SerializeObject data
-        __.dataJson <- dataJson
+    [<DefaultValue>]
+    val mutable private labels: seq<string> option
+
+    let serializeTraces names (traces:seq<Trace>) =
+        match names with
+        | None -> traces
+        | Some names ->            
+            traces
+            |> Seq.mapi (fun i trace ->
+                trace.name <- Seq.nth i names
+                trace)
+        |> JsonConvert.SerializeObject
+
+    member __.Plot(data:seq<#Trace>, ?Layout, ?Labels) =
+        data
+        |> Seq.map (fun trace -> trace :> Trace)
+        |> fun traces -> __.traces <- traces
         __.layout <- Layout
+        __.labels <- Labels
 
     member __.Show() =
+        let tracesJson = serializeTraces __.labels __.traces
         let layoutJson =
             match __.layout with
             | None -> "\"\""
@@ -55,7 +70,7 @@ type PlotlyChart() =
                     .Replace("[ID]", guid)
                     .Replace("[WIDTH]", width)
                     .Replace("[HEIGHT]", height)
-                    .Replace("[DATA]", __.dataJson)
+                    .Replace("[DATA]", tracesJson)
                     .Replace("[LAYOUT]", layoutJson)
             HTML.doc.Replace("[CHART]", chartMarkup)
         let tempPath = Path.GetTempPath()
@@ -65,6 +80,7 @@ type PlotlyChart() =
         System.Diagnostics.Process.Start(path) |> ignore
 
     member __.GetInlineHtml() =
+        let tracesJson = serializeTraces __.labels __.traces
         let layoutJson =
             match __.layout with
             | None -> "\"\""
@@ -73,7 +89,7 @@ type PlotlyChart() =
             .Replace("[ID]", guid)
             .Replace("[WIDTH]", width)
             .Replace("[HEIGHT]", height)
-            .Replace("[DATA]", __.dataJson)
+            .Replace("[DATA]", tracesJson)
             .Replace("[LAYOUT]", layoutJson)
 
     member __.WithWidth(widthValue: int) = width <- string widthValue
@@ -82,12 +98,14 @@ type PlotlyChart() =
 
     member __.WithLayout(layoutObj) = __.layout <- Some layoutObj
 
+    member __.WithLabels(labels) = __.labels <- Some labels 
+
 type key = IConvertible
 type value = IConvertible
 
 type Plotly =
 
-    static member Plot(data) = 
+    static member Plot(data:seq<#Trace>) = 
         let chart = PlotlyChart()
         chart.Plot data
         chart
@@ -119,6 +137,10 @@ type Plotly =
 
     static member WithLayout layout (chart:PlotlyChart) =
         chart.WithLayout layout
+        chart
+
+    static member WithLabels labels (chart:PlotlyChart) =
+        chart.WithLabels labels
         chart
 
 type Plotly with
@@ -154,3 +176,19 @@ type Plotly with
                 Scatter(x = x, y = y, mode = "markers")
             )
         Plotly.Plot scatters
+
+    static member Bar(data:seq<#key * #value>, ?Label:string) =
+        let x = Seq.map fst data
+        let y = Seq.map snd data
+        let bar = Bar(x = x, y = y)
+        Plotly.Plot [bar]
+
+    static member Bar(data:seq<#seq<#key * #value>>) =
+        let bars =
+            data
+            |> Seq.mapi (fun i series ->
+                let x = Seq.map fst series
+                let y = Seq.map snd series
+                Bar(x = x, y = y)
+            )
+        Plotly.Plot bars
