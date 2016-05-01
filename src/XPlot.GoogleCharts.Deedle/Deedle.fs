@@ -3,7 +3,7 @@ module XPlot.GoogleCharts.Deedle
 
 open XPlot.GoogleCharts
 open Deedle
-open Deedle.FSharpFrameExtensions
+open Deedle.``F# Frame extensions``
 open System
 
 type Chart with
