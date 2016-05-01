@@ -410,3 +410,43 @@ module Chart10 =
     |> Plotly.Plot
     |> Plotly.WithLayout layout
     |> Plotly.Show
+
+// ====================
+// Pipeline style tests
+// ====================
+
+// Basic bar chart
+module Chart1' =
+
+    let data = ["giraffes", 20; "orangutans", 14; "monkeys", 23]
+
+    data
+    |> Plotly.Bar
+    |> Plotly.Show
+
+// Grouped bar chart
+module Chart2' =
+
+    let trace1 = ["giraffes", 20; "orangutans", 14; "monkeys", 23]
+    let trace2 = ["giraffes", 12; "orangutans", 18; "monkeys", 29]
+
+    let layout = Layout(barmode = "group")
+    
+    [trace1; trace2]
+    |> Plotly.Bar
+    |> Plotly.WithLayout layout
+    |> Plotly.Show
+
+// Stacked bar chart
+module Chart3' =
+
+    let trace1 = ["giraffes", 20; "orangutans", 14; "monkeys", 23]
+    let trace2 = ["giraffes", 12; "orangutans", 18; "monkeys", 29]
+
+    let layout = Layout(barmode = "stack")
+
+    [trace1; trace2]
+    |> Plotly.Bar
+    |> Plotly.WithLabels ["SF Zoo"; "LA Zoo"]
+    |> Plotly.WithLayout layout
+    |> Plotly.Show
