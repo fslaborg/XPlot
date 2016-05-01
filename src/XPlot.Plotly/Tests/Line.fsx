@@ -676,3 +676,20 @@ module Chart11 =
     |> Plotly.Plot
     |> Plotly.WithLayout layout
     |> Plotly.Show
+
+// ====================
+// Pipeline stype tests
+// ====================
+
+let sales = ["2013", 1000; "2014", 1170; "2015", 660; "2016", 1030]
+let expenses = ["2013", 400; "2014", 460; "2015", 1120; "2016", 540]
+
+let chart1 =
+    sales
+    |> Plotly.Line
+    |> Plotly.Show
+
+let chart2 =
+    [sales; expenses]
+    |> Plotly.Line
+    |> Plotly.Show

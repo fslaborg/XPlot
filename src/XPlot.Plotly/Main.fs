@@ -82,6 +82,9 @@ type PlotlyChart() =
 
     member __.WithLayout(layoutObj) = __.layout <- Some layoutObj
 
+type key = IConvertible
+type value = IConvertible
+
 type Plotly =
 
     static member Plot(data) = 
@@ -118,3 +121,20 @@ type Plotly =
         chart.WithLayout layout
         chart
 
+type Plotly with
+
+    static member Line(data:seq<#key * #value>) =
+        let x = Seq.map fst data
+        let y = Seq.map snd data
+        let scatter = Scatter(x = x, y = y)
+        Plotly.Plot [scatter]
+
+    static member Line(data:seq<#seq<#key * #value>>) =
+        let scatters =
+            data
+            |> Seq.map (fun series ->
+                let x = Seq.map fst series
+                let y = Seq.map snd series
+                Scatter(x = x, y = y)
+            )
+        Plotly.Plot scatters
