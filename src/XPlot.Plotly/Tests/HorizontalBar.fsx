@@ -215,7 +215,7 @@ module Chart3 =
 // Basic bar chart
 module Chart1' =
 
-    let data = [20, "giraffes"; 14, "orangutans"; 23, "monkeys"]
+    let data = ["giraffes", 20; "orangutans", 14; "monkeys", 23]
 
     data
     |> Plotly.Bar
@@ -224,8 +224,8 @@ module Chart1' =
 // Grouped bar chart
 module Chart2' =
 
-    let trace1 = [20, "giraffes"; 14, "orangutans"; 23, "monkeys"]    
-    let trace2 = [12, "giraffes"; 19, "orangutans"; 29, "monkeys"]
+    let trace1 = ["giraffes", 20; "orangutans", 14; "monkeys", 23]
+    let trace2 = ["giraffes", 12; "orangutans", 18; "monkeys", 29]
 
     let layout = Layout(barmode = "group")
     
@@ -237,8 +237,8 @@ module Chart2' =
 // Stacked bar chart
 module Chart3' =
 
-    let trace1 = [20, "giraffes"; 14, "orangutans"; 23, "monkeys"]    
-    let trace2 = [12, "giraffes"; 19, "orangutans"; 29, "monkeys"]
+    let trace1 = ["giraffes", 20; "orangutans", 14; "monkeys", 23]
+    let trace2 = ["giraffes", 12; "orangutans", 18; "monkeys", 29]
 
     let layout = Layout(barmode = "stack")
 

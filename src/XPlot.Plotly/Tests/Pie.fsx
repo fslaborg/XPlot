@@ -166,3 +166,23 @@ module Chart3 =
     |> Plotly.Plot
     |> Plotly.WithLayout layout
     |> Plotly.Show
+
+// ====================
+// Pipeline style tests
+// ====================
+
+// Basic pie chart
+module Chart1' =
+
+    let data = ["Residential", 19; "Non-Residential", 26; "Utility", 55]
+
+    let layout =
+        Layout(
+            height = 400.,
+            width = 500.
+        )
+
+    data
+    |> Plotly.Pie
+    |> Plotly.WithLayout layout
+    |> Plotly.Show

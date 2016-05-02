@@ -177,7 +177,7 @@ type Plotly with
             )
         Plotly.Plot scatters
 
-    static member Column(data:seq<#key * #value>, ?Label:string) =
+    static member Column(data:seq<#key * #value>) =
         let x = Seq.map fst data
         let y = Seq.map snd data
         let bar = Bar(x = x, y = y)
@@ -193,10 +193,10 @@ type Plotly with
             )
         Plotly.Plot bars
 
-    static member Bar(data:seq<#key * #value>, ?Label:string) =
+    static member Bar(data:seq<#key * #value>) =
         let x = Seq.map fst data
         let y = Seq.map snd data
-        let bar = Bar(x = x, y = y, orientation = "h")
+        let bar = Bar(x = y, y = x, orientation = "h")
         Plotly.Plot [bar]
 
     static member Bar(data:seq<#seq<#key * #value>>) =
@@ -205,6 +205,12 @@ type Plotly with
             |> Seq.mapi (fun i series ->
                 let x = Seq.map fst series
                 let y = Seq.map snd series
-                Bar(x = x, y = y, orientation = "h")
+                Bar(x = y, y = x, orientation = "h")
             )
         Plotly.Plot bars
+
+    static member Pie(data:seq<#key * #value>) =
+        let x = Seq.map fst data
+        let y = Seq.map snd data
+        let pie = Pie(labels = x, values = y)
+        Plotly.Plot [pie]
