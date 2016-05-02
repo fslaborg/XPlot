@@ -10,6 +10,8 @@ type Trace() =
         with get () = Option.get _name
         and set value = _name <- Some value
 
+    member __.ShouldSerializename() = not _name.IsNone
+
 type Font() =
 
     let mutable _family: string option = None

@@ -421,7 +421,7 @@ module Chart1' =
     let data = ["giraffes", 20; "orangutans", 14; "monkeys", 23]
 
     data
-    |> Plotly.Bar
+    |> Plotly.Column
     |> Plotly.Show
 
 // Grouped bar chart
@@ -433,7 +433,7 @@ module Chart2' =
     let layout = Layout(barmode = "group")
     
     [trace1; trace2]
-    |> Plotly.Bar
+    |> Plotly.Column
     |> Plotly.WithLayout layout
     |> Plotly.Show
 
@@ -446,7 +446,7 @@ module Chart3' =
     let layout = Layout(barmode = "stack")
 
     [trace1; trace2]
-    |> Plotly.Bar
+    |> Plotly.Column
     |> Plotly.WithLabels ["SF Zoo"; "LA Zoo"]
     |> Plotly.WithLayout layout
     |> Plotly.Show
