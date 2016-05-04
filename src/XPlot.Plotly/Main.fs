@@ -214,3 +214,21 @@ type Plotly with
         let y = Seq.map snd data
         let pie = Pie(labels = x, values = y)
         Plotly.Plot [pie]
+
+    static member Area(data:seq<#key * #value>) =
+        let x = Seq.map fst data
+        let y = Seq.map snd data
+        let area = Scatter(x = x, y = y, fill = "tozeroy")
+        Plotly.Plot [area]
+
+    static member Area(data:seq<#seq<#key * #value>>) =
+        let areas =
+            data
+            |> Seq.mapi (fun i series ->
+                let x = Seq.map fst series
+                let y = Seq.map snd series
+                match i with
+                | 0 -> Scatter(x = x, y = y, fill = "tozeroy")
+                | _ -> Scatter(x = x, y = y, fill = "tonexty")
+            )
+        Plotly.Plot areas
