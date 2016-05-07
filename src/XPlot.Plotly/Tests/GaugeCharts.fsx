@@ -3,7 +3,7 @@
 open XPlot.Plotly
 open System
 
-// https://plot.ly/javascript/gauge-charts/#circular-gauge-chart
+// Circular Gauge Chart
 module Chart1 =
 
     // Enter a speed between 0 and 180
