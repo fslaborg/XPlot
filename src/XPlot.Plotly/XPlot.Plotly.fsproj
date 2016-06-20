@@ -72,8 +72,14 @@
     <None Include="Tests\GaugeCharts.fsx" />
     <None Include="Tests\MultipleChartTypes.fsx" />
     <None Include="Tests\ChartingTests.fsx" />
+    <None Include="Tests\Shapes.fsx" />
+    <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="MathNet.Numerics">
+      <HintPath>..\..\packages\MathNet.Numerics\lib\net40\MathNet.Numerics.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="FSharp.Core, Version=$(TargetFSharpCoreVersion), Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <Private>False</Private>
