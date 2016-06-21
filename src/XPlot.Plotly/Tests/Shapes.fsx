@@ -174,3 +174,71 @@ module Chart2 =
     |> Plotly.WithLayout layout
     |> Plotly.Show
 
+// Vertical and Horizontal Lines Positioned Relative to the Axes
+module Chart3 =
+
+    let trace1 =
+        Scatter(
+            x = [2.; 3.5; 6.],
+            y = [1.; 1.5; 1.],
+            text = ["Vertical Line"; "Horizontal Dashed Line"; "Diagonal dotted Line"],
+            mode = "text"
+        )
+
+    let layout =
+        Layout(
+            title = "Vertical and Horizontal Lines Positioned Relative to the Axes",
+            xaxis = Xaxis(range = [0; 7]),
+            yaxis = Yaxis(range = [0.; 2.5]),
+//            width = 500.,
+//            height = 500.,
+            shapes =
+                [
+                    //line vertical
+                    Shape(
+                        ``type`` = "line",
+                        x0 = 1,
+                        y0 = 0,
+                        x1 = 1,
+                        y1 = 2,
+                        line =
+                            Line(
+                                color = "rgb(55, 128, 191)",
+                                width = 3
+                            )
+                    )
+                    //Line Horizontal
+                    Shape(
+                        ``type`` = "line",
+                        x0 = 2,
+                        y0 = 2,
+                        x1 = 5,
+                        y1 = 2,
+                        line =
+                            Line(
+                                color = "rgb(50, 171, 96)",
+                                width = 4,
+                                dash = "dashdot"
+                            )
+                    )
+                    //Line Diagonal
+                    Shape(
+                        ``type`` = "line",
+                        x0 = 4,
+                        y0 = 0,
+                        x1 = 6,
+                        y1 = 2,
+                        line =
+                            Line(
+                                color = "rgb(128, 0, 128)",
+                                width = 4,
+                                dash = "dot"
+                            )
+                    )
+            ]
+        )
+
+    trace1
+    |> Plotly.Plot
+    |> Plotly.WithLayout layout
+    |> Plotly.Show

@@ -1,111 +1,68 @@
-﻿var d3 = Plotly.d3
-
-function normal_array(mean, stddev, size) {
-    var arr = new Array(size), i;
-    // from http://bl.ocks.org/nrabinowitz/2034281
-    var generator = (function () {
-        return d3.random.normal(mean, stddev);
-    }());
-
-    for (i = 0; i < arr.length; i++) {
-        arr[i] = generator();
-    }
-    return arr;
-}
-
-var x0 = normal_array(2, 0.45, 300);
-var y0 = normal_array(2, 0.45, 300);
-
-var x1 = normal_array(6, 0.4, 200);
-var y1 = normal_array(6, 0.4, 200)
-
-var x2 = normal_array(4, 0.3, 200);
-var y2 = normal_array(4, 0.3, 200);
-
-console.log(x0);
-
-var data = [
-    {
-        x: x0,
-        y: y0,
-        mode: 'markers'
-    }, {
-        x: x1,
-        y: y1,
-        mode: 'markers'
-    }, {
-        x: x2,
-        y: y2,
-        mode: 'markers'
-    }, {
-        x: x1,
-        y: y0,
-        mode: 'markers'
-    }
-];
+﻿var trace1 = {
+    x: [2, 3.5, 6],
+    y: [1, 1.5, 1],
+    text: ['Vertical Line', 'Horizontal Dashed Line', 'Diagonal dotted Line'],
+    mode: 'text'
+};
 
 var layout = {
+    title: 'Vertical and Horizontal Lines Positioned Relative to the Axes',
+    xaxis: {
+        range: [0, 7]
+    },
+    yaxis: {
+        range: [0, 2.5]
+    },
+    width: 500,
+    height: 500,
     shapes: [
-        {
-            type: 'circle',
-            xref: 'x',
-            yref: 'y',
-            x0: d3.min(x0),
-            y0: d3.min(y0),
-            x1: d3.max(x0),
-            y1: d3.max(y0),
-            opacity: 0.2,
-            fillcolor: 'blue',
-            line: {
-                color: 'blue'
-            }
-        },
-        {
-            type: 'circle',
-            xref: 'x',
-            yref: 'y',
-            x0: d3.min(x1),
-            y0: d3.min(y1),
-            x1: d3.max(x1),
-            y1: d3.max(y1),
-            opacity: 0.2,
-            fillcolor: 'orange',
-            line: {
-                color: 'orange'
-            }
-        },
-        {
-            type: 'circle',
-            xref: 'x',
-            yref: 'y',
-            x0: d3.min(x2),
-            y0: d3.min(y2),
-            x1: d3.max(x2),
-            y1: d3.max(y2),
-            opacity: 0.2,
-            fillcolor: 'green',
-            line: {
-                color: 'green'
-            }
-        },
-        {
-            type: 'circle',
-            xref: 'x',
-            yref: 'y',
-            x0: d3.min(x1),
-            y0: d3.min(y0),
-            x1: d3.max(x1),
-            y1: d3.max(y0),
-            opacity: 0.2,
-            fillcolor: 'red',
-            line: {
-                color: 'red'
-            }
-        }
-    ],
-    height: 400,
-    width: 480,
-    showlegend: false
-}
+
+      //line vertical
+
+      {
+          type: 'line',
+          x0: 1,
+          y0: 0,
+          x1: 1,
+          y1: 2,
+          line: {
+              color: 'rgb(55, 128, 191)',
+              width: 3
+          }
+      },
+
+      //Line Horizontal
+
+      {
+          type: 'line',
+          x0: 2,
+          y0: 2,
+          x1: 5,
+          y1: 2,
+          line: {
+              color: 'rgb(50, 171, 96)',
+              width: 4,
+              dash: 'dashdot'
+          }
+      },
+
+      //Line Diagonal
+
+      {
+          type: 'line',
+          x0: 4,
+          y0: 0,
+          x1: 6,
+          y1: 2,
+          line: {
+              color: 'rgb(128, 0, 128)',
+              width: 4,
+              dash: 'dot'
+          }
+      }
+    ]
+};
+
+var data = [trace1];
 
 Plotly.newPlot('myDiv', data, layout);
