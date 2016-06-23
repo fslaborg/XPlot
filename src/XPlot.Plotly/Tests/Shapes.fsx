@@ -242,3 +242,60 @@ module Chart3 =
     |> Plotly.Plot
     |> Plotly.WithLayout layout
     |> Plotly.Show
+
+// Circle
+module Chart4 =
+    let trace1 =
+        Scatter(
+            x = [1.5; 3.5],
+            y = [0.75; 2.5],
+            text = ["Unfilled Circle"; "Filled Circle"],
+            mode = "text"
+        )
+
+    let layout =
+        Layout(
+            title = "Circles",
+            xaxis =
+                Xaxis(
+                    range = [0.; 4.5],
+                    zeroline = false
+                ),
+            yaxis = Yaxis(range = [0.; 4.5]),
+//            width = 500.,
+//            height = 500.,
+            shapes = [
+                // Unfilled Circle
+                Shape(
+                    ``type`` = "circle",
+                    xref = "x",
+                    yref = "y",
+                    x0 = 1,
+                    y0 = 1,
+                    x1 = 3,
+                    y1 = 3,
+                    line = Line(color = "rgba(50, 171, 96, 1)")
+                )
+                // Filled Circle
+                Shape(
+                    ``type`` = "circle",
+                    xref = "x",
+                    yref = "y",
+                    fillcolor = "rgba(50, 171, 96, 0.7)",
+                    x0 = 3,
+                    y0 = 3,
+                    x1 = 4,
+                    y1 = 4,
+                    line = Line(color = "rgba(50, 171, 96, 1)")
+                )
+            ]
+        )
+
+    trace1
+    |> Plotly.Plot
+    |> Plotly.WithLayout layout
+    |> Plotly.Show
+
+// Rectangle Positioned Relative to the Plot and to the Axes
+module chart4 =
+// https://plot.ly/javascript/shapes/#rectangle-positioned-relative-to-the-plot-and-to-the-axes

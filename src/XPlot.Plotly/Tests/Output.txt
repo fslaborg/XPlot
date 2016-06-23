@@ -1,64 +1,52 @@
 let trace1 = (
-    x = [2; 3.5; 6],
-    y = [1; 1.5; 1],
-    text = ["Vertical Line"; "Horizontal Dashed Line"; "Diagonal dotted Line"],
+    x = [1.5; 3.5],
+    y = [0.75; 2.5],
+    text = ["Unfilled Circle"; "Filled Circle"],
     mode = "text"
 )
 
 let layout =
     Layout(
-    title = "Vertical and Horizontal Lines Positioned Relative to the Axes",
+    title = "Circles",
     xaxis = (
-        range = [0; 7]
+        range = [0; 4.5],
+        zeroline = false
     )
     yaxis = (
-        range = [0; 2.5]
+        range = [0; 4.5]
     )
     width = 500,
     height = 500,
     shapes = [
 
-      //line vertical
+      // Unfilled Circle
 
       {
-          type = "line",
+          type = "circle",
+          xref = "x",
+          yref = "y",
           x0 = 1,
-          y0 = 0,
-          x1 = 1,
-          y1 = 2,
+          y0 = 1,
+          x1 = 3,
+          y1 = 3,
           line = (
-              color = "rgb(55, 128, 191)",
-              width = 3
+              color = "rgba(50; 171; 96; 1)"
           )
       )
 
-      //Line Horizontal
+      // Filled Circle
 
       {
-          type = "line",
-          x0 = 2,
-          y0 = 2,
-          x1 = 5,
-          y1 = 2,
+          type = "circle",
+          xref = "x",
+          yref = "y",
+          fillcolor = "rgba(50; 171; 96; 0.7)",
+          x0 = 3,
+          y0 = 3,
+          x1 = 4,
+          y1 = 4,
           line = (
-              color = "rgb(50, 171, 96)",
-              width = 4,
-              dash = "dashdot"
-          )
-      )
-
-      //Line Diagonal
-
-      {
-          type = "line",
-          x0 = 4,
-          y0 = 0,
-          x1 = 6,
-          y1 = 2,
-          line = (
-              color = "rgb(128, 0, 128)",
-              width = 4,
-              dash = "dot"
+              color = "rgba(50; 171; 96; 1)"
           )
       )
     ]
