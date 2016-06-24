@@ -298,4 +298,67 @@ module Chart4 =
 
 // Rectangle Positioned Relative to the Plot and to the Axes
 module chart4 =
-// https://plot.ly/javascript/shapes/#rectangle-positioned-relative-to-the-plot-and-to-the-axes
+    let trace1 =
+        Scatter(
+            x = [1.5; 3.],
+            y = [2.5; 2.5],
+            text = ["Rectangle reference to the plot"; "Rectangle reference to the axes"],
+            mode = "text"
+        )
+
+    let layout =
+        Layout(
+            title = "Rectangles Positioned Relative to the Plot and to the Axes",
+            xaxis =
+                Xaxis(
+                    range = [0; 4],
+                    showgrid = false
+                ),
+            yaxis = Yaxis(range = [0; 4]),
+//            width = 800.,
+//            height = 600.,
+            shapes =
+                [
+                    //Rectangle reference to the axes
+                    Shape(
+                        ``type`` = "rect",
+                        xref = "x",
+                        yref = "y",
+                        x0 = 2.5,
+                        y0 = 0,
+                        x1 = 3.5,
+                        y1 = 2,
+                        line =
+                            Line(
+                                color = "rgb(55, 128, 191)",
+                                width = 3
+                            ),
+                        fillcolor = "rgba(55, 128, 191, 0.6)"
+                    )
+                    //Rectangle reference to the Plot
+                    Shape(
+                        ``type`` = "rect",
+                        xref = "paper",
+                        yref = "paper",
+                        x0 = 0.25,
+                        y0 = 0,
+                        x1 = 0.5,
+                        y1 = 0.5,
+                        line =
+                            Line(
+                            color = "rgb(50, 171, 96)",
+                            width = 3
+                            ),
+                        fillcolor = "rgba(50, 171, 96, 0.6)"
+                    )
+                ]
+        )
+
+    trace1
+    |> Plotly.Plot
+    |> Plotly.WithLayout layout
+    |> Plotly.Show
+
+// Rectangle Positioned Relative to the Axe
+module Chart5 =
+https://plot.ly/javascript/shapes/#rectangle-positioned-relative-to-the-axes
