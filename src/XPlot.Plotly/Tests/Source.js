@@ -1,51 +1,51 @@
 ﻿var trace1 = {
-    x: [1.5, 3.5],
-    y: [0.75, 2.5],
-    text: ['Unfilled Circle', 'Filled Circle'],
+    x: [2, 6],
+    y: [1, 1],
+    text: ['Line positioned relative to the plot', 'Line positioned relative to the axes'],
     mode: 'text'
 };
 
 var layout = {
-    title: 'Circles',
+    title: 'Lines Positioned Relative to the Plot & to the Axes',
     xaxis: {
-        range: [0, 4.5],
-        zeroline: false
+        range: [0, 8]
     },
     yaxis: {
-        range: [0, 4.5]
+        range: [0, 2]
     },
     width: 500,
     height: 500,
     shapes: [
 
-      // Unfilled Circle
+      //Line reference to the axes
 
       {
-          type: 'circle',
+          type: 'line',
           xref: 'x',
           yref: 'y',
-          x0: 1,
-          y0: 1,
-          x1: 3,
-          y1: 3,
+          x0: 4,
+          y0: 0,
+          x1: 8,
+          y1: 1,
           line: {
-              color: 'rgba(50, 171, 96, 1)'
+              color: 'rgb(55, 128, 191)',
+              width: 3
           }
       },
 
-      // Filled Circle
+      //Line reference to the plot
 
       {
-          type: 'circle',
-          xref: 'x',
-          yref: 'y',
-          fillcolor: 'rgba(50, 171, 96, 0.7)',
-          x0: 3,
-          y0: 3,
-          x1: 4,
-          y1: 4,
+          type: 'line',
+          xref: 'paper',
+          yref: 'paper',
+          x0: 0,
+          y0: 0,
+          x1: 0.5,
+          y1: 0.5,
           line: {
-              color: 'rgba(50, 171, 96, 1)'
+              color: 'rgb(50, 171, 96)',
+              width: 3
           }
       }
     ]

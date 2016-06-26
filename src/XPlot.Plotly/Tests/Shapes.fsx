@@ -361,4 +361,112 @@ module chart4 =
 
 // Rectangle Positioned Relative to the Axe
 module Chart5 =
-https://plot.ly/javascript/shapes/#rectangle-positioned-relative-to-the-axes
+    let trace1 =
+        Scatter(
+            x = [1.5; 4.5],
+            y = [0.75; 0.75],
+            text = ["Unfilled Rectangle"; "Filled Rectangle"],
+            mode = "text"
+        )
+
+    let layout =
+        Layout(
+            title = "Rectangle Positioned Relative to the Axes",
+            xaxis =
+                Xaxis(
+                    range = [0; 7],
+                    showgrid = false
+                ),
+            yaxis = Yaxis(range = [0.; 3.5]),
+//            width = 500.,
+//            height = 500.,
+            shapes =
+                [
+                    //Unfilled Rectangle
+                    Shape(
+                        ``type`` = "rect",
+                        x0 = 1,
+                        y0 = 1,
+                        x1 = 2,
+                        y1 = 3,
+                        line = Line(color = "rgba(128, 0, 128, 1)")
+                    )
+                    //Filled Rectangle
+                    Shape(
+                        ``type`` = "rect",
+                        x0 = 3,
+                        y0 = 1,
+                        x1 = 6,
+                        y1 = 2,
+                        line =
+                            Line(
+                                color = "rgba(128; 0; 128; 1)",
+                                width = 2
+                            ),
+                        fillcolor = "rgba(128, 0, 128, 0.7)"
+                    )
+                ]
+        )
+
+    trace1
+    |> Plotly.Plot
+    |> Plotly.WithLayout layout
+    |> Plotly.Show
+
+// Lines Positioned Realtive to the Plot and to the Axis
+module Chart6 =
+    let trace1 =
+        Scatter(
+            x = [2; 6],
+            y = [1; 1],
+            text = ["Line positioned relative to the plot"; "Line positioned relative to the axes"],
+            mode = "text"
+        )
+
+    let layout =
+        Layout(
+            title = "Lines Positioned Relative to the Plot & to the Axes",
+            xaxis = Xaxis(range = [0; 8]),
+            yaxis = Yaxis(range = [0; 2]),
+//            width = 500,
+//            height = 500.,
+            shapes =
+                [
+                    // Line reference to the axes
+                    Shape(
+                        ``type`` = "line",
+                        xref = "x",
+                        yref = "y",
+                        x0 = 4,
+                        y0 = 0,
+                        x1 = 8,
+                        y1 = 1,
+                        line =
+                            Line(
+                                color = "rgb(55, 128, 191)",
+                                width = 3
+                            )
+                    )
+                    // Line reference to the plot
+                    Shape(
+                        ``type`` = "line",
+                        xref = "paper",
+                        yref = "paper",
+                        x0 = 0,
+                        y0 = 0,
+                        x1 = 0.5,
+                        y1 = 0.5,
+                        line =
+                            Line(
+                                color = "rgb(50, 171, 96)",
+                                width = 3
+                            )
+                    )
+                ]
+        )
+
+    trace1
+    |> Plotly.Plot
+    |> Plotly.WithLayout layout
+    |> Plotly.Show
+
