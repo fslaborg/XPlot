@@ -470,3 +470,6 @@ module Chart6 =
     |> Plotly.WithLayout layout
     |> Plotly.Show
 
+// Basic Arbitrary SVG Paths
+module Chart6 =
+https://plot.ly/javascript/shapes/#basic-arbitrary-svg-paths

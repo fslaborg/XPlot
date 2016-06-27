@@ -7,8 +7,6 @@ open System
 open System.Data
 open System.Globalization
 
-//Google.DataTable.Net.Wrapper.Extension
-
 type key = IConvertible
 type value = IConvertible
 
