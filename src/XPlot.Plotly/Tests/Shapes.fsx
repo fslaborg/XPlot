@@ -530,3 +530,7 @@ module Chart7 =
     |> Plotly.Plot
     |> Plotly.WithLayout layout
     |> Plotly.Show
+
+// Venn Diagram with Circle Shapes
+module Chart7 =
+https://plot.ly/javascript/shapes/#venn-diagram-with-circle-shapes

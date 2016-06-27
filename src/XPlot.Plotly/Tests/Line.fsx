@@ -20,8 +20,8 @@ module Chart1 =
     let data = [trace1; trace2]
 
     data
-    |> Plotly.Plot
-    |> Plotly.Show
+    |> Chart.Plot
+    |> Chart.Show
 
 // Line and scatter plot
 module Chart2 =
@@ -52,8 +52,8 @@ module Chart2 =
     let layout = Layout(title ="Line and Scatter Plot")
 
     (data, layout)
-    |> Plotly.Plot
-    |> Plotly.Show
+    |> Chart.Plot
+    |> Chart.Show
 
 // Adding names to line and scatter plot
 module Chart3 =
@@ -87,8 +87,8 @@ module Chart3 =
     let layout = Layout(title ="Adding Names to Line and Scatter Plot")
 
     (data, layout)
-    |> Plotly.Plot
-    |> Plotly.Show
+    |> Chart.Plot
+    |> Chart.Show
 
 // Line and scatter styling
 module Chart4 =
@@ -139,8 +139,8 @@ module Chart4 =
     let layout = Layout(title = "Line and Scatter Styling")
 
     (data, layout)
-    |> Plotly.Plot
-    |> Plotly.Show
+    |> Chart.Plot
+    |> Chart.Show
 
 // Colored and styled scatter plots
 module Chart5 =
@@ -225,8 +225,8 @@ module Chart5 =
         )
 
     (data, layout)
-    |> Plotly.Plot
-    |> Plotly.Show
+    |> Chart.Plot
+    |> Chart.Show
 
 // Styling line plot
 module Chart6 =
@@ -266,9 +266,9 @@ module Chart6 =
     let data = [trace1; trace2]
 
     data
-    |> Plotly.Plot
-    |> Plotly.WithLayout layout
-    |> Plotly.Show
+    |> Chart.Plot
+    |> Chart.WithLayout layout
+    |> Chart.Show
 
 // Line shape options for interpolation
 module Chart7 =
@@ -341,9 +341,9 @@ module Chart7 =
         )
 
     data
-    |> Plotly.Plot
-    |> Plotly.WithLayout layout
-    |> Plotly.Show
+    |> Chart.Plot
+    |> Chart.WithLayout layout
+    |> Chart.Show
 
 // Graph and axes titles
 module Chart8 =
@@ -382,9 +382,9 @@ module Chart8 =
         )
 
     data
-    |> Plotly.Plot
-    |> Plotly.WithLayout layout
-    |> Plotly.Show
+    |> Chart.Plot
+    |> Chart.WithLayout layout
+    |> Chart.Show
 
 // Line dash
 module Chart9 =
@@ -465,9 +465,9 @@ module Chart9 =
         )
 
     data
-    |> Plotly.Plot
-    |> Plotly.WithLayout layout
-    |> Plotly.Show
+    |> Chart.Plot
+    |> Chart.WithLayout layout
+    |> Chart.Show
 
 // Connect gaps between dots
 module Chart10 =
@@ -497,9 +497,9 @@ module Chart10 =
         )
 
     data
-    |> Plotly.Plot
-    |> Plotly.WithLayout layout
-    |> Plotly.Show
+    |> Chart.Plot
+    |> Chart.WithLayout layout
+    |> Chart.Show
 
 // Labelling lines with annotations
 module Chart11 =
@@ -673,9 +673,9 @@ module Chart11 =
     layout.annotations <- (Seq.append layout.annotations annotations)
 
     data
-    |> Plotly.Plot
-    |> Plotly.WithLayout layout
-    |> Plotly.Show
+    |> Chart.Plot
+    |> Chart.WithLayout layout
+    |> Chart.Show
 
 // ====================
 // Pipeline style tests
@@ -685,22 +685,26 @@ let sales = ["2013", 1000; "2014", 1170; "2015", 660; "2016", 1030]
 let expenses = ["2013", 400; "2014", 460; "2015", 1120; "2016", 540]
 
 [sales; expenses]
-|> Plotly.Line
-|> Plotly.Show
+|> Chart.Line
+|> Chart.Show
 
 let chart1 =
     sales
-    |> Plotly.Line
-    |> Plotly.Show
+    |> Chart.Line
+    |> Chart.Show
 
 let chart2 =
     [sales; expenses]
-    |> Plotly.Line
-    |> Plotly.Show
+    |> Chart.Line
+    |> Chart.Show
 
 let a = [1, 10.0; 2, 11.0; 3, 12.0]
 let b = [0, 5.0; 1, 6.0; 2, 7.0; 3, 8.0]
 
 [a; b]
-|> Plotly.Line
-|> Plotly.Show
+|> Chart.Line
+|> Chart.Show
+
+[10.0; 11.0; 12.0]
+|> Chart.Line
+|> Chart.Show

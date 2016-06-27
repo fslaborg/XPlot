@@ -103,7 +103,7 @@ type PlotlyChart() =
 type key = IConvertible
 type value = IConvertible
 
-type Plotly =
+type Chart =
 
     static member Plot(data:seq<#Trace>) = 
         let chart = PlotlyChart()
@@ -143,13 +143,15 @@ type Plotly =
         chart.WithLabels labels
         chart
 
-type Plotly with
+    static member Line(data:seq<#value>) =
+        let scatter = Scatter(y = data)
+        Chart.Plot [scatter]
 
     static member Line(data:seq<#key * #value>) =
         let x = Seq.map fst data
         let y = Seq.map snd data
         let scatter = Scatter(x = x, y = y)
-        Plotly.Plot [scatter]
+        Chart.Plot [scatter]
 
     static member Line(data:seq<#seq<#key * #value>>) =
         let scatters =
@@ -159,13 +161,17 @@ type Plotly with
                 let y = Seq.map snd series
                 Scatter(x = x, y = y)
             )
-        Plotly.Plot scatters
+        Chart.Plot scatters
+
+    static member Scatter(data:seq<#value>) =
+        let scatter = Scatter(y = data, mode = "markers")
+        Chart.Plot [scatter]
 
     static member Scatter(data:seq<#key * #value>) =
         let x = Seq.map fst data
         let y = Seq.map snd data
         let scatter = Scatter(x = x, y = y, mode = "markers")
-        Plotly.Plot [scatter]
+        Chart.Plot [scatter]
 
     static member Scatter(data:seq<#seq<#key * #value>>) =
         let scatters =
@@ -175,13 +181,17 @@ type Plotly with
                 let y = Seq.map snd series
                 Scatter(x = x, y = y, mode = "markers")
             )
-        Plotly.Plot scatters
+        Chart.Plot scatters
+
+    static member Column(data:seq<#value>) =
+        let bar = Bar(y = data)
+        Chart.Plot [bar]
 
     static member Column(data:seq<#key * #value>) =
         let x = Seq.map fst data
         let y = Seq.map snd data
         let bar = Bar(x = x, y = y)
-        Plotly.Plot [bar]
+        Chart.Plot [bar]
 
     static member Column(data:seq<#seq<#key * #value>>) =
         let bars =
@@ -191,13 +201,17 @@ type Plotly with
                 let y = Seq.map snd series
                 Bar(x = x, y = y)
             )
-        Plotly.Plot bars
+        Chart.Plot bars
+
+    static member Bar(data:seq<#value>) =
+        let bar = Bar(x = data, orientation = "h")
+        Chart.Plot [bar]
 
     static member Bar(data:seq<#key * #value>) =
         let x = Seq.map fst data
         let y = Seq.map snd data
         let bar = Bar(x = y, y = x, orientation = "h")
-        Plotly.Plot [bar]
+        Chart.Plot [bar]
 
     static member Bar(data:seq<#seq<#key * #value>>) =
         let bars =
@@ -207,19 +221,19 @@ type Plotly with
                 let y = Seq.map snd series
                 Bar(x = y, y = x, orientation = "h")
             )
-        Plotly.Plot bars
+        Chart.Plot bars
 
     static member Pie(data:seq<#key * #value>) =
         let x = Seq.map fst data
         let y = Seq.map snd data
         let pie = Pie(labels = x, values = y)
-        Plotly.Plot [pie]
+        Chart.Plot [pie]
 
     static member Area(data:seq<#key * #value>) =
         let x = Seq.map fst data
         let y = Seq.map snd data
         let area = Scatter(x = x, y = y, fill = "tozeroy")
-        Plotly.Plot [area]
+        Chart.Plot [area]
 
     static member Area(data:seq<#seq<#key * #value>>) =
         let areas =
@@ -231,4 +245,4 @@ type Plotly with
                 | 0 -> Scatter(x = x, y = y, fill = "tozeroy")
                 | _ -> Scatter(x = x, y = y, fill = "tonexty")
             )
-        Plotly.Plot areas
+        Chart.Plot areas

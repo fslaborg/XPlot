@@ -27,8 +27,8 @@ module Chart1 =
         )
 
     [trace1; trace2; trace3]
-    |> Plotly.Plot
-    |> Plotly.Show
+    |> Chart.Plot
+    |> Chart.Show
 
 // Data labels hover
 module Chart2 =
@@ -63,8 +63,8 @@ module Chart2 =
         )
 
     (data, layout)
-    |> Plotly.Plot
-    |> Plotly.Show
+    |> Chart.Plot
+    |> Chart.Show
 
 // Data labels on the plot
 module Chart3 =
@@ -111,8 +111,8 @@ module Chart3 =
         )
 
     (data, layout)
-    |> Plotly.Plot
-    |> Plotly.Show
+    |> Chart.Plot
+    |> Chart.Show
 
 // Scatter plot with a color dimension
 module Chart4 =
@@ -133,8 +133,8 @@ module Chart4 =
     let layout = Layout(title = "Scatter Plot with a Color Dimension")
 
     (data, layout)
-    |> Plotly.Plot
-    |> Plotly.Show
+    |> Chart.Plot
+    |> Chart.Show
 
 // Categorical dot plot
 module Chart5 =
@@ -221,20 +221,24 @@ module Chart5 =
         )
 
     (data, layout)
-    |> Plotly.Plot
-    |> Plotly.Show
+    |> Chart.Plot
+    |> Chart.Show
 
 // ====================
 // Pipeline stype tests
 // ====================
 
 [8., 12.; 4., 5.5; 11., 14.; 4., 5.; 3., 3.5; 6.5, 7.]
-|> Plotly.Scatter
-|> Plotly.Show
+|> Chart.Scatter
+|> Chart.Show
 
 let rnd = new System.Random(0)
 let data = [for i in 1 .. 1000 -> (rnd.Next(10),rnd.Next(10))]
 
-[data]
-|> Plotly.Scatter
-|> Plotly.Show
+data
+|> Chart.Scatter
+|> Chart.Show
+
+[12.; 5.5; 14.; 5.; 3.5; 7.]
+|> Chart.Scatter
+|> Chart.Show

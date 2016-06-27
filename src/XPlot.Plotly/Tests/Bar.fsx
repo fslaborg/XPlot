@@ -8,408 +8,205 @@ module Chart1 =
     let data =
         [
             Bar(
-                x = ["giraffes"; "orangutans"; "monkeys"],
-                y = [20; 14; 23]
+                x = [20; 14; 23],
+                y = ["giraffes"; "orangutans"; "monkeys"],
+                orientation = "h"
             )
         ]
 
     data
-    |> Plotly.Plot
-    |> Plotly.Show
+    |> Chart.Plot
+    |> Chart.Show
 
-// Grouped bar chart
+// Colored bar chart
 module Chart2 =
 
     let trace1 =
         Bar(
-            x = ["giraffes"; "orangutans"; "monkeys"],
-            y = [20; 14; 23],
-            name = "SF Zoo"
+            x = [20; 14; 23],
+            y = ["giraffes"; "orangutans"; "monkeys"],
+            name = "SF Zoo",
+            orientation = "h",
+            marker =
+                Marker(
+                    color = "rgba(55,128,191,0.6)"//,
+//                    width = 1.
+                )
         )
 
     let trace2 =
         Bar(
-            x = ["giraffes"; "orangutans"; "monkeys"],
-            y = [12; 18; 29],
-            name = "LA Zoo"
+            x = [12; 18; 29],
+            y = ["giraffes"; "orangutans"; "monkeys"],
+            name = "LA Zoo",
+            orientation = "h",
+            marker =
+                Marker(
+                    color = "rgba(255,153,51,0.6)"//,
+//                    width = 1
+                )
         )
 
     let data = [trace1; trace2]
 
-    let layout = Layout(barmode = "group")
-    
-    data
-    |> Plotly.Plot
-    |> Plotly.WithLayout layout
-    |> Plotly.Show
+    let layout =
+        Layout(
+            title = "Colored Bar Chart",
+            barmode = "stack"
+        )
 
-// Stacked bar chart
+    data
+    |> Chart.Plot
+    |> Chart.WithLayout layout
+    |> Chart.Show
+
+// Bar chart with line plot
 module Chart3 =
 
-    let trace1 =
-        Bar(
-            x = ["giraffes"; "orangutans"; "monkeys"],
-            y = [20; 14; 23],
-            name = "SF Zoo"
-        )
-
-    let trace2 =
-        Bar(
-            x = ["giraffes"; "orangutans"; "monkeys"],
-            y = [12; 18; 29],
-            name = "LA Zoo"
-        )
-
-    let data = [trace1; trace2]
-
-    let layout = Layout(barmode = "stack")
-
-    data
-    |> Plotly.Plot
-    |> Plotly.WithLayout layout
-    |> Plotly.Show
-
-// Bar chart with hover text
-module Chart4 =
-
-    let trace1 =
-        Bar(
-            x = ["Product A"; "Product B"; "Product C"],
-            y = [20; 14; 23],
-            text = ["27% market share"; "24% market share"; "19% market share"],
-            marker =
-                Marker(
-                    color = "rgb(158,202,225)",
-                    opacity = 0.6,
-                    line =
-                        Line(
-                            color = "rbg(8,48,107)",
-                            width = 1.5
-                        )
-                )
-        )
-
-    let data = [trace1]
-
-    let layout = Layout(title = "January 2013 Sales Report")
-
-    data
-    |> Plotly.Plot
-    |> Plotly.WithLayout layout
-    |> Plotly.Show
-
-// Bar chart with direct labels
-module Chart5 =
-
-    let xValue = ["Product A"; "Product B"; "Product C"]
-
-    let yValue = [20.; 14.; 23.]
-
-    let trace1 =
-        Bar(
-            x = xValue,
-            y = yValue,
-            text = ["27% market share"; "24% market share"; "19% market share"],
-            marker =
-                Marker(
-                    color = "rgb(158;202;225)",
-                    opacity = 0.6,
-                    line =
-                        Line(
-                            color = "rbg(8;48;107)",
-                            width = 1.5
-                        )
-                )
-        )
-
-    let data = [trace1]
-
-    let layout = Layout(title = "January 2013 Sales Report")
-
-    let annotations =
-        xValue
-        |> List.mapi (fun i _ ->
-            Annotation(
-                x = xValue.[i],
-                y = yValue.[i],
-                text = string yValue.[i],
-                xanchor = "center",
-                yanchor = "bottom",
-                showarrow = false
-            )
-        )
-
-    layout.annotations <- annotations
-            
-    data
-    |> Plotly.Plot
-    |> Plotly.WithLayout layout
-    |> Plotly.Show
-
-// Grouped bar chart with direct labels
-module Chart6 =
-
-    let trace1 =
-        Bar(
-            x = ["Jan"; "Feb"; "Mar"; "Apr"; "May"; "Jun"; "Jul"; "Aug"; "Sep"; "Oct"; "Nov"; "Dec"],
-            y = [20; 14; 25; 16; 18; 22; 19; 15; 12; 16; 14; 17],
-            name = "Primary Product",
-            marker =
-                Marker(
-                    color = "rgb(49,130,189)",
-                    opacity = 0.7
-                )
-        )
-
-    let trace2 =
-        Bar(
-            x = ["Jan"; "Feb"; "Mar"; "Apr"; "May"; "Jun"; "Jul"; "Aug"; "Sep"; "Oct"; "Nov"; "Dec"],
-            y = [19; 14; 22; 14; 16; 19; 15; 14; 10; 12; 12; 16],
-            name = "Secondary Product",
-            marker =
-                Marker(
-                    color = "rgb(204,204,204)",
-                    opacity = 0.5
-                )
-        )
-
-    let data = [trace1; trace2]
-
-    let layout =
-        Layout(
-            title = "2013 Sales Report",
-            xaxis = Xaxis(tickangle = -45.),
-            barmode = "group"
-        )
-
-    data
-    |> Plotly.Plot
-    |> Plotly.WithLayout layout
-    |> Plotly.Show
-
-// Customizing individual bar colors
-module Chart7 =
-
-    let trace1 =
-        Bar(
-            x = ["Feature A"; "Feature B"; "Feature C"; "Feature D"; "Feature E"],
-            y = [20; 14; 23; 25; 22],
-            marker =
-                Marker(
-                    color = ["rgba(204,204,204,1)"; "rgba(222,45,38,0.8)"; "rgba(204,204,204,1)"; "rgba(204,204,204,1)"; "rgba(204,204,204,1)"]
-                )
-        )
-
-    let data = [trace1]
-
-    let layout = Layout(title = "Least Used Feature")
-
-    data
-    |> Plotly.Plot
-    |> Plotly.WithLayout layout
-    |> Plotly.Show
-
-// Bar chart with hover text
-module Chart8 =
-
-    let trace1 =
-        Bar(
-            x = ["Liam"; "Sophie"; "Jacob"; "Mia"; "William"; "Olivia"],
-            y = [8.0; 8.0; 12.0; 12.0; 13.0; 20.0],
-            text = ["4.17 below the mean"; "4.17 below the mean"; "0.17 below the mean"; "0.17 below the mean"; "0.83 above the mean"; "7.83 above the mean"],
-            marker = Marker(color = "rgb(142,124,195)")
-        )
-
-    let data = [trace1]
-
-    let layout =
-        Layout(
-            title = "Number of Graphs Made this Week",
-            font = Font(family = "Raleway; snas-serif"),
-            showlegend = false,
-            xaxis = Xaxis(tickangle = -45.),
-            yaxis =
-                Yaxis(
-                    zeroline = false
-//                    grigwidth = 2.
-                ),
-            bargap = 0.05
-        )
-
-    data
-    |> Plotly.Plot
-    |> Plotly.WithLayout layout
-    |> Plotly.Show
-
-// Colored and styled bar chart 
-module Chart9 =
-
-    let trace1 =
-        Bar(
-            x = [1995; 1996; 1997; 1998; 1999; 2000; 2001; 2002; 2003; 2004; 2005; 2006; 2007; 2008; 2009; 2010; 2011; 2012],
-            y = [219; 146; 112; 127; 124; 180; 236; 207; 236; 263; 350; 430; 474; 526; 488; 537; 500; 439],
-            name = "Rest of world",
-            marker = Marker(color = "rgb(55, 83, 109)")
-        )
-
-    let trace2 =
-        Bar(
-            x = [1995; 1996; 1997; 1998; 1999; 2000; 2001; 2002; 2003; 2004; 2005; 2006; 2007; 2008; 2009; 2010; 2011; 2012],
-            y = [16; 13; 10; 11; 28; 37; 43; 55; 56; 88; 105; 156; 270; 299; 340; 403; 549; 499],
-            name = "China",
-            marker = Marker(color = "rgb(26, 118, 255)")
-        )
-
-    let data = [trace1; trace2]
-
-    let layout =
-        Layout(
-            title = "US Export of Plastic Scrap",
-            xaxis =
-                Xaxis(
-                    tickfont =
-                        Font(
-                            size = 14.,
-                            color = "rgb(107, 107, 107)"
-                        )
-                ),
-            yaxis =
-                Yaxis(
-                    title = "USD (millions)",
-                    titlefont =
-                        Font(
-                            size = 16.,
-                            color = "rgb(107, 107, 107)"
-                        ),
-                    tickfont =
-                        Font(
-                            size = 14.,
-                            color = "rgb(107, 107, 107)"
-                        )
-                ),
-            legend =
-                Legend(
-                    x = 0.,
-                    y = 1.0,
-                    bgcolor = "rgba(255, 255, 255, 0)",
-                    bordercolor = "rgba(255, 255, 255, 0)"
-                ),
-            barmode = "group",
-            bargap = 0.15
-//            bargroupgap = 0.1
-        )
-
-    data
-    |> Plotly.Plot
-    |> Plotly.WithLayout layout
-    |> Plotly.Show
-
-// Waterfall bar chart
-module Chart10 =
-
-    let xData =
-        [
-            "Product Revenue";
-            "Services Revenue";
-            "Total Revenue";
-            "Fixed Costs";
-            "Variable Costs";
-            "Total Costs";
-            "Total"
+    let xSavings =
+        [1.3586; 2.2623000000000002; 4.9821999999999997; 6.5096999999999996;
+            7.4812000000000003; 7.5133000000000001; 15.2148; 17.520499999999998
         ]
 
-    let yData = [400; 660; 660; 590; 400; 400; 340]
+    let xNetworth = [93453.919999999998; 81666.570000000007; 69889.619999999995; 78381.529999999999; 141395.29999999999; 92969.020000000004; 66090.179999999993; 122379.3]
 
-    let textList = ["$430K"; "$260K"; "$690K"; "$-120K"; "$-200K"; "$-320K"; "$370K"]
+    let ySavings = ["Japan"; "United Kingdom"; "Canada"; "Netherlands"; "United States"; "Belgium"; "Sweden"; "Switzerland"]
+
+    let yNetworth = ["Japan"; "United Kingdom"; "Canada"; "Netherlands"; "United States"; "Belgium"; "Sweden"; "Switzerland"]
 
     let trace1 =
         Bar(
-            x = xData,
-            y = [0; 430; 0; 570; 370; 370; 0],
-            marker = Marker(color = "rgba(1,1,1,0.0)")
-        )
-
-    let trace2 =
-        Bar(
-            x = xData,
-            y = [430; 260; 690; 0; 0; 0; 0],
-            marker = 
-                Marker(
-                    color = "rgba(55,128,191,0.7)",
-                    line =
-                        Line(
-                            color = "rgba(55,128,191,1.0)",
-                            width = 2.
-                        )
-                )
-        )
-
-    let trace3 =
-        Bar(
-            x = xData,
-            y = [0; 0; 0; 120; 200; 320; 0],
+            x = xSavings,
+            y = ySavings,
+            xaxis = "x1",
+            yaxis = "y1",
             marker =
                 Marker(
-                    color = "rgba(219, 64, 82, 0.7)",
-                    line =
-                        Line(
-                            color = "rgba(219, 64, 82, 1.0)",
-                            width = 2.
-                        )
-                )
-        )
-
-    let trace4 =
-        Bar(
-            x = xData,
-            y = [0; 0; 0; 0; 0; 0; 370],
-            marker =
-                Marker(
-                    color = "rgba(50, 171, 96, 0.7)",
+                    color = "rgba(50,171,96,0.6)",
                     line =
                         Line(
                             color = "rgba(50,171,96,1.0)",
-                            width = 2.
+                            width = 1.
                         )
-                )
+                ),
+            name = "Household savings; percentage of household disposable income",
+            orientation = "h"
         )
 
-    let data = [trace1; trace2; trace3; trace4]
+    let trace2 =
+        Scatter(
+            x = xNetworth,
+            y = yNetworth,
+            xaxis = "x2",
+            yaxis = "y1",
+            mode = "lines+markers",
+            line = Line(color = "rgb(128,0,128)"),
+            name = "Household net worth; Million USD/capita"
+        )
+
+    let data = [trace1 :> Trace; trace2 :> Trace]
 
     let layout =
         Layout(
-            title = "Annual Profit 2015",
-            barmode = "stack",
-            paper_bgcolor = "rgba(245,246,249,1)",
-            plot_bgcolor = "rgba(245,246,249,1)",
-            width = 600.,
+            title = "Household Savings & Net Worth for Eight OECD Countries",
+            xaxis1 =
+                Xaxis(
+                    range = [0; 20],
+                    domain = [0.; 0.5],
+                    zeroline = false,
+                    showline = false,
+                    showticklabels = true,
+                    showgrid = true
+                ),
+            xaxis2 =
+                Xaxis(
+                    range = [25000; 150000],
+                    domain = [0.5; 1.],
+                    zeroline = false,
+                    showline = false,
+                    showticklabels = true,
+                    showgrid = true,
+                    side = "top",
+                    dtick = 25000
+                ),
+            legend =
+                Legend(
+                    x = 0.029,
+                    y = 1.238,
+                    font = Font(size = 10.)
+                ),
+            margin =
+                Margin(
+                    l = 100.,
+                    r = 20.,
+                    t = 200.,
+                    b = 70.
+                ),
+            width = 700.,
             height = 600.,
-            showlegend = false
+            paper_bgcolor = "rgb(248,248,255)",
+            plot_bgcolor = "rgb(248,248,255)",
+            annotations = [
+                Annotation(
+                    xref = "paper",
+                    yref = "paper",
+                    x = -0.2,
+                    y = -0.109,
+                    text = "OECD " + "(2015) Household savings (indicator) " + "Household net worth (indicator). doi = " + "10.1787/cfc6f499-en (Accessed on 05 June 2015)",
+                    showarrow = false,
+                    font =
+                        Font(
+                            family = "Arial",
+                            size = 10.,
+                            color = "rgb(150,150,150)"
+                        )
+                )
+            ]
         )
 
     let annotations =
-        [0 .. 6]
-        |> List.map (fun i ->
-            Annotation(
-                x = xData.[i],
-                y = float yData.[i],
-                text = textList.[i],
-                font =
-                    Font(
-                        family = "Arial",
-                        size = 14.,
-                        color = "rgba(245,246,249,1)"
-                    ),
-                showarrow = false
-            )
-    )
+        [
+            for i in 0 .. xSavings.Length - 1 do
+                let result =
+                    Annotation(
+                        xref = "x1",
+                        yref = "y1",
+                        x = xSavings.[i] + 2.3,
+                        y = ySavings.[i],
+                        text = string xSavings.[i] + "%",
+                        font =
+                            Font(
+                                family = "Arial",
+                                size = 12.,
+                                color = "rgb(50, 171, 96)"
+                            ),
+                         showarrow = false;
+                    )
+                let result2 =
+                    Annotation(
+                        xref = "x2",
+                        yref = "y1",
+                        x = xNetworth.[i] - 20000.,
+                        y = yNetworth.[i],
+                        text = string xNetworth.[i] + " M",
+                        font =
+                            Font(
+                                family = "Arial",
+                                size = 12.,
+                                color = "rgb(128, 0, 128)"
+                            ),
+                         showarrow = false
+                    )
+                yield result
+                yield result2
+        ]
 
-    layout.annotations <- annotations
+    layout.annotations <- Seq.append layout.annotations annotations
 
     data
-    |> Plotly.Plot
-    |> Plotly.WithLayout layout
-    |> Plotly.Show
+    |> Chart.Plot
+    |> Chart.WithLayout layout
+    |> Chart.Show
 
 // ====================
 // Pipeline style tests
@@ -421,8 +218,8 @@ module Chart1' =
     let data = ["giraffes", 20; "orangutans", 14; "monkeys", 23]
 
     data
-    |> Plotly.Column
-    |> Plotly.Show
+    |> Chart.Bar
+    |> Chart.Show
 
 // Grouped bar chart
 module Chart2' =
@@ -433,9 +230,9 @@ module Chart2' =
     let layout = Layout(barmode = "group")
     
     [trace1; trace2]
-    |> Plotly.Column
-    |> Plotly.WithLayout layout
-    |> Plotly.Show
+    |> Chart.Bar
+    |> Chart.WithLayout layout
+    |> Chart.Show
 
 // Stacked bar chart
 module Chart3' =
@@ -446,7 +243,11 @@ module Chart3' =
     let layout = Layout(barmode = "stack")
 
     [trace1; trace2]
-    |> Plotly.Column
-    |> Plotly.WithLabels ["SF Zoo"; "LA Zoo"]
-    |> Plotly.WithLayout layout
-    |> Plotly.Show
+    |> Chart.Bar
+    |> Chart.WithLabels ["SF Zoo"; "LA Zoo"]
+    |> Chart.WithLayout layout
+    |> Chart.Show
+
+[20; 14; 23]
+|> Chart.Bar
+|> Chart.Show
