@@ -471,5 +471,62 @@ module Chart6 =
     |> Plotly.Show
 
 // Basic Arbitrary SVG Paths
-module Chart6 =
-https://plot.ly/javascript/shapes/#basic-arbitrary-svg-paths
+module Chart7 =
+    let trace1 =
+        Scatter(
+            x = [2; 1; 8; 8],
+            y = [0.25; 9.; 2.; 6.],
+            text = ["filled triangle"; "filled Polygon"; "Quadratic Bezier Curves"; "Cubic Bezier Curves"],
+            mode = "text"
+        )
+
+    let layout =
+        Layout(
+            title = "Basic Arbitrary SVG Paths",
+            xaxis =
+                Xaxis(
+                    range = [0; 9],
+                    zeroline = false
+                ),
+            yaxis =
+                Yaxis(
+                    range = [0; 11],
+                    showgrid = false
+                ),
+//            width = 500.,
+//            height = 500.,
+            shapes =
+                [
+                    // Quadratic Bezier Curves
+                    Shape(
+                        ``type`` = "path",
+                        path = "M 4,4 Q 6,0 8,4",
+                        line = Line(color = "rgb(93, 164, 214)")
+                    )
+                    // Cubic Bezier Curves
+                    Shape(
+                        ``type`` = "path",
+                        path = "M 1,4 C 2,8 6,4 8,8",
+                        line = Line(color = "rgb(207, 114, 255)")
+                    )
+                    // Filled Triangle
+                    Shape(
+                        ``type`` = "path",
+                        path = "M 1 1 L 1 3 L 4 1 Z",
+                        fillcolor = "rgba(44, 160, 101, 0.5)",
+                        line = Line(color = "rgb(44, 160, 101)")
+                    )
+                    // Filled Polygon
+                    Shape(
+                        ``type`` = "path",
+                        path = "M 3,7 L2,8 L2,9 L3,10, L4,10 L5,9 L5,8 L4,7 Z",
+                        fillcolor = "rgba(255, 140, 184, 0.5)",
+                        line = Line(color = "rgb(255, 140, 184)")
+                    )
+                ]
+        )
+
+    trace1
+    |> Plotly.Plot
+    |> Plotly.WithLayout layout
+    |> Plotly.Show

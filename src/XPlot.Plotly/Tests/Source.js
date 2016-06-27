@@ -1,51 +1,63 @@
 ﻿var trace1 = {
-    x: [2, 6],
-    y: [1, 1],
-    text: ['Line positioned relative to the plot', 'Line positioned relative to the axes'],
+    x: [2, 1, 8, 8],
+    y: [0.25, 9, 2, 6],
+    text: ['filled triangle', 'filled Polygon', 'Quadratic Bezier Curves', 'Cubic Bezier Curves'],
     mode: 'text'
 };
 
 var layout = {
-    title: 'Lines Positioned Relative to the Plot & to the Axes',
+    title: 'Basic Arbitrary SVG Paths',
     xaxis: {
-        range: [0, 8]
+        range: [0, 9],
+        zeroline: false
     },
     yaxis: {
-        range: [0, 2]
+        range: [0, 11],
+        showgrid: false
     },
     width: 500,
     height: 500,
     shapes: [
 
-      //Line reference to the axes
+      //Quadratic Bezier Curves
 
       {
-          type: 'line',
-          xref: 'x',
-          yref: 'y',
-          x0: 4,
-          y0: 0,
-          x1: 8,
-          y1: 1,
+          type: 'path',
+          path: 'M 4,4 Q 6,0 8,4',
           line: {
-              color: 'rgb(55, 128, 191)',
-              width: 3
+              color: 'rgb(93, 164, 214)'
           }
       },
 
-      //Line reference to the plot
+      //Cubic Bezier Curves
 
       {
-          type: 'line',
-          xref: 'paper',
-          yref: 'paper',
-          x0: 0,
-          y0: 0,
-          x1: 0.5,
-          y1: 0.5,
+          type: 'path',
+          path: 'M 1,4 C 2,8 6,4 8,8',
           line: {
-              color: 'rgb(50, 171, 96)',
-              width: 3
+              color: 'rgb(207, 114, 255)'
+          }
+      },
+
+      //Filled Triangle
+
+      {
+          type: 'path',
+          path: 'M 1 1 L 1 3 L 4 1 Z',
+          fillcolor: 'rgba(44, 160, 101, 0.5)',
+          line: {
+              color: 'rgb(44, 160, 101)'
+          }
+      },
+
+      //Filled Polygon
+
+      {
+          type: 'path',
+          path: ' M 3,7 L2,8 L2,9 L3,10, L4,10 L5,9 L5,8 L4,7 Z',
+          fillcolor: 'rgba(255, 140, 184, 0.5)',
+          line: {
+              color: 'rgb(255, 140, 184)'
           }
       }
     ]
