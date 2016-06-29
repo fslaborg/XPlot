@@ -5468,7 +5468,7 @@ type Margin() =
     //member __.ShouldSerializerole() = not _role.IsNone
 
 type Xaxis() =
-
+    let mutable _autotick: bool option = None
     let mutable _title: string option = None
     let mutable _titlefont: Font option = None
     let mutable _type: _ option = None
@@ -5523,6 +5523,10 @@ type Xaxis() =
     let mutable _showbackground: bool option = None
     let mutable _backgroundcolor: string option = None
     let mutable _showaxeslabels: bool option = None
+
+    member __.autotick
+        with get () = Option.get _autotick
+        and set value = _autotick <- Some value
 
     /// Sets the title of this axis.
     member __.title
@@ -5790,6 +5794,7 @@ type Xaxis() =
         with get () = Option.get _showaxeslabels
         and set value = _showaxeslabels <- Some value
 
+    member __.ShouldSerializeautotick() = not _autotick.IsNone
     member __.ShouldSerializetitle() = not _title.IsNone
     member __.ShouldSerializetitlefont() = not _titlefont.IsNone
     member __.ShouldSerializetype() = not _type.IsNone
@@ -5847,6 +5852,7 @@ type Xaxis() =
 
 type Yaxis() =
 
+    let mutable _autotick: bool option = None
     let mutable _title: string option = None
     let mutable _titlefont: Font option = None
     let mutable _type: _ option = None
@@ -5901,6 +5907,10 @@ type Yaxis() =
     let mutable _showbackground: bool option = None
     let mutable _backgroundcolor: string option = None
     let mutable _showaxeslabels: bool option = None
+
+    member __.autotick
+        with get () = Option.get _autotick
+        and set value = _autotick <- Some value
 
     /// Sets the title of this axis.
     member __.title
@@ -6168,6 +6178,7 @@ type Yaxis() =
         with get () = Option.get _showaxeslabels
         and set value = _showaxeslabels <- Some value
 
+    member __.ShouldSerializeautotick() = not _autotick.IsNone
     member __.ShouldSerializetitle() = not _title.IsNone
     member __.ShouldSerializetitlefont() = not _titlefont.IsNone
     member __.ShouldSerializetype() = not _type.IsNone

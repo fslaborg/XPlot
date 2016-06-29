@@ -532,5 +532,76 @@ module Chart7 =
     |> Plotly.Show
 
 // Venn Diagram with Circle Shapes
-module Chart7 =
-https://plot.ly/javascript/shapes/#venn-diagram-with-circle-shapes
+module Chart8 =
+    let trace1 =
+        Scatter(
+            x = [1.; 1.75; 2.5],
+            y = [1; 1; 1],
+            mode = "text",
+            text = ["A"; "A+B"; "B"],
+            textfont =
+                Textfont(
+                    color = "black",
+                    size = 18.,
+                    family = "Arial"
+                )
+        )
+
+    let layout =
+        Layout(
+            title = "Venn Diagram with Circle Shapes",
+            xaxis =
+                Xaxis(
+                    showticklabels = false,
+                    autotick = false,
+                    showgrid = false,
+                    zeroline = false
+                ),
+            yaxis =
+                Yaxis(
+                    showticklabels = false,
+                    autotick = false,
+                    showgrid = false,
+                    zeroline = false
+                ),
+            shapes =
+                [
+                    Shape(
+                        opacity = 0.3,
+                        xref = "x",
+                        yref = "y",
+                        fillcolor = "blue",
+                        x0 = 0,
+                        y0 = 0,
+                        x1 = 2,
+                        y1 = 2,
+                        ``type`` = "circle",
+                        line = Line(color = "blue")
+                    )
+                    Shape(
+                        opacity = 0.3,
+                        xref = "x",
+                        yref = "y",
+                        fillcolor = "gray",
+                        x0 = 1.5,
+                        y0 = 0,
+                        x1 = 3.5,
+                        y1 = 2,
+                        ``type`` = "circle",
+                        line = Line(color = "gray")
+                    )
+                ],
+            margin =
+                Margin(
+                    l = 20.,
+                    r = 20.,
+                    b = 100.
+                )
+//            height = 500.,
+//            width = 500.
+        )
+
+    trace1
+    |> Chart.Plot
+    |> Chart.WithLayout layout
+    |> Chart.Show
