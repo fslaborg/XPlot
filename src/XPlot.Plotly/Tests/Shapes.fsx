@@ -1,7 +1,12 @@
 ﻿#r @"../../../bin/XPlot.Plotly.dll"
+#r "../../../packages/MathNet.Numerics/lib/net40/MathNet.Numerics.dll"
+
+open System
+
+open MathNet.Numerics
+open MathNet.Numerics.Distributions
 
 open XPlot.Plotly
-open System
 
 // Highlighting Time Series Regions with Rectangle Shapes
 module Chart1 =
@@ -60,14 +65,9 @@ module Chart1 =
         )
 
     data
-    |> Plotly.Plot
-    |> Plotly.WithLayout layout
-    |> Plotly.Show
-
-#r "../../../packages/MathNet.Numerics/lib/net40/MathNet.Numerics.dll"
-
-open MathNet.Numerics
-open MathNet.Numerics.Distributions
+    |> Chart.Plot
+    |> Chart.WithLayout layout
+    |> Chart.Show
 
 let normalArray mean stddev size =
     let normal = new Normal(mean, stddev)
@@ -170,9 +170,9 @@ module Chart2 =
     )
 
     data
-    |> Plotly.Plot
-    |> Plotly.WithLayout layout
-    |> Plotly.Show
+    |> Chart.Plot
+    |> Chart.WithLayout layout
+    |> Chart.Show
 
 // Vertical and Horizontal Lines Positioned Relative to the Axes
 module Chart3 =
@@ -239,9 +239,9 @@ module Chart3 =
         )
 
     trace1
-    |> Plotly.Plot
-    |> Plotly.WithLayout layout
-    |> Plotly.Show
+    |> Chart.Plot
+    |> Chart.WithLayout layout
+    |> Chart.Show
 
 // Circle
 module Chart4 =
@@ -292,9 +292,9 @@ module Chart4 =
         )
 
     trace1
-    |> Plotly.Plot
-    |> Plotly.WithLayout layout
-    |> Plotly.Show
+    |> Chart.Plot
+    |> Chart.WithLayout layout
+    |> Chart.Show
 
 // Rectangle Positioned Relative to the Plot and to the Axes
 module chart4 =
@@ -355,9 +355,9 @@ module chart4 =
         )
 
     trace1
-    |> Plotly.Plot
-    |> Plotly.WithLayout layout
-    |> Plotly.Show
+    |> Chart.Plot
+    |> Chart.WithLayout layout
+    |> Chart.Show
 
 // Rectangle Positioned Relative to the Axe
 module Chart5 =
@@ -409,9 +409,9 @@ module Chart5 =
         )
 
     trace1
-    |> Plotly.Plot
-    |> Plotly.WithLayout layout
-    |> Plotly.Show
+    |> Chart.Plot
+    |> Chart.WithLayout layout
+    |> Chart.Show
 
 // Lines Positioned Realtive to the Plot and to the Axis
 module Chart6 =
@@ -466,9 +466,9 @@ module Chart6 =
         )
 
     trace1
-    |> Plotly.Plot
-    |> Plotly.WithLayout layout
-    |> Plotly.Show
+    |> Chart.Plot
+    |> Chart.WithLayout layout
+    |> Chart.Show
 
 // Basic Arbitrary SVG Paths
 module Chart7 =
@@ -527,9 +527,9 @@ module Chart7 =
         )
 
     trace1
-    |> Plotly.Plot
-    |> Plotly.WithLayout layout
-    |> Plotly.Show
+    |> Chart.Plot
+    |> Chart.WithLayout layout
+    |> Chart.Show
 
 // Venn Diagram with Circle Shapes
 module Chart8 =
@@ -600,6 +600,76 @@ module Chart8 =
 //            height = 500.,
 //            width = 500.
         )
+
+    trace1
+    |> Chart.Plot
+    |> Chart.WithLayout layout
+    |> Chart.Show
+
+// Creating Tangent Lines with Shapes
+module Chart9 =
+    let xValues = Generate.LinearSpaced(200, 1., 3.)
+    let yValues =
+        [|
+            for x in 0 .. (xValues.Length - 1) do
+                let result = xValues.[x] * Math.Sin(Math.Pow(xValues.[x], 2.)) + 1.
+                yield result
+        |]
+
+    let trace1 =
+        Scatter(
+          x = xValues,
+          y = yValues
+        )
+
+    let layout =
+        Layout(
+          title = "Creating Tangent Lines with Shapes",
+          shapes =
+            [
+                Shape(
+                    ``type`` = "line",
+                    x0 = 1,
+                    y0 = 2.30756,
+                    x1 = 1.75,
+                    y1 = 2.30756,
+                    opacity = 0.7,
+                    line =
+                        Line(
+                          color = "red",
+                          width = 2.5
+                        )
+                )
+                Shape(
+                    ``type`` = "line",
+                    x0 = 2.5,
+                    y0 = 3.80796,
+                    x1 = 3.05,
+                    y1 = 3.80796,
+                    opacity = 0.7,
+                    line =
+                        Line(
+                            color = "red",
+                            width = 2.5
+                        )
+                )
+                Shape(
+                    ``type`` = "line",
+                    x0 = 1.90,
+                    y0 = -1.1827,
+                    x1 = 2.50,
+                    y1 = -1.1827,
+                    opacity = 0.7,
+                    line =
+                        Line(
+                            color = "red",
+                            width = 2.5
+                        )
+                )
+            ]
+//            height = 500.,
+//            width = 500.
+    )
 
     trace1
     |> Chart.Plot

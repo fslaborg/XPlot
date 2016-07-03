@@ -1,66 +1,58 @@
-﻿var trace1 = {
-    x: [1, 1.75, 2.5],
-    y: [1, 1, 1],
-    type: 'scatter',
-    mode: 'text',
-    text: ['A', 'A+B', 'B'],
-    textfont: {
-        color: 'black',
-        size: 18,
-        family: 'Arial'
-    }
+﻿var xValues = numeric.linspace(1, 3, 200);
+
+var yValues = [];
+
+for ( var i = 0 ; i < xValues.length ; i++ ) {
+  var result = xValues[i] * Math.sin(Math.pow(xValues[i], 2)) + 1;
+  yValues.push(result);
 };
 
-var layout = {
-    title: 'Venn Diagram with Circle Shapes',
-    xaxis: {
-        showticklabels: false,
-        autotick: false,
-        showgrid: false,
-        zeroline: false
-    },
-    yaxis: {
-        showticklabels: false,
-        autotick: false,
-        showgrid: false,
-        zeroline: false
-    },
-    shapes: [{
-        opacity: 0.3,
-        xref: 'x',
-        yref: 'y',
-        fillcolor: 'blue',
-        x0: 0,
-        y0: 0,
-        x1: 2,
-        y1: 2,
-        type: 'circle',
-        line: {
-            color: 'blue'
-        }
-    }, {
-        opacity: 0.3,
-        xref: 'x',
-        yref: 'y',
-        fillcolor: 'gray',
-        x0: 1.5,
-        y0: 0,
-        x1: 3.5,
-        y1: 2,
-        type: 'circle',
-        line: {
-            color: 'gray'
-        }
-    }],
-    margin: {
-        l: 20,
-        r: 20,
-        b: 100
-    },
-    height: 500,
-    width: 500
+var trace1 = {
+  x: xValues,
+  y: yValues,
+  type: 'scatter'
 };
 
 var data = [trace1];
+
+var layout = {
+  title: 'Creating Tangent Lines with Shapes',
+  shapes: [{
+    type: 'line',
+    x0: 1,
+    y0: 2.30756,
+    x1: 1.75,
+    y1: 2.30756,
+    opacity: 0.7,
+    line: {
+      color: 'red',
+      width: 2.5
+    }
+  }, {
+    type: 'line',
+    x0: 2.5,
+    y0: 3.80796,
+    x1: 3.05,
+    y1: 3.80796,
+    opacity: 0.7,
+    line: {
+      color: 'red',
+      width: 2.5
+    }
+  }, {
+    type: 'line',
+    x0: 1.90,
+    y0: -1.1827,
+    x1: 2.50,
+    y1: -1.1827,
+    opacity: 0.7,
+    line: {
+      color: 'red',
+      width: 2.5
+    }
+  }],
+  height: 500,
+  width: 500
+};
 
 Plotly.newPlot('myDiv', data, layout);
