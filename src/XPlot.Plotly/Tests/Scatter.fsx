@@ -111,7 +111,7 @@ module Chart3 =
         )
 
     (data, layout)
-    |> Chart.Plot
+    |> Plotly.Plot
     |> Chart.Show
 
 // Scatter plot with a color dimension

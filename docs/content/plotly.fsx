@@ -8,9 +8,7 @@ It's recommended to get XPlot as part of [FsLab](http://www.fslab.org/). FsLab t
 of installing and referencing the necessary packages and adds an FSI printer that shows the charts
 you'll create in a browser window.
 
-Alternatively, the <code>XPlot.Plotly</code> package is available on NuGet. On Windows, you
-can also install the <code>XPlot.Plotly.WPF</code> package which provides the <code>Show</code>
-method that displays Plotly figures in a WPF window.
+Alternatively, the <code>XPlot.Plotly</code> package is available on NuGet.
 
 Chart Gallery
 -------------

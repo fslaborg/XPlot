@@ -8,9 +8,7 @@ It's recommended to get XPlot as part of [FsLab](http://www.fslab.org/). FsLab t
 of installing and referencing the necessary packages and adds an FSI printer that shows the charts
 you'll create in a browser window.
 
-Alternatively, the <code>XPlot.GoogleCharts</code> package is available on NuGet. On Windows, you
-can also install the <code>XPlot.GoogleCharts.WPF</code> package which provides the <code>Chart.Show</code>
-method that displays charts in a WPF window.
+Alternatively, the <code>XPlot.GoogleCharts</code> package is available on NuGet.
 
 Chart Gallery
 -------------

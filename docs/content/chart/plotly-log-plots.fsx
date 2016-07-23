@@ -1,12 +1,9 @@
 ﻿(*** hide ***)
 #I "../../../bin"
-#load "../credentials.fsx"
 #r "XPlot.Plotly.dll"
-#r "XPlot.Plotly.WPF.dll"
 
 open XPlot.Plotly
 
-Plotly.Signin MyCredentials.userAndKey
 
 (**
 Plotly Log Plots
@@ -15,7 +12,7 @@ Plotly Log Plots
 Logarithmic Axes
 ----------------
 *)
-
+(*** define-output:chart ***)
 let trace1 =
     Scatter(
         x = [0; 1; 2; 3; 4; 5; 6; 7; 8],
@@ -28,25 +25,24 @@ let trace2 =
         y = [0; 1; 2; 3; 4; 5; 6; 7; 8]
     )
 
-let data = Data([trace1; trace2])
-
 let layout =
     Layout(
         title = "Logarithmic Axes",
         xaxis =
-            XAxis(
+            Xaxis(
                 ``type`` = "log",
                 autorange = true
             ),
         yaxis =
-            YAxis(
+            Yaxis(
                 ``type`` = "log",
                 autorange = true
             )
     )
 
-Figure(Data.From [trace1; trace2], layout)
-
-(**
-<iframe width="640" height="480" frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~TahaHachana/548.embed?width=640&height=480" ></iframe>
-*)
+[trace1; trace2]
+|> Chart.Plot
+|> Chart.WithLayout layout
+|> Chart.WithWidth 700
+|> Chart.WithHeight 500
+(*** include-it:chart ***)

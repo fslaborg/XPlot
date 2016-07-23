@@ -1,12 +1,8 @@
 ﻿(*** hide ***)
 #I "../../../bin"
-#load "../credentials.fsx"
 #r "XPlot.Plotly.dll"
-#r "XPlot.Plotly.WPF.dll"
 
 open XPlot.Plotly
-
-Plotly.Signin MyCredentials.userAndKey
 
 (**
 Plotly Bubble Charts
@@ -15,7 +11,7 @@ Plotly Bubble Charts
 Marker Size, Color, and Symbol as an Array
 ------------------------------------------
 *)
-
+(*** define-output:chart ***)
 let trace1 =
     Scatter(
         x = [1; 2; 3; 4],
@@ -61,8 +57,13 @@ let trace3 =
 
 let layout = Layout(showlegend = false)
 
-Figure(Data.From [trace1; trace2; trace3], layout)
+[trace1; trace2; trace3]
+|> Chart.Plot
+|> Chart.WithWidth 700
+|> Chart.WithHeight 500
+(*** include-it:chart ***)
 
-(**
-<iframe width="640" height="480" frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~TahaHachana/226.embed?width=640&height=480" ></iframe>
-*)
+(*** hide ***)
+//(**
+//<iframe width="640" height="480" frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~TahaHachana/226.embed?width=640&height=480" ></iframe>
+//*)

@@ -1,7 +1,6 @@
 ﻿(*** hide ***)
 #I "../../../bin"
 #r "XPlot.GoogleCharts.dll"
-#r "XPlot.GoogleCharts.WPF.dll"
 open XPlot.GoogleCharts
 
 let Bolivia = ["2004/05", 165.; "2005/06", 135.; "2006/07", 157.; "2007/08", 139.; "2008/09", 136.]

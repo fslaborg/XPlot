@@ -246,3 +246,6 @@ type Chart =
                 | _ -> Scatter(x = x, y = y, fill = "tonexty")
             )
         Chart.Plot areas
+
+[<ObsoleteAttribute("Use the Chart type instead.")>]
+type Plotly = Chart

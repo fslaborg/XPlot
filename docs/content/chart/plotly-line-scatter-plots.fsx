@@ -32,7 +32,9 @@ let trace3 =
     )
 
 [trace1; trace2; trace3]
-|> Plotly.Plot
+|> Chart.Plot
+|> Chart.WithWidth 700
+|> Chart.WithHeight 500
 (*** include-it:chart ***)
 
 

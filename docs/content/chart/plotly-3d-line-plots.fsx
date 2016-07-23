@@ -1,12 +1,8 @@
 ﻿(*** hide ***)
 #I "../../../bin"
-#load "../credentials.fsx"
 #r "XPlot.Plotly.dll"
-#r "XPlot.Plotly.WPF.dll"
 
 open XPlot.Plotly
-
-Plotly.Signin MyCredentials.userAndKey
 
 open System.IO
 
@@ -36,7 +32,7 @@ Plotly 3D Line Plots
 3D Random Walk
 --------------
 *)
-
+(*** define-output:chart ***)
 let trace1 =
     Scatter3d(
         x = x1,
@@ -124,8 +120,9 @@ let layout =
             )
     )
 
-Figure(Data.From [trace1; trace2; trace3], layout)
-
-(**
-<iframe width="640" height="480" frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~TahaHachana/560.embed?width=640&height=480" ></iframe>
-*)
+[trace1; trace2; trace3]
+|> Chart.Plot
+|> Chart.WithLayout layout
+|> Chart.WithWidth 700
+|> Chart.WithHeight 500
+(*** include-it:chart ***)

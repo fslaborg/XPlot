@@ -80,7 +80,7 @@ Plotly 3D Scatter Plots
 3D Scatter Plot
 ---------------
 *)
-
+(*** define-output:chart ***)
 let trace1 =
     Scatter3d(
         x = x1,
@@ -122,9 +122,7 @@ let trace2 =
     )
 
 [ trace1; trace2 ]
-    |> Plotly.Plot
-    |> Plotly.Show
-
-(**
-<iframe width="640" height="480" frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~TahaHachana/553.embed?width=640&height=480" ></iframe>
-*)
+|> Chart.Plot
+|> Chart.WithWidth 700
+|> Chart.WithHeight 500
+(*** include-it:chart ***)

@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".paket", ".paket", "{63297B98-5CED-492C-A5B7-A5B4F73CF142}"
 	ProjectSection(SolutionItems) = preProject
@@ -27,8 +27,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{83F16175
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{8E6D5255-776D-4B61-85F9-73C37AA1FB9A}"
 	ProjectSection(SolutionItems) = preProject
-		docs\content\credentials.fsx = docs\content\credentials.fsx
-		docs\content\chart\google-annotation-chart.fsx = docs\content\chart\google-annotation-chart.fsx
 		docs\content\google-charts.fsx = docs\content\google-charts.fsx
 		docs\content\index.fsx = docs\content\index.fsx
 		docs\content\plotly.fsx = docs\content\plotly.fsx
@@ -42,12 +40,6 @@ EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "XPlot.GoogleCharts.Deedle", "src\XPlot.GoogleCharts.Deedle\XPlot.GoogleCharts.Deedle.fsproj", "{F6FBA7C2-8411-47E1-997C-3EE7AA709FEF}"
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "XPlot.Plotly", "src\XPlot.Plotly\XPlot.Plotly.fsproj", "{182232F3-9E9D-4342-A096-037F2CF2037F}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "google", "google", "{CA29FA4F-144D-4498-A59F-81B0B0868349}"
-	ProjectSection(SolutionItems) = preProject
-		docs\content\google\geo.fsx = docs\content\google\geo.fsx
-		docs\content\google\points-lines.fsx = docs\content\google\points-lines.fsx
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "chart", "chart", "{1F19571C-5074-44FC-973B-3E93E9FF531B}"
 	ProjectSection(SolutionItems) = preProject
@@ -115,7 +107,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{83F16175-43B1-4C90-A1EE-8E351C33435D} = {A6A6AF7D-D6E3-442D-9B1E-58CC91879BE1}
 		{8E6D5255-776D-4B61-85F9-73C37AA1FB9A} = {A6A6AF7D-D6E3-442D-9B1E-58CC91879BE1}
-		{CA29FA4F-144D-4498-A59F-81B0B0868349} = {8E6D5255-776D-4B61-85F9-73C37AA1FB9A}
 		{1F19571C-5074-44FC-973B-3E93E9FF531B} = {8E6D5255-776D-4B61-85F9-73C37AA1FB9A}
 	EndGlobalSection
 EndGlobal

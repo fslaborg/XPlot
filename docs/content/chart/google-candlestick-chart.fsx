@@ -1,7 +1,6 @@
 ﻿(*** hide ***)
 #I "../../../bin"
 #r "XPlot.GoogleCharts.dll"
-#r "XPlot.GoogleCharts.WPF.dll"
 open XPlot.GoogleCharts
 
 (**

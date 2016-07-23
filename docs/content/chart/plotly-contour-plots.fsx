@@ -1,17 +1,13 @@
 ﻿(*** hide ***)
 #I "../../../bin"
 #I "../../../packages/MathNet.Numerics/lib/net40"
-#load "../credentials.fsx"
 #r "XPlot.Plotly.dll"
-#r "XPlot.Plotly.WPF.dll"
 #r "MathNet.Numerics.dll"
 
 open XPlot.Plotly
 open MathNet.Numerics
 open MathNet.Numerics.Distributions
 open System
-
-Plotly.Signin MyCredentials.userAndKey
 
 let size = 100
 
@@ -43,7 +39,7 @@ Plotly Contour Plots
 Basic Contour Plot
 ------------------
 *)
-
+(*** define-output:chart ***)
 let trace =
     Contour(
         z = z,
@@ -51,97 +47,103 @@ let trace =
         y = y
     )
 
-Figure(Data.From [trace])
+trace
+|> Chart.Plot
+|> Chart.WithWidth 700
+|> Chart.WithHeight 500
+(*** include-it:chart ***)
 
-(**
-<iframe width="640" height="480" frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~TahaHachana/268.embed?width=640&height=480" ></iframe>
-*)
+(*** hide ***)
 
-(**
-2D Histogram Contour Plot with Histogram Subplots
--------------------------------------------------
-*)
-
-let trace1 =
-    Scatter(
-        x = x1,
-        y = y1,
-        mode = "markers",
-        name = "points",
-        marker =
-            Marker(
-                color = "rgb(102,0,0)",
-                size = 2,
-                opacity = 0.4
-            )
-    )
-
-let trace2 =
-    Histogram2dContour(
-        x = x1,
-        y = y1,
-        name = "density",
-        ncontours = 20.,
-        colorscale = "Hot",
-        reversescale = true,
-        showscale = false
-    )
-
-let trace3 =
-    Histogram(
-        x = x1,
-        name = "x density",
-        marker = Marker(color = "rgb(102,0,0)"),
-        yaxis = "y2"
-    )
-
-let trace4 =
-    Histogram(
-        y = y1,
-        name = "y density",
-        marker = Marker(color = "rgb(102,0,0)"),
-        xaxis = "x2"
-    )
-
-let data' = Data [trace1; trace2; trace3; trace4]
-
-let layout =
-    Layout(
-        showlegend = false,
-        autosize = false,
-        width = 600.,
-        height = 550.,
-        xaxis =
-            XAxis(
-                domain = [|0.; 0.85|],
-                showgrid = false,
-                zeroline = false
-            ),
-        yaxis =
-            YAxis(
-                domain = [|0.; 0.85|],
-                showgrid = false,
-                zeroline = false
-            ),
-        margin = Margin(t = 50.),
-        hovermode = "closest",
-        bargap = 0.,
-        xaxis2 =
-            XAxis(
-                domain = [|0.85; 1.|],
-                showgrid = false,
-                zeroline = false
-            ),
-        yaxis2 =
-            YAxis(
-                domain = [|0.85; 1.|],
-                showgrid = false,
-                zeroline = false
-            )
-    )
-
-Figure(data', layout)
-
-(**
-<iframe width="640" height="480" frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~TahaHachana/269.embed?width=640&height=480" ></iframe>
-*)
+//(**
+//<iframe width="640" height="480" frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~TahaHachana/268.embed?width=640&height=480" ></iframe>
+//*)
+//
+//(**
+//2D Histogram Contour Plot with Histogram Subplots
+//-------------------------------------------------
+//*)
+//
+//let trace1 =
+//    Scatter(
+//        x = x1,
+//        y = y1,
+//        mode = "markers",
+//        name = "points",
+//        marker =
+//            Marker(
+//                color = "rgb(102,0,0)",
+//                size = 2,
+//                opacity = 0.4
+//            )
+//    )
+//
+//let trace2 =
+//    Histogram2dContour(
+//        x = x1,
+//        y = y1,
+//        name = "density",
+//        ncontours = 20.,
+//        colorscale = "Hot",
+//        reversescale = true,
+//        showscale = false
+//    )
+//
+//let trace3 =
+//    Histogram(
+//        x = x1,
+//        name = "x density",
+//        marker = Marker(color = "rgb(102,0,0)"),
+//        yaxis = "y2"
+//    )
+//
+//let trace4 =
+//    Histogram(
+//        y = y1,
+//        name = "y density",
+//        marker = Marker(color = "rgb(102,0,0)"),
+//        xaxis = "x2"
+//    )
+//
+//let data' = Data [trace1; trace2; trace3; trace4]
+//
+//let layout =
+//    Layout(
+//        showlegend = false,
+//        autosize = false,
+//        width = 600.,
+//        height = 550.,
+//        xaxis =
+//            XAxis(
+//                domain = [|0.; 0.85|],
+//                showgrid = false,
+//                zeroline = false
+//            ),
+//        yaxis =
+//            YAxis(
+//                domain = [|0.; 0.85|],
+//                showgrid = false,
+//                zeroline = false
+//            ),
+//        margin = Margin(t = 50.),
+//        hovermode = "closest",
+//        bargap = 0.,
+//        xaxis2 =
+//            XAxis(
+//                domain = [|0.85; 1.|],
+//                showgrid = false,
+//                zeroline = false
+//            ),
+//        yaxis2 =
+//            YAxis(
+//                domain = [|0.85; 1.|],
+//                showgrid = false,
+//                zeroline = false
+//            )
+//    )
+//
+//Figure(data', layout)
+//
+//(**
+//<iframe width="640" height="480" frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~TahaHachana/269.embed?width=640&height=480" ></iframe>
+//*)

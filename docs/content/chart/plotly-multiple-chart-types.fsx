@@ -1,12 +1,8 @@
 ﻿(*** hide ***)
 #I "../../../bin"
-#load "../credentials.fsx"
 #r "XPlot.Plotly.dll"
-#r "XPlot.Plotly.WPF.dll"
 
 open XPlot.Plotly
-
-Plotly.Signin MyCredentials.userAndKey
 
 let z1 =
     [
@@ -41,13 +37,13 @@ Multiple Chart Types
 A Contour and Scatter Plot of the Method of Steepest Descent
 ------------------------------------------------------------
 *)
-
+(*** define-output:chart ***)
 let trace1 =
     Contour(
         z = z1,
         x = x1,
         y = y1,
-        ncontours = 30.,
+        ncontours = 30,
         showscale = false
     )
 
@@ -60,41 +56,44 @@ let trace2 =
         line = Line(color = "black")
     )
 
-let multiData1 = Data([trace1; trace2])
+let layout = Layout(title = "A Contour and Scatter Plot of the Method of Steepest Descent")
 
-let title = "A Contour and Scatter Plot of the Method of Steepest Descent"
+[trace1 :> Trace; trace2 :> Trace]
+|> Chart.Plot
+|> Chart.WithLayout layout
+|> Chart.WithWidth 700
+|> Chart.WithHeight 500
+(*** include-it:chart ***)
 
-let multiLayout1 = Layout(title = title)
+(*** hide ***)
 
-Figure(multiData1, multiLayout1)
-
-(**
-<iframe width="640" height="480" frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~TahaHachana/537.embed?width=640&height=480" ></iframe>
-*)
-
-(**
-Line Chart and a Bar Chart
---------------------------
-*)
-
-let trace1' =
-    Scatter(
-        x = [0; 1; 2; 3; 4; 5],
-        y = [1.5; 1.; 1.3; 0.7; 0.8; 0.9]
-    )
-
-let trace2' =
-    Bar(
-        x = [0; 1; 2; 3; 4; 5],
-        y = [1.; 0.5; 0.7; -1.2; 0.3; 0.4]
-    )
-
-let multiData' = Data([trace1'; trace2'])
-
-let multiLayout' = Layout(title = "Line Chart and a Bar Chart")
-
-Figure(multiData', multiLayout')
-
-(**
-<iframe width="640" height="480" frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~TahaHachana/543.embed?width=640&height=480" ></iframe>
-*)
+//(**
+//<iframe width="640" height="480" frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~TahaHachana/537.embed?width=640&height=480" ></iframe>
+//*)
+//
+//(**
+//Line Chart and a Bar Chart
+//--------------------------
+//*)
+//
+//let trace1' =
+//    Scatter(
+//        x = [0; 1; 2; 3; 4; 5],
+//        y = [1.5; 1.; 1.3; 0.7; 0.8; 0.9]
+//    )
+//
+//let trace2' =
+//    Bar(
+//        x = [0; 1; 2; 3; 4; 5],
+//        y = [1.; 0.5; 0.7; -1.2; 0.3; 0.4]
+//    )
+//
+//let multiData' = Data([trace1'; trace2'])
+//
+//let multiLayout' = Layout(title = "Line Chart and a Bar Chart")
+//
+//Figure(multiData', multiLayout')
+//
+//(**
+//<iframe width="640" height="480" frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~TahaHachana/543.embed?width=640&height=480" ></iframe>
+//*)

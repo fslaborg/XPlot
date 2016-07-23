@@ -1,10 +1,8 @@
 (*** hide ***)
 #I "../../bin"
-#load "credentials.fsx"
 #r "XPlot.Plotly.dll"
 #r "XPlot.GoogleCharts.dll"
 open XPlot.GoogleCharts
-open XPlot.Plotly
 
 let Bolivia = ["2004/05", 165.; "2005/06", 135.; "2006/07", 157.; "2007/08", 139.; "2008/09", 136.]
 let Ecuador = ["2004/05", 938.; "2005/06", 1120.; "2006/07", 1167.; "2007/08", 1110.; "2008/09", 691.]
@@ -86,6 +84,8 @@ plot, rendered on a polar chart with different marker color for each of the tria
 data set:
 
 *)
+(*** hide ***)
+open XPlot.Plotly
 (*** define-output:polar ***) 
 let traces =
   [ for trial in HobbsPearson ->
@@ -96,7 +96,9 @@ let layout =
   Layout(title = "Hobbs-Pearson Trials", showlegend = false,
     plot_bgcolor = "rgb(223,223,223)")
 
-Plotly.Plot(traces, layout)
+traces
+|> Chart.Plot
+|> Chart.WithLayout layout
 (*** include-it:polar ***)
 
 (**

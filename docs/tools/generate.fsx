@@ -4,7 +4,7 @@
 // --------------------------------------------------------------------------------------
 
 // Web site location for the generated documentation
-let website = "/XPlot"
+let website = "" //"/XPlot"
 
 let githubLink = "http://github.com/TahaHachana/XPlot"
 

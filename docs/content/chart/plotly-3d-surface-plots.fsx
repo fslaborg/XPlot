@@ -1,12 +1,8 @@
 ﻿(*** hide ***)
 #I "../../../bin"
-#load "../credentials.fsx"
 #r "XPlot.Plotly.dll"
-#r "XPlot.Plotly.WPF.dll"
 
 open XPlot.Plotly
-
-Plotly.Signin MyCredentials.userAndKey
 
 let z =
     [
@@ -44,7 +40,7 @@ Plotly 3D Surface Plots
 Topographical 3D Surface Plot
 -----------------------------
 *)
-
+(*** define-output:chart ***)
 let trace = Surface(z = z)
 
 let layout =
@@ -62,8 +58,9 @@ let layout =
             )
     )
 
-Figure(Data.From [trace], layout)
-
-(**
-<iframe width="640" height="480" frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~TahaHachana/557.embed?width=640&height=480" ></iframe>
-*)
+trace
+|> Chart.Plot
+|> Chart.WithLayout layout
+|> Chart.WithWidth 700
+|> Chart.WithHeight 500
+(*** include-it:chart ***)
