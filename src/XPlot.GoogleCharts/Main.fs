@@ -6,6 +6,7 @@ open Newtonsoft.Json
 open System
 open System.Data
 open System.Globalization
+open System.IO
 
 type key = IConvertible
 type value = IConvertible
@@ -248,6 +249,14 @@ type GoogleChart() =
         gc.``type`` <- ``type``
         gc
 
+    member __.Show() =
+        let html = __.Html
+        let tempPath = Path.GetTempPath()
+        let file = sprintf "%s.html" __.Id
+        let path = Path.Combine(tempPath, file)
+        File.WriteAllText(path, html)
+        System.Diagnostics.Process.Start(path) |> ignore
+
     /// The chart's JavaScript code. Doesn't contain the
     /// necessary line for loading the appropiate Google
     /// visualization package. 
@@ -360,6 +369,8 @@ type GoogleChart() =
       __.Width <- width
 
 type Chart =
+
+    static member Show(chart : GoogleChart) = chart.Show()
 
     /// <summary>Creates an annotation chart.</summary>
     /// <param name="data">The chart's data.</param>
