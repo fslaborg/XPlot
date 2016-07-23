@@ -1,4 +1,11 @@
-﻿### 1.3.1 - January 13, 2016
+﻿### 1.4.0 - July 23, 2016
+* Update the documentation
+* Rationalise Plotly and GoogleCharts (WIP)
+* More chart generation methods
+* Some Plotly API mappings fixes
+* Stop distributing WPF show helpers
+
+### 1.3.1 - January 13, 2016
 * Update the Plotly.js API
 
 ### 1.3.0 - December 12, 2015
