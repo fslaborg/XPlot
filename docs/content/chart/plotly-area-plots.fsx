@@ -8,10 +8,13 @@ open XPlot.Plotly
 Plotly Area Plots
 =================
 
+[Full source](https://github.com/TahaHachana/XPlot/blob/master/docs/content/chart/plotly-area-plots.fsx)
+
 Basic Overlaid Area Chart
 -------------------------
 *)
-(*** define-output:chart ***)
+
+(*** define-output: chart ***)
 let trace1 =
     Scatter(
         x = [1; 2; 3; 4],
@@ -36,4 +39,4 @@ let layout =
 [trace1; trace2]
 |> Chart.Plot
 |> Chart.WithLayout layout
-(*** include-it:chart ***)
+(*** include-it: chart ***)

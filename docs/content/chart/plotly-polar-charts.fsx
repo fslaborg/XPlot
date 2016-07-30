@@ -32,10 +32,13 @@ let t11 = [-66.53583632728323; -84.514422676922; -63.339741699567846; -24.146812
 Plotly Polar Charts
 ===================
 
+[Full source](https://github.com/TahaHachana/XPlot/blob/master/docs/content/chart/plotly-polar-charts.fsx)
+
 Polar Line Chart
 ----------------
 *)
-(*** define-output:chart ***)
+
+(*** define-output: chart1 ***)
 let lineTrace1 =
     Scatter(
         r = r1,
@@ -132,182 +135,174 @@ let layout =
 |> Chart.WithLayout layout
 |> Chart.WithWidth 700
 |> Chart.WithHeight 500
-(*** include-it:chart ***)
+(*** include-it: chart1 ***)
 
-(*** hide ***)
-//
-//(**
-//<iframe width="640" height="480" frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~TahaHachana/439.embed?width=640&height=480" ></iframe>
-//*)
-//
-//(**
-//Polar Scatter Chart
-//-------------------
-//*)
-//       
-//let scatterTrace1 =
-//    Scatter(
-//        r = r6,
-//        t = t6,
-//        mode = "markers",
-//        name = "Trial 1",
-//        marker =
-//            Marker(
-//                color = "rgb(27,158,119)",
-//                size = 110,
-//                line = Line(color = "white"),
-//                opacity=0.7
-//            )
-//    )
-//
-//let scatterTrace2 =
-//    Scatter(
-//        r = r7,
-//        t = t7,
-//        mode = "markers",
-//        name = "Trial 2",
-//        marker =
-//            Marker(
-//                color = "rgb(217,95,2)",
-//                size = 110.,
-//                line = Line(color = "white"),
-//                opacity=0.7
-//            )
-//    )
-//
-//let scatterTrace3 =
-//    Scatter(
-//        r = r8,
-//        t = t8,
-//        mode = "markers",
-//        name = "Trial 3",
-//        marker =
-//            Marker(
-//                color = "rgb(117,112,179)",
-//                size = 110.,
-//                line = Line(color = "white"),
-//                opacity = 0.7
-//            )
-//    )
-//
-//let scatterTrace4 =
-//    Scatter(
-//        r = r9,
-//        t = t9,
-//        mode = "markers",
-//        name = "Trial 4",
-//        marker =
-//            Marker(
-//                color = "rgb(231,41,138)",
-//                size = 110.,
-//                line = Line(color = "white"),
-//                opacity = 0.7
-//            )
-//    )
-//
-//let scatterTrace5 =
-//    Scatter(
-//        r = r10,
-//        t = t10,
-//        mode = "markers",
-//        name = "Trial 5",
-//        marker =
-//            Marker(
-//                color = "rgb(102,166,30)",
-//                size = 110.,
-//                line = Line(color = "white"),
-//                opacity = 0.7
-//            )
-//    )
-//
-//let scatterTrace6 =
-//    Scatter(
-//        r = r11,
-//        t = t11,
-//        mode = "markers",
-//        name = "Trial 6",
-//        marker =
-//            Marker(
-//                color = "rgb(230,171,2)",
-//                size = 110.,
-//                line = Line(color = "white"),
-//                opacity = 0.7
-//            )
-//    )
-//
-//let scatterData =
-//    Data(
-//        [scatterTrace1; scatterTrace2; scatterTrace3;
-//         scatterTrace4; scatterTrace5; scatterTrace6]
-//    )
-//
-//let scatterLayout =
-//    Layout(
-//        title = "Hobbs-Pearson Trials",
-//        font = Font(size = 15.),
-//        plot_bgcolor = "rgb(223, 223, 223)",
-//        angularaxis = AngularAxis(tickcolor = "rgb(253,253,253)")
-//    )    
-//
-//Figure(scatterData, scatterLayout)
-//
-//(**
-//<iframe width="640" height="480" frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~TahaHachana/443.embed?width=640&height=480" ></iframe>
-//*)
-//
-//(**      
-//Polar Area Chart
-//----------------
-//*)
-//       
-//let areaTrace1 =
-//    Area(
-//        r = [77.5; 72.5; 70.0; 45.0; 22.5; 42.5; 40.0; 62.5],
-//        t = ["North"; "N-E"; "East"; "S-E"; "South"; "S-W"; "West"; "N-W"],
-//        name = "11-14 m/s",
-//        marker = Marker(color = "rgb(106,81,163)")
-//    )
-//
-//let areaTrace2 =
-//    Area(
-//        r = [57.49999999999999; 50.0; 45.0; 35.0; 20.0; 22.5; 37.5; 55.00000000000001],
-//        t = ["North"; "N-E"; "East"; "S-E"; "South"; "S-W"; "West"; "N-W"],
-//        name = "8-11 m/s",
-//        marker = Marker(color = "rgb(158,154,200)")
-//    )
-//
-//let areaTrace3 =
-//    Area(
-//        r = [40.0; 30.0; 30.0; 35.0; 7.5; 7.5; 32.5; 40.0],
-//        t = ["North"; "N-E"; "East"; "S-E"; "South"; "S-W"; "West"; "N-W"],
-//        name = "5-8 m/s",
-//        marker = Marker(color = "rgb(203,201,226)")
-//    )
-//
-//let areaTrace4 =
-//    Area(
-//        r = [20.0; 7.5; 15.0; 22.5; 2.5; 2.5; 12.5; 22.5],
-//        t = ["North"; "N-E"; "East"; "S-E"; "South"; "S-W"; "West"; "N-W"],
-//        name = "< 5 m/s",
-//        marker = Marker(color = "rgb(242,240,247)")
-//    )
-//
-//let areaData = Data([areaTrace1; areaTrace2; areaTrace3; areaTrace4])
-//
-//let areaLayout =
-//    Layout(
-//        title = "Wind Speed Distribution in Laurel, NE",
-//        font = Font(size = 16.),
-//        legend =
-//            Legend(
-//                font = Font(size = 16.)
-//            ),
-//        radialaxis = RadialAxis(ticksuffix = "%"),
-//        orientation = 270.
-//    )
-//
-//Figure(areaData, areaLayout)
-//
-//(**
-//<iframe width="640" height="480" frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~TahaHachana/444.embed?width=640&height=480" ></iframe>
-//*)
+(**
+Polar Scatter Chart
+-------------------
+*)
+
+(*** define-output: chart2 ***)       
+let scatterTrace1 =
+    Scatter(
+        r = r6,
+        t = t6,
+        mode = "markers",
+        name = "Trial 1",
+        marker =
+            Marker(
+                color = "rgb(27,158,119)",
+                size = 110,
+                line = Line(color = "white"),
+                opacity=0.7
+            )
+    )
+
+let scatterTrace2 =
+    Scatter(
+        r = r7,
+        t = t7,
+        mode = "markers",
+        name = "Trial 2",
+        marker =
+            Marker(
+                color = "rgb(217,95,2)",
+                size = 110.,
+                line = Line(color = "white"),
+                opacity=0.7
+            )
+    )
+
+let scatterTrace3 =
+    Scatter(
+        r = r8,
+        t = t8,
+        mode = "markers",
+        name = "Trial 3",
+        marker =
+            Marker(
+                color = "rgb(117,112,179)",
+                size = 110.,
+                line = Line(color = "white"),
+                opacity = 0.7
+            )
+    )
+
+let scatterTrace4 =
+    Scatter(
+        r = r9,
+        t = t9,
+        mode = "markers",
+        name = "Trial 4",
+        marker =
+            Marker(
+                color = "rgb(231,41,138)",
+                size = 110.,
+                line = Line(color = "white"),
+                opacity = 0.7
+            )
+    )
+
+let scatterTrace5 =
+    Scatter(
+        r = r10,
+        t = t10,
+        mode = "markers",
+        name = "Trial 5",
+        marker =
+            Marker(
+                color = "rgb(102,166,30)",
+                size = 110.,
+                line = Line(color = "white"),
+                opacity = 0.7
+            )
+    )
+
+let scatterTrace6 =
+    Scatter(
+        r = r11,
+        t = t11,
+        mode = "markers",
+        name = "Trial 6",
+        marker =
+            Marker(
+                color = "rgb(230,171,2)",
+                size = 110.,
+                line = Line(color = "white"),
+                opacity = 0.7
+            )
+    )
+
+
+let scatterLayout =
+    Layout(
+        title = "Hobbs-Pearson Trials",
+        font = Font(size = 15.),
+        plot_bgcolor = "rgb(223, 223, 223)",
+        angularaxis = Angularaxis(tickcolor = "rgb(253,253,253)")
+    )    
+
+[scatterTrace1; scatterTrace2; scatterTrace3;
+    scatterTrace4; scatterTrace5; scatterTrace6]
+|> Chart.Plot
+|> Chart.WithLayout scatterLayout
+|> Chart.WithWidth 700
+|> Chart.WithHeight 500
+(*** include-it: chart2 ***)
+
+(**      
+Polar Area Chart
+----------------
+*)
+
+(*** define-output: chart3 ***)       
+let areaTrace1 =
+    Area(
+        r = [77.5; 72.5; 70.0; 45.0; 22.5; 42.5; 40.0; 62.5],
+        t = ["North"; "N-E"; "East"; "S-E"; "South"; "S-W"; "West"; "N-W"],
+        name = "11-14 m/s",
+        marker = Marker(color = "rgb(106,81,163)")
+    )
+
+let areaTrace2 =
+    Area(
+        r = [57.49999999999999; 50.0; 45.0; 35.0; 20.0; 22.5; 37.5; 55.00000000000001],
+        t = ["North"; "N-E"; "East"; "S-E"; "South"; "S-W"; "West"; "N-W"],
+        name = "8-11 m/s",
+        marker = Marker(color = "rgb(158,154,200)")
+    )
+
+let areaTrace3 =
+    Area(
+        r = [40.0; 30.0; 30.0; 35.0; 7.5; 7.5; 32.5; 40.0],
+        t = ["North"; "N-E"; "East"; "S-E"; "South"; "S-W"; "West"; "N-W"],
+        name = "5-8 m/s",
+        marker = Marker(color = "rgb(203,201,226)")
+    )
+
+let areaTrace4 =
+    Area(
+        r = [20.0; 7.5; 15.0; 22.5; 2.5; 2.5; 12.5; 22.5],
+        t = ["North"; "N-E"; "East"; "S-E"; "South"; "S-W"; "West"; "N-W"],
+        name = "< 5 m/s",
+        marker = Marker(color = "rgb(242,240,247)")
+    )
+
+let areaLayout =
+    Layout(
+        title = "Wind Speed Distribution in Laurel, NE",
+        font = Font(size = 16.),
+        legend =
+            Legend(
+                font = Font(size = 16.)
+            ),
+        radialaxis = Radialaxis(ticksuffix = "%"),
+        orientation = 270.
+    )
+
+[areaTrace1; areaTrace2; areaTrace3; areaTrace4]
+|> Chart.Plot
+|> Chart.WithLayout areaLayout
+|> Chart.WithWidth 700
+|> Chart.WithHeight 500
+(*** include-it: chart3 ***)

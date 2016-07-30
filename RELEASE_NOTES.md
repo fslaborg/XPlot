@@ -1,4 +1,8 @@
-﻿### 1.4.0 - July 23, 2016
+﻿### 1.4.1 - July 30, 2016
+* Documentation updates
+* Plotly API mappings fixes
+
+### 1.4.0 - July 23, 2016
 * Update the documentation
 * Rationalise Plotly and GoogleCharts (WIP)
 * More chart generation methods

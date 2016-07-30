@@ -2,13 +2,13 @@
 #I "../../../bin"
 #r "XPlot.Plotly.dll"
 
-open XPlot.Plotly
-
 open System.IO
 
+open XPlot.Plotly
+
 let data =
-    let path = Path.Combine(__SOURCE_DIRECTORY__, "3DLineData.txt")
-    File.ReadAllLines path
+    Path.Combine(__SOURCE_DIRECTORY__, "3DLineData.txt")
+    |> File.ReadAllLines
 
 let getData line =
     data.[line]
@@ -29,10 +29,13 @@ let z3 = getData 8
 Plotly 3D Line Plots
 ====================
 
+[Full source](https://github.com/TahaHachana/XPlot/blob/master/docs/content/chart/plotly-3d-line-plots.fsx)
+
 3D Random Walk
 --------------
 *)
-(*** define-output:chart ***)
+
+(*** define-output: chart ***)
 let trace1 =
     Scatter3d(
         x = x1,
@@ -109,8 +112,6 @@ let layout =
     Layout(
         title = "3D Random Walk",
         autosize = false,
-        width = 500.,
-        height = 500.,
         margin =
             Margin(
                 l = 0.,
@@ -125,4 +126,4 @@ let layout =
 |> Chart.WithLayout layout
 |> Chart.WithWidth 700
 |> Chart.WithHeight 500
-(*** include-it:chart ***)
+(*** include-it: chart ***)

@@ -24,7 +24,8 @@ Google Map Chart
 (*** define-output:map ***) 
 let options = Options(showTip = true)
  
-Chart.Map data
+data
+|> Chart.Map
 |> Chart.WithOptions options
 |> Chart.WithHeight 420
 (*** include-it:map ***)

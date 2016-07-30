@@ -8,10 +8,13 @@ open XPlot.Plotly
 Plotly Bubble Charts
 ====================
 
+[Full source](https://github.com/TahaHachana/XPlot/blob/master/docs/content/chart/plotly-bubble-charts.fsx)
+
 Marker Size, Color, and Symbol as an Array
 ------------------------------------------
 *)
-(*** define-output:chart ***)
+
+(*** define-output: chart ***)
 let trace1 =
     Scatter(
         x = [1; 2; 3; 4],
@@ -54,16 +57,8 @@ let trace3 =
             )
     )
 
-
-let layout = Layout(showlegend = false)
-
 [trace1; trace2; trace3]
 |> Chart.Plot
 |> Chart.WithWidth 700
 |> Chart.WithHeight 500
-(*** include-it:chart ***)
-
-(*** hide ***)
-//(**
-//<iframe width="640" height="480" frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~TahaHachana/226.embed?width=640&height=480" ></iframe>
-//*)
+(*** include-it: chart ***)

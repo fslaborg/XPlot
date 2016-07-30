@@ -37,18 +37,17 @@ let z =
 Plotly 3D Surface Plots
 =======================
 
+[Full source](https://github.com/TahaHachana/XPlot/blob/master/docs/content/chart/plotly-3d-surface-plots.fsx)
+
 Topographical 3D Surface Plot
 -----------------------------
 *)
-(*** define-output:chart ***)
-let trace = Surface(z = z)
 
+(*** define-output: chart ***)
 let layout =
     Layout(
         title = "Mt Bruno Elevation",
         autosize = false,
-        width = 500.,
-        height = 500.,
         margin =
             Margin(
                 l = 65.,
@@ -58,9 +57,9 @@ let layout =
             )
     )
 
-trace
+Surface(z = z)
 |> Chart.Plot
 |> Chart.WithLayout layout
 |> Chart.WithWidth 700
 |> Chart.WithHeight 500
-(*** include-it:chart ***)
+(*** include-it: chart ***)

@@ -42,14 +42,17 @@ let y1 =
 let x' = Seq.concat [x0; x1]
 let y' = Seq.concat [y0; y1]
 
-(**
+(** 
 Plotly 2D Histograms
 ====================
+
+[Full source](https://github.com/TahaHachana/XPlot/blob/master/docs/content/chart/plotly-2d-histograms.fsx)
 
 2D Histogram of a Bivariate Normal Distribution
 -----------------------------------------------
 *)
-(*** define-output:chart ***)
+
+(*** define-output: chart1 ***)
 Histogram2d(
     x = x,
     y = y
@@ -57,97 +60,87 @@ Histogram2d(
 |> Chart.Plot
 |> Chart.WithWidth 700
 |> Chart.WithHeight 500
-(*** include-it:chart ***)
+(*** include-it: chart1 ***)
 
-(*** hide ***)
-//
-//(**
-//<iframe width="640" height="480" frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~TahaHachana/411.embed?width=640&height=480" ></iframe>
-//*)
-//
-//(**
-//2D Histogram Binning and Styling Options
-//----------------------------------------
-//*)
-//
-//let data' =
-//    Data(
-//        [
-//            Histogram2d(
-//                x = x,
-//                y = y,
-//                histnorm = "probability",
-//                autobinx = false,
-//                xbins =
-//                    XBins(
-//                        start = -3.,
-//                        ``end`` = 3.,
-//                        size = 0.1
-//                    ),
-//                autobiny = false,
-//                ybins =
-//                    YBins(
-//                        start = -2.5,
-//                        ``end`` = 4.,
-//                        size = 0.1
-//                    ),
-//                colorscale =
-//                    [
-//                        [box 0; box "rgb(12,51,131)"]
-//                        [0.25; "rgb(10,136,186)"]
-//                        [0.5; "rgb(242,211,56)"]
-//                        [0.75; "rgb(242,143,56)"]
-//                        [1; "rgb(217,30,30)"]
-//                    ]
-//            )
-//        ]
-//    )
-//
-//Figure(data')
-//
-//(**
-//<iframe width="640" height="480" frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~TahaHachana/414.embed?width=640&height=480" ></iframe>
-//*)
-//
-//(**
-//2D Histogram Overlaid with a Scatter Chart
-//------------------------------------------
-//*)
-//
-//let trace1 =
-//    Scatter(
-//        x = x0,
-//        y = y0,
-//        mode = "markers",
-//        marker =
-//            Marker(
-//                symbol = "circle",
-//                opacity = 0.7
-//            )
-//    )
-//
-//let trace2 =
-//    Scatter(
-//        x = x1,
-//        y = y1,
-//        mode = "markers",
-//        marker =
-//            Marker(
-//                symbol = "square",
-//                opacity = 0.7
-//            )
-//    )
-//
-//let trace3 =
-//    Histogram2d(
-//        x = x',
-//        y = y'
-//    )
-//
-//let data'' = Data([trace1; trace2; trace3])
-//
-//Figure(data'')
-//
-//(**
-//<iframe width="640" height="480" frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~TahaHachana/415.embed?width=640&height=480" ></iframe>
-//*)
+(**
+2D Histogram Binning and Styling Options
+----------------------------------------
+*)
+
+(*** define-output: chart2 ***)
+Histogram2d(
+    x = x,
+    y = y,
+    histnorm = "probability",
+    autobinx = false,
+    xbins =
+        Xbins(
+            start = -3.,
+            ``end`` = 3.,
+            size = 0.1
+        ),
+    autobiny = false,
+    ybins =
+        Ybins(
+            start = -2.5,
+            ``end`` = 4.,
+            size = 0.1
+        ),
+    colorscale =
+        [
+            [box 0; box "rgb(12,51,131)"]
+            [0.25; "rgb(10,136,186)"]
+            [0.5; "rgb(242,211,56)"]
+            [0.75; "rgb(242,143,56)"]
+            [1; "rgb(217,30,30)"]
+        ]
+)
+|> Chart.Plot
+|> Chart.WithWidth 700
+|> Chart.WithHeight 500
+(*** include-it: chart2 ***)
+
+(**
+2D Histogram Overlaid with a Scatter Chart
+------------------------------------------
+*)
+
+(*** define-output: chart3 ***)
+let trace1 =
+    Scatter(
+        x = x0,
+        y = y0,
+        mode = "markers",
+        marker =
+            Marker(
+                symbol = "circle",
+                opacity = 0.7
+            )
+    )
+
+let trace2 =
+    Scatter(
+        x = x1,
+        y = y1,
+        mode = "markers",
+        marker =
+            Marker(
+                symbol = "square",
+                opacity = 0.7
+            )
+    )
+
+let trace3 =
+    Histogram2d(
+        x = x',
+        y = y'
+    )
+
+let layout = Layout(showlegend = false)
+
+[trace1 :> Trace; trace2 :> _; trace3 :> _]
+|> Chart.Plot
+|> Chart.WithWidth 700
+|> Chart.WithHeight 500
+|> Chart.WithLayout layout
+(*** include-it: chart3 ***)

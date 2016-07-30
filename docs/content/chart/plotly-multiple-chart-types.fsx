@@ -34,10 +34,13 @@ let y2 = [-0.9; -0.72; -0.576; -0.4608; -0.36863999999999997; -0.294911999999999
 Multiple Chart Types
 ====================
 
+[Full source](https://github.com/TahaHachana/XPlot/blob/master/docs/content/chart/plotly-multiple-chart-types.fsx)
+
 A Contour and Scatter Plot of the Method of Steepest Descent
 ------------------------------------------------------------
 *)
-(*** define-output:chart ***)
+
+(*** define-output: chart1 ***)
 let trace1 =
     Contour(
         z = z1,
@@ -63,37 +66,31 @@ let layout = Layout(title = "A Contour and Scatter Plot of the Method of Steepes
 |> Chart.WithLayout layout
 |> Chart.WithWidth 700
 |> Chart.WithHeight 500
-(*** include-it:chart ***)
+(*** include-it: chart1 ***)
 
-(*** hide ***)
+(**
+Line Chart and a Bar Chart
+--------------------------
+*)
 
-//(**
-//<iframe width="640" height="480" frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~TahaHachana/537.embed?width=640&height=480" ></iframe>
-//*)
-//
-//(**
-//Line Chart and a Bar Chart
-//--------------------------
-//*)
-//
-//let trace1' =
-//    Scatter(
-//        x = [0; 1; 2; 3; 4; 5],
-//        y = [1.5; 1.; 1.3; 0.7; 0.8; 0.9]
-//    )
-//
-//let trace2' =
-//    Bar(
-//        x = [0; 1; 2; 3; 4; 5],
-//        y = [1.; 0.5; 0.7; -1.2; 0.3; 0.4]
-//    )
-//
-//let multiData' = Data([trace1'; trace2'])
-//
-//let multiLayout' = Layout(title = "Line Chart and a Bar Chart")
-//
-//Figure(multiData', multiLayout')
-//
-//(**
-//<iframe width="640" height="480" frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~TahaHachana/543.embed?width=640&height=480" ></iframe>
-//*)
+(*** define-output: chart2 ***)
+let trace1' =
+    Scatter(
+        x = [0; 1; 2; 3; 4; 5],
+        y = [1.5; 1.; 1.3; 0.7; 0.8; 0.9]
+    ) :> Trace
+
+let trace2' =
+    Bar(
+        x = [0; 1; 2; 3; 4; 5],
+        y = [1.; 0.5; 0.7; -1.2; 0.3; 0.4]
+    ) :> Trace
+
+let multiLayout = Layout(title = "Line Chart and a Bar Chart")
+
+[trace1'; trace2']
+|> Chart.Plot
+|> Chart.WithLayout multiLayout
+|> Chart.WithWidth 700
+|> Chart.WithHeight 500
+(*** include-it: chart2 ***)

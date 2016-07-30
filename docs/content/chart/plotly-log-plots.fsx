@@ -4,15 +4,17 @@
 
 open XPlot.Plotly
 
-
 (**
 Plotly Log Plots
 ================
 
+[Full source](https://github.com/TahaHachana/XPlot/blob/master/docs/content/chart/plotly-log-plots.fsx)
+
 Logarithmic Axes
 ----------------
 *)
-(*** define-output:chart ***)
+
+(*** define-output: chart ***)
 let trace1 =
     Scatter(
         x = [0; 1; 2; 3; 4; 5; 6; 7; 8],
@@ -45,4 +47,4 @@ let layout =
 |> Chart.WithLayout layout
 |> Chart.WithWidth 700
 |> Chart.WithHeight 500
-(*** include-it:chart ***)
+(*** include-it: chart ***)
