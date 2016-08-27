@@ -4,42 +4,42 @@ open Graph
 open Newtonsoft.Json
 open System
 
-module HTML =
+module Html =
 
-    let doc =
-        """<head>
-  <!-- Plotly.js -->
-  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-</head>
+    let pageTemplate =
+        """<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    </head>
+    <body>
+        [CHART]
+    </body>
+</html>"""
 
-<body>
-  [CHART]
-</body>"""
+    let inlineTemplate =
+        """<div id="[ID]" style="width: [WIDTH]px; height: [HEIGHT]px;"></div>
+        <script>
+            var data = [DATA];
+            var layout = [LAYOUT];
+            Plotly.newPlot('[ID]', data, layout);
+        </script>"""
 
-    let chart =
-        """<div id="[ID]" style="width: [WIDTH]px; height: [HEIGHT]px;"><!-- Plotly chart will be drawn inside this DIV --></div>
-  <script>
-    var data = [DATA];
-    var layout = [LAYOUT];
-    Plotly.newPlot('[ID]', data, layout);
-  </script>"""
+    let jsTemplate =
+        """<script>
+            var data = [DATA];
+            var layout = [LAYOUT];
+            Plotly.newPlot('[ID]', data, layout);
+        </script>"""
 
 open System.IO
 
+type Options = Layout
+
 type PlotlyChart() =
-    let guid = Guid.NewGuid().ToString()
-
-    let mutable height = "500"
-    let mutable width = "900"
 
     [<DefaultValue>]
-    val mutable private traces: seq<Trace>
-
-    [<DefaultValue>]
-    val mutable private layout: Layout option
-
-    [<DefaultValue>]
-    val mutable private labels: seq<string> option
+    val mutable private traces : seq<Trace>
 
     let serializeTraces names (traces:seq<Trace>) =
         match names with
@@ -51,6 +51,61 @@ type PlotlyChart() =
                 trace)
         |> JsonConvert.SerializeObject
 
+    [<DefaultValue>]
+    val mutable private layout : Layout option
+
+    [<DefaultValue>]
+    val mutable private labels : seq<string> option
+
+    /// Returns the chart's full HTML source.
+    member __.GetHtml() =
+//        let tracesJson = serializeTraces __.labels __.traces
+//        let layoutJson =
+//            match __.layout with
+//            | None -> "\"\""
+//            | Some x -> JsonConvert.SerializeObject x
+        let chartMarkup = __.GetInlineHtml()
+//            Html.inlineTemplate
+//                .Replace("[ID]", __.Id)
+//                .Replace("[WIDTH]", string __.Width)
+//                .Replace("[HEIGHT]", string __.Height)
+//                .Replace("[DATA]", tracesJson)
+//                .Replace("[LAYOUT]", layoutJson)
+        Html.pageTemplate.Replace("[CHART]", chartMarkup)
+
+    /// Inline markup that can be embedded in a HTML document.
+    member __.GetInlineHtml() =
+        let tracesJson = serializeTraces __.labels __.traces
+        let layoutJson =
+            match __.layout with
+            | None -> "\"\""
+            | Some x -> JsonConvert.SerializeObject x
+        Html.inlineTemplate
+            .Replace("[ID]", __.Id)
+            .Replace("[WIDTH]", string __.Width)
+            .Replace("[HEIGHT]", string __.Height)
+            .Replace("[DATA]", tracesJson)
+            .Replace("[LAYOUT]", layoutJson)
+
+    /// The chart's inline JavaScript code.
+    member __.GetInlineJS() =
+        let tracesJson = serializeTraces __.labels __.traces
+        let layoutJson =
+            match __.layout with
+            | None -> "\"\""
+            | Some x -> JsonConvert.SerializeObject x
+        Html.jsTemplate
+            .Replace("[DATA]", tracesJson)
+            .Replace("[LAYOUT]", layoutJson)
+
+    /// The height of the chart container element.
+    member val Height = 500 with get, set
+
+    /// The chart's container div id.
+    member val Id =
+        Guid.NewGuid().ToString()
+        with get, set
+
     member __.Plot(data:seq<#Trace>, ?Layout, ?Labels) =
         data
         |> Seq.map (fun trace -> trace :> Trace)
@@ -59,46 +114,93 @@ type PlotlyChart() =
         __.labels <- Labels
 
     member __.Show() =
-        let tracesJson = serializeTraces __.labels __.traces
-        let layoutJson =
-            match __.layout with
-            | None -> "\"\""
-            | Some x -> JsonConvert.SerializeObject x
-        let html =
-            let chartMarkup =
-                HTML.chart
-                    .Replace("[ID]", guid)
-                    .Replace("[WIDTH]", width)
-                    .Replace("[HEIGHT]", height)
-                    .Replace("[DATA]", tracesJson)
-                    .Replace("[LAYOUT]", layoutJson)
-            HTML.doc.Replace("[CHART]", chartMarkup)
+//        let tracesJson = serializeTraces __.labels __.traces
+//        let layoutJson =
+//            match __.layout with
+//            | None -> "\"\""
+//            | Some x -> JsonConvert.SerializeObject x
+//        let html =
+//            let chartMarkup =
+//                Html.inlineTemplate
+//                    .Replace("[ID]", __.Id)
+//                    .Replace("[WIDTH]", string __.Width)
+//                    .Replace("[HEIGHT]", string __.Height)
+//                    .Replace("[DATA]", tracesJson)
+//                    .Replace("[LAYOUT]", layoutJson)
+//            Html.pageTemplate.Replace("[CHART]", chartMarkup)
+        let html = __.GetHtml()
         let tempPath = Path.GetTempPath()
-        let file = sprintf "%s.html" guid
+        let file = sprintf "%s.html" __.Id
         let path = Path.Combine(tempPath, file)
         File.WriteAllText(path, html)
         System.Diagnostics.Process.Start(path) |> ignore
 
-    member __.GetInlineHtml() =
-        let tracesJson = serializeTraces __.labels __.traces
-        let layoutJson =
-            match __.layout with
-            | None -> "\"\""
-            | Some x -> JsonConvert.SerializeObject x
-        HTML.chart
-            .Replace("[ID]", guid)
-            .Replace("[WIDTH]", width)
-            .Replace("[HEIGHT]", height)
-            .Replace("[DATA]", tracesJson)
-            .Replace("[LAYOUT]", layoutJson)
+    /// The width of the chart container element.
+    member val Width = 900 with get, set
 
-    member __.WithWidth(widthValue: int) = width <- string widthValue
+    /// Sets the chart's height.
+    member __.WithHeight height = __.Height <- height
 
-    member __.WithHeight(heightValue: int) = height <- string heightValue
+    /// Sets the chart's container div id.
+    member __.WithId newId = __.Id <- newId
 
+    /// Sets the data series label. Use this member if the
+    /// chart's data is a single series.
+    member __.WithLabel label = __.labels <- Some <| Seq.singleton label
+
+    /// Sets the data series labels. Use this method if the
+    /// chart's data is a series collection.
+    member __.WithLabels(labels) = __.labels <- Some labels 
+
+    /// Sets the chart's configuration options.
     member __.WithLayout(layoutObj) = __.layout <- Some layoutObj
 
-    member __.WithLabels(labels) = __.labels <- Some labels 
+    /// Display/hide the legend.
+    member __.WithLegend enabled =
+        match __.layout with
+        | None ->
+            let layout = Layout(showlegend = enabled)
+            __.layout <- Some layout
+        | Some layout -> layout.showlegend <- enabled
+
+    /// Sets the chart's configuration options.
+    member __.WithOptions options = __.WithLayout options
+
+    /// Sets the chart's width and height.
+    member __.WithSize (width, height) = 
+        __.Height <- height
+        __.Width <- width
+
+    /// Sets the chart's title.
+    member __.WithTitle title =
+        match __.layout with
+        | None ->
+            let layout = Layout(title = title)
+            __.layout <- Some layout
+        | Some layout -> layout.title <- title
+
+    /// Sets the chart's width.
+    member __.WithWidth width = __.Width <- width
+
+    /// Sets the chart's X-axis title.
+    member __.WithXTitle xTitle =
+        match __.layout with
+        | None ->
+            let layout = Layout(xaxis = Xaxis(title = xTitle))
+            __.layout <- Some layout
+        | Some layout ->
+            try layout.xaxis.title <- xTitle
+            with _ -> layout.xaxis <- Xaxis(title = xTitle)
+
+    /// Sets the chart's Y-axis title.
+    member __.WithYTitle yTitle =
+        match __.layout with
+        | None ->
+            let layout = Layout(yaxis = Yaxis(title = yTitle))
+            __.layout <- Some layout
+        | Some layout ->
+            try layout.yaxis.title <- yTitle
+            with _ -> layout.yaxis <- Yaxis(title = yTitle)
 
 type key = IConvertible
 type value = IConvertible

@@ -137,8 +137,7 @@ module Data =
 
         sysDt
 
-[<AutoOpen>]
-module Templates =
+module Html =
 
     let jsTemplate =
         """google.setOnLoadCallback(drawChart);
@@ -151,29 +150,29 @@ module Templates =
                 chart.draw(data, options);
             }"""
 
-    let inlineTemplate = """
-    <script type="text/javascript">
-        {JS}
-    </script>
-    <div id="{GUID}" style="width: {WIDTH}px; height: {HEIGHT}px;"></div>"""
+    let inlineTemplate =
+        """<script type="text/javascript">
+    {JS}
+</script>
+<div id="{GUID}" style="width: {WIDTH}px; height: {HEIGHT}px;"></div>"""
 
-    let template =
+    let pageTemplate =
         """<!DOCTYPE html>
-    <html>
-        <head>
-            <meta charset="UTF-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-            <title>Google Chart</title>
-            <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-            <script type="text/javascript">
-                google.load("visualization", "{VERSION}", {packages:["{PACKAGES}"]})
-                {JS}
-            </script>
-        </head>
-        <body>
-            <div id="{GUID}" style="width: {WIDTH}px; height: {HEIGHT}px;"></div>
-        </body>
-    </html>"""
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>Google Chart</title>
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+        <script type="text/javascript">
+            google.load("visualization", "{VERSION}", {packages:["{PACKAGES}"]})
+            {JS}
+        </script>
+    </head>
+    <body>
+        <div id="{GUID}" style="width: {WIDTH}px; height: {HEIGHT}px;"></div>
+    </body>
+</html>"""
 
 type ChartGallery =
     | Annotation
@@ -222,17 +221,6 @@ type GoogleChart() =
 
     [<DefaultValue>]
     val mutable private ``type`` : ChartGallery
-    
-    /// The chart's container div id.
-    member val Id =
-        Guid.NewGuid().ToString()
-        with get, set
-
-    /// The height of the chart container element.
-    member val Height = 500 with get, set
-
-    /// The width of the chart container element.
-    member val Width = 900 with get, set
 
     static member Create data labels options ``type`` =
         let dt = makeDataTable data labels
@@ -249,27 +237,8 @@ type GoogleChart() =
         gc.``type`` <- ``type``
         gc
 
-    member __.Show() =
-        let html = __.Html
-        let tempPath = Path.GetTempPath()
-        let file = sprintf "%s.html" __.Id
-        let path = Path.Combine(tempPath, file)
-        File.WriteAllText(path, html)
-        System.Diagnostics.Process.Start(path) |> ignore
-
-    /// The chart's JavaScript code. Doesn't contain the
-    /// necessary line for loading the appropiate Google
-    /// visualization package. 
-    member __.Js =
-        let dataJson = __.dataTable.ToGoogleDataTable().GetJson()         
-        let optionsJson = JsonConvert.SerializeObject(__.options)
-        jsTemplate.Replace("{DATA}", dataJson)
-            .Replace("{OPTIONS}", optionsJson)
-            .Replace("{TYPE}", __.``type``.ToString())
-            .Replace("{GUID}", __.Id)
-
-    /// The chart's complete HTML code.
-    member __.Html =
+    /// Returns the chart's full HTML source.
+    member __.GetHtml() =
         let version =
             match __.``type`` with
             | Calendar | Sankey -> "1.1"            
@@ -286,30 +255,66 @@ type GoogleChart() =
             | Timeline -> "timeline"
             | TreeMap -> "treemap"
             | _ -> "corechart"
-        template.Replace("{VERSION}", version)
+        Html.pageTemplate
+            .Replace("{VERSION}", version)
             .Replace("{PACKAGES}", packages)
-            .Replace("{JS}", __.Js)
+            .Replace("{JS}", __.GetInlineJS())
             .Replace("{GUID}", __.Id)
             .Replace("{WIDTH}", string(__.Width))
             .Replace("{HEIGHT}", string(__.Height))
 
-    /// Inline HTML that can be embedded in a larger page (provided that the page
-    /// has a reference to Google APIs and loads required Google Charts)
-    member __.InlineHtml =
-        inlineTemplate
-            .Replace("{JS}", __.Js)
+    /// Inline markup that can be embedded in a HTML document (provided that it has
+    /// a reference to Google APIs and loads the required Google Charts packages).
+    member __.GetInlineHtml() =
+        Html.inlineTemplate
+            .Replace("{JS}", __.GetInlineJS())
             .Replace("{GUID}", __.Id)
             .Replace("{WIDTH}", string(__.Width))
             .Replace("{HEIGHT}", string(__.Height))
 
-    /// Sets the data series label. Use this member if the
+    /// The chart's inline JavaScript code.
+    member __.GetInlineJS() =
+        let dataJson = __.dataTable.ToGoogleDataTable().GetJson()         
+        let optionsJson = JsonConvert.SerializeObject(__.options)
+        Html.jsTemplate.Replace("{DATA}", dataJson)
+            .Replace("{OPTIONS}", optionsJson)
+            .Replace("{TYPE}", __.``type``.ToString())
+            .Replace("{GUID}", __.Id)
+
+    /// The height of the chart container element.
+    member val Height = 500 with get, set
+
+    /// The chart's container div id.
+    member val Id =
+        Guid.NewGuid().ToString()
+        with get, set
+
+    /// Displays a chart in the default browser.
+    member __.Show() =
+        let html = __.GetHtml()
+        let tempPath = Path.GetTempPath()
+        let file = sprintf "%s.html" __.Id
+        let path = Path.Combine(tempPath, file)
+        File.WriteAllText(path, html)
+        System.Diagnostics.Process.Start(path) |> ignore
+
+    /// The width of the chart container element.
+    member val Width = 900 with get, set
+
+    /// Sets the chart's height.
+    member __.WithHeight height = __.Height <- height
+
+    /// Sets the chart's container div id.
+    member __.WithId newId = __.Id <- newId
+
+    /// Sets the data series label. Use this method if the
     /// chart's data is a single series.
     member __.WithLabel label =
         let columns = __.dataTable.Columns
         columns.[1].ColumnName <- label
         __.WithLegend true
 
-    /// Sets the data series labels. Use this member if the
+    /// Sets the data series labels. Use this method if the
     /// chart's data is a series collection.
     member __.WithLabels labels =
         let columns = __.dataTable.Columns
@@ -320,10 +325,33 @@ type GoogleChart() =
         names
         |> Seq.iteri (fun idx x -> columns.[idx].ColumnName <- x)
         __.WithLegend true
-            
+
+    /// Display/hide the legend.
+    member __.WithLegend enabled =
+        match enabled with
+        | false ->
+            try
+                __.options.legend.position <- "none"
+            with _ -> __.options.legend <- Legend(position = "none") 
+        | true ->
+            try
+                __.options.legend.position <- "right"
+            with _ -> __.options.legend <- Legend(position = "right") 
+                
+    /// Sets the chart's configuration options.
+    member __.WithOptions options = __.options <- options
+
+    /// Sets the chart's width and height.
+    member __.WithSize (width, height) = 
+        __.Height <- height
+        __.Width <- width
+
     /// Sets the chart's title.
     member __.WithTitle title =
         __.options.title <- title
+
+    /// Sets the chart's width.
+    member __.WithWidth width = __.Width <- width
 
     /// Sets the chart's X-axis title.
     member __.WithXTitle xTitle =
@@ -338,35 +366,6 @@ type GoogleChart() =
             __.options.vAxis.title <- yTitle
         with _ ->
             __.options.vAxis <- Axis(title = yTitle)
-
-    /// Display/hide the legend.
-    member __.WithLegend enabled =
-        match enabled with
-        | false ->
-            try
-                __.options.legend.position <- "none"
-            with _ -> __.options.legend <- Legend(position = "none") 
-        | true ->
-            try
-                __.options.legend.position <- "right"
-            with _ -> __.options.legend <- Legend(position = "right") 
-                
-    /// Sets the chart's container div id.
-    member __.WithId newId = __.Id <- newId
-
-    /// Sets the chart's configuration options.
-    member __.WithOptions options = __.options <- options
-
-    /// Sets the chart's height.
-    member __.WithHeight height = __.Height <- height
-
-    /// Sets the chart's width.
-    member __.WithWidth width = __.Width <- width
-
-    /// Sets the chart's width and height.
-    member __.WithSize (width, height) = 
-      __.Height <- height
-      __.Width <- width
 
 type Chart =
 
