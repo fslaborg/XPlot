@@ -212,42 +212,21 @@ module Chart3 =
 // Pipeline style tests
 // ====================
 
-// Basic bar chart
-module Chart1' =
+let sales = ["2013", 1000; "2014", 1170; "2015", 660; "2016", 1030]
+let expenses = ["2013", 400; "2014", 460; "2015", 1120; "2016", 540]
 
-    let data = ["giraffes", 20; "orangutans", 14; "monkeys", 23]
+// y values only
+sales
+|> List.map snd
+|> Chart.Bar
+|> Chart.Show
 
-    data
-    |> Chart.Bar
-    |> Chart.Show
+// single series
+sales
+|> Chart.Bar
+|> Chart.Show
 
-// Grouped bar chart
-module Chart2' =
-
-    let trace1 = ["giraffes", 20; "orangutans", 14; "monkeys", 23]
-    let trace2 = ["giraffes", 12; "orangutans", 18; "monkeys", 29]
-
-    let layout = Layout(barmode = "group")
-    
-    [trace1; trace2]
-    |> Chart.Bar
-    |> Chart.WithLayout layout
-    |> Chart.Show
-
-// Stacked bar chart
-module Chart3' =
-
-    let trace1 = ["giraffes", 20; "orangutans", 14; "monkeys", 23]
-    let trace2 = ["giraffes", 12; "orangutans", 18; "monkeys", 29]
-
-    let layout = Layout(barmode = "stack")
-
-    [trace1; trace2]
-    |> Chart.Bar
-    |> Chart.WithLabels ["SF Zoo"; "LA Zoo"]
-    |> Chart.WithLayout layout
-    |> Chart.Show
-
-[20; 14; 23]
+// multiple series
+[sales; expenses]
 |> Chart.Bar
 |> Chart.Show

@@ -16,7 +16,7 @@ let chart' =
 
 let html = chart.GetHtml()
 
-let inlineHtml = chart.GetInlineHtml
+let inlineHtml = chart.GetInlineHtml()
 
 let inlineJs = chart.GetInlineJS()
 

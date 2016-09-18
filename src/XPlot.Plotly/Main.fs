@@ -3,6 +3,7 @@
 open Graph
 open Newtonsoft.Json
 open System
+open System.IO
 
 module Html =
 
@@ -31,8 +32,6 @@ module Html =
             var layout = [LAYOUT];
             Plotly.newPlot('[ID]', data, layout);
         </script>"""
-
-open System.IO
 
 type Options = Layout
 
@@ -207,19 +206,14 @@ type value = IConvertible
 
 type Chart =
 
-    static member Plot(data:seq<#Trace>) = 
-        let chart = PlotlyChart()
-        chart.Plot data
-        chart
-
     static member Plot(data) = 
         let chart = PlotlyChart()
         chart.Plot [data]
         chart
 
-    static member Plot(data, layout) =
+    static member Plot(data:seq<#Trace>) = 
         let chart = PlotlyChart()
-        chart.Plot(data, layout)
+        chart.Plot data
         chart
 
     static member Plot(data, layout) =
@@ -227,83 +221,99 @@ type Chart =
         chart.Plot([data], layout)
         chart
 
-    static member Show(chart:PlotlyChart) = chart.Show()
-
-    static member WithWidth width (chart:PlotlyChart) =
-        chart.WithWidth width
+    static member Plot(data, layout) =
+        let chart = PlotlyChart()
+        chart.Plot(data, layout)
         chart
 
+    /// Displays a chart in the default browser.
+    static member Show(chart:PlotlyChart) = chart.Show()
+
+    /// Sets the chart's height.
     static member WithHeight height (chart:PlotlyChart) =
         chart.WithHeight height
+        chart
+
+    /// Sets the chart's container div id.
+    static member WithId id (chart:PlotlyChart) =
+        chart.WithId id
+        chart
+
+    /// Sets the data series label. Use this member if the
+    /// chart's data is a single series.
+    static member WithLabel label (chart:PlotlyChart) =
+        chart.WithLabel label
+        chart
+
+    /// Sets the data series labels. Use this member if the
+    /// chart's data is a series collection.
+    static member WithLabels labels (chart:PlotlyChart) =
+        chart.WithLabels labels
         chart
 
     static member WithLayout layout (chart:PlotlyChart) =
         chart.WithLayout layout
         chart
 
-    static member WithLabels labels (chart:PlotlyChart) =
-        chart.WithLabels labels
+    /// Display/hide the legend.
+    static member WithLegend enabled (chart:PlotlyChart) =
+        chart.WithLegend enabled
         chart
 
-    static member Line(data:seq<#value>) =
-        let scatter = Scatter(y = data)
-        Chart.Plot [scatter]
+    /// Sets the chart's configuration options.
+    static member WithOptions options (chart:PlotlyChart) =
+        chart.WithOptions options
+        chart
 
-    static member Line(data:seq<#key * #value>) =
+    /// Sets the chart's height.
+    static member WithSize size (chart:PlotlyChart) =
+        chart.WithSize size
+        chart
+
+    /// Sets the chart's title.
+    static member WithTitle title (chart:PlotlyChart) =
+        chart.WithTitle title
+        chart
+
+    /// Sets the chart's width.
+    static member WithWidth width (chart:PlotlyChart) =
+        chart.WithWidth width
+        chart
+
+    /// Sets the chart's X-axis title.
+    static member WithXTitle xTitle (chart:PlotlyChart) =
+        chart.WithXTitle xTitle
+        chart
+
+    /// Sets the chart's Y-axis title.
+    static member WithYTitle yTitle (chart:PlotlyChart) =
+        chart.WithYTitle yTitle
+        chart
+
+type Chart with
+
+    static member Area(data:seq<#value>) =
+        let x = Seq.mapi (fun i _ -> i) data
+        let area = Scatter(x = x, y = data, fill = "tozeroy")
+        Chart.Plot [area]
+
+    static member Area(data:seq<#key * #value>) =
         let x = Seq.map fst data
         let y = Seq.map snd data
-        let scatter = Scatter(x = x, y = y)
-        Chart.Plot [scatter]
+        let area = Scatter(x = x, y = y, fill = "tozeroy")
+        Chart.Plot [area]
 
-    static member Line(data:seq<#seq<#key * #value>>) =
-        let scatters =
-            data
-            |> Seq.map (fun series ->
-                let x = Seq.map fst series
-                let y = Seq.map snd series
-                Scatter(x = x, y = y)
-            )
-        Chart.Plot scatters
-
-    static member Scatter(data:seq<#value>) =
-        let scatter = Scatter(y = data, mode = "markers")
-        Chart.Plot [scatter]
-
-    static member Scatter(data:seq<#key * #value>) =
-        let x = Seq.map fst data
-        let y = Seq.map snd data
-        let scatter = Scatter(x = x, y = y, mode = "markers")
-        Chart.Plot [scatter]
-
-    static member Scatter(data:seq<#seq<#key * #value>>) =
-        let scatters =
-            data
-            |> Seq.map (fun series ->
-                let x = Seq.map fst series
-                let y = Seq.map snd series
-                Scatter(x = x, y = y, mode = "markers")
-            )
-        Chart.Plot scatters
-
-    static member Column(data:seq<#value>) =
-        let bar = Bar(y = data)
-        Chart.Plot [bar]
-
-    static member Column(data:seq<#key * #value>) =
-        let x = Seq.map fst data
-        let y = Seq.map snd data
-        let bar = Bar(x = x, y = y)
-        Chart.Plot [bar]
-
-    static member Column(data:seq<#seq<#key * #value>>) =
-        let bars =
+    static member Area(data:seq<#seq<#key * #value>>) =
+        let areas =
             data
             |> Seq.mapi (fun i series ->
                 let x = Seq.map fst series
                 let y = Seq.map snd series
-                Bar(x = x, y = y)
+                match i with
+                | 0 -> Scatter(x = x, y = y, fill = "tozeroy")
+                | _ -> Scatter(x = x, y = y, fill = "tonexty")
             )
-        Chart.Plot bars
+        Chart.Plot areas
 
     static member Bar(data:seq<#value>) =
         let bar = Bar(x = data, orientation = "h")
@@ -325,29 +335,87 @@ type Chart =
             )
         Chart.Plot bars
 
+    static member Bubble(data:seq<#key * #value * #value>) =
+        let xs = data |> Seq.map (fun (x, _, _) -> x)
+        let ys = data |> Seq.map (fun (_, y, _) -> y)
+        let sizes = data |> Seq.map (fun (_, _, size) -> size)
+        let trace =
+            Scatter(
+                x = xs,
+                y = ys,
+                mode = "markers",
+                marker =
+                    Marker (
+                        size = sizes
+                    )
+            )
+        Chart.Plot trace
+
+    static member Column(data:seq<#value>) =
+        let bar = Bar(y = data)
+        Chart.Plot [bar]
+
+    static member Column(data:seq<#key * #value>) =
+        let x = Seq.map fst data
+        let y = Seq.map snd data
+        let bar = Bar(x = x, y = y)
+        Chart.Plot [bar]
+
+    static member Column(data:seq<#seq<#key * #value>>) =
+        let bars =
+            data
+            |> Seq.mapi (fun i series ->
+                let x = Seq.map fst series
+                let y = Seq.map snd series
+                Bar(x = x, y = y)
+            )
+        Chart.Plot bars
+
+    static member Line(data:seq<#value>) =
+        let scatter = Scatter(y = data)
+        Chart.Plot [scatter]
+
+    static member Line(data:seq<#key * #value>) =
+        let x = Seq.map fst data
+        let y = Seq.map snd data
+        let scatter = Scatter(x = x, y = y)
+        Chart.Plot [scatter]
+
+    static member Line(data:seq<#seq<#key * #value>>) =
+        let scatters =
+            data
+            |> Seq.map (fun series ->
+                let x = Seq.map fst series
+                let y = Seq.map snd series
+                Scatter(x = x, y = y)
+            )
+        Chart.Plot scatters
+
     static member Pie(data:seq<#key * #value>) =
         let x = Seq.map fst data
         let y = Seq.map snd data
         let pie = Pie(labels = x, values = y)
         Chart.Plot [pie]
 
-    static member Area(data:seq<#key * #value>) =
+    static member Scatter(data:seq<#value>) =
+        let scatter = Scatter(y = data, mode = "markers")
+        Chart.Plot [scatter]
+
+    static member Scatter(data:seq<#key * #value>) =
         let x = Seq.map fst data
         let y = Seq.map snd data
-        let area = Scatter(x = x, y = y, fill = "tozeroy")
-        Chart.Plot [area]
+        let scatter = Scatter(x = x, y = y, mode = "markers")
+        Chart.Plot [scatter]
 
-    static member Area(data:seq<#seq<#key * #value>>) =
-        let areas =
+    static member Scatter(data:seq<#seq<#key * #value>>) =
+        let scatters =
             data
-            |> Seq.mapi (fun i series ->
+            |> Seq.map (fun series ->
                 let x = Seq.map fst series
                 let y = Seq.map snd series
-                match i with
-                | 0 -> Scatter(x = x, y = y, fill = "tozeroy")
-                | _ -> Scatter(x = x, y = y, fill = "tonexty")
+                Scatter(x = x, y = y, mode = "markers")
             )
-        Chart.Plot areas
+        Chart.Plot scatters
 
 [<ObsoleteAttribute("Use the Chart type instead.")>]
 type Plotly = Chart

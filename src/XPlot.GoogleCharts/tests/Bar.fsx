@@ -1,11 +1,26 @@
 ﻿#I "../../../bin"
 #r "XPlot.GoogleCharts.dll"
-#r "XPlot.GoogleCharts.WPF.dll"
 
 open XPlot.GoogleCharts
 
 let sales = ["2013", 1000; "2014", 1170; "2015", 660; "2016", 1030]
 let expenses = ["2013", 400; "2014", 460; "2015", 1120; "2016", 540]
+
+// y values only
+sales
+|> List.map snd
+|> Chart.Bar
+|> Chart.Show
+
+// single series
+sales
+|> Chart.Bar
+|> Chart.Show
+
+// multiple series
+[sales; expenses]
+|> Chart.Bar
+|> Chart.Show
 
 let test1 =
     sales

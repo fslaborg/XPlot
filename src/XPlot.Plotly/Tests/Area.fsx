@@ -20,8 +20,8 @@ module Chart1 =
         )
 
     [trace1; trace2]
-    |> Plotly.Plot
-    |> Plotly.Show
+    |> Chart.Plot
+    |> Chart.Show
 
 // Overlaid Chart Without Boundary Lines
 module Chart2 =
@@ -45,20 +45,29 @@ module Chart2 =
     let layout = Layout(title = "Overlaid Chart Without Boundary Lines")
 
     [trace1; trace2]
-    |> Plotly.Plot
-    |> Plotly.WithLayout layout
-    |> Plotly.Show
+    |> Chart.Plot
+    |> Chart.WithLayout layout
+    |> Chart.Show
     
 // ==========
 // Pipe style
 // ==========
 
-// Basic Overlaid Area Chart
-module Chart1' =
+let sales = ["2013", 1000; "2014", 1170; "2015", 660; "2016", 1030]
+let expenses = ["2013", 400; "2014", 460; "2015", 1120; "2016", 540]
 
-    let trace1 = [1, 0; 2, 2; 3, 3; 4, 5]
-    let trace2 = [1, 3; 2, 5; 3, 1; 4, 7]
+// y values only
+sales
+|> List.map snd
+|> Chart.Area
+|> Chart.Show
 
-    [trace1; trace2]
-    |> Plotly.Area
-    |> Plotly.Show
+// single series
+sales
+|> Chart.Area
+|> Chart.Show
+
+// multiple series
+[sales; expenses]
+|> Chart.Area
+|> Chart.Show

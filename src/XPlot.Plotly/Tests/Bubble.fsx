@@ -2,6 +2,10 @@
 
 open XPlot.Plotly
 
+[1, 10, 40; 2, 11, 60; 3, 12, 80; 4, 13, 100]
+|> Chart.Bubble
+|> Chart.Show
+
 // Marker Size on Bubble Charts
 module Chart1 =
 

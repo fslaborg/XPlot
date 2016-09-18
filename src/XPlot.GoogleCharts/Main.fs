@@ -38,6 +38,26 @@ module Data =
 
         static member New dps = {DataPoints = dps}
 
+        static member New (data: seq<#key * #value>) =
+            data
+            |> Seq.map Datum.New
+            |> Series.New
+
+        static member New (data: seq<#key * #value * #value>) =
+            data
+            |> Seq.map Datum.New
+            |> Series.New
+
+        static member New (data: seq<#key * #value * #value * #value>) =
+            data
+            |> Seq.map Datum.New
+            |> Series.New
+
+        static member New (data: seq<#key * #value * #value * #value * #value>) =
+            data
+            |> Seq.map Datum.New
+            |> Series.New
+
     let makeDataTable series labels =
 
         let rows =
@@ -369,449 +389,18 @@ type GoogleChart() =
 
 type Chart =
 
+    /// Displays a chart in the default browser.
     static member Show(chart : GoogleChart) = chart.Show()
 
-    /// <summary>Creates an annotation chart.</summary>
-    /// <param name="data">The chart's data.</param>
-    /// <param name="Labels">Labels for the data table columns.</param>
-    /// <param name="Options">The chart's options.</param>
-    static member Annotation(data:seq<DateTime * #value * string * string>, ?Labels, ?Options) =
-        let series =
-            data
-            |> Seq.map Datum.New
-            |> Series.New
-        let options = defaultArg Options <| Configuration.Options()
-        GoogleChart.Create [series] Labels options Annotation
+    /// Sets the chart's height.
+    static member WithHeight height (chart:GoogleChart) =
+        chart.WithHeight height
+        chart
 
-    /// <summary>Creates an annotation chart.</summary>
-    /// <param name="data">The chart's data.</param>
-    /// <param name="Labels">Labels for the data table columns.</param>
-    /// <param name="Options">The chart's options.</param>
-    static member Annotation(data:seq<#seq<DateTime * 'V * string * string>> when 'V :> value, ?Labels, ?Options) =
-        let series =
-            data
-            |> Seq.map (fun x ->
-                x
-                |> Seq.map Datum.New
-                |> Series.New)
-        let options = defaultArg Options <| Configuration.Options()
-        GoogleChart.Create series Labels options Annotation
-
-    /// <summary>Creates an area chart.</summary>
-    /// <param name="data">The chart's data.</param>
-    /// <param name="Labels">Labels for the data table columns.</param>
-    /// <param name="Options">The chart's options.</param>
-    static member Area(data:seq<#key * #value>, ?Labels, ?Options) =
-        let series =
-            data
-            |> Seq.map Datum.New
-            |> Series.New
-        let options = defaultArg Options <| Configuration.Options()
-        GoogleChart.Create [series] Labels options Area
-
-    /// <summary>Creates an area chart.</summary>
-    /// <param name="data">The chart's data.</param>
-    /// <param name="Labels">Labels for the data table columns.</param>
-    /// <param name="Options">The chart's options.</param>
-    static member Area(data:seq<#seq<'K * 'V>> when 'K :> key and 'V :> value, ?Labels, ?Options) =
-        let series =
-            data
-            |> Seq.map (fun x ->
-                x 
-                |> Seq.map Datum.New
-                |> Series.New)
-        let options = defaultArg Options <| Configuration.Options()
-        GoogleChart.Create series Labels options Area
-
-    /// <summary>Creates a bar chart.</summary>
-    /// <param name="data">The chart's data.</param>
-    /// <param name="Labels">Labels for the data table columns.</param>
-    /// <param name="Options">The chart's options.</param>
-    static member Bar(data:seq<#key * #value>, ?Labels, ?Options) =
-        let series =
-            data
-            |> Seq.map Datum.New
-            |> Series.New
-        let options = defaultArg Options <| Configuration.Options()
-        GoogleChart.Create [series] Labels options Bar
-
-    /// <summary>Creates a bar chart.</summary>
-    /// <param name="data">The chart's data.</param>
-    /// <param name="Labels">Labels for the data table columns.</param>
-    /// <param name="Options">The chart's options.</param>
-    static member Bar(data:seq<#seq<'K * 'V>> when 'K :> key and 'V :> value, ?Labels, ?Options) =
-        let series =
-            data
-            |> Seq.map (fun x ->
-                x 
-                |> Seq.map Datum.New
-                |> Series.New)
-        let options = defaultArg Options <| Configuration.Options()
-        GoogleChart.Create series Labels options Bar
-
-    /// <summary>Creates a bubble chart.</summary>
-    /// <param name="data">The chart's data.</param>
-    /// <param name="Labels">Labels for the data table columns.</param>
-    /// <param name="Options">The chart's options.</param>
-    static member Bubble(data:seq<string * #value * #value>, ?Labels, ?Options) =
-        let series =
-            data
-            |> Seq.map Datum.New
-            |> Series.New
-        let options = defaultArg Options <| Configuration.Options()
-        GoogleChart.Create [series] Labels options Bubble
-
-    /// <summary>Creates a bubble chart.</summary>
-    /// <param name="data">The chart's data.</param>
-    /// <param name="Labels">Labels for the data table columns.</param>
-    /// <param name="Options">The chart's options.</param>
-    static member Bubble(data:seq<string * #value * #value * #value>, ?Labels, ?Options) =
-        let series =
-            data
-            |> Seq.map Datum.New
-            |> Series.New
-        let options = defaultArg Options <| Configuration.Options()
-        GoogleChart.Create [series] Labels options Bubble
-
-    /// <summary>Creates a bubble chart.</summary>
-    /// <param name="data">The chart's data.</param>
-    /// <param name="Labels">Labels for the data table columns.</param>
-    /// <param name="Options">The chart's options.</param>
-    static member Bubble(data:seq<string * #value * #value * #value * #value>, ?Labels, ?Options) =
-        let series =
-            data
-            |> Seq.map Datum.New
-            |> Series.New
-        let options = defaultArg Options <| Configuration.Options()
-        GoogleChart.Create [series] Labels options Bubble
-     
-    /// <summary>Creates a calendar chart.</summary>
-    /// <param name="data">The chart's data.</param>
-    /// <param name="Labels">Labels for the data table columns.</param>
-    /// <param name="Options">The chart's options.</param>
-    static member Calendar(data:seq<DateTime * #value>, ?Labels, ?Options) =
-        let series =
-            data
-            |> Seq.map Datum.New
-            |> Series.New
-        let options = defaultArg Options <| Configuration.Options()
-        GoogleChart.Create [series] Labels options Calendar
- 
-    /// <summary>Creates a candlestick chart.</summary>
-    /// <param name="data">The chart's data.</param>
-    /// <param name="Labels">Labels for the data table columns.</param>
-    /// <param name="Options">The chart's options.</param>
-    static member Candlestick(data:seq<#key * #value * #value * #value * #value>, ?Labels, ?Options) =
-        let series =
-            data
-            |> Seq.map Datum.New
-            |> Series.New
-        let options = defaultArg Options <| Configuration.Options()
-        GoogleChart.Create [series] Labels options Candlestick
-
-    /// <summary>Creates a candlestick chart.</summary>
-    /// <param name="data">The chart's data.</param>
-    /// <param name="Labels">Labels for the data table columns.</param>
-    /// <param name="Options">The chart's options.</param>
-    static member Candlestick(data:seq<#seq<'K * 'V * 'V * 'V * 'V>> when 'K :> key and 'V :> value, ?Labels, ?Options) =
-        let series =
-            data
-            |> Seq.map (fun x ->
-                x 
-                |> Seq.map Datum.New
-                |> Series.New)
-        let options = defaultArg Options <| Configuration.Options()
-        GoogleChart.Create series Labels options Candlestick
-
-    /// <summary>Creates a column chart.</summary>
-    /// <param name="data">The chart's data.</param>
-    /// <param name="Labels">Labels for the data table columns.</param>
-    /// <param name="Options">The chart's options.</param>
-    static member Column(data:seq<#key * #value>, ?Labels, ?Options) =
-        let series =
-            data
-            |> Seq.map Datum.New
-            |> Series.New
-        let options = defaultArg Options <| Configuration.Options()
-        GoogleChart.Create [series] Labels options Column
-
-    /// <summary>Creates a column chart.</summary>
-    /// <param name="data">The chart's data.</param>
-    /// <param name="Labels">Labels for the data table columns.</param>
-    /// <param name="Options">The chart's options.</param>
-    static member Column(data:seq<#seq<'K * 'V>> when 'K :> key and 'V :> value, ?Labels, ?Options) =
-        let series =
-            data
-            |> Seq.map (fun x ->
-                x 
-                |> Seq.map Datum.New
-                |> Series.New)
-        let options = defaultArg Options <| Configuration.Options()
-        GoogleChart.Create series Labels options Column
-
-    /// <summary>Creates a combo chart.</summary>
-    /// <param name="data">The chart's data.</param>
-    /// <param name="Labels">Labels for the data table columns.</param>
-    /// <param name="Options">The chart's options.</param>
-    static member Combo(data:seq<#seq<'K * 'V>> when 'K :> key and 'V :> value, ?Labels, ?Options) =
-        let series =
-            data
-            |> Seq.map (fun x ->
-                x 
-                |> Seq.map Datum.New
-                |> Series.New)
-        let options = defaultArg Options <| Configuration.Options()
-        GoogleChart.Create series Labels options Combo
-
-    /// <summary>Creates a gauge chart.</summary>
-    /// <param name="data">The chart's data.</param>
-    /// <param name="Labels">Labels for the data table columns.</param>
-    /// <param name="Options">The chart's options.</param>
-    static member Gauge(data:seq<string * #value>, ?Labels, ?Options) =
-        let series =
-            data
-            |> Seq.map Datum.New
-            |> Series.New
-        let options = defaultArg Options <| Configuration.Options()
-        GoogleChart.Create [series] Labels options Gauge
-
-    /// <summary>Creates a geo chart.</summary>
-    /// <param name="data">The chart's data.</param>
-    /// <param name="Labels">Labels for the data table columns.</param>
-    /// <param name="Options">The chart's options.</param>
-    static member Geo(data:seq<string * #value>, ?Labels, ?Options) =
-        let series =
-            data
-            |> Seq.map Datum.New
-            |> Series.New
-        let options = defaultArg Options <| Configuration.Options()
-        GoogleChart.Create [series] Labels options Geo
-
-    /// <summary>Creates a geo chart.</summary>
-    /// <param name="data">The chart's data.</param>
-    /// <param name="Labels">Labels for the data table columns.</param>
-    /// <param name="Options">The chart's options.</param>
-    static member Geo(data:seq<string * #value * #value>, ?Labels, ?Options) =
-        let series =
-            data
-            |> Seq.map Datum.New
-            |> Series.New
-        let options = defaultArg Options <| Configuration.Options()
-        GoogleChart.Create [series] Labels options Geo
-
-    /// <summary>Creates a histogram chart.</summary>
-    /// <param name="data">The chart's data.</param>
-    /// <param name="Labels">Labels for the data table columns.</param>
-    /// <param name="Options">The chart's options.</param>
-    static member Histogram(data:seq<string * #value>, ?Labels, ?Options) =
-        let series =
-            data
-            |> Seq.map Datum.New
-            |> Series.New
-        let options = defaultArg Options <| Configuration.Options()
-        GoogleChart.Create [series] Labels options Histogram
-
-    /// <summary>Creates a line chart.</summary>
-    /// <param name="data">The chart's data.</param>
-    /// <param name="Labels">Labels for the data table columns.</param>
-    /// <param name="Options">The chart's options.</param>
-    static member Line(data:seq<#key * #value>, ?Labels, ?Options) =
-        let series =
-            data
-            |> Seq.map Datum.New
-            |> Series.New
-        let options = defaultArg Options <| Configuration.Options()
-        GoogleChart.Create [series] Labels options Line
-
-    /// <summary>Creates a line chart.</summary>
-    /// <param name="data">The chart's data.</param>
-    /// <param name="Labels">Labels for the data table columns.</param>
-    /// <param name="Options">The chart's options.</param>
-    static member Line(data:seq<#seq<'K * 'V>> when 'K :> key and 'V :> value, ?Labels, ?Options) =
-        let series =
-            data
-            |> Seq.map (fun x ->
-                x 
-                |> Seq.map Datum.New
-                |> Series.New)
-        let options = defaultArg Options <| Configuration.Options()
-        GoogleChart.Create series Labels options Line
-     
-    /// <summary>Creates a map chart.</summary>
-    /// <param name="data">The chart's data.</param>
-    /// <param name="Labels">Labels for the data table columns.</param>
-    /// <param name="Options">The chart's options.</param>
-    static member Map(data:seq<string * string>, ?Labels, ?Options) =
-        let series =
-            data
-            |> Seq.map Datum.New
-            |> Series.New
-        let options = defaultArg Options <| Configuration.Options()
-        GoogleChart.Create [series] Labels options Map
-
-    /// <summary>Creates a map chart.</summary>
-    /// <param name="data">The chart's data.</param>
-    /// <param name="Labels">Labels for the data table columns.</param>
-    /// <param name="Options">The chart's options.</param>
-    static member Map(data:seq<float * float * string>, ?Labels, ?Options) =
-        let series =
-            data
-            |> Seq.map Datum.New
-            |> Series.New
-        let options = defaultArg Options <| Configuration.Options()
-        GoogleChart.Create [series] Labels options Map
-
-    /// <summary>Creates a pie chart.</summary>
-    /// <param name="data">The chart's data.</param>
-    /// <param name="Labels">Labels for the data table columns.</param>
-    /// <param name="Options">The chart's options.</param>
-    static member Pie(data:seq<string * #value>, ?Labels, ?Options) =
-        let series =
-            data
-            |> Seq.map Datum.New
-            |> Series.New
-        let options = defaultArg Options <| Configuration.Options()
-        GoogleChart.Create [series] Labels options Pie
-
-    /// <summary>Creates a sankey diagram.</summary>
-    /// <param name="data">The chart's data.</param>
-    /// <param name="Labels">Labels for the data table columns.</param>
-    /// <param name="Options">The chart's options.</param>
-    static member Sankey(data:seq<string * string * #value>, ?Labels, ?Options) =
-        let series =
-            data
-            |> Seq.map Datum.New
-            |> Series.New
-        let options = defaultArg Options <| Configuration.Options()
-        GoogleChart.Create [series] Labels options Sankey
-
-    /// <summary>Creates a scatter chart.</summary>
-    /// <param name="data">The chart's data.</param>
-    /// <param name="Labels">Labels for the data table columns.</param>
-    /// <param name="Options">The chart's options.</param>
-    static member Scatter(data:seq<#key * #value>, ?Labels, ?Options) =
-        let series =
-            data
-            |> Seq.map Datum.New
-            |> Series.New
-        let options = defaultArg Options <| Configuration.Options()
-        GoogleChart.Create [series] Labels options Scatter
-
-    /// <summary>Creates a scatter chart.</summary>
-    /// <param name="data">The chart's data.</param>
-    /// <param name="Labels">Labels for the data table columns.</param>
-    /// <param name="Options">The chart's options.</param>
-    static member Scatter(data:seq<#seq<'K * 'V>> when 'K :> key and 'V :> value, ?Labels, ?Options) =
-        let series =
-            data
-            |> Seq.map (fun x ->
-                x 
-                |> Seq.map Datum.New
-                |> Series.New)
-        let options = defaultArg Options <| Configuration.Options()
-        GoogleChart.Create series Labels options Scatter
-
-    /// <summary>Creates a stepped area chart.</summary>
-    /// <param name="data">The chart's data.</param>
-    /// <param name="Labels">Labels for the data table columns.</param>
-    /// <param name="Options">The chart's options.</param>
-    static member SteppedArea(data:seq<#key * #value>, ?Labels, ?Options) =
-        let series =
-            data
-            |> Seq.map Datum.New
-            |> Series.New
-        let options = defaultArg Options <| Configuration.Options()
-        GoogleChart.Create [series] Labels options SteppedArea
-
-    /// <summary>Creates a stepped area chart.</summary>
-    /// <param name="data">The chart's data.</param>
-    /// <param name="Labels">Labels for the data table columns.</param>
-    /// <param name="Options">The chart's options.</param>
-    static member SteppedArea(data:seq<#seq<'K * 'V>> when 'K :> key and 'V :> value, ?Labels, ?Options) =
-        let series =
-            data
-            |> Seq.map (fun x ->
-                x 
-                |> Seq.map Datum.New
-                |> Series.New)
-        let options = defaultArg Options <| Configuration.Options()
-        GoogleChart.Create series Labels options SteppedArea
-
-    /// <summary>Creates a table chart.</summary>
-    /// <param name="data">The chart's data.</param>
-    /// <param name="Labels">Labels for the data table columns.</param>
-    /// <param name="Options">The chart's options.</param>
-    static member Table(data:seq<#key * #value>, ?Labels, ?Options) =
-        let series =
-            data
-            |> Seq.map Datum.New
-            |> Series.New
-        let options = defaultArg Options <| Configuration.Options()
-        GoogleChart.Create [series] Labels options Table
-
-    /// <summary>Creates a table chart.</summary>
-    /// <param name="data">The chart's data.</param>
-    /// <param name="Labels">Labels for the data table columns.</param>
-    /// <param name="Options">The chart's options.</param>
-    static member Table(data:seq<#seq<'K * 'V>> when 'K :> key and 'V :> value, ?Labels, ?Options) =
-        let series =
-            data
-            |> Seq.map (fun x ->
-                x 
-                |> Seq.map Datum.New
-                |> Series.New)
-        let options = defaultArg Options <| Configuration.Options()
-        GoogleChart.Create series Labels options Table
-
-    /// <summary>Creates a timeline chart.</summary>
-    /// <param name="data">The chart's data.</param>
-    /// <param name="Labels">Labels for the data table columns.</param>
-    /// <param name="Options">The chart's options.</param>
-    static member Timeline(data:seq<string * #value * #value>, ?Labels, ?Options) =
-        let series =
-            data
-            |> Seq.map Datum.New
-            |> Series.New
-        let options = defaultArg Options <| Configuration.Options()
-        GoogleChart.Create [series] Labels options Timeline
-
-    /// <summary>Creates a timeline chart.</summary>
-    /// <param name="data">The chart's data.</param>
-    /// <param name="Labels">Labels for the data table columns.</param>
-    /// <param name="Options">The chart's options.</param>
-    static member Timeline(data:seq<string * string * #value * #value>, ?Labels, ?Options) =
-        let series =
-            data
-            |> Seq.map Datum.New
-            |> Series.New
-        let options = defaultArg Options <| Configuration.Options()
-        GoogleChart.Create [series] Labels options Timeline
-
-    /// <summary>Creates a treemap chart.</summary>
-    /// <param name="data">The chart's data.</param>
-    /// <param name="Labels">Labels for the data table columns.</param>
-    /// <param name="Options">The chart's options.</param>
-    static member Treemap(data:seq<string * string * #value>, ?Labels, ?Options) =
-        let series =
-            data
-            |> Seq.map Datum.New
-            |> Series.New
-        let options = defaultArg Options <| Configuration.Options()
-        GoogleChart.Create [series] Labels options TreeMap
-
-    /// <summary>Creates a treemap chart.</summary>
-    /// <param name="data">The chart's data.</param>
-    /// <param name="Labels">Labels for the data table columns.</param>
-    /// <param name="Options">The chart's options.</param>
-    static member Treemap(data:seq<string * string * #value * #value>, ?Labels, ?Options) =
-        let series =
-            data
-            |> Seq.map Datum.New
-            |> Series.New
-        let options = defaultArg Options <| Configuration.Options()
-        GoogleChart.Create [series] Labels options TreeMap
-        
-type Chart with
+    /// Sets the chart's container div id.
+    static member WithId id (chart:GoogleChart) =
+        chart.WithId id
+        chart
 
     /// Sets the data series label. Use this member if the
     /// chart's data is a single series.
@@ -825,9 +414,29 @@ type Chart with
         chart.WithLabels labels
         chart
 
+    /// Display/hide the legend.
+    static member WithLegend enabled (chart:GoogleChart) =
+        chart.WithLegend enabled
+        chart
+
+    /// Sets the chart's configuration options.
+    static member WithOptions options (chart:GoogleChart) =
+        chart.WithOptions options
+        chart
+
+    /// Sets the chart's height.
+    static member WithSize size (chart:GoogleChart) =
+        chart.WithSize size
+        chart
+
     /// Sets the chart's title.
     static member WithTitle title (chart:GoogleChart) =
         chart.WithTitle title
+        chart
+
+    /// Sets the chart's width.
+    static member WithWidth width (chart:GoogleChart) =
+        chart.WithWidth width
         chart
 
     /// Sets the chart's X-axis title.
@@ -840,32 +449,303 @@ type Chart with
         chart.WithYTitle yTitle
         chart
 
-    /// Display/hide the legend.
-    static member WithLegend enabled (chart:GoogleChart) =
-        chart.WithLegend enabled
-        chart
 
-    /// Sets the chart's container div id.
-    static member WithId id (chart:GoogleChart) =
-        chart.WithId id
-        chart
+type Chart with
 
-    /// Sets the chart's configuration options.
-    static member WithOptions options (chart:GoogleChart) =
-        chart.WithOptions options
-        chart
+    static member private Create (data: seq<#seq<'T>>) labels options chartType datumNew =
+        let seriesFromData x =
+            x
+            |> Seq.map (fun y ->
+                y
+                |> Seq.map datumNew
+                |> Series.New
+            )
+        let series = seriesFromData data
+        let options = defaultArg options <| Configuration.Options()
+        GoogleChart.Create series labels options chartType
 
-    /// Sets the chart's height.
-    static member WithHeight height (chart:GoogleChart) =
-        chart.WithHeight height
-        chart
+    static member private Create' (data: seq<#value>) labels options chartType =
+        let data' =
+            data
+            |> Seq.mapi (fun i x -> i, x)
+        Chart.Create [data'] labels options chartType Datum.New
 
-    /// Sets the chart's width.
-    static member WithWidth width (chart:GoogleChart) =
-        chart.WithWidth width
-        chart
+    /// <summary>Creates an annotation chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">Labels for the data table columns.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Annotation(data:seq<DateTime * #value * string * string>, ?Labels, ?Options) =
+        Chart.Create [data] Labels Options Annotation Datum.New
 
-    /// Sets the chart's height.
-    static member WithSize size (chart:GoogleChart) =
-        chart.WithSize size
-        chart
+    /// <summary>Creates an annotation chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">Labels for the data table columns.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Annotation(data:seq<#seq<DateTime * 'V * string * string>> when 'V :> value, ?Labels, ?Options) =
+        Chart.Create data Labels Options Annotation Datum.New
+
+    /// <summary>Creates an area chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">Labels for the data table columns.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Area(data:seq<#value>, ?Labels, ?Options) =
+        Chart.Create' data Labels Options Area
+
+    /// <summary>Creates an area chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">Labels for the data table columns.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Area(data:seq<#key * #value>, ?Labels, ?Options) =
+        Chart.Create [data] Labels Options Area Datum.New
+
+    /// <summary>Creates an area chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">Labels for the data table columns.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Area(data:seq<#seq<'K * 'V>> when 'K :> key and 'V :> value, ?Labels, ?Options) =
+        Chart.Create data Labels Options Area Datum.New
+
+    /// <summary>Creates a bar chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">Labels for the data table columns.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Bar(data:seq<#value>, ?Labels, ?Options) =
+        Chart.Create' data Labels Options Bar
+
+    /// <summary>Creates a bar chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">Labels for the data table columns.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Bar(data:seq<#key * #value>, ?Labels, ?Options) =
+        Chart.Create [data] Labels Options Bar Datum.New
+
+    /// <summary>Creates a bar chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">Labels for the data table columns.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Bar(data:seq<#seq<'K * 'V>> when 'K :> key and 'V :> value, ?Labels, ?Options) =
+        Chart.Create data Labels Options Bar Datum.New
+
+    /// <summary>Creates a bubble chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">Labels for the data table columns.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Bubble(data:seq<string * #value * #value>, ?Labels, ?Options) =
+        Chart.Create [data] Labels Options Bubble Datum.New
+
+    /// <summary>Creates a bubble chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">Labels for the data table columns.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Bubble(data:seq<string * #value * #value * #value>, ?Labels, ?Options) =
+        Chart.Create [data] Labels Options Bubble Datum.New
+
+    /// <summary>Creates a bubble chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">Labels for the data table columns.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Bubble(data:seq<string * #value * #value * #value * #value>, ?Labels, ?Options) =
+        Chart.Create [data] Labels Options Bubble Datum.New
+
+    /// <summary>Creates a calendar chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">Labels for the data table columns.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Calendar(data:seq<DateTime * #value>, ?Labels, ?Options) =
+        Chart.Create [data] Labels Options Calendar Datum.New
+
+    /// <summary>Creates a candlestick chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">Labels for the data table columns.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Candlestick(data:seq<#key * #value * #value * #value * #value>, ?Labels, ?Options) =
+        Chart.Create [data] Labels Options Candlestick Datum.New
+
+    /// <summary>Creates a candlestick chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">Labels for the data table columns.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Candlestick(data:seq<#seq<'K * 'V * 'V * 'V * 'V>> when 'K :> key and 'V :> value, ?Labels, ?Options) =
+        Chart.Create data Labels Options Candlestick Datum.New
+
+    /// <summary>Creates a column chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">Labels for the data table columns.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Column(data:seq<#value>, ?Labels, ?Options) =
+        Chart.Create' data Labels Options Column
+
+    /// <summary>Creates a column chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">Labels for the data table columns.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Column(data:seq<#key * #value>, ?Labels, ?Options) =
+        Chart.Create [data] Labels Options Column Datum.New
+
+    /// <summary>Creates a column chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">Labels for the data table columns.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Column(data:seq<#seq<'K * 'V>> when 'K :> key and 'V :> value, ?Labels, ?Options) =
+        Chart.Create data Labels Options Column Datum.New
+
+    /// <summary>Creates a combo chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">Labels for the data table columns.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Combo(data:seq<#seq<'K * 'V>> when 'K :> key and 'V :> value, ?Labels, ?Options) =
+        Chart.Create data Labels Options Combo Datum.New
+
+    /// <summary>Creates a gauge chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">Labels for the data table columns.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Gauge(data:seq<string * #value>, ?Labels, ?Options) =
+        Chart.Create [data] Labels Options Gauge Datum.New
+
+    /// <summary>Creates a geo chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">Labels for the data table columns.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Geo(data:seq<string * #value>, ?Labels, ?Options) =
+        Chart.Create [data] Labels Options Geo Datum.New
+
+    /// <summary>Creates a geo chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">Labels for the data table columns.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Geo(data:seq<string * #value * #value>, ?Labels, ?Options) =
+        Chart.Create [data] Labels Options Geo Datum.New
+
+    /// <summary>Creates a histogram chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">Labels for the data table columns.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Histogram(data:seq<string * #value>, ?Labels, ?Options) =
+        Chart.Create [data] Labels Options Histogram Datum.New
+
+    /// <summary>Creates a line chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">Labels for the data table columns.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Line(data:seq<#value>, ?Labels, ?Options) =
+        Chart.Create' data Labels Options Line
+
+    /// <summary>Creates a line chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">Labels for the data table columns.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Line(data:seq<#key * #value>, ?Labels, ?Options) =
+        Chart.Create [data] Labels Options Line Datum.New
+
+    /// <summary>Creates a line chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">Labels for the data table columns.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Line(data:seq<#seq<'K * 'V>> when 'K :> key and 'V :> value, ?Labels, ?Options) =
+        Chart.Create data Labels Options Line Datum.New
+     
+    /// <summary>Creates a map chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">Labels for the data table columns.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Map(data:seq<string * string>, ?Labels, ?Options) =
+        Chart.Create [data] Labels Options Map Datum.New
+
+    /// <summary>Creates a map chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">Labels for the data table columns.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Map(data:seq<float * float * string>, ?Labels, ?Options) =
+        Chart.Create [data] Labels Options Map Datum.New
+
+    /// <summary>Creates a pie chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">Labels for the data table columns.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Pie(data:seq<string * #value>, ?Labels, ?Options) =
+        Chart.Create [data] Labels Options Pie Datum.New
+
+    /// <summary>Creates a sankey diagram.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">Labels for the data table columns.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Sankey(data:seq<string * string * #value>, ?Labels, ?Options) =
+        Chart.Create [data] Labels Options Sankey Datum.New
+
+    /// <summary>Creates a scatter chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">Labels for the data table columns.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Scatter(data:seq<#value>, ?Labels, ?Options) =
+        Chart.Create' data Labels Options Scatter
+
+    /// <summary>Creates a scatter chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">Labels for the data table columns.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Scatter(data:seq<#key * #value>, ?Labels, ?Options) =
+        Chart.Create [data] Labels Options Scatter Datum.New
+
+    /// <summary>Creates a scatter chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">Labels for the data table columns.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Scatter(data:seq<#seq<'K * 'V>> when 'K :> key and 'V :> value, ?Labels, ?Options) =
+        Chart.Create data Labels Options Scatter Datum.New
+
+    /// <summary>Creates a stepped area chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">Labels for the data table columns.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member SteppedArea(data:seq<#key * #value>, ?Labels, ?Options) =
+        Chart.Create [data] Labels Options SteppedArea Datum.New
+
+    /// <summary>Creates a stepped area chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">Labels for the data table columns.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member SteppedArea(data:seq<#seq<'K * 'V>> when 'K :> key and 'V :> value, ?Labels, ?Options) =
+        Chart.Create data Labels Options SteppedArea Datum.New
+
+    /// <summary>Creates a table chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">Labels for the data table columns.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Table(data:seq<#key * #value>, ?Labels, ?Options) =
+        Chart.Create [data] Labels Options Table Datum.New
+
+    /// <summary>Creates a table chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">Labels for the data table columns.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Table(data:seq<#seq<'K * 'V>> when 'K :> key and 'V :> value, ?Labels, ?Options) =
+        Chart.Create data Labels Options Table Datum.New
+
+    /// <summary>Creates a timeline chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">Labels for the data table columns.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Timeline(data:seq<string * #value * #value>, ?Labels, ?Options) =
+        Chart.Create [data] Labels Options Timeline Datum.New
+
+    /// <summary>Creates a timeline chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">Labels for the data table columns.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Timeline(data:seq<string * string * #value * #value>, ?Labels, ?Options) =
+        Chart.Create [data] Labels Options Timeline Datum.New
+
+    /// <summary>Creates a treemap chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">Labels for the data table columns.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Treemap(data:seq<string * string * #value>, ?Labels, ?Options) =
+        Chart.Create [data] Labels Options TreeMap Datum.New
+
+    /// <summary>Creates a treemap chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">Labels for the data table columns.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Treemap(data:seq<string * string * #value * #value>, ?Labels, ?Options) =
+        Chart.Create [data] Labels Options TreeMap Datum.New

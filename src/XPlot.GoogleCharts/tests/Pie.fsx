@@ -1,8 +1,17 @@
 ﻿#I "../../../bin"
 #r "XPlot.GoogleCharts.dll"
-#r "XPlot.GoogleCharts.WPF.dll"
 
 open XPlot.GoogleCharts
+
+[
+    "Work", 11
+    "Eat", 2
+    "Commute", 2
+    "Watch TV", 2
+    "Sleep", 7
+]
+|> Chart.Pie
+|> Chart.Show
 
 let chart1 =
     [
