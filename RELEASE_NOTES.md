@@ -1,4 +1,8 @@
-﻿### 1.4.1 - July 30, 2016
+﻿### 1.4.2-rc001 - September 25, 2016
+* Rationalise the GoogleChart and PlotlyChart types
+* Rationalise the pipeline style helpers
+
+### 1.4.1 - July 30, 2016
 * Documentation updates
 * Plotly API mappings fixes
 

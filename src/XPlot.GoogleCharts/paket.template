@@ -1,8 +1,8 @@
 type project
 owners
-    Taha Hachana
+    Taha Hachana; Tomas Petricek
 authors
-    Taha Hachana
+    Taha Hachana; Tomas Petricek
 projectUrl
     http://github.com/TahaHachana/XPlot
 iconUrl
@@ -19,3 +19,6 @@ summary
     Data visualization library for F#
 description
     XPlot is a cross-platform data visualization library that supports creating charts using Google Charts and Plotly. The library provides a composable domain specific language for building charts and specifying their properties.
+dependencies
+    Google.DataTable.Net.Wrapper ~> CURRENTVERSION
+    Newtonsoft.Json ~> CURRENTVERSION

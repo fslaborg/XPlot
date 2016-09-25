@@ -151,11 +151,20 @@ Target "SourceLink" (fun _ ->
 
 Target "NuGet" (fun _ ->
     Paket.Pack(fun p ->
+//    NuGet (fun p ->
         { p with
+ //           Authors = authors
             OutputPath = "bin"
             Version = release.NugetVersion
             ReleaseNotes = toLines release.Notes
+//            Dependencies =
+//                [
+//                    "Google.DataTable.Net.Wrapper", GetPackageVersion "packages" "Google.DataTable.Net.Wrapper"
+//                    "Newtonsoft.Json", GetPackageVersion "packages" "Newtonsoft.Json"
+//                ]
+            
         })
+//        ("xplot.nuspec")
 )
 
 Target "PublishNuget" (fun _ ->
