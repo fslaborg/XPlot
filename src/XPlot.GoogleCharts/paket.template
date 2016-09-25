@@ -1,6 +1,6 @@
 type project
 owners
-    Taha Hachana, Tomas Petricek
+    Taha Hachana
 authors
     Taha Hachana, Tomas Petricek
 projectUrl
@@ -20,5 +20,5 @@ summary
 description
     XPlot is a cross-platform data visualization library that supports creating charts using Google Charts and Plotly. The library provides a composable domain specific language for building charts and specifying their properties.
 dependencies
-    Google.DataTable.Net.Wrapper ~> LOCKEDVERSION
-    Newtonsoft.Json ~> LOCKEDVERSION
+    Google.DataTable.Net.Wrapper = LOCKEDVERSION
+    Newtonsoft.Json = LOCKEDVERSION

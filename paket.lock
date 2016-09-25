@@ -1,23 +1,15 @@
 NUGET
   remote: https://www.nuget.org/api/v2
     Deedle (1.2.5)
-    FAKE (4.35.1)
+    FAKE (4.40)
     FSharp.Compiler.Service (2.0.0.6)
-    FSharp.Core (4.0.0.1)
-    FSharp.Data (2.3.2)
-      Zlib.Portable (>= 1.11) - framework: portable-net45+sl5+win8, portable-net45+win8, portable-net45+win8+wp8+wpa81
     FSharp.Formatting (2.14.4)
       FSharp.Compiler.Service (2.0.0.6)
       FSharpVSPowerTools.Core (>= 2.3 < 2.4)
     FSharpVSPowerTools.Core (2.3)
       FSharp.Compiler.Service (>= 2.0.0.3)
     Google.DataTable.Net.Wrapper (3.1.2)
-    Hopac (0.3)
-      FSharp.Core (>= 3.1.2.5)
-    Http.fs (3.0.6)
-      FSharp.Core (>= 3.1.2.5)
-      Hopac (>= 0.3)
-    MathNet.Numerics (3.12)
+    MathNet.Numerics (3.13.1)
       TaskParallelLibrary (>= 1.0.2856) - framework: net35
     Microsoft.Bcl (1.1.10) - framework: net10, net11, net20, net30, net35, net40, net40-full
       Microsoft.Bcl.Build (>= 1.0.14)
@@ -81,7 +73,7 @@ NUGET
       NUnit.Extension.NUnitV2ResultWriter (>= 3.4.1)
       NUnit.Extension.TeamCityEventListener (>= 1.0.1)
       NUnit.Extension.VSProjectLoader (>= 3.4.1)
-    Octokit (0.21.1)
+    Octokit (0.22)
       Microsoft.Net.Http  - framework: net10, net11, net20, net30, net35, net40, net40-full
     SourceLink.Fake (1.1)
     System.Collections (4.0.11) - framework: >= netstandard10
@@ -280,8 +272,7 @@ NUGET
       System.Threading (>= 4.0.11) - framework: dnxcore50, >= netstandard13
       System.Xml.ReaderWriter (>= 4.0.11) - framework: dnxcore50, netstandard10, >= netstandard13
     TaskParallelLibrary (1.0.2856) - framework: net35
-    Zlib.Portable (1.11) - framework: portable-net45+sl5+win8, portable-net45+win8, portable-net45+win8+wp8+wpa81
 GITHUB
   remote: fsharp/FAKE
-    modules/Octokit/Octokit.fsx (def4ef86c0552d7126cbe6756c7b7fdda447245d)
+    modules/Octokit/Octokit.fsx (dab7b5aea40c0855cf35fc7d6e67fa4f411fb24b)
       Octokit (>= 0.20)

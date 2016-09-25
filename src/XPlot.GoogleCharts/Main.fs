@@ -64,7 +64,7 @@ module Data =
             match Seq.length series with
             | 1 ->
                 series
-                |> Seq.nth 0
+                |> Seq.item 0
                 |> fun x ->
                     x.DataPoints
                     |> Seq.map (fun dp ->
@@ -123,7 +123,7 @@ module Data =
                 | false -> Seq.append ["Column 1"] labelsSeq
                 | true -> labelsSeq
 
-        sysDt.Columns.Add(Seq.nth 0 labels', (fst longestRow).GetType())
+        sysDt.Columns.Add(Seq.item 0 labels', (fst longestRow).GetType())
         |> ignore
 
         let values = Seq.map snd rows 
@@ -138,7 +138,7 @@ module Data =
                     | _ -> fst x.[idx])
                 |> Option.get
                 |> fun x -> x.GetType()
-            sysDt.Columns.Add(Seq.nth (idx + 1) labels', columnType)
+            sysDt.Columns.Add(Seq.item (idx + 1) labels', columnType)
             |> ignore
         )
 
