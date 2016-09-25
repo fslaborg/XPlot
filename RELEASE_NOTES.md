@@ -1,4 +1,7 @@
-﻿### 1.4.2-rc001 - September 25, 2016
+﻿### 1.4.2-rc002 - September 25, 2016
+* Latest dependencies versions for the XPlot.GoogleCharts package
+
+### 1.4.2-rc001 - September 25, 2016
 * Rationalise the GoogleChart and PlotlyChart types
 * Rationalise the pipeline style helpers
 
