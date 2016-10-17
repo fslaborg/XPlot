@@ -82,6 +82,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "chart", "chart", "{1F19571C
 		docs\content\chart\plotly-time-series.fsx = docs\content\chart\plotly-time-series.fsx
 	EndProjectSection
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "XPlot.D3", "src\XPlot.D3\XPlot.D3.fsproj", "{DF291356-C9DD-4C7F-80FE-E9B17BDEBFA0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -100,6 +102,10 @@ Global
 		{182232F3-9E9D-4342-A096-037F2CF2037F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{182232F3-9E9D-4342-A096-037F2CF2037F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{182232F3-9E9D-4342-A096-037F2CF2037F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF291356-C9DD-4C7F-80FE-E9B17BDEBFA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF291356-C9DD-4C7F-80FE-E9B17BDEBFA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF291356-C9DD-4C7F-80FE-E9B17BDEBFA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF291356-C9DD-4C7F-80FE-E9B17BDEBFA0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

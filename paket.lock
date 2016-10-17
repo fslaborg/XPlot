@@ -88,6 +88,9 @@ NUGET
       Microsoft.NETCore.Platforms (>= 1.0.1) - framework: dnxcore50, >= netstandard10
       Microsoft.NETCore.Targets (>= 1.0.1) - framework: dnxcore50, >= netstandard10
       System.Runtime (>= 4.1) - framework: dnxcore50, >= netstandard10
+    System.Drawing.Primitives (4.0)
+      System.Runtime (>= 4.1) - framework: >= netstandard11
+      System.Runtime.Extensions (>= 4.1) - framework: >= netstandard11
     System.Dynamic.Runtime (4.0.11) - framework: >= netstandard10
       System.Collections (>= 4.0.11) - framework: dnxcore50, >= netstandard13
       System.Diagnostics.Debug (>= 4.0.11) - framework: dnxcore50, >= netstandard13
@@ -274,5 +277,5 @@ NUGET
     TaskParallelLibrary (1.0.2856) - framework: net35
 GITHUB
   remote: fsharp/FAKE
-    modules/Octokit/Octokit.fsx (dab7b5aea40c0855cf35fc7d6e67fa4f411fb24b)
+    modules/Octokit/Octokit.fsx (889bda9367dfb24f9abb524165a0dbe2cdd86252)
       Octokit (>= 0.20)
