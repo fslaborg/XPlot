@@ -30,5 +30,4 @@ edges
     | "A" -> {defaultNodeOptions with Fill = {Red = 150uy; Green = 150uy; Blue=195uy}} 
     | "B" -> {defaultNodeOptions with RadiusScale=1.5; Fill = {Red = 150uy; Green = 195uy; Blue=150uy}}
     | _ -> defaultNodeOptions)
-|> Chart.Show
 (*** include-it:netchart ***)

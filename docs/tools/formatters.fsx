@@ -55,11 +55,13 @@ open System.Windows.Forms
 
 /// Extract values from any series using reflection
 let (|SeriesValues|_|) (value:obj) = 
-  let iser = value.GetType().GetInterface("ISeries`1")
-  if iser <> null then
-    let keys = value.GetType().GetProperty("Keys").GetValue(value) :?> System.Collections.IEnumerable
-    let vector = value.GetType().GetProperty("Vector").GetValue(value) :?> IVector
-    Some(Seq.zip (Seq.cast<obj> keys) vector.ObjectSequence)
+  if value <> null then
+    let iser = value.GetType().GetInterface("ISeries`1")
+    if iser <> null then
+      let keys = value.GetType().GetProperty("Keys").GetValue(value) :?> System.Collections.IEnumerable
+      let vector = value.GetType().GetProperty("Vector").GetValue(value) :?> IVector
+      Some(Seq.zip (Seq.cast<obj> keys) vector.ObjectSequence)
+    else None
   else None
 
 let (|Float|_|) (v:obj) = if v :? float then Some(v :?> float) else None
