@@ -8,6 +8,7 @@ module Formatters
 #r "../../packages/Deedle/lib/net40/Deedle.dll"
 #r "../../bin/XPlot.GoogleCharts.dll"
 #r "../../bin/XPlot.Plotly.dll"
+#r "../../bin/XPlot.D3.dll"
 
 // --------------------------------------------------------------------------------------
 // NOTE: Most of this file is the same as in FsLab (https://github.com/fslaborg/FsLab)
@@ -153,6 +154,7 @@ let createFsiEvaluator root output (floatFormat:string) =
 //        fig.Height <- 300
 //        Some [ InlineBlock (fig.GetInlineHtml(name)) ]
         Some [ InlineBlock <| chart.GetInlineHtml() ]
+    | :? D3.ForceLayoutChart as chart -> Some [ InlineBlock <| chart.GetHtml() ]
 
     | SeriesValues s ->
         // Pretty print series!

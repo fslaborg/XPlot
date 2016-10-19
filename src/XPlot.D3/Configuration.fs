@@ -2,9 +2,14 @@ namespace XPlot.D3
 
 open System.IO
 open System
-open System.Drawing
 open System.Text
 open Newtonsoft.Json
+
+type Color = {
+    Red:byte
+    Green:byte
+    Blue:byte
+}
 
 type Node = {
         Name:string
@@ -26,7 +31,7 @@ module Configuration =
     type NodeOptions = {
         Fill: Color
         Stroke: Color
-        StrokeWidth:int
+        StrokeWidth:float
         RadiusScale:float
     }
 
@@ -39,34 +44,47 @@ module Configuration =
 
     type EdgeOptions = {
         Stroke: Color
-        StrokeWidth:int
+        StrokeWidth:float
+        Distance:float
     }
 
     type EdgeStyle = {
         StrokeHex: string
         StrokeWidth: string
+        Distance:float
     }
 
     type Options = {
+        EdgeOptions:Edge -> EdgeOptions
         NodeOptions:Node -> NodeOptions
         Gravity:float
+        Charge:float
     }
 
-    let grey = Color.FromArgb(200,200,200)
-    let darkGrey = Color.FromArgb(150,150,150)
+    let private grey = {Red = 200uy; Green = 200uy; Blue = 200uy}
+    let private darkGrey = {Red = 100uy; Green = 100uy; Blue = 100uy}
+    
 
-    let defaultNodeOptions = 
+    let defaultNodeOptions:NodeOptions = 
         {
             RadiusScale = 1.0
             Fill = grey
             Stroke = darkGrey
-            StrokeWidth = 2
+            StrokeWidth = 2.0
+        }
+    let defaultEdgeOptions:EdgeOptions = 
+        {
+            StrokeWidth = 2.0
+            Stroke = darkGrey
+            Distance = 150.0
         }
 
     let defaultOptions = 
         {
+            Charge = -3000.0
             Gravity = 1.0
             NodeOptions = (fun n -> defaultNodeOptions)
+            EdgeOptions = (fun e -> defaultEdgeOptions)
         }
 
     
