@@ -92,6 +92,14 @@ type public ForceLayoutChart() =
                 StrokeHex = toHex nodeOptions.Stroke
                 StrokeWidth = sprintf "%fpx" nodeOptions.StrokeWidth
                 RadiusScale = nodeOptions.RadiusScale
+                LabelText = 
+                    match nodeOptions.Label with
+                    | None -> ""
+                    | Some lbl -> lbl.Text
+                LabelAttrs = 
+                    match nodeOptions.Label with
+                    | None -> []
+                    | Some lbl -> lbl.StyleAttrs
             }
     let toEdgeStyle (edgeOptions:EdgeOptions) = 
         {

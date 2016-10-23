@@ -4,7 +4,9 @@
         
         var nodes = {NODES};
 
-        var links = {LINKS}
+        var links = {LINKS};
+
+        //var labels = {LABELS};
         
         var svg = d3.select('#{GUID}').append('svg')
             .attr('width', width)
@@ -32,14 +34,33 @@
             .style('fill',function(d,i) { return nodeStyles[i]['FillHex']; })
             .attr('cx', function(d,i) { return width/2; }) 
             .attr('cy', function(d,i) { return height/2; })
-            .attr('r', function(d,i) { return nodeStyles[i]['RadiusScale'] * radius; }); 
+            .attr('r', function(d,i) { return nodeStyles[i]['RadiusScale'] * radius; });
+
+        var lbls = svg.selectAll("text")
+            .data(nodes)
+            .enter()
+            .append('text')
+            .attr('x', width/2)
+            .attr('y', height/2)
+            .text(function (d,i) {
+                return nodeStyles[i].LabelText;})
+            .each(function (d,i){
+                var attrs = nodeStyles[i].LabelAttrs
+                for (var j = 0; j< attrs.length; j++){
+                    var attr = attrs[j];
+                    d3.select(this).attr(attr.Item1,attr.Item2);
+                }
+            });
 
         function tick(e) {
                 node.attr('r', function(d,i) { return nodeStyles[i]['RadiusScale'] * radius; })
                     .attr('cx', function(d) { return d.x; })
                     .attr('cy', function(d) { return d.y; })
-                    .call(force.drag) 
-                    ;
+                    .call(force.drag);
+                
+                lbls.attr('x', function(d) { return d.x + 20; })
+                    .attr('y', function(d) { return d.y; })
+                    .call(force.drag);
             
                 link.attr('x1', function(d) { return d.source.x; })
                     .attr('y1', function(d) { return d.source.y; })
