@@ -8,6 +8,7 @@ module Formatters
 #r "../../packages/Deedle/lib/net40/Deedle.dll"
 #r "../../bin/XPlot.GoogleCharts.dll"
 #r "../../bin/XPlot.Plotly.dll"
+#r "../../bin/XPlot.D3.dll"
 
 // --------------------------------------------------------------------------------------
 // NOTE: Most of this file is the same as in FsLab (https://github.com/fslaborg/FsLab)
@@ -54,11 +55,13 @@ open System.Windows.Forms
 
 /// Extract values from any series using reflection
 let (|SeriesValues|_|) (value:obj) = 
-  let iser = value.GetType().GetInterface("ISeries`1")
-  if iser <> null then
-    let keys = value.GetType().GetProperty("Keys").GetValue(value) :?> System.Collections.IEnumerable
-    let vector = value.GetType().GetProperty("Vector").GetValue(value) :?> IVector
-    Some(Seq.zip (Seq.cast<obj> keys) vector.ObjectSequence)
+  if value <> null then
+    let iser = value.GetType().GetInterface("ISeries`1")
+    if iser <> null then
+      let keys = value.GetType().GetProperty("Keys").GetValue(value) :?> System.Collections.IEnumerable
+      let vector = value.GetType().GetProperty("Vector").GetValue(value) :?> IVector
+      Some(Seq.zip (Seq.cast<obj> keys) vector.ObjectSequence)
+    else None
   else None
 
 let (|Float|_|) (v:obj) = if v :? float then Some(v :?> float) else None
@@ -153,6 +156,7 @@ let createFsiEvaluator root output (floatFormat:string) =
 //        fig.Height <- 300
 //        Some [ InlineBlock (fig.GetInlineHtml(name)) ]
         Some [ InlineBlock <| chart.GetInlineHtml() ]
+    | :? D3.ForceLayoutChart as chart -> Some [ InlineBlock <| chart.GetHtml() ]
 
     | SeriesValues s ->
         // Pretty print series!
