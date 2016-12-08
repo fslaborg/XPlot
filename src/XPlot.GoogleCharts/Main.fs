@@ -302,7 +302,7 @@ type GoogleChart() =
             .Replace("{GUID}", __.Id)
 
     /// The height of the chart container element.
-    member val Height = 500 with get, set
+    member val Height = -1 with get, set
 
     /// The chart's container div id.
     member val Id =
@@ -319,7 +319,7 @@ type GoogleChart() =
         System.Diagnostics.Process.Start(path) |> ignore
 
     /// The width of the chart container element.
-    member val Width = 900 with get, set
+    member val Width = -1 with get, set
 
     /// Sets the chart's height.
     member __.WithHeight height = __.Height <- height
