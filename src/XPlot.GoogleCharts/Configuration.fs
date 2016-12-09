@@ -1254,6 +1254,60 @@ module Configuration =
         member __.ShouldSerializetableCell() = not tableCellField.IsNone
         member __.ShouldSerializerowNumberCell() = not rowNumberCellField.IsNone
 
+    /// Corresponds to the Google Charts NumberFormat type:
+    /// https://developers.google.com/chart/interactive/docs/reference#numberformat
+    type NumberFormat() =
+
+        let mutable decimalSymbolField : string option = None
+        let mutable fractionDigitsField : string option = None
+        let mutable groupingSymbolField : string option = None
+        let mutable negativeColorField : string option = None
+        let mutable negativeParensField : string option = None
+        let mutable patternField : string option = None
+        let mutable prefixField : string option = None
+        let mutable suffixField : string option = None
+
+        member __.decimalSymbol
+            with get() = decimalSymbolField.Value
+            and set(value) = decimalSymbolField <- Some value
+
+        member __.fractionDigits
+            with get() = fractionDigitsField.Value
+            and set(value) = fractionDigitsField <- Some value
+
+        member __.groupingSymbol
+            with get() = groupingSymbolField.Value
+            and set(value) = groupingSymbolField <- Some value
+
+        member __.negativeColor
+            with get() = negativeColorField.Value
+            and set(value) = negativeColorField <- Some value
+
+        member __.negativeParens
+            with get() = negativeParensField.Value
+            and set(value) = negativeParensField <- Some value
+
+        member __.pattern
+            with get() = patternField.Value
+            and set(value) = patternField <- Some value
+
+        member __.prefix
+            with get() = prefixField.Value
+            and set(value) = prefixField <- Some value
+
+        member __.suffix
+            with get() = suffixField.Value
+            and set(value) = suffixField <- Some value
+
+        member __.ShouldSerializedecimalSymbol() = not decimalSymbolField.IsNone
+        member __.ShouldSerializefractionDigits() = not fractionDigitsField.IsNone
+        member __.ShouldSerializegroupingSymbol() = not groupingSymbolField.IsNone
+        member __.ShouldSerializenegativeColor() = not negativeColorField.IsNone
+        member __.ShouldSerializenegativeParens() = not negativeParensField.IsNone
+        member __.ShouldSerializepattern() = not patternField.IsNone
+        member __.ShouldSerializeprefix() = not prefixField.IsNone
+        member __.ShouldSerializesuffix() = not suffixField.IsNone
+
     type Options() =
 
         let mutable aggregationTargetField : string option = None
@@ -1417,6 +1471,8 @@ module Configuration =
         let mutable showScaleField : bool option = None
         let mutable showTooltipsField : bool option = None
         let mutable useWeightedAverageForAggregationField : bool option = None
+
+        member val datasetNumberFormats : ((int * NumberFormat) list option) = None with get, set
 
         member __.aggregationTarget
             with get() = aggregationTargetField.Value
@@ -1995,7 +2051,7 @@ module Configuration =
         member __.useWeightedAverageForAggregation
             with get() = useWeightedAverageForAggregationField.Value
             and set(value) = useWeightedAverageForAggregationField <- Some value
-
+        
         member __.ShouldSerializeaggregationTarget() = not aggregationTargetField.IsNone
         member __.ShouldSerializeanimation() = not animationField.IsNone
         member __.ShouldSerializeannotations() = not annotationsField.IsNone
@@ -2140,5 +2196,6 @@ module Configuration =
         member __.ShouldSerializeshowScale() = not showScaleField.IsNone
         member __.ShouldSerializeshowTooltips() = not showTooltipsField.IsNone
         member __.ShouldSerializeuseWeightedAverageForAggregation() = not useWeightedAverageForAggregationField.IsNone
+        member __.ShouldSerializedatasetNumberFormats() = false
 
 
