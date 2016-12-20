@@ -11,6 +11,7 @@ module Html =
         """<!DOCTYPE html>
 <html>
     <head>
+        <meta charset="UTF-8" />
         <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     </head>
     <body>
