@@ -32,6 +32,14 @@ module Html =
             var layout = [LAYOUT];
             Plotly.newPlot('[ID]', data, layout);
         </script>"""
+    
+    /// Display given html markup in default browser
+    let showInBrowser html pageId=
+        let tempPath = Path.GetTempPath()
+        let file = sprintf "%s.html" pageId
+        let path = Path.Combine(tempPath, file)
+        File.WriteAllText(path, html)
+        System.Diagnostics.Process.Start(path) |> ignore
 
 type Options = Layout
 
@@ -128,11 +136,7 @@ type PlotlyChart() =
 //                    .Replace("[LAYOUT]", layoutJson)
 //            Html.pageTemplate.Replace("[CHART]", chartMarkup)
         let html = __.GetHtml()
-        let tempPath = Path.GetTempPath()
-        let file = sprintf "%s.html" __.Id
-        let path = Path.Combine(tempPath, file)
-        File.WriteAllText(path, html)
-        System.Diagnostics.Process.Start(path) |> ignore
+        Html.showInBrowser html __.Id        
 
     /// The width of the chart container element.
     member val Width = 900 with get, set
@@ -229,14 +233,12 @@ type Chart =
     /// Displays a chart in the default browser.
     static member Show(chart:PlotlyChart) = chart.Show()
 
+    /// Combine charts together and display as a single page in default browser
     static member ShowAll(charts:seq<PlotlyChart>)=
         let html = charts |> Seq.map (fun c->c.GetInlineHtml()) |> Seq.reduce (+)
         let pageHtml = Html.pageTemplate.Replace("[CHART]", html)
-        let tempPath = Path.GetTempPath()
-        let file = sprintf "%s.html" (Guid.NewGuid().ToString())
-        let path = Path.Combine(tempPath, file)
-        File.WriteAllText(path, pageHtml)
-        System.Diagnostics.Process.Start(path) |> ignore
+        let combinedChartId = Guid.NewGuid().ToString()
+        Html.showInBrowser pageHtml combinedChartId
 
     /// Sets the chart's height.
     static member WithHeight height (chart:PlotlyChart) =
