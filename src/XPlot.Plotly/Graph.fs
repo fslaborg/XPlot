@@ -7127,6 +7127,7 @@ type Legend() =
     let mutable _borderwidth: float option = None
     let mutable _font: Font option = None
     let mutable _traceorder: string option = None
+    let mutable _orientation: string option = None
     let mutable _tracegroupgap: float option = None
     let mutable _x: float option = None
     let mutable _xanchor: _ option = None
@@ -7158,6 +7159,11 @@ type Legend() =
     member __.traceorder
         with get () = Option.get _traceorder
         and set value = _traceorder <- Some value
+
+    /// Set horizontal *h* or vertical *v* orientation of legend
+    member __.orientation
+        with get () = Option.get _orientation
+        and set value = _orientation <- Some value
 
     /// Sets the amount of vertical space (in px) between legend groups.
     member __.tracegroupgap
@@ -7197,6 +7203,7 @@ type Legend() =
     member __.ShouldSerializeborderwidth() = not _borderwidth.IsNone
     member __.ShouldSerializefont() = not _font.IsNone
     member __.ShouldSerializetraceorder() = not _traceorder.IsNone
+    member __.ShouldSerializeorientation() = not _orientation.IsNone
     member __.ShouldSerializetracegroupgap() = not _tracegroupgap.IsNone
     member __.ShouldSerializex() = not _x.IsNone
     member __.ShouldSerializexanchor() = not _xanchor.IsNone
