@@ -37,7 +37,7 @@ let z =
 Plotly 3D Surface Plots
 =======================
 
-[Full source](https://github.com/TahaHachana/XPlot/blob/master/docs/content/chart/plotly-3d-surface-plots.fsx)
+[Full source](https://github.com/fslaborg/XPlot/blob/master/docs/content/chart/plotly-3d-surface-plots.fsx)
 
 Topographical 3D Surface Plot
 -----------------------------
