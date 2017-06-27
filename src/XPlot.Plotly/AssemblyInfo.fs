@@ -10,5 +10,8 @@ open System.Reflection
 do ()
 
 module internal AssemblyVersionInformation =
-    let [<Literal>] Version = "1.4.2"
-    let [<Literal>] InformationalVersion = "1.4.2"
+    let [<Literal>] AssemblyTitle = "XPlot.Plotly"
+    let [<Literal>] AssemblyProduct = "XPlot"
+    let [<Literal>] AssemblyDescription = "Data visualization library for F#"
+    let [<Literal>] AssemblyVersion = "1.4.2"
+    let [<Literal>] AssemblyFileVersion = "1.4.2"
