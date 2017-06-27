@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Plotly Bubble Charts
+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Data visualization library for F#" />
+    <meta name="author" content="Taha Hachana; Tomas Petricek" />
+
+    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        google.load("visualization", "1.1", { packages: ["corechart", "annotationchart", "calendar", "gauge", "geochart", "map", "sankey", "table", "timeline", "treemap"] })
+    </script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="/XPlot/content/style.css" />
+    <script type="text/javascript" src="/XPlot/content/tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div class="container">
+        <div class="masthead">
+            <ul class="nav nav-pills pull-right">
+                <li>
+                    <a href="http://fslab.org"><img height="16" width="16" src="http://fslab.org/img/thumbs/fslab.png" /> FsLab</a>
+                </li>
+                <li>
+                    <a href="http://fsharp.github.io/FSharp.Data"><img height="16" width="16" src="http://fslab.org/img/thumbs/fsharpdata.png" /> F# Data</a>
+                </li>
+                <li>
+                    <a href="http://bluemountaincapital.github.io/Deedle"><img height="16" width="16" src="http://fslab.org/img/thumbs/deedle.png" /> Deedle</a>
+                </li>
+                <li>
+                    <a href="http://bluemountaincapital.github.io/FSharpRProvider"><img height="16" width="16" src="http://fslab.org/img/thumbs/rprovider.png" /> R Provider</a>
+                </li>
+                <li>
+                    <a href="http://numerics.mathdotnet.com/"><img height="16" width="16" src="http://fslab.org/img/thumbs/mathnet.png" /> Math.NET</a>
+                </li>
+            </ul>
+            <h3 class="muted"><a href="/XPlot/">XPlot</a></h3>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="span9" id="main">
+                
+<h1><a name="Plotly-Bubble-Charts" class="anchor" href="#Plotly-Bubble-Charts">Plotly Bubble Charts</a></h1>
+<p><a href="https://github.com/fslaborg/XPlot/blob/master/docs/content/chart/plotly-bubble-charts.fsx">Full source</a></p>
+<h2><a name="Marker-Size-Color-and-Symbol-as-an-Array" class="anchor" href="#Marker-Size-Color-and-Symbol-as-an-Array">Marker Size, Color, and Symbol as an Array</a></h2>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+<span class="l">11: </span>
+<span class="l">12: </span>
+<span class="l">13: </span>
+<span class="l">14: </span>
+<span class="l">15: </span>
+<span class="l">16: </span>
+<span class="l">17: </span>
+<span class="l">18: </span>
+<span class="l">19: </span>
+<span class="l">20: </span>
+<span class="l">21: </span>
+<span class="l">22: </span>
+<span class="l">23: </span>
+<span class="l">24: </span>
+<span class="l">25: </span>
+<span class="l">26: </span>
+<span class="l">27: </span>
+<span class="l">28: </span>
+<span class="l">29: </span>
+<span class="l">30: </span>
+<span class="l">31: </span>
+<span class="l">32: </span>
+<span class="l">33: </span>
+<span class="l">34: </span>
+<span class="l">35: </span>
+<span class="l">36: </span>
+<span class="l">37: </span>
+<span class="l">38: </span>
+<span class="l">39: </span>
+<span class="l">40: </span>
+<span class="l">41: </span>
+<span class="l">42: </span>
+<span class="l">43: </span>
+<span class="l">44: </span>
+<span class="l">45: </span>
+<span class="l">46: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span class="i">trace1</span> <span class="o">=</span>
+    <span class="i">Scatter</span>(
+        <span class="i">x</span> <span class="o">=</span> [<span class="n">1</span>; <span class="n">2</span>; <span class="n">3</span>; <span class="n">4</span>],
+        <span class="i">y</span> <span class="o">=</span> [<span class="n">10</span>; <span class="n">11</span>; <span class="n">12</span>; <span class="n">13</span>],
+        <span class="i">mode</span> <span class="o">=</span> <span class="s">&quot;markers&quot;</span>,
+        <span class="i">marker</span> <span class="o">=</span>
+            <span class="i">Marker</span>(
+                <span class="i">color</span> <span class="o">=</span> [<span class="s">&quot;hsl(0,100,40)&quot;</span>; <span class="s">&quot;hsl(33,100,40)&quot;</span>; <span class="s">&quot;hsl(66,100,40)&quot;</span>; <span class="s">&quot;hsl(99,100,40)&quot;</span>],
+                <span class="i">size</span> <span class="o">=</span> [<span class="n">12</span>; <span class="n">22</span>; <span class="n">32</span>; <span class="n">42</span>],
+                <span class="i">opacity</span> <span class="o">=</span> [<span class="n">0.6</span>, <span class="n">0.7</span>, <span class="n">0.8</span>, <span class="n">0.9</span>]
+            )
+    )
+
+<span class="k">let</span> <span class="i">trace2</span> <span class="o">=</span>
+    <span class="i">Scatter</span>(
+        <span class="i">x</span> <span class="o">=</span> [<span class="n">1</span>; <span class="n">2</span>; <span class="n">3</span>; <span class="n">4</span>],
+        <span class="i">y</span> <span class="o">=</span> [<span class="n">11</span>; <span class="n">12</span>; <span class="n">13</span>; <span class="n">14</span>],
+        <span class="i">mode</span> <span class="o">=</span> <span class="s">&quot;markers&quot;</span>,
+        <span class="i">marker</span> <span class="o">=</span>
+            <span class="i">Marker</span>(
+                <span class="i">color</span> <span class="o">=</span> <span class="s">&quot;rgb(31, 119, 180)&quot;</span>,
+                <span class="i">size</span> <span class="o">=</span> <span class="n">18</span>,
+                <span class="i">symbol</span> <span class="o">=</span> [<span class="s">&quot;circle&quot;</span>; <span class="s">&quot;square&quot;</span>; <span class="s">&quot;diamond&quot;</span>; <span class="s">&quot;cross&quot;</span>]
+            )
+    )
+
+<span class="k">let</span> <span class="i">trace3</span> <span class="o">=</span>
+    <span class="i">Scatter</span>(
+        <span class="i">x</span> <span class="o">=</span> [<span class="n">1</span>; <span class="n">2</span>; <span class="n">3</span>; <span class="n">4</span>],
+        <span class="i">y</span> <span class="o">=</span> [<span class="n">12</span>; <span class="n">13</span>; <span class="n">14</span>; <span class="n">15</span>],
+        <span class="i">mode</span> <span class="o">=</span> <span class="s">&quot;markers&quot;</span>,
+        <span class="i">marker</span> <span class="o">=</span>
+            <span class="i">Marker</span>(
+                <span class="i">size</span> <span class="o">=</span> <span class="n">18</span>,
+                <span class="i">line</span> <span class="o">=</span>
+                    <span class="i">Line</span>(
+                        <span class="i">color</span> <span class="o">=</span> [<span class="s">&quot;rgb(120,120,120)&quot;</span>; <span class="s">&quot;rgb(120,120,120)&quot;</span>; <span class="s">&quot;red&quot;</span>; <span class="s">&quot;rgb(120,120,120)&quot;</span>],
+                        <span class="i">width</span> <span class="o">=</span> [<span class="n">2</span>; <span class="n">2</span>; <span class="n">6</span>; <span class="n">2</span>]
+                    )
+            )
+    )
+
+[<span class="i">trace1</span>; <span class="i">trace2</span>; <span class="i">trace3</span>]
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">Plot</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithWidth</span> <span class="n">700</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithHeight</span> <span class="n">500</span>
+</code></pre></td>
+</tr>
+</table>
+<div id="e6755ca3-9f0e-42ad-a7e0-7add96fe4406" style="width: 700px; height: 500px;"></div>
+        <script>
+            var data = [{"type":"scatter","x":[1,2,3,4],"y":[10,11,12,13],"mode":"markers","marker":{"opacity":[{"Item1":0.6,"Item2":0.7,"Item3":0.8,"Item4":0.9}],"size":[12,22,32,42],"color":["hsl(0,100,40)","hsl(33,100,40)","hsl(66,100,40)","hsl(99,100,40)"]}},{"type":"scatter","x":[1,2,3,4],"y":[11,12,13,14],"mode":"markers","marker":{"symbol":["circle","square","diamond","cross"],"size":18,"color":"rgb(31, 119, 180)"}},{"type":"scatter","x":[1,2,3,4],"y":[12,13,14,15],"mode":"markers","marker":{"size":18,"line":{"color":["rgb(120,120,120)","rgb(120,120,120)","red","rgb(120,120,120)"],"width":[2,2,6,2]}}}];
+            var layout = "";
+            Plotly.newPlot('e6755ca3-9f0e-42ad-a7e0-7add96fe4406', data, layout);
+        </script>
+
+
+            </div>
+            <div class="span3">
+                <img src="/XPlot/img/logo.png" alt="F# Project" style="width:130px;margin:20px" />
+                <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
+                    <li class="nav-header">XPlot</li>
+                    <li><a href="/XPlot/">Home page</a></li>
+                    <li class="divider"></li>
+                    <li><a href="http://www.nuget.org/packages?q=XPlot">Get Library via NuGet</a></li>
+                    <li><a href="http://github.com/fslaborg/XPlot">Source Code on GitHub</a></li>
+                    <li><a href="/XPlot/license.html">License (Apache 2.0)</a></li>
+                    <li><a href="/XPlot/release-notes.html">Release Notes</a></li>
+
+                    <li class="nav-header"><a href="/XPlot/google-charts.html">Google Charts</a></li>
+                    <li><a href="/XPlot/chart/google-annotation-chart.html">Annotation</a></li>
+                    <li><a href="/XPlot/chart/google-area-chart.html">Area</a></li>
+                    <li><a href="/XPlot/chart/google-bar-chart.html">Bar</a></li>
+                    <li><a href="/XPlot/chart/google-bubble-chart.html">Bubble</a></li>
+                    <li><a href="/XPlot/chart/google-calendar-chart.html">Calendar</a></li>
+                    <li><a href="/XPlot/chart/google-candlestick-chart.html">Candlestick</a></li>
+                    <li><a href="/XPlot/chart/google-column-chart.html">Column</a></li>
+                    <li><a href="/XPlot/chart/google-combo-chart.html">Combo</a></li>
+                    <li><a href="/XPlot/chart/google-gauge-chart.html">Gauge</a></li>
+                    <li><a href="/XPlot/chart/google-geo-chart.html">Geo</a></li>
+                    <li><a href="/XPlot/chart/google-histogram-chart.html">Histogram</a></li>
+                    <li><a href="/XPlot/chart/google-line-chart.html">Line</a></li>
+                    <li><a href="/XPlot/chart/google-map-chart.html">Map</a></li>
+                    <li><a href="/XPlot/chart/google-pie-chart.html">Pie</a></li>
+                    <li><a href="/XPlot/chart/google-sankey-diagram.html">Sankey</a></li>
+                    <li><a href="/XPlot/chart/google-scatter-chart.html">Scatter</a></li>
+                    <li><a href="/XPlot/chart/google-stepped-area-chart.html">Stepped Area</a></li>
+                    <li><a href="/XPlot/chart/google-timeline-chart.html">Timeline</a></li>
+                    <li><a href="/XPlot/chart/google-table-chart.html">Table</a></li>
+                    <li><a href="/XPlot/chart/google-treemap-chart.html">Treemap</a></li>
+
+                    <li class="nav-header"><a href="/XPlot/plotly.html">Plotly</a></li>
+                    <li><a href="/XPlot/chart/plotly-bar-charts.html">Bar</a></li>
+                    <li><a href="/XPlot/chart/plotly-line-scatter-plots.html">Line and Scatter Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-box-plots.html">Box Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-bubble-charts.html">Bubble Charts</a></li>
+                    <li><a href="/XPlot/chart/plotly-contour-plots.html">Contour Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-area-plots.html">Area Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-heatmaps.html">Heatmaps</a></li>
+                    <li><a href="/XPlot/chart/plotly-histograms.html">Histograms</a></li>
+                    <li><a href="/XPlot/chart/plotly-2d-histograms.html">2D Histograms</a></li>
+                    <li><a href="/XPlot/chart/plotly-polar-charts.html">Polar Charts</a></li>
+                    <li><a href="/XPlot/chart/plotly-time-series.html">Time Series</a></li>
+                    <li><a href="/XPlot/chart/plotly-multiple-chart-types.html">Multiple Chart Types</a></li>
+                    <li><a href="/XPlot/chart/plotly-log-plots.html">Log Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-3d-scatter-plots.html">3D Scatter Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-3d-surface-plots.html">3D Surface Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-3d-line-plots.html">3D Line Plots</a></li>
+
+                    <li class="nav-header">Documentation</li>
+                    <li><a href="/XPlot/reference/index.html">API Reference</a></li>
+                    <li class="divider"></li>
+
+                    <li><a href="/XPlot/reference/xplot-googlecharts-chart.html">Google Chart type</a></li>
+                    <li><a href="/XPlot/reference/xplot-googlecharts-configuration-options.html">Google Option type</a></li>
+                    <li><a href="/XPlot/reference/xplot-googlecharts-configuration.html">Google configuration module</a></li>
+
+                    <li class="divider"></li>
+
+                    <li><a href="/XPlot/reference/xplot-plotly-graph.html">Plotly Graph module</a></li>
+                    <li><a href="/XPlot/reference/xplot-plotly-graph-layout.html">Plotly Layout type</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <a href="http://github.com/fslaborg/XPlot"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub" /></a>
+</body>
+</html>

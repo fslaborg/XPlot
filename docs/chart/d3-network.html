@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>d3-network</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Data visualization library for F#" />
+    <meta name="author" content="Taha Hachana; Tomas Petricek" />
+
+    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        google.load("visualization", "1.1", { packages: ["corechart", "annotationchart", "calendar", "gauge", "geochart", "map", "sankey", "table", "timeline", "treemap"] })
+    </script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="/XPlot/content/style.css" />
+    <script type="text/javascript" src="/XPlot/content/tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div class="container">
+        <div class="masthead">
+            <ul class="nav nav-pills pull-right">
+                <li>
+                    <a href="http://fslab.org"><img height="16" width="16" src="http://fslab.org/img/thumbs/fslab.png" /> FsLab</a>
+                </li>
+                <li>
+                    <a href="http://fsharp.github.io/FSharp.Data"><img height="16" width="16" src="http://fslab.org/img/thumbs/fsharpdata.png" /> F# Data</a>
+                </li>
+                <li>
+                    <a href="http://bluemountaincapital.github.io/Deedle"><img height="16" width="16" src="http://fslab.org/img/thumbs/deedle.png" /> Deedle</a>
+                </li>
+                <li>
+                    <a href="http://bluemountaincapital.github.io/FSharpRProvider"><img height="16" width="16" src="http://fslab.org/img/thumbs/rprovider.png" /> R Provider</a>
+                </li>
+                <li>
+                    <a href="http://numerics.mathdotnet.com/"><img height="16" width="16" src="http://fslab.org/img/thumbs/mathnet.png" /> Math.NET</a>
+                </li>
+            </ul>
+            <h3 class="muted"><a href="/XPlot/">XPlot</a></h3>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="span9" id="main">
+                
+<h2><a name="D3-Network-Example" class="anchor" href="#D3-Network-Example">D3 Network Example</a></h2>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+<span class="l">11: </span>
+<span class="l">12: </span>
+<span class="l">13: </span>
+<span class="l">14: </span>
+<span class="l">15: </span>
+<span class="l">16: </span>
+<span class="l">17: </span>
+<span class="l">18: </span>
+<span class="l">19: </span>
+<span class="l">20: </span>
+<span class="l">21: </span>
+<span class="l">22: </span>
+<span class="l">23: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span class="i">edges</span> <span class="o">=</span> 
+    [   <span class="s">&quot;A&quot;</span>, <span class="s">&quot;B&quot;</span>
+        <span class="s">&quot;B&quot;</span>, <span class="s">&quot;C&quot;</span>
+        <span class="s">&quot;C&quot;</span>, <span class="s">&quot;A&quot;</span>
+        <span class="s">&quot;A&quot;</span>, <span class="s">&quot;D&quot;</span>
+        <span class="s">&quot;B&quot;</span>, <span class="s">&quot;E&quot;</span>]
+<span class="i">edges</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">ForceLayout</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithHeight</span> <span class="n">300</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithWidth</span> <span class="n">400</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithGravity</span> <span class="n">0.5</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithCharge</span> <span class="o">-</span><span class="n">2000.0</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithEdgeOptions</span> (<span class="k">fun</span> <span class="i">e</span> <span class="k">-&gt;</span>
+    <span class="k">let</span> <span class="i">pr</span> <span class="o">=</span> <span class="i">e</span><span class="o">.</span><span class="i">From</span><span class="o">.</span><span class="i">Name</span>, <span class="i">e</span><span class="o">.</span><span class="i">To</span><span class="o">.</span><span class="i">Name</span>
+    <span class="k">match</span> <span class="i">pr</span> <span class="k">with</span> 
+    | <span class="s">&quot;A&quot;</span>,<span class="s">&quot;B&quot;</span> <span class="k">-&gt;</span> { <span class="i">defaultEdgeOptions</span> <span class="k">with</span> <span class="i">Distance</span> <span class="o">=</span> <span class="n">200.0</span> }
+    | <span class="s">&quot;A&quot;</span>,<span class="s">&quot;D&quot;</span> <span class="k">-&gt;</span> { <span class="i">defaultEdgeOptions</span> <span class="k">with</span> <span class="i">StrokeWidth</span> <span class="o">=</span> <span class="n">4.5</span> } 
+    | _ <span class="k">-&gt;</span> {<span class="i">defaultEdgeOptions</span> <span class="k">with</span> <span class="i">Distance</span> <span class="o">=</span> <span class="n">100.0</span>})
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithNodeOptions</span>(<span class="k">fun</span> <span class="i">n</span> <span class="k">-&gt;</span>
+    <span class="k">match</span> <span class="i">n</span><span class="o">.</span><span class="i">Name</span> <span class="k">with</span>
+    | <span class="s">&quot;A&quot;</span> <span class="k">-&gt;</span> {<span class="i">defaultNodeOptions</span> <span class="k">with</span> <span class="i">Fill</span> <span class="o">=</span> {<span class="i">Red</span> <span class="o">=</span> <span class="n">150uy</span>; <span class="i">Green</span> <span class="o">=</span> <span class="n">150uy</span>; <span class="i">Blue</span><span class="o">=</span><span class="n">195uy</span>}} 
+    | <span class="s">&quot;B&quot;</span> <span class="k">-&gt;</span> {<span class="i">defaultNodeOptions</span> <span class="k">with</span> <span class="i">RadiusScale</span><span class="o">=</span><span class="n">1.5</span>; <span class="i">Fill</span> <span class="o">=</span> {<span class="i">Red</span> <span class="o">=</span> <span class="n">150uy</span>; <span class="i">Green</span> <span class="o">=</span> <span class="n">195uy</span>; <span class="i">Blue</span><span class="o">=</span><span class="n">150uy</span>}}
+    | _ <span class="k">-&gt;</span> <span class="i">defaultNodeOptions</span>)
+</code></pre></td>
+</tr>
+</table>
+<!DOCTYPE html>
+            <html>
+                <head>
+                    <meta charset="UTF-8">
+                    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+                    <title>D3 Chart</title>
+                </head>
+                <body>
+                    <div id="d3a18c44637db24cceb9dac78f5814f224" style="width: 400px; height: 300px;"></div>
+                    <script src="http://d3js.org/d3.v3.min.js"></script>
+                    <script type="text/javascript">
+                        
+                        // set a width and height for our SVG
+        var width = 400,
+            height = 300;
+        
+        var nodes = [{"Name":"B"},{"Name":"C"},{"Name":"A"},{"Name":"D"},{"Name":"E"}];
+
+        var links = [{"source":2,"target":0},{"source":0,"target":1},{"source":1,"target":2},{"source":2,"target":3},{"source":0,"target":4}];
+
+        //var labels = {LABELS};
+        
+        var svg = d3.select('#d3a18c44637db24cceb9dac78f5814f224').append('svg')
+            .attr('width', width)
+            .attr('height', height);
+
+        var linkStyles = [{"StrokeHex":"#646464","StrokeWidth":"2.000000px","Distance":200.0},{"StrokeHex":"#646464","StrokeWidth":"2.000000px","Distance":100.0},{"StrokeHex":"#646464","StrokeWidth":"2.000000px","Distance":100.0},{"StrokeHex":"#646464","StrokeWidth":"4.500000px","Distance":150.0},{"StrokeHex":"#646464","StrokeWidth":"2.000000px","Distance":100.0}]
+
+        var link = svg.selectAll('.link')
+            .data(links)
+            .enter().append('line')
+            .style('stroke',function(d,i) { return linkStyles[i]['StrokeHex']; })
+            .style('stroke-width', function(d,i) { return linkStyles[i]['StrokeWidth']; })
+            .attr('class', 'link');
+
+        var nodeStyles = [{"FillHex":"#96C396","StrokeHex":"#646464","StrokeWidth":"2.000000px","RadiusScale":1.5,"LabelText":"","LabelAttrs":[]},{"FillHex":"#C8C8C8","StrokeHex":"#646464","StrokeWidth":"2.000000px","RadiusScale":1.0,"LabelText":"","LabelAttrs":[]},{"FillHex":"#9696C3","StrokeHex":"#646464","StrokeWidth":"2.000000px","RadiusScale":1.0,"LabelText":"","LabelAttrs":[]},{"FillHex":"#C8C8C8","StrokeHex":"#646464","StrokeWidth":"2.000000px","RadiusScale":1.0,"LabelText":"","LabelAttrs":[]},{"FillHex":"#C8C8C8","StrokeHex":"#646464","StrokeWidth":"2.000000px","RadiusScale":1.0,"LabelText":"","LabelAttrs":[]}]
+
+        var radius = width / (nodes.length * 7);
+
+        var node = svg.selectAll('.node')
+            .data(nodes)
+            .enter().append('circle')
+            .attr('class', 'node')
+            .style('stroke',function(d,i) { return nodeStyles[i]['StrokeHex']; })
+            .style('stroke-width',function(d,i) { return nodeStyles[i]['StrokeWidth']; })
+            .style('fill',function(d,i) { return nodeStyles[i]['FillHex']; })
+            .attr('cx', function(d,i) { return width/2; }) 
+            .attr('cy', function(d,i) { return height/2; })
+            .attr('r', function(d,i) { return nodeStyles[i]['RadiusScale'] * radius; });
+
+        var lbls = svg.selectAll("text")
+            .data(nodes)
+            .enter()
+            .append('text')
+            .attr('x', width/2)
+            .attr('y', height/2)
+            .text(function (d,i) {
+                return nodeStyles[i].LabelText;})
+            .each(function (d,i){
+                var attrs = nodeStyles[i].LabelAttrs
+                for (var j = 0; j< attrs.length; j++){
+                    var attr = attrs[j];
+                    d3.select(this).attr(attr.Item1,attr.Item2);
+                }
+            });
+
+        function tick(e) {
+                node.attr('r', function(d,i) { return nodeStyles[i]['RadiusScale'] * radius; })
+                    .attr('cx', function(d) { return d.x; })
+                    .attr('cy', function(d) { return d.y; })
+                    .call(force.drag);
+                
+                lbls.attr('x', function(d) { return d.x + 20; })
+                    .attr('y', function(d) { return d.y; })
+                    .call(force.drag);
+            
+                link.attr('x1', function(d) { return d.source.x; })
+                    .attr('y1', function(d) { return d.source.y; })
+                    .attr('x2', function(d) { return d.target.x; })
+                    .attr('y2', function(d) { return d.target.y; });
+            }
+
+
+        var force = d3.layout.force()
+            .size([width, height])
+            .nodes(nodes)
+            .links(links)
+            .gravity(0.5)
+            .on("tick", tick)
+            .linkDistance( function (d,i) {
+                return linkStyles[i]['Distance'];
+            })
+            .linkStrength(1)
+            .charge(-2000)
+            .start();
+                    </script>
+                </body>
+            </html>
+
+
+            </div>
+            <div class="span3">
+                <img src="/XPlot/img/logo.png" alt="F# Project" style="width:130px;margin:20px" />
+                <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
+                    <li class="nav-header">XPlot</li>
+                    <li><a href="/XPlot/">Home page</a></li>
+                    <li class="divider"></li>
+                    <li><a href="http://www.nuget.org/packages?q=XPlot">Get Library via NuGet</a></li>
+                    <li><a href="http://github.com/fslaborg/XPlot">Source Code on GitHub</a></li>
+                    <li><a href="/XPlot/license.html">License (Apache 2.0)</a></li>
+                    <li><a href="/XPlot/release-notes.html">Release Notes</a></li>
+
+                    <li class="nav-header"><a href="/XPlot/google-charts.html">Google Charts</a></li>
+                    <li><a href="/XPlot/chart/google-annotation-chart.html">Annotation</a></li>
+                    <li><a href="/XPlot/chart/google-area-chart.html">Area</a></li>
+                    <li><a href="/XPlot/chart/google-bar-chart.html">Bar</a></li>
+                    <li><a href="/XPlot/chart/google-bubble-chart.html">Bubble</a></li>
+                    <li><a href="/XPlot/chart/google-calendar-chart.html">Calendar</a></li>
+                    <li><a href="/XPlot/chart/google-candlestick-chart.html">Candlestick</a></li>
+                    <li><a href="/XPlot/chart/google-column-chart.html">Column</a></li>
+                    <li><a href="/XPlot/chart/google-combo-chart.html">Combo</a></li>
+                    <li><a href="/XPlot/chart/google-gauge-chart.html">Gauge</a></li>
+                    <li><a href="/XPlot/chart/google-geo-chart.html">Geo</a></li>
+                    <li><a href="/XPlot/chart/google-histogram-chart.html">Histogram</a></li>
+                    <li><a href="/XPlot/chart/google-line-chart.html">Line</a></li>
+                    <li><a href="/XPlot/chart/google-map-chart.html">Map</a></li>
+                    <li><a href="/XPlot/chart/google-pie-chart.html">Pie</a></li>
+                    <li><a href="/XPlot/chart/google-sankey-diagram.html">Sankey</a></li>
+                    <li><a href="/XPlot/chart/google-scatter-chart.html">Scatter</a></li>
+                    <li><a href="/XPlot/chart/google-stepped-area-chart.html">Stepped Area</a></li>
+                    <li><a href="/XPlot/chart/google-timeline-chart.html">Timeline</a></li>
+                    <li><a href="/XPlot/chart/google-table-chart.html">Table</a></li>
+                    <li><a href="/XPlot/chart/google-treemap-chart.html">Treemap</a></li>
+
+                    <li class="nav-header"><a href="/XPlot/plotly.html">Plotly</a></li>
+                    <li><a href="/XPlot/chart/plotly-bar-charts.html">Bar</a></li>
+                    <li><a href="/XPlot/chart/plotly-line-scatter-plots.html">Line and Scatter Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-box-plots.html">Box Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-bubble-charts.html">Bubble Charts</a></li>
+                    <li><a href="/XPlot/chart/plotly-contour-plots.html">Contour Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-area-plots.html">Area Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-heatmaps.html">Heatmaps</a></li>
+                    <li><a href="/XPlot/chart/plotly-histograms.html">Histograms</a></li>
+                    <li><a href="/XPlot/chart/plotly-2d-histograms.html">2D Histograms</a></li>
+                    <li><a href="/XPlot/chart/plotly-polar-charts.html">Polar Charts</a></li>
+                    <li><a href="/XPlot/chart/plotly-time-series.html">Time Series</a></li>
+                    <li><a href="/XPlot/chart/plotly-multiple-chart-types.html">Multiple Chart Types</a></li>
+                    <li><a href="/XPlot/chart/plotly-log-plots.html">Log Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-3d-scatter-plots.html">3D Scatter Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-3d-surface-plots.html">3D Surface Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-3d-line-plots.html">3D Line Plots</a></li>
+
+                    <li class="nav-header">Documentation</li>
+                    <li><a href="/XPlot/reference/index.html">API Reference</a></li>
+                    <li class="divider"></li>
+
+                    <li><a href="/XPlot/reference/xplot-googlecharts-chart.html">Google Chart type</a></li>
+                    <li><a href="/XPlot/reference/xplot-googlecharts-configuration-options.html">Google Option type</a></li>
+                    <li><a href="/XPlot/reference/xplot-googlecharts-configuration.html">Google configuration module</a></li>
+
+                    <li class="divider"></li>
+
+                    <li><a href="/XPlot/reference/xplot-plotly-graph.html">Plotly Graph module</a></li>
+                    <li><a href="/XPlot/reference/xplot-plotly-graph-layout.html">Plotly Layout type</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <a href="http://github.com/fslaborg/XPlot"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub" /></a>
+</body>
+</html>

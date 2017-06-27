@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Plotly Box Plots
+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Data visualization library for F#" />
+    <meta name="author" content="Taha Hachana; Tomas Petricek" />
+
+    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        google.load("visualization", "1.1", { packages: ["corechart", "annotationchart", "calendar", "gauge", "geochart", "map", "sankey", "table", "timeline", "treemap"] })
+    </script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="/XPlot/content/style.css" />
+    <script type="text/javascript" src="/XPlot/content/tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div class="container">
+        <div class="masthead">
+            <ul class="nav nav-pills pull-right">
+                <li>
+                    <a href="http://fslab.org"><img height="16" width="16" src="http://fslab.org/img/thumbs/fslab.png" /> FsLab</a>
+                </li>
+                <li>
+                    <a href="http://fsharp.github.io/FSharp.Data"><img height="16" width="16" src="http://fslab.org/img/thumbs/fsharpdata.png" /> F# Data</a>
+                </li>
+                <li>
+                    <a href="http://bluemountaincapital.github.io/Deedle"><img height="16" width="16" src="http://fslab.org/img/thumbs/deedle.png" /> Deedle</a>
+                </li>
+                <li>
+                    <a href="http://bluemountaincapital.github.io/FSharpRProvider"><img height="16" width="16" src="http://fslab.org/img/thumbs/rprovider.png" /> R Provider</a>
+                </li>
+                <li>
+                    <a href="http://numerics.mathdotnet.com/"><img height="16" width="16" src="http://fslab.org/img/thumbs/mathnet.png" /> Math.NET</a>
+                </li>
+            </ul>
+            <h3 class="muted"><a href="/XPlot/">XPlot</a></h3>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="span9" id="main">
+                
+<h1><a name="Plotly-Box-Plots" class="anchor" href="#Plotly-Box-Plots">Plotly Box Plots</a></h1>
+<p><a href="https://github.com/fslaborg/XPlot/blob/master/docs/content/chart/plotly-box-plots.fsx">Full source</a></p>
+<h2><a name="Basic-Box-Plot" class="anchor" href="#Basic-Box-Plot">Basic Box Plot</a></h2>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+<span class="l">5: </span>
+<span class="l">6: </span>
+<span class="l">7: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span class="i">trace1</span> <span class="o">=</span> <span class="i">Box</span>(<span class="i">y</span> <span class="o">=</span> <span class="i">y0</span>)
+<span class="k">let</span> <span class="i">trace2</span> <span class="o">=</span> <span class="i">Box</span>(<span class="i">y</span> <span class="o">=</span> <span class="i">y1</span>)
+
+[<span class="i">trace1</span>; <span class="i">trace2</span>]
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">Plot</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithWidth</span> <span class="n">700</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithHeight</span> <span class="n">500</span>
+</code></pre></td>
+</tr>
+</table>
+<div id="9d4601a1-d76f-4a80-a76d-549929f0ce54" style="width: 700px; height: 500px;"></div>
+        <script>
+            var data = [{"type":"box","y":[-0.75105507087942924,-0.54805723658206729,-1.4677540729463818,-0.10200421687308903,0.87863150887593222,0.41721417004112848,0.62453064333392816,-0.14774318857944713,1.0342030317681858,-1.165613233496255,-1.7127764605604003,-1.7805615506510073,-0.12154986146909641,-1.2283268297176468,-0.37428945330637009,1.4883063340784546,0.9166917589943353,-1.0830945131010816,-0.45774189087922768,-0.93498785709728849,0.80739291992848439,0.09727295265406033,-0.20220629912903809,-1.5252595505189428,-0.93203399635480444,-1.1281865192335969,-1.563270115611735,0.35117700132130492,0.53642634373457443,-1.628845668592884,1.5494522219381544,1.0415462898470211,-1.6799501578742406,0.91814111652697483,-1.6902521702415554,0.19914090842899923,1.3863340999122407,0.11206720572526918,-1.4229616530858733,-1.2418326928381962,-1.4486195075831467,-1.3181616561618457,0.26587387133663243,-0.73235046361216827,-1.5170325101432542,0.566725952628407,0.70372294419618453,1.401190389404628,0.77265610587441214,0.1047861615963217]},{"type":"box","y":[-0.66881481786668984,-0.92276983300352922,0.89747487836399809,-0.33870468427366796,0.90836396203765823,2.3249172721826081,2.9853970680504087,-1.1244120634740273,-0.10896935501553551,1.4378571247671992,1.4032428004048965,-0.8406909634734927,2.5406950056835518,2.3004379517493945,-0.12881125020273565,-0.1804129070511149,3.3077515970299727,2.0733806974782523,-0.59282334843316264,2.6862558417982676,-1.0659628423424263,-0.1423631934366949,-0.75326245622395649,-0.16935373340237603,-0.524858113808957,1.593930094351028,3.2183829284172418,-0.503153279546254,3.4291859865883296,1.4699585939710766,1.0320510169081627,-0.45662797259941146,2.8859878059131967,-0.63263160194858514,3.2126550721808593,3.0043160964009887,0.516455655599225,2.815370765708094,0.34335693900629738,0.13820735390214578,1.9612357407627792,2.9915481041518728,0.3011483449773622,1.3766068779754479,1.6493057279890893,-1.0185709388454309,0.41152310066461695,2.7339118394692949,-0.78895253199569537,2.8712256982509157]}];
+            var layout = "";
+            Plotly.newPlot('9d4601a1-d76f-4a80-a76d-549929f0ce54', data, layout);
+        </script>
+<h2><a name="Box-Plot-That-Displays-the-Underlying-Data" class="anchor" href="#Box-Plot-That-Displays-the-Underlying-Data">Box Plot That Displays the Underlying Data</a></h2>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+<span class="l">5: </span>
+<span class="l">6: </span>
+<span class="l">7: </span>
+<span class="l">8: </span>
+<span class="l">9: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="i">Box</span>(
+    <span class="i">y</span> <span class="o">=</span> [<span class="n">0</span>; <span class="n">1</span>; <span class="n">1</span>; <span class="n">2</span>; <span class="n">3</span>; <span class="n">5</span>; <span class="n">8</span>; <span class="n">13</span>; <span class="n">21</span>],
+    <span class="i">boxpoints</span> <span class="o">=</span> <span class="s">&quot;all&quot;</span>,
+    <span class="i">jitter</span> <span class="o">=</span> <span class="n">0.3</span>,
+    <span class="i">pointpos</span> <span class="o">=</span> <span class="o">-</span><span class="n">1.8</span>
+)
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">Plot</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithWidth</span> <span class="n">700</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithHeight</span> <span class="n">500</span>
+</code></pre></td>
+</tr>
+</table>
+<div id="64452f44-551f-4e80-b82e-1e2e1df25646" style="width: 700px; height: 500px;"></div>
+        <script>
+            var data = [{"type":"box","y":[0,1,1,2,3,5,8,13,21],"boxpoints":"all","jitter":0.3,"pointpos":-1.8}];
+            var layout = "";
+            Plotly.newPlot('64452f44-551f-4e80-b82e-1e2e1df25646', data, layout);
+        </script>
+<h2><a name="Grouped-Box-Plot" class="anchor" href="#Grouped-Box-Plot">Grouped Box Plot</a></h2>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+<span class="l">11: </span>
+<span class="l">12: </span>
+<span class="l">13: </span>
+<span class="l">14: </span>
+<span class="l">15: </span>
+<span class="l">16: </span>
+<span class="l">17: </span>
+<span class="l">18: </span>
+<span class="l">19: </span>
+<span class="l">20: </span>
+<span class="l">21: </span>
+<span class="l">22: </span>
+<span class="l">23: </span>
+<span class="l">24: </span>
+<span class="l">25: </span>
+<span class="l">26: </span>
+<span class="l">27: </span>
+<span class="l">28: </span>
+<span class="l">29: </span>
+<span class="l">30: </span>
+<span class="l">31: </span>
+<span class="l">32: </span>
+<span class="l">33: </span>
+<span class="l">34: </span>
+<span class="l">35: </span>
+<span class="l">36: </span>
+<span class="l">37: </span>
+<span class="l">38: </span>
+<span class="l">39: </span>
+<span class="l">40: </span>
+<span class="l">41: </span>
+<span class="l">42: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span class="i">x</span> <span class="o">=</span> [<span class="s">&quot;day 1&quot;</span>; <span class="s">&quot;day 1&quot;</span>; <span class="s">&quot;day 1&quot;</span>; <span class="s">&quot;day 1&quot;</span>; <span class="s">&quot;day 1&quot;</span>; <span class="s">&quot;day 1&quot;</span>;
+        <span class="s">&quot;day 2&quot;</span>; <span class="s">&quot;day 2&quot;</span>; <span class="s">&quot;day 2&quot;</span>; <span class="s">&quot;day 2&quot;</span>; <span class="s">&quot;day 2&quot;</span>; <span class="s">&quot;day 2&quot;</span>]
+
+<span class="k">let</span> <span class="i">groupedTrace1</span> <span class="o">=</span>
+    <span class="i">Box</span>(
+        <span class="i">y</span> <span class="o">=</span> [<span class="n">0.2</span>; <span class="n">0.2</span>; <span class="n">0.6</span>; <span class="n">1.0</span>; <span class="n">0.5</span>; <span class="n">0.4</span>; <span class="n">0.2</span>; <span class="n">0.7</span>; <span class="n">0.9</span>; <span class="n">0.1</span>; <span class="n">0.5</span>; <span class="n">0.3</span>],
+        <span class="i">x</span> <span class="o">=</span> <span class="i">x</span>,
+        <span class="i">name</span> <span class="o">=</span> <span class="s">&quot;kale&quot;</span>,
+        <span class="i">marker</span> <span class="o">=</span> <span class="i">Marker</span>(<span class="i">color</span> <span class="o">=</span> <span class="s">&quot;#3D9970&quot;</span>)
+    )
+
+<span class="k">let</span> <span class="i">groupedTrace2</span> <span class="o">=</span>
+    <span class="i">Box</span>(
+        <span class="i">y</span> <span class="o">=</span> [<span class="n">0.6</span>; <span class="n">0.7</span>; <span class="n">0.3</span>; <span class="n">0.6</span>; <span class="n">0.0</span>; <span class="n">0.5</span>; <span class="n">0.7</span>; <span class="n">0.9</span>; <span class="n">0.5</span>; <span class="n">0.8</span>; <span class="n">0.7</span>; <span class="n">0.2</span>],
+        <span class="i">x</span> <span class="o">=</span> <span class="i">x</span>,
+        <span class="i">name</span> <span class="o">=</span> <span class="s">&quot;radishes&quot;</span>,
+        <span class="i">marker</span> <span class="o">=</span> <span class="i">Marker</span>(<span class="i">color</span> <span class="o">=</span> <span class="s">&quot;#FF4136&quot;</span>)
+    )
+
+<span class="k">let</span> <span class="i">groupedTrace3</span> <span class="o">=</span>
+    <span class="i">Box</span>(
+        <span class="i">y</span> <span class="o">=</span> [<span class="n">0.1</span>; <span class="n">0.3</span>; <span class="n">0.1</span>; <span class="n">0.9</span>; <span class="n">0.6</span>; <span class="n">0.6</span>; <span class="n">0.9</span>; <span class="n">1.0</span>; <span class="n">0.3</span>; <span class="n">0.6</span>; <span class="n">0.8</span>; <span class="n">0.5</span>],
+        <span class="i">x</span> <span class="o">=</span> <span class="i">x</span>,
+        <span class="i">name</span> <span class="o">=</span> <span class="s">&quot;carrots&quot;</span>,
+        <span class="i">marker</span> <span class="o">=</span> <span class="i">Marker</span>(<span class="i">color</span> <span class="o">=</span> <span class="s">&quot;#FF851B&quot;</span>)
+    )
+
+<span class="k">let</span> <span class="i">layout</span> <span class="o">=</span>
+    <span class="i">Layout</span>(
+        <span class="i">yaxis</span> <span class="o">=</span>
+            <span class="i">Yaxis</span>(
+                <span class="i">title</span> <span class="o">=</span> <span class="s">&quot;normalized moisture&quot;</span>,
+                <span class="i">zeroline</span> <span class="o">=</span> <span class="k">false</span>
+            ),
+        <span class="i">boxmode</span> <span class="o">=</span> <span class="s">&quot;group&quot;</span>
+    )
+
+[<span class="i">groupedTrace1</span>; <span class="i">groupedTrace2</span>; <span class="i">groupedTrace3</span>]
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">Plot</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithLayout</span> <span class="i">layout</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithWidth</span> <span class="n">700</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithHeight</span> <span class="n">500</span>
+</code></pre></td>
+</tr>
+</table>
+<div id="6b176403-a472-4de2-99be-f5a21901eb1e" style="width: 700px; height: 500px;"></div>
+        <script>
+            var data = [{"type":"box","y":[0.2,0.2,0.6,1.0,0.5,0.4,0.2,0.7,0.9,0.1,0.5,0.3],"x":["day 1","day 1","day 1","day 1","day 1","day 1","day 2","day 2","day 2","day 2","day 2","day 2"],"marker":{"color":"#3D9970"},"name":"kale"},{"type":"box","y":[0.6,0.7,0.3,0.6,0.0,0.5,0.7,0.9,0.5,0.8,0.7,0.2],"x":["day 1","day 1","day 1","day 1","day 1","day 1","day 2","day 2","day 2","day 2","day 2","day 2"],"marker":{"color":"#FF4136"},"name":"radishes"},{"type":"box","y":[0.1,0.3,0.1,0.9,0.6,0.6,0.9,1.0,0.3,0.6,0.8,0.5],"x":["day 1","day 1","day 1","day 1","day 1","day 1","day 2","day 2","day 2","day 2","day 2","day 2"],"marker":{"color":"#FF851B"},"name":"carrots"}];
+            var layout = {"yaxis":{"title":"normalized moisture","zeroline":false,"_isSubplotObj":true},"boxmode":"group"};
+            Plotly.newPlot('6b176403-a472-4de2-99be-f5a21901eb1e', data, layout);
+        </script>
+
+
+            </div>
+            <div class="span3">
+                <img src="/XPlot/img/logo.png" alt="F# Project" style="width:130px;margin:20px" />
+                <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
+                    <li class="nav-header">XPlot</li>
+                    <li><a href="/XPlot/">Home page</a></li>
+                    <li class="divider"></li>
+                    <li><a href="http://www.nuget.org/packages?q=XPlot">Get Library via NuGet</a></li>
+                    <li><a href="http://github.com/fslaborg/XPlot">Source Code on GitHub</a></li>
+                    <li><a href="/XPlot/license.html">License (Apache 2.0)</a></li>
+                    <li><a href="/XPlot/release-notes.html">Release Notes</a></li>
+
+                    <li class="nav-header"><a href="/XPlot/google-charts.html">Google Charts</a></li>
+                    <li><a href="/XPlot/chart/google-annotation-chart.html">Annotation</a></li>
+                    <li><a href="/XPlot/chart/google-area-chart.html">Area</a></li>
+                    <li><a href="/XPlot/chart/google-bar-chart.html">Bar</a></li>
+                    <li><a href="/XPlot/chart/google-bubble-chart.html">Bubble</a></li>
+                    <li><a href="/XPlot/chart/google-calendar-chart.html">Calendar</a></li>
+                    <li><a href="/XPlot/chart/google-candlestick-chart.html">Candlestick</a></li>
+                    <li><a href="/XPlot/chart/google-column-chart.html">Column</a></li>
+                    <li><a href="/XPlot/chart/google-combo-chart.html">Combo</a></li>
+                    <li><a href="/XPlot/chart/google-gauge-chart.html">Gauge</a></li>
+                    <li><a href="/XPlot/chart/google-geo-chart.html">Geo</a></li>
+                    <li><a href="/XPlot/chart/google-histogram-chart.html">Histogram</a></li>
+                    <li><a href="/XPlot/chart/google-line-chart.html">Line</a></li>
+                    <li><a href="/XPlot/chart/google-map-chart.html">Map</a></li>
+                    <li><a href="/XPlot/chart/google-pie-chart.html">Pie</a></li>
+                    <li><a href="/XPlot/chart/google-sankey-diagram.html">Sankey</a></li>
+                    <li><a href="/XPlot/chart/google-scatter-chart.html">Scatter</a></li>
+                    <li><a href="/XPlot/chart/google-stepped-area-chart.html">Stepped Area</a></li>
+                    <li><a href="/XPlot/chart/google-timeline-chart.html">Timeline</a></li>
+                    <li><a href="/XPlot/chart/google-table-chart.html">Table</a></li>
+                    <li><a href="/XPlot/chart/google-treemap-chart.html">Treemap</a></li>
+
+                    <li class="nav-header"><a href="/XPlot/plotly.html">Plotly</a></li>
+                    <li><a href="/XPlot/chart/plotly-bar-charts.html">Bar</a></li>
+                    <li><a href="/XPlot/chart/plotly-line-scatter-plots.html">Line and Scatter Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-box-plots.html">Box Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-bubble-charts.html">Bubble Charts</a></li>
+                    <li><a href="/XPlot/chart/plotly-contour-plots.html">Contour Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-area-plots.html">Area Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-heatmaps.html">Heatmaps</a></li>
+                    <li><a href="/XPlot/chart/plotly-histograms.html">Histograms</a></li>
+                    <li><a href="/XPlot/chart/plotly-2d-histograms.html">2D Histograms</a></li>
+                    <li><a href="/XPlot/chart/plotly-polar-charts.html">Polar Charts</a></li>
+                    <li><a href="/XPlot/chart/plotly-time-series.html">Time Series</a></li>
+                    <li><a href="/XPlot/chart/plotly-multiple-chart-types.html">Multiple Chart Types</a></li>
+                    <li><a href="/XPlot/chart/plotly-log-plots.html">Log Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-3d-scatter-plots.html">3D Scatter Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-3d-surface-plots.html">3D Surface Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-3d-line-plots.html">3D Line Plots</a></li>
+
+                    <li class="nav-header">Documentation</li>
+                    <li><a href="/XPlot/reference/index.html">API Reference</a></li>
+                    <li class="divider"></li>
+
+                    <li><a href="/XPlot/reference/xplot-googlecharts-chart.html">Google Chart type</a></li>
+                    <li><a href="/XPlot/reference/xplot-googlecharts-configuration-options.html">Google Option type</a></li>
+                    <li><a href="/XPlot/reference/xplot-googlecharts-configuration.html">Google configuration module</a></li>
+
+                    <li class="divider"></li>
+
+                    <li><a href="/XPlot/reference/xplot-plotly-graph.html">Plotly Graph module</a></li>
+                    <li><a href="/XPlot/reference/xplot-plotly-graph-layout.html">Plotly Layout type</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <a href="http://github.com/fslaborg/XPlot"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub" /></a>
+</body>
+</html>

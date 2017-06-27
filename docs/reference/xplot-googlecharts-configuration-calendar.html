@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Calendar - XPlot</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="" />
+    <meta name="author" content="Taha Hachana; Tomas Petricek" />
+
+    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        google.load("visualization", "1.1", { packages: ["corechart", "annotationchart", "calendar", "gauge", "geochart", "map", "sankey", "table", "timeline", "treemap"] })
+    </script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="./content/style.css" />
+    <script type="text/javascript" src="./content/tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div class="container">
+        <div class="masthead">
+            <ul class="nav nav-pills pull-right">
+                <li>
+                    <a href="http://fslab.org"><img height="16" width="16" src="http://fslab.org/img/thumbs/fslab.png" /> FsLab</a>
+                </li>
+                <li>
+                    <a href="http://fsharp.github.io/FSharp.Data"><img height="16" width="16" src="http://fslab.org/img/thumbs/fsharpdata.png" /> F# Data</a>
+                </li>
+                <li>
+                    <a href="http://bluemountaincapital.github.io/Deedle"><img height="16" width="16" src="http://fslab.org/img/thumbs/deedle.png" /> Deedle</a>
+                </li>
+                <li>
+                    <a href="http://bluemountaincapital.github.io/FSharpRProvider"><img height="16" width="16" src="http://fslab.org/img/thumbs/rprovider.png" /> R Provider</a>
+                </li>
+                <li>
+                    <a href="http://numerics.mathdotnet.com/"><img height="16" width="16" src="http://fslab.org/img/thumbs/mathnet.png" /> Math.NET</a>
+                </li>
+            </ul>
+            <h3 class="muted"><a href="./">XPlot</a></h3>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="span9" id="main">
+                
+
+
+
+<h1>Calendar</h1>
+<p>
+  <span>Namespace: XPlot.GoogleCharts</span><br />
+  <span>Parent Module: <a href="xplot-googlecharts-configuration.html">Configuration</a></span>
+</p>
+<div class="xmldoc">
+</div>
+  <h3>Constructors</h3>
+  <table class="table table-bordered member-list">
+    <thead>
+      <tr><td>Constructor</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '255', 255)" onmouseover="showTip(event, '255', 255)">
+            new()
+          </code>
+          <div class="tip" id="255">
+            <strong>Signature:</strong> unit -&gt; Calendar<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/fslaborg/XPlot/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L756-756" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+              <p>CompiledName: <code>.ctor</code></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <h3>Instance members</h3>
+  <table class="table table-bordered member-list">
+    <thead>
+      <tr><td>Instance member</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '256', 256)" onmouseover="showTip(event, '256', 256)">
+            cellColor()
+          </code>
+          <div class="tip" id="256">
+            <strong>Signature:</strong> unit -&gt; CellColor<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/fslaborg/XPlot/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L770-770" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+              <p>CompiledName: <code>set_cellColor</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '257', 257)" onmouseover="showTip(event, '257', 257)">
+            cellColor()
+          </code>
+          <div class="tip" id="257">
+            <strong>Signature:</strong> unit -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/fslaborg/XPlot/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L770-770" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+              <p>CompiledName: <code>get_cellColor</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '258', 258)" onmouseover="showTip(event, '258', 258)">
+            cellSize()
+          </code>
+          <div class="tip" id="258">
+            <strong>Signature:</strong> unit -&gt; int<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/fslaborg/XPlot/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L774-774" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+              <p>CompiledName: <code>set_cellSize</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '259', 259)" onmouseover="showTip(event, '259', 259)">
+            cellSize()
+          </code>
+          <div class="tip" id="259">
+            <strong>Signature:</strong> unit -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/fslaborg/XPlot/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L774-774" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+              <p>CompiledName: <code>get_cellSize</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '260', 260)" onmouseover="showTip(event, '260', 260)">
+            dayOfWeekLabel()
+          </code>
+          <div class="tip" id="260">
+            <strong>Signature:</strong> unit -&gt; TextStyle<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/fslaborg/XPlot/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L778-778" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+              <p>CompiledName: <code>set_dayOfWeekLabel</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '261', 261)" onmouseover="showTip(event, '261', 261)">
+            dayOfWeekLabel()
+          </code>
+          <div class="tip" id="261">
+            <strong>Signature:</strong> unit -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/fslaborg/XPlot/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L778-778" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+              <p>CompiledName: <code>get_dayOfWeekLabel</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '262', 262)" onmouseover="showTip(event, '262', 262)">
+            dayOfWeekRightSpace()
+          </code>
+          <div class="tip" id="262">
+            <strong>Signature:</strong> unit -&gt; int<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/fslaborg/XPlot/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L782-782" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+              <p>CompiledName: <code>set_dayOfWeekRightSpace</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '263', 263)" onmouseover="showTip(event, '263', 263)">
+            dayOfWeekRightSpace()
+          </code>
+          <div class="tip" id="263">
+            <strong>Signature:</strong> unit -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/fslaborg/XPlot/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L782-782" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+              <p>CompiledName: <code>get_dayOfWeekRightSpace</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '264', 264)" onmouseover="showTip(event, '264', 264)">
+            daysOfWeek()
+          </code>
+          <div class="tip" id="264">
+            <strong>Signature:</strong> unit -&gt; string<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/fslaborg/XPlot/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L786-786" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+              <p>CompiledName: <code>set_daysOfWeek</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '265', 265)" onmouseover="showTip(event, '265', 265)">
+            daysOfWeek()
+          </code>
+          <div class="tip" id="265">
+            <strong>Signature:</strong> unit -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/fslaborg/XPlot/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L786-786" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+              <p>CompiledName: <code>get_daysOfWeek</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '266', 266)" onmouseover="showTip(event, '266', 266)">
+            focusedCellColor()
+          </code>
+          <div class="tip" id="266">
+            <strong>Signature:</strong> unit -&gt; CellColor<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/fslaborg/XPlot/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L790-790" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+              <p>CompiledName: <code>set_focusedCellColor</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '267', 267)" onmouseover="showTip(event, '267', 267)">
+            focusedCellColor()
+          </code>
+          <div class="tip" id="267">
+            <strong>Signature:</strong> unit -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/fslaborg/XPlot/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L790-790" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+              <p>CompiledName: <code>get_focusedCellColor</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '268', 268)" onmouseover="showTip(event, '268', 268)">
+            monthLabel()
+          </code>
+          <div class="tip" id="268">
+            <strong>Signature:</strong> unit -&gt; TextStyle<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/fslaborg/XPlot/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L794-794" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+              <p>CompiledName: <code>set_monthLabel</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '269', 269)" onmouseover="showTip(event, '269', 269)">
+            monthLabel()
+          </code>
+          <div class="tip" id="269">
+            <strong>Signature:</strong> unit -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/fslaborg/XPlot/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L794-794" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+              <p>CompiledName: <code>get_monthLabel</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '270', 270)" onmouseover="showTip(event, '270', 270)">
+            monthOutlineColor()
+          </code>
+          <div class="tip" id="270">
+            <strong>Signature:</strong> unit -&gt; CellColor<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/fslaborg/XPlot/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L798-798" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+              <p>CompiledName: <code>set_monthOutlineColor</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '271', 271)" onmouseover="showTip(event, '271', 271)">
+            monthOutlineColor()
+          </code>
+          <div class="tip" id="271">
+            <strong>Signature:</strong> unit -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/fslaborg/XPlot/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L798-798" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+              <p>CompiledName: <code>get_monthOutlineColor</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '272', 272)" onmouseover="showTip(event, '272', 272)">
+            ShouldSerializecellColor()
+          </code>
+          <div class="tip" id="272">
+            <strong>Signature:</strong> unit -&gt; bool<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/fslaborg/XPlot/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L814-814" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '273', 273)" onmouseover="showTip(event, '273', 273)">
+            ShouldSerializecellSize()
+          </code>
+          <div class="tip" id="273">
+            <strong>Signature:</strong> unit -&gt; bool<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/fslaborg/XPlot/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L815-815" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '274', 274)" onmouseover="showTip(event, '274', 274)">
+            ShouldSerializedayOfWeekLabel()
+          </code>
+          <div class="tip" id="274">
+            <strong>Signature:</strong> unit -&gt; bool<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/fslaborg/XPlot/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L816-816" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '275', 275)" onmouseover="showTip(event, '275', 275)">
+            ShouldSerializedayOfWeekRightSpace()
+          </code>
+          <div class="tip" id="275">
+            <strong>Signature:</strong> unit -&gt; bool<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/fslaborg/XPlot/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L817-817" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '276', 276)" onmouseover="showTip(event, '276', 276)">
+            ShouldSerializedaysOfWeek()
+          </code>
+          <div class="tip" id="276">
+            <strong>Signature:</strong> unit -&gt; bool<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/fslaborg/XPlot/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L818-818" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '277', 277)" onmouseover="showTip(event, '277', 277)">
+            ShouldSerializefocusedCellColor()
+          </code>
+          <div class="tip" id="277">
+            <strong>Signature:</strong> unit -&gt; bool<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/fslaborg/XPlot/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L819-819" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '278', 278)" onmouseover="showTip(event, '278', 278)">
+            ShouldSerializemonthLabel()
+          </code>
+          <div class="tip" id="278">
+            <strong>Signature:</strong> unit -&gt; bool<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/fslaborg/XPlot/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L820-820" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '279', 279)" onmouseover="showTip(event, '279', 279)">
+            ShouldSerializemonthOutlineColor()
+          </code>
+          <div class="tip" id="279">
+            <strong>Signature:</strong> unit -&gt; bool<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/fslaborg/XPlot/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L821-821" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '280', 280)" onmouseover="showTip(event, '280', 280)">
+            ShouldSerializeunderMonthSpace()
+          </code>
+          <div class="tip" id="280">
+            <strong>Signature:</strong> unit -&gt; bool<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/fslaborg/XPlot/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L822-822" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '281', 281)" onmouseover="showTip(event, '281', 281)">
+            ShouldSerializeunderYearSpace()
+          </code>
+          <div class="tip" id="281">
+            <strong>Signature:</strong> unit -&gt; bool<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/fslaborg/XPlot/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L823-823" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '282', 282)" onmouseover="showTip(event, '282', 282)">
+            ShouldSerializeunusedMonthOutlineColor()
+          </code>
+          <div class="tip" id="282">
+            <strong>Signature:</strong> unit -&gt; bool<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/fslaborg/XPlot/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L824-824" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '283', 283)" onmouseover="showTip(event, '283', 283)">
+            underMonthSpace()
+          </code>
+          <div class="tip" id="283">
+            <strong>Signature:</strong> unit -&gt; int<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/fslaborg/XPlot/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L802-802" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+              <p>CompiledName: <code>set_underMonthSpace</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '284', 284)" onmouseover="showTip(event, '284', 284)">
+            underMonthSpace()
+          </code>
+          <div class="tip" id="284">
+            <strong>Signature:</strong> unit -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/fslaborg/XPlot/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L802-802" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+              <p>CompiledName: <code>get_underMonthSpace</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '285', 285)" onmouseover="showTip(event, '285', 285)">
+            underYearSpace()
+          </code>
+          <div class="tip" id="285">
+            <strong>Signature:</strong> unit -&gt; int<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/fslaborg/XPlot/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L806-806" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+              <p>CompiledName: <code>set_underYearSpace</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '286', 286)" onmouseover="showTip(event, '286', 286)">
+            underYearSpace()
+          </code>
+          <div class="tip" id="286">
+            <strong>Signature:</strong> unit -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/fslaborg/XPlot/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L806-806" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+              <p>CompiledName: <code>get_underYearSpace</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '287', 287)" onmouseover="showTip(event, '287', 287)">
+            unusedMonthOutlineColor()
+          </code>
+          <div class="tip" id="287">
+            <strong>Signature:</strong> unit -&gt; CellColor<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/fslaborg/XPlot/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L810-810" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+              <p>CompiledName: <code>set_unusedMonthOutlineColor</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '288', 288)" onmouseover="showTip(event, '288', 288)">
+            unusedMonthOutlineColor()
+          </code>
+          <div class="tip" id="288">
+            <strong>Signature:</strong> unit -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/fslaborg/XPlot/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L810-810" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+              <p>CompiledName: <code>get_unusedMonthOutlineColor</code></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+            </div>
+            <div class="span3">
+                <img src="./img/logo.png" alt="F# Project" style="width:130px;margin:20px" />
+                <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
+                    <li class="nav-header">XPlot</li>
+                    <li><a href="./">Home page</a></li>
+                    <li class="divider"></li>
+                    <li><a href="http://www.nuget.org/packages?q=XPlot">Get Library via NuGet</a></li>
+                    <li><a href="http://github.com/fslaborg/XPlot">Source Code on GitHub</a></li>
+                    <li><a href="./license.html">License (Apache 2.0)</a></li>
+                    <li><a href="./release-notes.html">Release Notes</a></li>
+
+                    <li class="nav-header"><a href="./google-charts.html">Google Charts</a></li>
+                    <li><a href="./chart/google-annotation-chart.html">Annotation</a></li>
+                    <li><a href="./chart/google-area-chart.html">Area</a></li>
+                    <li><a href="./chart/google-bar-chart.html">Bar</a></li>
+                    <li><a href="./chart/google-bubble-chart.html">Bubble</a></li>
+                    <li><a href="./chart/google-calendar-chart.html">Calendar</a></li>
+                    <li><a href="./chart/google-candlestick-chart.html">Candlestick</a></li>
+                    <li><a href="./chart/google-column-chart.html">Column</a></li>
+                    <li><a href="./chart/google-combo-chart.html">Combo</a></li>
+                    <li><a href="./chart/google-gauge-chart.html">Gauge</a></li>
+                    <li><a href="./chart/google-geo-chart.html">Geo</a></li>
+                    <li><a href="./chart/google-histogram-chart.html">Histogram</a></li>
+                    <li><a href="./chart/google-line-chart.html">Line</a></li>
+                    <li><a href="./chart/google-map-chart.html">Map</a></li>
+                    <li><a href="./chart/google-pie-chart.html">Pie</a></li>
+                    <li><a href="./chart/google-sankey-diagram.html">Sankey</a></li>
+                    <li><a href="./chart/google-scatter-chart.html">Scatter</a></li>
+                    <li><a href="./chart/google-stepped-area-chart.html">Stepped Area</a></li>
+                    <li><a href="./chart/google-timeline-chart.html">Timeline</a></li>
+                    <li><a href="./chart/google-table-chart.html">Table</a></li>
+                    <li><a href="./chart/google-treemap-chart.html">Treemap</a></li>
+
+                    <li class="nav-header"><a href="./plotly.html">Plotly</a></li>
+                    <li><a href="./chart/plotly-bar-charts.html">Bar</a></li>
+                    <li><a href="./chart/plotly-line-scatter-plots.html">Line and Scatter Plots</a></li>
+                    <li><a href="./chart/plotly-box-plots.html">Box Plots</a></li>
+                    <li><a href="./chart/plotly-bubble-charts.html">Bubble Charts</a></li>
+                    <li><a href="./chart/plotly-contour-plots.html">Contour Plots</a></li>
+                    <li><a href="./chart/plotly-area-plots.html">Area Plots</a></li>
+                    <li><a href="./chart/plotly-heatmaps.html">Heatmaps</a></li>
+                    <li><a href="./chart/plotly-histograms.html">Histograms</a></li>
+                    <li><a href="./chart/plotly-2d-histograms.html">2D Histograms</a></li>
+                    <li><a href="./chart/plotly-polar-charts.html">Polar Charts</a></li>
+                    <li><a href="./chart/plotly-time-series.html">Time Series</a></li>
+                    <li><a href="./chart/plotly-multiple-chart-types.html">Multiple Chart Types</a></li>
+                    <li><a href="./chart/plotly-log-plots.html">Log Plots</a></li>
+                    <li><a href="./chart/plotly-3d-scatter-plots.html">3D Scatter Plots</a></li>
+                    <li><a href="./chart/plotly-3d-surface-plots.html">3D Surface Plots</a></li>
+                    <li><a href="./chart/plotly-3d-line-plots.html">3D Line Plots</a></li>
+
+                    <li class="nav-header">Documentation</li>
+                    <li><a href="./reference/index.html">API Reference</a></li>
+                    <li class="divider"></li>
+
+                    <li><a href="./reference/xplot-googlecharts-chart.html">Google Chart type</a></li>
+                    <li><a href="./reference/xplot-googlecharts-configuration-options.html">Google Option type</a></li>
+                    <li><a href="./reference/xplot-googlecharts-configuration.html">Google configuration module</a></li>
+
+                    <li class="divider"></li>
+
+                    <li><a href="./reference/xplot-plotly-graph.html">Plotly Graph module</a></li>
+                    <li><a href="./reference/xplot-plotly-graph-layout.html">Plotly Layout type</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <a href="http://github.com/fslaborg/XPlot"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub" /></a>
+</body>
+</html>

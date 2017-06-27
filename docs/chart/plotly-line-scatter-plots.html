@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Plotly Line and Scatter Plots
+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Data visualization library for F#" />
+    <meta name="author" content="Taha Hachana; Tomas Petricek" />
+
+    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        google.load("visualization", "1.1", { packages: ["corechart", "annotationchart", "calendar", "gauge", "geochart", "map", "sankey", "table", "timeline", "treemap"] })
+    </script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="/XPlot/content/style.css" />
+    <script type="text/javascript" src="/XPlot/content/tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div class="container">
+        <div class="masthead">
+            <ul class="nav nav-pills pull-right">
+                <li>
+                    <a href="http://fslab.org"><img height="16" width="16" src="http://fslab.org/img/thumbs/fslab.png" /> FsLab</a>
+                </li>
+                <li>
+                    <a href="http://fsharp.github.io/FSharp.Data"><img height="16" width="16" src="http://fslab.org/img/thumbs/fsharpdata.png" /> F# Data</a>
+                </li>
+                <li>
+                    <a href="http://bluemountaincapital.github.io/Deedle"><img height="16" width="16" src="http://fslab.org/img/thumbs/deedle.png" /> Deedle</a>
+                </li>
+                <li>
+                    <a href="http://bluemountaincapital.github.io/FSharpRProvider"><img height="16" width="16" src="http://fslab.org/img/thumbs/rprovider.png" /> R Provider</a>
+                </li>
+                <li>
+                    <a href="http://numerics.mathdotnet.com/"><img height="16" width="16" src="http://fslab.org/img/thumbs/mathnet.png" /> Math.NET</a>
+                </li>
+            </ul>
+            <h3 class="muted"><a href="/XPlot/">XPlot</a></h3>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="span9" id="main">
+                
+<h1><a name="Plotly-Line-and-Scatter-Plots" class="anchor" href="#Plotly-Line-and-Scatter-Plots">Plotly Line and Scatter Plots</a></h1>
+<p><a href="https://github.com/fslaborg/XPlot/blob/master/docs/content/chart/plotly-line-scatter-plots.fsx">Full source</a></p>
+<h2><a name="Basic-Line-Plot" class="anchor" href="#Basic-Line-Plot">Basic Line Plot</a></h2>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+<span class="l">11: </span>
+<span class="l">12: </span>
+<span class="l">13: </span>
+<span class="l">14: </span>
+<span class="l">15: </span>
+<span class="l">16: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span class="i">trace1</span> <span class="o">=</span>
+    <span class="i">Scatter</span>(
+        <span class="i">x</span> <span class="o">=</span> [<span class="n">1</span>; <span class="n">2</span>; <span class="n">3</span>; <span class="n">4</span>],
+        <span class="i">y</span> <span class="o">=</span> [<span class="n">10</span>; <span class="n">15</span>; <span class="n">13</span>; <span class="n">17</span>]
+    )
+
+<span class="k">let</span> <span class="i">trace2</span> <span class="o">=</span>
+    <span class="i">Scatter</span>(
+        <span class="i">x</span> <span class="o">=</span> [<span class="n">2</span>; <span class="n">3</span>; <span class="n">4</span>; <span class="n">5</span>],
+        <span class="i">y</span> <span class="o">=</span> [<span class="n">16</span>; <span class="n">5</span>; <span class="n">11</span>; <span class="n">9</span>]
+    )
+
+[<span class="i">trace1</span>; <span class="i">trace2</span>]
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">Plot</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithWidth</span> <span class="n">700</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithHeight</span> <span class="n">500</span>
+</code></pre></td>
+</tr>
+</table>
+<div id="9a7926f7-0d0d-419c-af4f-e7c5cf4e2acc" style="width: 700px; height: 500px;"></div>
+        <script>
+            var data = [{"type":"scatter","x":[1,2,3,4],"y":[10,15,13,17]},{"type":"scatter","x":[2,3,4,5],"y":[16,5,11,9]}];
+            var layout = "";
+            Plotly.newPlot('9a7926f7-0d0d-419c-af4f-e7c5cf4e2acc', data, layout);
+        </script>
+<h2><a name="Line-and-Scatter-Plot" class="anchor" href="#Line-and-Scatter-Plot">Line and Scatter Plot</a></h2>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+<span class="l">11: </span>
+<span class="l">12: </span>
+<span class="l">13: </span>
+<span class="l">14: </span>
+<span class="l">15: </span>
+<span class="l">16: </span>
+<span class="l">17: </span>
+<span class="l">18: </span>
+<span class="l">19: </span>
+<span class="l">20: </span>
+<span class="l">21: </span>
+<span class="l">22: </span>
+<span class="l">23: </span>
+<span class="l">24: </span>
+<span class="l">25: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span class="i">lineTrace1</span> <span class="o">=</span>
+    <span class="i">Scatter</span>(
+        <span class="i">x</span> <span class="o">=</span> [<span class="n">1</span>; <span class="n">2</span>; <span class="n">3</span>; <span class="n">4</span>],
+        <span class="i">y</span> <span class="o">=</span> [<span class="n">10</span>; <span class="n">15</span>; <span class="n">13</span>; <span class="n">17</span>],
+        <span class="i">mode</span> <span class="o">=</span> <span class="s">&quot;markers&quot;</span>
+    )
+
+<span class="k">let</span> <span class="i">lineTrace2</span> <span class="o">=</span>
+    <span class="i">Scatter</span>(
+        <span class="i">x</span> <span class="o">=</span> [<span class="n">2</span>; <span class="n">3</span>; <span class="n">4</span>; <span class="n">5</span>],
+        <span class="i">y</span> <span class="o">=</span> [<span class="n">16</span>; <span class="n">5</span>; <span class="n">11</span>; <span class="n">9</span>],
+        <span class="i">mode</span> <span class="o">=</span> <span class="s">&quot;lines&quot;</span>
+    )
+
+<span class="k">let</span> <span class="i">lineTrace3</span> <span class="o">=</span>
+    <span class="i">Scatter</span>(
+        <span class="i">x</span> <span class="o">=</span> [<span class="n">1</span>; <span class="n">2</span>; <span class="n">3</span>; <span class="n">4</span>],
+        <span class="i">y</span> <span class="o">=</span> [<span class="n">12</span>; <span class="n">9</span>; <span class="n">15</span>; <span class="n">12</span>],
+        <span class="i">mode</span> <span class="o">=</span> <span class="s">&quot;lines+markers&quot;</span>
+    )
+
+[<span class="i">lineTrace1</span>; <span class="i">lineTrace2</span>; <span class="i">lineTrace3</span>]
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">Plot</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithWidth</span> <span class="n">700</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithHeight</span> <span class="n">500</span>
+</code></pre></td>
+</tr>
+</table>
+<div id="8a241144-6450-4f75-b73d-34753226ef1b" style="width: 700px; height: 500px;"></div>
+        <script>
+            var data = [{"type":"scatter","x":[1,2,3,4],"y":[10,15,13,17],"mode":"markers"},{"type":"scatter","x":[2,3,4,5],"y":[16,5,11,9],"mode":"lines"},{"type":"scatter","x":[1,2,3,4],"y":[12,9,15,12],"mode":"lines+markers"}];
+            var layout = "";
+            Plotly.newPlot('8a241144-6450-4f75-b73d-34753226ef1b', data, layout);
+        </script>
+<h2><a name="Colored-and-Styled-Scatter-Plot" class="anchor" href="#Colored-and-Styled-Scatter-Plot">Colored and Styled Scatter Plot</a></h2>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">  1: </span>
+<span class="l">  2: </span>
+<span class="l">  3: </span>
+<span class="l">  4: </span>
+<span class="l">  5: </span>
+<span class="l">  6: </span>
+<span class="l">  7: </span>
+<span class="l">  8: </span>
+<span class="l">  9: </span>
+<span class="l"> 10: </span>
+<span class="l"> 11: </span>
+<span class="l"> 12: </span>
+<span class="l"> 13: </span>
+<span class="l"> 14: </span>
+<span class="l"> 15: </span>
+<span class="l"> 16: </span>
+<span class="l"> 17: </span>
+<span class="l"> 18: </span>
+<span class="l"> 19: </span>
+<span class="l"> 20: </span>
+<span class="l"> 21: </span>
+<span class="l"> 22: </span>
+<span class="l"> 23: </span>
+<span class="l"> 24: </span>
+<span class="l"> 25: </span>
+<span class="l"> 26: </span>
+<span class="l"> 27: </span>
+<span class="l"> 28: </span>
+<span class="l"> 29: </span>
+<span class="l"> 30: </span>
+<span class="l"> 31: </span>
+<span class="l"> 32: </span>
+<span class="l"> 33: </span>
+<span class="l"> 34: </span>
+<span class="l"> 35: </span>
+<span class="l"> 36: </span>
+<span class="l"> 37: </span>
+<span class="l"> 38: </span>
+<span class="l"> 39: </span>
+<span class="l"> 40: </span>
+<span class="l"> 41: </span>
+<span class="l"> 42: </span>
+<span class="l"> 43: </span>
+<span class="l"> 44: </span>
+<span class="l"> 45: </span>
+<span class="l"> 46: </span>
+<span class="l"> 47: </span>
+<span class="l"> 48: </span>
+<span class="l"> 49: </span>
+<span class="l"> 50: </span>
+<span class="l"> 51: </span>
+<span class="l"> 52: </span>
+<span class="l"> 53: </span>
+<span class="l"> 54: </span>
+<span class="l"> 55: </span>
+<span class="l"> 56: </span>
+<span class="l"> 57: </span>
+<span class="l"> 58: </span>
+<span class="l"> 59: </span>
+<span class="l"> 60: </span>
+<span class="l"> 61: </span>
+<span class="l"> 62: </span>
+<span class="l"> 63: </span>
+<span class="l"> 64: </span>
+<span class="l"> 65: </span>
+<span class="l"> 66: </span>
+<span class="l"> 67: </span>
+<span class="l"> 68: </span>
+<span class="l"> 69: </span>
+<span class="l"> 70: </span>
+<span class="l"> 71: </span>
+<span class="l"> 72: </span>
+<span class="l"> 73: </span>
+<span class="l"> 74: </span>
+<span class="l"> 75: </span>
+<span class="l"> 76: </span>
+<span class="l"> 77: </span>
+<span class="l"> 78: </span>
+<span class="l"> 79: </span>
+<span class="l"> 80: </span>
+<span class="l"> 81: </span>
+<span class="l"> 82: </span>
+<span class="l"> 83: </span>
+<span class="l"> 84: </span>
+<span class="l"> 85: </span>
+<span class="l"> 86: </span>
+<span class="l"> 87: </span>
+<span class="l"> 88: </span>
+<span class="l"> 89: </span>
+<span class="l"> 90: </span>
+<span class="l"> 91: </span>
+<span class="l"> 92: </span>
+<span class="l"> 93: </span>
+<span class="l"> 94: </span>
+<span class="l"> 95: </span>
+<span class="l"> 96: </span>
+<span class="l"> 97: </span>
+<span class="l"> 98: </span>
+<span class="l"> 99: </span>
+<span class="l">100: </span>
+<span class="l">101: </span>
+<span class="l">102: </span>
+<span class="l">103: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span class="i">styledTrace1</span> <span class="o">=</span>
+    <span class="i">Scatter</span>(
+        <span class="i">x</span> <span class="o">=</span> [<span class="n">52698</span>; <span class="n">43117</span>],
+        <span class="i">y</span> <span class="o">=</span> [<span class="n">53</span>; <span class="n">31</span>],
+        <span class="i">mode</span> <span class="o">=</span> <span class="s">&quot;markers&quot;</span>,
+        <span class="i">name</span> <span class="o">=</span> <span class="s">&quot;North America&quot;</span>,
+        <span class="i">text</span> <span class="o">=</span> [<span class="s">&quot;United States&quot;</span>; <span class="s">&quot;Canada&quot;</span>],
+        <span class="i">marker</span> <span class="o">=</span>
+            <span class="i">Marker</span>(
+                <span class="i">color</span> <span class="o">=</span> <span class="s">&quot;rgb(164, 194, 244)&quot;</span>,
+                <span class="i">size</span> <span class="o">=</span> <span class="n">12</span>,
+                <span class="i">line</span> <span class="o">=</span>
+                    <span class="i">Line</span>(
+                        <span class="i">color</span> <span class="o">=</span> <span class="s">&quot;white&quot;</span>,
+                        <span class="i">width</span> <span class="o">=</span> <span class="n">0.5</span>
+                    )
+            )
+    )
+
+<span class="k">let</span> <span class="i">styledTrace2</span> <span class="o">=</span>
+    <span class="i">Scatter</span>(
+        <span class="i">x</span> <span class="o">=</span> [<span class="n">39317</span>; <span class="n">37236</span>; <span class="n">35650</span>; <span class="n">30066</span>; <span class="n">29570</span>; <span class="n">27159</span>; <span class="n">23557</span>; <span class="n">21046</span>; <span class="n">18007</span>],
+        <span class="i">y</span> <span class="o">=</span> [<span class="n">33</span>; <span class="n">20</span>; <span class="n">13</span>; <span class="n">19</span>; <span class="n">27</span>; <span class="n">19</span>; <span class="n">49</span>; <span class="n">44</span>; <span class="n">38</span>],
+        <span class="i">mode</span> <span class="o">=</span> <span class="s">&quot;markers&quot;</span>,
+        <span class="i">name</span> <span class="o">=</span> <span class="s">&quot;Europe&quot;</span>,
+        <span class="i">text</span> <span class="o">=</span>
+            [<span class="s">&quot;Germany&quot;</span>; <span class="s">&quot;Britain&quot;</span>; <span class="s">&quot;France&quot;</span>; <span class="s">&quot;Spain&quot;</span>; <span class="s">&quot;Italy&quot;</span>; <span class="s">&quot;Czech Rep.&quot;</span>; <span class="s">&quot;Greece&quot;</span>;
+             <span class="s">&quot;Poland&quot;</span>],
+        <span class="i">marker</span> <span class="o">=</span>
+            <span class="i">Marker</span>(
+                <span class="i">color</span> <span class="o">=</span> <span class="s">&quot;rgb(255, 217, 102)&quot;</span>,
+                <span class="i">size</span> <span class="o">=</span> <span class="n">12</span>,
+                <span class="i">line</span><span class="o">=</span>
+                    <span class="i">Line</span>(
+                        <span class="i">color</span> <span class="o">=</span> <span class="s">&quot;white&quot;</span>,
+                        <span class="i">width</span> <span class="o">=</span> <span class="n">0.5</span>
+                    )
+            )
+    )
+
+<span class="k">let</span> <span class="i">styledTrace3</span> <span class="o">=</span> 
+    <span class="i">Scatter</span>(
+        <span class="i">x</span> <span class="o">=</span> [<span class="n">42952</span>; <span class="n">37037</span>; <span class="n">33106</span>; <span class="n">17478</span>; <span class="n">9813</span>; <span class="n">5253</span>; <span class="n">4692</span>; <span class="n">3899</span>],
+        <span class="i">y</span> <span class="o">=</span> [<span class="n">23</span>; <span class="n">42</span>; <span class="n">54</span>; <span class="n">89</span>; <span class="n">14</span>; <span class="n">99</span>; <span class="n">93</span>; <span class="n">70</span>],
+        <span class="i">mode</span> <span class="o">=</span> <span class="s">&quot;markers&quot;</span>,
+        <span class="i">name</span> <span class="o">=</span> <span class="s">&quot;Asia/Pacific&quot;</span>,
+        <span class="i">text</span> <span class="o">=</span>
+            [<span class="s">&quot;Australia&quot;</span>; <span class="s">&quot;Japan&quot;</span>; <span class="s">&quot;South Korea&quot;</span>; <span class="s">&quot;Malaysia&quot;</span>; <span class="s">&quot;China&quot;</span>; <span class="s">&quot;Indonesia&quot;</span>;
+             <span class="s">&quot;Philippines&quot;</span>; <span class="s">&quot;India&quot;</span>],
+        <span class="i">marker</span> <span class="o">=</span>
+            <span class="i">Marker</span>(
+                <span class="i">color</span> <span class="o">=</span> <span class="s">&quot;rgb(234, 153, 153)&quot;</span>,
+                <span class="i">size</span> <span class="o">=</span> <span class="n">12</span>,
+                <span class="i">line</span> <span class="o">=</span>
+                    <span class="i">Line</span>(
+                        <span class="i">color</span> <span class="o">=</span> <span class="s">&quot;white&quot;</span>,
+                        <span class="i">width</span> <span class="o">=</span> <span class="n">0.5</span>
+                    )
+            )
+    )
+
+<span class="k">let</span> <span class="i">styledTrace4</span> <span class="o">=</span>
+    <span class="i">Scatter</span>(
+        <span class="i">x</span> <span class="o">=</span> [<span class="n">19097</span>; <span class="n">18601</span>; <span class="n">15595</span>; <span class="n">13546</span>; <span class="n">12026</span>; <span class="n">7434</span>; <span class="n">5419</span>],
+        <span class="i">y</span> <span class="o">=</span> [<span class="n">43</span>; <span class="n">47</span>; <span class="n">56</span>; <span class="n">80</span>; <span class="n">86</span>; <span class="n">93</span>; <span class="n">80</span>],
+        <span class="i">mode</span> <span class="o">=</span> <span class="s">&quot;markers&quot;</span>,
+        <span class="i">name</span> <span class="o">=</span> <span class="s">&quot;Latin America&quot;</span>,
+        <span class="i">text</span> <span class="o">=</span>
+            [<span class="s">&quot;Chile&quot;</span>; <span class="s">&quot;Argentina&quot;</span>; <span class="s">&quot;Mexico&quot;</span>; <span class="s">&quot;Venezuela&quot;</span>; <span class="s">&quot;Venezuela&quot;</span>; <span class="s">&quot;El Salvador&quot;</span>;
+             <span class="s">&quot;Bolivia&quot;</span>],
+        <span class="i">marker</span> <span class="o">=</span> 
+            <span class="i">Marker</span>(
+                <span class="i">color</span> <span class="o">=</span> <span class="s">&quot;rgb(142, 124, 195)&quot;</span>,
+                <span class="i">size</span> <span class="o">=</span> <span class="n">12</span>,
+                <span class="i">line</span> <span class="o">=</span>
+                    <span class="i">Line</span>(
+                        <span class="i">color</span> <span class="o">=</span> <span class="s">&quot;white&quot;</span>,
+                        <span class="i">width</span> <span class="o">=</span> <span class="n">0.5</span>
+                    )
+            )
+    )
+
+<span class="k">let</span> <span class="i">styledLayout</span> <span class="o">=</span>
+    <span class="i">Layout</span>(
+        <span class="i">title</span> <span class="o">=</span> <span class="s">&quot;Quarter 1 Growth&quot;</span>,
+        <span class="i">xaxis</span> <span class="o">=</span>
+            <span class="i">Xaxis</span>(
+                <span class="i">title</span> <span class="o">=</span> <span class="s">&quot;GDP per Capita&quot;</span>,
+                <span class="i">showgrid</span> <span class="o">=</span> <span class="k">false</span>,
+                <span class="i">zeroline</span> <span class="o">=</span> <span class="k">false</span>
+            ),
+        <span class="i">yaxis</span> <span class="o">=</span>
+            <span class="i">Yaxis</span>(
+                <span class="i">title</span> <span class="o">=</span> <span class="s">&quot;Percent&quot;</span>,
+                <span class="i">showline</span> <span class="o">=</span> <span class="k">false</span>
+            )
+    )
+
+[<span class="i">styledTrace1</span>; <span class="i">styledTrace2</span>; <span class="i">styledTrace3</span>; <span class="i">styledTrace4</span>]
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">Plot</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithLayout</span> <span class="i">styledLayout</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithWidth</span> <span class="n">700</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithHeight</span> <span class="n">500</span>
+</code></pre></td>
+</tr>
+</table>
+<div id="75cd3381-4a36-49fe-8961-56c67f9d0552" style="width: 700px; height: 500px;"></div>
+        <script>
+            var data = [{"type":"scatter","x":[52698,43117],"y":[53,31],"text":["United States","Canada"],"mode":"markers","marker":{"size":12,"color":"rgb(164, 194, 244)","line":{"color":"white","width":0.5}},"name":"North America"},{"type":"scatter","x":[39317,37236,35650,30066,29570,27159,23557,21046,18007],"y":[33,20,13,19,27,19,49,44,38],"text":["Germany","Britain","France","Spain","Italy","Czech Rep.","Greece","Poland"],"mode":"markers","marker":{"size":12,"color":"rgb(255, 217, 102)","line":{"color":"white","width":0.5}},"name":"Europe"},{"type":"scatter","x":[42952,37037,33106,17478,9813,5253,4692,3899],"y":[23,42,54,89,14,99,93,70],"text":["Australia","Japan","South Korea","Malaysia","China","Indonesia","Philippines","India"],"mode":"markers","marker":{"size":12,"color":"rgb(234, 153, 153)","line":{"color":"white","width":0.5}},"name":"Asia/Pacific"},{"type":"scatter","x":[19097,18601,15595,13546,12026,7434,5419],"y":[43,47,56,80,86,93,80],"text":["Chile","Argentina","Mexico","Venezuela","Venezuela","El Salvador","Bolivia"],"mode":"markers","marker":{"size":12,"color":"rgb(142, 124, 195)","line":{"color":"white","width":0.5}},"name":"Latin America"}];
+            var layout = {"title":"Quarter 1 Growth","xaxis":{"title":"GDP per Capita","showgrid":false,"zeroline":false,"_isSubplotObj":true},"yaxis":{"title":"Percent","showline":false,"_isSubplotObj":true}};
+            Plotly.newPlot('75cd3381-4a36-49fe-8961-56c67f9d0552', data, layout);
+        </script>
+<h2><a name="Line-Shape-Options-for-Interpolation" class="anchor" href="#Line-Shape-Options-for-Interpolation">Line Shape Options for Interpolation</a></h2>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+<span class="l">11: </span>
+<span class="l">12: </span>
+<span class="l">13: </span>
+<span class="l">14: </span>
+<span class="l">15: </span>
+<span class="l">16: </span>
+<span class="l">17: </span>
+<span class="l">18: </span>
+<span class="l">19: </span>
+<span class="l">20: </span>
+<span class="l">21: </span>
+<span class="l">22: </span>
+<span class="l">23: </span>
+<span class="l">24: </span>
+<span class="l">25: </span>
+<span class="l">26: </span>
+<span class="l">27: </span>
+<span class="l">28: </span>
+<span class="l">29: </span>
+<span class="l">30: </span>
+<span class="l">31: </span>
+<span class="l">32: </span>
+<span class="l">33: </span>
+<span class="l">34: </span>
+<span class="l">35: </span>
+<span class="l">36: </span>
+<span class="l">37: </span>
+<span class="l">38: </span>
+<span class="l">39: </span>
+<span class="l">40: </span>
+<span class="l">41: </span>
+<span class="l">42: </span>
+<span class="l">43: </span>
+<span class="l">44: </span>
+<span class="l">45: </span>
+<span class="l">46: </span>
+<span class="l">47: </span>
+<span class="l">48: </span>
+<span class="l">49: </span>
+<span class="l">50: </span>
+<span class="l">51: </span>
+<span class="l">52: </span>
+<span class="l">53: </span>
+<span class="l">54: </span>
+<span class="l">55: </span>
+<span class="l">56: </span>
+<span class="l">57: </span>
+<span class="l">58: </span>
+<span class="l">59: </span>
+<span class="l">60: </span>
+<span class="l">61: </span>
+<span class="l">62: </span>
+<span class="l">63: </span>
+<span class="l">64: </span>
+<span class="l">65: </span>
+<span class="l">66: </span>
+<span class="l">67: </span>
+<span class="l">68: </span>
+<span class="l">69: </span>
+<span class="l">70: </span>
+<span class="l">71: </span>
+<span class="l">72: </span>
+<span class="l">73: </span>
+<span class="l">74: </span>
+<span class="l">75: </span>
+<span class="l">76: </span>
+<span class="l">77: </span>
+<span class="l">78: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span class="i">shapeTrace1</span> <span class="o">=</span>
+    <span class="i">Scatter</span>(
+        <span class="i">x</span> <span class="o">=</span> [<span class="n">1</span>; <span class="n">2</span>; <span class="n">3</span>; <span class="n">4</span>; <span class="n">5</span>],
+        <span class="i">y</span> <span class="o">=</span> [<span class="n">1</span>; <span class="n">3</span>; <span class="n">2</span>; <span class="n">3</span>; <span class="n">1</span>],
+        <span class="i">mode</span> <span class="o">=</span> <span class="s">&quot;lines+markers&quot;</span>,
+        <span class="i">name</span> <span class="o">=</span> <span class="s">&quot;&#39;linear&#39;&quot;</span>,
+        <span class="i">line</span> <span class="o">=</span> <span class="i">Line</span>(<span class="i">shape</span> <span class="o">=</span> <span class="s">&quot;linear&quot;</span>)
+    )
+
+<span class="k">let</span> <span class="i">shapeTrace2</span> <span class="o">=</span>
+    <span class="i">Scatter</span>(
+        <span class="i">x</span> <span class="o">=</span> [<span class="n">1</span>; <span class="n">2</span>; <span class="n">3</span>; <span class="n">4</span>; <span class="n">5</span>],
+        <span class="i">y</span> <span class="o">=</span> [<span class="n">6</span>; <span class="n">8</span>; <span class="n">7</span>; <span class="n">8</span>; <span class="n">6</span>],
+        <span class="i">mode</span> <span class="o">=</span> <span class="s">&quot;lines+markers&quot;</span>,
+        <span class="i">name</span> <span class="o">=</span> <span class="s">&quot;&#39;spline&#39;&quot;</span>,
+        <span class="i">text</span> <span class="o">=</span>
+            [<span class="s">&quot;tweak line smoothness&lt;br&gt;with &#39;smoothing&#39; in line object&quot;</span>;
+             <span class="s">&quot;tweak line smoothness&lt;br&gt;with &#39;smoothing&#39; in line object&quot;</span>;
+             <span class="s">&quot;tweak line smoothness&lt;br&gt;with &#39;smoothing&#39; in line object&quot;</span>;
+             <span class="s">&quot;tweak line smoothness&lt;br&gt;with &#39;smoothing&#39; in line object&quot;</span>;
+             <span class="s">&quot;tweak line smoothness&lt;br&gt;with &#39;smoothing&#39; in line object&quot;</span>;
+             <span class="s">&quot;tweak line smoothness&lt;br&gt;with &#39;smoothing&#39; in line object&quot;</span>],
+        <span class="i">line</span> <span class="o">=</span> <span class="i">Line</span>(<span class="i">shape</span> <span class="o">=</span> <span class="s">&quot;spline&quot;</span>)
+    )
+
+<span class="k">let</span> <span class="i">shapeTrace3</span> <span class="o">=</span>
+    <span class="i">Scatter</span>(
+        <span class="i">x</span> <span class="o">=</span> [<span class="n">1</span>; <span class="n">2</span>; <span class="n">3</span>; <span class="n">4</span>; <span class="n">5</span>],
+        <span class="i">y</span> <span class="o">=</span> [<span class="n">11</span>; <span class="n">13</span>; <span class="n">12</span>; <span class="n">13</span>; <span class="n">11</span>],
+        <span class="i">mode</span> <span class="o">=</span> <span class="s">&quot;lines+markers&quot;</span>,
+        <span class="i">name</span> <span class="o">=</span> <span class="s">&quot;&#39;vhv&#39;&quot;</span>,
+        <span class="i">line</span> <span class="o">=</span> <span class="i">Line</span>(<span class="i">shape</span> <span class="o">=</span> <span class="s">&quot;vhv&quot;</span>)
+    )
+
+<span class="k">let</span> <span class="i">shapeTrace4</span> <span class="o">=</span>
+    <span class="i">Scatter</span>(
+        <span class="i">x</span> <span class="o">=</span> [<span class="n">1</span>; <span class="n">2</span>; <span class="n">3</span>; <span class="n">4</span>; <span class="n">5</span>],
+        <span class="i">y</span> <span class="o">=</span> [<span class="n">16</span>; <span class="n">18</span>; <span class="n">17</span>; <span class="n">18</span>; <span class="n">16</span>],
+        <span class="i">mode</span> <span class="o">=</span> <span class="s">&quot;lines+markers&quot;</span>,
+        <span class="i">name</span> <span class="o">=</span> <span class="s">&quot;&#39;hvh&#39;&quot;</span>,
+        <span class="i">line</span> <span class="o">=</span> <span class="i">Line</span>(<span class="i">shape</span> <span class="o">=</span> <span class="s">&quot;hvh&quot;</span>)
+    )
+
+<span class="k">let</span> <span class="i">shapeTrace5</span> <span class="o">=</span>
+    <span class="i">Scatter</span>(
+        <span class="i">x</span> <span class="o">=</span> [<span class="n">1</span>; <span class="n">2</span>; <span class="n">3</span>; <span class="n">4</span>; <span class="n">5</span>],
+        <span class="i">y</span> <span class="o">=</span> [<span class="n">21</span>; <span class="n">23</span>; <span class="n">22</span>; <span class="n">23</span>; <span class="n">21</span>],
+        <span class="i">mode</span> <span class="o">=</span> <span class="s">&quot;lines+markers&quot;</span>,
+        <span class="i">name</span> <span class="o">=</span> <span class="s">&quot;&#39;vh&#39;&quot;</span>,
+        <span class="i">line</span> <span class="o">=</span> <span class="i">Line</span>(<span class="i">shape</span> <span class="o">=</span> <span class="s">&quot;vh&quot;</span>)
+    )
+
+<span class="k">let</span> <span class="i">shapeTrace6</span> <span class="o">=</span>
+    <span class="i">Scatter</span>(
+        <span class="i">x</span> <span class="o">=</span> [<span class="n">1</span>; <span class="n">2</span>; <span class="n">3</span>; <span class="n">4</span>; <span class="n">5</span>],
+        <span class="i">y</span> <span class="o">=</span> [<span class="n">26</span>; <span class="n">28</span>; <span class="n">27</span>; <span class="n">28</span>; <span class="n">26</span>],
+        <span class="i">mode</span> <span class="o">=</span> <span class="s">&quot;lines+markers&quot;</span>,
+        <span class="i">name</span> <span class="o">=</span> <span class="s">&quot;&#39;hv&#39;&quot;</span>,
+        <span class="i">line</span> <span class="o">=</span> <span class="i">Line</span>(<span class="i">shape</span> <span class="o">=</span> <span class="s">&quot;hv&quot;</span>)
+    )
+        
+<span class="k">let</span> <span class="i">shapeLayout</span> <span class="o">=</span>
+    <span class="i">Layout</span>(
+        <span class="i">legend</span> <span class="o">=</span>
+            <span class="i">Legend</span>(
+                <span class="i">y</span> <span class="o">=</span> <span class="n">0.5</span>,
+                <span class="i">traceorder</span> <span class="o">=</span> <span class="s">&quot;reversed&quot;</span>,
+                <span class="i">font</span> <span class="o">=</span> <span class="i">Font</span>(<span class="i">size</span> <span class="o">=</span> <span class="n">16.</span>),
+                <span class="i">yref</span> <span class="o">=</span> <span class="s">&quot;paper&quot;</span>
+            )
+    )
+
+[<span class="i">shapeTrace1</span>; <span class="i">shapeTrace2</span>; <span class="i">shapeTrace3</span>;
+ <span class="i">shapeTrace4</span>; <span class="i">shapeTrace5</span>; <span class="i">shapeTrace6</span>]
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">Plot</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithLayout</span> <span class="i">shapeLayout</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithWidth</span> <span class="n">700</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithHeight</span> <span class="n">500</span>
+</code></pre></td>
+</tr>
+</table>
+<div id="a2a48ae7-21cd-4d9b-a1a0-35cc10c289fb" style="width: 700px; height: 500px;"></div>
+        <script>
+            var data = [{"type":"scatter","x":[1,2,3,4,5],"y":[1,3,2,3,1],"mode":"lines+markers","line":{"shape":"linear"},"name":"'linear'"},{"type":"scatter","x":[1,2,3,4,5],"y":[6,8,7,8,6],"text":["tweak line smoothness<br>with 'smoothing' in line object","tweak line smoothness<br>with 'smoothing' in line object","tweak line smoothness<br>with 'smoothing' in line object","tweak line smoothness<br>with 'smoothing' in line object","tweak line smoothness<br>with 'smoothing' in line object","tweak line smoothness<br>with 'smoothing' in line object"],"mode":"lines+markers","line":{"shape":"spline"},"name":"'spline'"},{"type":"scatter","x":[1,2,3,4,5],"y":[11,13,12,13,11],"mode":"lines+markers","line":{"shape":"vhv"},"name":"'vhv'"},{"type":"scatter","x":[1,2,3,4,5],"y":[16,18,17,18,16],"mode":"lines+markers","line":{"shape":"hvh"},"name":"'hvh'"},{"type":"scatter","x":[1,2,3,4,5],"y":[21,23,22,23,21],"mode":"lines+markers","line":{"shape":"vh"},"name":"'vh'"},{"type":"scatter","x":[1,2,3,4,5],"y":[26,28,27,28,26],"mode":"lines+markers","line":{"shape":"hv"},"name":"'hv'"}];
+            var layout = {"legend":{"font":{"size":16.0},"traceorder":"reversed","y":0.5,"yref":"paper"}};
+            Plotly.newPlot('a2a48ae7-21cd-4d9b-a1a0-35cc10c289fb', data, layout);
+        </script>
+
+
+            </div>
+            <div class="span3">
+                <img src="/XPlot/img/logo.png" alt="F# Project" style="width:130px;margin:20px" />
+                <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
+                    <li class="nav-header">XPlot</li>
+                    <li><a href="/XPlot/">Home page</a></li>
+                    <li class="divider"></li>
+                    <li><a href="http://www.nuget.org/packages?q=XPlot">Get Library via NuGet</a></li>
+                    <li><a href="http://github.com/fslaborg/XPlot">Source Code on GitHub</a></li>
+                    <li><a href="/XPlot/license.html">License (Apache 2.0)</a></li>
+                    <li><a href="/XPlot/release-notes.html">Release Notes</a></li>
+
+                    <li class="nav-header"><a href="/XPlot/google-charts.html">Google Charts</a></li>
+                    <li><a href="/XPlot/chart/google-annotation-chart.html">Annotation</a></li>
+                    <li><a href="/XPlot/chart/google-area-chart.html">Area</a></li>
+                    <li><a href="/XPlot/chart/google-bar-chart.html">Bar</a></li>
+                    <li><a href="/XPlot/chart/google-bubble-chart.html">Bubble</a></li>
+                    <li><a href="/XPlot/chart/google-calendar-chart.html">Calendar</a></li>
+                    <li><a href="/XPlot/chart/google-candlestick-chart.html">Candlestick</a></li>
+                    <li><a href="/XPlot/chart/google-column-chart.html">Column</a></li>
+                    <li><a href="/XPlot/chart/google-combo-chart.html">Combo</a></li>
+                    <li><a href="/XPlot/chart/google-gauge-chart.html">Gauge</a></li>
+                    <li><a href="/XPlot/chart/google-geo-chart.html">Geo</a></li>
+                    <li><a href="/XPlot/chart/google-histogram-chart.html">Histogram</a></li>
+                    <li><a href="/XPlot/chart/google-line-chart.html">Line</a></li>
+                    <li><a href="/XPlot/chart/google-map-chart.html">Map</a></li>
+                    <li><a href="/XPlot/chart/google-pie-chart.html">Pie</a></li>
+                    <li><a href="/XPlot/chart/google-sankey-diagram.html">Sankey</a></li>
+                    <li><a href="/XPlot/chart/google-scatter-chart.html">Scatter</a></li>
+                    <li><a href="/XPlot/chart/google-stepped-area-chart.html">Stepped Area</a></li>
+                    <li><a href="/XPlot/chart/google-timeline-chart.html">Timeline</a></li>
+                    <li><a href="/XPlot/chart/google-table-chart.html">Table</a></li>
+                    <li><a href="/XPlot/chart/google-treemap-chart.html">Treemap</a></li>
+
+                    <li class="nav-header"><a href="/XPlot/plotly.html">Plotly</a></li>
+                    <li><a href="/XPlot/chart/plotly-bar-charts.html">Bar</a></li>
+                    <li><a href="/XPlot/chart/plotly-line-scatter-plots.html">Line and Scatter Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-box-plots.html">Box Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-bubble-charts.html">Bubble Charts</a></li>
+                    <li><a href="/XPlot/chart/plotly-contour-plots.html">Contour Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-area-plots.html">Area Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-heatmaps.html">Heatmaps</a></li>
+                    <li><a href="/XPlot/chart/plotly-histograms.html">Histograms</a></li>
+                    <li><a href="/XPlot/chart/plotly-2d-histograms.html">2D Histograms</a></li>
+                    <li><a href="/XPlot/chart/plotly-polar-charts.html">Polar Charts</a></li>
+                    <li><a href="/XPlot/chart/plotly-time-series.html">Time Series</a></li>
+                    <li><a href="/XPlot/chart/plotly-multiple-chart-types.html">Multiple Chart Types</a></li>
+                    <li><a href="/XPlot/chart/plotly-log-plots.html">Log Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-3d-scatter-plots.html">3D Scatter Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-3d-surface-plots.html">3D Surface Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-3d-line-plots.html">3D Line Plots</a></li>
+
+                    <li class="nav-header">Documentation</li>
+                    <li><a href="/XPlot/reference/index.html">API Reference</a></li>
+                    <li class="divider"></li>
+
+                    <li><a href="/XPlot/reference/xplot-googlecharts-chart.html">Google Chart type</a></li>
+                    <li><a href="/XPlot/reference/xplot-googlecharts-configuration-options.html">Google Option type</a></li>
+                    <li><a href="/XPlot/reference/xplot-googlecharts-configuration.html">Google configuration module</a></li>
+
+                    <li class="divider"></li>
+
+                    <li><a href="/XPlot/reference/xplot-plotly-graph.html">Plotly Graph module</a></li>
+                    <li><a href="/XPlot/reference/xplot-plotly-graph-layout.html">Plotly Layout type</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <a href="http://github.com/fslaborg/XPlot"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub" /></a>
+</body>
+</html>

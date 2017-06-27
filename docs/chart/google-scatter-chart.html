@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Google Scatter Chart
+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Data visualization library for F#" />
+    <meta name="author" content="Taha Hachana; Tomas Petricek" />
+
+    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        google.load("visualization", "1.1", { packages: ["corechart", "annotationchart", "calendar", "gauge", "geochart", "map", "sankey", "table", "timeline", "treemap"] })
+    </script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="/XPlot/content/style.css" />
+    <script type="text/javascript" src="/XPlot/content/tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div class="container">
+        <div class="masthead">
+            <ul class="nav nav-pills pull-right">
+                <li>
+                    <a href="http://fslab.org"><img height="16" width="16" src="http://fslab.org/img/thumbs/fslab.png" /> FsLab</a>
+                </li>
+                <li>
+                    <a href="http://fsharp.github.io/FSharp.Data"><img height="16" width="16" src="http://fslab.org/img/thumbs/fsharpdata.png" /> F# Data</a>
+                </li>
+                <li>
+                    <a href="http://bluemountaincapital.github.io/Deedle"><img height="16" width="16" src="http://fslab.org/img/thumbs/deedle.png" /> Deedle</a>
+                </li>
+                <li>
+                    <a href="http://bluemountaincapital.github.io/FSharpRProvider"><img height="16" width="16" src="http://fslab.org/img/thumbs/rprovider.png" /> R Provider</a>
+                </li>
+                <li>
+                    <a href="http://numerics.mathdotnet.com/"><img height="16" width="16" src="http://fslab.org/img/thumbs/mathnet.png" /> Math.NET</a>
+                </li>
+            </ul>
+            <h3 class="muted"><a href="/XPlot/">XPlot</a></h3>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="span9" id="main">
+                
+<h1><a name="Google-Scatter-Chart" class="anchor" href="#Google-Scatter-Chart">Google Scatter Chart</a></h1>
+<p>Creating scatter plots (or point charts) is easy. The following example generates 1000
+points by multiplying two numbers for the X coordinate and two numbers for the Y coordinate:</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+<span class="l">5: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span class="i">rnd</span> <span class="o">=</span> <span class="k">new</span> <span class="i">System</span><span class="o">.</span><span class="i">Random</span>() 
+<span class="k">let</span> <span class="i">next</span>() <span class="o">=</span> <span class="i">rnd</span><span class="o">.</span><span class="i">NextDouble</span>() <span class="o">*</span> <span class="i">rnd</span><span class="o">.</span><span class="i">NextDouble</span>()
+<span class="k">let</span> <span class="i">points</span> <span class="o">=</span> [ <span class="k">for</span> <span class="i">i</span> <span class="k">in</span> <span class="n">0</span> <span class="o">..</span> <span class="n">100</span> <span class="k">-&gt;</span> <span class="i">next</span>(), <span class="i">next</span>() ]
+
+<span class="i">points</span> <span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">Scatter</span> 
+</code></pre></td>
+</tr>
+</table>
+<script type="text/javascript">
+    google.setOnLoadCallback(drawChart);
+            function drawChart() {
+                var data = new google.visualization.DataTable({"cols": [{"type": "number" ,"id": "Column 1" ,"label": "Column 1" }, {"type": "number" ,"id": "Column 2" ,"label": "Column 2" }], "rows" : [{"c" : [{"v": 0.15744118716778}, {"v": 0.140276884415353}]}, {"c" : [{"v": 0.17430637919831}, {"v": 0.288787838114158}]}, {"c" : [{"v": 0.293672314770562}, {"v": 0.413103558924621}]}, {"c" : [{"v": 0.213779410574362}, {"v": 0.728185361913395}]}, {"c" : [{"v": 0.00135027362927822}, {"v": 0.488250136050347}]}, {"c" : [{"v": 0.488285811660218}, {"v": 0.859091500061893}]}, {"c" : [{"v": 0.652365593975691}, {"v": 0.135220318629742}]}, {"c" : [{"v": 0.288625699582158}, {"v": 0.40523715928643}]}, {"c" : [{"v": 0.361803982301444}, {"v": 0.153787443647068}]}, {"c" : [{"v": 0.0592275282995787}, {"v": 0.0525140704814874}]}, {"c" : [{"v": 0.187812601603051}, {"v": 0.0110299669079024}]}, {"c" : [{"v": 0.072621123056129}, {"v": 0.2410986557915}]}, {"c" : [{"v": 0.193352684558495}, {"v": 0.28974176081828}]}, {"c" : [{"v": 0.727768160318642}, {"v": 0.316510859632812}]}, {"c" : [{"v": 0.589190299732098}, {"v": 0.256046054875921}]}, {"c" : [{"v": 0.179165972332805}, {"v": 0.00775277384635128}]}, {"c" : [{"v": 0.154301684851923}, {"v": 0.355233295343729}]}, {"c" : [{"v": 0.349491488036014}, {"v": 0.0216839606832338}]}, {"c" : [{"v": 0.276760805785813}, {"v": 0.104071083663376}]}, {"c" : [{"v": 0.202000055373076}, {"v": 0.260923704994611}]}, {"c" : [{"v": 0.311276820997116}, {"v": 0.247240944548067}]}, {"c" : [{"v": 0.286854736215514}, {"v": 0.576603504042071}]}, {"c" : [{"v": 0.0223980105178566}, {"v": 0.182963492563978}]}, {"c" : [{"v": 0.0542238786178813}, {"v": 0.00812977999165779}]}, {"c" : [{"v": 0.0950604935424094}, {"v": 0.394205000294038}]}, {"c" : [{"v": 0.0121975030535799}, {"v": 0.550159929450458}]}, {"c" : [{"v": 0.107391627561796}, {"v": 0.330281571796272}]}, {"c" : [{"v": 0.067818141532463}, {"v": 0.318362082372421}]}, {"c" : [{"v": 0.016192708133667}, {"v": 0.0330018996417068}]}, {"c" : [{"v": 0.237440041669265}, {"v": 0.117825498185004}]}, {"c" : [{"v": 0.553675018750904}, {"v": 0.027307895707572}]}, {"c" : [{"v": 0.38397562097409}, {"v": 0.0351837066330159}]}, {"c" : [{"v": 0.0576876659289632}, {"v": 0.0317713884625866}]}, {"c" : [{"v": 0.357236345397912}, {"v": 0.397986077569484}]}, {"c" : [{"v": 0.672221787872304}, {"v": 0.336002962374264}]}, {"c" : [{"v": 0.0240434659901322}, {"v": 0.508411379749947}]}, {"c" : [{"v": 0.319196248656693}, {"v": 0.0786540782681575}]}, {"c" : [{"v": 0.3291083619782}, {"v": 0.0543736200600656}]}, {"c" : [{"v": 0.102918737872629}, {"v": 0.222187104374273}]}, {"c" : [{"v": 0.388949868984902}, {"v": 0.035206005084875}]}, {"c" : [{"v": 0.492922583333197}, {"v": 0.0133421326329729}]}, {"c" : [{"v": 0.252179635582628}, {"v": 0.118408130065897}]}, {"c" : [{"v": 0.112845394228424}, {"v": 0.418236314097476}]}, {"c" : [{"v": 0.0771081482620347}, {"v": 0.24980906845125}]}, {"c" : [{"v": 0.128325571503674}, {"v": 0.582454328923894}]}, {"c" : [{"v": 0.429202247403322}, {"v": 0.321133901905054}]}, {"c" : [{"v": 0.142068026018819}, {"v": 0.14063963130394}]}, {"c" : [{"v": 0.0899759582309299}, {"v": 0.284639910144333}]}, {"c" : [{"v": 0.505152759329825}, {"v": 0.276452622746379}]}, {"c" : [{"v": 0.506449731091792}, {"v": 0.0298696764949294}]}, {"c" : [{"v": 0.389564214237586}, {"v": 0.0251087852015316}]}, {"c" : [{"v": 0.137641025060867}, {"v": 0.0601818666490343}]}, {"c" : [{"v": 0.565865618081681}, {"v": 0.38585956312241}]}, {"c" : [{"v": 0.229096917557649}, {"v": 0.146875440393553}]}, {"c" : [{"v": 0.0560443645556196}, {"v": 0.109025471041827}]}, {"c" : [{"v": 0.00242134961622153}, {"v": 0.199318308947392}]}, {"c" : [{"v": 0.15880749006051}, {"v": 0.0443955389367996}]}, {"c" : [{"v": 0.0830339268295549}, {"v": 0.437054255164509}]}, {"c" : [{"v": 0.484229537700098}, {"v": 0.0960538708631583}]}, {"c" : [{"v": 0.0548389207713734}, {"v": 0.0991487143079563}]}, {"c" : [{"v": 0.183961073970223}, {"v": 0.341152070042152}]}, {"c" : [{"v": 0.790647099527522}, {"v": 0.166268394070446}]}, {"c" : [{"v": 0.595102327406966}, {"v": 0.0632123493510907}]}, {"c" : [{"v": 0.762359444435848}, {"v": 0.841010692882934}]}, {"c" : [{"v": 0.307931741747574}, {"v": 0.172249403097656}]}, {"c" : [{"v": 0.00340000318364408}, {"v": 0.206045320698715}]}, {"c" : [{"v": 0.84431368648366}, {"v": 0.0464911893889371}]}, {"c" : [{"v": 0.0378235781195627}, {"v": 0.653151849441519}]}, {"c" : [{"v": 0.359014826545981}, {"v": 0.365415645148754}]}, {"c" : [{"v": 0.125477906433131}, {"v": 0.901944848338237}]}, {"c" : [{"v": 0.575773641935406}, {"v": 0.545829029728788}]}, {"c" : [{"v": 0.41798018080779}, {"v": 0.519532204385352}]}, {"c" : [{"v": 0.189520142344576}, {"v": 0.124521375422325}]}, {"c" : [{"v": 0.0153924472740918}, {"v": 0.000385286372675745}]}, {"c" : [{"v": 0.0468830677991803}, {"v": 0.0104365873914931}]}, {"c" : [{"v": 0.166403843253088}, {"v": 0.0910047111768139}]}, {"c" : [{"v": 0.0311492576820826}, {"v": 0.141901491232854}]}, {"c" : [{"v": 0.102271155700041}, {"v": 0.422388992937846}]}, {"c" : [{"v": 0.292066693840717}, {"v": 0.00090185218108271}]}, {"c" : [{"v": 0.491607840407236}, {"v": 0.349487124327042}]}, {"c" : [{"v": 0.0998433615916451}, {"v": 0.359034964075223}]}, {"c" : [{"v": 0.427206057132998}, {"v": 0.26489943746392}]}, {"c" : [{"v": 0.297631371016633}, {"v": 0.0947826733669167}]}, {"c" : [{"v": 0.155735021888301}, {"v": 0.152791922205749}]}, {"c" : [{"v": 0.146213101977784}, {"v": 0.411736801312151}]}, {"c" : [{"v": 0.308328971373798}, {"v": 0.188518486959623}]}, {"c" : [{"v": 0.530047119369881}, {"v": 0.221130770716375}]}, {"c" : [{"v": 0.104148657123813}, {"v": 0.0249407023485636}]}, {"c" : [{"v": 0.0109105037895259}, {"v": 0.0646701808805512}]}, {"c" : [{"v": 0.294309090172818}, {"v": 0.326160991824444}]}, {"c" : [{"v": 0.322070309482985}, {"v": 0.507402795176156}]}, {"c" : [{"v": 0.293767560723398}, {"v": 0.451586964335673}]}, {"c" : [{"v": 0.517635805705957}, {"v": 0.479909872845293}]}, {"c" : [{"v": 0.0863911810702834}, {"v": 0.623468788908392}]}, {"c" : [{"v": 0.127485934476383}, {"v": 0.254214792203009}]}, {"c" : [{"v": 0.284231959781448}, {"v": 0.199612213784504}]}, {"c" : [{"v": 0.138386493510403}, {"v": 0.0996902497981903}]}, {"c" : [{"v": 0.0319813069127369}, {"v": 0.116424201576686}]}, {"c" : [{"v": 0.153968877665411}, {"v": 0.125608214105149}]}, {"c" : [{"v": 0.483972131489358}, {"v": 0.0069718164899157}]}, {"c" : [{"v": 0.135184900041929}, {"v": 0.494865710937955}]}]});
+
+                
+
+                var options = {"legend":{"position":"none"}} 
+
+                var chart = new google.visualization.ScatterChart(document.getElementById('47bfdaf0-5144-451a-be63-c74e6e6cb664'));
+                chart.draw(data, options);
+            }
+</script>
+<div id="47bfdaf0-5144-451a-be63-c74e6e6cb664" style="width: 700px; height: 400px;"></div>
+
+
+            </div>
+            <div class="span3">
+                <img src="/XPlot/img/logo.png" alt="F# Project" style="width:130px;margin:20px" />
+                <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
+                    <li class="nav-header">XPlot</li>
+                    <li><a href="/XPlot/">Home page</a></li>
+                    <li class="divider"></li>
+                    <li><a href="http://www.nuget.org/packages?q=XPlot">Get Library via NuGet</a></li>
+                    <li><a href="http://github.com/fslaborg/XPlot">Source Code on GitHub</a></li>
+                    <li><a href="/XPlot/license.html">License (Apache 2.0)</a></li>
+                    <li><a href="/XPlot/release-notes.html">Release Notes</a></li>
+
+                    <li class="nav-header"><a href="/XPlot/google-charts.html">Google Charts</a></li>
+                    <li><a href="/XPlot/chart/google-annotation-chart.html">Annotation</a></li>
+                    <li><a href="/XPlot/chart/google-area-chart.html">Area</a></li>
+                    <li><a href="/XPlot/chart/google-bar-chart.html">Bar</a></li>
+                    <li><a href="/XPlot/chart/google-bubble-chart.html">Bubble</a></li>
+                    <li><a href="/XPlot/chart/google-calendar-chart.html">Calendar</a></li>
+                    <li><a href="/XPlot/chart/google-candlestick-chart.html">Candlestick</a></li>
+                    <li><a href="/XPlot/chart/google-column-chart.html">Column</a></li>
+                    <li><a href="/XPlot/chart/google-combo-chart.html">Combo</a></li>
+                    <li><a href="/XPlot/chart/google-gauge-chart.html">Gauge</a></li>
+                    <li><a href="/XPlot/chart/google-geo-chart.html">Geo</a></li>
+                    <li><a href="/XPlot/chart/google-histogram-chart.html">Histogram</a></li>
+                    <li><a href="/XPlot/chart/google-line-chart.html">Line</a></li>
+                    <li><a href="/XPlot/chart/google-map-chart.html">Map</a></li>
+                    <li><a href="/XPlot/chart/google-pie-chart.html">Pie</a></li>
+                    <li><a href="/XPlot/chart/google-sankey-diagram.html">Sankey</a></li>
+                    <li><a href="/XPlot/chart/google-scatter-chart.html">Scatter</a></li>
+                    <li><a href="/XPlot/chart/google-stepped-area-chart.html">Stepped Area</a></li>
+                    <li><a href="/XPlot/chart/google-timeline-chart.html">Timeline</a></li>
+                    <li><a href="/XPlot/chart/google-table-chart.html">Table</a></li>
+                    <li><a href="/XPlot/chart/google-treemap-chart.html">Treemap</a></li>
+
+                    <li class="nav-header"><a href="/XPlot/plotly.html">Plotly</a></li>
+                    <li><a href="/XPlot/chart/plotly-bar-charts.html">Bar</a></li>
+                    <li><a href="/XPlot/chart/plotly-line-scatter-plots.html">Line and Scatter Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-box-plots.html">Box Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-bubble-charts.html">Bubble Charts</a></li>
+                    <li><a href="/XPlot/chart/plotly-contour-plots.html">Contour Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-area-plots.html">Area Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-heatmaps.html">Heatmaps</a></li>
+                    <li><a href="/XPlot/chart/plotly-histograms.html">Histograms</a></li>
+                    <li><a href="/XPlot/chart/plotly-2d-histograms.html">2D Histograms</a></li>
+                    <li><a href="/XPlot/chart/plotly-polar-charts.html">Polar Charts</a></li>
+                    <li><a href="/XPlot/chart/plotly-time-series.html">Time Series</a></li>
+                    <li><a href="/XPlot/chart/plotly-multiple-chart-types.html">Multiple Chart Types</a></li>
+                    <li><a href="/XPlot/chart/plotly-log-plots.html">Log Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-3d-scatter-plots.html">3D Scatter Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-3d-surface-plots.html">3D Surface Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-3d-line-plots.html">3D Line Plots</a></li>
+
+                    <li class="nav-header">Documentation</li>
+                    <li><a href="/XPlot/reference/index.html">API Reference</a></li>
+                    <li class="divider"></li>
+
+                    <li><a href="/XPlot/reference/xplot-googlecharts-chart.html">Google Chart type</a></li>
+                    <li><a href="/XPlot/reference/xplot-googlecharts-configuration-options.html">Google Option type</a></li>
+                    <li><a href="/XPlot/reference/xplot-googlecharts-configuration.html">Google configuration module</a></li>
+
+                    <li class="divider"></li>
+
+                    <li><a href="/XPlot/reference/xplot-plotly-graph.html">Plotly Graph module</a></li>
+                    <li><a href="/XPlot/reference/xplot-plotly-graph-layout.html">Plotly Layout type</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <a href="http://github.com/fslaborg/XPlot"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub" /></a>
+</body>
+</html>

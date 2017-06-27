@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Google Line Chart
+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Data visualization library for F#" />
+    <meta name="author" content="Taha Hachana; Tomas Petricek" />
+
+    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        google.load("visualization", "1.1", { packages: ["corechart", "annotationchart", "calendar", "gauge", "geochart", "map", "sankey", "table", "timeline", "treemap"] })
+    </script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="/XPlot/content/style.css" />
+    <script type="text/javascript" src="/XPlot/content/tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div class="container">
+        <div class="masthead">
+            <ul class="nav nav-pills pull-right">
+                <li>
+                    <a href="http://fslab.org"><img height="16" width="16" src="http://fslab.org/img/thumbs/fslab.png" /> FsLab</a>
+                </li>
+                <li>
+                    <a href="http://fsharp.github.io/FSharp.Data"><img height="16" width="16" src="http://fslab.org/img/thumbs/fsharpdata.png" /> F# Data</a>
+                </li>
+                <li>
+                    <a href="http://bluemountaincapital.github.io/Deedle"><img height="16" width="16" src="http://fslab.org/img/thumbs/deedle.png" /> Deedle</a>
+                </li>
+                <li>
+                    <a href="http://bluemountaincapital.github.io/FSharpRProvider"><img height="16" width="16" src="http://fslab.org/img/thumbs/rprovider.png" /> R Provider</a>
+                </li>
+                <li>
+                    <a href="http://numerics.mathdotnet.com/"><img height="16" width="16" src="http://fslab.org/img/thumbs/mathnet.png" /> Math.NET</a>
+                </li>
+            </ul>
+            <h3 class="muted"><a href="/XPlot/">XPlot</a></h3>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="span9" id="main">
+                
+<h1><a name="Google-Line-Chart" class="anchor" href="#Google-Line-Chart">Google Line Chart</a></h1>
+<p>This example shows how to create scatter (point) charts and line charts using the
+<code>XPlot.GoogleCharts</code> library.</p>
+<p>To create a line chart, use <code>Chart.Line</code>. To create a scatter (point) chart, use
+<code>Chart.Scatter</code>. In both cases, you can also combine multiple charts in the same
+chart area, simply by calling the functions with a list of lists (rather
+than with just a plan list of key value pairs)</p>
+<h2><a name="A-simple-line-chart" class="anchor" href="#A-simple-line-chart">A simple line chart</a></h2>
+<p>The following example calls <code>Chart.Line</code> with a list of key value pairs, created
+using a simple F# list comprehension:</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="i">Chart</span><span class="o">.</span><span class="i">Line</span> [ <span class="k">for</span> <span class="i">x</span> <span class="k">in</span> <span class="n">0.</span> <span class="o">..</span> <span class="n">0.5</span> <span class="o">..</span> <span class="n">6.3</span> <span class="k">-&gt;</span> <span class="i">x</span>, <span class="i">sin</span> <span class="i">x</span> ]
+</code></pre></td>
+</tr>
+</table>
+<script type="text/javascript">
+    google.setOnLoadCallback(drawChart);
+            function drawChart() {
+                var data = new google.visualization.DataTable({"cols": [{"type": "number" ,"id": "Column 1" ,"label": "Column 1" }, {"type": "number" ,"id": "Column 2" ,"label": "Column 2" }], "rows" : [{"c" : [{"v": 0}, {"v": 0}]}, {"c" : [{"v": 0.5}, {"v": 0.479425538604203}]}, {"c" : [{"v": 1}, {"v": 0.841470984807897}]}, {"c" : [{"v": 1.5}, {"v": 0.997494986604054}]}, {"c" : [{"v": 2}, {"v": 0.909297426825682}]}, {"c" : [{"v": 2.5}, {"v": 0.598472144103957}]}, {"c" : [{"v": 3}, {"v": 0.141120008059867}]}, {"c" : [{"v": 3.5}, {"v": -0.35078322768962}]}, {"c" : [{"v": 4}, {"v": -0.756802495307928}]}, {"c" : [{"v": 4.5}, {"v": -0.977530117665097}]}, {"c" : [{"v": 5}, {"v": -0.958924274663138}]}, {"c" : [{"v": 5.5}, {"v": -0.705540325570392}]}, {"c" : [{"v": 6}, {"v": -0.279415498198926}]}]});
+
+                
+
+                var options = {"legend":{"position":"none"}} 
+
+                var chart = new google.visualization.LineChart(document.getElementById('3d30e23d-cceb-46b8-ba8f-64b698fbccb3'));
+                chart.draw(data, options);
+            }
+</script>
+<div id="3d30e23d-cceb-46b8-ba8f-64b698fbccb3" style="width: 700px; height: 400px;"></div>
+<h2><a name="A-smooth-function-chart" class="anchor" href="#A-smooth-function-chart">A smooth function chart</a></h2>
+<p>By default, line charts use straight line segments between the points. You can add
+smoothing by creating <code>Options</code> with <code>curveType="function"</code> as follows:</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="i">Chart</span><span class="o">.</span><span class="i">Line</span> [ <span class="k">for</span> <span class="i">x</span> <span class="k">in</span> <span class="n">0.</span> <span class="o">..</span> <span class="n">0.5</span> <span class="o">..</span> <span class="n">6.3</span> <span class="k">-&gt;</span> <span class="i">x</span>, <span class="i">sin</span> <span class="i">x</span> ]
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithOptions</span>(<span class="i">Options</span>(<span class="i">curveType</span> <span class="o">=</span> <span class="s">&quot;function&quot;</span>))
+</code></pre></td>
+</tr>
+</table>
+<script type="text/javascript">
+    google.setOnLoadCallback(drawChart);
+            function drawChart() {
+                var data = new google.visualization.DataTable({"cols": [{"type": "number" ,"id": "Column 1" ,"label": "Column 1" }, {"type": "number" ,"id": "Column 2" ,"label": "Column 2" }], "rows" : [{"c" : [{"v": 0}, {"v": 0}]}, {"c" : [{"v": 0.5}, {"v": 0.479425538604203}]}, {"c" : [{"v": 1}, {"v": 0.841470984807897}]}, {"c" : [{"v": 1.5}, {"v": 0.997494986604054}]}, {"c" : [{"v": 2}, {"v": 0.909297426825682}]}, {"c" : [{"v": 2.5}, {"v": 0.598472144103957}]}, {"c" : [{"v": 3}, {"v": 0.141120008059867}]}, {"c" : [{"v": 3.5}, {"v": -0.35078322768962}]}, {"c" : [{"v": 4}, {"v": -0.756802495307928}]}, {"c" : [{"v": 4.5}, {"v": -0.977530117665097}]}, {"c" : [{"v": 5}, {"v": -0.958924274663138}]}, {"c" : [{"v": 5.5}, {"v": -0.705540325570392}]}, {"c" : [{"v": 6}, {"v": -0.279415498198926}]}]});
+
+                
+
+                var options = {"legend":{"position":"none"},"curveType":"function"} 
+
+                var chart = new google.visualization.LineChart(document.getElementById('a0162e7f-6f2a-43e5-8819-054e9aff7a3c'));
+                chart.draw(data, options);
+            }
+</script>
+<div id="a0162e7f-6f2a-43e5-8819-054e9aff7a3c" style="width: 700px; height: 400px;"></div>
+<p>You can find more information about other options that you can specify in the documentation
+<a href="reference/xplot-googlecharts-configuration-options.html">for the <code>Options</code> type</a> in the API
+reference. Another way to explore the available configuration options is to type dot right
+after the value, i.e. <code>Options().</code> - and see what fields (lower-case, at the end of the list)
+are available.</p>
+<h2><a name="Combining-line-charts" class="anchor" href="#Combining-line-charts">Combining line charts</a></h2>
+<p>Finally, you can also pass multiple series of values to both point and line charts. This creates
+a chart that shows multiple data sets using a different line or point color for each data set.
+The following example plots sales and expenses of some non-existent company in a single line
+chart with annotations:</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+<span class="l">11: </span>
+<span class="l">12: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span class="i">sales</span> <span class="o">=</span> [(<span class="s">&quot;2013&quot;</span>, <span class="n">1000</span>); (<span class="s">&quot;2014&quot;</span>, <span class="n">1170</span>); (<span class="s">&quot;2015&quot;</span>, <span class="n">660</span>); (<span class="s">&quot;2016&quot;</span>, <span class="n">1030</span>)]
+<span class="k">let</span> <span class="i">expenses</span> <span class="o">=</span> [(<span class="s">&quot;2013&quot;</span>, <span class="n">400</span>); (<span class="s">&quot;2014&quot;</span>, <span class="n">460</span>); (<span class="s">&quot;2015&quot;</span>, <span class="n">1120</span>); (<span class="s">&quot;2016&quot;</span>, <span class="n">540</span>)]
+ 
+<span class="k">let</span> <span class="i">options</span> <span class="o">=</span>
+  <span class="i">Options</span>
+    ( <span class="i">title</span> <span class="o">=</span> <span class="s">&quot;Company Performance&quot;</span>, <span class="i">curveType</span> <span class="o">=</span> <span class="s">&quot;function&quot;</span>,
+      <span class="i">legend</span> <span class="o">=</span> <span class="i">Legend</span>(<span class="i">position</span> <span class="o">=</span> <span class="s">&quot;bottom&quot;</span>) )
+            
+[<span class="i">sales</span>; <span class="i">expenses</span>]
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">Line</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithOptions</span> <span class="i">options</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithLabels</span> [<span class="s">&quot;Sales&quot;</span>; <span class="s">&quot;Expenses&quot;</span>]
+</code></pre></td>
+</tr>
+</table>
+<script type="text/javascript">
+    google.setOnLoadCallback(drawChart);
+            function drawChart() {
+                var data = new google.visualization.DataTable({"cols": [{"type": "string" ,"id": "Column 1" ,"label": "Column 1" }, {"type": "number" ,"id": "Sales" ,"label": "Sales" }, {"type": "number" ,"id": "Expenses" ,"label": "Expenses" }], "rows" : [{"c" : [{"v": "2013"}, {"v": 1000}, {"v": 400}]}, {"c" : [{"v": "2014"}, {"v": 1170}, {"v": 460}]}, {"c" : [{"v": "2015"}, {"v": 660}, {"v": 1120}]}, {"c" : [{"v": "2016"}, {"v": 1030}, {"v": 540}]}]});
+
+                
+
+                var options = {"legend":{"position":"right"},"title":"Company Performance","curveType":"function"} 
+
+                var chart = new google.visualization.LineChart(document.getElementById('0b40ccd8-a57f-4d8f-99d8-863a118263f3'));
+                chart.draw(data, options);
+            }
+</script>
+<div id="0b40ccd8-a57f-4d8f-99d8-863a118263f3" style="width: 700px; height: 400px;"></div>
+<p>Note that the two inputs are sequences of tuples with X (year) and Y (value) pairs. We then
+create <code>Options</code> object to specify the title, smooth curve and also the legend of the chart.
+Then we call <code>Chart.Line</code> followed by <code>Chart.WithOptions</code> and also <code>Chart.WithLabels</code> to
+provide labels for the two series.</p>
+
+
+            </div>
+            <div class="span3">
+                <img src="/XPlot/img/logo.png" alt="F# Project" style="width:130px;margin:20px" />
+                <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
+                    <li class="nav-header">XPlot</li>
+                    <li><a href="/XPlot/">Home page</a></li>
+                    <li class="divider"></li>
+                    <li><a href="http://www.nuget.org/packages?q=XPlot">Get Library via NuGet</a></li>
+                    <li><a href="http://github.com/fslaborg/XPlot">Source Code on GitHub</a></li>
+                    <li><a href="/XPlot/license.html">License (Apache 2.0)</a></li>
+                    <li><a href="/XPlot/release-notes.html">Release Notes</a></li>
+
+                    <li class="nav-header"><a href="/XPlot/google-charts.html">Google Charts</a></li>
+                    <li><a href="/XPlot/chart/google-annotation-chart.html">Annotation</a></li>
+                    <li><a href="/XPlot/chart/google-area-chart.html">Area</a></li>
+                    <li><a href="/XPlot/chart/google-bar-chart.html">Bar</a></li>
+                    <li><a href="/XPlot/chart/google-bubble-chart.html">Bubble</a></li>
+                    <li><a href="/XPlot/chart/google-calendar-chart.html">Calendar</a></li>
+                    <li><a href="/XPlot/chart/google-candlestick-chart.html">Candlestick</a></li>
+                    <li><a href="/XPlot/chart/google-column-chart.html">Column</a></li>
+                    <li><a href="/XPlot/chart/google-combo-chart.html">Combo</a></li>
+                    <li><a href="/XPlot/chart/google-gauge-chart.html">Gauge</a></li>
+                    <li><a href="/XPlot/chart/google-geo-chart.html">Geo</a></li>
+                    <li><a href="/XPlot/chart/google-histogram-chart.html">Histogram</a></li>
+                    <li><a href="/XPlot/chart/google-line-chart.html">Line</a></li>
+                    <li><a href="/XPlot/chart/google-map-chart.html">Map</a></li>
+                    <li><a href="/XPlot/chart/google-pie-chart.html">Pie</a></li>
+                    <li><a href="/XPlot/chart/google-sankey-diagram.html">Sankey</a></li>
+                    <li><a href="/XPlot/chart/google-scatter-chart.html">Scatter</a></li>
+                    <li><a href="/XPlot/chart/google-stepped-area-chart.html">Stepped Area</a></li>
+                    <li><a href="/XPlot/chart/google-timeline-chart.html">Timeline</a></li>
+                    <li><a href="/XPlot/chart/google-table-chart.html">Table</a></li>
+                    <li><a href="/XPlot/chart/google-treemap-chart.html">Treemap</a></li>
+
+                    <li class="nav-header"><a href="/XPlot/plotly.html">Plotly</a></li>
+                    <li><a href="/XPlot/chart/plotly-bar-charts.html">Bar</a></li>
+                    <li><a href="/XPlot/chart/plotly-line-scatter-plots.html">Line and Scatter Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-box-plots.html">Box Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-bubble-charts.html">Bubble Charts</a></li>
+                    <li><a href="/XPlot/chart/plotly-contour-plots.html">Contour Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-area-plots.html">Area Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-heatmaps.html">Heatmaps</a></li>
+                    <li><a href="/XPlot/chart/plotly-histograms.html">Histograms</a></li>
+                    <li><a href="/XPlot/chart/plotly-2d-histograms.html">2D Histograms</a></li>
+                    <li><a href="/XPlot/chart/plotly-polar-charts.html">Polar Charts</a></li>
+                    <li><a href="/XPlot/chart/plotly-time-series.html">Time Series</a></li>
+                    <li><a href="/XPlot/chart/plotly-multiple-chart-types.html">Multiple Chart Types</a></li>
+                    <li><a href="/XPlot/chart/plotly-log-plots.html">Log Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-3d-scatter-plots.html">3D Scatter Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-3d-surface-plots.html">3D Surface Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-3d-line-plots.html">3D Line Plots</a></li>
+
+                    <li class="nav-header">Documentation</li>
+                    <li><a href="/XPlot/reference/index.html">API Reference</a></li>
+                    <li class="divider"></li>
+
+                    <li><a href="/XPlot/reference/xplot-googlecharts-chart.html">Google Chart type</a></li>
+                    <li><a href="/XPlot/reference/xplot-googlecharts-configuration-options.html">Google Option type</a></li>
+                    <li><a href="/XPlot/reference/xplot-googlecharts-configuration.html">Google configuration module</a></li>
+
+                    <li class="divider"></li>
+
+                    <li><a href="/XPlot/reference/xplot-plotly-graph.html">Plotly Graph module</a></li>
+                    <li><a href="/XPlot/reference/xplot-plotly-graph-layout.html">Plotly Layout type</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <a href="http://github.com/fslaborg/XPlot"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub" /></a>
+</body>
+</html>

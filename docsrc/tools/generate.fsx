@@ -3,9 +3,6 @@
 // (the generated documentation is stored in the 'docs/output' directory)
 // --------------------------------------------------------------------------------------
 
-// Web site location for the generated documentation
-let website = "/XPlot"
-
 let githubLink = "http://github.com/fslaborg/XPlot"
 
 // Specify more information about your project
@@ -36,16 +33,12 @@ let binaries = !! (__SOURCE_DIRECTORY__ @@ "../../bin/XPlot.*.dll") |> List.ofSe
 
 // When called from 'build.fsx', use the public project URL as <root>
 // otherwise, use the current 'output' directory.
-#if RELEASE
-let root = website
-#else
-let root = "file://" + (__SOURCE_DIRECTORY__ @@ "../output")
-#endif
+let root = "."
 
 // Paths with template/source/output locations
 let bin        = __SOURCE_DIRECTORY__ @@ "../../bin"
 let content    = __SOURCE_DIRECTORY__ @@ "../content"
-let output     = __SOURCE_DIRECTORY__ @@ "../output"
+let output     = __SOURCE_DIRECTORY__ @@ "../../docs"
 let files      = __SOURCE_DIRECTORY__ @@ "../files"
 let templates  = __SOURCE_DIRECTORY__ @@ "templates"
 let formatting = __SOURCE_DIRECTORY__ @@ "../../packages/FSharp.Formatting/"
