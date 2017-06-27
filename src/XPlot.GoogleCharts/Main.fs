@@ -166,8 +166,11 @@ module Html =
         """
 
     let jsTemplate =
-        """google.setOnLoadCallback(drawChart);
+        """google.charts.setOnLoadCallback(drawChart);
             function drawChart() {
+                if ("{KEY}")
+                    google.visualization.mapsApiKey = "{KEY}"
+
                 var data = new google.visualization.DataTable({DATA});
 
                 {FORMAT}
@@ -191,9 +194,11 @@ module Html =
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <title>Google Chart</title>
-        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <script type="text/javascript">
-            google.load("visualization", "{VERSION}", {packages:["{PACKAGES}"]})
+            google.charts.load('current', {
+              packages: ["{PACKAGES}"]
+            });
             {JS}
         </script>
     </head>
@@ -267,10 +272,6 @@ type GoogleChart() =
 
     /// Returns the chart's full HTML source.
     member __.GetHtml() =
-        let version =
-            match __.``type`` with
-            | Calendar | Sankey -> "1.1"            
-            | _ -> "1"
         let packages =
             match __.``type`` with
             | Annotation -> "annotationchart"
@@ -284,7 +285,6 @@ type GoogleChart() =
             | TreeMap -> "treemap"
             | _ -> "corechart"
         Html.pageTemplate
-            .Replace("{VERSION}", version)
             .Replace("{PACKAGES}", packages)
             .Replace("{JS}", __.GetInlineJS())
             .Replace("{GUID}", __.Id)
@@ -319,6 +319,7 @@ type GoogleChart() =
             .Replace("{TYPE}", __.``type``.ToString())
             .Replace("{GUID}", __.Id)
             .Replace("{FORMAT}", formatTemplate)
+            .Replace("{KEY}", string(__.ApiKey))
 
     /// The height of the chart container element.
     member val Height = -1 with get, set
@@ -326,6 +327,11 @@ type GoogleChart() =
     /// The chart's container div id.
     member val Id =
         Guid.NewGuid().ToString()
+        with get, set
+
+    /// The Google Maps API Key, used with Goe and Map charts.
+    member val ApiKey =
+        String.Empty
         with get, set
 
     /// Displays a chart in the default browser.
@@ -346,6 +352,9 @@ type GoogleChart() =
     /// Sets the chart's container div id.
     member __.WithId newId = __.Id <- newId
 
+    /// Sets the Google Maps API Key, used by Goe and Map charts.
+    member __.WithApiKey newApiKey = __.ApiKey<- newApiKey
+
     /// Sets the data series label. Use this method if the
     /// chart's data is a single series.
     member __.WithLabel label =
@@ -359,7 +368,7 @@ type GoogleChart() =
         let columns = __.dataTable.Columns
         let names =
             match (Seq.length labels) = columns.Count with
-            | false -> Seq.append ["Column 1"] labels
+            | false -> Seq.append (seq {for x in 1 .. (columns.Count - (Seq.length labels)) -> "Column " + string x}) labels
             | true -> labels
         names
         |> Seq.iteri (fun idx x -> columns.[idx].ColumnName <- x)
@@ -419,6 +428,11 @@ type Chart =
     /// Sets the chart's container div id.
     static member WithId id (chart:GoogleChart) =
         chart.WithId id
+        chart
+
+    /// Sets Google API Key.
+    static member WithApiKey apiKey (chart:GoogleChart) =
+        chart.WithApiKey apiKey
         chart
 
     /// Sets the data series label. Use this member if the
@@ -634,6 +648,27 @@ type Chart with
     /// <param name="Labels">Labels for the data table columns.</param>
     /// <param name="Options">The chart's options.</param>
     static member Geo(data:seq<string * #value * #value>, ?Labels, ?Options) =
+        Chart.Create [data] Labels Options Geo Datum.New
+
+    /// <summary>Creates a geo chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">Labels for the data table columns.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Geo(data:seq<float * float>, ?Labels, ?Options) =
+        Chart.Create [data] Labels Options Geo Datum.New
+
+    /// <summary>Creates a geo chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">Labels for the data table columns.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Geo(data:seq<float * float * #value>, ?Labels, ?Options) =
+        Chart.Create [data] Labels Options Geo Datum.New
+
+    /// <summary>Creates a geo chart.</summary>
+    /// <param name="data">The chart's data.</param>
+    /// <param name="Labels">Labels for the data table columns.</param>
+    /// <param name="Options">The chart's options.</param>
+    static member Geo(data:seq<float * float * #value  * #value>, ?Labels, ?Options) =
         Chart.Create [data] Labels Options Geo Datum.New
 
     /// <summary>Creates a histogram chart.</summary>
