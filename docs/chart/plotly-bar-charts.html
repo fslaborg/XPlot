@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Plotly Bar Charts
+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Data visualization library for F#" />
+    <meta name="author" content="Taha Hachana; Tomas Petricek" />
+
+    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        google.load("visualization", "1.1", { packages: ["corechart", "annotationchart", "calendar", "gauge", "geochart", "map", "sankey", "table", "timeline", "treemap"] })
+    </script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="/XPlot/content/style.css" />
+    <script type="text/javascript" src="/XPlot/content/tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div class="container">
+        <div class="masthead">
+            <ul class="nav nav-pills pull-right">
+                <li>
+                    <a href="http://fslab.org"><img height="16" width="16" src="http://fslab.org/img/thumbs/fslab.png" /> FsLab</a>
+                </li>
+                <li>
+                    <a href="http://fsharp.github.io/FSharp.Data"><img height="16" width="16" src="http://fslab.org/img/thumbs/fsharpdata.png" /> F# Data</a>
+                </li>
+                <li>
+                    <a href="http://bluemountaincapital.github.io/Deedle"><img height="16" width="16" src="http://fslab.org/img/thumbs/deedle.png" /> Deedle</a>
+                </li>
+                <li>
+                    <a href="http://bluemountaincapital.github.io/FSharpRProvider"><img height="16" width="16" src="http://fslab.org/img/thumbs/rprovider.png" /> R Provider</a>
+                </li>
+                <li>
+                    <a href="http://numerics.mathdotnet.com/"><img height="16" width="16" src="http://fslab.org/img/thumbs/mathnet.png" /> Math.NET</a>
+                </li>
+            </ul>
+            <h3 class="muted"><a href="/XPlot/">XPlot</a></h3>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="span9" id="main">
+                
+<h1><a name="Plotly-Bar-Charts" class="anchor" href="#Plotly-Bar-Charts">Plotly Bar Charts</a></h1>
+<p><a href="https://github.com/fslaborg/XPlot/blob/master/docs/content/chart/plotly-bar-charts.fsx">Full source</a></p>
+<h2><a name="Basic-Bar-Chart" class="anchor" href="#Basic-Bar-Chart">Basic Bar Chart</a></h2>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+<span class="l">5: </span>
+<span class="l">6: </span>
+<span class="l">7: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span class="i">layout</span> <span class="o">=</span> <span class="i">Layout</span>(<span class="i">title</span> <span class="o">=</span> <span class="s">&quot;Basic Bar Chart&quot;</span>)
+
+[<span class="s">&quot;giraffes&quot;</span>, <span class="n">20</span>; <span class="s">&quot;orangutans&quot;</span>, <span class="n">14</span>; <span class="s">&quot;monkeys&quot;</span>, <span class="n">23</span>]
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">Bar</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithLayout</span> <span class="i">layout</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithHeight</span> <span class="n">500</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithWidth</span> <span class="n">700</span>
+</code></pre></td>
+</tr>
+</table>
+<div id="7db35675-e663-4171-b50e-cef6d4681598" style="width: 700px; height: 500px;"></div>
+        <script>
+            var data = [{"type":"bar","x":[20,14,23],"y":["giraffes","orangutans","monkeys"],"orientation":"h"}];
+            var layout = {"title":"Basic Bar Chart"};
+            Plotly.newPlot('7db35675-e663-4171-b50e-cef6d4681598', data, layout);
+        </script>
+<h2><a name="Grouped-Bar-Chart" class="anchor" href="#Grouped-Bar-Chart">Grouped Bar Chart</a></h2>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+<span class="l">11: </span>
+<span class="l">12: </span>
+<span class="l">13: </span>
+<span class="l">14: </span>
+<span class="l">15: </span>
+<span class="l">16: </span>
+<span class="l">17: </span>
+<span class="l">18: </span>
+<span class="l">19: </span>
+<span class="l">20: </span>
+<span class="l">21: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span class="i">groupedTrace1</span> <span class="o">=</span>
+    <span class="i">Bar</span>(
+        <span class="i">x</span> <span class="o">=</span> [<span class="s">&quot;giraffes&quot;</span>; <span class="s">&quot;orangutans&quot;</span>; <span class="s">&quot;monkeys&quot;</span>],
+        <span class="i">y</span> <span class="o">=</span> [<span class="n">20</span>; <span class="n">14</span>; <span class="n">23</span>],
+        <span class="i">name</span><span class="o">=</span> <span class="s">&quot;SF Zoo&quot;</span>            
+    )
+
+<span class="k">let</span> <span class="i">groupedTrace2</span> <span class="o">=</span>
+    <span class="i">Bar</span>(
+        <span class="i">x</span> <span class="o">=</span> [<span class="s">&quot;giraffes&quot;</span>; <span class="s">&quot;orangutans&quot;</span>; <span class="s">&quot;monkeys&quot;</span>],
+        <span class="i">y</span> <span class="o">=</span> [<span class="n">12</span>; <span class="n">18</span>; <span class="n">29</span>],
+        <span class="i">name</span> <span class="o">=</span> <span class="s">&quot;LA Zoo&quot;</span>
+    )
+
+<span class="k">let</span> <span class="i">groupedLayout</span> <span class="o">=</span> <span class="i">Layout</span>(<span class="i">barmode</span> <span class="o">=</span> <span class="s">&quot;group&quot;</span>)
+
+[<span class="i">groupedTrace1</span>; <span class="i">groupedTrace2</span>]
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">Plot</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithLayout</span> <span class="i">groupedLayout</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithHeight</span> <span class="n">500</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithWidth</span> <span class="n">700</span>
+</code></pre></td>
+</tr>
+</table>
+<div id="c5025b70-b43d-46a8-a5a7-928a2749a41b" style="width: 700px; height: 500px;"></div>
+        <script>
+            var data = [{"type":"bar","x":["giraffes","orangutans","monkeys"],"y":[20,14,23],"name":"SF Zoo"},{"type":"bar","x":["giraffes","orangutans","monkeys"],"y":[12,18,29],"name":"LA Zoo"}];
+            var layout = {"barmode":"group"};
+            Plotly.newPlot('c5025b70-b43d-46a8-a5a7-928a2749a41b', data, layout);
+        </script>
+<h2><a name="Stacked-Bar-Chart" class="anchor" href="#Stacked-Bar-Chart">Stacked Bar Chart</a></h2>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+<span class="l">11: </span>
+<span class="l">12: </span>
+<span class="l">13: </span>
+<span class="l">14: </span>
+<span class="l">15: </span>
+<span class="l">16: </span>
+<span class="l">17: </span>
+<span class="l">18: </span>
+<span class="l">19: </span>
+<span class="l">20: </span>
+<span class="l">21: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span class="i">stackedTrace1</span> <span class="o">=</span>
+    <span class="i">Bar</span>(
+        <span class="i">x</span> <span class="o">=</span> [<span class="s">&quot;giraffes&quot;</span>; <span class="s">&quot;orangutans&quot;</span>; <span class="s">&quot;monkeys&quot;</span>],
+        <span class="i">y</span> <span class="o">=</span> [<span class="n">20</span>; <span class="n">14</span>; <span class="n">23</span>],
+        <span class="i">name</span> <span class="o">=</span> <span class="s">&quot;SF Zoo&quot;</span>
+    )
+
+<span class="k">let</span> <span class="i">stackedTrace2</span> <span class="o">=</span>
+    <span class="i">Bar</span>(
+        <span class="i">x</span><span class="o">=</span> [<span class="s">&quot;giraffes&quot;</span>; <span class="s">&quot;orangutans&quot;</span>; <span class="s">&quot;monkeys&quot;</span>],
+        <span class="i">y</span><span class="o">=</span> [<span class="n">12</span>; <span class="n">18</span>; <span class="n">29</span>],
+        <span class="i">name</span> <span class="o">=</span> <span class="s">&quot;LA Zoo&quot;</span>
+    )
+
+<span class="k">let</span> <span class="i">stackedLayout</span> <span class="o">=</span> <span class="i">Layout</span>(<span class="i">barmode</span> <span class="o">=</span> <span class="s">&quot;stack&quot;</span>)
+
+[<span class="i">stackedTrace1</span>; <span class="i">stackedTrace2</span>]
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">Plot</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithLayout</span> <span class="i">stackedLayout</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithHeight</span> <span class="n">500</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithWidth</span> <span class="n">700</span>
+</code></pre></td>
+</tr>
+</table>
+<div id="130d9d7c-7235-4ff3-942d-9ff17ce66012" style="width: 700px; height: 500px;"></div>
+        <script>
+            var data = [{"type":"bar","x":["giraffes","orangutans","monkeys"],"y":[20,14,23],"name":"SF Zoo"},{"type":"bar","x":["giraffes","orangutans","monkeys"],"y":[12,18,29],"name":"LA Zoo"}];
+            var layout = {"barmode":"stack"};
+            Plotly.newPlot('130d9d7c-7235-4ff3-942d-9ff17ce66012', data, layout);
+        </script>
+<h2><a name="Colored-and-Styled-Bar-Chart" class="anchor" href="#Colored-and-Styled-Bar-Chart">Colored and Styled Bar Chart</a></h2>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+<span class="l">11: </span>
+<span class="l">12: </span>
+<span class="l">13: </span>
+<span class="l">14: </span>
+<span class="l">15: </span>
+<span class="l">16: </span>
+<span class="l">17: </span>
+<span class="l">18: </span>
+<span class="l">19: </span>
+<span class="l">20: </span>
+<span class="l">21: </span>
+<span class="l">22: </span>
+<span class="l">23: </span>
+<span class="l">24: </span>
+<span class="l">25: </span>
+<span class="l">26: </span>
+<span class="l">27: </span>
+<span class="l">28: </span>
+<span class="l">29: </span>
+<span class="l">30: </span>
+<span class="l">31: </span>
+<span class="l">32: </span>
+<span class="l">33: </span>
+<span class="l">34: </span>
+<span class="l">35: </span>
+<span class="l">36: </span>
+<span class="l">37: </span>
+<span class="l">38: </span>
+<span class="l">39: </span>
+<span class="l">40: </span>
+<span class="l">41: </span>
+<span class="l">42: </span>
+<span class="l">43: </span>
+<span class="l">44: </span>
+<span class="l">45: </span>
+<span class="l">46: </span>
+<span class="l">47: </span>
+<span class="l">48: </span>
+<span class="l">49: </span>
+<span class="l">50: </span>
+<span class="l">51: </span>
+<span class="l">52: </span>
+<span class="l">53: </span>
+<span class="l">54: </span>
+<span class="l">55: </span>
+<span class="l">56: </span>
+<span class="l">57: </span>
+<span class="l">58: </span>
+<span class="l">59: </span>
+<span class="l">60: </span>
+<span class="l">61: </span>
+<span class="l">62: </span>
+<span class="l">63: </span>
+<span class="l">64: </span>
+<span class="l">65: </span>
+<span class="l">66: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span class="i">styledTrace1</span> <span class="o">=</span>
+    <span class="i">Bar</span>(
+        <span class="i">x</span> <span class="o">=</span>
+            [<span class="n">1995</span>; <span class="n">1996</span>; <span class="n">1997</span>; <span class="n">1998</span>; <span class="n">1999</span>; <span class="n">2000</span>; <span class="n">2001</span>; <span class="n">2002</span>; <span class="n">2003</span>; <span class="n">2004</span>; <span class="n">2005</span>; <span class="n">2006</span>;
+             <span class="n">2007</span>; <span class="n">2008</span>; <span class="n">2009</span>; <span class="n">2010</span>; <span class="n">2011</span>; <span class="n">2012</span>],
+        <span class="i">y</span> <span class="o">=</span>
+            [<span class="n">219</span>; <span class="n">146</span>; <span class="n">112</span>; <span class="n">127</span>; <span class="n">124</span>; <span class="n">180</span>; <span class="n">236</span>; <span class="n">207</span>; <span class="n">236</span>; <span class="n">263</span>; <span class="n">350</span>; <span class="n">430</span>; <span class="n">474</span>; <span class="n">526</span>; <span class="n">488</span>;
+            <span class="n">537</span>; <span class="n">500</span>; <span class="n">439</span>],
+        <span class="i">name</span> <span class="o">=</span> <span class="s">&quot;Rest of world&quot;</span>,
+        <span class="i">marker</span> <span class="o">=</span> <span class="i">Marker</span>(<span class="i">color</span> <span class="o">=</span> <span class="s">&quot;rgb(55, 83, 109)&quot;</span>)
+    )
+
+<span class="k">let</span> <span class="i">styledTrace2</span> <span class="o">=</span>
+    <span class="i">Bar</span>(
+        <span class="i">x</span> <span class="o">=</span>
+            [<span class="n">1995</span>; <span class="n">1996</span>; <span class="n">1997</span>; <span class="n">1998</span>; <span class="n">1999</span>; <span class="n">2000</span>; <span class="n">2001</span>; <span class="n">2002</span>; <span class="n">2003</span>; <span class="n">2004</span>; <span class="n">2005</span>; <span class="n">2006</span>;
+            <span class="n">2007</span>; <span class="n">2008</span>; <span class="n">2009</span>; <span class="n">2010</span>; <span class="n">2011</span>; <span class="n">2012</span>],
+        <span class="i">y</span> <span class="o">=</span>
+            [<span class="n">16</span>; <span class="n">13</span>; <span class="n">10</span>; <span class="n">11</span>; <span class="n">28</span>; <span class="n">37</span>; <span class="n">43</span>; <span class="n">55</span>; <span class="n">56</span>; <span class="n">88</span>; <span class="n">105</span>; <span class="n">156</span>; <span class="n">270</span>; <span class="n">299</span>; <span class="n">340</span>; <span class="n">403</span>; <span class="n">549</span>;
+            <span class="n">499</span>],        
+        <span class="i">name</span> <span class="o">=</span> <span class="s">&quot;China&quot;</span>,
+        <span class="i">marker</span> <span class="o">=</span> <span class="i">Marker</span>(<span class="i">color</span> <span class="o">=</span> <span class="s">&quot;rgb(26, 118, 255)&quot;</span>)
+    )
+
+<span class="k">let</span> <span class="i">styledLayout</span> <span class="o">=</span>
+    <span class="i">Layout</span>(
+        <span class="i">title</span> <span class="o">=</span> <span class="s">&quot;US Export of Plastic Scrap&quot;</span>,
+        <span class="i">xaxis</span> <span class="o">=</span>
+            <span class="i">Xaxis</span>(
+                <span class="i">tickfont</span> <span class="o">=</span>
+                    <span class="i">Font</span>(
+                        <span class="i">size</span> <span class="o">=</span> <span class="n">14.</span>,
+                        <span class="i">color</span> <span class="o">=</span> <span class="s">&quot;rgb(107, 107, 107)&quot;</span>
+                    )
+            ),
+        <span class="i">yaxis</span> <span class="o">=</span>
+            <span class="i">Yaxis</span>(
+                <span class="i">title</span> <span class="o">=</span> <span class="s">&quot;USD (millions)&quot;</span>,
+                <span class="i">titlefont</span> <span class="o">=</span>
+                    <span class="i">Font</span>(
+                        <span class="i">size</span> <span class="o">=</span> <span class="n">16.</span>,
+                        <span class="i">color</span> <span class="o">=</span> <span class="s">&quot;rgb(107, 107, 107)&quot;</span>
+                    ),
+                <span class="i">tickfont</span> <span class="o">=</span>
+                    <span class="i">Font</span>(
+                        <span class="i">size</span> <span class="o">=</span> <span class="n">14.</span>,
+                        <span class="i">color</span> <span class="o">=</span> <span class="s">&quot;rgb(107, 107, 107)&quot;</span>
+                    )
+            ),
+        <span class="i">legend</span> <span class="o">=</span>
+            <span class="i">Legend</span>(
+                <span class="i">x</span> <span class="o">=</span> <span class="n">0.</span>,
+                <span class="i">y</span> <span class="o">=</span> <span class="n">1.0</span>,
+                <span class="i">bgcolor</span> <span class="o">=</span> <span class="s">&quot;rgba(255, 255, 255, 0)&quot;</span>,
+                <span class="i">bordercolor</span> <span class="o">=</span> <span class="s">&quot;rgba(255, 255, 255, 0)&quot;</span>
+            ),
+        <span class="i">barmode</span> <span class="o">=</span> <span class="s">&quot;group&quot;</span>,
+        <span class="i">bargap</span> <span class="o">=</span> <span class="n">0.15</span>,
+        <span class="i">bargroupgap</span> <span class="o">=</span> <span class="n">0.1</span>
+    )
+
+[<span class="i">styledTrace1</span>; <span class="i">styledTrace2</span>]
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">Plot</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithLayout</span> <span class="i">styledLayout</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithHeight</span> <span class="n">500</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithWidth</span> <span class="n">700</span>
+</code></pre></td>
+</tr>
+</table>
+<div id="fa283785-ed2d-4c28-aca4-1e79488b6580" style="width: 700px; height: 500px;"></div>
+        <script>
+            var data = [{"type":"bar","x":[1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012],"y":[219,146,112,127,124,180,236,207,236,263,350,430,474,526,488,537,500,439],"marker":{"color":"rgb(55, 83, 109)"},"name":"Rest of world"},{"type":"bar","x":[1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012],"y":[16,13,10,11,28,37,43,55,56,88,105,156,270,299,340,403,549,499],"marker":{"color":"rgb(26, 118, 255)"},"name":"China"}];
+            var layout = {"title":"US Export of Plastic Scrap","xaxis":{"tickfont":{"size":14.0,"color":"rgb(107, 107, 107)"},"_isSubplotObj":true},"yaxis":{"title":"USD (millions)","titlefont":{"size":16.0,"color":"rgb(107, 107, 107)"},"tickfont":{"size":14.0,"color":"rgb(107, 107, 107)"},"_isSubplotObj":true},"legend":{"bgcolor":"rgba(255, 255, 255, 0)","bordercolor":"rgba(255, 255, 255, 0)","x":0.0,"y":1.0},"barmode":"group","bargap":0.15,"bargroupgap":0.1};
+            Plotly.newPlot('fa283785-ed2d-4c28-aca4-1e79488b6580', data, layout);
+        </script>
+<h2><a name="Bar-Chart-with-Hover-Text" class="anchor" href="#Bar-Chart-with-Hover-Text">Bar Chart with Hover Text</a></h2>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+<span class="l">11: </span>
+<span class="l">12: </span>
+<span class="l">13: </span>
+<span class="l">14: </span>
+<span class="l">15: </span>
+<span class="l">16: </span>
+<span class="l">17: </span>
+<span class="l">18: </span>
+<span class="l">19: </span>
+<span class="l">20: </span>
+<span class="l">21: </span>
+<span class="l">22: </span>
+<span class="l">23: </span>
+<span class="l">24: </span>
+<span class="l">25: </span>
+<span class="l">26: </span>
+<span class="l">27: </span>
+<span class="l">28: </span>
+<span class="l">29: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span class="i">hoverTrace</span> <span class="o">=</span>
+    <span class="i">Bar</span>(
+        <span class="i">x</span> <span class="o">=</span> [<span class="s">&quot;Liam&quot;</span>; <span class="s">&quot;Sophie&quot;</span>; <span class="s">&quot;Jacob&quot;</span>; <span class="s">&quot;Mia&quot;</span>; <span class="s">&quot;William&quot;</span>; <span class="s">&quot;Olivia&quot;</span>],
+        <span class="i">y</span> <span class="o">=</span> [<span class="n">8.0</span>; <span class="n">8.0</span>; <span class="n">12.0</span>; <span class="n">12.0</span>; <span class="n">13.0</span>; <span class="n">20.0</span>],
+        <span class="i">text</span> <span class="o">=</span>
+            [<span class="s">&quot;4.17 below the mean&quot;</span>; <span class="s">&quot;4.17 below the mean&quot;</span>; <span class="s">&quot;0.17 below the mean&quot;</span>;
+            <span class="s">&quot;0.17 below the mean&quot;</span>; <span class="s">&quot;0.83 above the mean&quot;</span>; <span class="s">&quot;7.83 above the mean&quot;</span>],
+        <span class="i">marker</span> <span class="o">=</span> <span class="i">Marker</span>(<span class="i">color</span> <span class="o">=</span> <span class="s">&quot;rgb(142, 124, 195)&quot;</span>)
+    )
+
+<span class="k">let</span> <span class="i">hoverLayout</span> <span class="o">=</span>
+    <span class="i">Layout</span>(
+        <span class="i">title</span> <span class="o">=</span> <span class="s">&quot;Number of graphs made this week&quot;</span>,
+        <span class="i">font</span> <span class="o">=</span> <span class="i">Font</span>(<span class="i">family</span> <span class="o">=</span> <span class="s">&quot;Raleway, sans-serif&quot;</span>),
+        <span class="i">showlegend</span> <span class="o">=</span> <span class="k">false</span>,
+        <span class="i">xaxis</span><span class="o">=</span> <span class="i">Xaxis</span>(<span class="i">tickangle</span> <span class="o">=</span> <span class="o">-</span><span class="n">45.</span>),
+        <span class="i">yaxis</span><span class="o">=</span>
+            <span class="i">Yaxis</span>(
+                <span class="i">zeroline</span> <span class="o">=</span> <span class="k">false</span>,
+                <span class="i">gridwidth</span> <span class="o">=</span> <span class="n">2.</span>
+            ),
+        <span class="i">bargap</span> <span class="o">=</span> <span class="n">0.05</span>
+    )
+
+<span class="i">hoverTrace</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">Plot</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithLayout</span> <span class="i">hoverLayout</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithHeight</span> <span class="n">500</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithWidth</span> <span class="n">700</span>
+</code></pre></td>
+</tr>
+</table>
+<div id="485efe58-e2ae-4288-83b0-f599a2bfd3b6" style="width: 700px; height: 500px;"></div>
+        <script>
+            var data = [{"type":"bar","x":["Liam","Sophie","Jacob","Mia","William","Olivia"],"y":[8.0,8.0,12.0,12.0,13.0,20.0],"text":["4.17 below the mean","4.17 below the mean","0.17 below the mean","0.17 below the mean","0.83 above the mean","7.83 above the mean"],"marker":{"color":"rgb(142, 124, 195)"}}];
+            var layout = {"font":{"family":"Raleway, sans-serif"},"title":"Number of graphs made this week","showlegend":false,"xaxis":{"tickangle":-45.0,"_isSubplotObj":true},"yaxis":{"gridwidth":2.0,"zeroline":false,"_isSubplotObj":true},"bargap":0.05};
+            Plotly.newPlot('485efe58-e2ae-4288-83b0-f599a2bfd3b6', data, layout);
+        </script>
+<h2><a name="Customizing-Individual-Bar-Colors" class="anchor" href="#Customizing-Individual-Bar-Colors">Customizing Individual Bar Colors</a></h2>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+<span class="l">5: </span>
+<span class="l">6: </span>
+<span class="l">7: </span>
+<span class="l">8: </span>
+<span class="l">9: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="i">Bar</span>(
+    <span class="i">x</span> <span class="o">=</span> [<span class="n">1</span>; <span class="n">2</span>; <span class="n">3</span>; <span class="n">4</span>],
+    <span class="i">y</span> <span class="o">=</span> [<span class="n">5</span>; <span class="n">4</span>; <span class="o">-</span><span class="n">3</span>; <span class="n">2</span>],
+    <span class="i">marker</span> <span class="o">=</span> <span class="i">Marker</span>(<span class="i">color</span> <span class="o">=</span> [<span class="s">&quot;#447adb&quot;</span>; <span class="s">&quot;#447adb&quot;</span>; <span class="s">&quot;#db5a44&quot;</span>; <span class="s">&quot;#447adb&quot;</span>])
+)
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">Plot</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithLayout</span> <span class="i">hoverLayout</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithHeight</span> <span class="n">500</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithWidth</span> <span class="n">700</span>
+</code></pre></td>
+</tr>
+</table>
+<div id="73e992ab-2b96-448e-9f16-f596c3e7de48" style="width: 700px; height: 500px;"></div>
+        <script>
+            var data = [{"type":"bar","x":[1,2,3,4],"y":[5,4,-3,2],"marker":{"color":["#447adb","#447adb","#db5a44","#447adb"]}}];
+            var layout = {"font":{"family":"Raleway, sans-serif"},"title":"Number of graphs made this week","showlegend":false,"xaxis":{"tickangle":-45.0,"_isSubplotObj":true},"yaxis":{"gridwidth":2.0,"zeroline":false,"_isSubplotObj":true},"bargap":0.05};
+            Plotly.newPlot('73e992ab-2b96-448e-9f16-f596c3e7de48', data, layout);
+        </script>
+
+
+            </div>
+            <div class="span3">
+                <img src="/XPlot/img/logo.png" alt="F# Project" style="width:130px;margin:20px" />
+                <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
+                    <li class="nav-header">XPlot</li>
+                    <li><a href="/XPlot/">Home page</a></li>
+                    <li class="divider"></li>
+                    <li><a href="http://www.nuget.org/packages?q=XPlot">Get Library via NuGet</a></li>
+                    <li><a href="http://github.com/fslaborg/XPlot">Source Code on GitHub</a></li>
+                    <li><a href="/XPlot/license.html">License (Apache 2.0)</a></li>
+                    <li><a href="/XPlot/release-notes.html">Release Notes</a></li>
+
+                    <li class="nav-header"><a href="/XPlot/google-charts.html">Google Charts</a></li>
+                    <li><a href="/XPlot/chart/google-annotation-chart.html">Annotation</a></li>
+                    <li><a href="/XPlot/chart/google-area-chart.html">Area</a></li>
+                    <li><a href="/XPlot/chart/google-bar-chart.html">Bar</a></li>
+                    <li><a href="/XPlot/chart/google-bubble-chart.html">Bubble</a></li>
+                    <li><a href="/XPlot/chart/google-calendar-chart.html">Calendar</a></li>
+                    <li><a href="/XPlot/chart/google-candlestick-chart.html">Candlestick</a></li>
+                    <li><a href="/XPlot/chart/google-column-chart.html">Column</a></li>
+                    <li><a href="/XPlot/chart/google-combo-chart.html">Combo</a></li>
+                    <li><a href="/XPlot/chart/google-gauge-chart.html">Gauge</a></li>
+                    <li><a href="/XPlot/chart/google-geo-chart.html">Geo</a></li>
+                    <li><a href="/XPlot/chart/google-histogram-chart.html">Histogram</a></li>
+                    <li><a href="/XPlot/chart/google-line-chart.html">Line</a></li>
+                    <li><a href="/XPlot/chart/google-map-chart.html">Map</a></li>
+                    <li><a href="/XPlot/chart/google-pie-chart.html">Pie</a></li>
+                    <li><a href="/XPlot/chart/google-sankey-diagram.html">Sankey</a></li>
+                    <li><a href="/XPlot/chart/google-scatter-chart.html">Scatter</a></li>
+                    <li><a href="/XPlot/chart/google-stepped-area-chart.html">Stepped Area</a></li>
+                    <li><a href="/XPlot/chart/google-timeline-chart.html">Timeline</a></li>
+                    <li><a href="/XPlot/chart/google-table-chart.html">Table</a></li>
+                    <li><a href="/XPlot/chart/google-treemap-chart.html">Treemap</a></li>
+
+                    <li class="nav-header"><a href="/XPlot/plotly.html">Plotly</a></li>
+                    <li><a href="/XPlot/chart/plotly-bar-charts.html">Bar</a></li>
+                    <li><a href="/XPlot/chart/plotly-line-scatter-plots.html">Line and Scatter Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-box-plots.html">Box Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-bubble-charts.html">Bubble Charts</a></li>
+                    <li><a href="/XPlot/chart/plotly-contour-plots.html">Contour Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-area-plots.html">Area Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-heatmaps.html">Heatmaps</a></li>
+                    <li><a href="/XPlot/chart/plotly-histograms.html">Histograms</a></li>
+                    <li><a href="/XPlot/chart/plotly-2d-histograms.html">2D Histograms</a></li>
+                    <li><a href="/XPlot/chart/plotly-polar-charts.html">Polar Charts</a></li>
+                    <li><a href="/XPlot/chart/plotly-time-series.html">Time Series</a></li>
+                    <li><a href="/XPlot/chart/plotly-multiple-chart-types.html">Multiple Chart Types</a></li>
+                    <li><a href="/XPlot/chart/plotly-log-plots.html">Log Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-3d-scatter-plots.html">3D Scatter Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-3d-surface-plots.html">3D Surface Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-3d-line-plots.html">3D Line Plots</a></li>
+
+                    <li class="nav-header">Documentation</li>
+                    <li><a href="/XPlot/reference/index.html">API Reference</a></li>
+                    <li class="divider"></li>
+
+                    <li><a href="/XPlot/reference/xplot-googlecharts-chart.html">Google Chart type</a></li>
+                    <li><a href="/XPlot/reference/xplot-googlecharts-configuration-options.html">Google Option type</a></li>
+                    <li><a href="/XPlot/reference/xplot-googlecharts-configuration.html">Google configuration module</a></li>
+
+                    <li class="divider"></li>
+
+                    <li><a href="/XPlot/reference/xplot-plotly-graph.html">Plotly Graph module</a></li>
+                    <li><a href="/XPlot/reference/xplot-plotly-graph-layout.html">Plotly Layout type</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <a href="http://github.com/fslaborg/XPlot"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub" /></a>
+</body>
+</html>

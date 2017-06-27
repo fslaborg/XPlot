@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Google Treemap Chart
+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Data visualization library for F#" />
+    <meta name="author" content="Taha Hachana; Tomas Petricek" />
+
+    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        google.load("visualization", "1.1", { packages: ["corechart", "annotationchart", "calendar", "gauge", "geochart", "map", "sankey", "table", "timeline", "treemap"] })
+    </script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="/XPlot/content/style.css" />
+    <script type="text/javascript" src="/XPlot/content/tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div class="container">
+        <div class="masthead">
+            <ul class="nav nav-pills pull-right">
+                <li>
+                    <a href="http://fslab.org"><img height="16" width="16" src="http://fslab.org/img/thumbs/fslab.png" /> FsLab</a>
+                </li>
+                <li>
+                    <a href="http://fsharp.github.io/FSharp.Data"><img height="16" width="16" src="http://fslab.org/img/thumbs/fsharpdata.png" /> F# Data</a>
+                </li>
+                <li>
+                    <a href="http://bluemountaincapital.github.io/Deedle"><img height="16" width="16" src="http://fslab.org/img/thumbs/deedle.png" /> Deedle</a>
+                </li>
+                <li>
+                    <a href="http://bluemountaincapital.github.io/FSharpRProvider"><img height="16" width="16" src="http://fslab.org/img/thumbs/rprovider.png" /> R Provider</a>
+                </li>
+                <li>
+                    <a href="http://numerics.mathdotnet.com/"><img height="16" width="16" src="http://fslab.org/img/thumbs/mathnet.png" /> Math.NET</a>
+                </li>
+            </ul>
+            <h3 class="muted"><a href="/XPlot/">XPlot</a></h3>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="span9" id="main">
+                
+<h1><a name="Google-Treemap-Chart" class="anchor" href="#Google-Treemap-Chart">Google Treemap Chart</a></h1>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+<span class="l">11: </span>
+<span class="l">12: </span>
+<span class="l">13: </span>
+<span class="l">14: </span>
+<span class="l">15: </span>
+<span class="l">16: </span>
+<span class="l">17: </span>
+<span class="l">18: </span>
+<span class="l">19: </span>
+<span class="l">20: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span class="i">options</span> <span class="o">=</span>
+    <span class="i">Options</span>(
+        <span class="i">minColor</span> <span class="o">=</span> <span class="s">&quot;#f00&quot;</span>,
+        <span class="i">midColor</span> <span class="o">=</span> <span class="s">&quot;#ddd&quot;</span>,
+        <span class="i">maxColor</span> <span class="o">=</span> <span class="s">&quot;#0d0&quot;</span>,
+        <span class="i">headerHeight</span> <span class="o">=</span> <span class="n">15</span>,
+        <span class="i">fontColor</span> <span class="o">=</span> <span class="s">&quot;black&quot;</span>,
+        <span class="i">showScale</span> <span class="o">=</span> <span class="k">true</span>        
+    )
+ 
+<span class="i">data</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">Treemap</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithOptions</span> <span class="i">options</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithLabels</span>
+    [
+        <span class="s">&quot;Location&quot;</span>
+        <span class="s">&quot;Parent&quot;</span>
+        <span class="s">&quot;Market trade volume (size)&quot;</span>
+        <span class="s">&quot;Market increase/decrease (color)&quot;</span>
+    ]
+</code></pre></td>
+</tr>
+</table>
+<script type="text/javascript">
+    google.setOnLoadCallback(drawChart);
+            function drawChart() {
+                var data = new google.visualization.DataTable({"cols": [{"type": "string" ,"id": "Location" ,"label": "Location" }, {"type": "string" ,"id": "Parent" ,"label": "Parent" }, {"type": "number" ,"id": "Market trade volume (size)" ,"label": "Market trade volume (size)" }, {"type": "number" ,"id": "Market increase/decrease (color)" ,"label": "Market increase/decrease (color)" }], "rows" : [{"c" : [{"v": "Global"}, {"v": ""}, {"v": 0}, {"v": 0}]}, {"c" : [{"v": "America"}, {"v": "Global"}, {"v": 0}, {"v": 0}]}, {"c" : [{"v": "Europe"}, {"v": "Global"}, {"v": 0}, {"v": 0}]}, {"c" : [{"v": "Asia"}, {"v": "Global"}, {"v": 0}, {"v": 0}]}, {"c" : [{"v": "Australia"}, {"v": "Global"}, {"v": 0}, {"v": 0}]}, {"c" : [{"v": "Africa"}, {"v": "Global"}, {"v": 0}, {"v": 0}]}, {"c" : [{"v": "Brazil"}, {"v": "America"}, {"v": 11}, {"v": 10}]}, {"c" : [{"v": "USA"}, {"v": "America"}, {"v": 52}, {"v": 31}]}, {"c" : [{"v": "Mexico"}, {"v": "America"}, {"v": 24}, {"v": 12}]}, {"c" : [{"v": "Canada"}, {"v": "America"}, {"v": 16}, {"v": -23}]}, {"c" : [{"v": "France"}, {"v": "Europe"}, {"v": 42}, {"v": -11}]}, {"c" : [{"v": "Germany"}, {"v": "Europe"}, {"v": 31}, {"v": -2}]}, {"c" : [{"v": "Sweden"}, {"v": "Europe"}, {"v": 22}, {"v": -13}]}, {"c" : [{"v": "Italy"}, {"v": "Europe"}, {"v": 17}, {"v": 4}]}, {"c" : [{"v": "UK"}, {"v": "Europe"}, {"v": 21}, {"v": -5}]}, {"c" : [{"v": "China"}, {"v": "Asia"}, {"v": 36}, {"v": 4}]}, {"c" : [{"v": "Japan"}, {"v": "Asia"}, {"v": 20}, {"v": -12}]}, {"c" : [{"v": "India"}, {"v": "Asia"}, {"v": 40}, {"v": 63}]}, {"c" : [{"v": "Laos"}, {"v": "Asia"}, {"v": 4}, {"v": 34}]}, {"c" : [{"v": "Mongolia"}, {"v": "Asia"}, {"v": 1}, {"v": -5}]}, {"c" : [{"v": "Israel"}, {"v": "Asia"}, {"v": 12}, {"v": 24}]}, {"c" : [{"v": "Iran"}, {"v": "Asia"}, {"v": 18}, {"v": 13}]}, {"c" : [{"v": "Pakistan"}, {"v": "Asia"}, {"v": 11}, {"v": -52}]}, {"c" : [{"v": "Egypt"}, {"v": "Africa"}, {"v": 21}, {"v": 0}]}, {"c" : [{"v": "S. Africa"}, {"v": "Africa"}, {"v": 30}, {"v": 43}]}, {"c" : [{"v": "Sudan"}, {"v": "Africa"}, {"v": 12}, {"v": 2}]}, {"c" : [{"v": "Congo"}, {"v": "Africa"}, {"v": 10}, {"v": 12}]}, {"c" : [{"v": "Zaire"}, {"v": "Africa"}, {"v": 8}, {"v": 10}]}]});
+
+                
+
+                var options = {"legend":{"position":"right"},"fontColor":"black","headerHeight":15,"maxColor":"#0d0","midColor":"#ddd","minColor":"#f00","showScale":true} 
+
+                var chart = new google.visualization.TreeMap(document.getElementById('29964613-b083-4dc7-8b9f-201ac9e83cf9'));
+                chart.draw(data, options);
+            }
+</script>
+<div id="29964613-b083-4dc7-8b9f-201ac9e83cf9" style="width: 700px; height: 400px;"></div>
+
+
+            </div>
+            <div class="span3">
+                <img src="/XPlot/img/logo.png" alt="F# Project" style="width:130px;margin:20px" />
+                <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
+                    <li class="nav-header">XPlot</li>
+                    <li><a href="/XPlot/">Home page</a></li>
+                    <li class="divider"></li>
+                    <li><a href="http://www.nuget.org/packages?q=XPlot">Get Library via NuGet</a></li>
+                    <li><a href="http://github.com/fslaborg/XPlot">Source Code on GitHub</a></li>
+                    <li><a href="/XPlot/license.html">License (Apache 2.0)</a></li>
+                    <li><a href="/XPlot/release-notes.html">Release Notes</a></li>
+
+                    <li class="nav-header"><a href="/XPlot/google-charts.html">Google Charts</a></li>
+                    <li><a href="/XPlot/chart/google-annotation-chart.html">Annotation</a></li>
+                    <li><a href="/XPlot/chart/google-area-chart.html">Area</a></li>
+                    <li><a href="/XPlot/chart/google-bar-chart.html">Bar</a></li>
+                    <li><a href="/XPlot/chart/google-bubble-chart.html">Bubble</a></li>
+                    <li><a href="/XPlot/chart/google-calendar-chart.html">Calendar</a></li>
+                    <li><a href="/XPlot/chart/google-candlestick-chart.html">Candlestick</a></li>
+                    <li><a href="/XPlot/chart/google-column-chart.html">Column</a></li>
+                    <li><a href="/XPlot/chart/google-combo-chart.html">Combo</a></li>
+                    <li><a href="/XPlot/chart/google-gauge-chart.html">Gauge</a></li>
+                    <li><a href="/XPlot/chart/google-geo-chart.html">Geo</a></li>
+                    <li><a href="/XPlot/chart/google-histogram-chart.html">Histogram</a></li>
+                    <li><a href="/XPlot/chart/google-line-chart.html">Line</a></li>
+                    <li><a href="/XPlot/chart/google-map-chart.html">Map</a></li>
+                    <li><a href="/XPlot/chart/google-pie-chart.html">Pie</a></li>
+                    <li><a href="/XPlot/chart/google-sankey-diagram.html">Sankey</a></li>
+                    <li><a href="/XPlot/chart/google-scatter-chart.html">Scatter</a></li>
+                    <li><a href="/XPlot/chart/google-stepped-area-chart.html">Stepped Area</a></li>
+                    <li><a href="/XPlot/chart/google-timeline-chart.html">Timeline</a></li>
+                    <li><a href="/XPlot/chart/google-table-chart.html">Table</a></li>
+                    <li><a href="/XPlot/chart/google-treemap-chart.html">Treemap</a></li>
+
+                    <li class="nav-header"><a href="/XPlot/plotly.html">Plotly</a></li>
+                    <li><a href="/XPlot/chart/plotly-bar-charts.html">Bar</a></li>
+                    <li><a href="/XPlot/chart/plotly-line-scatter-plots.html">Line and Scatter Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-box-plots.html">Box Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-bubble-charts.html">Bubble Charts</a></li>
+                    <li><a href="/XPlot/chart/plotly-contour-plots.html">Contour Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-area-plots.html">Area Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-heatmaps.html">Heatmaps</a></li>
+                    <li><a href="/XPlot/chart/plotly-histograms.html">Histograms</a></li>
+                    <li><a href="/XPlot/chart/plotly-2d-histograms.html">2D Histograms</a></li>
+                    <li><a href="/XPlot/chart/plotly-polar-charts.html">Polar Charts</a></li>
+                    <li><a href="/XPlot/chart/plotly-time-series.html">Time Series</a></li>
+                    <li><a href="/XPlot/chart/plotly-multiple-chart-types.html">Multiple Chart Types</a></li>
+                    <li><a href="/XPlot/chart/plotly-log-plots.html">Log Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-3d-scatter-plots.html">3D Scatter Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-3d-surface-plots.html">3D Surface Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-3d-line-plots.html">3D Line Plots</a></li>
+
+                    <li class="nav-header">Documentation</li>
+                    <li><a href="/XPlot/reference/index.html">API Reference</a></li>
+                    <li class="divider"></li>
+
+                    <li><a href="/XPlot/reference/xplot-googlecharts-chart.html">Google Chart type</a></li>
+                    <li><a href="/XPlot/reference/xplot-googlecharts-configuration-options.html">Google Option type</a></li>
+                    <li><a href="/XPlot/reference/xplot-googlecharts-configuration.html">Google configuration module</a></li>
+
+                    <li class="divider"></li>
+
+                    <li><a href="/XPlot/reference/xplot-plotly-graph.html">Plotly Graph module</a></li>
+                    <li><a href="/XPlot/reference/xplot-plotly-graph-layout.html">Plotly Layout type</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <a href="http://github.com/fslaborg/XPlot"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub" /></a>
+</body>
+</html>

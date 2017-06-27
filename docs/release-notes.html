@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>release-notes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Data visualization library for F#" />
+    <meta name="author" content="Taha Hachana; Tomas Petricek" />
+
+    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        google.load("visualization", "1.1", { packages: ["corechart", "annotationchart", "calendar", "gauge", "geochart", "map", "sankey", "table", "timeline", "treemap"] })
+    </script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="/XPlot/content/style.css" />
+    <script type="text/javascript" src="/XPlot/content/tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div class="container">
+        <div class="masthead">
+            <ul class="nav nav-pills pull-right">
+                <li>
+                    <a href="http://fslab.org"><img height="16" width="16" src="http://fslab.org/img/thumbs/fslab.png" /> FsLab</a>
+                </li>
+                <li>
+                    <a href="http://fsharp.github.io/FSharp.Data"><img height="16" width="16" src="http://fslab.org/img/thumbs/fsharpdata.png" /> F# Data</a>
+                </li>
+                <li>
+                    <a href="http://bluemountaincapital.github.io/Deedle"><img height="16" width="16" src="http://fslab.org/img/thumbs/deedle.png" /> Deedle</a>
+                </li>
+                <li>
+                    <a href="http://bluemountaincapital.github.io/FSharpRProvider"><img height="16" width="16" src="http://fslab.org/img/thumbs/rprovider.png" /> R Provider</a>
+                </li>
+                <li>
+                    <a href="http://numerics.mathdotnet.com/"><img height="16" width="16" src="http://fslab.org/img/thumbs/mathnet.png" /> Math.NET</a>
+                </li>
+            </ul>
+            <h3 class="muted"><a href="/XPlot/">XPlot</a></h3>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="span9" id="main">
+                
+<h3><a name="1-4-2-September-25-2016" class="anchor" href="#1-4-2-September-25-2016">1.4.2 - September 25, 2016</a></h3>
+<ul>
+<li>Rationalise the GoogleChart and PlotlyChart types</li>
+<li>Rationalise the pipeline style helpers</li>
+<li>Explicit dependencies versions</li>
+</ul>
+<h3><a name="1-4-1-July-30-2016" class="anchor" href="#1-4-1-July-30-2016">1.4.1 - July 30, 2016</a></h3>
+<ul>
+<li>Documentation updates</li>
+<li>Plotly API mappings fixes</li>
+</ul>
+<h3><a name="1-4-0-July-23-2016" class="anchor" href="#1-4-0-July-23-2016">1.4.0 - July 23, 2016</a></h3>
+<ul>
+<li>Update the documentation</li>
+<li>Rationalise Plotly and GoogleCharts (WIP)</li>
+<li>More chart generation methods</li>
+<li>Some Plotly API mappings fixes</li>
+<li>Stop distributing WPF show helpers</li>
+</ul>
+<h3><a name="1-3-1-January-13-2016" class="anchor" href="#1-3-1-January-13-2016">1.3.1 - January 13, 2016</a></h3>
+<ul>
+<li>Update the Plotly.js API</li>
+</ul>
+<h3><a name="1-3-0-December-12-2015" class="anchor" href="#1-3-0-December-12-2015">1.3.0 - December 12, 2015</a></h3>
+<ul>
+<li>Plotly.js support</li>
+</ul>
+<h3><a name="1-2-2-October-25-2015" class="anchor" href="#1-2-2-October-25-2015">1.2.2 - October 25, 2015</a></h3>
+<ul>
+<li>Fix the Annotation.showarrow type annotation in Plotly's API</li>
+</ul>
+<h3><a name="1-2-1-August-25-2015" class="anchor" href="#1-2-1-August-25-2015">1.2.1 - August 25, 2015</a></h3>
+<ul>
+<li>Set HTML charset attribute to UTF-8 in template</li>
+</ul>
+<h3><a name="1-2-0-June-6-2015" class="anchor" href="#1-2-0-June-6-2015">1.2.0 - June 6, 2015</a></h3>
+<ul>
+<li>Fix data table generation for non-overlapping series</li>
+</ul>
+<h3><a name="1-1-9-May-28-2015" class="anchor" href="#1-1-9-May-28-2015">1.1.9 - May 28, 2015</a></h3>
+<ul>
+<li>Fix data table generation for sankey diagrams</li>
+</ul>
+<h3><a name="1-1-8-May-5-2015" class="anchor" href="#1-1-8-May-5-2015">1.1.8 - May 5, 2015</a></h3>
+<ul>
+<li>Fix data grouping when the series have different lengths</li>
+<li>Show a legend for Google Charts when WithLabel[s] is called</li>
+<li>Auto open the Deedle helpers module</li>
+<li>Same version number for all packages</li>
+</ul>
+<h3><a name="1-1-0-beta001-May-1-2015" class="anchor" href="#1-1-0-beta001-May-1-2015">1.1.0-beta001 - May 1, 2015</a></h3>
+<ul>
+<li>Testing ProjectScaffold's release process</li>
+</ul>
+<h3><a name="1-0-0" class="anchor" href="#1-0-0">1.0.0</a></h3>
+<ul>
+<li>Google table and treemap charts</li>
+</ul>
+<h3><a name="0-9-0" class="anchor" href="#0-9-0">0.9.0</a></h3>
+<ul>
+<li>Google scatter, stepped area and timeline charts</li>
+</ul>
+<h3><a name="0-8-0" class="anchor" href="#0-8-0">0.8.0</a></h3>
+<ul>
+<li>Google pie and sankey charts</li>
+</ul>
+<h3><a name="0-7-0" class="anchor" href="#0-7-0">0.7.0</a></h3>
+<ul>
+<li>Google histogram, line and map charts</li>
+</ul>
+<h3><a name="0-6-1" class="anchor" href="#0-6-1">0.6.1</a></h3>
+<ul>
+<li>Fix gauge chart yellowTo option</li>
+</ul>
+<h3><a name="0-6-0" class="anchor" href="#0-6-0">0.6.0</a></h3>
+<ul>
+<li>Google gauge and geo charts</li>
+</ul>
+<h3><a name="0-5-0" class="anchor" href="#0-5-0">0.5.0</a></h3>
+<ul>
+<li>Google column and combo charts</li>
+</ul>
+<h3><a name="0-4-0" class="anchor" href="#0-4-0">0.4.0</a></h3>
+<ul>
+<li>Google calendar and candlestick charts</li>
+</ul>
+<h3><a name="0-3-0" class="anchor" href="#0-3-0">0.3.0</a></h3>
+<ul>
+<li>Google bubble chart</li>
+</ul>
+<h3><a name="0-2-1" class="anchor" href="#0-2-1">0.2.1</a></h3>
+<ul>
+<li>Bootstrap script</li>
+</ul>
+<h3><a name="0-2-0" class="anchor" href="#0-2-0">0.2.0</a></h3>
+<ul>
+<li>Google annotation chart</li>
+</ul>
+<h3><a name="0-1-0" class="anchor" href="#0-1-0">0.1.0</a></h3>
+<ul>
+<li>Basic Google area chart</li>
+</ul>
+
+
+            </div>
+            <div class="span3">
+                <img src="/XPlot/img/logo.png" alt="F# Project" style="width:130px;margin:20px" />
+                <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
+                    <li class="nav-header">XPlot</li>
+                    <li><a href="/XPlot/">Home page</a></li>
+                    <li class="divider"></li>
+                    <li><a href="http://www.nuget.org/packages?q=XPlot">Get Library via NuGet</a></li>
+                    <li><a href="http://github.com/fslaborg/XPlot">Source Code on GitHub</a></li>
+                    <li><a href="/XPlot/license.html">License (Apache 2.0)</a></li>
+                    <li><a href="/XPlot/release-notes.html">Release Notes</a></li>
+
+                    <li class="nav-header"><a href="/XPlot/google-charts.html">Google Charts</a></li>
+                    <li><a href="/XPlot/chart/google-annotation-chart.html">Annotation</a></li>
+                    <li><a href="/XPlot/chart/google-area-chart.html">Area</a></li>
+                    <li><a href="/XPlot/chart/google-bar-chart.html">Bar</a></li>
+                    <li><a href="/XPlot/chart/google-bubble-chart.html">Bubble</a></li>
+                    <li><a href="/XPlot/chart/google-calendar-chart.html">Calendar</a></li>
+                    <li><a href="/XPlot/chart/google-candlestick-chart.html">Candlestick</a></li>
+                    <li><a href="/XPlot/chart/google-column-chart.html">Column</a></li>
+                    <li><a href="/XPlot/chart/google-combo-chart.html">Combo</a></li>
+                    <li><a href="/XPlot/chart/google-gauge-chart.html">Gauge</a></li>
+                    <li><a href="/XPlot/chart/google-geo-chart.html">Geo</a></li>
+                    <li><a href="/XPlot/chart/google-histogram-chart.html">Histogram</a></li>
+                    <li><a href="/XPlot/chart/google-line-chart.html">Line</a></li>
+                    <li><a href="/XPlot/chart/google-map-chart.html">Map</a></li>
+                    <li><a href="/XPlot/chart/google-pie-chart.html">Pie</a></li>
+                    <li><a href="/XPlot/chart/google-sankey-diagram.html">Sankey</a></li>
+                    <li><a href="/XPlot/chart/google-scatter-chart.html">Scatter</a></li>
+                    <li><a href="/XPlot/chart/google-stepped-area-chart.html">Stepped Area</a></li>
+                    <li><a href="/XPlot/chart/google-timeline-chart.html">Timeline</a></li>
+                    <li><a href="/XPlot/chart/google-table-chart.html">Table</a></li>
+                    <li><a href="/XPlot/chart/google-treemap-chart.html">Treemap</a></li>
+
+                    <li class="nav-header"><a href="/XPlot/plotly.html">Plotly</a></li>
+                    <li><a href="/XPlot/chart/plotly-bar-charts.html">Bar</a></li>
+                    <li><a href="/XPlot/chart/plotly-line-scatter-plots.html">Line and Scatter Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-box-plots.html">Box Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-bubble-charts.html">Bubble Charts</a></li>
+                    <li><a href="/XPlot/chart/plotly-contour-plots.html">Contour Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-area-plots.html">Area Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-heatmaps.html">Heatmaps</a></li>
+                    <li><a href="/XPlot/chart/plotly-histograms.html">Histograms</a></li>
+                    <li><a href="/XPlot/chart/plotly-2d-histograms.html">2D Histograms</a></li>
+                    <li><a href="/XPlot/chart/plotly-polar-charts.html">Polar Charts</a></li>
+                    <li><a href="/XPlot/chart/plotly-time-series.html">Time Series</a></li>
+                    <li><a href="/XPlot/chart/plotly-multiple-chart-types.html">Multiple Chart Types</a></li>
+                    <li><a href="/XPlot/chart/plotly-log-plots.html">Log Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-3d-scatter-plots.html">3D Scatter Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-3d-surface-plots.html">3D Surface Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-3d-line-plots.html">3D Line Plots</a></li>
+
+                    <li class="nav-header">Documentation</li>
+                    <li><a href="/XPlot/reference/index.html">API Reference</a></li>
+                    <li class="divider"></li>
+
+                    <li><a href="/XPlot/reference/xplot-googlecharts-chart.html">Google Chart type</a></li>
+                    <li><a href="/XPlot/reference/xplot-googlecharts-configuration-options.html">Google Option type</a></li>
+                    <li><a href="/XPlot/reference/xplot-googlecharts-configuration.html">Google configuration module</a></li>
+
+                    <li class="divider"></li>
+
+                    <li><a href="/XPlot/reference/xplot-plotly-graph.html">Plotly Graph module</a></li>
+                    <li><a href="/XPlot/reference/xplot-plotly-graph-layout.html">Plotly Layout type</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <a href="http://github.com/fslaborg/XPlot"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub" /></a>
+</body>
+</html>
