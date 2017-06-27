@@ -16,7 +16,7 @@ let x =
 Plotly Time Series
 ==================
 
-[Full source](https://github.com/TahaHachana/XPlot/blob/master/docs/content/chart/plotly-time-series.fsx)
+[Full source](https://github.com/fslaborg/XPlot/blob/master/docs/content/chart/plotly-time-series.fsx)
 
 Time Series Plot with DateTime Objects
 --------------------------------------

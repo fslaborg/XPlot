@@ -6,7 +6,7 @@
 // Web site location for the generated documentation
 let website = "/XPlot"
 
-let githubLink = "http://github.com/TahaHachana/XPlot"
+let githubLink = "http://github.com/fslaborg/XPlot"
 
 // Specify more information about your project
 let info =

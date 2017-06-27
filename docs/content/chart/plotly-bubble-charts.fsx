@@ -8,7 +8,7 @@ open XPlot.Plotly
 Plotly Bubble Charts
 ====================
 
-[Full source](https://github.com/TahaHachana/XPlot/blob/master/docs/content/chart/plotly-bubble-charts.fsx)
+[Full source](https://github.com/fslaborg/XPlot/blob/master/docs/content/chart/plotly-bubble-charts.fsx)
 
 Marker Size, Color, and Symbol as an Array
 ------------------------------------------

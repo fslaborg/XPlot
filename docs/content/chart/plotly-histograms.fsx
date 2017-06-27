@@ -44,7 +44,7 @@ let coloredX1 = Array.map (fun x -> x + 1.) coloredX0
 Plotly Histograms
 =================
 
-[Full source](https://github.com/TahaHachana/XPlot/blob/master/docs/content/chart/plotly-histograms.fsx)
+[Full source](https://github.com/fslaborg/XPlot/blob/master/docs/content/chart/plotly-histograms.fsx)
 
 Basic Histogram
 ---------------

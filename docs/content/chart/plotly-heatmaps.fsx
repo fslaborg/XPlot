@@ -8,7 +8,7 @@ open XPlot.Plotly
 Plotly Heatmaps
 ===============
 
-[Full source](https://github.com/TahaHachana/XPlot/blob/master/docs/content/chart/plotly-heatmaps.fsx)
+[Full source](https://github.com/fslaborg/XPlot/blob/master/docs/content/chart/plotly-heatmaps.fsx)
 
 Basic Heatmap
 -------------
