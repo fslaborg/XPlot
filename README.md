@@ -9,7 +9,7 @@ Data visualization for F# using JavaScript charting libraries.
 Documentation
 -------------
 
-http://tahahachana.github.io/XPlot/
+http://fslaborg.github.io/XPlot/
 
 NuGet
 -----
@@ -23,4 +23,4 @@ NuGet
 Contact
 -------
 
-http://tahahachana.github.io/#contact
+http://fslaborg.github.io/#contact
