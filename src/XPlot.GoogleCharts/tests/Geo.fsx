@@ -73,3 +73,20 @@ let test4 =
     |> Chart.WithLabel "Popularity"
     |> Chart.WithOptions options
     |> Chart.Show
+
+
+let test5 =
+    let options = Options (
+        region = "IT",
+        displayMode = "markers",
+        colorAxis = ColorAxis(colors = [|"green"; "blue"|])
+    )
+    [
+        41.890, 12.49, 25, 20
+        43.890, 11.49, 30, 20
+        45.467,  9.189, 35, 20
+    ]
+    |> Chart.Geo
+    |> Chart.WithOptions options
+    |> Chart.WithLabels ["Popularity"; "Area"]
+    |> Chart.Show
