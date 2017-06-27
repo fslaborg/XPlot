@@ -8,7 +8,7 @@ open XPlot.Plotly
 Plotly Area Plots
 =================
 
-[Full source](https://github.com/TahaHachana/XPlot/blob/master/docs/content/chart/plotly-area-plots.fsx)
+[Full source](https://github.com/fslaborg/XPlot/blob/master/docs/content/chart/plotly-area-plots.fsx)
 
 Basic Overlaid Area Chart
 -------------------------
