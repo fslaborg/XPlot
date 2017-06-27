@@ -243,6 +243,26 @@ module Chart5 =
     |> Chart.Plot
     |> Chart.Show
 
+
+// Multiple y axes plot
+module Chart6 =
+
+    let trace1 = Scatter(x = [1; 2; 3; 4], y = [10; 15; 13; 17])
+
+    let trace2 = Scatter(x = [2; 3; 4; 5], y = [160; 52; 114; 92], yaxis = "y2")
+    
+    let layout = 
+      Layout (
+        yaxis = Yaxis(title="Axis 1"),
+        yaxis2 = Yaxis(title="Axis 2", overlaying="y", side="right")
+    )
+    
+    Chart.Plot ([trace1; trace2], layout)
+    |> Chart.Show
+
+
+
+
 // ====================
 // Pipeline stype tests
 // ====================

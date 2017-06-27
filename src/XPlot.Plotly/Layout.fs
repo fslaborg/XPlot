@@ -126,7 +126,7 @@ type Layout() =
 
     member __.yaxis2
         with get () = Option.get _yaxis2
-        and set value = _yaxis <- Some value
+        and set value = _yaxis2 <- Some value
 
     member __.scene
         with get () = Option.get _scene
