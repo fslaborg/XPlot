@@ -159,10 +159,18 @@ module Data =
 
 module Html =
 
+    let formatDatasetTemplate = 
+        """
+        var __number_formatter_{COLUME} = new google.visualization.NumberFormat({FORMAT});
+        __number_formatter_{COLUME}.format(data, {COLUME});    
+        """
+
     let jsTemplate =
         """google.setOnLoadCallback(drawChart);
             function drawChart() {
                 var data = new google.visualization.DataTable({DATA});
+
+                {FORMAT}
 
                 var options = {OPTIONS} 
 
@@ -296,13 +304,24 @@ type GoogleChart() =
     member __.GetInlineJS() =
         let dataJson = __.dataTable.ToGoogleDataTable().GetJson()         
         let optionsJson = JsonConvert.SerializeObject(__.options)
+
+        let formatTemplate = 
+            match __.options.datasetNumberFormats with
+            | Some formats -> 
+                formats
+                |> List.map (fun (col, format) ->
+                    Html.formatDatasetTemplate.Replace("{FORMAT}", JsonConvert.SerializeObject(format)).Replace("{COLUME}", col.ToString()))
+                |> String.concat Environment.NewLine
+            | None -> ""
+
         Html.jsTemplate.Replace("{DATA}", dataJson)
             .Replace("{OPTIONS}", optionsJson)
             .Replace("{TYPE}", __.``type``.ToString())
             .Replace("{GUID}", __.Id)
+            .Replace("{FORMAT}", formatTemplate)
 
     /// The height of the chart container element.
-    member val Height = 500 with get, set
+    member val Height = -1 with get, set
 
     /// The chart's container div id.
     member val Id =
@@ -319,7 +338,7 @@ type GoogleChart() =
         System.Diagnostics.Process.Start(path) |> ignore
 
     /// The width of the chart container element.
-    member val Width = 900 with get, set
+    member val Width = -1 with get, set
 
     /// Sets the chart's height.
     member __.WithHeight height = __.Height <- height
