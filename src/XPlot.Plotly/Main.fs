@@ -103,6 +103,7 @@ type PlotlyChart() =
             | None -> "\"\""
             | Some x -> JsonConvert.SerializeObject x
         Html.jsTemplate
+            .Replace("[ID]", __.Id)
             .Replace("[DATA]", tracesJson)
             .Replace("[LAYOUT]", layoutJson)
 
