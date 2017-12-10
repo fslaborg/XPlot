@@ -23,7 +23,7 @@ This will create a file called `paket.dependencies`
 Modify `paket.dependencies` so that it looks like this:
 
 ```
-framework:45
+framework:net45
 source https://www.nuget.org/api/v2
 nuget XPlot.GoogleCharts
 ```
@@ -64,6 +64,8 @@ open XPlot.GoogleCharts
 [ 1 .. 10 ] |> Chart.Line |> Chart.Show
 
 (**
+Select all of the code you pasted in and press `Alt`+`Enter` to execute it.
+
 That's it! You should see a chart popping up in your browser.
 
 Notes
