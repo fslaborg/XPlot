@@ -364,6 +364,18 @@ type Chart with
             )
         Chart.Plot trace
 
+    static member Candlestick(data:seq<#key * #value * #value * #value * #value>) =
+
+        let x = data |> Seq.map (fun (x, _, _, _, _) -> x)
+        let o = data |> Seq.map (fun (_, o, _, _, _) -> o)
+        let h = data |> Seq.map (fun (_, _, h, _, _) -> h)
+        let l = data |> Seq.map (fun (_, _, _, l, _) -> l)
+        let c = data |> Seq.map (fun (_, _, _, _, c) -> c)
+
+        let cs = Candlestick(x = x, low = l, ``open``= o, high = h, close = c, showlegend = false)
+
+        Chart.Plot [cs]
+
     static member Column(data:seq<#value>) =
         let bar = Bar(y = data)
         Chart.Plot [bar]
