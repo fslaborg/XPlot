@@ -127,7 +127,7 @@ Documentation
 -------------
 
 The documentation for the library is automatically generated from F# script files that you can find
-[in the `docs/content` folder on GitHub](https://github.com/tpetricek/XPlot/tree/master/docs/content). 
+[in the `docsrc/content` folder on GitHub](https://github.com/fslaborg/XPlot/tree/master/docsrc/content). 
 The links in the right panel point to a number of tutorials that demonstrate some common scenarios.
 You can also copy the source code from GitHub.
 
