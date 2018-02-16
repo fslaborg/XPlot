@@ -1,4 +1,7 @@
-### 1.4.4 - February 16, 2018
+### 1.4.5 - February 16, 2018
+* Fixing documentation template
+
+### 1.4.3 - February 16, 2018
 * Quickstart tutorial, incorrect link fix (#64)
 * Adding Candlestick to Plotly (#65)
 
