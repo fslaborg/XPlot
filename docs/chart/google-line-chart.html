@@ -18,8 +18,8 @@
         google.load("visualization", "1.1", { packages: ["corechart", "annotationchart", "calendar", "gauge", "geochart", "map", "sankey", "table", "timeline", "treemap"] })
     </script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <link type="text/css" rel="stylesheet" href="./content/style.css" />
-    <script type="text/javascript" src="./content/tips.js"></script>
+    <link type="text/css" rel="stylesheet" href="/XPlot/content/style.css" />
+    <script type="text/javascript" src="/XPlot/content/tips.js"></script>
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -45,7 +45,7 @@
                     <a href="http://numerics.mathdotnet.com/"><img height="16" width="16" src="http://fslab.org/img/thumbs/mathnet.png" /> Math.NET</a>
                 </li>
             </ul>
-            <h3 class="muted"><a href="./">XPlot</a></h3>
+            <h3 class="muted"><a href="/XPlot/">XPlot</a></h3>
         </div>
         <hr />
         <div class="row">
@@ -79,11 +79,11 @@ using a simple F# list comprehension:</p>
 
                 var options = {"legend":{"position":"none"}} 
 
-                var chart = new google.visualization.LineChart(document.getElementById('fe2c47b3-ca96-4d24-b2e4-b74107e04ff8'));
+                var chart = new google.visualization.LineChart(document.getElementById('a0f31771-23aa-4513-ba90-ee640b6837ab'));
                 chart.draw(data, options);
             }
 </script>
-<div id="fe2c47b3-ca96-4d24-b2e4-b74107e04ff8" style="width: 700px; height: 400px;"></div>
+<div id="a0f31771-23aa-4513-ba90-ee640b6837ab" style="width: 700px; height: 400px;"></div>
 <h2><a name="A-smooth-function-chart" class="anchor" href="#A-smooth-function-chart">A smooth function chart</a></h2>
 <p>By default, line charts use straight line segments between the points. You can add
 smoothing by creating <code>Options</code> with <code>curveType="function"</code> as follows:</p>
@@ -107,11 +107,11 @@ smoothing by creating <code>Options</code> with <code>curveType="function"</code
 
                 var options = {"legend":{"position":"none"},"curveType":"function"} 
 
-                var chart = new google.visualization.LineChart(document.getElementById('b2ccc137-d172-43ca-af3d-ecc22c0e5486'));
+                var chart = new google.visualization.LineChart(document.getElementById('a6da1b89-d28e-4020-91fa-9e5cbe3ad0ef'));
                 chart.draw(data, options);
             }
 </script>
-<div id="b2ccc137-d172-43ca-af3d-ecc22c0e5486" style="width: 700px; height: 400px;"></div>
+<div id="a6da1b89-d28e-4020-91fa-9e5cbe3ad0ef" style="width: 700px; height: 400px;"></div>
 <p>You can find more information about other options that you can specify in the documentation
 <a href="reference/xplot-googlecharts-configuration-options.html">for the <code>Options</code> type</a> in the API
 reference. Another way to explore the available configuration options is to type dot right
@@ -162,11 +162,11 @@ chart with annotations:</p>
 
                 var options = {"legend":{"position":"right"},"title":"Company Performance","curveType":"function"} 
 
-                var chart = new google.visualization.LineChart(document.getElementById('ffb64e60-2c58-4e3b-98d5-19542bada95a'));
+                var chart = new google.visualization.LineChart(document.getElementById('2997da07-0703-4743-a614-f52cac8d0e83'));
                 chart.draw(data, options);
             }
 </script>
-<div id="ffb64e60-2c58-4e3b-98d5-19542bada95a" style="width: 700px; height: 400px;"></div>
+<div id="2997da07-0703-4743-a614-f52cac8d0e83" style="width: 700px; height: 400px;"></div>
 <p>Note that the two inputs are sequences of tuples with X (year) and Y (value) pairs. We then
 create <code>Options</code> object to specify the title, smooth curve and also the legend of the chart.
 Then we call <code>Chart.Line</code> followed by <code>Chart.WithOptions</code> and also <code>Chart.WithLabels</code> to
@@ -188,68 +188,68 @@ provide labels for the two series.</p>
 
             </div>
             <div class="span3">
-                <img src="./img/logo.png" alt="F# Project" style="width:130px;margin:20px" />
+                <img src="/XPlot/img/logo.png" alt="F# Project" style="width:130px;margin:20px" />
                 <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
                     <li class="nav-header">XPlot</li>
-                    <li><a href="./">Home page</a></li>
+                    <li><a href="/XPlot/">Home page</a></li>
                     <li class="divider"></li>
                     <li><a href="http://www.nuget.org/packages?q=XPlot">Get Library via NuGet</a></li>
                     <li><a href="http://github.com/fslaborg/XPlot">Source Code on GitHub</a></li>
-                    <li><a href="./license.html">License (Apache 2.0)</a></li>
-                    <li><a href="./release-notes.html">Release Notes</a></li>
+                    <li><a href="/XPlot/license.html">License (Apache 2.0)</a></li>
+                    <li><a href="/XPlot/release-notes.html">Release Notes</a></li>
 
-                    <li class="nav-header"><a href="./google-charts.html">Google Charts</a></li>
-                    <li><a href="./chart/google-annotation-chart.html">Annotation</a></li>
-                    <li><a href="./chart/google-area-chart.html">Area</a></li>
-                    <li><a href="./chart/google-bar-chart.html">Bar</a></li>
-                    <li><a href="./chart/google-bubble-chart.html">Bubble</a></li>
-                    <li><a href="./chart/google-calendar-chart.html">Calendar</a></li>
-                    <li><a href="./chart/google-candlestick-chart.html">Candlestick</a></li>
-                    <li><a href="./chart/google-column-chart.html">Column</a></li>
-                    <li><a href="./chart/google-combo-chart.html">Combo</a></li>
-                    <li><a href="./chart/google-gauge-chart.html">Gauge</a></li>
-                    <li><a href="./chart/google-geo-chart.html">Geo</a></li>
-                    <li><a href="./chart/google-histogram-chart.html">Histogram</a></li>
-                    <li><a href="./chart/google-line-chart.html">Line</a></li>
-                    <li><a href="./chart/google-map-chart.html">Map</a></li>
-                    <li><a href="./chart/google-pie-chart.html">Pie</a></li>
-                    <li><a href="./chart/google-sankey-diagram.html">Sankey</a></li>
-                    <li><a href="./chart/google-scatter-chart.html">Scatter</a></li>
-                    <li><a href="./chart/google-stepped-area-chart.html">Stepped Area</a></li>
-                    <li><a href="./chart/google-timeline-chart.html">Timeline</a></li>
-                    <li><a href="./chart/google-table-chart.html">Table</a></li>
-                    <li><a href="./chart/google-treemap-chart.html">Treemap</a></li>
+                    <li class="nav-header"><a href="/XPlot/google-charts.html">Google Charts</a></li>
+                    <li><a href="/XPlot/chart/google-annotation-chart.html">Annotation</a></li>
+                    <li><a href="/XPlot/chart/google-area-chart.html">Area</a></li>
+                    <li><a href="/XPlot/chart/google-bar-chart.html">Bar</a></li>
+                    <li><a href="/XPlot/chart/google-bubble-chart.html">Bubble</a></li>
+                    <li><a href="/XPlot/chart/google-calendar-chart.html">Calendar</a></li>
+                    <li><a href="/XPlot/chart/google-candlestick-chart.html">Candlestick</a></li>
+                    <li><a href="/XPlot/chart/google-column-chart.html">Column</a></li>
+                    <li><a href="/XPlot/chart/google-combo-chart.html">Combo</a></li>
+                    <li><a href="/XPlot/chart/google-gauge-chart.html">Gauge</a></li>
+                    <li><a href="/XPlot/chart/google-geo-chart.html">Geo</a></li>
+                    <li><a href="/XPlot/chart/google-histogram-chart.html">Histogram</a></li>
+                    <li><a href="/XPlot/chart/google-line-chart.html">Line</a></li>
+                    <li><a href="/XPlot/chart/google-map-chart.html">Map</a></li>
+                    <li><a href="/XPlot/chart/google-pie-chart.html">Pie</a></li>
+                    <li><a href="/XPlot/chart/google-sankey-diagram.html">Sankey</a></li>
+                    <li><a href="/XPlot/chart/google-scatter-chart.html">Scatter</a></li>
+                    <li><a href="/XPlot/chart/google-stepped-area-chart.html">Stepped Area</a></li>
+                    <li><a href="/XPlot/chart/google-timeline-chart.html">Timeline</a></li>
+                    <li><a href="/XPlot/chart/google-table-chart.html">Table</a></li>
+                    <li><a href="/XPlot/chart/google-treemap-chart.html">Treemap</a></li>
 
-                    <li class="nav-header"><a href="./plotly.html">Plotly</a></li>
-                    <li><a href="./chart/plotly-bar-charts.html">Bar</a></li>
-                    <li><a href="./chart/plotly-line-scatter-plots.html">Line and Scatter Plots</a></li>
-                    <li><a href="./chart/plotly-box-plots.html">Box Plots</a></li>
-                    <li><a href="./chart/plotly-bubble-charts.html">Bubble Charts</a></li>
-                    <li><a href="./chart/plotly-contour-plots.html">Contour Plots</a></li>
-                    <li><a href="./chart/plotly-area-plots.html">Area Plots</a></li>
-                    <li><a href="./chart/plotly-heatmaps.html">Heatmaps</a></li>
-                    <li><a href="./chart/plotly-histograms.html">Histograms</a></li>
-                    <li><a href="./chart/plotly-2d-histograms.html">2D Histograms</a></li>
-                    <li><a href="./chart/plotly-polar-charts.html">Polar Charts</a></li>
-                    <li><a href="./chart/plotly-time-series.html">Time Series</a></li>
-                    <li><a href="./chart/plotly-multiple-chart-types.html">Multiple Chart Types</a></li>
-                    <li><a href="./chart/plotly-log-plots.html">Log Plots</a></li>
-                    <li><a href="./chart/plotly-3d-scatter-plots.html">3D Scatter Plots</a></li>
-                    <li><a href="./chart/plotly-3d-surface-plots.html">3D Surface Plots</a></li>
-                    <li><a href="./chart/plotly-3d-line-plots.html">3D Line Plots</a></li>
+                    <li class="nav-header"><a href="/XPlot/plotly.html">Plotly</a></li>
+                    <li><a href="/XPlot/chart/plotly-bar-charts.html">Bar</a></li>
+                    <li><a href="/XPlot/chart/plotly-line-scatter-plots.html">Line and Scatter Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-box-plots.html">Box Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-bubble-charts.html">Bubble Charts</a></li>
+                    <li><a href="/XPlot/chart/plotly-contour-plots.html">Contour Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-area-plots.html">Area Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-heatmaps.html">Heatmaps</a></li>
+                    <li><a href="/XPlot/chart/plotly-histograms.html">Histograms</a></li>
+                    <li><a href="/XPlot/chart/plotly-2d-histograms.html">2D Histograms</a></li>
+                    <li><a href="/XPlot/chart/plotly-polar-charts.html">Polar Charts</a></li>
+                    <li><a href="/XPlot/chart/plotly-time-series.html">Time Series</a></li>
+                    <li><a href="/XPlot/chart/plotly-multiple-chart-types.html">Multiple Chart Types</a></li>
+                    <li><a href="/XPlot/chart/plotly-log-plots.html">Log Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-3d-scatter-plots.html">3D Scatter Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-3d-surface-plots.html">3D Surface Plots</a></li>
+                    <li><a href="/XPlot/chart/plotly-3d-line-plots.html">3D Line Plots</a></li>
 
                     <li class="nav-header">Documentation</li>
-                    <li><a href="./reference/index.html">API Reference</a></li>
+                    <li><a href="/XPlot/reference/index.html">API Reference</a></li>
                     <li class="divider"></li>
 
-                    <li><a href="./reference/xplot-googlecharts-chart.html">Google Chart type</a></li>
-                    <li><a href="./reference/xplot-googlecharts-configuration-options.html">Google Option type</a></li>
-                    <li><a href="./reference/xplot-googlecharts-configuration.html">Google configuration module</a></li>
+                    <li><a href="/XPlot/reference/xplot-googlecharts-chart.html">Google Chart type</a></li>
+                    <li><a href="/XPlot/reference/xplot-googlecharts-configuration-options.html">Google Option type</a></li>
+                    <li><a href="/XPlot/reference/xplot-googlecharts-configuration.html">Google configuration module</a></li>
 
                     <li class="divider"></li>
 
-                    <li><a href="./reference/xplot-plotly-graph.html">Plotly Graph module</a></li>
-                    <li><a href="./reference/xplot-plotly-graph-layout.html">Plotly Layout type</a></li>
+                    <li><a href="/XPlot/reference/xplot-plotly-graph.html">Plotly Graph module</a></li>
+                    <li><a href="/XPlot/reference/xplot-plotly-graph-layout.html">Plotly Layout type</a></li>
                 </ul>
             </div>
         </div>
