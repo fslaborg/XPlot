@@ -18,8 +18,8 @@
         google.load("visualization", "1.1", { packages: ["corechart", "annotationchart", "calendar", "gauge", "geochart", "map", "sankey", "table", "timeline", "treemap"] })
     </script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <link type="text/css" rel="stylesheet" href="/XPlot/content/style.css" />
-    <script type="text/javascript" src="/XPlot/content/tips.js"></script>
+    <link type="text/css" rel="stylesheet" href="./content/style.css" />
+    <script type="text/javascript" src="./content/tips.js"></script>
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -45,7 +45,7 @@
                     <a href="http://numerics.mathdotnet.com/"><img height="16" width="16" src="http://fslab.org/img/thumbs/mathnet.png" /> Math.NET</a>
                 </li>
             </ul>
-            <h3 class="muted"><a href="/XPlot/">XPlot</a></h3>
+            <h3 class="muted"><a href="./">XPlot</a></h3>
         </div>
         <hr />
         <div class="row">
@@ -70,106 +70,125 @@
 <span class="l">16: </span>
 <span class="l">17: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span class="i">options</span> <span class="o">=</span>
-    <span class="i">Options</span>(
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs9', 9)" onmouseover="showTip(event, 'fs9', 9)" class="i">options</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs10', 10)" onmouseover="showTip(event, 'fs10', 10)" class="t">Options</span>(
         <span class="i">title</span> <span class="o">=</span> <span class="s">&quot;Monthly Coffee Production by Country&quot;</span>,
-        <span class="i">vAxis</span> <span class="o">=</span> <span class="i">Axis</span>(<span class="i">title</span> <span class="o">=</span> <span class="s">&quot;Cups&quot;</span>),
-        <span class="i">hAxis</span> <span class="o">=</span> <span class="i">Axis</span>(<span class="i">title</span> <span class="o">=</span> <span class="s">&quot;Month&quot;</span>),
+        <span class="i">vAxis</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs11', 11)" onmouseover="showTip(event, 'fs11', 11)" class="t">Axis</span>(<span class="i">title</span> <span class="o">=</span> <span class="s">&quot;Cups&quot;</span>),
+        <span class="i">hAxis</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs11', 12)" onmouseover="showTip(event, 'fs11', 12)" class="t">Axis</span>(<span class="i">title</span> <span class="o">=</span> <span class="s">&quot;Month&quot;</span>),
         <span class="i">seriesType</span> <span class="o">=</span> <span class="s">&quot;bars&quot;</span>,
         <span class="i">series</span> <span class="o">=</span>
             [|
-                <span class="k">for</span> _ <span class="k">in</span> <span class="n">0</span> <span class="o">..</span> <span class="n">4</span> <span class="k">-&gt;</span> <span class="i">Series</span>(<span class="i">``type``</span> <span class="o">=</span> <span class="s">&quot;bars&quot;</span>)
-                <span class="k">yield</span> <span class="i">Series</span>(<span class="i">``type``</span> <span class="o">=</span> <span class="s">&quot;line&quot;</span>)
+                <span class="k">for</span> _ <span class="k">in</span> <span class="n">0</span> <span class="o">..</span> <span class="n">4</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs12', 13)" onmouseover="showTip(event, 'fs12', 13)" class="t">Series</span>(<span class="i">``type``</span> <span class="o">=</span> <span class="s">&quot;bars&quot;</span>)
+                <span class="k">yield</span> <span onmouseout="hideTip(event, 'fs12', 14)" onmouseover="showTip(event, 'fs12', 14)" class="t">Series</span>(<span class="i">``type``</span> <span class="o">=</span> <span class="s">&quot;line&quot;</span>)
             |]
     )
  
-[<span class="i">Bolivia</span>; <span class="i">Ecuador</span>; <span class="i">Madagascar</span>; <span class="i">``Papua New Guinea``</span>; <span class="i">Rwanda</span>; <span class="i">Average</span>]
-<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">Combo</span>
-<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithOptions</span> <span class="i">options</span>
-<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithLabels</span> [<span class="s">&quot;Bolivia&quot;</span>; <span class="s">&quot;Ecuador&quot;</span>; <span class="s">&quot;Madagascar&quot;</span>; <span class="s">&quot;Papua New Guinea&quot;</span>; <span class="s">&quot;Rwanda&quot;</span>; <span class="s">&quot;Average&quot;</span>]
+[<span onmouseout="hideTip(event, 'fs3', 15)" onmouseover="showTip(event, 'fs3', 15)" class="i">Bolivia</span>; <span onmouseout="hideTip(event, 'fs4', 16)" onmouseover="showTip(event, 'fs4', 16)" class="i">Ecuador</span>; <span onmouseout="hideTip(event, 'fs5', 17)" onmouseover="showTip(event, 'fs5', 17)" class="i">Madagascar</span>; <span onmouseout="hideTip(event, 'fs6', 18)" onmouseover="showTip(event, 'fs6', 18)" class="i">``Papua New Guinea``</span>; <span onmouseout="hideTip(event, 'fs7', 19)" onmouseover="showTip(event, 'fs7', 19)" class="i">Rwanda</span>; <span onmouseout="hideTip(event, 'fs8', 20)" onmouseover="showTip(event, 'fs8', 20)" class="i">Average</span>]
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs13', 21)" onmouseover="showTip(event, 'fs13', 21)" class="t">Chart</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs14', 22)" onmouseover="showTip(event, 'fs14', 22)" class="f">Combo</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs13', 23)" onmouseover="showTip(event, 'fs13', 23)" class="t">Chart</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs15', 24)" onmouseover="showTip(event, 'fs15', 24)" class="f">WithOptions</span> <span onmouseout="hideTip(event, 'fs9', 25)" onmouseover="showTip(event, 'fs9', 25)" class="i">options</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs13', 26)" onmouseover="showTip(event, 'fs13', 26)" class="t">Chart</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs16', 27)" onmouseover="showTip(event, 'fs16', 27)" class="f">WithLabels</span> [<span class="s">&quot;Bolivia&quot;</span>; <span class="s">&quot;Ecuador&quot;</span>; <span class="s">&quot;Madagascar&quot;</span>; <span class="s">&quot;Papua New Guinea&quot;</span>; <span class="s">&quot;Rwanda&quot;</span>; <span class="s">&quot;Average&quot;</span>]
 </code></pre></td>
 </tr>
 </table>
 <script type="text/javascript">
-    google.setOnLoadCallback(drawChart);
+    google.charts.setOnLoadCallback(drawChart);
             function drawChart() {
+                if ("")
+                    google.visualization.mapsApiKey = ""
+
                 var data = new google.visualization.DataTable({"cols": [{"type": "string" ,"id": "Column 1" ,"label": "Column 1" }, {"type": "number" ,"id": "Bolivia" ,"label": "Bolivia" }, {"type": "number" ,"id": "Ecuador" ,"label": "Ecuador" }, {"type": "number" ,"id": "Madagascar" ,"label": "Madagascar" }, {"type": "number" ,"id": "Papua New Guinea" ,"label": "Papua New Guinea" }, {"type": "number" ,"id": "Rwanda" ,"label": "Rwanda" }, {"type": "number" ,"id": "Average" ,"label": "Average" }], "rows" : [{"c" : [{"v": "2004/05"}, {"v": 165}, {"v": 938}, {"v": 522}, {"v": 998}, {"v": 450}, {"v": 614.6}]}, {"c" : [{"v": "2005/06"}, {"v": 135}, {"v": 1120}, {"v": 599}, {"v": 1268}, {"v": 288}, {"v": 682}]}, {"c" : [{"v": "2006/07"}, {"v": 157}, {"v": 1167}, {"v": 587}, {"v": 807}, {"v": 397}, {"v": 623}]}, {"c" : [{"v": "2007/08"}, {"v": 139}, {"v": 1110}, {"v": 615}, {"v": 968}, {"v": 215}, {"v": 609.4}]}, {"c" : [{"v": "2008/09"}, {"v": 136}, {"v": 691}, {"v": 629}, {"v": 1026}, {"v": 366}, {"v": 569.6}]}]});
 
                 
 
                 var options = {"hAxis":{"title":"Month"},"legend":{"position":"right"},"series":[{"type":"bars"},{"type":"bars"},{"type":"bars"},{"type":"bars"},{"type":"bars"},{"type":"line"}],"title":"Monthly Coffee Production by Country","vAxis":{"title":"Cups"},"seriesType":"bars"} 
 
-                var chart = new google.visualization.ComboChart(document.getElementById('f441aa74-d25e-437e-99fe-b643391d358b'));
+                var chart = new google.visualization.ComboChart(document.getElementById('7ff7f37a-77ac-4ede-91e4-10b6f734c210'));
                 chart.draw(data, options);
             }
 </script>
-<div id="f441aa74-d25e-437e-99fe-b643391d358b" style="width: 700px; height: 400px;"></div>
+<div id="7ff7f37a-77ac-4ede-91e4-10b6f734c210" style="width: 700px; height: 400px;"></div>
 
+<div class="tip" id="fs1">namespace XPlot</div>
+<div class="tip" id="fs2">namespace XPlot.GoogleCharts</div>
+<div class="tip" id="fs3">val Bolivia : (string * float) list<br /><br />Full name: Google-combo-chart.Bolivia</div>
+<div class="tip" id="fs4">val Ecuador : (string * float) list<br /><br />Full name: Google-combo-chart.Ecuador</div>
+<div class="tip" id="fs5">val Madagascar : (string * float) list<br /><br />Full name: Google-combo-chart.Madagascar</div>
+<div class="tip" id="fs6">val ( Papua New Guinea ) : (string * float) list<br /><br />Full name: Google-combo-chart.( Papua New Guinea )</div>
+<div class="tip" id="fs7">val Rwanda : (string * float) list<br /><br />Full name: Google-combo-chart.Rwanda</div>
+<div class="tip" id="fs8">val Average : (string * float) list<br /><br />Full name: Google-combo-chart.Average</div>
+<div class="tip" id="fs9">val options : Options<br /><br />Full name: Google-combo-chart.options</div>
+<div class="tip" id="fs10">Multiple items<br />type Options =<br />&#160;&#160;new : unit -&gt; Options<br />&#160;&#160;member ShouldSerializeaggregationTarget : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeallValuesSuffix : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeallowHtml : unit -&gt; bool<br />&#160;&#160;member ShouldSerializealternatingRowStyle : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeanimation : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeannotations : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeannotationsWidth : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeareaOpacity : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeavoidOverlappingGridLines : unit -&gt; bool<br />&#160;&#160;...<br /><br />Full name: XPlot.GoogleCharts.Configuration.Options<br /><br />--------------------<br />new : unit -&gt; Options</div>
+<div class="tip" id="fs11">Multiple items<br />type Axis =<br />&#160;&#160;new : unit -&gt; Axis<br />&#160;&#160;member ShouldSerializeallowContainerBoundaryTextCufoff : unit -&gt; bool<br />&#160;&#160;member ShouldSerializebaseline : unit -&gt; bool<br />&#160;&#160;member ShouldSerializebaselineColor : unit -&gt; bool<br />&#160;&#160;member ShouldSerializedirection : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeformat : unit -&gt; bool<br />&#160;&#160;member ShouldSerializegridlines : unit -&gt; bool<br />&#160;&#160;member ShouldSerializelogScale : unit -&gt; bool<br />&#160;&#160;member ShouldSerializemaxAlternation : unit -&gt; bool<br />&#160;&#160;member ShouldSerializemaxTextLines : unit -&gt; bool<br />&#160;&#160;...<br /><br />Full name: XPlot.GoogleCharts.Configuration.Axis<br /><br />--------------------<br />new : unit -&gt; Axis</div>
+<div class="tip" id="fs12">Multiple items<br />type Series =<br />&#160;&#160;new : ?type:string -&gt; Series<br />&#160;&#160;member ShouldSerializeannotations : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeareaOpacity : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecolor : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecurveType : unit -&gt; bool<br />&#160;&#160;member ShouldSerializefallingColor : unit -&gt; bool<br />&#160;&#160;member ShouldSerializelineWidth : unit -&gt; bool<br />&#160;&#160;member ShouldSerializepointShape : unit -&gt; bool<br />&#160;&#160;member ShouldSerializepointSize : unit -&gt; bool<br />&#160;&#160;member ShouldSerializerisingColor : unit -&gt; bool<br />&#160;&#160;...<br /><br />Full name: XPlot.GoogleCharts.Configuration.Series<br /><br />--------------------<br />new : ?type:string -&gt; Series</div>
+<div class="tip" id="fs13">type Chart =<br />&#160;&#160;static member Annotation : data:seq&lt;#seq&lt;DateTime * &#39;V * string * string&gt;&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart (requires &#39;V :&gt; value)<br />&#160;&#160;static member Annotation : data:seq&lt;DateTime * #value * string * string&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart<br />&#160;&#160;static member Area : data:seq&lt;#seq&lt;&#39;K * &#39;V&gt;&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart (requires &#39;K :&gt; key and &#39;V :&gt; value)<br />&#160;&#160;static member Area : data:seq&lt;#key * #value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart<br />&#160;&#160;static member Area : data:seq&lt;#value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart<br />&#160;&#160;static member Bar : data:seq&lt;#seq&lt;&#39;K * &#39;V&gt;&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart (requires &#39;K :&gt; key and &#39;V :&gt; value)<br />&#160;&#160;static member Bar : data:seq&lt;#key * #value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart<br />&#160;&#160;static member Bar : data:seq&lt;#value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart<br />&#160;&#160;static member Bubble : data:seq&lt;string * #value * #value * #value * #value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart<br />&#160;&#160;static member Bubble : data:seq&lt;string * #value * #value * #value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart<br />&#160;&#160;...<br /><br />Full name: XPlot.GoogleCharts.Chart</div>
+<div class="tip" id="fs14">static member Chart.Combo : data:seq&lt;#seq&lt;&#39;K * &#39;V&gt;&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart (requires &#39;K :&gt; key and &#39;V :&gt; value)</div>
+<div class="tip" id="fs15">static member Chart.WithOptions : options:Options -&gt; chart:GoogleChart -&gt; GoogleChart</div>
+<div class="tip" id="fs16">static member Chart.WithLabels : labels:seq&lt;string&gt; -&gt; chart:GoogleChart -&gt; GoogleChart</div>
 
             </div>
             <div class="span3">
-                <img src="/XPlot/img/logo.png" alt="F# Project" style="width:130px;margin:20px" />
+                <img src="./img/logo.png" alt="F# Project" style="width:130px;margin:20px" />
                 <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
                     <li class="nav-header">XPlot</li>
-                    <li><a href="/XPlot/">Home page</a></li>
+                    <li><a href="./">Home page</a></li>
                     <li class="divider"></li>
                     <li><a href="http://www.nuget.org/packages?q=XPlot">Get Library via NuGet</a></li>
                     <li><a href="http://github.com/fslaborg/XPlot">Source Code on GitHub</a></li>
-                    <li><a href="/XPlot/license.html">License (Apache 2.0)</a></li>
-                    <li><a href="/XPlot/release-notes.html">Release Notes</a></li>
+                    <li><a href="./license.html">License (Apache 2.0)</a></li>
+                    <li><a href="./release-notes.html">Release Notes</a></li>
 
-                    <li class="nav-header"><a href="/XPlot/google-charts.html">Google Charts</a></li>
-                    <li><a href="/XPlot/chart/google-annotation-chart.html">Annotation</a></li>
-                    <li><a href="/XPlot/chart/google-area-chart.html">Area</a></li>
-                    <li><a href="/XPlot/chart/google-bar-chart.html">Bar</a></li>
-                    <li><a href="/XPlot/chart/google-bubble-chart.html">Bubble</a></li>
-                    <li><a href="/XPlot/chart/google-calendar-chart.html">Calendar</a></li>
-                    <li><a href="/XPlot/chart/google-candlestick-chart.html">Candlestick</a></li>
-                    <li><a href="/XPlot/chart/google-column-chart.html">Column</a></li>
-                    <li><a href="/XPlot/chart/google-combo-chart.html">Combo</a></li>
-                    <li><a href="/XPlot/chart/google-gauge-chart.html">Gauge</a></li>
-                    <li><a href="/XPlot/chart/google-geo-chart.html">Geo</a></li>
-                    <li><a href="/XPlot/chart/google-histogram-chart.html">Histogram</a></li>
-                    <li><a href="/XPlot/chart/google-line-chart.html">Line</a></li>
-                    <li><a href="/XPlot/chart/google-map-chart.html">Map</a></li>
-                    <li><a href="/XPlot/chart/google-pie-chart.html">Pie</a></li>
-                    <li><a href="/XPlot/chart/google-sankey-diagram.html">Sankey</a></li>
-                    <li><a href="/XPlot/chart/google-scatter-chart.html">Scatter</a></li>
-                    <li><a href="/XPlot/chart/google-stepped-area-chart.html">Stepped Area</a></li>
-                    <li><a href="/XPlot/chart/google-timeline-chart.html">Timeline</a></li>
-                    <li><a href="/XPlot/chart/google-table-chart.html">Table</a></li>
-                    <li><a href="/XPlot/chart/google-treemap-chart.html">Treemap</a></li>
+                    <li class="nav-header"><a href="./google-charts.html">Google Charts</a></li>
+                    <li><a href="./chart/google-annotation-chart.html">Annotation</a></li>
+                    <li><a href="./chart/google-area-chart.html">Area</a></li>
+                    <li><a href="./chart/google-bar-chart.html">Bar</a></li>
+                    <li><a href="./chart/google-bubble-chart.html">Bubble</a></li>
+                    <li><a href="./chart/google-calendar-chart.html">Calendar</a></li>
+                    <li><a href="./chart/google-candlestick-chart.html">Candlestick</a></li>
+                    <li><a href="./chart/google-column-chart.html">Column</a></li>
+                    <li><a href="./chart/google-combo-chart.html">Combo</a></li>
+                    <li><a href="./chart/google-gauge-chart.html">Gauge</a></li>
+                    <li><a href="./chart/google-geo-chart.html">Geo</a></li>
+                    <li><a href="./chart/google-histogram-chart.html">Histogram</a></li>
+                    <li><a href="./chart/google-line-chart.html">Line</a></li>
+                    <li><a href="./chart/google-map-chart.html">Map</a></li>
+                    <li><a href="./chart/google-pie-chart.html">Pie</a></li>
+                    <li><a href="./chart/google-sankey-diagram.html">Sankey</a></li>
+                    <li><a href="./chart/google-scatter-chart.html">Scatter</a></li>
+                    <li><a href="./chart/google-stepped-area-chart.html">Stepped Area</a></li>
+                    <li><a href="./chart/google-timeline-chart.html">Timeline</a></li>
+                    <li><a href="./chart/google-table-chart.html">Table</a></li>
+                    <li><a href="./chart/google-treemap-chart.html">Treemap</a></li>
 
-                    <li class="nav-header"><a href="/XPlot/plotly.html">Plotly</a></li>
-                    <li><a href="/XPlot/chart/plotly-bar-charts.html">Bar</a></li>
-                    <li><a href="/XPlot/chart/plotly-line-scatter-plots.html">Line and Scatter Plots</a></li>
-                    <li><a href="/XPlot/chart/plotly-box-plots.html">Box Plots</a></li>
-                    <li><a href="/XPlot/chart/plotly-bubble-charts.html">Bubble Charts</a></li>
-                    <li><a href="/XPlot/chart/plotly-contour-plots.html">Contour Plots</a></li>
-                    <li><a href="/XPlot/chart/plotly-area-plots.html">Area Plots</a></li>
-                    <li><a href="/XPlot/chart/plotly-heatmaps.html">Heatmaps</a></li>
-                    <li><a href="/XPlot/chart/plotly-histograms.html">Histograms</a></li>
-                    <li><a href="/XPlot/chart/plotly-2d-histograms.html">2D Histograms</a></li>
-                    <li><a href="/XPlot/chart/plotly-polar-charts.html">Polar Charts</a></li>
-                    <li><a href="/XPlot/chart/plotly-time-series.html">Time Series</a></li>
-                    <li><a href="/XPlot/chart/plotly-multiple-chart-types.html">Multiple Chart Types</a></li>
-                    <li><a href="/XPlot/chart/plotly-log-plots.html">Log Plots</a></li>
-                    <li><a href="/XPlot/chart/plotly-3d-scatter-plots.html">3D Scatter Plots</a></li>
-                    <li><a href="/XPlot/chart/plotly-3d-surface-plots.html">3D Surface Plots</a></li>
-                    <li><a href="/XPlot/chart/plotly-3d-line-plots.html">3D Line Plots</a></li>
+                    <li class="nav-header"><a href="./plotly.html">Plotly</a></li>
+                    <li><a href="./chart/plotly-bar-charts.html">Bar</a></li>
+                    <li><a href="./chart/plotly-line-scatter-plots.html">Line and Scatter Plots</a></li>
+                    <li><a href="./chart/plotly-box-plots.html">Box Plots</a></li>
+                    <li><a href="./chart/plotly-bubble-charts.html">Bubble Charts</a></li>
+                    <li><a href="./chart/plotly-contour-plots.html">Contour Plots</a></li>
+                    <li><a href="./chart/plotly-area-plots.html">Area Plots</a></li>
+                    <li><a href="./chart/plotly-heatmaps.html">Heatmaps</a></li>
+                    <li><a href="./chart/plotly-histograms.html">Histograms</a></li>
+                    <li><a href="./chart/plotly-2d-histograms.html">2D Histograms</a></li>
+                    <li><a href="./chart/plotly-polar-charts.html">Polar Charts</a></li>
+                    <li><a href="./chart/plotly-time-series.html">Time Series</a></li>
+                    <li><a href="./chart/plotly-multiple-chart-types.html">Multiple Chart Types</a></li>
+                    <li><a href="./chart/plotly-log-plots.html">Log Plots</a></li>
+                    <li><a href="./chart/plotly-3d-scatter-plots.html">3D Scatter Plots</a></li>
+                    <li><a href="./chart/plotly-3d-surface-plots.html">3D Surface Plots</a></li>
+                    <li><a href="./chart/plotly-3d-line-plots.html">3D Line Plots</a></li>
 
                     <li class="nav-header">Documentation</li>
-                    <li><a href="/XPlot/reference/index.html">API Reference</a></li>
+                    <li><a href="./reference/index.html">API Reference</a></li>
                     <li class="divider"></li>
 
-                    <li><a href="/XPlot/reference/xplot-googlecharts-chart.html">Google Chart type</a></li>
-                    <li><a href="/XPlot/reference/xplot-googlecharts-configuration-options.html">Google Option type</a></li>
-                    <li><a href="/XPlot/reference/xplot-googlecharts-configuration.html">Google configuration module</a></li>
+                    <li><a href="./reference/xplot-googlecharts-chart.html">Google Chart type</a></li>
+                    <li><a href="./reference/xplot-googlecharts-configuration-options.html">Google Option type</a></li>
+                    <li><a href="./reference/xplot-googlecharts-configuration.html">Google configuration module</a></li>
 
                     <li class="divider"></li>
 
-                    <li><a href="/XPlot/reference/xplot-plotly-graph.html">Plotly Graph module</a></li>
-                    <li><a href="/XPlot/reference/xplot-plotly-graph-layout.html">Plotly Layout type</a></li>
+                    <li><a href="./reference/xplot-plotly-graph.html">Plotly Graph module</a></li>
+                    <li><a href="./reference/xplot-plotly-graph-layout.html">Plotly Layout type</a></li>
                 </ul>
             </div>
         </div>

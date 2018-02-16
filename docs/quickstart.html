@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>NodeLabel - XPlot</title>
+    <title>Your First XPlot Chart
+</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="" />
+    <meta name="description" content="Data visualization library for F#" />
     <meta name="author" content="Taha Hachana; Tomas Petricek" />
 
     <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
@@ -50,59 +51,92 @@
         <div class="row">
             <div class="span9" id="main">
                 
+<h1><a name="Your-First-XPlot-Chart" class="anchor" href="#Your-First-XPlot-Chart">Your First XPlot Chart</a></h1>
+<p>In this tutorial we will walk through creating a chart in the browser,
+from an F# script running in <a href="https://code.visualstudio.com/">Visual Studio Code</a>.</p>
+<p>We assume that:</p>
+<ul>
+<li>VS Code is already installed,</li>
+<li>F# is already installed (<a href="http://fsharp.org/">see fsharp.org under "Use"</a>), and</li>
+<li>
+VS Code extensions <a href="https://marketplace.visualstudio.com/items?itemName=Ionide.Ionide-fsharp">Ionide FSharp</a> 
+and <a href="https://marketplace.visualstudio.com/items?itemName=Ionide.Ionide-paket">Ionide Paket</a> are installed.
+</li>
+</ul>
+<h2><a name="Step-1-Download-the-package-XPlot-GoogleChart" class="anchor" href="#Step-1-Download-the-package-XPlot-GoogleChart">Step 1: Download the package XPlot.GoogleChart</a></h2>
+<p>Choose a folder where you want to work, and open it in VS Code.</p>
+<p>Then use <code>Ctrl</code>+<code>Shift</code>+<code>P</code> to bring up the command palette and type the command <code>Paket: Init</code>.</p>
+<p>This will create a file called <code>paket.dependencies</code></p>
+<p>Modify <code>paket.dependencies</code> so that it looks like this:</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="i">framework</span><span class="o">:</span><span class="i">net45</span>
+<span class="i">source</span> <span class="i">https</span><span class="o">:</span><span class="c">//www.nuget.org/api/v2</span>
+<span class="i">nuget</span> <span class="i">XPlot</span><span class="o">.</span><span class="i">GoogleCharts</span>
+</code></pre></td>
+</tr>
+</table>
+<p>Bring up the command palette again with <code>Ctrl</code>+<code>Shift</code>+<code>P</code> and type <code>Paket: Install</code>.
+This installs the package in your folder. You will see two things:</p>
+<ul>
+<li>a paket.lock file,</li>
+<li>and a "packages" directory, with the following structure:</li>
+</ul>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+<span class="l">5: </span>
+<span class="l">6: </span>
+<span class="l">7: </span>
+<span class="l">8: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="o">/</span><span class="i">packages</span><span class="o">/</span>
+    <span class="o">/</span> <span class="i">Google</span><span class="o">.</span><span class="i">DataTable</span><span class="o">.</span><span class="i">Net</span><span class="o">.</span><span class="i">Wrapper</span><span class="o">/</span>
+        <span class="o">/</span> <span class="i">lib</span>
+            <span class="o">/</span> <span class="i">Google</span><span class="o">.</span><span class="i">DataTable</span><span class="o">.</span><span class="i">Net</span><span class="o">.</span><span class="i">Wrapper</span><span class="o">.</span><span class="i">dll</span>
+    <span class="o">/</span> <span class="i">XPlot</span><span class="o">.</span><span class="i">GoogleCharts</span>
+        <span class="o">/</span> <span class="i">lib</span>
+            <span class="o">/</span><span class="i">net45</span>
+                <span class="o">/</span> <span class="i">XPlot</span><span class="o">.</span><span class="i">GoogleCharts</span><span class="o">.</span><span class="i">dll</span>
+</code></pre></td>
+</tr>
+</table>
+<p>Now you are ready to start creating a chart.</p>
+<h2><a name="Step-2-Creating-a-chart-from-a-script" class="anchor" href="#Step-2-Creating-a-chart-from-a-script">Step 2: Creating a chart from a script</a></h2>
+<p>First, create a new F# script file: <code>Script.fsx</code>.</p>
+<p>Copy-paste the following code into the editor:</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+<span class="l">5: </span>
+<span class="l">6: </span>
+<span class="l">7: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="prep">#I</span> <span class="s">&quot;./packages&quot;</span>
+<span class="prep">#r</span> <span class="s">&quot;Google.DataTable.Net.Wrapper/lib/Google.DataTable.Net.Wrapper.dll&quot;</span>
+<span class="prep">#r</span> <span class="s">&quot;XPlot.GoogleCharts/lib/net45/XPlot.GoogleCharts.dll&quot;</span>
 
+<span class="k">open</span> <span class="i">XPlot</span><span class="o">.</span><span class="i">GoogleCharts</span>
 
+[ <span class="n">1</span> <span class="o">..</span> <span class="n">10</span> ] <span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">Line</span> <span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">Show</span>
+</code></pre></td>
+</tr>
+</table>
+<p>Select all of the code you pasted in and press <code>Alt</code>+<code>Enter</code> to execute it.</p>
+<p>That's it! You should see a chart popping up in your browser.</p>
+<p>Notes</p>
+<ul>
+<li>
+in the path <code>#r "XPlot.GoogleCharts/lib/net45/</code>, make sure "net45" is right, 
+this is based on <code>paket.dependencies</code>, specifically the .NET 4.5 framework part (<code>framework:net45</code>).
+</li>
+<li>you will need an internet connection for the chart to render, as the code relies on Google-hosted services.</li>
+</ul>
 
-<h1>NodeLabel</h1>
-<p>
-  <span>Namespace: XPlot.D3</span><br />
-</p>
-<div class="xmldoc">
-</div>
-  <h3>Record Fields</h3>
-  <table class="table table-bordered member-list">
-    <thead>
-      <tr><td>Record Field</td><td>Description</td></tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '124', 124)" onmouseover="showTip(event, '124', 124)">
-            StyleAttrs
-          </code>
-          <div class="tip" id="124">
-            <strong>Signature:</strong> (string * string) list<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/fslaborg/XPlot/tree/master/src/XPlot.D3/Configuration.fs#L10-10" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '125', 125)" onmouseover="showTip(event, '125', 125)">
-            Text
-          </code>
-          <div class="tip" id="125">
-            <strong>Signature:</strong> string<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-            <a href="http://github.com/fslaborg/XPlot/tree/master/src/XPlot.D3/Configuration.fs#L9-9" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-        </td>
-      </tr>
-    </tbody>
-  </table>
 
             </div>
             <div class="span3">
