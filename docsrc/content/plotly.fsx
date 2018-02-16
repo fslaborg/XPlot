@@ -16,6 +16,7 @@ Chart Gallery
 - [Line and Scatter Plots](chart/plotly-line-scatter-plots.html)
 - [Box Plots](chart/plotly-box-plots.html)
 - [Bubble Charts](chart/plotly-bubble-charts.html)
+- [Candlestick Plots](chart/plotly-candlestick-plots.html)
 - [Contour Plots](chart/plotly-contour-plots.html)
 - [Area Plots](chart/plotly-area-plots.html)
 - [Heatmaps](chart/plotly-heatmaps.html)
