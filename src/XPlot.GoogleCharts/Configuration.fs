@@ -1592,8 +1592,9 @@ module Configuration =
 
         member __.title
             with get() = 
-                titleField 
-                |> Option.defaultValue String.Empty
+                match titleField with
+                | None -> String.Empty
+                | Some(title) -> title
             and set(value) = titleField <- Some value
 
         member __.titlePosition
