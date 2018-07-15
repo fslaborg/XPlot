@@ -1,14 +1,38 @@
 framework: >=net45
 source https://nuget.org/api/v2
 
-nuget FSharp.Formatting
-nuget NUnit
-nuget NUnit.Runners
+nuget FSharp.Core
+
+nuget NUnit 3.7.1
+nuget NUnit.Runners 3.6.1
 nuget FAKE
 
 nuget Deedle
 nuget MathNet.Numerics
 nuget Google.DataTable.Net.Wrapper
-nuget Newtonsoft.Json
+nuget Newtonsoft.Json 
 
-github fsharp/FAKE modules/Octokit/Octokit.fsx
+clitool dotnet-fake
+
+group Formatting
+source https://nuget.org/api/v2
+source https://ci.appveyor.com/nuget/fsharp-formatting
+
+nuget FSharp.Formatting prerelease
+nuget FSharp.Formatting.CommandTool prerelease
+
+group FakeBuild
+source https://api.nuget.org/v3/index.json
+
+storage: none
+
+nuget Fake.Core.Target
+nuget Fake.IO.FileSystem
+nuget Fake.DotNet.Cli
+nuget Fake.Tools.Git
+nuget Fake.DotNet.MSBuild
+nuget Fake.Core.ReleaseNotes 
+nuget Fake.DotNet.AssemblyInfoFile
+nuget Fake.DotNet.Paket
+nuget Fake.DotNet.Testing.Nunit 
+nuget Fake.DotNet.FSFormatting 
