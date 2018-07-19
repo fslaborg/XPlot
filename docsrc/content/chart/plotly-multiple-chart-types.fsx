@@ -34,7 +34,7 @@ let y2 = [-0.9; -0.72; -0.576; -0.4608; -0.36863999999999997; -0.294911999999999
 Multiple Chart Types
 ====================
 
-[Full source and data](https://github.com/fslaborg/XPlot/blob/master/docs/content/chart/plotly-multiple-chart-types.fsx)
+[Full source and data](https://github.com/fslaborg/XPlot/blob/master/docsrc/content/chart/plotly-multiple-chart-types.fsx)
 
 A Contour and Scatter Plot of the Method of Steepest Descent
 ------------------------------------------------------------
