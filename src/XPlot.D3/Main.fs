@@ -28,7 +28,7 @@ module HtmlGeneration =
                 </head>
                 <body>
                     <div id="{GUID}" style="width: {WIDTH}px; height: {HEIGHT}px;"></div>
-                    <script src="http://d3js.org/d3.v3.min.js"></script>
+                    <script src="https://d3js.org/d3.v3.min.js"></script>
                     <script type="text/javascript">
                         
                         {JS}
