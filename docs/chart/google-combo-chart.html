@@ -13,9 +13,11 @@
     <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
     <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet" />
 
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
-        google.load("visualization", "1.1", { packages: ["corechart", "annotationchart", "calendar", "gauge", "geochart", "map", "sankey", "table", "timeline", "treemap"] })
+        google.charts.load('current', {
+            packages: ["corechart", "annotationchart", "calendar", "gauge", "geochart", "map", "sankey", "table", "timeline", "treemap"]
+        });
     </script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <link type="text/css" rel="stylesheet" href="/XPlot/content/style.css" />
@@ -69,24 +71,42 @@
 <span class="l">15: </span>
 <span class="l">16: </span>
 <span class="l">17: </span>
+<span class="l">18: </span>
+<span class="l">19: </span>
+<span class="l">20: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs9', 9)" onmouseover="showTip(event, 'fs9', 9)" class="i">options</span> <span class="o">=</span>
-    <span onmouseout="hideTip(event, 'fs10', 10)" onmouseover="showTip(event, 'fs10', 10)" class="t">Options</span>(
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span class="i">Bolivia</span> <span class="o">=</span> [<span class="s">&quot;2004/05&quot;</span>, <span class="n">165.</span>; <span class="s">&quot;2005/06&quot;</span>, <span class="n">135.</span>; <span class="s">&quot;2006/07&quot;</span>, <span class="n">157.</span>; <span class="s">&quot;2007/08&quot;</span>, <span class="n">139.</span>; <span class="s">&quot;2008/09&quot;</span>, <span class="n">136.</span>]
+<span class="k">let</span> <span class="i">Ecuador</span> <span class="o">=</span> [<span class="s">&quot;2004/05&quot;</span>, <span class="n">938.</span>; <span class="s">&quot;2005/06&quot;</span>, <span class="n">1120.</span>; <span class="s">&quot;2006/07&quot;</span>, <span class="n">1167.</span>; <span class="s">&quot;2007/08&quot;</span>, <span class="n">1110.</span>; <span class="s">&quot;2008/09&quot;</span>, <span class="n">691.</span>]
+<span class="k">let</span> <span class="i">Madagascar</span> <span class="o">=</span> [<span class="s">&quot;2004/05&quot;</span>, <span class="n">522.</span>; <span class="s">&quot;2005/06&quot;</span>, <span class="n">599.</span>; <span class="s">&quot;2006/07&quot;</span>, <span class="n">587.</span>; <span class="s">&quot;2007/08&quot;</span>, <span class="n">615.</span>; <span class="s">&quot;2008/09&quot;</span>, <span class="n">629.</span>]
+<span class="k">let</span> <span class="i">``Papua New Guinea``</span> <span class="o">=</span> [<span class="s">&quot;2004/05&quot;</span>, <span class="n">998.</span>; <span class="s">&quot;2005/06&quot;</span>, <span class="n">1268.</span>; <span class="s">&quot;2006/07&quot;</span>, <span class="n">807.</span>; <span class="s">&quot;2007/08&quot;</span>, <span class="n">968.</span>; <span class="s">&quot;2008/09&quot;</span>, <span class="n">1026.</span>]
+<span class="k">let</span> <span class="i">Rwanda</span> <span class="o">=</span> [<span class="s">&quot;2004/05&quot;</span>, <span class="n">450.</span>; <span class="s">&quot;2005/06&quot;</span>, <span class="n">288.</span>; <span class="s">&quot;2006/07&quot;</span>, <span class="n">397.</span>; <span class="s">&quot;2007/08&quot;</span>, <span class="n">215.</span>; <span class="s">&quot;2008/09&quot;</span>, <span class="n">366.</span>]
+<span class="k">let</span> <span class="i">Average</span> <span class="o">=</span> [<span class="s">&quot;2004/05&quot;</span>, <span class="n">614.6</span>; <span class="s">&quot;2005/06&quot;</span>, <span class="n">682.</span>; <span class="s">&quot;2006/07&quot;</span>, <span class="n">623.</span>; <span class="s">&quot;2007/08&quot;</span>, <span class="n">609.4</span>; <span class="s">&quot;2008/09&quot;</span>, <span class="n">569.6</span>]
+
+<span class="k">let</span> <span class="i">options</span> <span class="o">=</span>
+    <span class="i">Options</span>(
         <span class="i">title</span> <span class="o">=</span> <span class="s">&quot;Monthly Coffee Production by Country&quot;</span>,
-        <span class="i">vAxis</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs11', 11)" onmouseover="showTip(event, 'fs11', 11)" class="t">Axis</span>(<span class="i">title</span> <span class="o">=</span> <span class="s">&quot;Cups&quot;</span>),
-        <span class="i">hAxis</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs11', 12)" onmouseover="showTip(event, 'fs11', 12)" class="t">Axis</span>(<span class="i">title</span> <span class="o">=</span> <span class="s">&quot;Month&quot;</span>),
+        <span class="i">vAxis</span> <span class="o">=</span> <span class="i">Axis</span>(<span class="i">title</span> <span class="o">=</span> <span class="s">&quot;Cups&quot;</span>),
+        <span class="i">hAxis</span> <span class="o">=</span> <span class="i">Axis</span>(<span class="i">title</span> <span class="o">=</span> <span class="s">&quot;Month&quot;</span>),
         <span class="i">seriesType</span> <span class="o">=</span> <span class="s">&quot;bars&quot;</span>,
         <span class="i">series</span> <span class="o">=</span>
             [|
-                <span class="k">for</span> _ <span class="k">in</span> <span class="n">0</span> <span class="o">..</span> <span class="n">4</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs12', 13)" onmouseover="showTip(event, 'fs12', 13)" class="t">Series</span>(<span class="i">``type``</span> <span class="o">=</span> <span class="s">&quot;bars&quot;</span>)
-                <span class="k">yield</span> <span onmouseout="hideTip(event, 'fs12', 14)" onmouseover="showTip(event, 'fs12', 14)" class="t">Series</span>(<span class="i">``type``</span> <span class="o">=</span> <span class="s">&quot;line&quot;</span>)
+                <span class="k">for</span> _ <span class="k">in</span> <span class="n">0</span> <span class="o">..</span> <span class="n">4</span> <span class="k">-&gt;</span> <span class="i">Series</span>(<span class="i">``type``</span> <span class="o">=</span> <span class="s">&quot;bars&quot;</span>)
+                <span class="k">yield</span> <span class="i">Series</span>(<span class="i">``type``</span> <span class="o">=</span> <span class="s">&quot;line&quot;</span>)
             |]
     )
  
-[<span onmouseout="hideTip(event, 'fs3', 15)" onmouseover="showTip(event, 'fs3', 15)" class="i">Bolivia</span>; <span onmouseout="hideTip(event, 'fs4', 16)" onmouseover="showTip(event, 'fs4', 16)" class="i">Ecuador</span>; <span onmouseout="hideTip(event, 'fs5', 17)" onmouseover="showTip(event, 'fs5', 17)" class="i">Madagascar</span>; <span onmouseout="hideTip(event, 'fs6', 18)" onmouseover="showTip(event, 'fs6', 18)" class="i">``Papua New Guinea``</span>; <span onmouseout="hideTip(event, 'fs7', 19)" onmouseover="showTip(event, 'fs7', 19)" class="i">Rwanda</span>; <span onmouseout="hideTip(event, 'fs8', 20)" onmouseover="showTip(event, 'fs8', 20)" class="i">Average</span>]
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs13', 21)" onmouseover="showTip(event, 'fs13', 21)" class="t">Chart</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs14', 22)" onmouseover="showTip(event, 'fs14', 22)" class="f">Combo</span>
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs13', 23)" onmouseover="showTip(event, 'fs13', 23)" class="t">Chart</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs15', 24)" onmouseover="showTip(event, 'fs15', 24)" class="f">WithOptions</span> <span onmouseout="hideTip(event, 'fs9', 25)" onmouseover="showTip(event, 'fs9', 25)" class="i">options</span>
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs13', 26)" onmouseover="showTip(event, 'fs13', 26)" class="t">Chart</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs16', 27)" onmouseover="showTip(event, 'fs16', 27)" class="f">WithLabels</span> [<span class="s">&quot;Bolivia&quot;</span>; <span class="s">&quot;Ecuador&quot;</span>; <span class="s">&quot;Madagascar&quot;</span>; <span class="s">&quot;Papua New Guinea&quot;</span>; <span class="s">&quot;Rwanda&quot;</span>; <span class="s">&quot;Average&quot;</span>]
+</code></pre></td>
+</tr>
+</table>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp">[<span class="i">Bolivia</span>; <span class="i">Ecuador</span>; <span class="i">Madagascar</span>; <span class="i">``Papua New Guinea``</span>; <span class="i">Rwanda</span>; <span class="i">Average</span>]
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">Combo</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithOptions</span> <span class="i">options</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithLabels</span> [<span class="s">&quot;Bolivia&quot;</span>; <span class="s">&quot;Ecuador&quot;</span>; <span class="s">&quot;Madagascar&quot;</span>; <span class="s">&quot;Papua New Guinea&quot;</span>; <span class="s">&quot;Rwanda&quot;</span>; <span class="s">&quot;Average&quot;</span>]
 </code></pre></td>
 </tr>
 </table>
@@ -102,28 +122,12 @@
 
                 var options = {"hAxis":{"title":"Month"},"legend":{"position":"right"},"series":[{"type":"bars"},{"type":"bars"},{"type":"bars"},{"type":"bars"},{"type":"bars"},{"type":"line"}],"title":"Monthly Coffee Production by Country","vAxis":{"title":"Cups"},"seriesType":"bars"} 
 
-                var chart = new google.visualization.ComboChart(document.getElementById('e5d76c91-b254-43dc-bcda-e72fbc982e53'));
+                var chart = new google.visualization.ComboChart(document.getElementById('2f65f587-2056-4f72-8962-64139081aa83'));
                 chart.draw(data, options);
             }
 </script>
-<div id="e5d76c91-b254-43dc-bcda-e72fbc982e53" style="width: 700px; height: 400px;"></div>
+<div id="2f65f587-2056-4f72-8962-64139081aa83" style="width: 700px; height: 400px;"></div>
 
-<div class="tip" id="fs1">namespace XPlot</div>
-<div class="tip" id="fs2">namespace XPlot.GoogleCharts</div>
-<div class="tip" id="fs3">val Bolivia : (string * float) list<br /><br />Full name: Google-combo-chart.Bolivia</div>
-<div class="tip" id="fs4">val Ecuador : (string * float) list<br /><br />Full name: Google-combo-chart.Ecuador</div>
-<div class="tip" id="fs5">val Madagascar : (string * float) list<br /><br />Full name: Google-combo-chart.Madagascar</div>
-<div class="tip" id="fs6">val ( Papua New Guinea ) : (string * float) list<br /><br />Full name: Google-combo-chart.( Papua New Guinea )</div>
-<div class="tip" id="fs7">val Rwanda : (string * float) list<br /><br />Full name: Google-combo-chart.Rwanda</div>
-<div class="tip" id="fs8">val Average : (string * float) list<br /><br />Full name: Google-combo-chart.Average</div>
-<div class="tip" id="fs9">val options : Options<br /><br />Full name: Google-combo-chart.options</div>
-<div class="tip" id="fs10">Multiple items<br />type Options =<br />&#160;&#160;new : unit -&gt; Options<br />&#160;&#160;member ShouldSerializeaggregationTarget : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeallValuesSuffix : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeallowHtml : unit -&gt; bool<br />&#160;&#160;member ShouldSerializealternatingRowStyle : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeanimation : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeannotations : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeannotationsWidth : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeareaOpacity : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeavoidOverlappingGridLines : unit -&gt; bool<br />&#160;&#160;...<br /><br />Full name: XPlot.GoogleCharts.Configuration.Options<br /><br />--------------------<br />new : unit -&gt; Options</div>
-<div class="tip" id="fs11">Multiple items<br />type Axis =<br />&#160;&#160;new : unit -&gt; Axis<br />&#160;&#160;member ShouldSerializeallowContainerBoundaryTextCufoff : unit -&gt; bool<br />&#160;&#160;member ShouldSerializebaseline : unit -&gt; bool<br />&#160;&#160;member ShouldSerializebaselineColor : unit -&gt; bool<br />&#160;&#160;member ShouldSerializedirection : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeformat : unit -&gt; bool<br />&#160;&#160;member ShouldSerializegridlines : unit -&gt; bool<br />&#160;&#160;member ShouldSerializelogScale : unit -&gt; bool<br />&#160;&#160;member ShouldSerializemaxAlternation : unit -&gt; bool<br />&#160;&#160;member ShouldSerializemaxTextLines : unit -&gt; bool<br />&#160;&#160;...<br /><br />Full name: XPlot.GoogleCharts.Configuration.Axis<br /><br />--------------------<br />new : unit -&gt; Axis</div>
-<div class="tip" id="fs12">Multiple items<br />type Series =<br />&#160;&#160;new : ?type:string -&gt; Series<br />&#160;&#160;member ShouldSerializeannotations : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeareaOpacity : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecolor : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecurveType : unit -&gt; bool<br />&#160;&#160;member ShouldSerializefallingColor : unit -&gt; bool<br />&#160;&#160;member ShouldSerializelineWidth : unit -&gt; bool<br />&#160;&#160;member ShouldSerializepointShape : unit -&gt; bool<br />&#160;&#160;member ShouldSerializepointSize : unit -&gt; bool<br />&#160;&#160;member ShouldSerializerisingColor : unit -&gt; bool<br />&#160;&#160;...<br /><br />Full name: XPlot.GoogleCharts.Configuration.Series<br /><br />--------------------<br />new : ?type:string -&gt; Series</div>
-<div class="tip" id="fs13">type Chart =<br />&#160;&#160;static member Annotation : data:seq&lt;#seq&lt;DateTime * &#39;V * string * string&gt;&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart (requires &#39;V :&gt; value)<br />&#160;&#160;static member Annotation : data:seq&lt;DateTime * #value * string * string&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart<br />&#160;&#160;static member Area : data:seq&lt;#seq&lt;&#39;K * &#39;V&gt;&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart (requires &#39;K :&gt; key and &#39;V :&gt; value)<br />&#160;&#160;static member Area : data:seq&lt;#key * #value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart<br />&#160;&#160;static member Area : data:seq&lt;#value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart<br />&#160;&#160;static member Bar : data:seq&lt;#seq&lt;&#39;K * &#39;V&gt;&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart (requires &#39;K :&gt; key and &#39;V :&gt; value)<br />&#160;&#160;static member Bar : data:seq&lt;#key * #value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart<br />&#160;&#160;static member Bar : data:seq&lt;#value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart<br />&#160;&#160;static member Bubble : data:seq&lt;string * #value * #value * #value * #value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart<br />&#160;&#160;static member Bubble : data:seq&lt;string * #value * #value * #value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart<br />&#160;&#160;...<br /><br />Full name: XPlot.GoogleCharts.Chart</div>
-<div class="tip" id="fs14">static member Chart.Combo : data:seq&lt;#seq&lt;&#39;K * &#39;V&gt;&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart (requires &#39;K :&gt; key and &#39;V :&gt; value)</div>
-<div class="tip" id="fs15">static member Chart.WithOptions : options:Options -&gt; chart:GoogleChart -&gt; GoogleChart</div>
-<div class="tip" id="fs16">static member Chart.WithLabels : labels:seq&lt;string&gt; -&gt; chart:GoogleChart -&gt; GoogleChart</div>
 
             </div>
             <div class="span3">
@@ -177,6 +181,9 @@
                     <li><a href="/XPlot/chart/plotly-3d-scatter-plots.html">3D Scatter Plots</a></li>
                     <li><a href="/XPlot/chart/plotly-3d-surface-plots.html">3D Surface Plots</a></li>
                     <li><a href="/XPlot/chart/plotly-3d-line-plots.html">3D Line Plots</a></li>
+
+                    <li class="nav-header"><a href="/XPlot/d3.html">D3 Charts</a></li>
+                    <li><a href="/XPlot/chart/d3-network.html">Network</a></li>
 
                     <li class="nav-header">Documentation</li>
                     <li><a href="/XPlot/reference/index.html">API Reference</a></li>

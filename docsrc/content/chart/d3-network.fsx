@@ -6,13 +6,14 @@ open XPlot.D3
 (**
 ##D3 Network Example
 *)
-(*** define-output:netchart ***)
 let edges = 
     [   "A", "B"
         "B", "C"
         "C", "A"
         "A", "D"
         "B", "E"]
+
+(*** define-output:netchart ***)
 edges
 |> Chart.ForceLayout
 |> Chart.WithHeight 300

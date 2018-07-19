@@ -13,9 +13,11 @@
     <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
     <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet" />
 
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
-        google.load("visualization", "1.1", { packages: ["corechart", "annotationchart", "calendar", "gauge", "geochart", "map", "sankey", "table", "timeline", "treemap"] })
+        google.charts.load('current', {
+            packages: ["corechart", "annotationchart", "calendar", "gauge", "geochart", "map", "sankey", "table", "timeline", "treemap"]
+        });
     </script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <link type="text/css" rel="stylesheet" href="/XPlot/content/style.css" />
@@ -67,17 +69,21 @@ works just fine:</p>
 <span class="l">2: </span>
 <span class="l">3: </span>
 <span class="l">4: </span>
-<span class="l">5: </span>
-<span class="l">6: </span>
-<span class="l">7: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="i">pop</span> <span class="o">=</span>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span class="i">pop</span> <span class="o">=</span>
   [ <span class="s">&quot;Germany&quot;</span>, <span class="n">200</span>; <span class="s">&quot;United States&quot;</span>, <span class="n">300</span>
     <span class="s">&quot;Brazil&quot;</span>, <span class="n">400</span>;  <span class="s">&quot;Canada&quot;</span>, <span class="n">500</span>
     <span class="s">&quot;France&quot;</span>, <span class="n">600</span>;  <span class="s">&quot;RU&quot;</span>, <span class="n">700</span> ]
-<span onmouseout="hideTip(event, 'fs3', 4)" onmouseover="showTip(event, 'fs3', 4)" class="i">pop</span>
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs4', 5)" onmouseover="showTip(event, 'fs4', 5)" class="t">Chart</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs5', 6)" onmouseover="showTip(event, 'fs5', 6)" class="f">Geo</span>
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs4', 7)" onmouseover="showTip(event, 'fs4', 7)" class="t">Chart</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs6', 8)" onmouseover="showTip(event, 'fs6', 8)" class="f">WithLabel</span> <span class="s">&quot;Popularity&quot;</span>
+</code></pre></td>
+</tr>
+</table>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="i">pop</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">Geo</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithLabel</span> <span class="s">&quot;Popularity&quot;</span>
 </code></pre></td>
 </tr>
 </table>
@@ -93,18 +99,12 @@ works just fine:</p>
 
                 var options = {"legend":{"position":"right"}} 
 
-                var chart = new google.visualization.GeoChart(document.getElementById('d52a08ad-f059-415f-a7ca-10e3edf4af17'));
+                var chart = new google.visualization.GeoChart(document.getElementById('2db89072-ae51-48fb-b1e3-f66a35d11144'));
                 chart.draw(data, options);
             }
 </script>
-<div id="d52a08ad-f059-415f-a7ca-10e3edf4af17" style="width: 700px; height: 400px;"></div>
+<div id="2db89072-ae51-48fb-b1e3-f66a35d11144" style="width: 700px; height: 400px;"></div>
 
-<div class="tip" id="fs1">namespace XPlot</div>
-<div class="tip" id="fs2">namespace XPlot.GoogleCharts</div>
-<div class="tip" id="fs3">val pop : (string * int) list<br /><br />Full name: Google-geo-chart.pop</div>
-<div class="tip" id="fs4">type Chart =<br />&#160;&#160;static member Annotation : data:seq&lt;#seq&lt;DateTime * &#39;V * string * string&gt;&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart (requires &#39;V :&gt; value)<br />&#160;&#160;static member Annotation : data:seq&lt;DateTime * #value * string * string&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart<br />&#160;&#160;static member Area : data:seq&lt;#seq&lt;&#39;K * &#39;V&gt;&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart (requires &#39;K :&gt; key and &#39;V :&gt; value)<br />&#160;&#160;static member Area : data:seq&lt;#key * #value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart<br />&#160;&#160;static member Area : data:seq&lt;#value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart<br />&#160;&#160;static member Bar : data:seq&lt;#seq&lt;&#39;K * &#39;V&gt;&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart (requires &#39;K :&gt; key and &#39;V :&gt; value)<br />&#160;&#160;static member Bar : data:seq&lt;#key * #value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart<br />&#160;&#160;static member Bar : data:seq&lt;#value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart<br />&#160;&#160;static member Bubble : data:seq&lt;string * #value * #value * #value * #value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart<br />&#160;&#160;static member Bubble : data:seq&lt;string * #value * #value * #value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart<br />&#160;&#160;...<br /><br />Full name: XPlot.GoogleCharts.Chart</div>
-<div class="tip" id="fs5">static member Chart.Geo : data:seq&lt;float * float * #value * #value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart<br />static member Chart.Geo : data:seq&lt;float * float * #value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart<br />static member Chart.Geo : data:seq&lt;float * float&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart<br />static member Chart.Geo : data:seq&lt;string * #value * #value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart<br />static member Chart.Geo : data:seq&lt;string * #value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart</div>
-<div class="tip" id="fs6">static member Chart.WithLabel : label:string -&gt; chart:GoogleChart -&gt; GoogleChart</div>
 
             </div>
             <div class="span3">
@@ -158,6 +158,9 @@ works just fine:</p>
                     <li><a href="/XPlot/chart/plotly-3d-scatter-plots.html">3D Scatter Plots</a></li>
                     <li><a href="/XPlot/chart/plotly-3d-surface-plots.html">3D Surface Plots</a></li>
                     <li><a href="/XPlot/chart/plotly-3d-line-plots.html">3D Line Plots</a></li>
+
+                    <li class="nav-header"><a href="/XPlot/d3.html">D3 Charts</a></li>
+                    <li><a href="/XPlot/chart/d3-network.html">Network</a></li>
 
                     <li class="nav-header">Documentation</li>
                     <li><a href="/XPlot/reference/index.html">API Reference</a></li>

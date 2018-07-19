@@ -83,7 +83,7 @@ let text2 =
 Plotly 3D Scatter Plots
 =======================
 
-[Full source](https://github.com/fslaborg/XPlot/blob/master/docs/content/chart/plotly-3d-scatter-plots.fsx)
+[Full source and data](https://github.com/fslaborg/XPlot/blob/master/docs/content/chart/plotly-3d-scatter-plots.fsx)
 
 3D Scatter Plot
 ---------------

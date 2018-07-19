@@ -3,6 +3,10 @@
 #r "XPlot.GoogleCharts.dll"
 open XPlot.GoogleCharts
 
+(**
+Google Table Chart
+==================
+*)
 let salary =
     [
         "Mike", 10000
@@ -21,10 +25,6 @@ let fulltime =
     ]
     |> List.map (fun (x, y) -> x, y :> value)
 
-(**
-Google Table Chart
-==================
-*)
 (*** define-output:table ***) 
 [salary; fulltime]        
 |> Chart.Table
