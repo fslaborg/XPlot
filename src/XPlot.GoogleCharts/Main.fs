@@ -387,7 +387,15 @@ type GoogleChart() =
             with _ -> __.options.legend <- Legend(position = "right") 
                 
     /// Sets the chart's configuration options.
-    member __.WithOptions options = __.options <- options
+    member __.WithOptions (options:Options) =
+        // If the chart title has been set,
+        // do not overwrite it.
+        let currentTitle = __.options.title        
+        if not (String.IsNullOrEmpty currentTitle)
+        then
+            options.title <- currentTitle
+            
+        __.options <- options
 
     /// Sets the chart's width and height.
     member __.WithSize (width, height) = 
