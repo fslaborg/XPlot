@@ -114,7 +114,7 @@ How to get XPlot
 If you want to get XPlot as part of larger package of F# and .NET tools for doing data science, then check out
 the [FsLab web site](http://www.fslab.org). This gives you a nice cross-platform environment where you can
 access data using [F# Data type providers](http://fsharp.github.io/FSharp.Data/), analyze the data using 
-[Deedle data frames and series](http://bluemountaincapital.github.io/Deedle/) and then visualize data using
+[Deedle data frames and series](http://fslab.org/Deedle/) and then visualize data using
 XPlot.
 
 ### Stand alone XPlot packages
