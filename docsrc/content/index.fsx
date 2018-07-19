@@ -45,7 +45,7 @@ The XPlot library can be used interactively from F# Interactive, but charts can 
 in F# applications and in HTML reports. 
 
  - To get XPlot, scroll down to [how to get XPlot](#How-to-get-XPlot) or get XPlot as part of the 
-   [FsLab data science package](http://fslab.org/download/).
+   [FsLab data science package](https://fslab.org/download/).
  - For detailed documentation, scroll down to [documentation](#Documentation) or follow links on the right.
 
 The next two demos show some of the more complex and advanced charts that can be created using XPlot.
@@ -114,7 +114,7 @@ How to get XPlot
 If you want to get XPlot as part of larger package of F# and .NET tools for doing data science, then check out
 the [FsLab web site](http://www.fslab.org). This gives you a nice cross-platform environment where you can
 access data using [F# Data type providers](http://fsharp.github.io/FSharp.Data/), analyze the data using 
-[Deedle data frames and series](http://fslab.org/Deedle/) and then visualize data using
+[Deedle data frames and series](https://fslab.org/Deedle/) and then visualize data using
 XPlot.
 
 ### Stand alone XPlot packages
