@@ -8,7 +8,7 @@ open XPlot.Plotly
 Plotly Bar Charts
 =================
 
-[Full source](https://github.com/fslaborg/XPlot/blob/master/docs/content/chart/plotly-bar-charts.fsx)
+[Full source and data](https://github.com/fslaborg/XPlot/blob/master/docs/content/chart/plotly-bar-charts.fsx)
 
 Basic Bar Chart
 ---------------
@@ -17,7 +17,9 @@ Basic Bar Chart
 (*** define-output: chart1 ***)
 let layout = Layout(title = "Basic Bar Chart")
 
-["giraffes", 20; "orangutans", 14; "monkeys", 23]
+let data = ["giraffes", 20; "orangutans", 14; "monkeys", 23]
+
+data
 |> Chart.Bar
 |> Chart.WithLayout layout
 |> Chart.WithHeight 500

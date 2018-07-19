@@ -3,6 +3,10 @@
 #r "XPlot.GoogleCharts.dll"
 open XPlot.GoogleCharts
 
+(**
+Google Bubble Chart
+===================
+*)
 let data =
     [
         "CAN", 80.66, 1.67, "North America", 33739900
@@ -14,11 +18,6 @@ let data =
         "USA", 78.09, 2.05, "North America", 307007000
     ]
 
-(**
-Google Bubble Chart
-===================
-*)
-(*** define-output:bubble ***) 
 let options =
     Options(
         title = "Correlation between life expectancy, fertility rate and population of some world countries (2010)",
@@ -27,6 +26,7 @@ let options =
         bubble = Bubble(textStyle = TextStyle(fontSize = 11))
     )
  
+(*** define-output:bubble ***) 
 data
 |> Chart.Bubble
 |> Chart.WithOptions options

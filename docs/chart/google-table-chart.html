@@ -13,9 +13,11 @@
     <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
     <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet" />
 
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
-        google.load("visualization", "1.1", { packages: ["corechart", "annotationchart", "calendar", "gauge", "geochart", "map", "sankey", "table", "timeline", "treemap"] })
+        google.charts.load('current', {
+            packages: ["corechart", "annotationchart", "calendar", "gauge", "geochart", "map", "sankey", "table", "timeline", "treemap"]
+        });
     </script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <link type="text/css" rel="stylesheet" href="/XPlot/content/style.css" />
@@ -52,15 +54,53 @@
             <div class="span9" id="main">
                 
 <h1><a name="Google-Table-Chart" class="anchor" href="#Google-Table-Chart">Google Table Chart</a></h1>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+<span class="l">11: </span>
+<span class="l">12: </span>
+<span class="l">13: </span>
+<span class="l">14: </span>
+<span class="l">15: </span>
+<span class="l">16: </span>
+<span class="l">17: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span class="i">salary</span> <span class="o">=</span>
+    [
+        <span class="s">&quot;Mike&quot;</span>, <span class="n">10000</span>
+        <span class="s">&quot;Jim&quot;</span>, <span class="n">8000</span>
+        <span class="s">&quot;Alice&quot;</span>, <span class="n">12500</span>
+        <span class="s">&quot;Bob&quot;</span>, <span class="n">7000</span>
+    ]
+    <span class="o">|&gt;</span> <span class="i">List</span><span class="o">.</span><span class="i">map</span> (<span class="k">fun</span> (<span class="i">x</span>, <span class="i">y</span>) <span class="k">-&gt;</span> <span class="i">x</span>, <span class="i">y</span> <span class="o">:&gt;</span> <span class="i">value</span>)
+ 
+<span class="k">let</span> <span class="i">fulltime</span> <span class="o">=</span>
+    [
+        <span class="s">&quot;Mike&quot;</span>, <span class="k">true</span>
+        <span class="s">&quot;Jim&quot;</span>, <span class="k">false</span>
+        <span class="s">&quot;Alice&quot;</span>, <span class="k">true</span>
+        <span class="s">&quot;Bob&quot;</span>, <span class="k">true</span>
+    ]
+    <span class="o">|&gt;</span> <span class="i">List</span><span class="o">.</span><span class="i">map</span> (<span class="k">fun</span> (<span class="i">x</span>, <span class="i">y</span>) <span class="k">-&gt;</span> <span class="i">x</span>, <span class="i">y</span> <span class="o">:&gt;</span> <span class="i">value</span>)
+</code></pre></td>
+</tr>
+</table>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
 <span class="l">4: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp">[<span onmouseout="hideTip(event, 'fs3', 19)" onmouseover="showTip(event, 'fs3', 19)" class="i">salary</span>; <span onmouseout="hideTip(event, 'fs9', 20)" onmouseover="showTip(event, 'fs9', 20)" class="i">fulltime</span>]        
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs11', 21)" onmouseover="showTip(event, 'fs11', 21)" class="t">Chart</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs12', 22)" onmouseover="showTip(event, 'fs12', 22)" class="f">Table</span>
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs11', 23)" onmouseover="showTip(event, 'fs11', 23)" class="t">Chart</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs13', 24)" onmouseover="showTip(event, 'fs13', 24)" class="f">WithOptions</span>(<span onmouseout="hideTip(event, 'fs14', 25)" onmouseover="showTip(event, 'fs14', 25)" class="t">Options</span>(<span class="i">showRowNumber</span> <span class="o">=</span> <span class="k">true</span>))
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs11', 26)" onmouseover="showTip(event, 'fs11', 26)" class="t">Chart</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs15', 27)" onmouseover="showTip(event, 'fs15', 27)" class="f">WithLabels</span> [<span class="s">&quot;Name&quot;</span>; <span class="s">&quot;Salary&quot;</span>; <span class="s">&quot;Full Time Employee&quot;</span>]
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp">[<span class="i">salary</span>; <span class="i">fulltime</span>]        
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">Table</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithOptions</span>(<span class="i">Options</span>(<span class="i">showRowNumber</span> <span class="o">=</span> <span class="k">true</span>))
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithLabels</span> [<span class="s">&quot;Name&quot;</span>; <span class="s">&quot;Salary&quot;</span>; <span class="s">&quot;Full Time Employee&quot;</span>]
 </code></pre></td>
 </tr>
 </table>
@@ -76,27 +116,12 @@
 
                 var options = {"legend":{"position":"right"},"showRowNumber":true} 
 
-                var chart = new google.visualization.Table(document.getElementById('d3400ffe-c618-49af-ac5d-07b3cec3acfa'));
+                var chart = new google.visualization.Table(document.getElementById('71a9738c-7769-4405-9e11-4f7a4e4365d1'));
                 chart.draw(data, options);
             }
 </script>
-<div id="d3400ffe-c618-49af-ac5d-07b3cec3acfa" style="width: 700px; height: 400px;"></div>
+<div id="71a9738c-7769-4405-9e11-4f7a4e4365d1" style="width: 700px; height: 400px;"></div>
 
-<div class="tip" id="fs1">namespace XPlot</div>
-<div class="tip" id="fs2">namespace XPlot.GoogleCharts</div>
-<div class="tip" id="fs3">val salary : (string * value) list<br /><br />Full name: Google-table-chart.salary</div>
-<div class="tip" id="fs4">Multiple items<br />module List<br /><br />from Microsoft.FSharp.Collections<br /><br />--------------------<br />type List&lt;&#39;T&gt; =<br />&#160;&#160;| ( [] )<br />&#160;&#160;| ( :: ) of Head: &#39;T * Tail: &#39;T list<br />&#160;&#160;interface IEnumerable<br />&#160;&#160;interface IEnumerable&lt;&#39;T&gt;<br />&#160;&#160;member GetSlice : startIndex:int option * endIndex:int option -&gt; &#39;T list<br />&#160;&#160;member Head : &#39;T<br />&#160;&#160;member IsEmpty : bool<br />&#160;&#160;member Item : index:int -&gt; &#39;T with get<br />&#160;&#160;member Length : int<br />&#160;&#160;member Tail : &#39;T list<br />&#160;&#160;static member Cons : head:&#39;T * tail:&#39;T list -&gt; &#39;T list<br />&#160;&#160;static member Empty : &#39;T list<br /><br />Full name: Microsoft.FSharp.Collections.List&lt;_&gt;</div>
-<div class="tip" id="fs5">val map : mapping:(&#39;T -&gt; &#39;U) -&gt; list:&#39;T list -&gt; &#39;U list<br /><br />Full name: Microsoft.FSharp.Collections.List.map</div>
-<div class="tip" id="fs6">val x : string</div>
-<div class="tip" id="fs7">val y : int</div>
-<div class="tip" id="fs8">type value = System.IConvertible<br /><br />Full name: XPlot.GoogleCharts.value</div>
-<div class="tip" id="fs9">val fulltime : (string * value) list<br /><br />Full name: Google-table-chart.fulltime</div>
-<div class="tip" id="fs10">val y : bool</div>
-<div class="tip" id="fs11">type Chart =<br />&#160;&#160;static member Annotation : data:seq&lt;#seq&lt;DateTime * &#39;V * string * string&gt;&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart (requires &#39;V :&gt; value)<br />&#160;&#160;static member Annotation : data:seq&lt;DateTime * #value * string * string&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart<br />&#160;&#160;static member Area : data:seq&lt;#seq&lt;&#39;K * &#39;V&gt;&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart (requires &#39;K :&gt; key and &#39;V :&gt; value)<br />&#160;&#160;static member Area : data:seq&lt;#key * #value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart<br />&#160;&#160;static member Area : data:seq&lt;#value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart<br />&#160;&#160;static member Bar : data:seq&lt;#seq&lt;&#39;K * &#39;V&gt;&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart (requires &#39;K :&gt; key and &#39;V :&gt; value)<br />&#160;&#160;static member Bar : data:seq&lt;#key * #value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart<br />&#160;&#160;static member Bar : data:seq&lt;#value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart<br />&#160;&#160;static member Bubble : data:seq&lt;string * #value * #value * #value * #value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart<br />&#160;&#160;static member Bubble : data:seq&lt;string * #value * #value * #value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart<br />&#160;&#160;...<br /><br />Full name: XPlot.GoogleCharts.Chart</div>
-<div class="tip" id="fs12">static member Chart.Table : data:seq&lt;#seq&lt;&#39;K * &#39;V&gt;&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart (requires &#39;K :&gt; key and &#39;V :&gt; value)<br />static member Chart.Table : data:seq&lt;#key * #value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart</div>
-<div class="tip" id="fs13">static member Chart.WithOptions : options:Options -&gt; chart:GoogleChart -&gt; GoogleChart</div>
-<div class="tip" id="fs14">Multiple items<br />type Options =<br />&#160;&#160;new : unit -&gt; Options<br />&#160;&#160;member ShouldSerializeaggregationTarget : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeallValuesSuffix : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeallowHtml : unit -&gt; bool<br />&#160;&#160;member ShouldSerializealternatingRowStyle : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeanimation : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeannotations : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeannotationsWidth : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeareaOpacity : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeavoidOverlappingGridLines : unit -&gt; bool<br />&#160;&#160;...<br /><br />Full name: XPlot.GoogleCharts.Configuration.Options<br /><br />--------------------<br />new : unit -&gt; Options</div>
-<div class="tip" id="fs15">static member Chart.WithLabels : labels:seq&lt;string&gt; -&gt; chart:GoogleChart -&gt; GoogleChart</div>
 
             </div>
             <div class="span3">
@@ -150,6 +175,9 @@
                     <li><a href="/XPlot/chart/plotly-3d-scatter-plots.html">3D Scatter Plots</a></li>
                     <li><a href="/XPlot/chart/plotly-3d-surface-plots.html">3D Surface Plots</a></li>
                     <li><a href="/XPlot/chart/plotly-3d-line-plots.html">3D Line Plots</a></li>
+
+                    <li class="nav-header"><a href="/XPlot/d3.html">D3 Charts</a></li>
+                    <li><a href="/XPlot/chart/d3-network.html">Network</a></li>
 
                     <li class="nav-header">Documentation</li>
                     <li><a href="/XPlot/reference/index.html">API Reference</a></li>

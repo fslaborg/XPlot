@@ -3,6 +3,11 @@
 #r "XPlot.GoogleCharts.dll"
 open XPlot.GoogleCharts
 
+(**
+Google Stepped Area Chart
+=========================
+*)
+(*** define-output:steparea ***) 
 let data =
     [
         [
@@ -19,11 +24,6 @@ let data =
         ]
     ]
 
-(**
-Google Stepped Area Chart
-=========================
-*)
-(*** define-output:steparea ***) 
 let options =
     Options(
         title = "The decline of 'The 39 Steps'",

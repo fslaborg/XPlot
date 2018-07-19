@@ -55,8 +55,8 @@ simpler charts.
 ### Google Charts example
 
 The following example uses the Google Charts library to create a combo chart showing coffee production
-in Bolivia, Ecuador and Madagascar (as bar plots), together with the average visualized as a line chart:
-*)
+in Bolivia, Ecuador and Madagascar (as bar plots), together with the average visualized as a line chart
+([full source and data](https://github.com/fslaborg/XPlot/blob/master/docs/content/index.fsx)]): *)
 (*** define-output:combochart ***) 
 let series = [ "bars"; "bars"; "bars"; "lines" ]
 let inputs = [ Bolivia; Ecuador; Madagascar; Average ]
@@ -64,10 +64,9 @@ let inputs = [ Bolivia; Ecuador; Madagascar; Average ]
 inputs
 |> Chart.Combo
 |> Chart.WithOptions 
-     (Options(title = "Coffee Production", series = 
-        [| for typ in series -> Series(typ) |]))
-|> Chart.WithLabels 
-     ["Bolivia"; "Ecuador"; "Madagascar"; "Average"]
+     (Options(title = "Coffee Production", 
+              series = [| for typ in series -> Series(typ) |]))
+|> Chart.WithLabels ["Bolivia"; "Ecuador"; "Madagascar"; "Average"]
 |> Chart.WithLegend true
 |> Chart.WithSize (600, 250)
 (*** include-it:combochart ***)

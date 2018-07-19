@@ -3,12 +3,12 @@
 #r "XPlot.GoogleCharts.dll"
 open XPlot.GoogleCharts
 
-let data = ["Memory", 80; "CPU", 55; "Network", 68]
-
 (**
 Google Gauge Chart
 ==================
 *)
+let data = ["Memory", 80; "CPU", 55; "Network", 68]
+
 (*** define-output:gauge ***)  
 let options =
     Options(
