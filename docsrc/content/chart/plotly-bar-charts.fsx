@@ -8,7 +8,7 @@ open XPlot.Plotly
 Plotly Bar Charts
 =================
 
-[Full source and data](https://github.com/fslaborg/XPlot/blob/master/docs/content/chart/plotly-bar-charts.fsx)
+[Full source and data](https://github.com/fslaborg/XPlot/blob/master/docsrc/content/chart/plotly-bar-charts.fsx)
 
 Basic Bar Chart
 ---------------

@@ -39,7 +39,7 @@ let data =
 Google Treemap Chart
 ====================
 
-[Full source and data](https://github.com/fslaborg/XPlot/blob/master/docs/content/chart/google-treemap-chart.fsx)
+[Full source and data](https://github.com/fslaborg/XPlot/blob/master/docsrc/content/chart/google-treemap-chart.fsx)
 
 *)
 (*** define-output:tree ***) 

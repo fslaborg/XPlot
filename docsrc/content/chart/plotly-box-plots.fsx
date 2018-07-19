@@ -19,7 +19,7 @@ let y1 = randn 50 -1.2 3.44
 Plotly Box Plots
 ================
 
-[Full source and data](https://github.com/fslaborg/XPlot/blob/master/docs/content/chart/plotly-box-plots.fsx)
+[Full source and data](https://github.com/fslaborg/XPlot/blob/master/docsrc/content/chart/plotly-box-plots.fsx)
 
 Basic Box Plot
 --------------

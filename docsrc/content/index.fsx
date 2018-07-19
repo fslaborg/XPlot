@@ -56,7 +56,7 @@ simpler charts.
 
 The following example uses the Google Charts library to create a combo chart showing coffee production
 in Bolivia, Ecuador and Madagascar (as bar plots), together with the average visualized as a line chart
-([full source and data](https://github.com/fslaborg/XPlot/blob/master/docs/content/index.fsx)]): *)
+([full source and data](https://github.com/fslaborg/XPlot/blob/master/docsrc/content/index.fsx)]): *)
 (*** define-output:combochart ***) 
 let series = [ "bars"; "bars"; "bars"; "lines" ]
 let inputs = [ Bolivia; Ecuador; Madagascar; Average ]
