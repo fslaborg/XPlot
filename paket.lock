@@ -4,7 +4,7 @@ NUGET
     Deedle (1.2.5)
     dotnet-fake (5.2) - clitool: true
     FAKE (5.2)
-    FSharp.Core (4.5)
+    FSharp.Core (4.5.1)
     Google.DataTable.Net.Wrapper (3.1.2)
     MathNet.Numerics (4.5.1)
     Newtonsoft.Json (11.0.2)
@@ -144,7 +144,7 @@ NUGET
     FSharp.Control.Reactive (4.1) - restriction: || (>= net46) (>= netstandard2.0)
       FSharp.Core (>= 4.2.3) - restriction: || (>= net46) (>= netstandard2.0)
       System.Reactive (>= 4.0) - restriction: || (>= net46) (>= netstandard2.0)
-    FSharp.Core (4.5) - restriction: || (>= net46) (>= netstandard1.6)
+    FSharp.Core (4.5.1) - restriction: || (>= net46) (>= netstandard1.6)
     Microsoft.CSharp (4.5) - restriction: || (&& (< net20) (>= net46) (< netstandard1.3)) (&& (< net20) (>= net46) (< netstandard2.0)) (&& (< net20) (< netstandard1.3) (>= netstandard1.6)) (&& (< net20) (>= netstandard1.6) (< netstandard2.0))
       NETStandard.Library (>= 1.6.1) - restriction: || (>= dnxcore50) (&& (< monoandroid) (< monotouch) (< net45) (>= netstandard1.3) (< netstandard2.0) (< win8) (< wpa81) (< xamarinios) (< xamarinmac) (< xamarintvos) (< xamarinwatchos)) (&& (< monoandroid) (< net45) (>= netstandard1.0) (< netstandard1.3) (< win8) (< wp8) (< wpa81))
       System.Dynamic.Runtime (>= 4.3) - restriction: || (>= dnxcore50) (&& (< monoandroid) (< monotouch) (< net45) (>= netstandard1.3) (< netstandard2.0) (< win8) (< wpa81) (< xamarinios) (< xamarinmac) (< xamarintvos) (< xamarinwatchos)) (&& (< monoandroid) (< net45) (>= netstandard1.0) (< netstandard1.3) (< win8) (< wp8) (< wpa81))
@@ -882,7 +882,7 @@ NUGET
       System.Runtime.Loader (>= 4.0) - restriction: && (< net45) (>= netstandard2.0)
       System.Security.Cryptography.Algorithms (>= 4.3) - restriction: && (< net45) (>= netstandard2.0)
       System.ValueTuple (>= 4.4) - restriction: >= net45
-    FSharp.Core (4.5) - restriction: || (>= net45) (>= netstandard2.0)
+    FSharp.Core (4.5.1) - restriction: || (>= net45) (>= netstandard2.0)
     Microsoft.AspNet.Razor (3.2.6)
     Microsoft.DiaSymReader (1.3) - restriction: || (>= net45) (>= netstandard2.0)
       NETStandard.Library (>= 1.6.1) - restriction: && (< net20) (>= netstandard1.1)
