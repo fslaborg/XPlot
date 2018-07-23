@@ -55,7 +55,7 @@ type PlotlyChart() =
         | Some names ->            
             traces
             |> Seq.mapi (fun i trace ->
-                trace.name <- Seq.nth i names
+                trace.name <- Seq.item i names
                 trace)
         |> JsonConvert.SerializeObject
 
