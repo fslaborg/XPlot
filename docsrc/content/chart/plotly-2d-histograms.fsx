@@ -46,7 +46,7 @@ let y' = Seq.concat [y0; y1]
 Plotly 2D Histograms
 ====================
 
-[Full source](https://github.com/fslaborg/XPlot/blob/master/docs/content/chart/plotly-2d-histograms.fsx)
+[Full source and data](https://github.com/fslaborg/XPlot/blob/master/docsrc/content/chart/plotly-2d-histograms.fsx)
 
 2D Histogram of a Bivariate Normal Distribution
 -----------------------------------------------

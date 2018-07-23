@@ -7,7 +7,6 @@ open XPlot.GoogleCharts
 Google Candlestick Chart
 ========================
 *)
-(*** define-output:candle ***) 
 let data =
     [
         "Mon", 20, 28, 38, 45
@@ -17,5 +16,6 @@ let data =
         "Fri", 68, 66, 22, 15        
     ]
         
+(*** define-output:candle ***) 
 Chart.Candlestick data
 (*** include-it:candle ***)

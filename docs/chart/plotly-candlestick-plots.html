@@ -13,9 +13,11 @@
     <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
     <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet" />
 
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
-        google.load("visualization", "1.1", { packages: ["corechart", "annotationchart", "calendar", "gauge", "geochart", "map", "sankey", "table", "timeline", "treemap"] })
+        google.charts.load('current', {
+            packages: ["corechart", "annotationchart", "calendar", "gauge", "geochart", "map", "sankey", "table", "timeline", "treemap"]
+        });
     </script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <link type="text/css" rel="stylesheet" href="/XPlot/content/style.css" />
@@ -30,19 +32,19 @@
         <div class="masthead">
             <ul class="nav nav-pills pull-right">
                 <li>
-                    <a href="http://fslab.org"><img height="16" width="16" src="http://fslab.org/img/thumbs/fslab.png" /> FsLab</a>
+                    <a href="https://fslab.org"><img height="16" width="16" src="https://fslab.org/img/thumbs/fslab.png" /> FsLab</a>
                 </li>
                 <li>
-                    <a href="http://fsharp.github.io/FSharp.Data"><img height="16" width="16" src="http://fslab.org/img/thumbs/fsharpdata.png" /> F# Data</a>
+                    <a href="http://fsharp.github.io/FSharp.Data"><img height="16" width="16" src="https://fslab.org/img/thumbs/fsharpdata.png" /> F# Data</a>
                 </li>
                 <li>
-                    <a href="http://bluemountaincapital.github.io/Deedle"><img height="16" width="16" src="http://fslab.org/img/thumbs/deedle.png" /> Deedle</a>
+                    <a href="https://fslab.org/Deedle"><img height="16" width="16" src="https://fslab.org/img/thumbs/deedle.png" /> Deedle</a>
                 </li>
                 <li>
-                    <a href="http://bluemountaincapital.github.io/FSharpRProvider"><img height="16" width="16" src="http://fslab.org/img/thumbs/rprovider.png" /> R Provider</a>
+                    <a href="https://fslab.org/RProvider"><img height="16" width="16" src="https://fslab.org/img/thumbs/rprovider.png" /> R Provider</a>
                 </li>
                 <li>
-                    <a href="http://numerics.mathdotnet.com/"><img height="16" width="16" src="http://fslab.org/img/thumbs/mathnet.png" /> Math.NET</a>
+                    <a href="http://numerics.mathdotnet.com/"><img height="16" width="16" src="https://fslab.org/img/thumbs/mathnet.png" /> Math.NET</a>
                 </li>
             </ul>
             <h3 class="muted"><a href="/XPlot/">XPlot</a></h3>
@@ -64,7 +66,7 @@
 <span class="l">10: </span>
 <span class="l">11: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="i">data</span> <span class="o">=</span>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span class="i">data</span> <span class="o">=</span>
     [
          <span class="c">// x,  o,  h,  l,  c   </span>
         <span class="s">&quot;Mon&quot;</span>, <span class="n">28</span>, <span class="n">45</span>, <span class="n">20</span>, <span class="n">38</span> 
@@ -74,15 +76,15 @@
         <span class="s">&quot;Fri&quot;</span>, <span class="n">66</span>, <span class="n">68</span>, <span class="n">15</span>, <span class="n">22</span>        
     ]
         
-<span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="t">Chart</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs6', 6)" onmouseover="showTip(event, 'fs6', 6)" class="f">Candlestick</span> <span onmouseout="hideTip(event, 'fs4', 7)" onmouseover="showTip(event, 'fs4', 7)" class="i">data</span>
+<span class="i">Chart</span><span class="o">.</span><span class="i">Candlestick</span> <span class="i">data</span>
 </code></pre></td>
 </tr>
 </table>
-<div id="ca788cea-5692-46c5-acbd-1fb8d3363b07" style="width: 900px; height: 500px;"></div>
+<div id="c0843b6a-6812-47e1-95f9-f378bea7c81d" style="width: 900px; height: 500px;"></div>
         <script>
             var data = [{"type":"candlestick","showlegend":false,"x":["Mon","Tue","Wed","Thu","Fri"],"open":[28,38,55,77,66],"high":[45,66,80,77,68],"low":[20,31,50,50,15],"close":[38,55,77,66,22]}];
             var layout = "";
-            Plotly.newPlot('ca788cea-5692-46c5-acbd-1fb8d3363b07', data, layout);
+            Plotly.newPlot('c0843b6a-6812-47e1-95f9-f378bea7c81d', data, layout);
         </script>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
@@ -115,57 +117,46 @@
 <span class="l">29: </span>
 <span class="l">30: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs7', 8)" onmouseover="showTip(event, 'fs7', 8)" class="i">``XAU USD D1``</span> <span class="o">=</span>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span class="i">``XAU USD D1``</span> <span class="o">=</span>
     [
                  <span class="c">// x,       o,       h,       l,       c   </span>
-        <span onmouseout="hideTip(event, 'fs8', 9)" onmouseover="showTip(event, 'fs8', 9)" class="t">DateTime</span>(<span class="n">2017</span>, <span class="n">12</span>, <span class="n">27</span>), <span class="n">1282.19</span>, <span class="n">1289.01</span>, <span class="n">1281.43</span>, <span class="n">1287.67</span>
-        <span onmouseout="hideTip(event, 'fs8', 10)" onmouseover="showTip(event, 'fs8', 10)" class="t">DateTime</span>(<span class="n">2017</span>, <span class="n">12</span>, <span class="n">26</span>), <span class="n">1278.35</span>, <span class="n">1283.80</span>, <span class="n">1277.22</span>, <span class="n">1282.18</span>
-        <span onmouseout="hideTip(event, 'fs8', 11)" onmouseover="showTip(event, 'fs8', 11)" class="t">DateTime</span>(<span class="n">2017</span>, <span class="n">12</span>, <span class="n">22</span>), <span class="n">1267.07</span>, <span class="n">1276.08</span>, <span class="n">1265.07</span>, <span class="n">1274.97</span>
-        <span onmouseout="hideTip(event, 'fs8', 12)" onmouseover="showTip(event, 'fs8', 12)" class="t">DateTime</span>(<span class="n">2017</span>, <span class="n">12</span>, <span class="n">21</span>), <span class="n">1266.53</span>, <span class="n">1268.99</span>, <span class="n">1263.20</span>, <span class="n">1267.05</span>
-        <span onmouseout="hideTip(event, 'fs8', 13)" onmouseover="showTip(event, 'fs8', 13)" class="t">DateTime</span>(<span class="n">2017</span>, <span class="n">12</span>, <span class="n">20</span>), <span class="n">1261.80</span>, <span class="n">1267.92</span>, <span class="n">1261.53</span>, <span class="n">1266.55</span>
-        <span onmouseout="hideTip(event, 'fs8', 14)" onmouseover="showTip(event, 'fs8', 14)" class="t">DateTime</span>(<span class="n">2017</span>, <span class="n">12</span>, <span class="n">19</span>), <span class="n">1261.54</span>, <span class="n">1265.32</span>, <span class="n">1259.34</span>, <span class="n">1261.78</span>
-        <span onmouseout="hideTip(event, 'fs8', 15)" onmouseover="showTip(event, 'fs8', 15)" class="t">DateTime</span>(<span class="n">2017</span>, <span class="n">12</span>, <span class="n">18</span>), <span class="n">1253.91</span>, <span class="n">1263.99</span>, <span class="n">1252.85</span>, <span class="n">1261.51</span>
-        <span onmouseout="hideTip(event, 'fs8', 16)" onmouseover="showTip(event, 'fs8', 16)" class="t">DateTime</span>(<span class="n">2017</span>, <span class="n">12</span>, <span class="n">15</span>), <span class="n">1253.62</span>, <span class="n">1261.88</span>, <span class="n">1253.18</span>, <span class="n">1255.20</span>
-        <span onmouseout="hideTip(event, 'fs8', 17)" onmouseover="showTip(event, 'fs8', 17)" class="t">DateTime</span>(<span class="n">2017</span>, <span class="n">12</span>, <span class="n">14</span>), <span class="n">1254.05</span>, <span class="n">1259.14</span>, <span class="n">1250.58</span>, <span class="n">1253.62</span>
-        <span onmouseout="hideTip(event, 'fs8', 18)" onmouseover="showTip(event, 'fs8', 18)" class="t">DateTime</span>(<span class="n">2017</span>, <span class="n">12</span>, <span class="n">13</span>), <span class="n">1243.58</span>, <span class="n">1256.93</span>, <span class="n">1240.36</span>, <span class="n">1254.09</span>
-        <span onmouseout="hideTip(event, 'fs8', 19)" onmouseover="showTip(event, 'fs8', 19)" class="t">DateTime</span>(<span class="n">2017</span>, <span class="n">12</span>, <span class="n">12</span>), <span class="n">1242.90</span>, <span class="n">1246.29</span>, <span class="n">1236.59</span>, <span class="n">1243.48</span>
-        <span onmouseout="hideTip(event, 'fs8', 20)" onmouseover="showTip(event, 'fs8', 20)" class="t">DateTime</span>(<span class="n">2017</span>, <span class="n">12</span>, <span class="n">11</span>), <span class="n">1248.63</span>, <span class="n">1251.59</span>, <span class="n">1240.89</span>, <span class="n">1242.91</span>
-        <span onmouseout="hideTip(event, 'fs8', 21)" onmouseover="showTip(event, 'fs8', 21)" class="t">DateTime</span>(<span class="n">2017</span>, <span class="n">12</span>, <span class="n">08</span>), <span class="n">1247.15</span>, <span class="n">1252.41</span>, <span class="n">1244.18</span>, <span class="n">1248.56</span>
-        <span onmouseout="hideTip(event, 'fs8', 22)" onmouseover="showTip(event, 'fs8', 22)" class="t">DateTime</span>(<span class="n">2017</span>, <span class="n">12</span>, <span class="n">07</span>), <span class="n">1264.03</span>, <span class="n">1264.17</span>, <span class="n">1244.06</span>, <span class="n">1247.16</span>
-        <span onmouseout="hideTip(event, 'fs8', 23)" onmouseover="showTip(event, 'fs8', 23)" class="t">DateTime</span>(<span class="n">2017</span>, <span class="n">12</span>, <span class="n">06</span>), <span class="n">1266.32</span>, <span class="n">1269.25</span>, <span class="n">1262.63</span>, <span class="n">1264.14</span>
-        <span onmouseout="hideTip(event, 'fs8', 24)" onmouseover="showTip(event, 'fs8', 24)" class="t">DateTime</span>(<span class="n">2017</span>, <span class="n">12</span>, <span class="n">05</span>), <span class="n">1276.61</span>, <span class="n">1277.06</span>, <span class="n">1261.11</span>, <span class="n">1266.24</span>
-        <span onmouseout="hideTip(event, 'fs8', 25)" onmouseover="showTip(event, 'fs8', 25)" class="t">DateTime</span>(<span class="n">2017</span>, <span class="n">12</span>, <span class="n">04</span>), <span class="n">1273.93</span>, <span class="n">1277.17</span>, <span class="n">1271.41</span>, <span class="n">1276.61</span>
-        <span onmouseout="hideTip(event, 'fs8', 26)" onmouseover="showTip(event, 'fs8', 26)" class="t">DateTime</span>(<span class="n">2017</span>, <span class="n">12</span>, <span class="n">01</span>), <span class="n">1275.00</span>, <span class="n">1289.24</span>, <span class="n">1271.72</span>, <span class="n">1280.40</span>
-        <span onmouseout="hideTip(event, 'fs8', 27)" onmouseover="showTip(event, 'fs8', 27)" class="t">DateTime</span>(<span class="n">2017</span>, <span class="n">11</span>, <span class="n">30</span>), <span class="n">1284.15</span>, <span class="n">1285.36</span>, <span class="n">1270.43</span>, <span class="n">1275.03</span>
-        <span onmouseout="hideTip(event, 'fs8', 28)" onmouseover="showTip(event, 'fs8', 28)" class="t">DateTime</span>(<span class="n">2017</span>, <span class="n">11</span>, <span class="n">29</span>), <span class="n">1294.07</span>, <span class="n">1296.75</span>, <span class="n">1282.18</span>, <span class="n">1284.16</span>
-        <span onmouseout="hideTip(event, 'fs8', 29)" onmouseover="showTip(event, 'fs8', 29)" class="t">DateTime</span>(<span class="n">2017</span>, <span class="n">11</span>, <span class="n">28</span>), <span class="n">1294.59</span>, <span class="n">1297.48</span>, <span class="n">1290.95</span>, <span class="n">1294.06</span>
-        <span onmouseout="hideTip(event, 'fs8', 30)" onmouseover="showTip(event, 'fs8', 30)" class="t">DateTime</span>(<span class="n">2017</span>, <span class="n">11</span>, <span class="n">27</span>), <span class="n">1287.47</span>, <span class="n">1299.29</span>, <span class="n">1286.80</span>, <span class="n">1294.56</span>
+        <span class="i">DateTime</span>(<span class="n">2017</span>, <span class="n">12</span>, <span class="n">27</span>), <span class="n">1282.19</span>, <span class="n">1289.01</span>, <span class="n">1281.43</span>, <span class="n">1287.67</span>
+        <span class="i">DateTime</span>(<span class="n">2017</span>, <span class="n">12</span>, <span class="n">26</span>), <span class="n">1278.35</span>, <span class="n">1283.80</span>, <span class="n">1277.22</span>, <span class="n">1282.18</span>
+        <span class="i">DateTime</span>(<span class="n">2017</span>, <span class="n">12</span>, <span class="n">22</span>), <span class="n">1267.07</span>, <span class="n">1276.08</span>, <span class="n">1265.07</span>, <span class="n">1274.97</span>
+        <span class="i">DateTime</span>(<span class="n">2017</span>, <span class="n">12</span>, <span class="n">21</span>), <span class="n">1266.53</span>, <span class="n">1268.99</span>, <span class="n">1263.20</span>, <span class="n">1267.05</span>
+        <span class="i">DateTime</span>(<span class="n">2017</span>, <span class="n">12</span>, <span class="n">20</span>), <span class="n">1261.80</span>, <span class="n">1267.92</span>, <span class="n">1261.53</span>, <span class="n">1266.55</span>
+        <span class="i">DateTime</span>(<span class="n">2017</span>, <span class="n">12</span>, <span class="n">19</span>), <span class="n">1261.54</span>, <span class="n">1265.32</span>, <span class="n">1259.34</span>, <span class="n">1261.78</span>
+        <span class="i">DateTime</span>(<span class="n">2017</span>, <span class="n">12</span>, <span class="n">18</span>), <span class="n">1253.91</span>, <span class="n">1263.99</span>, <span class="n">1252.85</span>, <span class="n">1261.51</span>
+        <span class="i">DateTime</span>(<span class="n">2017</span>, <span class="n">12</span>, <span class="n">15</span>), <span class="n">1253.62</span>, <span class="n">1261.88</span>, <span class="n">1253.18</span>, <span class="n">1255.20</span>
+        <span class="i">DateTime</span>(<span class="n">2017</span>, <span class="n">12</span>, <span class="n">14</span>), <span class="n">1254.05</span>, <span class="n">1259.14</span>, <span class="n">1250.58</span>, <span class="n">1253.62</span>
+        <span class="i">DateTime</span>(<span class="n">2017</span>, <span class="n">12</span>, <span class="n">13</span>), <span class="n">1243.58</span>, <span class="n">1256.93</span>, <span class="n">1240.36</span>, <span class="n">1254.09</span>
+        <span class="i">DateTime</span>(<span class="n">2017</span>, <span class="n">12</span>, <span class="n">12</span>), <span class="n">1242.90</span>, <span class="n">1246.29</span>, <span class="n">1236.59</span>, <span class="n">1243.48</span>
+        <span class="i">DateTime</span>(<span class="n">2017</span>, <span class="n">12</span>, <span class="n">11</span>), <span class="n">1248.63</span>, <span class="n">1251.59</span>, <span class="n">1240.89</span>, <span class="n">1242.91</span>
+        <span class="i">DateTime</span>(<span class="n">2017</span>, <span class="n">12</span>, <span class="n">08</span>), <span class="n">1247.15</span>, <span class="n">1252.41</span>, <span class="n">1244.18</span>, <span class="n">1248.56</span>
+        <span class="i">DateTime</span>(<span class="n">2017</span>, <span class="n">12</span>, <span class="n">07</span>), <span class="n">1264.03</span>, <span class="n">1264.17</span>, <span class="n">1244.06</span>, <span class="n">1247.16</span>
+        <span class="i">DateTime</span>(<span class="n">2017</span>, <span class="n">12</span>, <span class="n">06</span>), <span class="n">1266.32</span>, <span class="n">1269.25</span>, <span class="n">1262.63</span>, <span class="n">1264.14</span>
+        <span class="i">DateTime</span>(<span class="n">2017</span>, <span class="n">12</span>, <span class="n">05</span>), <span class="n">1276.61</span>, <span class="n">1277.06</span>, <span class="n">1261.11</span>, <span class="n">1266.24</span>
+        <span class="i">DateTime</span>(<span class="n">2017</span>, <span class="n">12</span>, <span class="n">04</span>), <span class="n">1273.93</span>, <span class="n">1277.17</span>, <span class="n">1271.41</span>, <span class="n">1276.61</span>
+        <span class="i">DateTime</span>(<span class="n">2017</span>, <span class="n">12</span>, <span class="n">01</span>), <span class="n">1275.00</span>, <span class="n">1289.24</span>, <span class="n">1271.72</span>, <span class="n">1280.40</span>
+        <span class="i">DateTime</span>(<span class="n">2017</span>, <span class="n">11</span>, <span class="n">30</span>), <span class="n">1284.15</span>, <span class="n">1285.36</span>, <span class="n">1270.43</span>, <span class="n">1275.03</span>
+        <span class="i">DateTime</span>(<span class="n">2017</span>, <span class="n">11</span>, <span class="n">29</span>), <span class="n">1294.07</span>, <span class="n">1296.75</span>, <span class="n">1282.18</span>, <span class="n">1284.16</span>
+        <span class="i">DateTime</span>(<span class="n">2017</span>, <span class="n">11</span>, <span class="n">28</span>), <span class="n">1294.59</span>, <span class="n">1297.48</span>, <span class="n">1290.95</span>, <span class="n">1294.06</span>
+        <span class="i">DateTime</span>(<span class="n">2017</span>, <span class="n">11</span>, <span class="n">27</span>), <span class="n">1287.47</span>, <span class="n">1299.29</span>, <span class="n">1286.80</span>, <span class="n">1294.56</span>
     ]
         
-<span onmouseout="hideTip(event, 'fs7', 31)" onmouseover="showTip(event, 'fs7', 31)" class="i">``XAU USD D1``</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs9', 32)" onmouseover="showTip(event, 'fs9', 32)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs10', 33)" onmouseover="showTip(event, 'fs10', 33)" class="f">sortBy</span> (<span class="k">fun</span> (<span onmouseout="hideTip(event, 'fs11', 34)" onmouseover="showTip(event, 'fs11', 34)" class="i">x</span>,_,_,_,_) <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs11', 35)" onmouseover="showTip(event, 'fs11', 35)" class="i">x</span>)
-               <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs5', 36)" onmouseover="showTip(event, 'fs5', 36)" class="t">Chart</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs6', 37)" onmouseover="showTip(event, 'fs6', 37)" class="f">Candlestick</span>
+<span class="i">``XAU USD D1``</span> <span class="o">|&gt;</span> <span class="i">Seq</span><span class="o">.</span><span class="i">sortBy</span> (<span class="k">fun</span> (<span class="i">x</span>,_,_,_,_) <span class="k">-&gt;</span> <span class="i">x</span>)
+               <span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">Candlestick</span>
                
 </code></pre></td>
 </tr>
 </table>
-<div id="1970ad5a-1d03-4b3d-a8a6-a20070cee7cb" style="width: 900px; height: 500px;"></div>
+<div id="93e1c458-323d-4f30-8277-b414975ea48a" style="width: 900px; height: 500px;"></div>
         <script>
             var data = [{"type":"candlestick","showlegend":false,"x":["2017-11-27T00:00:00","2017-11-28T00:00:00","2017-11-29T00:00:00","2017-11-30T00:00:00","2017-12-01T00:00:00","2017-12-04T00:00:00","2017-12-05T00:00:00","2017-12-06T00:00:00","2017-12-07T00:00:00","2017-12-08T00:00:00","2017-12-11T00:00:00","2017-12-12T00:00:00","2017-12-13T00:00:00","2017-12-14T00:00:00","2017-12-15T00:00:00","2017-12-18T00:00:00","2017-12-19T00:00:00","2017-12-20T00:00:00","2017-12-21T00:00:00","2017-12-22T00:00:00","2017-12-26T00:00:00","2017-12-27T00:00:00"],"open":[1287.47,1294.59,1294.07,1284.15,1275.0,1273.93,1276.61,1266.32,1264.03,1247.15,1248.63,1242.9,1243.58,1254.05,1253.62,1253.91,1261.54,1261.8,1266.53,1267.07,1278.35,1282.19],"high":[1299.29,1297.48,1296.75,1285.36,1289.24,1277.17,1277.06,1269.25,1264.17,1252.41,1251.59,1246.29,1256.93,1259.14,1261.88,1263.99,1265.32,1267.92,1268.99,1276.08,1283.8,1289.01],"low":[1286.8,1290.95,1282.18,1270.43,1271.72,1271.41,1261.11,1262.63,1244.06,1244.18,1240.89,1236.59,1240.36,1250.58,1253.18,1252.85,1259.34,1261.53,1263.2,1265.07,1277.22,1281.43],"close":[1294.56,1294.06,1284.16,1275.03,1280.4,1276.61,1266.24,1264.14,1247.16,1248.56,1242.91,1243.48,1254.09,1253.62,1255.2,1261.51,1261.78,1266.55,1267.05,1274.97,1282.18,1287.67]}];
             var layout = "";
-            Plotly.newPlot('1970ad5a-1d03-4b3d-a8a6-a20070cee7cb', data, layout);
+            Plotly.newPlot('93e1c458-323d-4f30-8277-b414975ea48a', data, layout);
         </script>
 
-<div class="tip" id="fs1">namespace XPlot</div>
-<div class="tip" id="fs2">namespace XPlot.Plotly</div>
-<div class="tip" id="fs3">namespace System</div>
-<div class="tip" id="fs4">val data : (string * int * int * int * int) list<br /><br />Full name: Plotly-candlestick-plots.data</div>
-<div class="tip" id="fs5">type Chart =<br />&#160;&#160;static member Area : data:seq&lt;#seq&lt;&#39;a1 * &#39;a2&gt;&gt; -&gt; PlotlyChart (requires &#39;a1 :&gt; key and &#39;a2 :&gt; value)<br />&#160;&#160;static member Area : data:seq&lt;#key * #value&gt; -&gt; PlotlyChart<br />&#160;&#160;static member Area : data:seq&lt;#value&gt; -&gt; PlotlyChart<br />&#160;&#160;static member Bar : data:seq&lt;#seq&lt;&#39;a1 * &#39;a2&gt;&gt; -&gt; PlotlyChart (requires &#39;a1 :&gt; key and &#39;a2 :&gt; value)<br />&#160;&#160;static member Bar : data:seq&lt;#key * #value&gt; -&gt; PlotlyChart<br />&#160;&#160;static member Bar : data:seq&lt;#value&gt; -&gt; PlotlyChart<br />&#160;&#160;static member Bubble : data:seq&lt;#key * #value * #value&gt; -&gt; PlotlyChart<br />&#160;&#160;static member Candlestick : data:seq&lt;#key * #value * #value * #value * #value&gt; -&gt; PlotlyChart<br />&#160;&#160;static member Column : data:seq&lt;#seq&lt;&#39;a1 * &#39;a2&gt;&gt; -&gt; PlotlyChart (requires &#39;a1 :&gt; key and &#39;a2 :&gt; value)<br />&#160;&#160;static member Column : data:seq&lt;#key * #value&gt; -&gt; PlotlyChart<br />&#160;&#160;...<br /><br />Full name: XPlot.Plotly.Chart</div>
-<div class="tip" id="fs6">static member Chart.Candlestick : data:seq&lt;#key * #value * #value * #value * #value&gt; -&gt; PlotlyChart</div>
-<div class="tip" id="fs7">val ( XAU USD D1 ) : (DateTime * float * float * float * float) list<br /><br />Full name: Plotly-candlestick-plots.( XAU USD D1 )</div>
-<div class="tip" id="fs8">Multiple items<br />type DateTime =<br />&#160;&#160;struct<br />&#160;&#160;&#160;&#160;new : ticks:int64 -&gt; DateTime + 10 overloads<br />&#160;&#160;&#160;&#160;member Add : value:TimeSpan -&gt; DateTime<br />&#160;&#160;&#160;&#160;member AddDays : value:float -&gt; DateTime<br />&#160;&#160;&#160;&#160;member AddHours : value:float -&gt; DateTime<br />&#160;&#160;&#160;&#160;member AddMilliseconds : value:float -&gt; DateTime<br />&#160;&#160;&#160;&#160;member AddMinutes : value:float -&gt; DateTime<br />&#160;&#160;&#160;&#160;member AddMonths : months:int -&gt; DateTime<br />&#160;&#160;&#160;&#160;member AddSeconds : value:float -&gt; DateTime<br />&#160;&#160;&#160;&#160;member AddTicks : value:int64 -&gt; DateTime<br />&#160;&#160;&#160;&#160;member AddYears : value:int -&gt; DateTime<br />&#160;&#160;&#160;&#160;...<br />&#160;&#160;end<br /><br />Full name: System.DateTime<br /><br />--------------------<br />DateTime()<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(ticks: int64) : unit<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(ticks: int64, kind: DateTimeKind) : unit<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int) : unit<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int, calendar: Globalization.Calendar) : unit<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int, hour: int, minute: int, second: int) : unit<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int, hour: int, minute: int, second: int, kind: DateTimeKind) : unit<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int, hour: int, minute: int, second: int, calendar: Globalization.Calendar) : unit<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int, hour: int, minute: int, second: int, millisecond: int) : unit<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int, hour: int, minute: int, second: int, millisecond: int, kind: DateTimeKind) : unit<br />&#160;&#160;&#160;<em>(+0 other overloads)</em></div>
-<div class="tip" id="fs9">module Seq<br /><br />from Microsoft.FSharp.Collections</div>
-<div class="tip" id="fs10">val sortBy : projection:(&#39;T -&gt; &#39;Key) -&gt; source:seq&lt;&#39;T&gt; -&gt; seq&lt;&#39;T&gt; (requires comparison)<br /><br />Full name: Microsoft.FSharp.Collections.Seq.sortBy</div>
-<div class="tip" id="fs11">val x : DateTime</div>
 
             </div>
             <div class="span3">
@@ -219,6 +210,9 @@
                     <li><a href="/XPlot/chart/plotly-3d-scatter-plots.html">3D Scatter Plots</a></li>
                     <li><a href="/XPlot/chart/plotly-3d-surface-plots.html">3D Surface Plots</a></li>
                     <li><a href="/XPlot/chart/plotly-3d-line-plots.html">3D Line Plots</a></li>
+
+                    <li class="nav-header"><a href="/XPlot/d3.html">D3 Charts</a></li>
+                    <li><a href="/XPlot/chart/d3-network.html">Network</a></li>
 
                     <li class="nav-header">Documentation</li>
                     <li><a href="/XPlot/reference/index.html">API Reference</a></li>

@@ -13,9 +13,11 @@
     <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
     <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet" />
 
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
-        google.load("visualization", "1.1", { packages: ["corechart", "annotationchart", "calendar", "gauge", "geochart", "map", "sankey", "table", "timeline", "treemap"] })
+        google.charts.load('current', {
+            packages: ["corechart", "annotationchart", "calendar", "gauge", "geochart", "map", "sankey", "table", "timeline", "treemap"]
+        });
     </script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <link type="text/css" rel="stylesheet" href="/XPlot/content/style.css" />
@@ -30,19 +32,19 @@
         <div class="masthead">
             <ul class="nav nav-pills pull-right">
                 <li>
-                    <a href="http://fslab.org"><img height="16" width="16" src="http://fslab.org/img/thumbs/fslab.png" /> FsLab</a>
+                    <a href="https://fslab.org"><img height="16" width="16" src="https://fslab.org/img/thumbs/fslab.png" /> FsLab</a>
                 </li>
                 <li>
-                    <a href="http://fsharp.github.io/FSharp.Data"><img height="16" width="16" src="http://fslab.org/img/thumbs/fsharpdata.png" /> F# Data</a>
+                    <a href="http://fsharp.github.io/FSharp.Data"><img height="16" width="16" src="https://fslab.org/img/thumbs/fsharpdata.png" /> F# Data</a>
                 </li>
                 <li>
-                    <a href="http://bluemountaincapital.github.io/Deedle"><img height="16" width="16" src="http://fslab.org/img/thumbs/deedle.png" /> Deedle</a>
+                    <a href="https://fslab.org/Deedle"><img height="16" width="16" src="https://fslab.org/img/thumbs/deedle.png" /> Deedle</a>
                 </li>
                 <li>
-                    <a href="http://bluemountaincapital.github.io/FSharpRProvider"><img height="16" width="16" src="http://fslab.org/img/thumbs/rprovider.png" /> R Provider</a>
+                    <a href="https://fslab.org/RProvider"><img height="16" width="16" src="https://fslab.org/img/thumbs/rprovider.png" /> R Provider</a>
                 </li>
                 <li>
-                    <a href="http://numerics.mathdotnet.com/"><img height="16" width="16" src="http://fslab.org/img/thumbs/mathnet.png" /> Math.NET</a>
+                    <a href="http://numerics.mathdotnet.com/"><img height="16" width="16" src="https://fslab.org/img/thumbs/mathnet.png" /> Math.NET</a>
                 </li>
             </ul>
             <h3 class="muted"><a href="/XPlot/">XPlot</a></h3>
@@ -52,7 +54,7 @@
             <div class="span9" id="main">
                 
 <h1><a name="Plotly-Polar-Charts" class="anchor" href="#Plotly-Polar-Charts">Plotly Polar Charts</a></h1>
-<p><a href="https://github.com/fslaborg/XPlot/blob/master/docs/content/chart/plotly-polar-charts.fsx">Full source</a></p>
+<p><a href="https://github.com/fslaborg/XPlot/blob/master/docsrc/content/chart/plotly-polar-charts.fsx">Full source and data</a></p>
 <h2><a name="Polar-Line-Chart" class="anchor" href="#Polar-Line-Chart">Polar Line Chart</a></h2>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
@@ -151,76 +153,76 @@
 <span class="l">95: </span>
 <span class="l">96: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs25', 25)" onmouseover="showTip(event, 'fs25', 25)" class="i">lineTrace1</span> <span class="o">=</span>
-    <span onmouseout="hideTip(event, 'fs26', 26)" onmouseover="showTip(event, 'fs26', 26)" class="t">Scatter</span>(
-        <span onmouseout="hideTip(event, 'fs27', 27)" onmouseover="showTip(event, 'fs27', 27)" class="i">r</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs3', 28)" onmouseover="showTip(event, 'fs3', 28)" class="i">r1</span>,
-        <span onmouseout="hideTip(event, 'fs28', 29)" onmouseover="showTip(event, 'fs28', 29)" class="i">t</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 30)" onmouseover="showTip(event, 'fs4', 30)" class="i">t1</span>,
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span class="i">lineTrace1</span> <span class="o">=</span>
+    <span class="i">Scatter</span>(
+        <span class="i">r</span> <span class="o">=</span> <span class="i">r1</span>,
+        <span class="i">t</span> <span class="o">=</span> <span class="i">t1</span>,
         <span class="i">mode</span> <span class="o">=</span> <span class="s">&quot;lines&quot;</span>,
         <span class="i">name</span> <span class="o">=</span> <span class="s">&quot;Figure8&quot;</span>,
         <span class="i">marker</span> <span class="o">=</span>
-            <span onmouseout="hideTip(event, 'fs29', 31)" onmouseover="showTip(event, 'fs29', 31)" class="t">Marker</span>(
+            <span class="i">Marker</span>(
                 <span class="i">color</span> <span class="o">=</span> <span class="s">&quot;none&quot;</span>,
-                <span class="i">line</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs30', 32)" onmouseover="showTip(event, 'fs30', 32)" class="t">Line</span>(<span class="i">color</span> <span class="o">=</span> <span class="s">&quot;peru&quot;</span>)
+                <span class="i">line</span> <span class="o">=</span> <span class="i">Line</span>(<span class="i">color</span> <span class="o">=</span> <span class="s">&quot;peru&quot;</span>)
             )
     )
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs31', 33)" onmouseover="showTip(event, 'fs31', 33)" class="i">lineTrace2</span> <span class="o">=</span>
-    <span onmouseout="hideTip(event, 'fs26', 34)" onmouseover="showTip(event, 'fs26', 34)" class="t">Scatter</span>(
-        <span onmouseout="hideTip(event, 'fs27', 35)" onmouseover="showTip(event, 'fs27', 35)" class="i">r</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs5', 36)" onmouseover="showTip(event, 'fs5', 36)" class="i">r2</span>,
-        <span onmouseout="hideTip(event, 'fs28', 37)" onmouseover="showTip(event, 'fs28', 37)" class="i">t</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 38)" onmouseover="showTip(event, 'fs6', 38)" class="i">t2</span>,
+<span class="k">let</span> <span class="i">lineTrace2</span> <span class="o">=</span>
+    <span class="i">Scatter</span>(
+        <span class="i">r</span> <span class="o">=</span> <span class="i">r2</span>,
+        <span class="i">t</span> <span class="o">=</span> <span class="i">t2</span>,
         <span class="i">mode</span> <span class="o">=</span> <span class="s">&quot;lines&quot;</span>,
         <span class="i">name</span> <span class="o">=</span> <span class="s">&quot;Cardioid&quot;</span>,
         <span class="i">marker</span> <span class="o">=</span>
-            <span onmouseout="hideTip(event, 'fs29', 39)" onmouseover="showTip(event, 'fs29', 39)" class="t">Marker</span>(
+            <span class="i">Marker</span>(
                 <span class="i">color</span> <span class="o">=</span> <span class="s">&quot;none&quot;</span>,
-                <span class="i">line</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs30', 40)" onmouseover="showTip(event, 'fs30', 40)" class="t">Line</span>(<span class="i">color</span> <span class="o">=</span> <span class="s">&quot;darkviolet&quot;</span>)
+                <span class="i">line</span> <span class="o">=</span> <span class="i">Line</span>(<span class="i">color</span> <span class="o">=</span> <span class="s">&quot;darkviolet&quot;</span>)
             )
     )
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs32', 41)" onmouseover="showTip(event, 'fs32', 41)" class="i">lineTrace3</span> <span class="o">=</span>
-    <span onmouseout="hideTip(event, 'fs26', 42)" onmouseover="showTip(event, 'fs26', 42)" class="t">Scatter</span>(
-        <span onmouseout="hideTip(event, 'fs27', 43)" onmouseover="showTip(event, 'fs27', 43)" class="i">r</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs7', 44)" onmouseover="showTip(event, 'fs7', 44)" class="i">r3</span>,
-        <span onmouseout="hideTip(event, 'fs28', 45)" onmouseover="showTip(event, 'fs28', 45)" class="i">t</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs8', 46)" onmouseover="showTip(event, 'fs8', 46)" class="i">t3</span>,
+<span class="k">let</span> <span class="i">lineTrace3</span> <span class="o">=</span>
+    <span class="i">Scatter</span>(
+        <span class="i">r</span> <span class="o">=</span> <span class="i">r3</span>,
+        <span class="i">t</span> <span class="o">=</span> <span class="i">t3</span>,
         <span class="i">mode</span> <span class="o">=</span> <span class="s">&quot;lines&quot;</span>,
         <span class="i">name</span> <span class="o">=</span> <span class="s">&quot;Hypercardioid&quot;</span>,
         <span class="i">marker</span> <span class="o">=</span>
-            <span onmouseout="hideTip(event, 'fs29', 47)" onmouseover="showTip(event, 'fs29', 47)" class="t">Marker</span>(
+            <span class="i">Marker</span>(
                 <span class="i">color</span> <span class="o">=</span> <span class="s">&quot;none&quot;</span>,
-                <span class="i">line</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs30', 48)" onmouseover="showTip(event, 'fs30', 48)" class="t">Line</span>(<span class="i">color</span> <span class="o">=</span> <span class="s">&quot;deepskyblue&quot;</span>)
+                <span class="i">line</span> <span class="o">=</span> <span class="i">Line</span>(<span class="i">color</span> <span class="o">=</span> <span class="s">&quot;deepskyblue&quot;</span>)
             )
     )
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs33', 49)" onmouseover="showTip(event, 'fs33', 49)" class="i">lineTrace4</span> <span class="o">=</span>
-    <span onmouseout="hideTip(event, 'fs26', 50)" onmouseover="showTip(event, 'fs26', 50)" class="t">Scatter</span>(
-        <span onmouseout="hideTip(event, 'fs27', 51)" onmouseover="showTip(event, 'fs27', 51)" class="i">r</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs9', 52)" onmouseover="showTip(event, 'fs9', 52)" class="i">r4</span>,
-        <span onmouseout="hideTip(event, 'fs28', 53)" onmouseover="showTip(event, 'fs28', 53)" class="i">t</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs10', 54)" onmouseover="showTip(event, 'fs10', 54)" class="i">t4</span>,
+<span class="k">let</span> <span class="i">lineTrace4</span> <span class="o">=</span>
+    <span class="i">Scatter</span>(
+        <span class="i">r</span> <span class="o">=</span> <span class="i">r4</span>,
+        <span class="i">t</span> <span class="o">=</span> <span class="i">t4</span>,
         <span class="i">mode</span> <span class="o">=</span> <span class="s">&quot;lines&quot;</span>,
         <span class="i">name</span> <span class="o">=</span> <span class="s">&quot;Subcardioid&quot;</span>,
         <span class="i">marker</span> <span class="o">=</span>
-            <span onmouseout="hideTip(event, 'fs29', 55)" onmouseover="showTip(event, 'fs29', 55)" class="t">Marker</span>(
+            <span class="i">Marker</span>(
                 <span class="i">color</span> <span class="o">=</span> <span class="s">&quot;none&quot;</span>,
-                <span class="i">line</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs30', 56)" onmouseover="showTip(event, 'fs30', 56)" class="t">Line</span>(<span class="i">color</span> <span class="o">=</span> <span class="s">&quot;orangered&quot;</span>)
+                <span class="i">line</span> <span class="o">=</span> <span class="i">Line</span>(<span class="i">color</span> <span class="o">=</span> <span class="s">&quot;orangered&quot;</span>)
             )
     )
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs34', 57)" onmouseover="showTip(event, 'fs34', 57)" class="i">lineTrace5</span> <span class="o">=</span>
-    <span onmouseout="hideTip(event, 'fs26', 58)" onmouseover="showTip(event, 'fs26', 58)" class="t">Scatter</span>(
-        <span onmouseout="hideTip(event, 'fs27', 59)" onmouseover="showTip(event, 'fs27', 59)" class="i">r</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs11', 60)" onmouseover="showTip(event, 'fs11', 60)" class="i">r5</span>,
-        <span onmouseout="hideTip(event, 'fs28', 61)" onmouseover="showTip(event, 'fs28', 61)" class="i">t</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs12', 62)" onmouseover="showTip(event, 'fs12', 62)" class="i">t5</span>,
+<span class="k">let</span> <span class="i">lineTrace5</span> <span class="o">=</span>
+    <span class="i">Scatter</span>(
+        <span class="i">r</span> <span class="o">=</span> <span class="i">r5</span>,
+        <span class="i">t</span> <span class="o">=</span> <span class="i">t5</span>,
         <span class="i">mode</span> <span class="o">=</span> <span class="s">&quot;lines&quot;</span>,
         <span class="i">name</span> <span class="o">=</span> <span class="s">&quot;Supercardioid&quot;</span>,
         <span class="i">marker</span> <span class="o">=</span>
-            <span onmouseout="hideTip(event, 'fs29', 63)" onmouseover="showTip(event, 'fs29', 63)" class="t">Marker</span>(
+            <span class="i">Marker</span>(
                 <span class="i">color</span> <span class="o">=</span> <span class="s">&quot;none&quot;</span>,
-                <span class="i">line</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs30', 64)" onmouseover="showTip(event, 'fs30', 64)" class="t">Line</span>(<span class="i">color</span> <span class="o">=</span> <span class="s">&quot;green&quot;</span>)
+                <span class="i">line</span> <span class="o">=</span> <span class="i">Line</span>(<span class="i">color</span> <span class="o">=</span> <span class="s">&quot;green&quot;</span>)
             )
     )
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs35', 65)" onmouseover="showTip(event, 'fs35', 65)" class="i">layout</span> <span class="o">=</span>
-    <span onmouseout="hideTip(event, 'fs36', 66)" onmouseover="showTip(event, 'fs36', 66)" class="t">Layout</span>(
+<span class="k">let</span> <span class="i">layout</span> <span class="o">=</span>
+    <span class="i">Layout</span>(
         <span class="i">title</span> <span class="o">=</span> <span class="s">&quot;Mic Patterns&quot;</span>,
         <span class="i">font</span> <span class="o">=</span>
-            <span onmouseout="hideTip(event, 'fs37', 67)" onmouseover="showTip(event, 'fs37', 67)" class="t">Font</span>(
+            <span class="i">Font</span>(
                 <span class="i">family</span> <span class="o">=</span> <span class="s">&quot;Arial, sans-serif&quot;</span>,
                 <span class="i">size</span> <span class="o">=</span> <span class="n">12.</span>,
                 <span class="i">color</span> <span class="o">=</span> <span class="s">&quot;#000&quot;</span>
@@ -229,11 +231,11 @@
         <span class="i">width</span> <span class="o">=</span> <span class="n">500.</span>,
         <span class="i">height</span> <span class="o">=</span> <span class="n">400.</span>,
         <span class="i">margin</span> <span class="o">=</span>
-            <span onmouseout="hideTip(event, 'fs38', 68)" onmouseover="showTip(event, 'fs38', 68)" class="t">Margin</span>(
-                <span onmouseout="hideTip(event, 'fs39', 69)" onmouseover="showTip(event, 'fs39', 69)" class="i">l</span> <span class="o">=</span> <span class="n">40.</span>,
-                <span onmouseout="hideTip(event, 'fs40', 70)" onmouseover="showTip(event, 'fs40', 70)" class="i">r</span> <span class="o">=</span> <span class="n">40.</span>,
-                <span onmouseout="hideTip(event, 'fs41', 71)" onmouseover="showTip(event, 'fs41', 71)" class="i">b</span> <span class="o">=</span> <span class="n">20.</span>,
-                <span onmouseout="hideTip(event, 'fs42', 72)" onmouseover="showTip(event, 'fs42', 72)" class="i">t</span> <span class="o">=</span> <span class="n">40.</span>,
+            <span class="i">Margin</span>(
+                <span class="i">l</span> <span class="o">=</span> <span class="n">40.</span>,
+                <span class="i">r</span> <span class="o">=</span> <span class="n">40.</span>,
+                <span class="i">b</span> <span class="o">=</span> <span class="n">20.</span>,
+                <span class="i">t</span> <span class="o">=</span> <span class="n">40.</span>,
                 <span class="i">pad</span> <span class="o">=</span> <span class="n">0.</span>
             ),
         <span class="i">paper_bgcolor</span> <span class="o">=</span> <span class="s">&quot;rgb(255, 255, 255)&quot;</span>,
@@ -241,20 +243,20 @@
         <span class="i">orientation</span> <span class="o">=</span> <span class="o">-</span><span class="n">90.</span>
     )
 
-[<span onmouseout="hideTip(event, 'fs25', 73)" onmouseover="showTip(event, 'fs25', 73)" class="i">lineTrace1</span>; <span onmouseout="hideTip(event, 'fs31', 74)" onmouseover="showTip(event, 'fs31', 74)" class="i">lineTrace2</span>; <span onmouseout="hideTip(event, 'fs32', 75)" onmouseover="showTip(event, 'fs32', 75)" class="i">lineTrace3</span>;
-    <span onmouseout="hideTip(event, 'fs33', 76)" onmouseover="showTip(event, 'fs33', 76)" class="i">lineTrace4</span>; <span onmouseout="hideTip(event, 'fs34', 77)" onmouseover="showTip(event, 'fs34', 77)" class="i">lineTrace5</span>]
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs43', 78)" onmouseover="showTip(event, 'fs43', 78)" class="t">Chart</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs44', 79)" onmouseover="showTip(event, 'fs44', 79)" class="f">Plot</span>
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs43', 80)" onmouseover="showTip(event, 'fs43', 80)" class="t">Chart</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs45', 81)" onmouseover="showTip(event, 'fs45', 81)" class="f">WithLayout</span> <span onmouseout="hideTip(event, 'fs35', 82)" onmouseover="showTip(event, 'fs35', 82)" class="i">layout</span>
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs43', 83)" onmouseover="showTip(event, 'fs43', 83)" class="t">Chart</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs46', 84)" onmouseover="showTip(event, 'fs46', 84)" class="f">WithWidth</span> <span class="n">700</span>
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs43', 85)" onmouseover="showTip(event, 'fs43', 85)" class="t">Chart</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs47', 86)" onmouseover="showTip(event, 'fs47', 86)" class="f">WithHeight</span> <span class="n">500</span>
+[<span class="i">lineTrace1</span>; <span class="i">lineTrace2</span>; <span class="i">lineTrace3</span>;
+    <span class="i">lineTrace4</span>; <span class="i">lineTrace5</span>]
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">Plot</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithLayout</span> <span class="i">layout</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithWidth</span> <span class="n">700</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithHeight</span> <span class="n">500</span>
 </code></pre></td>
 </tr>
 </table>
-<div id="f11ba899-1c5b-419f-811a-82e67a0fcd44" style="width: 700px; height: 500px;"></div>
+<div id="804fb915-8e64-48b0-8975-45cf72629481" style="width: 700px; height: 500px;"></div>
         <script>
             var data = [{"type":"scatter","mode":"lines","marker":{"color":"none","line":{"color":"peru"}},"r":[1.0,0.995,0.978,0.951,0.914,0.866,0.809,0.743,0.669,0.588,0.5,0.407,0.309,0.208,0.105,0.0,0.105,0.208,0.309,0.407,0.5,0.588,0.669,0.743,0.809,0.866,0.914,0.951,0.978,0.995,1.0,0.995,0.978,0.951,0.914,0.866,0.809,0.743,0.669,0.588,0.5,0.407,0.309,0.208,0.105,0.0,0.105,0.208,0.309,0.407,0.5,0.588,0.669,0.743,0.809,0.866,0.914,0.951,0.978,0.995,1.0],"t":[0,6,12,18,24,30,36,42,48,54,60,66,72,78,84,90,96,102,108,114,120,126,132,138,144,150,156,162,168,174,180,186,192,198,204,210,216,222,228,234,240,246,252,258,264,270,276,282,288,294,300,306,312,318,324,330,336,342,348,354,360],"name":"Figure8"},{"type":"scatter","mode":"lines","marker":{"color":"none","line":{"color":"darkviolet"}},"r":[1.0,0.997,0.989,0.976,0.957,0.933,0.905,0.872,0.835,0.794,0.75,0.703,0.655,0.604,0.552,0.5,0.448,0.396,0.345,0.297,0.25,0.206,0.165,0.128,0.095,0.067,0.043,0.024,0.011,0.003,0.0,0.003,0.011,0.024,0.043,0.067,0.095,0.128,0.165,0.206,0.25,0.297,0.345,0.396,0.448,0.5,0.552,0.604,0.655,0.703,0.75,0.794,0.835,0.872,0.905,0.933,0.957,0.976,0.989,0.997,1.0],"t":[0,6,12,18,24,30,36,42,48,54,60,66,72,78,84,90,96,102,108,114,120,126,132,138,144,150,156,162,168,174,180,186,192,198,204,210,216,222,228,234,240,246,252,258,264,270,276,282,288,294,300,306,312,318,324,330,336,342,348,354,360],"name":"Cardioid"},{"type":"scatter","mode":"lines","marker":{"color":"none","line":{"color":"deepskyblue"}},"r":[1.0,0.996,0.984,0.963,0.935,0.9,0.857,0.807,0.752,0.691,0.625,0.555,0.482,0.406,0.328,0.25,0.172,0.094,0.018,0.055,0.125,0.191,0.252,0.307,0.357,0.4,0.435,0.463,0.484,0.496,0.5,0.496,0.484,0.463,0.435,0.4,0.357,0.307,0.252,0.191,0.125,0.055,0.018,0.094,0.172,0.25,0.328,0.406,0.482,0.555,0.625,0.691,0.752,0.807,0.857,0.9,0.935,0.963,0.984,0.996,1.0],"t":[0,6,12,18,24,30,36,42,48,54,60,66,72,78,84,90,96,102,108,114,120,126,132,138,144,150,156,162,168,174,180,186,192,198,204,210,216,222,228,234,240,246,252,258,264,270,276,282,288,294,300,306,312,318,324,330,336,342,348,354,360],"name":"Hypercardioid"},{"type":"scatter","mode":"lines","marker":{"color":"none","line":{"color":"orangered"}},"r":[1.0,0.998,0.993,0.985,0.974,0.96,0.943,0.923,0.901,0.876,0.85,0.822,0.793,0.762,0.731,0.7,0.669,0.638,0.607,0.578,0.55,0.524,0.499,0.477,0.457,0.44,0.426,0.415,0.407,0.402,0.4,0.402,0.407,0.415,0.426,0.44,0.457,0.477,0.499,0.524,0.55,0.578,0.607,0.638,0.669,0.7,0.731,0.762,0.793,0.822,0.85,0.876,0.901,0.923,0.943,0.96,0.974,0.985,0.993,0.998,1.0],"t":[0,6,12,18,24,30,36,42,48,54,60,66,72,78,84,90,96,102,108,114,120,126,132,138,144,150,156,162,168,174,180,186,192,198,204,210,216,222,228,234,240,246,252,258,264,270,276,282,288,294,300,306,312,318,324,330,336,342,348,354,360],"name":"Subcardioid"},{"type":"scatter","mode":"lines","marker":{"color":"none","line":{"color":"green"}},"r":[1.0,0.997,0.986,0.969,0.946,0.916,0.88,0.838,0.792,0.74,0.685,0.626,0.565,0.501,0.436,0.37,0.304,0.239,0.175,0.114,0.055,0.0,0.052,0.098,0.14,0.176,0.206,0.229,0.246,0.257,0.26,0.257,0.246,0.229,0.206,0.176,0.14,0.098,0.052,0.0,0.055,0.114,0.175,0.239,0.304,0.37,0.436,0.501,0.565,0.626,0.685,0.74,0.792,0.838,0.88,0.916,0.946,0.969,0.986,0.997,1.0],"t":[0,6,12,18,24,30,36,42,48,54,60,66,72,78,84,90,96,102,108,114,120,126,132,138,144,150,156,162,168,174,180,186,192,198,204,210,216,222,228,234,240,246,252,258,264,270,276,282,288,294,300,306,312,318,324,330,336,342,348,354,360],"name":"Supercardioid"}];
             var layout = {"font":{"family":"Arial, sans-serif","size":12.0,"color":"#000"},"title":"Mic Patterns","width":500.0,"height":400.0,"margin":{"l":40.0,"r":40.0,"t":40.0,"b":20.0,"pad":0.0},"paper_bgcolor":"rgb(255, 255, 255)","plot_bgcolor":"rgb(255, 255, 255)","showlegend":true,"orientation":-90.0};
-            Plotly.newPlot('f11ba899-1c5b-419f-811a-82e67a0fcd44', data, layout);
+            Plotly.newPlot('804fb915-8e64-48b0-8975-45cf72629481', data, layout);
         </script>
 <h2><a name="Polar-Scatter-Chart" class="anchor" href="#Polar-Scatter-Chart">Polar Scatter Chart</a></h2>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">  1: </span>
@@ -363,119 +365,119 @@
 <span class="l">104: </span>
 <span class="l">105: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs48', 87)" onmouseover="showTip(event, 'fs48', 87)" class="i">scatterTrace1</span> <span class="o">=</span>
-    <span onmouseout="hideTip(event, 'fs26', 88)" onmouseover="showTip(event, 'fs26', 88)" class="t">Scatter</span>(
-        <span onmouseout="hideTip(event, 'fs27', 89)" onmouseover="showTip(event, 'fs27', 89)" class="i">r</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs13', 90)" onmouseover="showTip(event, 'fs13', 90)" class="i">r6</span>,
-        <span onmouseout="hideTip(event, 'fs28', 91)" onmouseover="showTip(event, 'fs28', 91)" class="i">t</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs14', 92)" onmouseover="showTip(event, 'fs14', 92)" class="i">t6</span>,
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span class="i">scatterTrace1</span> <span class="o">=</span>
+    <span class="i">Scatter</span>(
+        <span class="i">r</span> <span class="o">=</span> <span class="i">r6</span>,
+        <span class="i">t</span> <span class="o">=</span> <span class="i">t6</span>,
         <span class="i">mode</span> <span class="o">=</span> <span class="s">&quot;markers&quot;</span>,
         <span class="i">name</span> <span class="o">=</span> <span class="s">&quot;Trial 1&quot;</span>,
         <span class="i">marker</span> <span class="o">=</span>
-            <span onmouseout="hideTip(event, 'fs29', 93)" onmouseover="showTip(event, 'fs29', 93)" class="t">Marker</span>(
+            <span class="i">Marker</span>(
                 <span class="i">color</span> <span class="o">=</span> <span class="s">&quot;rgb(27,158,119)&quot;</span>,
                 <span class="i">size</span> <span class="o">=</span> <span class="n">110</span>,
-                <span class="i">line</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs30', 94)" onmouseover="showTip(event, 'fs30', 94)" class="t">Line</span>(<span class="i">color</span> <span class="o">=</span> <span class="s">&quot;white&quot;</span>),
+                <span class="i">line</span> <span class="o">=</span> <span class="i">Line</span>(<span class="i">color</span> <span class="o">=</span> <span class="s">&quot;white&quot;</span>),
                 <span class="i">opacity</span><span class="o">=</span><span class="n">0.7</span>
             )
     )
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs49', 95)" onmouseover="showTip(event, 'fs49', 95)" class="i">scatterTrace2</span> <span class="o">=</span>
-    <span onmouseout="hideTip(event, 'fs26', 96)" onmouseover="showTip(event, 'fs26', 96)" class="t">Scatter</span>(
-        <span onmouseout="hideTip(event, 'fs27', 97)" onmouseover="showTip(event, 'fs27', 97)" class="i">r</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs15', 98)" onmouseover="showTip(event, 'fs15', 98)" class="i">r7</span>,
-        <span onmouseout="hideTip(event, 'fs28', 99)" onmouseover="showTip(event, 'fs28', 99)" class="i">t</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs16', 100)" onmouseover="showTip(event, 'fs16', 100)" class="i">t7</span>,
+<span class="k">let</span> <span class="i">scatterTrace2</span> <span class="o">=</span>
+    <span class="i">Scatter</span>(
+        <span class="i">r</span> <span class="o">=</span> <span class="i">r7</span>,
+        <span class="i">t</span> <span class="o">=</span> <span class="i">t7</span>,
         <span class="i">mode</span> <span class="o">=</span> <span class="s">&quot;markers&quot;</span>,
         <span class="i">name</span> <span class="o">=</span> <span class="s">&quot;Trial 2&quot;</span>,
         <span class="i">marker</span> <span class="o">=</span>
-            <span onmouseout="hideTip(event, 'fs29', 101)" onmouseover="showTip(event, 'fs29', 101)" class="t">Marker</span>(
+            <span class="i">Marker</span>(
                 <span class="i">color</span> <span class="o">=</span> <span class="s">&quot;rgb(217,95,2)&quot;</span>,
                 <span class="i">size</span> <span class="o">=</span> <span class="n">110.</span>,
-                <span class="i">line</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs30', 102)" onmouseover="showTip(event, 'fs30', 102)" class="t">Line</span>(<span class="i">color</span> <span class="o">=</span> <span class="s">&quot;white&quot;</span>),
+                <span class="i">line</span> <span class="o">=</span> <span class="i">Line</span>(<span class="i">color</span> <span class="o">=</span> <span class="s">&quot;white&quot;</span>),
                 <span class="i">opacity</span><span class="o">=</span><span class="n">0.7</span>
             )
     )
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs50', 103)" onmouseover="showTip(event, 'fs50', 103)" class="i">scatterTrace3</span> <span class="o">=</span>
-    <span onmouseout="hideTip(event, 'fs26', 104)" onmouseover="showTip(event, 'fs26', 104)" class="t">Scatter</span>(
-        <span onmouseout="hideTip(event, 'fs27', 105)" onmouseover="showTip(event, 'fs27', 105)" class="i">r</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs17', 106)" onmouseover="showTip(event, 'fs17', 106)" class="i">r8</span>,
-        <span onmouseout="hideTip(event, 'fs28', 107)" onmouseover="showTip(event, 'fs28', 107)" class="i">t</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs18', 108)" onmouseover="showTip(event, 'fs18', 108)" class="i">t8</span>,
+<span class="k">let</span> <span class="i">scatterTrace3</span> <span class="o">=</span>
+    <span class="i">Scatter</span>(
+        <span class="i">r</span> <span class="o">=</span> <span class="i">r8</span>,
+        <span class="i">t</span> <span class="o">=</span> <span class="i">t8</span>,
         <span class="i">mode</span> <span class="o">=</span> <span class="s">&quot;markers&quot;</span>,
         <span class="i">name</span> <span class="o">=</span> <span class="s">&quot;Trial 3&quot;</span>,
         <span class="i">marker</span> <span class="o">=</span>
-            <span onmouseout="hideTip(event, 'fs29', 109)" onmouseover="showTip(event, 'fs29', 109)" class="t">Marker</span>(
+            <span class="i">Marker</span>(
                 <span class="i">color</span> <span class="o">=</span> <span class="s">&quot;rgb(117,112,179)&quot;</span>,
                 <span class="i">size</span> <span class="o">=</span> <span class="n">110.</span>,
-                <span class="i">line</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs30', 110)" onmouseover="showTip(event, 'fs30', 110)" class="t">Line</span>(<span class="i">color</span> <span class="o">=</span> <span class="s">&quot;white&quot;</span>),
+                <span class="i">line</span> <span class="o">=</span> <span class="i">Line</span>(<span class="i">color</span> <span class="o">=</span> <span class="s">&quot;white&quot;</span>),
                 <span class="i">opacity</span> <span class="o">=</span> <span class="n">0.7</span>
             )
     )
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs51', 111)" onmouseover="showTip(event, 'fs51', 111)" class="i">scatterTrace4</span> <span class="o">=</span>
-    <span onmouseout="hideTip(event, 'fs26', 112)" onmouseover="showTip(event, 'fs26', 112)" class="t">Scatter</span>(
-        <span onmouseout="hideTip(event, 'fs27', 113)" onmouseover="showTip(event, 'fs27', 113)" class="i">r</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs19', 114)" onmouseover="showTip(event, 'fs19', 114)" class="i">r9</span>,
-        <span onmouseout="hideTip(event, 'fs28', 115)" onmouseover="showTip(event, 'fs28', 115)" class="i">t</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs20', 116)" onmouseover="showTip(event, 'fs20', 116)" class="i">t9</span>,
+<span class="k">let</span> <span class="i">scatterTrace4</span> <span class="o">=</span>
+    <span class="i">Scatter</span>(
+        <span class="i">r</span> <span class="o">=</span> <span class="i">r9</span>,
+        <span class="i">t</span> <span class="o">=</span> <span class="i">t9</span>,
         <span class="i">mode</span> <span class="o">=</span> <span class="s">&quot;markers&quot;</span>,
         <span class="i">name</span> <span class="o">=</span> <span class="s">&quot;Trial 4&quot;</span>,
         <span class="i">marker</span> <span class="o">=</span>
-            <span onmouseout="hideTip(event, 'fs29', 117)" onmouseover="showTip(event, 'fs29', 117)" class="t">Marker</span>(
+            <span class="i">Marker</span>(
                 <span class="i">color</span> <span class="o">=</span> <span class="s">&quot;rgb(231,41,138)&quot;</span>,
                 <span class="i">size</span> <span class="o">=</span> <span class="n">110.</span>,
-                <span class="i">line</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs30', 118)" onmouseover="showTip(event, 'fs30', 118)" class="t">Line</span>(<span class="i">color</span> <span class="o">=</span> <span class="s">&quot;white&quot;</span>),
+                <span class="i">line</span> <span class="o">=</span> <span class="i">Line</span>(<span class="i">color</span> <span class="o">=</span> <span class="s">&quot;white&quot;</span>),
                 <span class="i">opacity</span> <span class="o">=</span> <span class="n">0.7</span>
             )
     )
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs52', 119)" onmouseover="showTip(event, 'fs52', 119)" class="i">scatterTrace5</span> <span class="o">=</span>
-    <span onmouseout="hideTip(event, 'fs26', 120)" onmouseover="showTip(event, 'fs26', 120)" class="t">Scatter</span>(
-        <span onmouseout="hideTip(event, 'fs27', 121)" onmouseover="showTip(event, 'fs27', 121)" class="i">r</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs21', 122)" onmouseover="showTip(event, 'fs21', 122)" class="i">r10</span>,
-        <span onmouseout="hideTip(event, 'fs28', 123)" onmouseover="showTip(event, 'fs28', 123)" class="i">t</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs22', 124)" onmouseover="showTip(event, 'fs22', 124)" class="i">t10</span>,
+<span class="k">let</span> <span class="i">scatterTrace5</span> <span class="o">=</span>
+    <span class="i">Scatter</span>(
+        <span class="i">r</span> <span class="o">=</span> <span class="i">r10</span>,
+        <span class="i">t</span> <span class="o">=</span> <span class="i">t10</span>,
         <span class="i">mode</span> <span class="o">=</span> <span class="s">&quot;markers&quot;</span>,
         <span class="i">name</span> <span class="o">=</span> <span class="s">&quot;Trial 5&quot;</span>,
         <span class="i">marker</span> <span class="o">=</span>
-            <span onmouseout="hideTip(event, 'fs29', 125)" onmouseover="showTip(event, 'fs29', 125)" class="t">Marker</span>(
+            <span class="i">Marker</span>(
                 <span class="i">color</span> <span class="o">=</span> <span class="s">&quot;rgb(102,166,30)&quot;</span>,
                 <span class="i">size</span> <span class="o">=</span> <span class="n">110.</span>,
-                <span class="i">line</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs30', 126)" onmouseover="showTip(event, 'fs30', 126)" class="t">Line</span>(<span class="i">color</span> <span class="o">=</span> <span class="s">&quot;white&quot;</span>),
+                <span class="i">line</span> <span class="o">=</span> <span class="i">Line</span>(<span class="i">color</span> <span class="o">=</span> <span class="s">&quot;white&quot;</span>),
                 <span class="i">opacity</span> <span class="o">=</span> <span class="n">0.7</span>
             )
     )
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs53', 127)" onmouseover="showTip(event, 'fs53', 127)" class="i">scatterTrace6</span> <span class="o">=</span>
-    <span onmouseout="hideTip(event, 'fs26', 128)" onmouseover="showTip(event, 'fs26', 128)" class="t">Scatter</span>(
-        <span onmouseout="hideTip(event, 'fs27', 129)" onmouseover="showTip(event, 'fs27', 129)" class="i">r</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs23', 130)" onmouseover="showTip(event, 'fs23', 130)" class="i">r11</span>,
-        <span onmouseout="hideTip(event, 'fs28', 131)" onmouseover="showTip(event, 'fs28', 131)" class="i">t</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 132)" onmouseover="showTip(event, 'fs24', 132)" class="i">t11</span>,
+<span class="k">let</span> <span class="i">scatterTrace6</span> <span class="o">=</span>
+    <span class="i">Scatter</span>(
+        <span class="i">r</span> <span class="o">=</span> <span class="i">r11</span>,
+        <span class="i">t</span> <span class="o">=</span> <span class="i">t11</span>,
         <span class="i">mode</span> <span class="o">=</span> <span class="s">&quot;markers&quot;</span>,
         <span class="i">name</span> <span class="o">=</span> <span class="s">&quot;Trial 6&quot;</span>,
         <span class="i">marker</span> <span class="o">=</span>
-            <span onmouseout="hideTip(event, 'fs29', 133)" onmouseover="showTip(event, 'fs29', 133)" class="t">Marker</span>(
+            <span class="i">Marker</span>(
                 <span class="i">color</span> <span class="o">=</span> <span class="s">&quot;rgb(230,171,2)&quot;</span>,
                 <span class="i">size</span> <span class="o">=</span> <span class="n">110.</span>,
-                <span class="i">line</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs30', 134)" onmouseover="showTip(event, 'fs30', 134)" class="t">Line</span>(<span class="i">color</span> <span class="o">=</span> <span class="s">&quot;white&quot;</span>),
+                <span class="i">line</span> <span class="o">=</span> <span class="i">Line</span>(<span class="i">color</span> <span class="o">=</span> <span class="s">&quot;white&quot;</span>),
                 <span class="i">opacity</span> <span class="o">=</span> <span class="n">0.7</span>
             )
     )
 
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs54', 135)" onmouseover="showTip(event, 'fs54', 135)" class="i">scatterLayout</span> <span class="o">=</span>
-    <span onmouseout="hideTip(event, 'fs36', 136)" onmouseover="showTip(event, 'fs36', 136)" class="t">Layout</span>(
+<span class="k">let</span> <span class="i">scatterLayout</span> <span class="o">=</span>
+    <span class="i">Layout</span>(
         <span class="i">title</span> <span class="o">=</span> <span class="s">&quot;Hobbs-Pearson Trials&quot;</span>,
-        <span class="i">font</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs37', 137)" onmouseover="showTip(event, 'fs37', 137)" class="t">Font</span>(<span class="i">size</span> <span class="o">=</span> <span class="n">15.</span>),
+        <span class="i">font</span> <span class="o">=</span> <span class="i">Font</span>(<span class="i">size</span> <span class="o">=</span> <span class="n">15.</span>),
         <span class="i">plot_bgcolor</span> <span class="o">=</span> <span class="s">&quot;rgb(223, 223, 223)&quot;</span>,
-        <span class="i">angularaxis</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs55', 138)" onmouseover="showTip(event, 'fs55', 138)" class="t">Angularaxis</span>(<span class="i">tickcolor</span> <span class="o">=</span> <span class="s">&quot;rgb(253,253,253)&quot;</span>)
+        <span class="i">angularaxis</span> <span class="o">=</span> <span class="i">Angularaxis</span>(<span class="i">tickcolor</span> <span class="o">=</span> <span class="s">&quot;rgb(253,253,253)&quot;</span>)
     )    
 
-[<span onmouseout="hideTip(event, 'fs48', 139)" onmouseover="showTip(event, 'fs48', 139)" class="i">scatterTrace1</span>; <span onmouseout="hideTip(event, 'fs49', 140)" onmouseover="showTip(event, 'fs49', 140)" class="i">scatterTrace2</span>; <span onmouseout="hideTip(event, 'fs50', 141)" onmouseover="showTip(event, 'fs50', 141)" class="i">scatterTrace3</span>;
-    <span onmouseout="hideTip(event, 'fs51', 142)" onmouseover="showTip(event, 'fs51', 142)" class="i">scatterTrace4</span>; <span onmouseout="hideTip(event, 'fs52', 143)" onmouseover="showTip(event, 'fs52', 143)" class="i">scatterTrace5</span>; <span onmouseout="hideTip(event, 'fs53', 144)" onmouseover="showTip(event, 'fs53', 144)" class="i">scatterTrace6</span>]
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs43', 145)" onmouseover="showTip(event, 'fs43', 145)" class="t">Chart</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs44', 146)" onmouseover="showTip(event, 'fs44', 146)" class="f">Plot</span>
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs43', 147)" onmouseover="showTip(event, 'fs43', 147)" class="t">Chart</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs45', 148)" onmouseover="showTip(event, 'fs45', 148)" class="f">WithLayout</span> <span onmouseout="hideTip(event, 'fs54', 149)" onmouseover="showTip(event, 'fs54', 149)" class="i">scatterLayout</span>
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs43', 150)" onmouseover="showTip(event, 'fs43', 150)" class="t">Chart</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs46', 151)" onmouseover="showTip(event, 'fs46', 151)" class="f">WithWidth</span> <span class="n">700</span>
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs43', 152)" onmouseover="showTip(event, 'fs43', 152)" class="t">Chart</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs47', 153)" onmouseover="showTip(event, 'fs47', 153)" class="f">WithHeight</span> <span class="n">500</span>
+[<span class="i">scatterTrace1</span>; <span class="i">scatterTrace2</span>; <span class="i">scatterTrace3</span>;
+    <span class="i">scatterTrace4</span>; <span class="i">scatterTrace5</span>; <span class="i">scatterTrace6</span>]
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">Plot</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithLayout</span> <span class="i">scatterLayout</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithWidth</span> <span class="n">700</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithHeight</span> <span class="n">500</span>
 </code></pre></td>
 </tr>
 </table>
-<div id="13bbfe8e-3a54-4ea6-b367-ecd94db4018d" style="width: 700px; height: 500px;"></div>
+<div id="21db29ff-b8f3-488c-99bd-4a400376ed3c" style="width: 700px; height: 500px;"></div>
         <script>
             var data = [{"type":"scatter","mode":"markers","marker":{"opacity":0.7,"size":110,"color":"rgb(27,158,119)","line":{"color":"white"}},"r":[6.8049857852659779,3.389596010612268,5.3814721107464445,8.0595402194201835,5.3182292278685894,2.9850999356273773,1.9665870023752283,6.7692654082065893,4.0734018987212046,6.50437182526841,7.5563698189966493,4.0474560940667752,7.3866624960700094,5.4136247369839312,7.4707165311632417,7.9821102169397378,4.737814080093381,4.206453042929911,5.478604804594065,4.8245202806977723,5.5996006098997366,6.8667952170824735,3.0856713662561464,7.7718109432273819,3.6877944350967193,5.3603566851922251,5.1404467393009856,6.0454456809288883,6.8339209401937078,3.6207694625408364,3.9894305834039687,5.3118244995018,4.6082134802820622,6.6405847161519116,3.0551888544829859,7.4925641637529647,5.4850781777896715,3.8977949966209358,5.976245114026165,5.4470615609109574,5.37703411681004,4.6908057877313007,4.7116404911848448,3.629919329394875,5.9576680763724976,5.3571212843911509,3.849235282821748,6.2505071363192179,7.122243357145468,3.3994042338353911,3.5105566722713313,4.1009976036609741,4.0963821001997793,6.233583074805102,3.9394885267729349,3.9254450773976983,6.1181325014626982,3.9404503462852323,7.583015573261159,3.513202145338516],"t":[-30.352944361883697,-25.611459854524096,-12.425227452676078,13.96138051872652,-4.9509328406707445,-25.692274190905437,12.468764161570309,-4.913764107032951,-10.967380287631935,30.814194054910676,2.4749594311442737,17.975543752391559,0.77113059336235845,6.137488485631386,-14.451963574013497,28.184534112915948,12.538680065954864,-8.9832303371311539,5.2312851647624168,-64.489002535840513,11.357486681772649,3.4540747915125176,13.924346613092862,-25.364002046782343,-16.818006386022681,-10.260051030559755,-13.212134125591883,2.5793388653025744,8.7175749658525188,-10.675498719239487,-2.9263660125223061,25.195880754767717,40.590329321559643,-9.121433630189772,-24.297362381339184,-3.1769445056889345,10.850498419172521,-31.332059747367008,4.8495674622142664,15.048276954124187,3.2951046992599635,-6.1970918731298372,-8.77857413578066,29.549174119407287,-5.1374487928814645,23.02686048794348,-6.6348165783711286,2.7550149918614695,21.733250113653973,-24.816994960101756,-7.83054706253201,28.325796210205855,12.300977467795988,-21.563157240034112,-19.335516283813288,26.146443170846787,-1.7060712026841085,16.071723694996702,2.0532663028469651,-5.0979116123325721],"name":"Trial 1"},{"type":"scatter","mode":"markers","marker":{"opacity":0.7,"size":110.0,"color":"rgb(217,95,2)","line":{"color":"white"}},"r":[3.4880439230080569,2.9184785763552368,4.2018273599710687,8.2273246068510737,4.7766904272371944,3.041912303114453,4.789947719076336,5.6638807803608557,3.8582623931727431,8.2602128811410473,6.8686244864281063,5.7401975996748895,6.5949792824581337,5.6927037782116141,5.3379165744627723,9.2836041851757809,5.7645908931363365,4.0288645520513322,5.6623447483731209,0.42283723110061455,6.2012664639293362,6.43926538131984,5.096758513060891,4.6320819087338148,3.4218461363102217,4.3694047033529211,4.02833441941273,5.80576719754376,6.848189921425055,3.8092955127795802,4.3852681838335856,6.98332684554596,7.3962731860291262,5.215125003141,3.0861487792429205,6.3353944914882181,6.0904147140584834,2.4480560069033306,5.9427840203051518,6.3731298855900453,5.4542053411763911,4.3933376165634757,4.2059446799773,6.1555422879595127,5.1190871711628718,6.8698608308283413,4.1045998605750489,5.9543481255827606,8.0923328771537779,2.9617697054526295,3.9740121875821748,6.3733841289075288,5.4154091431799021,3.876890919980343,3.2614469474245569,6.1458085296991589,5.5024519871928179,5.5715532953118991,6.853049261089887,4.1403550749426543],"t":[14.80662578088746,79.006340372582727,49.022065541300449,49.69908313603149,54.137491082859476,86.419321020546619,96.952391935713734,41.463488263612184,67.137691693390664,68.06103943971128,42.681930322734061,76.398656608117946,42.194793472208559,59.577888974612549,27.510866799296068,60.7534448322685,68.370832799147522,65.748028149453049,58.53300837209963,-176.7441064584909,61.174018579965981,47.4515085890397,84.4266531857914,12.479346550525074,72.480802761846263,50.578831757750606,51.560228240214684,52.437856181262717,51.586827992137934,73.872944777337139,70.217056927872591,70.71429915430754,82.234394426370983,38.935390447009851,84.7093666701594,38.165828436450383,61.704053653789032,70.196956292443048,54.454292590141606,64.334894968614279,58.273893146586325,60.499822390385191,59.155232538950266,83.86561846759426,47.873409897320109,69.282601565939785,71.1899104286971,51.048396463046757,59.427582415206295,78.598736961660975,75.755864515215592,79.970483723223822,73.893780246320162,31.733411131690488,68.084751177019427,80.411079978571991,48.924250708865017,76.650255755352021,42.182864362880558,76.03333589453311],"name":"Trial 2"},{"type":"scatter","mode":"markers","marker":{"opacity":0.7,"size":110.0,"color":"rgb(117,112,179)","line":{"color":"white"}},"r":[1.855870835032611,5.2869620620428215,3.8860133919435729,6.2828633130010569,4.4534148477405155,5.6880080507611934,7.3308642826084887,3.825660594787748,4.989604176963506,7.8974314697670955,4.6566931130229525,6.6671536963110443,4.4310062871369515,5.3461132533772586,2.4799456958789263,8.1134773485263967,6.0813116823120961,4.9682168962073048,5.24445392063028,5.422207884171506,5.7927746160233538,4.787580592225452,6.7843186371820918,1.10893690948093,5.138911105244,4.0429296572872966,4.0228920296811346,4.8284287913050168,5.4173783743079724,5.3786352106682651,5.4210971754598418,7.1205619788552434,8.3493085399035856,3.4104855883231204,5.6283784708757345,3.9149369761396855,5.7639402623551526,4.7643741067985124,5.0762362678950721,6.1655581832007913,5.1055765162798341,4.761036376933375,4.5962495409437905,7.5041884113467763,4.1070314179199876,6.9204222993799727,5.3491289495633971,4.7980657193856073,7.0232515323044664,5.2836809654576431,5.5690711524302916,7.383794908447646,6.2692332104431268,2.656529645009885,4.8439843388041171,7.2479923615552542,4.3729593944114891,6.5709810813602472,4.602479243892371,5.6700520508263965],"t":[151.29425518111282,147.18802502820009,125.2821571123002,87.0672979717481,119.62789835678657,147.74082414730458,139.56459814488954,101.39149710201973,134.56018427958381,104.02444470480259,89.393142944837635,123.19403140008181,91.474340515198165,113.33237361373539,96.1499255673322,93.280734522632216,118.21556522583221,132.32293737819632,112.9411863909871,-179.74623313781393,110.30351355864841,97.7508361660772,131.60808925703367,115.49691923085226,140.58118216037175,123.39666211932598,128.34200904453573,107.6088103983526,97.904689787467959,137.12844797536522,130.43124491245027,112.2270844807976,118.63020224581526,106.05822558950737,146.90810970600344,90.277349558165952,111.50528236323856,151.08974253643859,107.7213941567982,111.30085499702685,114.68027793629503,126.56937949315531,128.2189522328928,125.35485719537647,112.4180682532985,111.79735567917727,133.41805225814235,105.18411684151033,97.231036120647047,146.66803680360073,136.23931520140337,121.79184419346764,123.91132797113666,129.86224497019268,141.34395084996186,123.27096774880371,108.45882172345216,124.41237705630053,89.027110738683191,134.87670114511539],"name":"Trial 3"},{"type":"scatter","mode":"markers","marker":{"opacity":0.7,"size":110.0,"color":"rgb(231,41,138)","line":{"color":"white"}},"r":[5.3724709243191295,7.0963555720404674,4.8838239032000832,2.9201354412366496,4.7239630456840143,7.4236939509285209,8.0909460753975928,3.3068445913715996,6.0508284825225971,5.5302320744380937,2.47230695264053,6.2756705368621413,2.6158961737877817,4.6535399445826942,3.3354400138758,4.7958836048687612,5.4727113464827868,5.8819304909478678,4.5715870720453795,9.0398611697966746,4.6429075998956915,3.1727677357988284,7.0442481388185278,4.4663365141073852,6.5573302898030219,4.8208494372533615,5.1319155152129632,3.9700122370488873,3.4063238128284303,6.4767229639983723,6.019218509330762,5.6645015349542911,7.1587585225456705,3.6007126616736462,7.3241271687585314,2.5529461562453961,4.7271338603874788,6.9717552071825146,4.076578361066991,4.9462234070066238,4.6421554490431713,5.3605748644110855,5.3917190673630113,7.0725243050965432,4.1011115702773919,5.4857326210168953,6.1925352861141461,3.7687113918423396,4.2903113897605287,7.0601953696921793,6.5396918441764447,6.6797444064909426,6.0608253586958138,4.786574040927106,6.4166865296665989,6.70328133338789,3.8888478104797555,6.3085910811944537,2.4370447709043273,6.5081863478979747],"t":[-140.20332764140605,-168.084245433406,-166.28514132921811,138.24886675310003,-174.42438643640841,-169.96048275947723,176.99182268662011,-169.90141624864253,-172.64158159443713,142.9516688139347,172.41574636731281,168.51935919592719,177.82205369393654,172.85519034865231,-146.01452170111628,128.17729302420111,169.16707278067625,-173.58857378893256,173.72699270456877,-151.20610477226074,166.26047716274937,172.50756608236046,173.94918390427469,-131.80684093766672,-170.63527383147678,-168.57708548315375,-166.76550342128579,176.07048734819648,162.29750149829133,-174.05574631254976,-178.06092985664986,156.47126885027095,155.23914214477145,-163.00052639405448,-170.116713265192,-170.63927248749107,167.38314369359566,-163.09881705625639,172.8807370063752,163.38600768186703,176.18254197734461,-174.579680173718,-172.33584488196067,165.33802569398378,-172.52566426066147,157.54287773943665,-175.88151109326037,175.42764399370765,142.06967472256432,-168.34073401899721,-175.80583112260831,163.06374541935153,171.72097499708474,-151.40390456860604,-168.27136909034661,165.04532787828478,-177.31533666475329,170.04241289697416,173.59919660957283,-177.25065674571295],"name":"Trial 4"},{"type":"scatter","mode":"markers","marker":{"opacity":0.7,"size":110.0,"color":"rgb(102,166,30)","line":{"color":"white"}},"r":[7.9375578713791448,7.3027464915156344,5.9293022214429962,2.407178713166243,5.27092188705965,7.400596127535688,6.8108203383600063,4.9677590344223441,6.1902293704547953,2.1585186579506059,4.00412589386977,4.7766173216330072,4.2322504518084409,4.30765487269422,6.2002751728641163,0.72751384853447221,4.3780068038117674,6.0049649394430906,4.3419317029157583,10.237982935327496,3.8021588886978415,3.96928117013756,5.7589801424664335,7.6741790691447047,6.6999535330118016,5.7343103881346,6.0442759152977423,4.3129430660866035,3.3775452824133043,6.3676667272690617,5.7372441815496966,3.3963514719893415,4.216467481387725,5.4648850167172647,7.3111355775338591,4.7454007693622717,3.9164685318876504,7.6029729903258385,4.1252048294414392,3.6767949496501635,4.5512357885197794,5.6069605315230957,5.7948442574851891,5.0305281556947934,5.1095862409912192,3.4054402079637396,6.02630612538526,4.2211092636354195,1.9097829365788486,7.2546693939216782,6.2688758720335986,4.56258056659493,4.9180579654382806,6.83656096252698,6.78648654914422,4.7510143344857862,4.7199263476420041,4.9278052151809675,4.0591905873940828,6.1283389842903881],"t":[-101.83378577584543,-127.47839157875458,-112.24428499734169,-82.325910871196754,-114.68885562069281,-130.53786336160334,-145.01026497595521,-98.7488450072409,-124.44174882126121,-152.45411926998403,-89.294236552250567,-139.83245171792495,-91.543595184370119,-119.44216300369413,-92.455838527378276,-129.6599243163198,-131.05123509922481,-123.85291745359059,-118.08673900439605,-121.97921713765797,-121.91502996793754,-99.361847577747582,-141.46770199726927,-93.5662631891479,-126.33690140499776,-112.8349441777883,-114.38647992914663,-109.79607232724634,-102.74326471243563,-128.2467289067651,-127.79209264323043,-142.47362974536523,-161.58729418706835,-99.94061077957295,-130.16311732570668,-90.22881200957039,-122.65049121443686,-123.26775057177692,-111.99730880084306,-127.52831680551732,-117.93129533779559,-120.39163424547179,-119.38687147866949,-149.67469549249509,-107.85051750555007,-138.98993134073962,-127.5954702142739,-107.32083544041386,-117.57380742338241,-127.48166096847307,-129.91203316621693,-148.49521167061027,-135.33164137019145,-104.42165927641673,-123.87544021115426,-146.81682661802307,-107.0584854241401,-138.90256487329069,-88.896882519510314,-130.75446735589105],"name":"Trial 5"},{"type":"scatter","mode":"markers","marker":{"opacity":0.7,"size":110.0,"color":"rgb(230,171,2)","line":{"color":"white"}},"r":[8.46918052789063,5.821997567373959,6.1409183282181425,5.8317242847860431,5.5467544718572359,5.62748770920125,3.94832897601986,6.4901846146095252,5.3206182451516444,3.2435930414929843,6.444085331576761,3.3637781006487071,6.4631168105054071,4.7309449257812206,7.7965784111141421,4.5701278299159007,3.926206816002813,5.2543481398701388,4.8384111066133375,8.6945239989829339,4.39953181821818,5.8564839051788535,3.62157703921442,8.894912373110186,5.4945428360782111,5.9689808908538016,6.0478995736041838,5.3846713967220348,5.381220018196653,5.11157462273727,4.7705611050578,3.0983308826347407,1.665083171936659,6.7402585333329457,5.5944949288820025,6.8796308256691772,4.3827924662807751,6.4108436164850851,5.1542043177728178,4.01515851865648,4.9391488682598155,5.2982973144857128,5.4904171769467958,2.6237512593812404,5.9535886616652665,3.3014793719195046,4.9548890011009741,5.5000536696141777,4.4505123495497285,5.7866245133498566,4.9068344240646047,2.6299694734469274,3.7697036080472381,7.3967357155002862,5.7644819019579545,2.794585195883112,5.7820332698243533,3.4853519176219963,6.5006535986201648,4.7486407101291759],"t":[-66.535836327283235,-84.514422676922,-63.339741699567846,-24.146812744223833,-59.701245322566763,-88.065372679965776,-98.444204535322044,-49.15839681719936,-73.636223312029585,-17.923874678608904,-38.412399454605492,-66.340362377921309,-40.888838739199961,-52.46063321002169,-52.610462559124791,-7.0393510509138943,-57.235458692156968,-71.64220350197985,-52.345396169095466,-92.783038673549044,-47.187163055033508,-41.969208462875166,-82.144228249934272,-59.43916560317718,-79.194822593197742,-62.299908535313193,-65.537904039379413,-48.9060554475786,-37.748311038009291,-78.053333458288336,-71.873117663075035,-41.891092825900685,-53.115455485497208,-52.997628097314845,-87.0843610179252,-43.611904838375729,-48.79799840560851,-82.566803157131631,-47.909962995701761,-46.570485585311047,-54.5004832176089,-65.90072712679752,-66.87331746360131,-75.480807252097335,-54.777693866880114,-42.5983345913628,-74.50816626907293,-47.110218443425516,-22.356873183328428,-84.192986744984253,-78.505284756202087,-65.0363717923471,-66.513733681332823,-63.52677656175937,-77.80907855131592,-68.510179740136024,-51.296869310885135,-68.339913027654518,-38.631733068443026,-77.851848585111142],"name":"Trial 6"}];
             var layout = {"font":{"size":15.0},"title":"Hobbs-Pearson Trials","plot_bgcolor":"rgb(223, 223, 223)","angularaxis":{"tickcolor":"rgb(253,253,253)"}};
-            Plotly.newPlot('13bbfe8e-3a54-4ea6-b367-ecd94db4018d', data, layout);
+            Plotly.newPlot('21db29ff-b8f3-488c-99bd-4a400376ed3c', data, layout);
         </script>
 <h2><a name="Polar-Area-Chart" class="anchor" href="#Polar-Area-Chart">Polar Area Chart</a></h2>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
@@ -528,130 +530,65 @@
 <span class="l">48: </span>
 <span class="l">49: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs56', 154)" onmouseover="showTip(event, 'fs56', 154)" class="i">areaTrace1</span> <span class="o">=</span>
-    <span onmouseout="hideTip(event, 'fs57', 155)" onmouseover="showTip(event, 'fs57', 155)" class="t">Area</span>(
-        <span onmouseout="hideTip(event, 'fs58', 156)" onmouseover="showTip(event, 'fs58', 156)" class="i">r</span> <span class="o">=</span> [<span class="n">77.5</span>; <span class="n">72.5</span>; <span class="n">70.0</span>; <span class="n">45.0</span>; <span class="n">22.5</span>; <span class="n">42.5</span>; <span class="n">40.0</span>; <span class="n">62.5</span>],
-        <span onmouseout="hideTip(event, 'fs59', 157)" onmouseover="showTip(event, 'fs59', 157)" class="i">t</span> <span class="o">=</span> [<span class="s">&quot;North&quot;</span>; <span class="s">&quot;N-E&quot;</span>; <span class="s">&quot;East&quot;</span>; <span class="s">&quot;S-E&quot;</span>; <span class="s">&quot;South&quot;</span>; <span class="s">&quot;S-W&quot;</span>; <span class="s">&quot;West&quot;</span>; <span class="s">&quot;N-W&quot;</span>],
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span class="i">areaTrace1</span> <span class="o">=</span>
+    <span class="i">Area</span>(
+        <span class="i">r</span> <span class="o">=</span> [<span class="n">77.5</span>; <span class="n">72.5</span>; <span class="n">70.0</span>; <span class="n">45.0</span>; <span class="n">22.5</span>; <span class="n">42.5</span>; <span class="n">40.0</span>; <span class="n">62.5</span>],
+        <span class="i">t</span> <span class="o">=</span> [<span class="s">&quot;North&quot;</span>; <span class="s">&quot;N-E&quot;</span>; <span class="s">&quot;East&quot;</span>; <span class="s">&quot;S-E&quot;</span>; <span class="s">&quot;South&quot;</span>; <span class="s">&quot;S-W&quot;</span>; <span class="s">&quot;West&quot;</span>; <span class="s">&quot;N-W&quot;</span>],
         <span class="i">name</span> <span class="o">=</span> <span class="s">&quot;11-14 m/s&quot;</span>,
-        <span class="i">marker</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs29', 158)" onmouseover="showTip(event, 'fs29', 158)" class="t">Marker</span>(<span class="i">color</span> <span class="o">=</span> <span class="s">&quot;rgb(106,81,163)&quot;</span>)
+        <span class="i">marker</span> <span class="o">=</span> <span class="i">Marker</span>(<span class="i">color</span> <span class="o">=</span> <span class="s">&quot;rgb(106,81,163)&quot;</span>)
     )
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs60', 159)" onmouseover="showTip(event, 'fs60', 159)" class="i">areaTrace2</span> <span class="o">=</span>
-    <span onmouseout="hideTip(event, 'fs57', 160)" onmouseover="showTip(event, 'fs57', 160)" class="t">Area</span>(
-        <span onmouseout="hideTip(event, 'fs58', 161)" onmouseover="showTip(event, 'fs58', 161)" class="i">r</span> <span class="o">=</span> [<span class="n">57.49999999999999</span>; <span class="n">50.0</span>; <span class="n">45.0</span>; <span class="n">35.0</span>; <span class="n">20.0</span>; <span class="n">22.5</span>; <span class="n">37.5</span>; <span class="n">55.00000000000001</span>],
-        <span onmouseout="hideTip(event, 'fs59', 162)" onmouseover="showTip(event, 'fs59', 162)" class="i">t</span> <span class="o">=</span> [<span class="s">&quot;North&quot;</span>; <span class="s">&quot;N-E&quot;</span>; <span class="s">&quot;East&quot;</span>; <span class="s">&quot;S-E&quot;</span>; <span class="s">&quot;South&quot;</span>; <span class="s">&quot;S-W&quot;</span>; <span class="s">&quot;West&quot;</span>; <span class="s">&quot;N-W&quot;</span>],
+<span class="k">let</span> <span class="i">areaTrace2</span> <span class="o">=</span>
+    <span class="i">Area</span>(
+        <span class="i">r</span> <span class="o">=</span> [<span class="n">57.49999999999999</span>; <span class="n">50.0</span>; <span class="n">45.0</span>; <span class="n">35.0</span>; <span class="n">20.0</span>; <span class="n">22.5</span>; <span class="n">37.5</span>; <span class="n">55.00000000000001</span>],
+        <span class="i">t</span> <span class="o">=</span> [<span class="s">&quot;North&quot;</span>; <span class="s">&quot;N-E&quot;</span>; <span class="s">&quot;East&quot;</span>; <span class="s">&quot;S-E&quot;</span>; <span class="s">&quot;South&quot;</span>; <span class="s">&quot;S-W&quot;</span>; <span class="s">&quot;West&quot;</span>; <span class="s">&quot;N-W&quot;</span>],
         <span class="i">name</span> <span class="o">=</span> <span class="s">&quot;8-11 m/s&quot;</span>,
-        <span class="i">marker</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs29', 163)" onmouseover="showTip(event, 'fs29', 163)" class="t">Marker</span>(<span class="i">color</span> <span class="o">=</span> <span class="s">&quot;rgb(158,154,200)&quot;</span>)
+        <span class="i">marker</span> <span class="o">=</span> <span class="i">Marker</span>(<span class="i">color</span> <span class="o">=</span> <span class="s">&quot;rgb(158,154,200)&quot;</span>)
     )
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs61', 164)" onmouseover="showTip(event, 'fs61', 164)" class="i">areaTrace3</span> <span class="o">=</span>
-    <span onmouseout="hideTip(event, 'fs57', 165)" onmouseover="showTip(event, 'fs57', 165)" class="t">Area</span>(
-        <span onmouseout="hideTip(event, 'fs58', 166)" onmouseover="showTip(event, 'fs58', 166)" class="i">r</span> <span class="o">=</span> [<span class="n">40.0</span>; <span class="n">30.0</span>; <span class="n">30.0</span>; <span class="n">35.0</span>; <span class="n">7.5</span>; <span class="n">7.5</span>; <span class="n">32.5</span>; <span class="n">40.0</span>],
-        <span onmouseout="hideTip(event, 'fs59', 167)" onmouseover="showTip(event, 'fs59', 167)" class="i">t</span> <span class="o">=</span> [<span class="s">&quot;North&quot;</span>; <span class="s">&quot;N-E&quot;</span>; <span class="s">&quot;East&quot;</span>; <span class="s">&quot;S-E&quot;</span>; <span class="s">&quot;South&quot;</span>; <span class="s">&quot;S-W&quot;</span>; <span class="s">&quot;West&quot;</span>; <span class="s">&quot;N-W&quot;</span>],
+<span class="k">let</span> <span class="i">areaTrace3</span> <span class="o">=</span>
+    <span class="i">Area</span>(
+        <span class="i">r</span> <span class="o">=</span> [<span class="n">40.0</span>; <span class="n">30.0</span>; <span class="n">30.0</span>; <span class="n">35.0</span>; <span class="n">7.5</span>; <span class="n">7.5</span>; <span class="n">32.5</span>; <span class="n">40.0</span>],
+        <span class="i">t</span> <span class="o">=</span> [<span class="s">&quot;North&quot;</span>; <span class="s">&quot;N-E&quot;</span>; <span class="s">&quot;East&quot;</span>; <span class="s">&quot;S-E&quot;</span>; <span class="s">&quot;South&quot;</span>; <span class="s">&quot;S-W&quot;</span>; <span class="s">&quot;West&quot;</span>; <span class="s">&quot;N-W&quot;</span>],
         <span class="i">name</span> <span class="o">=</span> <span class="s">&quot;5-8 m/s&quot;</span>,
-        <span class="i">marker</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs29', 168)" onmouseover="showTip(event, 'fs29', 168)" class="t">Marker</span>(<span class="i">color</span> <span class="o">=</span> <span class="s">&quot;rgb(203,201,226)&quot;</span>)
+        <span class="i">marker</span> <span class="o">=</span> <span class="i">Marker</span>(<span class="i">color</span> <span class="o">=</span> <span class="s">&quot;rgb(203,201,226)&quot;</span>)
     )
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs62', 169)" onmouseover="showTip(event, 'fs62', 169)" class="i">areaTrace4</span> <span class="o">=</span>
-    <span onmouseout="hideTip(event, 'fs57', 170)" onmouseover="showTip(event, 'fs57', 170)" class="t">Area</span>(
-        <span onmouseout="hideTip(event, 'fs58', 171)" onmouseover="showTip(event, 'fs58', 171)" class="i">r</span> <span class="o">=</span> [<span class="n">20.0</span>; <span class="n">7.5</span>; <span class="n">15.0</span>; <span class="n">22.5</span>; <span class="n">2.5</span>; <span class="n">2.5</span>; <span class="n">12.5</span>; <span class="n">22.5</span>],
-        <span onmouseout="hideTip(event, 'fs59', 172)" onmouseover="showTip(event, 'fs59', 172)" class="i">t</span> <span class="o">=</span> [<span class="s">&quot;North&quot;</span>; <span class="s">&quot;N-E&quot;</span>; <span class="s">&quot;East&quot;</span>; <span class="s">&quot;S-E&quot;</span>; <span class="s">&quot;South&quot;</span>; <span class="s">&quot;S-W&quot;</span>; <span class="s">&quot;West&quot;</span>; <span class="s">&quot;N-W&quot;</span>],
+<span class="k">let</span> <span class="i">areaTrace4</span> <span class="o">=</span>
+    <span class="i">Area</span>(
+        <span class="i">r</span> <span class="o">=</span> [<span class="n">20.0</span>; <span class="n">7.5</span>; <span class="n">15.0</span>; <span class="n">22.5</span>; <span class="n">2.5</span>; <span class="n">2.5</span>; <span class="n">12.5</span>; <span class="n">22.5</span>],
+        <span class="i">t</span> <span class="o">=</span> [<span class="s">&quot;North&quot;</span>; <span class="s">&quot;N-E&quot;</span>; <span class="s">&quot;East&quot;</span>; <span class="s">&quot;S-E&quot;</span>; <span class="s">&quot;South&quot;</span>; <span class="s">&quot;S-W&quot;</span>; <span class="s">&quot;West&quot;</span>; <span class="s">&quot;N-W&quot;</span>],
         <span class="i">name</span> <span class="o">=</span> <span class="s">&quot;&lt; 5 m/s&quot;</span>,
-        <span class="i">marker</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs29', 173)" onmouseover="showTip(event, 'fs29', 173)" class="t">Marker</span>(<span class="i">color</span> <span class="o">=</span> <span class="s">&quot;rgb(242,240,247)&quot;</span>)
+        <span class="i">marker</span> <span class="o">=</span> <span class="i">Marker</span>(<span class="i">color</span> <span class="o">=</span> <span class="s">&quot;rgb(242,240,247)&quot;</span>)
     )
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs63', 174)" onmouseover="showTip(event, 'fs63', 174)" class="i">areaLayout</span> <span class="o">=</span>
-    <span onmouseout="hideTip(event, 'fs36', 175)" onmouseover="showTip(event, 'fs36', 175)" class="t">Layout</span>(
+<span class="k">let</span> <span class="i">areaLayout</span> <span class="o">=</span>
+    <span class="i">Layout</span>(
         <span class="i">title</span> <span class="o">=</span> <span class="s">&quot;Wind Speed Distribution in Laurel, NE&quot;</span>,
-        <span class="i">font</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs37', 176)" onmouseover="showTip(event, 'fs37', 176)" class="t">Font</span>(<span class="i">size</span> <span class="o">=</span> <span class="n">16.</span>),
+        <span class="i">font</span> <span class="o">=</span> <span class="i">Font</span>(<span class="i">size</span> <span class="o">=</span> <span class="n">16.</span>),
         <span class="i">legend</span> <span class="o">=</span>
-            <span onmouseout="hideTip(event, 'fs64', 177)" onmouseover="showTip(event, 'fs64', 177)" class="t">Legend</span>(
-                <span class="i">font</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs37', 178)" onmouseover="showTip(event, 'fs37', 178)" class="t">Font</span>(<span class="i">size</span> <span class="o">=</span> <span class="n">16.</span>)
+            <span class="i">Legend</span>(
+                <span class="i">font</span> <span class="o">=</span> <span class="i">Font</span>(<span class="i">size</span> <span class="o">=</span> <span class="n">16.</span>)
             ),
-        <span class="i">radialaxis</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs65', 179)" onmouseover="showTip(event, 'fs65', 179)" class="t">Radialaxis</span>(<span class="i">ticksuffix</span> <span class="o">=</span> <span class="s">&quot;%&quot;</span>),
+        <span class="i">radialaxis</span> <span class="o">=</span> <span class="i">Radialaxis</span>(<span class="i">ticksuffix</span> <span class="o">=</span> <span class="s">&quot;%&quot;</span>),
         <span class="i">orientation</span> <span class="o">=</span> <span class="n">270.</span>
     )
 
-[<span onmouseout="hideTip(event, 'fs56', 180)" onmouseover="showTip(event, 'fs56', 180)" class="i">areaTrace1</span>; <span onmouseout="hideTip(event, 'fs60', 181)" onmouseover="showTip(event, 'fs60', 181)" class="i">areaTrace2</span>; <span onmouseout="hideTip(event, 'fs61', 182)" onmouseover="showTip(event, 'fs61', 182)" class="i">areaTrace3</span>; <span onmouseout="hideTip(event, 'fs62', 183)" onmouseover="showTip(event, 'fs62', 183)" class="i">areaTrace4</span>]
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs43', 184)" onmouseover="showTip(event, 'fs43', 184)" class="t">Chart</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs44', 185)" onmouseover="showTip(event, 'fs44', 185)" class="f">Plot</span>
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs43', 186)" onmouseover="showTip(event, 'fs43', 186)" class="t">Chart</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs45', 187)" onmouseover="showTip(event, 'fs45', 187)" class="f">WithLayout</span> <span onmouseout="hideTip(event, 'fs63', 188)" onmouseover="showTip(event, 'fs63', 188)" class="i">areaLayout</span>
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs43', 189)" onmouseover="showTip(event, 'fs43', 189)" class="t">Chart</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs46', 190)" onmouseover="showTip(event, 'fs46', 190)" class="f">WithWidth</span> <span class="n">700</span>
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs43', 191)" onmouseover="showTip(event, 'fs43', 191)" class="t">Chart</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs47', 192)" onmouseover="showTip(event, 'fs47', 192)" class="f">WithHeight</span> <span class="n">500</span>
+[<span class="i">areaTrace1</span>; <span class="i">areaTrace2</span>; <span class="i">areaTrace3</span>; <span class="i">areaTrace4</span>]
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">Plot</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithLayout</span> <span class="i">areaLayout</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithWidth</span> <span class="n">700</span>
+<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithHeight</span> <span class="n">500</span>
 </code></pre></td>
 </tr>
 </table>
-<div id="f8e98dce-c985-4a06-9b81-90b24474f09f" style="width: 700px; height: 500px;"></div>
+<div id="3f15c369-92d7-44b2-a82e-65c0fe530c89" style="width: 700px; height: 500px;"></div>
         <script>
             var data = [{"type":"area","r":[77.5,72.5,70.0,45.0,22.5,42.5,40.0,62.5],"t":["North","N-E","East","S-E","South","S-W","West","N-W"],"marker":{"color":"rgb(106,81,163)"},"name":"11-14 m/s"},{"type":"area","r":[57.499999999999993,50.0,45.0,35.0,20.0,22.5,37.5,55.000000000000007],"t":["North","N-E","East","S-E","South","S-W","West","N-W"],"marker":{"color":"rgb(158,154,200)"},"name":"8-11 m/s"},{"type":"area","r":[40.0,30.0,30.0,35.0,7.5,7.5,32.5,40.0],"t":["North","N-E","East","S-E","South","S-W","West","N-W"],"marker":{"color":"rgb(203,201,226)"},"name":"5-8 m/s"},{"type":"area","r":[20.0,7.5,15.0,22.5,2.5,2.5,12.5,22.5],"t":["North","N-E","East","S-E","South","S-W","West","N-W"],"marker":{"color":"rgb(242,240,247)"},"name":"< 5 m/s"}];
             var layout = {"font":{"size":16.0},"title":"Wind Speed Distribution in Laurel, NE","legend":{"font":{"size":16.0}},"radialaxis":{"ticksuffix":"%"},"orientation":270.0};
-            Plotly.newPlot('f8e98dce-c985-4a06-9b81-90b24474f09f', data, layout);
+            Plotly.newPlot('3f15c369-92d7-44b2-a82e-65c0fe530c89', data, layout);
         </script>
 
-<div class="tip" id="fs1">namespace XPlot</div>
-<div class="tip" id="fs2">namespace XPlot.Plotly</div>
-<div class="tip" id="fs3">val r1 : float list<br /><br />Full name: Plotly-polar-charts.r1</div>
-<div class="tip" id="fs4">val t1 : int list<br /><br />Full name: Plotly-polar-charts.t1</div>
-<div class="tip" id="fs5">val r2 : float list<br /><br />Full name: Plotly-polar-charts.r2</div>
-<div class="tip" id="fs6">val t2 : int list<br /><br />Full name: Plotly-polar-charts.t2</div>
-<div class="tip" id="fs7">val r3 : float list<br /><br />Full name: Plotly-polar-charts.r3</div>
-<div class="tip" id="fs8">val t3 : int list<br /><br />Full name: Plotly-polar-charts.t3</div>
-<div class="tip" id="fs9">val r4 : float list<br /><br />Full name: Plotly-polar-charts.r4</div>
-<div class="tip" id="fs10">val t4 : int list<br /><br />Full name: Plotly-polar-charts.t4</div>
-<div class="tip" id="fs11">val r5 : float list<br /><br />Full name: Plotly-polar-charts.r5</div>
-<div class="tip" id="fs12">val t5 : int list<br /><br />Full name: Plotly-polar-charts.t5</div>
-<div class="tip" id="fs13">val r6 : float list<br /><br />Full name: Plotly-polar-charts.r6</div>
-<div class="tip" id="fs14">val t6 : float list<br /><br />Full name: Plotly-polar-charts.t6</div>
-<div class="tip" id="fs15">val r7 : float list<br /><br />Full name: Plotly-polar-charts.r7</div>
-<div class="tip" id="fs16">val t7 : float list<br /><br />Full name: Plotly-polar-charts.t7</div>
-<div class="tip" id="fs17">val r8 : float list<br /><br />Full name: Plotly-polar-charts.r8</div>
-<div class="tip" id="fs18">val t8 : float list<br /><br />Full name: Plotly-polar-charts.t8</div>
-<div class="tip" id="fs19">val r9 : float list<br /><br />Full name: Plotly-polar-charts.r9</div>
-<div class="tip" id="fs20">val t9 : float list<br /><br />Full name: Plotly-polar-charts.t9</div>
-<div class="tip" id="fs21">val r10 : float list<br /><br />Full name: Plotly-polar-charts.r10</div>
-<div class="tip" id="fs22">val t10 : float list<br /><br />Full name: Plotly-polar-charts.t10</div>
-<div class="tip" id="fs23">val r11 : float list<br /><br />Full name: Plotly-polar-charts.r11</div>
-<div class="tip" id="fs24">val t11 : float list<br /><br />Full name: Plotly-polar-charts.t11</div>
-<div class="tip" id="fs25">val lineTrace1 : Scatter<br /><br />Full name: Plotly-polar-charts.lineTrace1</div>
-<div class="tip" id="fs26">Multiple items<br />type Scatter =<br />&#160;&#160;inherit Trace<br />&#160;&#160;new : unit -&gt; Scatter<br />&#160;&#160;member ShouldSerializeconnectgaps : unit -&gt; bool<br />&#160;&#160;member ShouldSerializedx : unit -&gt; bool<br />&#160;&#160;member ShouldSerializedy : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeerror_x : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeerror_y : unit -&gt; bool<br />&#160;&#160;member ShouldSerializefill : unit -&gt; bool<br />&#160;&#160;member ShouldSerializefillcolor : unit -&gt; bool<br />&#160;&#160;member ShouldSerializehoverinfo : unit -&gt; bool<br />&#160;&#160;...<br /><br />Full name: XPlot.Plotly.Graph.Scatter<br /><br />--------------------<br />new : unit -&gt; Scatter</div>
-<div class="tip" id="fs27">property Scatter.r: obj</div>
-<div class="tip" id="fs28">property Scatter.t: obj</div>
-<div class="tip" id="fs29">Multiple items<br />type Marker =<br />&#160;&#160;new : unit -&gt; Marker<br />&#160;&#160;member ShouldSerializeautocolorscale : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecauto : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecmax : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecmin : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecolor : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecolorbar : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecolors : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecolorscale : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecolorsrc : unit -&gt; bool<br />&#160;&#160;...<br /><br />Full name: XPlot.Plotly.Graph.Marker<br /><br />--------------------<br />new : unit -&gt; Marker</div>
-<div class="tip" id="fs30">Multiple items<br />type Line =<br />&#160;&#160;new : unit -&gt; Line<br />&#160;&#160;member ShouldSerializeautocolorscale : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecauto : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecmax : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecmin : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecolor : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecolorscale : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecolorsrc : unit -&gt; bool<br />&#160;&#160;member ShouldSerializedash : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeoutliercolor : unit -&gt; bool<br />&#160;&#160;...<br /><br />Full name: XPlot.Plotly.Graph.Line<br /><br />--------------------<br />new : unit -&gt; Line</div>
-<div class="tip" id="fs31">val lineTrace2 : Scatter<br /><br />Full name: Plotly-polar-charts.lineTrace2</div>
-<div class="tip" id="fs32">val lineTrace3 : Scatter<br /><br />Full name: Plotly-polar-charts.lineTrace3</div>
-<div class="tip" id="fs33">val lineTrace4 : Scatter<br /><br />Full name: Plotly-polar-charts.lineTrace4</div>
-<div class="tip" id="fs34">val lineTrace5 : Scatter<br /><br />Full name: Plotly-polar-charts.lineTrace5</div>
-<div class="tip" id="fs35">val layout : Layout<br /><br />Full name: Plotly-polar-charts.layout</div>
-<div class="tip" id="fs36">Multiple items<br />module Layout<br /><br />from XPlot.Plotly<br /><br />--------------------<br />type Layout =<br />&#160;&#160;new : unit -&gt; Layout<br />&#160;&#160;member ShouldSerializeangularaxis : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeannotations : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeautosize : unit -&gt; bool<br />&#160;&#160;member ShouldSerializebargap : unit -&gt; bool<br />&#160;&#160;member ShouldSerializebargroupgap : unit -&gt; bool<br />&#160;&#160;member ShouldSerializebarmode : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeboxmode : unit -&gt; bool<br />&#160;&#160;member ShouldSerializedirection : unit -&gt; bool<br />&#160;&#160;member ShouldSerializedragmode : unit -&gt; bool<br />&#160;&#160;...<br /><br />Full name: XPlot.Plotly.Layout.Layout<br /><br />--------------------<br />new : unit -&gt; Layout</div>
-<div class="tip" id="fs37">Multiple items<br />type Font =<br />&#160;&#160;new : unit -&gt; Font<br />&#160;&#160;member ShouldSerializecolor : unit -&gt; bool<br />&#160;&#160;member ShouldSerializefamily : unit -&gt; bool<br />&#160;&#160;member ShouldSerializesize : unit -&gt; bool<br />&#160;&#160;member color : string<br />&#160;&#160;member family : string<br />&#160;&#160;member size : float<br />&#160;&#160;member color : string with set<br />&#160;&#160;member family : string with set<br />&#160;&#160;member size : float with set<br /><br />Full name: XPlot.Plotly.Graph.Font<br /><br />--------------------<br />new : unit -&gt; Font</div>
-<div class="tip" id="fs38">Multiple items<br />type Margin =<br />&#160;&#160;new : unit -&gt; Margin<br />&#160;&#160;member ShouldSerializeautoexpand : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeb : unit -&gt; bool<br />&#160;&#160;member ShouldSerializel : unit -&gt; bool<br />&#160;&#160;member ShouldSerializepad : unit -&gt; bool<br />&#160;&#160;member ShouldSerializer : unit -&gt; bool<br />&#160;&#160;member ShouldSerializet : unit -&gt; bool<br />&#160;&#160;member autoexpand : bool<br />&#160;&#160;member b : float<br />&#160;&#160;member l : float<br />&#160;&#160;...<br /><br />Full name: XPlot.Plotly.Graph.Margin<br /><br />--------------------<br />new : unit -&gt; Margin</div>
-<div class="tip" id="fs39">property Margin.l: float</div>
-<div class="tip" id="fs40">property Margin.r: float</div>
-<div class="tip" id="fs41">property Margin.b: float</div>
-<div class="tip" id="fs42">property Margin.t: float</div>
-<div class="tip" id="fs43">type Chart =<br />&#160;&#160;static member Area : data:seq&lt;#seq&lt;&#39;a1 * &#39;a2&gt;&gt; -&gt; PlotlyChart (requires &#39;a1 :&gt; key and &#39;a2 :&gt; value)<br />&#160;&#160;static member Area : data:seq&lt;#key * #value&gt; -&gt; PlotlyChart<br />&#160;&#160;static member Area : data:seq&lt;#value&gt; -&gt; PlotlyChart<br />&#160;&#160;static member Bar : data:seq&lt;#seq&lt;&#39;a1 * &#39;a2&gt;&gt; -&gt; PlotlyChart (requires &#39;a1 :&gt; key and &#39;a2 :&gt; value)<br />&#160;&#160;static member Bar : data:seq&lt;#key * #value&gt; -&gt; PlotlyChart<br />&#160;&#160;static member Bar : data:seq&lt;#value&gt; -&gt; PlotlyChart<br />&#160;&#160;static member Bubble : data:seq&lt;#key * #value * #value&gt; -&gt; PlotlyChart<br />&#160;&#160;static member Candlestick : data:seq&lt;#key * #value * #value * #value * #value&gt; -&gt; PlotlyChart<br />&#160;&#160;static member Column : data:seq&lt;#seq&lt;&#39;a1 * &#39;a2&gt;&gt; -&gt; PlotlyChart (requires &#39;a1 :&gt; key and &#39;a2 :&gt; value)<br />&#160;&#160;static member Column : data:seq&lt;#key * #value&gt; -&gt; PlotlyChart<br />&#160;&#160;...<br /><br />Full name: XPlot.Plotly.Chart</div>
-<div class="tip" id="fs44">static member Chart.Plot : data:seq&lt;#Trace&gt; -&gt; PlotlyChart<br />static member Chart.Plot : data:Trace -&gt; PlotlyChart<br />static member Chart.Plot : data:seq&lt;#Trace&gt; * layout:Layout -&gt; PlotlyChart<br />static member Chart.Plot : data:Trace * layout:Layout -&gt; PlotlyChart</div>
-<div class="tip" id="fs45">static member Chart.WithLayout : layout:Layout -&gt; chart:PlotlyChart -&gt; PlotlyChart</div>
-<div class="tip" id="fs46">static member Chart.WithWidth : width:int -&gt; chart:PlotlyChart -&gt; PlotlyChart</div>
-<div class="tip" id="fs47">static member Chart.WithHeight : height:int -&gt; chart:PlotlyChart -&gt; PlotlyChart</div>
-<div class="tip" id="fs48">val scatterTrace1 : Scatter<br /><br />Full name: Plotly-polar-charts.scatterTrace1</div>
-<div class="tip" id="fs49">val scatterTrace2 : Scatter<br /><br />Full name: Plotly-polar-charts.scatterTrace2</div>
-<div class="tip" id="fs50">val scatterTrace3 : Scatter<br /><br />Full name: Plotly-polar-charts.scatterTrace3</div>
-<div class="tip" id="fs51">val scatterTrace4 : Scatter<br /><br />Full name: Plotly-polar-charts.scatterTrace4</div>
-<div class="tip" id="fs52">val scatterTrace5 : Scatter<br /><br />Full name: Plotly-polar-charts.scatterTrace5</div>
-<div class="tip" id="fs53">val scatterTrace6 : Scatter<br /><br />Full name: Plotly-polar-charts.scatterTrace6</div>
-<div class="tip" id="fs54">val scatterLayout : Layout<br /><br />Full name: Plotly-polar-charts.scatterLayout</div>
-<div class="tip" id="fs55">Multiple items<br />type Angularaxis =<br />&#160;&#160;new : unit -&gt; Angularaxis<br />&#160;&#160;member ShouldSerializedomain : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeendpadding : unit -&gt; bool<br />&#160;&#160;member ShouldSerializerange : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeshowline : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeshowticklabels : unit -&gt; bool<br />&#160;&#160;member ShouldSerializetickcolor : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeticklen : unit -&gt; bool<br />&#160;&#160;member ShouldSerializetickorientation : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeticksuffix : unit -&gt; bool<br />&#160;&#160;...<br /><br />Full name: XPlot.Plotly.Graph.Angularaxis<br /><br />--------------------<br />new : unit -&gt; Angularaxis</div>
-<div class="tip" id="fs56">val areaTrace1 : Area<br /><br />Full name: Plotly-polar-charts.areaTrace1</div>
-<div class="tip" id="fs57">Multiple items<br />type Area =<br />&#160;&#160;inherit Trace<br />&#160;&#160;new : unit -&gt; Area<br />&#160;&#160;member ShouldSerializehoverinfo : unit -&gt; bool<br />&#160;&#160;member ShouldSerializelegendgroup : unit -&gt; bool<br />&#160;&#160;member ShouldSerializemarker : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeopacity : unit -&gt; bool<br />&#160;&#160;member ShouldSerializer : unit -&gt; bool<br />&#160;&#160;member ShouldSerializersrc : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeshowlegend : unit -&gt; bool<br />&#160;&#160;member ShouldSerializestream : unit -&gt; bool<br />&#160;&#160;...<br /><br />Full name: XPlot.Plotly.Graph.Area<br /><br />--------------------<br />new : unit -&gt; Area</div>
-<div class="tip" id="fs58">property Area.r: obj</div>
-<div class="tip" id="fs59">property Area.t: obj</div>
-<div class="tip" id="fs60">val areaTrace2 : Area<br /><br />Full name: Plotly-polar-charts.areaTrace2</div>
-<div class="tip" id="fs61">val areaTrace3 : Area<br /><br />Full name: Plotly-polar-charts.areaTrace3</div>
-<div class="tip" id="fs62">val areaTrace4 : Area<br /><br />Full name: Plotly-polar-charts.areaTrace4</div>
-<div class="tip" id="fs63">val areaLayout : Layout<br /><br />Full name: Plotly-polar-charts.areaLayout</div>
-<div class="tip" id="fs64">Multiple items<br />type Legend =<br />&#160;&#160;new : unit -&gt; Legend<br />&#160;&#160;member ShouldSerializebgcolor : unit -&gt; bool<br />&#160;&#160;member ShouldSerializebordercolor : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeborderwidth : unit -&gt; bool<br />&#160;&#160;member ShouldSerializefont : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeorientation : unit -&gt; bool<br />&#160;&#160;member ShouldSerializetracegroupgap : unit -&gt; bool<br />&#160;&#160;member ShouldSerializetraceorder : unit -&gt; bool<br />&#160;&#160;member ShouldSerializex : unit -&gt; bool<br />&#160;&#160;member ShouldSerializexanchor : unit -&gt; bool<br />&#160;&#160;...<br /><br />Full name: XPlot.Plotly.Graph.Legend<br /><br />--------------------<br />new : unit -&gt; Legend</div>
-<div class="tip" id="fs65">Multiple items<br />type Radialaxis =<br />&#160;&#160;new : unit -&gt; Radialaxis<br />&#160;&#160;member ShouldSerializedomain : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeendpadding : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeorientation : unit -&gt; bool<br />&#160;&#160;member ShouldSerializerange : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeshowline : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeshowticklabels : unit -&gt; bool<br />&#160;&#160;member ShouldSerializetickcolor : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeticklen : unit -&gt; bool<br />&#160;&#160;member ShouldSerializetickorientation : unit -&gt; bool<br />&#160;&#160;...<br /><br />Full name: XPlot.Plotly.Graph.Radialaxis<br /><br />--------------------<br />new : unit -&gt; Radialaxis</div>
 
             </div>
             <div class="span3">
@@ -705,6 +642,9 @@
                     <li><a href="/XPlot/chart/plotly-3d-scatter-plots.html">3D Scatter Plots</a></li>
                     <li><a href="/XPlot/chart/plotly-3d-surface-plots.html">3D Surface Plots</a></li>
                     <li><a href="/XPlot/chart/plotly-3d-line-plots.html">3D Line Plots</a></li>
+
+                    <li class="nav-header"><a href="/XPlot/d3.html">D3 Charts</a></li>
+                    <li><a href="/XPlot/chart/d3-network.html">Network</a></li>
 
                     <li class="nav-header">Documentation</li>
                     <li><a href="/XPlot/reference/index.html">API Reference</a></li>

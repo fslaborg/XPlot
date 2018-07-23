@@ -29,7 +29,7 @@ let z3 = getData 8
 Plotly 3D Line Plots
 ====================
 
-[Full source](https://github.com/fslaborg/XPlot/blob/master/docs/content/chart/plotly-3d-line-plots.fsx)
+[Full source and data](https://github.com/fslaborg/XPlot/blob/master/docsrc/content/chart/plotly-3d-line-plots.fsx)
 
 3D Random Walk
 --------------

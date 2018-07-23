@@ -3,6 +3,10 @@
 #r "XPlot.GoogleCharts.dll"
 open XPlot.GoogleCharts
 
+(**
+Google Map Chart
+================
+*)
 let data =
     [
         "China", "China: 1,363,800,000"
@@ -17,10 +21,6 @@ let data =
         "Japan", "Japan: 127,120,000"
     ]
 
-(**
-Google Map Chart
-================
-*)
 (*** define-output:map ***) 
 let options = Options(showTip = true)
  

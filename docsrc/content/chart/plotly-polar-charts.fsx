@@ -32,7 +32,7 @@ let t11 = [-66.53583632728323; -84.514422676922; -63.339741699567846; -24.146812
 Plotly Polar Charts
 ===================
 
-[Full source](https://github.com/fslaborg/XPlot/blob/master/docs/content/chart/plotly-polar-charts.fsx)
+[Full source and data](https://github.com/fslaborg/XPlot/blob/master/docsrc/content/chart/plotly-polar-charts.fsx)
 
 Polar Line Chart
 ----------------

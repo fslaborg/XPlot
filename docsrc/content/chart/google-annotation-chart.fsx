@@ -27,6 +27,9 @@ let gliese =
 (**
 Google Annotation Chart
 =======================
+
+[Full source and data](https://github.com/fslaborg/XPlot/blob/master/docsrc/content/chart/google-annotation-chart.fsx)
+
 *)
 (*** define-output:annotation ***)
 let options = Options(displayAnnotations = true)

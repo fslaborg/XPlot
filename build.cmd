@@ -1,4 +1,4 @@
-@echo off
+rem @echo off
 cls
 
 dotnet restore build.proj
