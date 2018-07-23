@@ -8,7 +8,7 @@ open XPlot.Plotly
 Plotly Line and Scatter Plots
 =============================
 
-[Full source](https://github.com/fslaborg/XPlot/blob/master/docs/content/chart/plotly-line-scatter-plots.fsx)
+[Full source and data](https://github.com/fslaborg/XPlot/blob/master/docsrc/content/chart/plotly-line-scatter-plots.fsx)
 
 Basic Line Plot
 ---------------

@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------
-// Builds the documentation from `.fsx` and `.md` files in the 'docs/content' directory
+// Builds the documentation from `.fsx` and `.md` files in the 'docsrc/content' directory
 // (the generated documentation is stored in the 'docs/output' directory)
 // --------------------------------------------------------------------------------------
 
@@ -71,7 +71,7 @@ let buildReference () =
       sourceFolder = __SOURCE_DIRECTORY__ @@ ".." @@ "..",
       publicOnly = true, libDirs = [ __SOURCE_DIRECTORY__ @@ "../../bin" ] )
 
-// Build documentation from `fsx` and `md` files in `docs/content`
+// Build documentation from `fsx` and `md` files in `docsrc/content`
 let buildDocumentation () =
   let fsiEval = Formatters.createFsiEvaluator root output "#.####"
   let subdirs = Directory.EnumerateDirectories(content, "*", SearchOption.AllDirectories)
@@ -80,8 +80,12 @@ let buildDocumentation () =
     let langSpecificPath(lang, path:string) =
         path.Split([|'/'; '\\'|], System.StringSplitOptions.RemoveEmptyEntries)
         |> Array.exists(fun i -> i = lang)
+    let subOutput = (output @@ sub)
+    printfn "processing %s --> %s" dir subOutput
+    if dir <> content then 
+        CleanDir subOutput
     Literate.ProcessDirectory
-      ( dir, docTemplate, output @@ sub, replacements = ("root", root)::info,
+      ( dir, docTemplate, subOutput, replacements = ("root", root)::info,
         layoutRoots = layoutRoots, fsiEvaluator = fsiEval,
         generateAnchors = true )
 

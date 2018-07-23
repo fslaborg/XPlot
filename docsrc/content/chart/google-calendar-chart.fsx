@@ -4,6 +4,10 @@
 open XPlot.GoogleCharts
 open System
 
+(**
+Google Calendar Chart
+=====================
+*)
 let data =
     let rnd = Random()
     [
@@ -11,17 +15,13 @@ let data =
             DateTime(2013, 1, 9).AddDays(x), rnd.Next(0, 5)
     ]
 
-(**
-Google Calendar Chart
-=====================
-*)
-(*** define-output:calendar ***)  
 let options =
     Options(
         title = "GitHub Contributions",
         height = 350
     )
  
+(*** define-output:calendar ***)  
 data
 |> Chart.Calendar
 |> Chart.WithOptions options

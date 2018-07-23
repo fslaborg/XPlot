@@ -12,9 +12,11 @@
     <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
     <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet" />
 
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
-        google.load("visualization", "1.1", { packages: ["corechart", "annotationchart", "calendar", "gauge", "geochart", "map", "sankey", "table", "timeline", "treemap"] })
+        google.charts.load('current', {
+            packages: ["corechart", "annotationchart", "calendar", "gauge", "geochart", "map", "sankey", "table", "timeline", "treemap"]
+        });
     </script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <link type="text/css" rel="stylesheet" href="/XPlot/content/style.css" />
@@ -29,19 +31,19 @@
         <div class="masthead">
             <ul class="nav nav-pills pull-right">
                 <li>
-                    <a href="http://fslab.org"><img height="16" width="16" src="http://fslab.org/img/thumbs/fslab.png" /> FsLab</a>
+                    <a href="https://fslab.org"><img height="16" width="16" src="https://fslab.org/img/thumbs/fslab.png" /> FsLab</a>
                 </li>
                 <li>
-                    <a href="http://fsharp.github.io/FSharp.Data"><img height="16" width="16" src="http://fslab.org/img/thumbs/fsharpdata.png" /> F# Data</a>
+                    <a href="http://fsharp.github.io/FSharp.Data"><img height="16" width="16" src="https://fslab.org/img/thumbs/fsharpdata.png" /> F# Data</a>
                 </li>
                 <li>
-                    <a href="http://bluemountaincapital.github.io/Deedle"><img height="16" width="16" src="http://fslab.org/img/thumbs/deedle.png" /> Deedle</a>
+                    <a href="https://fslab.org/Deedle"><img height="16" width="16" src="https://fslab.org/img/thumbs/deedle.png" /> Deedle</a>
                 </li>
                 <li>
-                    <a href="http://bluemountaincapital.github.io/FSharpRProvider"><img height="16" width="16" src="http://fslab.org/img/thumbs/rprovider.png" /> R Provider</a>
+                    <a href="https://fslab.org/RProvider"><img height="16" width="16" src="https://fslab.org/img/thumbs/rprovider.png" /> R Provider</a>
                 </li>
                 <li>
-                    <a href="http://numerics.mathdotnet.com/"><img height="16" width="16" src="http://fslab.org/img/thumbs/mathnet.png" /> Math.NET</a>
+                    <a href="http://numerics.mathdotnet.com/"><img height="16" width="16" src="https://fslab.org/img/thumbs/mathnet.png" /> Math.NET</a>
                 </li>
             </ul>
             <h3 class="muted"><a href="/XPlot/">XPlot</a></h3>
@@ -99,8 +101,8 @@
             New(data)
           </code>
           <div class="tip" id="1185">
-            <strong>Signature:</strong> (data:seq&lt;&#39;?7675 * &#39;?7676 * &#39;?7677 * &#39;?7678 * &#39;?7679&gt;) -&gt; Series<br />
-                          <strong>Type parameters:</strong> '?7675, '?7676, '?7677, '?7678, '?7679          </div>
+            <strong>Signature:</strong> (data:seq&lt;&#39;?7901 * &#39;?7902 * &#39;?7903 * &#39;?7904 * &#39;?7905&gt;) -&gt; Series<br />
+                          <strong>Type parameters:</strong> '?7901, '?7902, '?7903, '?7904, '?7905          </div>
         </td>
         <td class="xmldoc">
             <a href="http://github.com/fslaborg/XPlot/tree/master/src/XPlot.GoogleCharts/Main.fs#L56-56" class="github-link">
@@ -117,8 +119,8 @@
             New(data)
           </code>
           <div class="tip" id="1186">
-            <strong>Signature:</strong> (data:seq&lt;&#39;?7670 * &#39;?7671 * &#39;?7672 * &#39;?7673&gt;) -&gt; Series<br />
-                          <strong>Type parameters:</strong> '?7670, '?7671, '?7672, '?7673          </div>
+            <strong>Signature:</strong> (data:seq&lt;&#39;?7896 * &#39;?7897 * &#39;?7898 * &#39;?7899&gt;) -&gt; Series<br />
+                          <strong>Type parameters:</strong> '?7896, '?7897, '?7898, '?7899          </div>
         </td>
         <td class="xmldoc">
             <a href="http://github.com/fslaborg/XPlot/tree/master/src/XPlot.GoogleCharts/Main.fs#L51-51" class="github-link">
@@ -135,8 +137,8 @@
             New(data)
           </code>
           <div class="tip" id="1187">
-            <strong>Signature:</strong> (data:seq&lt;&#39;?7666 * &#39;?7667 * &#39;?7668&gt;) -&gt; Series<br />
-                          <strong>Type parameters:</strong> '?7666, '?7667, '?7668          </div>
+            <strong>Signature:</strong> (data:seq&lt;&#39;?7892 * &#39;?7893 * &#39;?7894&gt;) -&gt; Series<br />
+                          <strong>Type parameters:</strong> '?7892, '?7893, '?7894          </div>
         </td>
         <td class="xmldoc">
             <a href="http://github.com/fslaborg/XPlot/tree/master/src/XPlot.GoogleCharts/Main.fs#L46-46" class="github-link">
@@ -153,8 +155,8 @@
             New(data)
           </code>
           <div class="tip" id="1188">
-            <strong>Signature:</strong> (data:seq&lt;&#39;?7663 * &#39;?7664&gt;) -&gt; Series<br />
-                          <strong>Type parameters:</strong> '?7663, '?7664          </div>
+            <strong>Signature:</strong> (data:seq&lt;&#39;?7889 * &#39;?7890&gt;) -&gt; Series<br />
+                          <strong>Type parameters:</strong> '?7889, '?7890          </div>
         </td>
         <td class="xmldoc">
             <a href="http://github.com/fslaborg/XPlot/tree/master/src/XPlot.GoogleCharts/Main.fs#L41-41" class="github-link">
@@ -237,6 +239,9 @@
                     <li><a href="/XPlot/chart/plotly-3d-scatter-plots.html">3D Scatter Plots</a></li>
                     <li><a href="/XPlot/chart/plotly-3d-surface-plots.html">3D Surface Plots</a></li>
                     <li><a href="/XPlot/chart/plotly-3d-line-plots.html">3D Line Plots</a></li>
+
+                    <li class="nav-header"><a href="/XPlot/d3.html">D3 Charts</a></li>
+                    <li><a href="/XPlot/chart/d3-network.html">Network</a></li>
 
                     <li class="nav-header">Documentation</li>
                     <li><a href="/XPlot/reference/index.html">API Reference</a></li>

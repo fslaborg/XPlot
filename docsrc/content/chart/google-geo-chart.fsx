@@ -22,11 +22,12 @@ The following example calls `Chart.Geo` with a list of key value pairs. Google C
 automatically recognize country names and country codes, so the following readable code
 works just fine:
 *)
-(*** define-output:geo ***)
 let pop =
   [ "Germany", 200; "United States", 300
     "Brazil", 400;  "Canada", 500
     "France", 600;  "RU", 700 ]
+
+(*** define-output:geo ***)
 pop
 |> Chart.Geo
 |> Chart.WithLabel "Popularity"

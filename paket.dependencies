@@ -1,10 +1,10 @@
 framework: >=net45
 source https://nuget.org/api/v2
 
-nuget FSharp.Formatting
+nuget FSharp.Formatting 2.14.4
 nuget NUnit
 nuget NUnit.Runners
-nuget FAKE
+nuget FAKE 4.64.13
 
 nuget Deedle
 nuget MathNet.Numerics

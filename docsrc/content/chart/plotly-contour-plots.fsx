@@ -26,7 +26,7 @@ for i in 0 .. 99 do
 Plotly Contour Plots
 ====================
 
-[Full source](https://github.com/fslaborg/XPlot/blob/master/docs/content/chart/plotly-contour-plots.fsx)
+[Full source and data](https://github.com/fslaborg/XPlot/blob/master/docsrc/content/chart/plotly-contour-plots.fsx)
 
 Basic Contour Plot
 ------------------

@@ -1591,7 +1591,10 @@ module Configuration =
             and set(value) = themeField <- Some value
 
         member __.title
-            with get() = titleField.Value
+            with get() = 
+                match titleField with
+                | None -> String.Empty
+                | Some(title) -> title
             and set(value) = titleField <- Some value
 
         member __.titlePosition
