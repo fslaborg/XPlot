@@ -11,7 +11,7 @@ install:
   - export FrameworkPathOverride=$(dirname $(which mono))/../lib/mono/4.5/
   
 before_install:
-  - chmod +x fake.sh
+  - chmod +x build.sh
  
 matrix:
   include:
@@ -26,5 +26,5 @@ matrix:
       sudo: required
 
 script: 
-  - ./build.sh All
+  - ./build.sh build target all
 
