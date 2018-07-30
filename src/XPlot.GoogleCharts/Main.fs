@@ -5,6 +5,7 @@ open Microsoft.FSharp.Reflection
 open Newtonsoft.Json
 open System
 open System.Data
+
 open System.Globalization
 open System.IO
 
@@ -145,11 +146,11 @@ module Data =
         rows
         |> Seq.iter (fun (key, values) -> 
             let row = sysDt.NewRow()
-            row.SetField(0, key)
+            row.[0] <- key // SetField(0, key)
             values
             |> Seq.iter (fun (value, column) ->
                 match value with
-                | Some v -> row.SetField(column, v)
+                | Some v -> row.[column]  <- v // SetField(column, v)
                 | _ -> ()
             )
             sysDt.Rows.Add(row)

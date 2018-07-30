@@ -1,18 +1,24 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".paket", ".paket", "{63297B98-5CED-492C-A5B7-A5B4F73CF142}"
 	ProjectSection(SolutionItems) = preProject
 		paket.dependencies = paket.dependencies
 		paket.lock = paket.lock
+		paket.references = paket.references
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{A6A6AF7D-D6E3-442D-9B1E-58CC91879BE1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "project", "project", "{BF60BC93-E09B-4E5F-9D85-95A519479D54}"
 	ProjectSection(SolutionItems) = preProject
+		.travis.yml = .travis.yml
+		appveyor.yml = appveyor.yml
+		build.cmd = build.cmd
 		build.fsx = build.fsx
+		build.proj = build.proj
+		build.sh = build.sh
 		misc\logo.svg = misc\logo.svg
 		README.md = README.md
 		RELEASE_NOTES.md = RELEASE_NOTES.md
@@ -35,11 +41,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{8E6D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{ED8079DD-2B06-4030-9F0F-DC548F98E1C4}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "XPlot.GoogleCharts", "src\XPlot.GoogleCharts\XPlot.GoogleCharts.fsproj", "{5804E6A2-EDF3-4939-89C9-5BC7F2CC336A}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "XPlot.GoogleCharts", "src\XPlot.GoogleCharts\XPlot.GoogleCharts.fsproj", "{5804E6A2-EDF3-4939-89C9-5BC7F2CC336A}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "XPlot.GoogleCharts.Deedle", "src\XPlot.GoogleCharts.Deedle\XPlot.GoogleCharts.Deedle.fsproj", "{F6FBA7C2-8411-47E1-997C-3EE7AA709FEF}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "XPlot.GoogleCharts.Deedle", "src\XPlot.GoogleCharts.Deedle\XPlot.GoogleCharts.Deedle.fsproj", "{F6FBA7C2-8411-47E1-997C-3EE7AA709FEF}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "XPlot.Plotly", "src\XPlot.Plotly\XPlot.Plotly.fsproj", "{182232F3-9E9D-4342-A096-037F2CF2037F}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "XPlot.Plotly", "src\XPlot.Plotly\XPlot.Plotly.fsproj", "{182232F3-9E9D-4342-A096-037F2CF2037F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "chart", "chart", "{1F19571C-5074-44FC-973B-3E93E9FF531B}"
 	ProjectSection(SolutionItems) = preProject
@@ -82,7 +88,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "chart", "chart", "{1F19571C
 		docs\content\chart\plotly-time-series.fsx = docs\content\chart\plotly-time-series.fsx
 	EndProjectSection
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "XPlot.D3", "src\XPlot.D3\XPlot.D3.fsproj", "{DF291356-C9DD-4C7F-80FE-E9B17BDEBFA0}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "XPlot.D3", "src\XPlot.D3\XPlot.D3.fsproj", "{DF291356-C9DD-4C7F-80FE-E9B17BDEBFA0}"
+EndProject
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "XPlot.GoogleCharts.Tests", "tests\XPlot.GoogleCharts.Tests\XPlot.GoogleCharts.Tests.fsproj", "{D8C995BD-B6C8-4E31-ACEE-EAB2949FE499}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -106,6 +114,10 @@ Global
 		{DF291356-C9DD-4C7F-80FE-E9B17BDEBFA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF291356-C9DD-4C7F-80FE-E9B17BDEBFA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF291356-C9DD-4C7F-80FE-E9B17BDEBFA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8C995BD-B6C8-4E31-ACEE-EAB2949FE499}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8C995BD-B6C8-4E31-ACEE-EAB2949FE499}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8C995BD-B6C8-4E31-ACEE-EAB2949FE499}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8C995BD-B6C8-4E31-ACEE-EAB2949FE499}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -114,5 +126,9 @@ Global
 		{83F16175-43B1-4C90-A1EE-8E351C33435D} = {A6A6AF7D-D6E3-442D-9B1E-58CC91879BE1}
 		{8E6D5255-776D-4B61-85F9-73C37AA1FB9A} = {A6A6AF7D-D6E3-442D-9B1E-58CC91879BE1}
 		{1F19571C-5074-44FC-973B-3E93E9FF531B} = {8E6D5255-776D-4B61-85F9-73C37AA1FB9A}
+		{D8C995BD-B6C8-4E31-ACEE-EAB2949FE499} = {ED8079DD-2B06-4030-9F0F-DC548F98E1C4}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {63675CE2-3907-4F15-9CB8-7D2494ECAA7B}
 	EndGlobalSection
 EndGlobal
