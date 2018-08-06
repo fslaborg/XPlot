@@ -20,6 +20,18 @@ NuGet
 
 * [Plotly](http://www.nuget.org/packages/XPlot.Plotly/)
 
+Building
+-------------
+
+    .\build
+
+Release
+-------------
+
+    .\build target NuGet
+    set APIKEY=...
+    ..\FsLab\.nuget\NuGet.exe push bin\*.nupkg  %APIKEY% -Source https://www.nuget.org
+
 Contact
 -------
 
