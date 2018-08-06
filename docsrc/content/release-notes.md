@@ -1,3 +1,8 @@
+### 1.5.0 - August 6, 2018
+* Update to FSHarp.Core 4.5.0.0
+* Use proper google download links
+* Doc updates
+
 ### 1.4.5 - February 16, 2018
 * Fixing documentation template
 
