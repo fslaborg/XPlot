@@ -58,6 +58,7 @@ Copy-paste the following code into the editor:
 #I "./packages"
 #r "Google.DataTable.Net.Wrapper/lib/Google.DataTable.Net.Wrapper.dll"
 #r "XPlot.GoogleCharts/lib/net45/XPlot.GoogleCharts.dll"
+#r "Newtonsoft.Json/lib/net45/Newtonsoft.Json.dll"
 
 open XPlot.GoogleCharts
 
