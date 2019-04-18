@@ -1,4 +1,4 @@
-﻿#I "../../../bin"
+﻿#I "../../../bin/XPlot.GoogleCharts/net45"
 #r "XPlot.GoogleCharts.dll"
 
 open System
