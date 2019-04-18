@@ -1,5 +1,8 @@
 XPlot
+[![Build Status](https://api.travis-ci.org/fslaborg/XPlot.svg?branch=master)](https://travis-ci.org/fslaborg/XPlot)
+[![Nuget Version](https://buildstats.info/nuget/XPlot.Plotly)](https://www.nuget.org/packages/XPlot.Plotly/)
 =====
+<img align="right" src="https://github.com/fslaborg/XPlot/raw/master/docs/img/logo.png" alt="XPlot" />
 
 About
 -----
