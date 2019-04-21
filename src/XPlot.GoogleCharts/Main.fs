@@ -5,9 +5,10 @@ open Microsoft.FSharp.Reflection
 open Newtonsoft.Json
 open System
 open System.Data
-
 open System.Globalization
 open System.IO
+open System.Runtime.InteropServices
+open System.Diagnostics
 
 type key = IConvertible
 type value = IConvertible
@@ -342,7 +343,15 @@ type GoogleChart() =
         let file = sprintf "%s.html" __.Id
         let path = Path.Combine(tempPath, file)
         File.WriteAllText(path, html)
-        System.Diagnostics.Process.Start(path) |> ignore
+        if RuntimeInformation.IsOSPlatform(OSPlatform.Windows) then
+            let psi = new ProcessStartInfo(FileName = path, UseShellExecute = true)
+            Process.Start(psi) |> ignore
+        elif RuntimeInformation.IsOSPlatform(OSPlatform.Linux) then
+            Process.Start("xdg-open", path) |> ignore
+        elif RuntimeInformation.IsOSPlatform(OSPlatform.OSX) then
+            Process.Start("open", path) |> ignore
+        else
+            invalidOp "Not supported OS platform"        
 
     /// The width of the chart container element.
     member val Width = -1 with get, set

@@ -4,23 +4,21 @@ source https://nuget.org/api/v2
 
 nuget FSharp.Core
 
-nuget NUnit 3.7.1
-nuget NUnit.Runners 3.6.1
+nuget NUnit 3.9.0
+nuget NUnit.Runners 3.8.0
 nuget FAKE
 
 nuget Deedle
 nuget MathNet.Numerics
-nuget Google.DataTable.Net.Wrapper
+nuget Google.DataTable.Net.Wrapper 4.0.0-rc1
 nuget Newtonsoft.Json 
 
 clitool dotnet-fake
 
 group Formatting
 source https://nuget.org/api/v2
-source https://ci.appveyor.com/nuget/fsharp-formatting
-
-nuget FSharp.Formatting prerelease
-nuget FSharp.Formatting.CommandTool prerelease
+nuget FSharp.Formatting
+nuget FSharp.Formatting.CommandTool
 
 group FakeBuild
 source https://api.nuget.org/v3/index.json

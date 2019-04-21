@@ -1,5 +1,6 @@
-﻿#load "../packages/XPlot.GoogleCharts.1.0.1/XPlot.GoogleCharts.fsx"
- 
+﻿#I "../../bin/XPlot.GoogleCharts/net45"
+#r "XPlot.GoogleCharts.dll"
+
 open XPlot.GoogleCharts
  
 let data =

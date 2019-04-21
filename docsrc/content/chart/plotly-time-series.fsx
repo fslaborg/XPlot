@@ -1,5 +1,5 @@
 ﻿(*** hide ***)
-#I "../../../bin"
+#I "../../../bin/XPlot.Plotly/net45"
 #r "XPlot.Plotly.dll"
 
 open System
