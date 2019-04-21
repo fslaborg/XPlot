@@ -4,9 +4,8 @@ open Graph
 open Newtonsoft.Json
 open System
 open System.IO
-open System.Runtime.InteropServices
 
-module Html =    
+module Html =
 
     let pageTemplate =
         """<!DOCTYPE html>
@@ -41,15 +40,7 @@ module Html =
         let file = sprintf "%s.html" pageId
         let path = Path.Combine(tempPath, file)
         File.WriteAllText(path, html)
-        if RuntimeInformation.IsOSPlatform(OSPlatform.Windows) then
-            let psi = new System.Diagnostics.ProcessStartInfo(FileName = path, UseShellExecute = true)
-            System.Diagnostics.Process.Start(psi) |> ignore
-        elif RuntimeInformation.IsOSPlatform(OSPlatform.Linux) then
-            System.Diagnostics.Process.Start("xdg-open", path) |> ignore
-        elif RuntimeInformation.IsOSPlatform(OSPlatform.OSX) then
-            System.Diagnostics.Process.Start("open", path) |> ignore
-        else
-            invalidOp "Not supported OS platform"        
+        System.Diagnostics.Process.Start(path) |> ignore
 
 type Options = Layout
 

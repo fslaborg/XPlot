@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net472;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>net45;netstandard2.0</TargetFrameworks>
     <RootNamespace>XPlot.GoogleCharts</RootNamespace>
     <AssemblyName>XPlot.GoogleCharts</AssemblyName>
     <Name>XPlot.GoogleCharts</Name>
@@ -22,6 +22,7 @@
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="Configuration.fs" />
     <Compile Include="Main.fs" />
+    <Content Include="app.config" />
     <Content Include="paket.references" />
     <None Include="tests\Annotation.fsx" />
     <None Include="tests\Area.fsx" />

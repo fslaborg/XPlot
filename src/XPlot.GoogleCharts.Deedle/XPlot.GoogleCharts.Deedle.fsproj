@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net472;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>net45;netstandard2.0</TargetFrameworks>
     <RootNamespace>XPlot.GoogleCharts.Deedle</RootNamespace>
     <AssemblyName>XPlot.GoogleCharts.Deedle</AssemblyName>
     <Name>XPlot.GoogleCharts.Deedle</Name>
@@ -18,12 +18,10 @@
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
-  <!-- <ItemGroup>
-    <PackageReference Include="Deedle" Version="2.0.2" />
-  </ItemGroup>   -->
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="Deedle.fs" />
+    <Content Include="app.config" />
     <Content Include="paket.references" />
     <None Include="Tests.fsx" />
     <None Include="tests\Annotation.fsx" />

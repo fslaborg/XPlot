@@ -1,5 +1,4 @@
-﻿#I "../../bin/XPlot.GoogleCharts/net45"
-#r "XPlot.GoogleCharts.dll"
+﻿#load "../packages/XPlot.GoogleCharts.1.0.1/XPlot.GoogleCharts.fsx"
  
 open XPlot.GoogleCharts
  

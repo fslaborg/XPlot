@@ -3,8 +3,7 @@
 #r "System.Xaml.dll"
 #r "WindowsBase.dll"
 
-#I "../../bin/XPlot.GoogleCharts/net45"
-#r "XPlot.GoogleCharts.dll"
+#load "../packages/XPlot.GoogleCharts.1.0.1/XPlot.GoogleCharts.fsx"
 
 open System.Windows
 open System.Windows.Controls
@@ -21,7 +20,7 @@ let initWindow() =
 let showInWindow (chart:GoogleChart) =
     let wnd = initWindow()
     let browser = new WebBrowser()
-    browser.NavigateToString (chart.GetHtml())
+    browser.NavigateToString chart.Html
     wnd.Content <- browser
     wnd.Show()
     "Google Chart"

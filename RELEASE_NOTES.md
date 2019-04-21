@@ -1,5 +1,5 @@
 ### 1.5.0 - August 6, 2018
-* Update to FSharp.Core 4.5.0.0
+* Update to FSHarp.Core 4.5.0.0
 * Use proper google download links
 * Doc updates
 
@@ -10,7 +10,7 @@
 * Quickstart tutorial, incorrect link fix (#64)
 * Adding Candlestick to Plotly (#65)
 
-### 1.4.2 - September 25, 2016
+﻿### 1.4.2 - September 25, 2016
 * Rationalise the GoogleChart and PlotlyChart types
 * Rationalise the pipeline style helpers
 * Explicit dependencies versions

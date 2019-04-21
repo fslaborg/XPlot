@@ -1,5 +1,5 @@
 (*** hide ***)
-#I "../../../bin/XPlot.Plotly/net45"
+#I "../../../bin"
 #I "../../../packages/MathNet.Numerics/lib/net40"
 #r "XPlot.Plotly.dll"
 #r "MathNet.Numerics.dll"

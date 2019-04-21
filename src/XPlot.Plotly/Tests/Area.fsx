@@ -1,4 +1,4 @@
-﻿#r @"../../../bin/XPlot.Plotly/net45/XPlot.Plotly.dll"
+﻿#r @"../../../bin/XPlot.Plotly.dll"
 
 open XPlot.Plotly
 

@@ -1,5 +1,6 @@
-﻿#I "../../../bin/XPlot.GoogleCharts/net45"
+﻿#I "../../../bin"
 #r "XPlot.GoogleCharts.dll"
+#r "XPlot.GoogleCharts.WPF.dll"
 
 open System
 open XPlot.GoogleCharts
