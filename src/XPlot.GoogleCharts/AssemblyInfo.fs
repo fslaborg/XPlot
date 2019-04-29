@@ -5,13 +5,13 @@ open System.Reflection
 [<assembly: AssemblyTitleAttribute("XPlot.GoogleCharts")>]
 [<assembly: AssemblyProductAttribute("XPlot")>]
 [<assembly: AssemblyDescriptionAttribute("Data visualization library for F#")>]
-[<assembly: AssemblyVersionAttribute("1.5.0")>]
-[<assembly: AssemblyFileVersionAttribute("1.5.0")>]
+[<assembly: AssemblyVersionAttribute("2.0.0")>]
+[<assembly: AssemblyFileVersionAttribute("2.0.0")>]
 do ()
 
 module internal AssemblyVersionInformation =
     let [<Literal>] AssemblyTitle = "XPlot.GoogleCharts"
     let [<Literal>] AssemblyProduct = "XPlot"
     let [<Literal>] AssemblyDescription = "Data visualization library for F#"
-    let [<Literal>] AssemblyVersion = "1.5.0"
-    let [<Literal>] AssemblyFileVersion = "1.5.0"
+    let [<Literal>] AssemblyVersion = "2.0.0"
+    let [<Literal>] AssemblyFileVersion = "2.0.0"

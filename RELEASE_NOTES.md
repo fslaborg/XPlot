@@ -1,3 +1,6 @@
+### 2.0.0 - April 29, 2019
+* net472/netstandard2.0 full compatibility
+
 ### 1.5.0 - August 6, 2018
 * Update to FSharp.Core 4.5.0.0
 * Use proper google download links
