@@ -6,7 +6,11 @@
 
 #load "./.fake/build.fsx/intellisense.fsx"
 
+#if !FAKE
+    #r "netstandard"
+#endif
 open System.IO
+open System
 open Fake.Core
 open Fake.Core.TargetOperators
 open Fake.DotNet
@@ -64,7 +68,7 @@ let gitName = "XPlot"
 // The url for the raw files hosted
 let gitRaw = Environment.environVarOrDefault "gitRaw" "https://raw.github.com/fslaborg"
 
-let website = "/XPlot"
+let website = "https://fslab.org/XPlot"
 
 // --------------------------------------------------------------------------------------
 // END TODO: The rest of the file includes standard build steps
@@ -115,7 +119,7 @@ Target.create "Clean" (fun _ ->
 )
 
 Target.create "CleanDocs" (fun _ ->
-    Shell.cleanDirs ["docs/output"]
+    Shell.cleanDirs ["docs"]
 )
 
 // --------------------------------------------------------------------------------------
@@ -162,116 +166,11 @@ Target.create "PublishNuget" (fun _ ->
 
 // --------------------------------------------------------------------------------------
 // Generate the documentation
-
-// Paths with template/source/output locations
-let bin        = __SOURCE_DIRECTORY__ @@ "bin"
-let content    = __SOURCE_DIRECTORY__ @@ "docsrc\\content"
-let output     = __SOURCE_DIRECTORY__ @@ "docs"
-let files      = __SOURCE_DIRECTORY__ @@ "docsrc\\files"
-let templates  = __SOURCE_DIRECTORY__ @@ "docsrc\\tools\\templates"
-let formatting = __SOURCE_DIRECTORY__ @@ "packages\\formatting\\FSharp.Formatting"
-let docTemplate = "docpage.cshtml"
-
-let github_release_user = Environment.environVarOrDefault "github_release_user" gitOwner
-let githubLink = sprintf "https://github.com/%s/%s" github_release_user gitName
-
-let info =
-  [ "project-name", project
-    "project-author", authors
-    "project-summary", summary
-    "project-github", githubLink
-    "project-nuget", sprintf "http://nuget.org/packages%s" website ]
-
-let root = website
-
-let referenceBinaries = []
-
-let layoutRootsAll = new System.Collections.Generic.Dictionary<string, string list>()
-layoutRootsAll.Add("en",[   templates; 
-                            formatting @@ "templates"
-                            formatting @@ "templates/reference" ])
-
-Target.create "GenerateReferenceDocs" (fun _ ->
-    Directory.ensure (output @@ "reference")
-
-    let binaries () =
-        let manuallyAdded = 
-            referenceBinaries 
-            |> List.map (fun b -> bin @@ b)
-   
-        let conventionBased = 
-            DirectoryInfo.getSubDirectories <| DirectoryInfo bin
-            |> Array.collect (fun d ->
-                let name, dInfo =
-                    let net45Bin =
-                        DirectoryInfo.getSubDirectories d |> Array.filter(fun x -> x.FullName.ToLower().Contains("net45"))
-                    d.Name, net45Bin.[0]
-
-                dInfo.GetFiles()
-                |> Array.filter (fun x -> 
-                    x.Name.ToLower() = (sprintf "%s.dll" name).ToLower())
-                |> Array.map (fun x -> x.FullName) 
-                )
-            |> List.ofArray
-
-        conventionBased @ manuallyAdded
-
-    binaries()
-    |> FSFormatting.createDocsForDlls (fun args ->
-        { args with
-            OutputDirectory = output @@ "reference"
-            LayoutRoots =  layoutRootsAll.["en"]
-            ProjectParameters =  ("root", root)::info
-            SourceRepository = githubLink @@ "tree/master" }
-           )
+Target.create "GenerateDocs" (fun _ ->
+  let (exitCode, messages) = Fsi.exec (fun p -> { p with WorkingDirectory="docsrc/tools"; Define="RELEASE"; }) "generate.fsx" []
+  if exitCode = 0 then () else 
+    failwith (messages |> String.concat Environment.NewLine)
 )
-
-let copyFiles () =
-    Shell.copyRecursive files output true 
-    |> Trace.logItems "Copying file: "
-    Directory.ensure (output @@ "content")
-    Shell.copyRecursive (formatting @@ "styles") (output @@ "content") true 
-    |> Trace.logItems "Copying styles and scripts: "
-        
-Target.create "GenerateHelp" (fun _ ->
-    File.delete "docsrc/content/release-notes.md"
-    Shell.copyFile "docsrc/content/" "RELEASE_NOTES.md"
-    Shell.rename "docsrc/content/release-notes.md" "docsrc/content/RELEASE_NOTES.md"
-
-    File.delete "docsrc/content/license.md"
-    Shell.copyFile "docsrc/content/" "LICENSE.md"
-    //Shell.rename "docsrc/content/license.md" "docsrc/content/LICENSE.txt"
-
-    DirectoryInfo.getSubDirectories (DirectoryInfo.ofPath templates)
-    |> Seq.iter (fun d ->
-                    let name = d.Name
-                    if name.Length = 2 || name.Length = 3 then
-                        layoutRootsAll.Add(
-                                name, [templates @@ name
-                                       formatting @@ "templates"
-                                       formatting @@ "templates/reference" ]))
-    copyFiles ()
-    
-    for dir in  [ content; ] do
-        let langSpecificPath(lang, path:string) =
-            path.Split([|'/'; '\\'|], System.StringSplitOptions.RemoveEmptyEntries)
-            |> Array.exists(fun i -> i = lang)
-        let layoutRoots =
-            let key = layoutRootsAll.Keys |> Seq.tryFind (fun i -> langSpecificPath(i, dir))
-            match key with
-            | Some lang -> layoutRootsAll.[lang]
-            | None -> layoutRootsAll.["en"] // "en" is the default language
-
-        FSFormatting.createDocs (fun args ->
-            { args with
-                Source = content
-                OutputDirectory = output 
-                LayoutRoots = layoutRoots
-                ProjectParameters  = ("root", root)::info
-                Template = docTemplate } )
-)
-
-Target.create "GenerateDocs" ignore
 
 // --------------------------------------------------------------------------------------
 // Release Scripts
@@ -305,22 +204,14 @@ Target.create "All" ignore
   ==> "AssemblyInfo"
   ==> "Build"
   ==> "CopyBinaries"
-//   =?> ("GenerateReferenceDocs",isLocalBuild)
-//   =?> ("GenerateDocs",isLocalBuild)
   ==> "All"
 
 "All"
   ==> "NuGet"
 
-"CleanDocs"
-  ==> "GenerateHelp"
-  ==> "GenerateReferenceDocs"
+"All"
+  ==> "CleanDocs"
   ==> "GenerateDocs"
-
-"GenerateHelp" ?=> "Build"
-
-"GenerateDocs"
-  ==> "Release"
 
 "BuildPackage"
   ==> "PublishNuget"

@@ -1,15 +1,12 @@
 module Formatters
-#I "../../packages/FSharp.Formatting/lib/net40"
-#r "FSharp.Literate.dll"
-#r "FSharp.Markdown.dll"
-#r "FSharp.CodeFormat.dll"
-#r "RazorEngine.dll"
-#r "../../packages/FAKE/tools/FakeLib.dll"
-#r "../../packages/Deedle/lib/net40/Deedle.dll"
-#r "../../bin/XPlot.GoogleCharts.dll"
-#r "../../bin/XPlot.Plotly.dll"
-#r "../../bin/XPlot.D3.dll"
-
+#I "../../packages/formatting/FSharp.Formatting"
+#load "FSharp.Formatting.fsx"
+#r "../../packages/Deedle/lib/net45/Deedle.dll"
+#r "../../bin/XPlot.GoogleCharts/net45/XPlot.GoogleCharts.dll"
+#r "../../bin/XPlot.Plotly/net45/XPlot.Plotly.dll"
+#r "../../bin/XPlot.D3/net45/XPlot.D3.dll"
+#r "../../packages/formatting/FSharp.Compiler.Service/lib/net45/FSharp.Compiler.Service.dll"
+#r "netstandard"
 // --------------------------------------------------------------------------------------
 // NOTE: Most of this file is the same as in FsLab (https://github.com/fslaborg/FsLab)
 // --------------------------------------------------------------------------------------
@@ -51,8 +48,6 @@ let vectorEndItemCount = 2
 // Helper functions etc.
 // --------------------------------------------------------------------------------------
 
-open System.Windows.Forms
-
 /// Extract values from any series using reflection
 let (|SeriesValues|_|) (value:obj) = 
   if value <> null then
@@ -76,13 +71,13 @@ let inline (|NaN|_|) (v: ^T) =
 
 /// Format value as a single-literal paragraph
 let formatValue (floatFormat:string) def = function
-  | Some(Float v) -> [ Paragraph [Literal (v.ToString(floatFormat)) ]] 
-  | Some(Float32 v) -> [ Paragraph [Literal (v.ToString(floatFormat)) ]] 
-  | Some v -> [ Paragraph [Literal (v.ToString()) ]] 
-  | _ -> [ Paragraph [Literal def] ]
+  | Some(Float v) -> [ Paragraph([Literal(v.ToString(floatFormat), None)], None)] 
+  | Some(Float32 v) -> [ Paragraph([Literal(v.ToString(floatFormat), None)], None)] 
+  | Some v -> [ Paragraph([Literal(v.ToString(), None)], None)] 
+  | _ -> [ Paragraph([Literal(def, None)], None)]
 
 /// Format body of a single table cell
-let td v = [ Paragraph [Literal v] ]
+let td v = [ Paragraph([Literal(v, None)], None)]
 
 /// Use 'f' to transform all values, then call 'g' with Some for 
 /// values to show and None for "..." in the middle
@@ -118,9 +113,9 @@ let InlineMultiformatBlock(html, latex) =
     { new MarkdownEmbedParagraphs with
         member x.Render() =
           if currentOutputKind = OutputKind.Html then [ InlineBlock html ] else [ InlineBlock latex ] }
-  EmbedParagraphs(block)
+  EmbedParagraphs(block, None)
 
-let MathDisplay(latex) = Span [ LatexDisplayMath latex ]
+let MathDisplay(latex) = Span([ LatexDisplayMath latex ], None)
 
 /// Builds FSI evaluator that can render System.Image, F# Charts, series & frames
 let createFsiEvaluator root output (floatFormat:string) =
@@ -139,12 +134,12 @@ let createFsiEvaluator root output (floatFormat:string) =
         let file = "chart" + id + ".png"
         ensureDirectory (output @@ "images")
         img.Save(output @@ "images" @@ file, System.Drawing.Imaging.ImageFormat.Png) 
-        Some [ Paragraph [DirectImage ("", (root + "/images/" + file, None))]  ]
+        Some [ Paragraph([DirectImage ("", root + "/images/" + file, None, None)], None) ]
 
     | :? GoogleCharts.GoogleChart as ch ->
         // Just return the inline HTML of a Google chart
         let ch = ch |> XPlot.GoogleCharts.Chart.WithSize(700, 400)
-        Some [ InlineBlock <| ch.GetInlineHtml() ]
+        Some [ InlineBlock (ch.GetInlineHtml(), None) ]
 
     | :? Plotly.PlotlyChart as chart ->
         // Just return the inline HTML for a Plotly chart
@@ -155,17 +150,17 @@ let createFsiEvaluator root output (floatFormat:string) =
 //        fig.Width <- 600
 //        fig.Height <- 300
 //        Some [ InlineBlock (fig.GetInlineHtml(name)) ]
-        Some [ InlineBlock <| chart.GetInlineHtml() ]
-    | :? D3.ForceLayoutChart as chart -> Some [ InlineBlock <| chart.GetHtml() ]
+        Some [ InlineBlock(chart.GetInlineHtml(), None) ]
+    | :? D3.ForceLayoutChart as chart -> Some [ InlineBlock(chart.GetHtml(), None) ]
 
     | SeriesValues s ->
         // Pretty print series!
         let heads  = s |> mapSteps sitms fst (function Some k -> td (k.ToString()) | _ -> td " ... ")
         let row    = s |> mapSteps sitms snd (function Some v -> formatValue floatFormat "N/A" (OptionalValue.asOption v) | _ -> td " ... ")
         let aligns = s |> mapSteps sitms id (fun _ -> AlignDefault)
-        [ InlineMultiformatBlock("<div class=\"deedleseries\">", "\\vspace{1em}")
-          TableBlock(Some ((td "Keys")::heads), AlignDefault::aligns, [ (td "Values")::row ]) 
-          InlineMultiformatBlock("</div>","\\vspace{1em}") ] |> Some
+        [ InlineMultiformatBlock(("<div class=\"deedleseries\">", None), ("\\vspace{1em}", None))
+          TableBlock(Some ((td "Keys")::heads), AlignDefault::aligns, [ (td "Values")::row ], None) 
+          InlineMultiformatBlock(("</div>", None), ("\\vspace{1em}", None))] |> Some
 
     | :? IFrame as f ->
       // Pretty print frame!
@@ -182,11 +177,11 @@ let createFsiEvaluator root output (floatFormat:string) =
                 | None -> " ... ", " ... ", f.ColumnKeys |> Seq.map (fun _ -> None)
               let row = data |> mapSteps fcols id (function Some v -> formatValue floatFormat def v | _ -> td " ... ")
               (td k)::row )
-          Some [ 
-            InlineMultiformatBlock("<div class=\"deedleframe\">","\\vspace{1em}")
-            TableBlock(Some ([]::heads), AlignDefault::aligns, rows) 
-            InlineMultiformatBlock("</div>","\\vspace{1em}")
-          ] }
+          [ 
+            InlineMultiformatBlock(("<div class=\"deedleframe\">", None),("\\vspace{1em}", None))
+            TableBlock(Some ([]::heads), AlignDefault::aligns, rows, None) 
+            InlineMultiformatBlock(("</div>", None), ("\\vspace{1em}", None))
+          ] |> Some }
       |> f.Apply
 
     | _ -> None 
