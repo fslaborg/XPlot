@@ -81,11 +81,11 @@ using a simple F# list comprehension:</p>
 
                 var options = {"legend":{"position":"none"}} 
 
-                var chart = new google.visualization.LineChart(document.getElementById('d2fd0e2f-f96f-47b2-962b-5f575c78ff07'));
+                var chart = new google.visualization.LineChart(document.getElementById('cf4b2ba8-9723-414f-8028-34388e9693de'));
                 chart.draw(data, options);
             }
 </script>
-<div id="d2fd0e2f-f96f-47b2-962b-5f575c78ff07" style="width: 700px; height: 400px;"></div>
+<div id="cf4b2ba8-9723-414f-8028-34388e9693de" style="width: 700px; height: 400px;"></div>
 <h2><a name="A-smooth-function-chart" class="anchor" href="#A-smooth-function-chart">A smooth function chart</a></h2>
 <p>By default, line charts use straight line segments between the points. You can add
 smoothing by creating <code>Options</code> with <code>curveType="function"</code> as follows:</p>
@@ -109,11 +109,11 @@ smoothing by creating <code>Options</code> with <code>curveType="function"</code
 
                 var options = {"legend":{"position":"none"},"curveType":"function"} 
 
-                var chart = new google.visualization.LineChart(document.getElementById('85494777-6ad7-44a7-999f-385a41975a0e'));
+                var chart = new google.visualization.LineChart(document.getElementById('e8bad5a2-1b16-4fb0-b70a-4515f2355de8'));
                 chart.draw(data, options);
             }
 </script>
-<div id="85494777-6ad7-44a7-999f-385a41975a0e" style="width: 700px; height: 400px;"></div>
+<div id="e8bad5a2-1b16-4fb0-b70a-4515f2355de8" style="width: 700px; height: 400px;"></div>
 <p>You can find more information about other options that you can specify in the documentation
 <a href="reference/xplot-googlecharts-configuration-options.html">for the <code>Options</code> type</a> in the API
 reference. Another way to explore the available configuration options is to type dot right
@@ -164,11 +164,11 @@ chart with annotations:</p>
 
                 var options = {"legend":{"position":"right"},"title":"Company Performance","curveType":"function"} 
 
-                var chart = new google.visualization.LineChart(document.getElementById('dcd44abc-6094-438e-9459-6ca8db7a12ff'));
+                var chart = new google.visualization.LineChart(document.getElementById('5a3224ee-2266-42d6-a644-26ed3f304025'));
                 chart.draw(data, options);
             }
 </script>
-<div id="dcd44abc-6094-438e-9459-6ca8db7a12ff" style="width: 700px; height: 400px;"></div>
+<div id="5a3224ee-2266-42d6-a644-26ed3f304025" style="width: 700px; height: 400px;"></div>
 <p>Note that the two inputs are sequences of tuples with X (year) and Y (value) pairs. We then
 create <code>Options</code> object to specify the title, smooth curve and also the legend of the chart.
 Then we call <code>Chart.Line</code> followed by <code>Chart.WithOptions</code> and also <code>Chart.WithLabels</code> to

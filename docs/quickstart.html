@@ -72,10 +72,8 @@ and <a href="https://marketplace.visualstudio.com/items?itemName=Ionide.Ionide-p
 <p>Modify <code>paket.dependencies</code> so that it looks like this:</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
-<span class="l">3: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="id">framework</span><span class="pn">:</span><span class="id">net45</span>
-<span class="id">source</span> <span class="id">https</span><span class="pn">:</span><span class="c">//www.nuget.org/api/v2</span>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="id">source</span> <span class="id">https</span><span class="pn">:</span><span class="c">//www.nuget.org/api/v2</span>
 <span class="id">nuget</span> <span class="id">XPlot</span><span class="pn">.</span><span class="id">GoogleCharts</span>
 </code></pre></td>
 </tr>
@@ -94,14 +92,16 @@ This installs the package in your folder. You will see two things:</p>
 <span class="l">6: </span>
 <span class="l">7: </span>
 <span class="l">8: </span>
+<span class="l">9: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="o">/</span><span class="id">packages</span><span class="o">/</span>
     <span class="o">/</span> <span class="id">Google</span><span class="pn">.</span><span class="id">DataTable</span><span class="pn">.</span><span class="id">Net</span><span class="pn">.</span><span class="id">Wrapper</span><span class="o">/</span>
         <span class="o">/</span> <span class="id">lib</span>
-            <span class="o">/</span> <span class="id">Google</span><span class="pn">.</span><span class="id">DataTable</span><span class="pn">.</span><span class="id">Net</span><span class="pn">.</span><span class="id">Wrapper</span><span class="pn">.</span><span class="id">dll</span>
+            <span class="o">/</span><span class="id">netstandard2</span><span class="pn">.</span><span class="n">0</span>
+                <span class="o">/</span> <span class="id">Google</span><span class="pn">.</span><span class="id">DataTable</span><span class="pn">.</span><span class="id">Net</span><span class="pn">.</span><span class="id">Wrapper</span><span class="pn">.</span><span class="id">dll</span>
     <span class="o">/</span> <span class="id">XPlot</span><span class="pn">.</span><span class="id">GoogleCharts</span>
         <span class="o">/</span> <span class="id">lib</span>
-            <span class="o">/</span><span class="id">net45</span>
+            <span class="o">/</span><span class="id">netstandard2</span><span class="pn">.</span><span class="n">0</span>
                 <span class="o">/</span> <span class="id">XPlot</span><span class="pn">.</span><span class="id">GoogleCharts</span><span class="pn">.</span><span class="id">dll</span>
 </code></pre></td>
 </tr>
@@ -119,10 +119,10 @@ This installs the package in your folder. You will see two things:</p>
 <span class="l">7: </span>
 <span class="l">8: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="pp">#I</span> <span class="s">&quot;./packages&quot;</span>
-<span class="pp">#r</span> <span class="s">&quot;Google.DataTable.Net.Wrapper/lib/Google.DataTable.Net.Wrapper.dll&quot;</span>
-<span class="pp">#r</span> <span class="s">&quot;XPlot.GoogleCharts/lib/net45/XPlot.GoogleCharts.dll&quot;</span>
-<span class="pp">#r</span> <span class="s">&quot;Newtonsoft.Json/lib/net45/Newtonsoft.Json.dll&quot;</span>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="pp">#I</span> <span class="s">&quot;../../packages&quot;</span>
+<span class="pp">#r</span> <span class="s">&quot;Google.DataTable.Net.Wrapper/lib/netstandard2.0/Google.DataTable.Net.Wrapper.dll&quot;</span>
+<span class="pp">#r</span> <span class="s">&quot;XPlot.GoogleCharts/lib/netstandard2.0/XPlot.GoogleCharts.dll&quot;</span>
+<span class="pp">#r</span> <span class="s">&quot;Newtonsoft.Json/lib/netstandard2.0/Newtonsoft.Json.dll&quot;</span>
 
 <span class="k">open</span> <span class="id">XPlot</span><span class="pn">.</span><span class="id">GoogleCharts</span>
 

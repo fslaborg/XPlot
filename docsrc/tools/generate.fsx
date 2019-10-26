@@ -35,9 +35,9 @@ open FSharp.Formatting.Razor
 let referenceBinaries = 
   [ 
     __SOURCE_DIRECTORY__ + "/../../bin/XPlot.D3/net45/XPlot.D3.dll"
-    __SOURCE_DIRECTORY__ + "/../../bin/XPlot.GoogleCharts/net45/XPlot.GoogleCharts.dll"
+    __SOURCE_DIRECTORY__ + "/../../bin/XPlot.GoogleCharts/net472/XPlot.GoogleCharts.dll"
     __SOURCE_DIRECTORY__ + "/../../bin/XPlot.GoogleCharts.Deedle/net45/XPlot.GoogleCharts.Deedle.dll"
-    __SOURCE_DIRECTORY__ + "/../../bin/XPlot.Plotly/net45/XPlot.Plotly.dll"
+    __SOURCE_DIRECTORY__ + "/../../bin/XPlot.Plotly/net472/XPlot.Plotly.dll"
   ]
 
 // When called from 'build.fsx', use the public project URL as <root>

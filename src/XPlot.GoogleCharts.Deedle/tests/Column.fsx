@@ -1,12 +1,10 @@
-﻿#I "../../../bin"
+﻿#I "../../../bin/XPlot.GoogleCharts.Deedle/net472"
 #r "Deedle.dll"
 #r "XPlot.GoogleCharts.dll"
 #r "XPlot.GoogleCharts.Deedle.dll"
-#r "XPlot.GoogleCharts.WPF.dll"
 
 open Deedle
 open XPlot.GoogleCharts
-open XPlot.GoogleCharts.Deedle
 
 let sales = series ["2013" => 1000; "2014" => 1170; "2015" => 660; "2016" => 1030]
 let expenses = series ["2013" => 400; "2014" => 460; "2015" => 1120; "2016" => 540]

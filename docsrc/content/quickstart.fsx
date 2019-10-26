@@ -23,7 +23,6 @@ This will create a file called `paket.dependencies`
 Modify `paket.dependencies` so that it looks like this:
 
 ```
-framework:net45
 source https://www.nuget.org/api/v2
 nuget XPlot.GoogleCharts
 ```
@@ -38,10 +37,11 @@ This installs the package in your folder. You will see two things:
 /packages/
     / Google.DataTable.Net.Wrapper/
         / lib
-            / Google.DataTable.Net.Wrapper.dll
+            /netstandard2.0
+                / Google.DataTable.Net.Wrapper.dll
     / XPlot.GoogleCharts
         / lib
-            /net45
+            /netstandard2.0
                 / XPlot.GoogleCharts.dll
 ```
                 
@@ -55,10 +55,10 @@ Copy-paste the following code into the editor:
 
 *)
 
-#I "./packages"
-#r "Google.DataTable.Net.Wrapper/lib/Google.DataTable.Net.Wrapper.dll"
-#r "XPlot.GoogleCharts/lib/net45/XPlot.GoogleCharts.dll"
-#r "Newtonsoft.Json/lib/net45/Newtonsoft.Json.dll"
+#I "../../packages"
+#r "Google.DataTable.Net.Wrapper/lib/netstandard2.0/Google.DataTable.Net.Wrapper.dll"
+#r "XPlot.GoogleCharts/lib/netstandard2.0/XPlot.GoogleCharts.dll"
+#r "Newtonsoft.Json/lib/netstandard2.0/Newtonsoft.Json.dll"
 
 open XPlot.GoogleCharts
 
