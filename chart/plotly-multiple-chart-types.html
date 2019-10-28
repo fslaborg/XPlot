@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Multiple Chart Types
+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Data visualization library for F#" />
+    <meta name="author" content="Taha Hachana; Tomas Petricek" />
+
+    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {
+            packages: ["corechart", "annotationchart", "calendar", "gauge", "geochart", "map", "sankey", "table", "timeline", "treemap"]
+        });
+    </script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://fslab.org/XPlot/content/style.css" />
+    <script type="text/javascript" src="https://fslab.org/XPlot/content/tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div class="container">
+        <div class="masthead">
+            <ul class="nav nav-pills pull-right">
+                <li>
+                    <a href="https://fslab.org"><img height="16" width="16" src="https://fslab.org/img/thumbs/fslab.png" /> FsLab</a>
+                </li>
+                <li>
+                    <a href="http://fsharp.github.io/FSharp.Data"><img height="16" width="16" src="https://fslab.org/img/thumbs/fsharpdata.png" /> F# Data</a>
+                </li>
+                <li>
+                    <a href="https://fslab.org/Deedle"><img height="16" width="16" src="https://fslab.org/img/thumbs/deedle.png" /> Deedle</a>
+                </li>
+                <li>
+                    <a href="https://fslab.org/RProvider"><img height="16" width="16" src="https://fslab.org/img/thumbs/rprovider.png" /> R Provider</a>
+                </li>
+                <li>
+                    <a href="http://numerics.mathdotnet.com/"><img height="16" width="16" src="https://fslab.org/img/thumbs/mathnet.png" /> Math.NET</a>
+                </li>
+            </ul>
+            <h3 class="muted"><a href="https://fslab.org/XPlot/">XPlot</a></h3>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="span9" id="main">
+                
+<h1><a name="Multiple-Chart-Types" class="anchor" href="#Multiple-Chart-Types">Multiple Chart Types</a></h1>
+<p><a href="https://github.com/fslaborg/XPlot/blob/master/docsrc/content/chart/plotly-multiple-chart-types.fsx">Full source and data</a></p>
+<h2><a name="A-Contour-and-Scatter-Plot-of-the-Method-of-Steepest-Descent" class="anchor" href="#A-Contour-and-Scatter-Plot-of-the-Method-of-Steepest-Descent">A Contour and Scatter Plot of the Method of Steepest Descent</a></h2>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+<span class="l">11: </span>
+<span class="l">12: </span>
+<span class="l">13: </span>
+<span class="l">14: </span>
+<span class="l">15: </span>
+<span class="l">16: </span>
+<span class="l">17: </span>
+<span class="l">18: </span>
+<span class="l">19: </span>
+<span class="l">20: </span>
+<span class="l">21: </span>
+<span class="l">22: </span>
+<span class="l">23: </span>
+<span class="l">24: </span>
+<span class="l">25: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs8', 8)" onmouseover="showTip(event, 'fs8', 8)" class="id">trace1</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs9', 9)" onmouseover="showTip(event, 'fs9', 9)" class="rt">Contour</span><span class="pn">(</span>
+        <span onmouseout="hideTip(event, 'fs10', 10)" onmouseover="showTip(event, 'fs10', 10)" class="id">z</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs3', 11)" onmouseover="showTip(event, 'fs3', 11)" class="id">z1</span><span class="pn">,</span>
+        <span onmouseout="hideTip(event, 'fs11', 12)" onmouseover="showTip(event, 'fs11', 12)" class="id">x</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 13)" onmouseover="showTip(event, 'fs4', 13)" class="id">x1</span><span class="pn">,</span>
+        <span onmouseout="hideTip(event, 'fs12', 14)" onmouseover="showTip(event, 'fs12', 14)" class="id">y</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs5', 15)" onmouseover="showTip(event, 'fs5', 15)" class="id">y1</span><span class="pn">,</span>
+        <span class="id">ncontours</span> <span class="o">=</span> <span class="n">30</span><span class="pn">,</span>
+        <span class="id">showscale</span> <span class="o">=</span> <span class="k">false</span>
+    <span class="pn">)</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs13', 16)" onmouseover="showTip(event, 'fs13', 16)" class="id">trace2</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs14', 17)" onmouseover="showTip(event, 'fs14', 17)" class="rt">Scatter</span><span class="pn">(</span>
+        <span onmouseout="hideTip(event, 'fs15', 18)" onmouseover="showTip(event, 'fs15', 18)" class="id">x</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 19)" onmouseover="showTip(event, 'fs6', 19)" class="id">x2</span><span class="pn">,</span>
+        <span onmouseout="hideTip(event, 'fs16', 20)" onmouseover="showTip(event, 'fs16', 20)" class="id">y</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs7', 21)" onmouseover="showTip(event, 'fs7', 21)" class="id">y2</span><span class="pn">,</span>
+        <span class="id">mode</span> <span class="o">=</span> <span class="s">&quot;markers+lines&quot;</span><span class="pn">,</span>
+        <span class="id">name</span> <span class="o">=</span> <span class="s">&quot;steepest&quot;</span><span class="pn">,</span>
+        <span class="id">line</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs17', 22)" onmouseover="showTip(event, 'fs17', 22)" class="rt">Line</span><span class="pn">(</span><span class="id">color</span> <span class="o">=</span> <span class="s">&quot;black&quot;</span><span class="pn">)</span>
+    <span class="pn">)</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs18', 23)" onmouseover="showTip(event, 'fs18', 23)" class="id">layout</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs19', 24)" onmouseover="showTip(event, 'fs19', 24)" class="rt">Layout</span><span class="pn">(</span><span class="id">title</span> <span class="o">=</span> <span class="s">&quot;A Contour and Scatter Plot of the Method of Steepest Descent&quot;</span><span class="pn">)</span>
+
+<span class="pn">[</span><span onmouseout="hideTip(event, 'fs8', 25)" onmouseover="showTip(event, 'fs8', 25)" class="id">trace1</span> <span class="o">:&gt;</span> <span onmouseout="hideTip(event, 'fs20', 26)" onmouseover="showTip(event, 'fs20', 26)" class="rt">Trace</span><span class="pn">;</span> <span onmouseout="hideTip(event, 'fs13', 27)" onmouseover="showTip(event, 'fs13', 27)" class="id">trace2</span> <span class="o">:&gt;</span> <span onmouseout="hideTip(event, 'fs20', 28)" onmouseover="showTip(event, 'fs20', 28)" class="rt">Trace</span><span class="pn">]</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 29)" onmouseover="showTip(event, 'fs21', 29)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 30)" onmouseover="showTip(event, 'fs22', 30)" class="id">Plot</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 31)" onmouseover="showTip(event, 'fs21', 31)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 32)" onmouseover="showTip(event, 'fs23', 32)" class="id">WithLayout</span> <span onmouseout="hideTip(event, 'fs18', 33)" onmouseover="showTip(event, 'fs18', 33)" class="id">layout</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 34)" onmouseover="showTip(event, 'fs21', 34)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs24', 35)" onmouseover="showTip(event, 'fs24', 35)" class="id">WithWidth</span> <span class="n">700</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 36)" onmouseover="showTip(event, 'fs21', 36)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 37)" onmouseover="showTip(event, 'fs25', 37)" class="id">WithHeight</span> <span class="n">500</span>
+</code></pre></td>
+</tr>
+</table>
+<div id="2745698b-57d5-4c01-a856-1377da53f284" style="width: 700px; height: 500px;"></div>
+        <script>
+            var data = [{"type":"contour","z":[[1.5,1.2346938775510206,1.010204081632653,0.82653061224489788,0.68367346938775508,0.58163265306122458,0.52040816326530615,0.5,0.52040816326530615,0.58163265306122436,0.683673469387755,0.82653061224489788,1.010204081632653,1.2346938775510201,1.5],[1.3673469387755102,1.102040816326531,0.87755102040816335,0.69387755102040827,0.55102040816326547,0.4489795918367348,0.38775510204081642,0.36734693877551028,0.38775510204081637,0.44897959183673469,0.55102040816326525,0.69387755102040827,0.87755102040816324,1.1020408163265305,1.3673469387755102],[1.2551020408163265,0.989795918367347,0.76530612244897966,0.58163265306122447,0.43877551020408168,0.33673469387755106,0.27551020408163268,0.25510204081632654,0.27551020408163263,0.33673469387755095,0.43877551020408145,0.58163265306122447,0.76530612244897944,0.98979591836734659,1.2551020408163265],[1.1632653061224489,0.8979591836734695,0.673469387755102,0.48979591836734693,0.34693877551020413,0.24489795918367352,0.18367346938775511,0.16326530612244897,0.18367346938775508,0.24489795918367338,0.34693877551020391,0.48979591836734693,0.6734693877551019,0.897959183673469,1.1632653061224489],[1.0918367346938775,0.8265306122448981,0.60204081632653061,0.41836734693877553,0.27551020408163274,0.17346938775510212,0.1122448979591837,0.09183673469387757,0.11224489795918367,0.17346938775510198,0.27551020408163251,0.41836734693877553,0.6020408163265305,0.82653061224489766,1.0918367346938775],[1.0408163265306123,0.77551020408163285,0.55102040816326536,0.36734693877551022,0.2244897959183674,0.12244897959183682,0.061224489795918408,0.040816326530612269,0.061224489795918373,0.12244897959183668,0.22448979591836721,0.36734693877551022,0.55102040816326525,0.7755102040816324,1.0408163265306123],[1.010204081632653,0.74489795918367363,0.52040816326530615,0.336734693877551,0.19387755102040821,0.091836734693877611,0.030612244897959204,0.010204081632653067,0.030612244897959169,0.091836734693877486,0.19387755102040802,0.336734693877551,0.520408163265306,0.74489795918367319,1.010204081632653],[1.0,0.73469387755102056,0.51020408163265307,0.32653061224489793,0.18367346938775514,0.081632653061224539,0.020408163265306135,0.0,0.020408163265306103,0.081632653061224414,0.18367346938775495,0.32653061224489793,0.510204081632653,0.73469387755102011,1.0],[1.010204081632653,0.74489795918367363,0.52040816326530615,0.336734693877551,0.19387755102040818,0.0918367346938776,0.030612244897959186,0.010204081632653052,0.030612244897959155,0.091836734693877459,0.193877551020408,0.336734693877551,0.520408163265306,0.74489795918367319,1.010204081632653],[1.0408163265306123,0.77551020408163274,0.55102040816326525,0.36734693877551017,0.22448979591836735,0.12244897959183675,0.061224489795918338,0.040816326530612207,0.06122448979591831,0.12244897959183662,0.22448979591836715,0.36734693877551017,0.55102040816326514,0.77551020408163229,1.0408163265306123],[1.0918367346938775,0.826530612244898,0.6020408163265305,0.41836734693877542,0.27551020408163263,0.173469387755102,0.1122448979591836,0.091836734693877473,0.11224489795918358,0.1734693877551019,0.2755102040816324,0.41836734693877542,0.60204081632653039,0.82653061224489754,1.0918367346938775],[1.1632653061224489,0.8979591836734695,0.673469387755102,0.48979591836734693,0.34693877551020413,0.24489795918367352,0.18367346938775511,0.16326530612244897,0.18367346938775508,0.24489795918367338,0.34693877551020391,0.48979591836734693,0.6734693877551019,0.897959183673469,1.1632653061224489],[1.2551020408163265,0.989795918367347,0.76530612244897955,0.58163265306122436,0.43877551020408162,0.336734693877551,0.27551020408163263,0.25510204081632648,0.27551020408163257,0.33673469387755089,0.43877551020408145,0.58163265306122436,0.76530612244897944,0.98979591836734659,1.2551020408163265],[1.3673469387755102,1.1020408163265305,0.87755102040816313,0.693877551020408,0.55102040816326525,0.44897959183673458,0.3877551020408162,0.36734693877551006,0.38775510204081615,0.44897959183673447,0.551020408163265,0.693877551020408,0.877551020408163,1.10204081632653,1.3673469387755102],[1.5,1.2346938775510206,1.010204081632653,0.82653061224489788,0.68367346938775508,0.58163265306122458,0.52040816326530615,0.5,0.52040816326530615,0.58163265306122436,0.683673469387755,0.82653061224489788,1.010204081632653,1.2346938775510201,1.5]],"x":[-1.0,-0.85714285714285721,-0.7142857142857143,-0.5714285714285714,-0.4285714285714286,-0.28571428571428581,-0.14285714285714291,0.0,0.14285714285714279,0.28571428571428559,0.42857142857142838,0.5714285714285714,0.71428571428571419,0.857142857142857,1.0],"y":[-1.0,-0.85714285714285721,-0.7142857142857143,-0.5714285714285714,-0.4285714285714286,-0.28571428571428581,-0.14285714285714291,0.0,0.14285714285714279,0.28571428571428559,0.42857142857142838,0.5714285714285714,0.71428571428571419,0.857142857142857,1.0],"showscale":false,"ncontours":30},{"type":"scatter","x":[-0.8,-0.48,-0.288,-0.17279999999999998,-0.10367999999999998,-0.062207999999999986,-0.037324799999999991,-0.022394879999999992,-0.013436927999999996,-0.0080621567999999977,-0.0048372940799999986,-0.002902376447999999,-0.0017414258687999994,-0.0010448555212799996,-0.00062691331276799964,-0.00037614798766079979],"y":[-0.9,-0.72,-0.576,-0.4608,-0.36863999999999997,-0.29491199999999995,-0.23592959999999996,-0.18874367999999997,-0.15099494399999996,-0.12079595519999997,-0.096636764159999972,-0.077309411327999983,-0.061847529062399986,-0.04947802324991999,-0.039582418599935991,-0.031665934879948794],"mode":"markers+lines","line":{"color":"black"},"name":"steepest"}];
+            var layout = {"title":"A Contour and Scatter Plot of the Method of Steepest Descent"};
+            Plotly.newPlot('2745698b-57d5-4c01-a856-1377da53f284', data, layout);
+        </script>
+<h2><a name="Line-Chart-and-a-Bar-Chart" class="anchor" href="#Line-Chart-and-a-Bar-Chart">Line Chart and a Bar Chart</a></h2>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+<span class="l">11: </span>
+<span class="l">12: </span>
+<span class="l">13: </span>
+<span class="l">14: </span>
+<span class="l">15: </span>
+<span class="l">16: </span>
+<span class="l">17: </span>
+<span class="l">18: </span>
+<span class="l">19: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs26', 38)" onmouseover="showTip(event, 'fs26', 38)" class="id">trace1&#39;</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs14', 39)" onmouseover="showTip(event, 'fs14', 39)" class="rt">Scatter</span><span class="pn">(</span>
+        <span onmouseout="hideTip(event, 'fs15', 40)" onmouseover="showTip(event, 'fs15', 40)" class="id">x</span> <span class="o">=</span> <span class="pn">[</span><span class="n">0</span><span class="pn">;</span> <span class="n">1</span><span class="pn">;</span> <span class="n">2</span><span class="pn">;</span> <span class="n">3</span><span class="pn">;</span> <span class="n">4</span><span class="pn">;</span> <span class="n">5</span><span class="pn">]</span><span class="pn">,</span>
+        <span onmouseout="hideTip(event, 'fs16', 41)" onmouseover="showTip(event, 'fs16', 41)" class="id">y</span> <span class="o">=</span> <span class="pn">[</span><span class="n">1.5</span><span class="pn">;</span> <span class="n">1.</span><span class="pn">;</span> <span class="n">1.3</span><span class="pn">;</span> <span class="n">0.7</span><span class="pn">;</span> <span class="n">0.8</span><span class="pn">;</span> <span class="n">0.9</span><span class="pn">]</span>
+    <span class="pn">)</span> <span class="o">:&gt;</span> <span onmouseout="hideTip(event, 'fs20', 42)" onmouseover="showTip(event, 'fs20', 42)" class="rt">Trace</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs27', 43)" onmouseover="showTip(event, 'fs27', 43)" class="id">trace2&#39;</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs28', 44)" onmouseover="showTip(event, 'fs28', 44)" class="rt">Bar</span><span class="pn">(</span>
+        <span onmouseout="hideTip(event, 'fs29', 45)" onmouseover="showTip(event, 'fs29', 45)" class="id">x</span> <span class="o">=</span> <span class="pn">[</span><span class="n">0</span><span class="pn">;</span> <span class="n">1</span><span class="pn">;</span> <span class="n">2</span><span class="pn">;</span> <span class="n">3</span><span class="pn">;</span> <span class="n">4</span><span class="pn">;</span> <span class="n">5</span><span class="pn">]</span><span class="pn">,</span>
+        <span onmouseout="hideTip(event, 'fs30', 46)" onmouseover="showTip(event, 'fs30', 46)" class="id">y</span> <span class="o">=</span> <span class="pn">[</span><span class="n">1.</span><span class="pn">;</span> <span class="n">0.5</span><span class="pn">;</span> <span class="n">0.7</span><span class="pn">;</span> <span class="o">-</span><span class="n">1.2</span><span class="pn">;</span> <span class="n">0.3</span><span class="pn">;</span> <span class="n">0.4</span><span class="pn">]</span>
+    <span class="pn">)</span> <span class="o">:&gt;</span> <span onmouseout="hideTip(event, 'fs20', 47)" onmouseover="showTip(event, 'fs20', 47)" class="rt">Trace</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs31', 48)" onmouseover="showTip(event, 'fs31', 48)" class="id">multiLayout</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs19', 49)" onmouseover="showTip(event, 'fs19', 49)" class="rt">Layout</span><span class="pn">(</span><span class="id">title</span> <span class="o">=</span> <span class="s">&quot;Line Chart and a Bar Chart&quot;</span><span class="pn">)</span>
+
+<span class="pn">[</span><span onmouseout="hideTip(event, 'fs26', 50)" onmouseover="showTip(event, 'fs26', 50)" class="id">trace1&#39;</span><span class="pn">;</span> <span onmouseout="hideTip(event, 'fs27', 51)" onmouseover="showTip(event, 'fs27', 51)" class="id">trace2&#39;</span><span class="pn">]</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 52)" onmouseover="showTip(event, 'fs21', 52)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 53)" onmouseover="showTip(event, 'fs22', 53)" class="id">Plot</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 54)" onmouseover="showTip(event, 'fs21', 54)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 55)" onmouseover="showTip(event, 'fs23', 55)" class="id">WithLayout</span> <span onmouseout="hideTip(event, 'fs31', 56)" onmouseover="showTip(event, 'fs31', 56)" class="id">multiLayout</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 57)" onmouseover="showTip(event, 'fs21', 57)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs24', 58)" onmouseover="showTip(event, 'fs24', 58)" class="id">WithWidth</span> <span class="n">700</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 59)" onmouseover="showTip(event, 'fs21', 59)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 60)" onmouseover="showTip(event, 'fs25', 60)" class="id">WithHeight</span> <span class="n">500</span>
+</code></pre></td>
+</tr>
+</table>
+<div id="5a6bb35c-1e02-4281-a34d-3dbd87d0f0f8" style="width: 700px; height: 500px;"></div>
+        <script>
+            var data = [{"type":"scatter","x":[0,1,2,3,4,5],"y":[1.5,1.0,1.3,0.7,0.8,0.9]},{"type":"bar","x":[0,1,2,3,4,5],"y":[1.0,0.5,0.7,-1.2,0.3,0.4]}];
+            var layout = {"title":"Line Chart and a Bar Chart"};
+            Plotly.newPlot('5a6bb35c-1e02-4281-a34d-3dbd87d0f0f8', data, layout);
+        </script>
+
+<div class="tip" id="fs1">namespace XPlot</div>
+<div class="tip" id="fs2">namespace XPlot.Plotly</div>
+<div class="tip" id="fs3">val z1 : float list list</div>
+<div class="tip" id="fs4">val x1 : float list</div>
+<div class="tip" id="fs5">val y1 : float list</div>
+<div class="tip" id="fs6">val x2 : float list</div>
+<div class="tip" id="fs7">val y2 : float list</div>
+<div class="tip" id="fs8">val trace1 : Contour</div>
+<div class="tip" id="fs9">Multiple items<br />type Contour =<br />&#160;&#160;inherit Trace<br />&#160;&#160;new : unit -&gt; Contour<br />&#160;&#160;member ShouldSerializeautocolorscale : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeautocontour : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecolor : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecolorbar : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecolorscale : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeconnectgaps : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecontours : unit -&gt; bool<br />&#160;&#160;member ShouldSerializedx : unit -&gt; bool<br />&#160;&#160;...<br /><br />--------------------<br />new : unit -&gt; Contour</div>
+<div class="tip" id="fs10">property Contour.z: obj</div>
+<div class="tip" id="fs11">property Contour.x: obj</div>
+<div class="tip" id="fs12">property Contour.y: obj</div>
+<div class="tip" id="fs13">val trace2 : Scatter</div>
+<div class="tip" id="fs14">Multiple items<br />type Scatter =<br />&#160;&#160;inherit Trace<br />&#160;&#160;new : unit -&gt; Scatter<br />&#160;&#160;member ShouldSerializeconnectgaps : unit -&gt; bool<br />&#160;&#160;member ShouldSerializedx : unit -&gt; bool<br />&#160;&#160;member ShouldSerializedy : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeerror_x : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeerror_y : unit -&gt; bool<br />&#160;&#160;member ShouldSerializefill : unit -&gt; bool<br />&#160;&#160;member ShouldSerializefillcolor : unit -&gt; bool<br />&#160;&#160;member ShouldSerializehoverinfo : unit -&gt; bool<br />&#160;&#160;...<br /><br />--------------------<br />new : unit -&gt; Scatter</div>
+<div class="tip" id="fs15">property Scatter.x: obj</div>
+<div class="tip" id="fs16">property Scatter.y: obj</div>
+<div class="tip" id="fs17">Multiple items<br />type Line =<br />&#160;&#160;new : unit -&gt; Line<br />&#160;&#160;member ShouldSerializeautocolorscale : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecauto : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecmax : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecmin : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecolor : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecolorscale : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecolorsrc : unit -&gt; bool<br />&#160;&#160;member ShouldSerializedash : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeoutliercolor : unit -&gt; bool<br />&#160;&#160;...<br /><br />--------------------<br />new : unit -&gt; Line</div>
+<div class="tip" id="fs18">val layout : Layout</div>
+<div class="tip" id="fs19">Multiple items<br />module Layout<br /><br />from XPlot.Plotly<br /><br />--------------------<br />type Layout =<br />&#160;&#160;new : unit -&gt; Layout<br />&#160;&#160;member ShouldSerializeangularaxis : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeannotations : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeautosize : unit -&gt; bool<br />&#160;&#160;member ShouldSerializebargap : unit -&gt; bool<br />&#160;&#160;member ShouldSerializebargroupgap : unit -&gt; bool<br />&#160;&#160;member ShouldSerializebarmode : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeboxmode : unit -&gt; bool<br />&#160;&#160;member ShouldSerializedirection : unit -&gt; bool<br />&#160;&#160;member ShouldSerializedragmode : unit -&gt; bool<br />&#160;&#160;...<br /><br />--------------------<br />new : unit -&gt; Layout</div>
+<div class="tip" id="fs20">Multiple items<br />type Trace =<br />&#160;&#160;new : unit -&gt; Trace<br />&#160;&#160;member ShouldSerializename : unit -&gt; bool<br />&#160;&#160;member name : string<br />&#160;&#160;member name : string with set<br /><br />--------------------<br />new : unit -&gt; Trace</div>
+<div class="tip" id="fs21">type Chart =<br />&#160;&#160;static member Area : data:seq&lt;#seq&lt;&#39;a1 * &#39;a2&gt;&gt; -&gt; PlotlyChart (requires &#39;a1 :&gt; key and &#39;a2 :&gt; value)<br />&#160;&#160;static member Area : data:seq&lt;#key * #value&gt; -&gt; PlotlyChart<br />&#160;&#160;static member Area : data:seq&lt;#value&gt; -&gt; PlotlyChart<br />&#160;&#160;static member Bar : data:seq&lt;#seq&lt;&#39;a1 * &#39;a2&gt;&gt; -&gt; PlotlyChart (requires &#39;a1 :&gt; key and &#39;a2 :&gt; value)<br />&#160;&#160;static member Bar : data:seq&lt;#key * #value&gt; -&gt; PlotlyChart<br />&#160;&#160;static member Bar : data:seq&lt;#value&gt; -&gt; PlotlyChart<br />&#160;&#160;static member Bubble : data:seq&lt;#key * #value * #value&gt; -&gt; PlotlyChart<br />&#160;&#160;static member Candlestick : data:seq&lt;#key * #value * #value * #value * #value&gt; -&gt; PlotlyChart<br />&#160;&#160;static member Column : data:seq&lt;#seq&lt;&#39;a1 * &#39;a2&gt;&gt; -&gt; PlotlyChart (requires &#39;a1 :&gt; key and &#39;a2 :&gt; value)<br />&#160;&#160;static member Column : data:seq&lt;#key * #value&gt; -&gt; PlotlyChart<br />&#160;&#160;...</div>
+<div class="tip" id="fs22">static member Chart.Plot : data:seq&lt;#Trace&gt; -&gt; PlotlyChart<br />static member Chart.Plot : data:Trace -&gt; PlotlyChart<br />static member Chart.Plot : data:seq&lt;#Trace&gt; * layout:Layout -&gt; PlotlyChart<br />static member Chart.Plot : data:Trace * layout:Layout -&gt; PlotlyChart</div>
+<div class="tip" id="fs23">static member Chart.WithLayout : layout:Layout -&gt; chart:PlotlyChart -&gt; PlotlyChart</div>
+<div class="tip" id="fs24">static member Chart.WithWidth : width:int -&gt; chart:PlotlyChart -&gt; PlotlyChart</div>
+<div class="tip" id="fs25">static member Chart.WithHeight : height:int -&gt; chart:PlotlyChart -&gt; PlotlyChart</div>
+<div class="tip" id="fs26">val trace1&#39; : Trace</div>
+<div class="tip" id="fs27">val trace2&#39; : Trace</div>
+<div class="tip" id="fs28">Multiple items<br />type Bar =<br />&#160;&#160;inherit Trace<br />&#160;&#160;new : unit -&gt; Bar<br />&#160;&#160;member ShouldSerializedx : unit -&gt; bool<br />&#160;&#160;member ShouldSerializedy : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeerror_x : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeerror_y : unit -&gt; bool<br />&#160;&#160;member ShouldSerializehoverinfo : unit -&gt; bool<br />&#160;&#160;member ShouldSerializelegendgroup : unit -&gt; bool<br />&#160;&#160;member ShouldSerializemarker : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeopacity : unit -&gt; bool<br />&#160;&#160;...<br /><br />--------------------<br />new : unit -&gt; Bar</div>
+<div class="tip" id="fs29">property Bar.x: obj</div>
+<div class="tip" id="fs30">property Bar.y: obj</div>
+<div class="tip" id="fs31">val multiLayout : Layout</div>
+
+            </div>
+            <div class="span3">
+                <img src="https://fslab.org/XPlot/img/logo.png" alt="F# Project" style="width:130px;margin:20px" />
+                <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
+                    <li class="nav-header">XPlot</li>
+                    <li><a href="https://fslab.org/XPlot/">Home page</a></li>
+                    <li><a href="https://fslab.org/XPlot/quickstart.html">Getting started</a></li>
+                    <li class="divider"></li>
+                    <li><a href="http://www.nuget.org/packages?q=XPlot">Get Library via NuGet</a></li>
+                    <li><a href="https://github.com/fslab/XPlot">Source Code on GitHub</a></li>
+                    <li><a href="https://fslab.org/XPlot/license.html">License (Apache 2.0)</a></li>
+                    <li><a href="https://fslab.org/XPlot/release-notes.html">Release Notes</a></li>
+
+                    <li class="nav-header"><a href="https://fslab.org/XPlot/google-charts.html">Google Charts</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-annotation-chart.html">Annotation</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-area-chart.html">Area</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-bar-chart.html">Bar</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-bubble-chart.html">Bubble</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-calendar-chart.html">Calendar</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-candlestick-chart.html">Candlestick</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-column-chart.html">Column</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-combo-chart.html">Combo</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-gauge-chart.html">Gauge</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-geo-chart.html">Geo</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-histogram-chart.html">Histogram</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-line-chart.html">Line</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-map-chart.html">Map</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-pie-chart.html">Pie</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-sankey-diagram.html">Sankey</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-scatter-chart.html">Scatter</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-stepped-area-chart.html">Stepped Area</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-timeline-chart.html">Timeline</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-table-chart.html">Table</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-treemap-chart.html">Treemap</a></li>
+
+                    <li class="nav-header"><a href="https://fslab.org/XPlot/plotly.html">Plotly</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/plotly-bar-charts.html">Bar</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/plotly-line-scatter-plots.html">Line and Scatter Plots</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/plotly-box-plots.html">Box Plots</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/plotly-bubble-charts.html">Bubble Charts</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/plotly-contour-plots.html">Contour Plots</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/plotly-area-plots.html">Area Plots</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/plotly-heatmaps.html">Heatmaps</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/plotly-histograms.html">Histograms</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/plotly-2d-histograms.html">2D Histograms</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/plotly-polar-charts.html">Polar Charts</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/plotly-time-series.html">Time Series</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/plotly-multiple-chart-types.html">Multiple Chart Types</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/plotly-log-plots.html">Log Plots</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/plotly-3d-scatter-plots.html">3D Scatter Plots</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/plotly-3d-surface-plots.html">3D Surface Plots</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/plotly-3d-line-plots.html">3D Line Plots</a></li>
+
+                    <li class="nav-header"><a href="https://fslab.org/XPlot/d3.html">D3 Charts</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/d3-network.html">Network</a></li>
+
+                    <li class="nav-header">Documentation</li>
+                    <li><a href="https://fslab.org/XPlot/reference/index.html">API Reference</a></li>
+                    <li class="divider"></li>
+
+                    <li><a href="https://fslab.org/XPlot/reference/xplot-googlecharts-chart.html">Google Chart type</a></li>
+                    <li><a href="https://fslab.org/XPlot/reference/xplot-googlecharts-configuration-options.html">Google Option type</a></li>
+                    <li><a href="https://fslab.org/XPlot/reference/xplot-googlecharts-configuration.html">Google configuration module</a></li>
+
+                    <li class="divider"></li>
+
+                    <li><a href="https://fslab.org/XPlot/reference/xplot-plotly-graph.html">Plotly Graph module</a></li>
+                    <li><a href="https://fslab.org/XPlot/reference/xplot-plotly-graph-layout.html">Plotly Layout type</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <a href="https://github.com/fslab/XPlot"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub" /></a>
+</body>
+</html>
