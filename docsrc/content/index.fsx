@@ -135,16 +135,16 @@ Additionally, the library also comes with an API reference that is generated fro
 is work in progress, so please help us & contribute comments and documentation! The most important types
 are:
 
- - [Google Chart type](reference/xplot-googlecharts-chart.html) contains methods for creating charts like 
+ - [Google Chart Type](reference/xplot-googlecharts-chart.html) contains methods for creating charts like 
    `Chart.Line` and for configuring charts like `Chart.WithOptions`.
- - [Google Options type](reference/xplot-googlecharts-configuration-options.html) contains parameters for
+ - [Google Options Type](reference/xplot-googlecharts-configuration-options.html) contains parameters for
    charts that are specified using `Chart.WithOptions`.
- - [Google Configuration module](reference/xplot-googlecharts-configuration.html) contains other types
+ - [Google Configuration Module](reference/xplot-googlecharts-configuration.html) contains other types
    that are used as parameters to `Chart.WithOptions`.
 
- - [Plotly Graph module](reference/xplot-plotly-graph.html) contains methods for creating various kinds
+ - [Plotly Graph Module](reference/xplot-plotly-graph.html) contains methods for creating various kinds
    of charts such as `Scatter` used above.
- - [Plotly Layout type](reference/xplot-plotly-graph-layout.html) specifies common properties of Plotly
+ - [Plotly Layout Type](reference/xplot-plotly-layout-layout.html) specifies common properties of Plotly
    charts like title and color.
 
 *)
