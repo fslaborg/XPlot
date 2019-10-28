@@ -119,7 +119,7 @@ Target.create "Clean" (fun _ ->
 )
 
 Target.create "CleanDocs" (fun _ ->
-    Shell.cleanDirs ["docs"]
+    Shell.cleanDirs ["docs/output"]
 )
 
 // --------------------------------------------------------------------------------------
@@ -175,6 +175,16 @@ Target.create "GenerateDocs" (fun _ ->
 // --------------------------------------------------------------------------------------
 // Release Scripts
 
+Target.create "ReleaseDocs" (fun _ ->
+    Git.Repository.clone "" (gitHome + "/" + gitName + ".git") "temp/gh-pages"
+    Git.Branches.checkoutBranch "temp/gh-pages" "gh-pages"
+    Shell.copyRecursive "docs/output" "temp/gh-pages" true |> printfn "%A"
+    Git.CommandHelper.runSimpleGitCommand "temp/gh-pages" "add ." |> printfn "%s"
+    let cmd = sprintf """commit -a -m "Update generated documentation for version %s""" release.NugetVersion
+    Git.CommandHelper.runSimpleGitCommand "temp/gh-pages" cmd |> printfn "%s"
+    Git.Branches.push "temp/gh-pages"
+)
+
 Target.create "Release" (fun _ ->
     Git.Staging.stageAll ""
     Git.Commit.exec "" (sprintf "Bump version to %s" release.NugetVersion)
@@ -212,6 +222,7 @@ Target.create "All" ignore
 "All"
   ==> "CleanDocs"
   ==> "GenerateDocs"
+  ==> "ReleaseDocs"
 
 "BuildPackage"
   ==> "PublishNuget"

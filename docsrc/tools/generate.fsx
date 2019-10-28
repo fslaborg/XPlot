@@ -11,7 +11,7 @@ let info =
   [ "project-name", "XPlot"
     "project-author", "Taha Hachana; Tomas Petricek"
     "project-summary", "Data visualization library for F#"
-    "project-github", "https://github.com/fslab/XPlot"
+    "project-github", "https://github.com/fslaborg/XPlot"
     "project-nuget", "http://www.nuget.org/packages?q=XPlot" ]
 
 // --------------------------------------------------------------------------------------
@@ -51,7 +51,7 @@ let root = "file://" + (__SOURCE_DIRECTORY__ @@ "../output")
 // Paths with template/source/output locations
 let bin        = __SOURCE_DIRECTORY__ @@ "../../bin"
 let content    = __SOURCE_DIRECTORY__ @@ "../content"
-let output     = __SOURCE_DIRECTORY__ @@ "../../docs"
+let output     = __SOURCE_DIRECTORY__ @@ "../../docs/output"
 let files      = __SOURCE_DIRECTORY__ @@ "../files"
 let templates  = __SOURCE_DIRECTORY__ @@ "templates"
 let formatting = __SOURCE_DIRECTORY__ @@ "../../packages/formatting/FSharp.Formatting/"
