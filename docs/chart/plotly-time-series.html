@@ -20,8 +20,8 @@
         });
     </script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <link type="text/css" rel="stylesheet" href="/XPlot/content/style.css" />
-    <script type="text/javascript" src="/XPlot/content/tips.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://fslab.org/XPlot/content/style.css" />
+    <script type="text/javascript" src="https://fslab.org/XPlot/content/tips.js"></script>
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -47,7 +47,7 @@
                     <a href="http://numerics.mathdotnet.com/"><img height="16" width="16" src="https://fslab.org/img/thumbs/mathnet.png" /> Math.NET</a>
                 </li>
             </ul>
-            <h3 class="muted"><a href="/XPlot/">XPlot</a></h3>
+            <h3 class="muted"><a href="https://fslab.org/XPlot/">XPlot</a></h3>
         </div>
         <hr />
         <div class="row">
@@ -67,24 +67,24 @@
 <span class="l"> 9: </span>
 <span class="l">10: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span class="i">layout</span> <span class="o">=</span> <span class="i">Layout</span>(<span class="i">title</span> <span class="o">=</span> <span class="s">&quot;Time Series Plot with datetime Objects&quot;</span>)
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs6', 8)" onmouseover="showTip(event, 'fs6', 8)" class="id">layout</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs7', 9)" onmouseover="showTip(event, 'fs7', 9)" class="rt">Layout</span><span class="pn">(</span><span class="id">title</span> <span class="o">=</span> <span class="s">&quot;Time Series Plot with datetime Objects&quot;</span><span class="pn">)</span>
 
-<span class="i">Scatter</span>(
-    <span class="i">x</span> <span class="o">=</span> <span class="i">x</span>,
-    <span class="i">y</span> <span class="o">=</span> [<span class="n">1</span>; <span class="n">3</span>; <span class="n">6</span>]
-)
-<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">Plot</span>
-<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithLayout</span> <span class="i">layout</span>
-<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithWidth</span> <span class="n">700</span>
-<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithHeight</span> <span class="n">500</span>
+<span onmouseout="hideTip(event, 'fs8', 10)" onmouseover="showTip(event, 'fs8', 10)" class="rt">Scatter</span><span class="pn">(</span>
+    <span onmouseout="hideTip(event, 'fs9', 11)" onmouseover="showTip(event, 'fs9', 11)" class="id">x</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 12)" onmouseover="showTip(event, 'fs4', 12)" class="id">x</span><span class="pn">,</span>
+    <span onmouseout="hideTip(event, 'fs10', 13)" onmouseover="showTip(event, 'fs10', 13)" class="id">y</span> <span class="o">=</span> <span class="pn">[</span><span class="n">1</span><span class="pn">;</span> <span class="n">3</span><span class="pn">;</span> <span class="n">6</span><span class="pn">]</span>
+<span class="pn">)</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs11', 14)" onmouseover="showTip(event, 'fs11', 14)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs12', 15)" onmouseover="showTip(event, 'fs12', 15)" class="id">Plot</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs11', 16)" onmouseover="showTip(event, 'fs11', 16)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs13', 17)" onmouseover="showTip(event, 'fs13', 17)" class="id">WithLayout</span> <span onmouseout="hideTip(event, 'fs6', 18)" onmouseover="showTip(event, 'fs6', 18)" class="id">layout</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs11', 19)" onmouseover="showTip(event, 'fs11', 19)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs14', 20)" onmouseover="showTip(event, 'fs14', 20)" class="id">WithWidth</span> <span class="n">700</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs11', 21)" onmouseover="showTip(event, 'fs11', 21)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs15', 22)" onmouseover="showTip(event, 'fs15', 22)" class="id">WithHeight</span> <span class="n">500</span>
 </code></pre></td>
 </tr>
 </table>
-<div id="20ee5055-6825-40f8-85f0-c684f081e43d" style="width: 700px; height: 500px;"></div>
+<div id="919abab1-3a16-4988-99e9-a3f4880566bb" style="width: 700px; height: 500px;"></div>
         <script>
             var data = [{"type":"scatter","x":["2013-10-04T00:00:00","2013-11-05T00:00:00","2013-12-06T00:00:00"],"y":[1,3,6]}];
             var layout = {"title":"Time Series Plot with datetime Objects"};
-            Plotly.newPlot('20ee5055-6825-40f8-85f0-c684f081e43d', data, layout);
+            Plotly.newPlot('919abab1-3a16-4988-99e9-a3f4880566bb', data, layout);
         </script>
 <h2><a name="Date-Strings" class="anchor" href="#Date-Strings">Date Strings</a></h2>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
@@ -101,102 +101,118 @@
 <span class="l">12: </span>
 <span class="l">13: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span class="i">stringLayout</span> <span class="o">=</span> <span class="i">Layout</span>(<span class="i">title</span> <span class="o">=</span> <span class="s">&quot;Date Strings&quot;</span>)
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs16', 23)" onmouseover="showTip(event, 'fs16', 23)" class="id">stringLayout</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs7', 24)" onmouseover="showTip(event, 'fs7', 24)" class="rt">Layout</span><span class="pn">(</span><span class="id">title</span> <span class="o">=</span> <span class="s">&quot;Date Strings&quot;</span><span class="pn">)</span>
 
-<span class="i">Scatter</span>(
-    <span class="i">x</span> <span class="o">=</span>
-        [<span class="s">&quot;2013-10-04 22:23:00&quot;</span>;
-            <span class="s">&quot;2013-11-04 22:23:00&quot;</span>;
-            <span class="s">&quot;2013-12-04 22:23:00&quot;</span>],
-    <span class="i">y</span> <span class="o">=</span> [<span class="n">1</span>; <span class="n">3</span>; <span class="n">6</span>]
-)
-<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">Plot</span>
-<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithLayout</span> <span class="i">stringLayout</span>
-<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithWidth</span> <span class="n">700</span>
-<span class="o">|&gt;</span> <span class="i">Chart</span><span class="o">.</span><span class="i">WithHeight</span> <span class="n">500</span>
+<span onmouseout="hideTip(event, 'fs8', 25)" onmouseover="showTip(event, 'fs8', 25)" class="rt">Scatter</span><span class="pn">(</span>
+    <span onmouseout="hideTip(event, 'fs9', 26)" onmouseover="showTip(event, 'fs9', 26)" class="id">x</span> <span class="o">=</span>
+        <span class="pn">[</span><span class="s">&quot;2013-10-04 22:23:00&quot;</span><span class="pn">;</span>
+            <span class="s">&quot;2013-11-04 22:23:00&quot;</span><span class="pn">;</span>
+            <span class="s">&quot;2013-12-04 22:23:00&quot;</span><span class="pn">]</span><span class="pn">,</span>
+    <span onmouseout="hideTip(event, 'fs10', 27)" onmouseover="showTip(event, 'fs10', 27)" class="id">y</span> <span class="o">=</span> <span class="pn">[</span><span class="n">1</span><span class="pn">;</span> <span class="n">3</span><span class="pn">;</span> <span class="n">6</span><span class="pn">]</span>
+<span class="pn">)</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs11', 28)" onmouseover="showTip(event, 'fs11', 28)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs12', 29)" onmouseover="showTip(event, 'fs12', 29)" class="id">Plot</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs11', 30)" onmouseover="showTip(event, 'fs11', 30)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs13', 31)" onmouseover="showTip(event, 'fs13', 31)" class="id">WithLayout</span> <span onmouseout="hideTip(event, 'fs16', 32)" onmouseover="showTip(event, 'fs16', 32)" class="id">stringLayout</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs11', 33)" onmouseover="showTip(event, 'fs11', 33)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs14', 34)" onmouseover="showTip(event, 'fs14', 34)" class="id">WithWidth</span> <span class="n">700</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs11', 35)" onmouseover="showTip(event, 'fs11', 35)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs15', 36)" onmouseover="showTip(event, 'fs15', 36)" class="id">WithHeight</span> <span class="n">500</span>
 </code></pre></td>
 </tr>
 </table>
-<div id="7f575b6b-e5e9-4e81-9f65-3ae3da9f58f9" style="width: 700px; height: 500px;"></div>
+<div id="e4bd7a6a-5580-43ee-9d01-b3f1d8cb9cc1" style="width: 700px; height: 500px;"></div>
         <script>
             var data = [{"type":"scatter","x":["2013-10-04 22:23:00","2013-11-04 22:23:00","2013-12-04 22:23:00"],"y":[1,3,6]}];
             var layout = {"title":"Date Strings"};
-            Plotly.newPlot('7f575b6b-e5e9-4e81-9f65-3ae3da9f58f9', data, layout);
+            Plotly.newPlot('e4bd7a6a-5580-43ee-9d01-b3f1d8cb9cc1', data, layout);
         </script>
 
+<div class="tip" id="fs1">namespace System</div>
+<div class="tip" id="fs2">namespace XPlot</div>
+<div class="tip" id="fs3">namespace XPlot.Plotly</div>
+<div class="tip" id="fs4">val x : DateTime list</div>
+<div class="tip" id="fs5">Multiple items<br />type DateTime =<br />&#160;&#160;struct<br />&#160;&#160;&#160;&#160;new : ticks:int64 -&gt; DateTime + 10 overloads<br />&#160;&#160;&#160;&#160;member Add : value:TimeSpan -&gt; DateTime<br />&#160;&#160;&#160;&#160;member AddDays : value:float -&gt; DateTime<br />&#160;&#160;&#160;&#160;member AddHours : value:float -&gt; DateTime<br />&#160;&#160;&#160;&#160;member AddMilliseconds : value:float -&gt; DateTime<br />&#160;&#160;&#160;&#160;member AddMinutes : value:float -&gt; DateTime<br />&#160;&#160;&#160;&#160;member AddMonths : months:int -&gt; DateTime<br />&#160;&#160;&#160;&#160;member AddSeconds : value:float -&gt; DateTime<br />&#160;&#160;&#160;&#160;member AddTicks : value:int64 -&gt; DateTime<br />&#160;&#160;&#160;&#160;member AddYears : value:int -&gt; DateTime<br />&#160;&#160;&#160;&#160;...<br />&#160;&#160;end<br /><br />--------------------<br />DateTime ()<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(ticks: int64) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(ticks: int64, kind: DateTimeKind) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int, calendar: Globalization.Calendar) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int, hour: int, minute: int, second: int) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int, hour: int, minute: int, second: int, kind: DateTimeKind) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int, hour: int, minute: int, second: int, calendar: Globalization.Calendar) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int, hour: int, minute: int, second: int, millisecond: int) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int, hour: int, minute: int, second: int, millisecond: int, kind: DateTimeKind) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em></div>
+<div class="tip" id="fs6">val layout : Layout</div>
+<div class="tip" id="fs7">Multiple items<br />module Layout<br /><br />from XPlot.Plotly<br /><br />--------------------<br />type Layout =<br />&#160;&#160;new : unit -&gt; Layout<br />&#160;&#160;member ShouldSerializeangularaxis : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeannotations : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeautosize : unit -&gt; bool<br />&#160;&#160;member ShouldSerializebargap : unit -&gt; bool<br />&#160;&#160;member ShouldSerializebargroupgap : unit -&gt; bool<br />&#160;&#160;member ShouldSerializebarmode : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeboxmode : unit -&gt; bool<br />&#160;&#160;member ShouldSerializedirection : unit -&gt; bool<br />&#160;&#160;member ShouldSerializedragmode : unit -&gt; bool<br />&#160;&#160;...<br /><br />--------------------<br />new : unit -&gt; Layout</div>
+<div class="tip" id="fs8">Multiple items<br />type Scatter =<br />&#160;&#160;inherit Trace<br />&#160;&#160;new : unit -&gt; Scatter<br />&#160;&#160;member ShouldSerializeconnectgaps : unit -&gt; bool<br />&#160;&#160;member ShouldSerializedx : unit -&gt; bool<br />&#160;&#160;member ShouldSerializedy : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeerror_x : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeerror_y : unit -&gt; bool<br />&#160;&#160;member ShouldSerializefill : unit -&gt; bool<br />&#160;&#160;member ShouldSerializefillcolor : unit -&gt; bool<br />&#160;&#160;member ShouldSerializehoverinfo : unit -&gt; bool<br />&#160;&#160;...<br /><br />--------------------<br />new : unit -&gt; Scatter</div>
+<div class="tip" id="fs9">property Scatter.x: obj</div>
+<div class="tip" id="fs10">property Scatter.y: obj</div>
+<div class="tip" id="fs11">type Chart =<br />&#160;&#160;static member Area : data:seq&lt;#seq&lt;&#39;a1 * &#39;a2&gt;&gt; -&gt; PlotlyChart (requires &#39;a1 :&gt; key and &#39;a2 :&gt; value)<br />&#160;&#160;static member Area : data:seq&lt;#key * #value&gt; -&gt; PlotlyChart<br />&#160;&#160;static member Area : data:seq&lt;#value&gt; -&gt; PlotlyChart<br />&#160;&#160;static member Bar : data:seq&lt;#seq&lt;&#39;a1 * &#39;a2&gt;&gt; -&gt; PlotlyChart (requires &#39;a1 :&gt; key and &#39;a2 :&gt; value)<br />&#160;&#160;static member Bar : data:seq&lt;#key * #value&gt; -&gt; PlotlyChart<br />&#160;&#160;static member Bar : data:seq&lt;#value&gt; -&gt; PlotlyChart<br />&#160;&#160;static member Bubble : data:seq&lt;#key * #value * #value&gt; -&gt; PlotlyChart<br />&#160;&#160;static member Candlestick : data:seq&lt;#key * #value * #value * #value * #value&gt; -&gt; PlotlyChart<br />&#160;&#160;static member Column : data:seq&lt;#seq&lt;&#39;a1 * &#39;a2&gt;&gt; -&gt; PlotlyChart (requires &#39;a1 :&gt; key and &#39;a2 :&gt; value)<br />&#160;&#160;static member Column : data:seq&lt;#key * #value&gt; -&gt; PlotlyChart<br />&#160;&#160;...</div>
+<div class="tip" id="fs12">static member Chart.Plot : data:seq&lt;#Trace&gt; -&gt; PlotlyChart<br />static member Chart.Plot : data:Trace -&gt; PlotlyChart<br />static member Chart.Plot : data:seq&lt;#Trace&gt; * layout:Layout -&gt; PlotlyChart<br />static member Chart.Plot : data:Trace * layout:Layout -&gt; PlotlyChart</div>
+<div class="tip" id="fs13">static member Chart.WithLayout : layout:Layout -&gt; chart:PlotlyChart -&gt; PlotlyChart</div>
+<div class="tip" id="fs14">static member Chart.WithWidth : width:int -&gt; chart:PlotlyChart -&gt; PlotlyChart</div>
+<div class="tip" id="fs15">static member Chart.WithHeight : height:int -&gt; chart:PlotlyChart -&gt; PlotlyChart</div>
+<div class="tip" id="fs16">val stringLayout : Layout</div>
 
             </div>
             <div class="span3">
-                <img src="/XPlot/img/logo.png" alt="F# Project" style="width:130px;margin:20px" />
+                <img src="https://fslab.org/XPlot/img/logo.png" alt="F# Project" style="width:130px;margin:20px" />
                 <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
                     <li class="nav-header">XPlot</li>
-                    <li><a href="/XPlot/">Home page</a></li>
-                    <li><a href="/XPlot/quickstart.html">Getting started</a></li>
+                    <li><a href="https://fslab.org/XPlot/">Home page</a></li>
+                    <li><a href="https://fslab.org/XPlot/quickstart.html">Getting started</a></li>
                     <li class="divider"></li>
                     <li><a href="http://www.nuget.org/packages?q=XPlot">Get Library via NuGet</a></li>
-                    <li><a href="http://github.com/fslaborg/XPlot">Source Code on GitHub</a></li>
-                    <li><a href="/XPlot/license.html">License (Apache 2.0)</a></li>
-                    <li><a href="/XPlot/release-notes.html">Release Notes</a></li>
+                    <li><a href="https://github.com/fslab/XPlot">Source Code on GitHub</a></li>
+                    <li><a href="https://fslab.org/XPlot/license.html">License (Apache 2.0)</a></li>
+                    <li><a href="https://fslab.org/XPlot/release-notes.html">Release Notes</a></li>
 
-                    <li class="nav-header"><a href="/XPlot/google-charts.html">Google Charts</a></li>
-                    <li><a href="/XPlot/chart/google-annotation-chart.html">Annotation</a></li>
-                    <li><a href="/XPlot/chart/google-area-chart.html">Area</a></li>
-                    <li><a href="/XPlot/chart/google-bar-chart.html">Bar</a></li>
-                    <li><a href="/XPlot/chart/google-bubble-chart.html">Bubble</a></li>
-                    <li><a href="/XPlot/chart/google-calendar-chart.html">Calendar</a></li>
-                    <li><a href="/XPlot/chart/google-candlestick-chart.html">Candlestick</a></li>
-                    <li><a href="/XPlot/chart/google-column-chart.html">Column</a></li>
-                    <li><a href="/XPlot/chart/google-combo-chart.html">Combo</a></li>
-                    <li><a href="/XPlot/chart/google-gauge-chart.html">Gauge</a></li>
-                    <li><a href="/XPlot/chart/google-geo-chart.html">Geo</a></li>
-                    <li><a href="/XPlot/chart/google-histogram-chart.html">Histogram</a></li>
-                    <li><a href="/XPlot/chart/google-line-chart.html">Line</a></li>
-                    <li><a href="/XPlot/chart/google-map-chart.html">Map</a></li>
-                    <li><a href="/XPlot/chart/google-pie-chart.html">Pie</a></li>
-                    <li><a href="/XPlot/chart/google-sankey-diagram.html">Sankey</a></li>
-                    <li><a href="/XPlot/chart/google-scatter-chart.html">Scatter</a></li>
-                    <li><a href="/XPlot/chart/google-stepped-area-chart.html">Stepped Area</a></li>
-                    <li><a href="/XPlot/chart/google-timeline-chart.html">Timeline</a></li>
-                    <li><a href="/XPlot/chart/google-table-chart.html">Table</a></li>
-                    <li><a href="/XPlot/chart/google-treemap-chart.html">Treemap</a></li>
+                    <li class="nav-header"><a href="https://fslab.org/XPlot/google-charts.html">Google Charts</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-annotation-chart.html">Annotation</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-area-chart.html">Area</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-bar-chart.html">Bar</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-bubble-chart.html">Bubble</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-calendar-chart.html">Calendar</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-candlestick-chart.html">Candlestick</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-column-chart.html">Column</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-combo-chart.html">Combo</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-gauge-chart.html">Gauge</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-geo-chart.html">Geo</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-histogram-chart.html">Histogram</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-line-chart.html">Line</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-map-chart.html">Map</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-pie-chart.html">Pie</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-sankey-diagram.html">Sankey</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-scatter-chart.html">Scatter</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-stepped-area-chart.html">Stepped Area</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-timeline-chart.html">Timeline</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-table-chart.html">Table</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-treemap-chart.html">Treemap</a></li>
 
-                    <li class="nav-header"><a href="/XPlot/plotly.html">Plotly</a></li>
-                    <li><a href="/XPlot/chart/plotly-bar-charts.html">Bar</a></li>
-                    <li><a href="/XPlot/chart/plotly-line-scatter-plots.html">Line and Scatter Plots</a></li>
-                    <li><a href="/XPlot/chart/plotly-box-plots.html">Box Plots</a></li>
-                    <li><a href="/XPlot/chart/plotly-bubble-charts.html">Bubble Charts</a></li>
-                    <li><a href="/XPlot/chart/plotly-contour-plots.html">Contour Plots</a></li>
-                    <li><a href="/XPlot/chart/plotly-area-plots.html">Area Plots</a></li>
-                    <li><a href="/XPlot/chart/plotly-heatmaps.html">Heatmaps</a></li>
-                    <li><a href="/XPlot/chart/plotly-histograms.html">Histograms</a></li>
-                    <li><a href="/XPlot/chart/plotly-2d-histograms.html">2D Histograms</a></li>
-                    <li><a href="/XPlot/chart/plotly-polar-charts.html">Polar Charts</a></li>
-                    <li><a href="/XPlot/chart/plotly-time-series.html">Time Series</a></li>
-                    <li><a href="/XPlot/chart/plotly-multiple-chart-types.html">Multiple Chart Types</a></li>
-                    <li><a href="/XPlot/chart/plotly-log-plots.html">Log Plots</a></li>
-                    <li><a href="/XPlot/chart/plotly-3d-scatter-plots.html">3D Scatter Plots</a></li>
-                    <li><a href="/XPlot/chart/plotly-3d-surface-plots.html">3D Surface Plots</a></li>
-                    <li><a href="/XPlot/chart/plotly-3d-line-plots.html">3D Line Plots</a></li>
+                    <li class="nav-header"><a href="https://fslab.org/XPlot/plotly.html">Plotly</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/plotly-bar-charts.html">Bar</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/plotly-line-scatter-plots.html">Line and Scatter Plots</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/plotly-box-plots.html">Box Plots</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/plotly-bubble-charts.html">Bubble Charts</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/plotly-contour-plots.html">Contour Plots</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/plotly-area-plots.html">Area Plots</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/plotly-heatmaps.html">Heatmaps</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/plotly-histograms.html">Histograms</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/plotly-2d-histograms.html">2D Histograms</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/plotly-polar-charts.html">Polar Charts</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/plotly-time-series.html">Time Series</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/plotly-multiple-chart-types.html">Multiple Chart Types</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/plotly-log-plots.html">Log Plots</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/plotly-3d-scatter-plots.html">3D Scatter Plots</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/plotly-3d-surface-plots.html">3D Surface Plots</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/plotly-3d-line-plots.html">3D Line Plots</a></li>
 
-                    <li class="nav-header"><a href="/XPlot/d3.html">D3 Charts</a></li>
-                    <li><a href="/XPlot/chart/d3-network.html">Network</a></li>
+                    <li class="nav-header"><a href="https://fslab.org/XPlot/d3.html">D3 Charts</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/d3-network.html">Network</a></li>
 
                     <li class="nav-header">Documentation</li>
-                    <li><a href="/XPlot/reference/index.html">API Reference</a></li>
+                    <li><a href="https://fslab.org/XPlot/reference/index.html">API Reference</a></li>
                     <li class="divider"></li>
 
-                    <li><a href="/XPlot/reference/xplot-googlecharts-chart.html">Google Chart type</a></li>
-                    <li><a href="/XPlot/reference/xplot-googlecharts-configuration-options.html">Google Option type</a></li>
-                    <li><a href="/XPlot/reference/xplot-googlecharts-configuration.html">Google configuration module</a></li>
+                    <li><a href="https://fslab.org/XPlot/reference/xplot-googlecharts-chart.html">Google Chart type</a></li>
+                    <li><a href="https://fslab.org/XPlot/reference/xplot-googlecharts-configuration-options.html">Google Option type</a></li>
+                    <li><a href="https://fslab.org/XPlot/reference/xplot-googlecharts-configuration.html">Google configuration module</a></li>
 
                     <li class="divider"></li>
 
-                    <li><a href="/XPlot/reference/xplot-plotly-graph.html">Plotly Graph module</a></li>
-                    <li><a href="/XPlot/reference/xplot-plotly-graph-layout.html">Plotly Layout type</a></li>
+                    <li><a href="https://fslab.org/XPlot/reference/xplot-plotly-graph.html">Plotly Graph module</a></li>
+                    <li><a href="https://fslab.org/XPlot/reference/xplot-plotly-graph-layout.html">Plotly Layout type</a></li>
                 </ul>
             </div>
         </div>
     </div>
-    <a href="http://github.com/fslaborg/XPlot"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub" /></a>
+    <a href="https://github.com/fslab/XPlot"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub" /></a>
 </body>
 </html>

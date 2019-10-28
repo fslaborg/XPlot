@@ -3,7 +3,7 @@
 #r "System.Xaml.dll"
 #r "WindowsBase.dll"
 
-#I "../../bin/XPlot.GoogleCharts/net45"
+#I "../../bin/XPlot.GoogleCharts/net472"
 #r "XPlot.GoogleCharts.dll"
 
 open System.Windows

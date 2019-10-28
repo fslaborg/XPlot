@@ -1,19 +1,16 @@
-﻿#I "../../../bin"
+﻿#I "../../../bin/XPlot.GoogleCharts.Deedle/net472"
 #r "Deedle.dll"
 #r "XPlot.GoogleCharts.dll"
 #r "XPlot.GoogleCharts.Deedle.dll"
-#r "XPlot.GoogleCharts.WPF.dll"
 
 open Deedle
 open XPlot.GoogleCharts
-open XPlot.GoogleCharts.Deedle
 open System
 
 let a = Series.ofObservations [ 1 => 10.0; 2 => 11.0; 3 => 12.0; ]
 let b = Series.ofObservations [ 0 => 5.0; 1 => 6.0; 2 => 7.0; 3 => 8.0; ]
 
 [a; b]
-//|> Chart.Table
 |> Chart.Line
 |> Chart.Show
 
@@ -23,11 +20,6 @@ let b' = [(0, 5.0); (1, 6.0); (2, 7.0); (3, 8.0)]
 [a'; b']
 |> Chart.Line
 |> Chart.Show
-//
-//
-//Chart.Line b
-//|> Chart.Show
-
 
 let options = Options(displayAnnotations = true)
 

@@ -1,12 +1,10 @@
-﻿#I "../../../bin"
+﻿#I "../../../bin/XPlot.GoogleCharts.Deedle/net472"
 #r "Deedle.dll"
 #r "XPlot.GoogleCharts.dll"
 #r "XPlot.GoogleCharts.Deedle.dll"
-#r "XPlot.GoogleCharts.WPF.dll"
 
 open Deedle
 open XPlot.GoogleCharts
-open XPlot.GoogleCharts.Deedle
 
 type Correlation =
     {

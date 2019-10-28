@@ -1,5 +1,5 @@
 (*** hide ***)
-#I "../../../bin/"
+#I "../../../bin/XPlot.D3/net45"
 #r "XPlot.D3.dll"
 open XPlot.D3
 
