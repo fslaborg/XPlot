@@ -38,4 +38,4 @@ Release
 Contact
 -------
 
-http://fslaborg.github.io/#contact
+* Maintainers are [@zyzhu](http://github.com/zyzhu) and backup maintainer [@dsyme](http://github.com/dsyme) 
