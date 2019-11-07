@@ -1,5 +1,5 @@
 rem @echo off
 cls
 
-dotnet restore build.proj
+dotnet tool restore
 dotnet fake build %*
