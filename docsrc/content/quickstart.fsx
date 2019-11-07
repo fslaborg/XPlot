@@ -71,7 +71,7 @@ That's it! You should see a chart popping up in your browser.
 
 Notes
 
-- in the path `#r "XPlot.GoogleCharts/lib/net45/`, make sure "net45" is right, 
+- in the path `#r "XPlot.GoogleCharts/lib/netstandard2.0/`, make sure "net45" is right, 
 this is based on `paket.dependencies`, specifically the .NET 4.5 framework part (`framework:net45`).
 - you will need an internet connection for the chart to render, as the code relies on Google-hosted services.
 

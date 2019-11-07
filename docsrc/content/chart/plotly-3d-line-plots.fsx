@@ -1,5 +1,5 @@
 ﻿(*** hide ***)
-#I "../../../bin/XPlot.Plotly/net472"
+#I "../../../bin/XPlot.Plotly/netstandard2.0"
 #r "XPlot.Plotly.dll"
 
 open System.IO

@@ -34,10 +34,10 @@ open FSharp.Formatting.Razor
 // Binaries for which to generate XML documentation
 let referenceBinaries = 
   [ 
-    __SOURCE_DIRECTORY__ + "/../../bin/XPlot.D3/net45/XPlot.D3.dll"
-    __SOURCE_DIRECTORY__ + "/../../bin/XPlot.GoogleCharts/net472/XPlot.GoogleCharts.dll"
-    __SOURCE_DIRECTORY__ + "/../../bin/XPlot.GoogleCharts.Deedle/net45/XPlot.GoogleCharts.Deedle.dll"
-    __SOURCE_DIRECTORY__ + "/../../bin/XPlot.Plotly/net472/XPlot.Plotly.dll"
+    __SOURCE_DIRECTORY__ + "/../../bin/XPlot.D3/netstandard2.0/XPlot.D3.dll"
+    __SOURCE_DIRECTORY__ + "/../../bin/XPlot.GoogleCharts/netstandard2.0/XPlot.GoogleCharts.dll"
+    __SOURCE_DIRECTORY__ + "/../../bin/XPlot.GoogleCharts.Deedle/netstandard2.0/XPlot.GoogleCharts.Deedle.dll"
+    __SOURCE_DIRECTORY__ + "/../../bin/XPlot.Plotly/netstandard2.0/XPlot.Plotly.dll"
   ]
 
 // When called from 'build.fsx', use the public project URL as <root>
