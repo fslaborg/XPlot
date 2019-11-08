@@ -1,6 +1,6 @@
 # XPlot [![Nuget Badge](https://buildstats.info/nuget/XPlot.Plotly)](https://www.nuget.org/packages/XPlot.Plotly/) [![Build Status](https://dev.azure.com/xplot/xplot/_apis/build/status/fslaborg.XPlot?branchName=master)](https://dev.azure.com/xplot/xplot/_build/latest?definitionId=1&branchName=master)
 
-![](https://fslab.org/XPlot/img/logo.png)
+![XPlot logo](misc/XPlot.png)
 
 A splendid data visualization package for F# and .NET. Uses various JavaScript charting libraries as "backends".
 
