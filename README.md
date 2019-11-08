@@ -4,6 +4,14 @@
 
 A splendid data visualization package for F# and .NET. Uses various JavaScript charting libraries as "backends".
 
+## Try it out
+
+Click this button to launch a Binder instance, where you can get plotting interactively!
+
+The `fsharp/Docs/Plotting with Xplot` notebook showcases many ways to use XPlot with F#.
+
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/dotnet/try/master?urlpath=lab)
+
 ## Documentation
 
 http://fslaborg.github.io/XPlot/
