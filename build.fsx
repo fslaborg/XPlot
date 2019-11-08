@@ -203,4 +203,4 @@ Target.create "All" ignore
   ==> "PublishNuget"
   ==> "Release"
 
-Target.runOrDefault "All"
+Target.runOrDefaultWithArguments "All"
