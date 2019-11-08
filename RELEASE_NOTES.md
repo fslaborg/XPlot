@@ -1,3 +1,6 @@
+### 3.0.1 - November 8th, 2019
+* Update FSharp.Core dependency to be 4.5.0 or higher.
+
 ### 3.0.0 - November 8th, 2019
 * XPlot is now .NET Standard 2.0 only
 * Support for [SourceLink](https://github.com/dotnet/sourcelink)
