@@ -2,10 +2,6 @@ source https://nuget.org/api/v2
 
 nuget FSharp.Core 4.5.2
 
-nuget NUnit
-nuget NUnit.Runners
-nuget FAKE
-
 nuget Deedle
 nuget MathNet.Numerics
 nuget Google.DataTable.Net.Wrapper
@@ -16,20 +12,3 @@ group Formatting
 source https://nuget.org/api/v2
 nuget FSharp.Formatting
 nuget FSharp.Formatting.CommandTool
-
-group FakeBuild
-source https://api.nuget.org/v3/index.json
-
-storage: none
-
-nuget Fake.Core.Target
-nuget Fake.IO.FileSystem
-nuget Fake.DotNet.Cli
-nuget Fake.Tools.Git
-nuget Fake.DotNet.MSBuild
-nuget Fake.Core.ReleaseNotes 
-nuget Fake.DotNet.AssemblyInfoFile
-nuget Fake.DotNet.Paket
-nuget Fake.DotNet.Testing.Nunit 
-nuget Fake.DotNet.FSFormatting 
-nuget Fake.DotNet.Fsi
