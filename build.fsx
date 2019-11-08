@@ -52,11 +52,10 @@ let configuration = "Release"
 
 // Git configuration (used for publishing documentation in gh-pages branch)
 // The profile where the project is posted
-let gitOwner = "fslaborg"
-let gitHome = "https://github.com/" + gitOwner
+let gitHome = "https://github.com/fslaborg"
 
 // The name of the project on GitHub
-let gitName = "XPlot"
+let gitName = project
 
 // --------------------------------------------------------------------------------------
 // END TODO: The rest of the file includes standard build steps
@@ -128,18 +127,20 @@ Target.create "Build" (fun _ ->
 // --------------------------------------------------------------------------------------
 // Build a NuGet package
 
-Target.create "NuGet" (fun _ ->
+Target.create "BuildPackages" (fun _ ->
     Paket.pack(fun p -> 
         { p with
+            ToolType = ToolType.CreateLocalTool()
             OutputPath = "bin"
             Version = release.NugetVersion
             ReleaseNotes = release.Notes |> String.toLines })
 )
 
-Target.create "PublishNuget" (fun _ ->
+Target.create "PublishPackages" (fun _ ->
     Paket.push(fun p ->
         { p with
             WorkingDir = "bin"
+            ToolType = ToolType.CreateLocalTool()
             ApiKey = Environment.environVarOrDefault "NugetKey" "" })
 )
 
@@ -173,7 +174,6 @@ Target.create "Release" (fun _ ->
     Git.Branches.pushTag "" "origin" release.NugetVersion
 )
 
-Target.create "BuildPackage" ignore
 Target.create "LocalBuild" ignore
 
 "Clean"
@@ -183,11 +183,8 @@ Target.create "LocalBuild" ignore
   //==> "CleanDocs"
   //==> "GenerateDocs"
   ==> "LocalBuild"
-
-"LocalBuild"
-  ==> "NuGet"
-  ==> "BuildPackage"
-  ==> "PublishNuget"
+  ==> "BuildPackages"
+  ==> "PublishPackages"
   ==> "Release"
 
-Target.runOrDefaultWithArguments "LocalBuild"
+Target.runOrDefaultWithArguments "BuildPackages"
