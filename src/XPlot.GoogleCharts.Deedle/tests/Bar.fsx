@@ -1,4 +1,4 @@
-﻿#I "../../../bin/XPlot.GoogleCharts.Deedle/net472"
+﻿#I "../../../bin/XPlot.GoogleCharts.Deedle/netstandard2.0"
 #r "Deedle.dll"
 #r "XPlot.GoogleCharts.dll"
 #r "XPlot.GoogleCharts.Deedle.dll"

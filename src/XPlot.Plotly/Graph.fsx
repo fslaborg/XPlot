@@ -1,5 +1,5 @@
 ﻿
-#r @"../../packages/Newtonsoft.Json/lib/net45/Newtonsoft.Json.dll"
+#r @"../../packages/Newtonsoft.Json/lib/netstandard2.0/Newtonsoft.Json.dll"
 
 open Newtonsoft.Json
 open System

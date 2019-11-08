@@ -1,11 +1,11 @@
 module Formatters
 #I "../../packages/formatting/FSharp.Formatting"
 #load "FSharp.Formatting.fsx"
-#r "../../packages/Deedle/lib/net45/Deedle.dll"
-#r "../../bin/XPlot.GoogleCharts/net472/XPlot.GoogleCharts.dll"
-#r "../../bin/XPlot.Plotly/net472/XPlot.Plotly.dll"
-#r "../../bin/XPlot.D3/net45/XPlot.D3.dll"
-#r "../../packages/formatting/FSharp.Compiler.Service/lib/net45/FSharp.Compiler.Service.dll"
+#r "../../packages/Deedle/lib/netstandard2.0/Deedle.dll"
+#r "../../bin/XPlot.GoogleCharts/netstandard2.0/XPlot.GoogleCharts.dll"
+#r "../../bin/XPlot.Plotly/netstandard2.0/XPlot.Plotly.dll"
+#r "../../bin/XPlot.D3/netstandard2.0/XPlot.D3.dll"
+#r "../../packages/formatting/FSharp.Compiler.Service/lib/netstandard2.0/FSharp.Compiler.Service.dll"
 #r "netstandard"
 // --------------------------------------------------------------------------------------
 // NOTE: Most of this file is the same as in FsLab (https://github.com/fslaborg/FsLab)

@@ -1,6 +1,6 @@
 (*** hide ***)
-#I "../../bin/XPlot.GoogleCharts/net472"
-#I "../../bin/XPlot.Plotly/net472"
+#I "../../bin/XPlot.GoogleCharts/netstandard2.0"
+#I "../../bin/XPlot.Plotly/netstandard2.0"
 #r "XPlot.Plotly.dll"
 #r "XPlot.GoogleCharts.dll"
 open XPlot.GoogleCharts
