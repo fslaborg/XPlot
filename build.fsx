@@ -174,7 +174,7 @@ Target.create "Release" (fun _ ->
 )
 
 Target.create "BuildPackage" ignore
-Target.create "All" ignore
+Target.create "LocalBuild" ignore
 
 "Clean"
   ==> "AssemblyInfo"
@@ -182,10 +182,12 @@ Target.create "All" ignore
   ==> "CopyBinaries"
   //==> "CleanDocs"
   //==> "GenerateDocs"
-  ==> "All"
+  ==> "LocalBuild"
+
+"LocalBuild"
   ==> "NuGet"
-  //==> "BuildPackage"
+  ==> "BuildPackage"
   ==> "PublishNuget"
   ==> "Release"
 
-Target.runOrDefaultWithArguments "BuildPackage"
+Target.runOrDefaultWithArguments "LocalBuild"
