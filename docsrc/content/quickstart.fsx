@@ -23,7 +23,7 @@ This will create a file called `paket.dependencies`
 Modify `paket.dependencies` so that it looks like this:
 
 ```
-source https://www.nuget.org/api/v2
+source https://api.nuget.org/v3/index.json
 nuget XPlot.GoogleCharts
 ```
 

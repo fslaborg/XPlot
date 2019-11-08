@@ -1,4 +1,4 @@
-source https://nuget.org/api/v2
+source https://api.nuget.org/v3/index.json
 
 nuget FSharp.Core 4.5.2
 
@@ -9,6 +9,6 @@ nuget Newtonsoft.Json
 nuget Microsoft.SourceLink.GitHub
 
 group Formatting
-source https://nuget.org/api/v2
+source https://api.nuget.org/v3/index.json
 nuget FSharp.Formatting
 nuget FSharp.Formatting.CommandTool

@@ -129,13 +129,11 @@ Target.create "Build" (fun _ ->
 // Build a NuGet package
 
 Target.create "NuGet" (fun _ ->
-    let releaseNotes = release.Notes |> String.toLines
-
     Paket.pack(fun p -> 
         { p with
             OutputPath = "bin"
             Version = release.NugetVersion
-            ReleaseNotes = releaseNotes})
+            ReleaseNotes = release.Notes |> String.toLines })
 )
 
 Target.create "PublishNuget" (fun _ ->
@@ -173,34 +171,23 @@ Target.create "Release" (fun _ ->
 
     Git.Branches.tag "" release.NugetVersion
     Git.Branches.pushTag "" "origin" release.NugetVersion
-
-    // release on github
-    // createClient (getBuildParamOrDefault "github-user" "") (getBuildParamOrDefault "github-pw" "")
-    // |> createDraft gitOwner gitName release.NugetVersion (release.SemVer.PreRelease <> None) release.Notes
-    // // TODO: |> uploadFile "PATH_TO_FILE"
-    // |> releaseDraft
-    // |> Async.RunSynchronously
 )
 
 Target.create "BuildPackage" ignore
-Target.create "All" ignore
+Target.create "LocalBuild" ignore
 
 "Clean"
   ==> "AssemblyInfo"
   ==> "Build"
   ==> "CopyBinaries"
-  ==> "All"
+  //==> "CleanDocs"
+  //==> "GenerateDocs"
+  ==> "LocalBuild"
 
-"All"
+"LocalBuild"
   ==> "NuGet"
-
-"All"
-  ==> "CleanDocs"
-  ==> "GenerateDocs"
-  ==> "ReleaseDocs"
-
-"BuildPackage"
+  ==> "BuildPackage"
   ==> "PublishNuget"
   ==> "Release"
 
-Target.runOrDefaultWithArguments "All"
+Target.runOrDefaultWithArguments "LocalBuild"

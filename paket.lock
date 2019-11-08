@@ -1,5 +1,5 @@
 NUGET
-  remote: https://www.nuget.org/api/v2
+  remote: https://api.nuget.org/v3/index.json
     Deedle (2.1)
       FSharp.Core (>= 4.5.2)
     FSharp.Core (4.5.2)
@@ -744,7 +744,7 @@ NUGET
 
 GROUP Formatting
 NUGET
-  remote: https://www.nuget.org/api/v2
+  remote: https://api.nuget.org/v3/index.json
     FSharp.Compiler.Service (27.0.1)
       FSharp.Core (>= 4.5.2) - restriction: || (>= net45) (>= netstandard2.0)
       System.Collections.Immutable (>= 1.5) - restriction: || (>= net45) (>= netstandard2.0)
