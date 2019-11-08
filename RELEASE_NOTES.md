@@ -1,3 +1,7 @@
+### 3.0.0 - November 8th, 2019
+* XPlot is now .NET Standard 2.0 only
+* Support for [SourceLink](https://github.com/dotnet/sourcelink)
+
 ### 2.0.0 - April 29, 2019
 * net472/netstandard2.0 full compatibility
 
