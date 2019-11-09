@@ -18,6 +18,7 @@ nuget Fake.Api.GitHub //"
 #endif
 
 open System
+open System.IO
 open Fake.Core
 open Fake.Core.TargetOperators
 open Fake.DotNet
@@ -26,44 +27,15 @@ open Fake.IO.FileSystemOperators
 open Fake.IO.Globbing.Operators
 open Fake.Tools
 
-// --------------------------------------------------------------------------------------
-// START TODO: Provide project-specific details below
-// --------------------------------------------------------------------------------------
-
-// Information about the project are used
-//  - for version and project name in generated AssemblyInfo file
-//  - by the generated NuGet package
-//  - to run tests and to publish documentation on GitHub gh-pages
-//  - for documentation, you also need to edit info in "docs/tools/generate.fsx"
-
-// The name of the project
-// (used by attributes in AssemblyInfo, name of a NuGet package and directory in 'src')
 let project = "XPlot"
-
-// Short summary of the project
-// (used as description in AssemblyInfo and as a short summary for NuGet package)
 let summary = "Data visualization library for F#"
-
-// File system information
 let solutionFile  = "XPlot.sln"
-
-// Default target configuration
 let configuration = "Release"
-
-// Git configuration (used for publishing documentation in gh-pages branch)
-// The profile where the project is posted
 let gitHome = "https://github.com/fslaborg"
-
-// The name of the project on GitHub
 let gitName = project
 
-// --------------------------------------------------------------------------------------
-// END TODO: The rest of the file includes standard build steps
-// --------------------------------------------------------------------------------------
-
-// Read additional information from the release notes document
-//System.Environment.CurrentDirectory <- __SOURCE_DIRECTORY__
 let release = ReleaseNotes.load "RELEASE_NOTES.md"
+let buildConfiguration = DotNet.Custom <| Environment.environVarOrDefault "configuration" configuration
 
 // Generate assembly info files with the right version & up-to-date information
 Target.create "AssemblyInfo" (fun _ ->
@@ -75,31 +47,17 @@ Target.create "AssemblyInfo" (fun _ ->
           AssemblyInfo.FileVersion release.AssemblyVersion ]
 
     let getProjectDetails projectPath =
-        let projectName = System.IO.Path.GetFileNameWithoutExtension(projectPath)
-        ( projectPath, projectName,
-          System.IO.Path.GetDirectoryName(projectPath),
-          (getAssemblyInfoAttributes projectName) )
+        let projectName = Path.GetFileNameWithoutExtension(projectPath)
+        (Path.GetDirectoryName(projectPath), getAssemblyInfoAttributes projectName)
 
     !! "src/**/*.fsproj"
     |> Seq.map getProjectDetails
-    |> Seq.iter (fun (_, _, folderName, attributes) ->
+    |> Seq.iter (fun (folderName, attributes) ->
         AssemblyInfoFile.createFSharp (folderName </> "AssemblyInfo.fs") attributes )
-)
-
-// Copies binaries from default VS location to expected bin folder
-// But keeps a subdirectory structure for each project in the
-// src folder to support multiple project outputs
-Target.create "CopyBinaries" (fun _ ->
-    !! "src/**/*.??proj"
-    -- "src/**/*.shproj"
-    |>  Seq.map (fun f -> ((System.IO.Path.GetDirectoryName f) </> "bin" </> configuration, "bin" </> (System.IO.Path.GetFileNameWithoutExtension f)))
-    |>  Seq.iter (fun (fromDir, toDir) -> Shell.copyDir toDir fromDir (fun _ -> true))
 )
 
 // --------------------------------------------------------------------------------------
 // Clean build results
-
-let buildConfiguration = DotNet.Custom <| Environment.environVarOrDefault "configuration" configuration
 
 Target.create "Clean" (fun _ ->
     Shell.cleanDirs ["bin"; "temp"]
@@ -171,20 +129,16 @@ Target.create "Release" (fun _ ->
     Git.Branches.push ""
 
     Git.Branches.tag "" release.NugetVersion
-    Git.Branches.pushTag "" "origin" release.NugetVersion
+    Git.Branches.pushTag "" "upstream" release.NugetVersion
 )
-
-Target.create "LocalBuild" ignore
 
 "Clean"
   ==> "AssemblyInfo"
-  ==> "Build"
-  ==> "CopyBinaries"
+  ==> "Build" 
   //==> "CleanDocs"
   //==> "GenerateDocs"
-  ==> "LocalBuild"
   ==> "BuildPackages"
   ==> "PublishPackages"
   ==> "Release"
 
-Target.runOrDefaultWithArguments "BuildPackages"
+Target.runOrDefaultWithArguments "Build"
