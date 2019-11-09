@@ -33,6 +33,8 @@ let solutionFile  = "XPlot.sln"
 let configuration = "Release"
 let gitHome = "https://github.com/fslaborg"
 let gitName = project
+let now = DateTime.UtcNow
+let devBuildSuffix = "-build-" + string now.Year + string now.Month + string now.Day
 
 let release = ReleaseNotes.load "RELEASE_NOTES.md"
 let buildConfiguration = DotNet.Custom <| Environment.environVarOrDefault "configuration" configuration
@@ -60,15 +62,16 @@ Target.create "AssemblyInfo" (fun _ ->
 // Clean build results
 
 Target.create "Clean" (fun _ ->
-    Shell.cleanDirs ["bin"; "temp"]
+    !! "**/**/bin/" |> Shell.cleanDirs    
+    ["pkg"; "temp"] |> Shell.cleanDirs
 )
 
 Target.create "CleanDocs" (fun _ ->
-    Shell.cleanDirs ["docs/output"]
+    ["docs/output"] |> Shell.cleanDirs
 )
 
 // --------------------------------------------------------------------------------------
-// Build library & test project
+// Build everything
 
 Target.create "Build" (fun _ ->
     solutionFile 
@@ -83,13 +86,22 @@ Target.create "Build" (fun _ ->
 // sooooon
 
 // --------------------------------------------------------------------------------------
-// Build a NuGet package
+// Build and publish NuGet package
 
-Target.create "BuildPackages" (fun _ ->
+Target.create "BuildDevPackages" (fun _ ->
     Paket.pack(fun p -> 
         { p with
             ToolType = ToolType.CreateLocalTool()
-            OutputPath = "bin"
+            OutputPath = "pkg"
+            Version = release.NugetVersion + devBuildSuffix
+            ReleaseNotes = release.Notes |> String.toLines })
+)
+
+Target.create "BuildReleasePackages" (fun _ ->
+    Paket.pack(fun p -> 
+        { p with
+            ToolType = ToolType.CreateLocalTool()
+            OutputPath = "pkg"
             Version = release.NugetVersion
             ReleaseNotes = release.Notes |> String.toLines })
 )
@@ -97,13 +109,14 @@ Target.create "BuildPackages" (fun _ ->
 Target.create "PublishPackages" (fun _ ->
     Paket.push(fun p ->
         { p with
-            WorkingDir = "bin"
+            WorkingDir = "pkg"
             ToolType = ToolType.CreateLocalTool()
             ApiKey = Environment.environVarOrDefault "NugetKey" "" })
 )
 
 // --------------------------------------------------------------------------------------
 // Generate the documentation
+
 Target.create "GenerateDocs" (fun _ ->
   let (exitCode, messages) = Fsi.exec (fun p -> { p with WorkingDirectory="docsrc/tools"; Define="RELEASE"; }) "generate.fsx" []
   if exitCode = 0 then () else 
@@ -132,13 +145,22 @@ Target.create "Release" (fun _ ->
     Git.Branches.pushTag "" "upstream" release.NugetVersion
 )
 
+Target.create "DevBuild" ignore
+
 "Clean"
   ==> "AssemblyInfo"
-  ==> "Build" 
+  ==> "Build"
+  ==> "BuildDevPackages"
+  ==> "DevBuild"
+
   //==> "CleanDocs"
   //==> "GenerateDocs"
-  ==> "BuildPackages"
+
+"Clean"
+  ==> "AssemblyInfo"
+  ==> "Build"
+  ==> "BuildReleasePackages"
   ==> "PublishPackages"
   ==> "Release"
 
-Target.runOrDefaultWithArguments "Build"
+Target.runOrDefaultWithArguments "DevBuild"
