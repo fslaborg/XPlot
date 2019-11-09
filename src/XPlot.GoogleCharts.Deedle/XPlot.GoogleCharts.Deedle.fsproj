@@ -7,14 +7,6 @@
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="Deedle.fs" />
     <Content Include="paket.references" />
-    <None Include="Tests.fsx" />
-    <None Include="tests\Annotation.fsx" />
-    <None Include="tests\Area.fsx" />
-    <None Include="tests\Bar.fsx" />
-    <None Include="tests\Bubble.fsx" />
-    <None Include="tests\Calendar.fsx" />
-    <None Include="tests\Candlestick.fsx" />
-    <None Include="tests\Column.fsx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\XPlot.GoogleCharts\XPlot.GoogleCharts.fsproj" />
