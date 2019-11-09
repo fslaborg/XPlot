@@ -8,27 +8,6 @@
     <Compile Include="Configuration.fs" />
     <Compile Include="Main.fs" />
     <Content Include="paket.references" />
-    <None Include="tests\Annotation.fsx" />
-    <None Include="tests\Area.fsx" />
-    <None Include="tests\Bar.fsx" />
-    <None Include="tests\Bubble.fsx" />
-    <None Include="tests\Calendar.fsx" />
-    <None Include="tests\Candlestick.fsx" />
-    <None Include="tests\Column.fsx" />
-    <None Include="tests\Combo.fsx" />
-    <None Include="tests\Gauge.fsx" />
-    <None Include="tests\Geo.fsx" />
-    <None Include="tests\Histogram.fsx" />
-    <None Include="tests\Line.fsx" />
-    <None Include="tests\Map.fsx" />
-    <None Include="tests\Pie.fsx" />
-    <None Include="tests\Sankey.fsx" />
-    <None Include="tests\Scatter.fsx" />
-    <None Include="tests\SteppedArea.fsx" />
-    <None Include="tests\Table.fsx" />
-    <None Include="tests\Timeline.fsx" />
-    <None Include="tests\Treemap.fsx" />
-    <None Include="tests\ChartType.fsx" />
   </ItemGroup>
   <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>

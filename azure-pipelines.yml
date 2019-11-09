@@ -21,10 +21,10 @@ steps:
     packageType: 'sdk'
     useGlobalJson: true
     installationPath: $(Agent.ToolsDirectory)/dotnet
-- bash: ./build.sh
+- bash: ./build.sh target BuildPackages
   condition: or( eq( variables['Agent.OS'], 'Darwin' ), eq( variables['Agent.OS'], 'Linux' ))
   displayName: 'build.sh'
-- powershell: .\build.cmd
+- powershell: .\build.cmd target BuildPackages
   condition: eq( variables['Agent.OS'], 'Windows_NT' )
   displayName: 'build.cmd'
 

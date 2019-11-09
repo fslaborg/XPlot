@@ -8,14 +8,6 @@ open XPlot.GoogleCharts
 open XPlot.GoogleCharts.Deedle
 open System
 
-
-
-
-
-
-
-
-
 module Combo =
 
     let Bolivia = series ["2004/05", 165.; "2005/06", 135.; "2006/07", 157.; "2007/08", 139.; "2008/09", 136.]

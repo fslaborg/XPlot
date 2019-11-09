@@ -105,14 +105,14 @@ let traceMembers =
 
 let layoutMembers =
     [
-            let typeName = "layout"
-            let jObj = layout.["layoutAttributes"]
-            let traces =
-                jObj.ToString()
-                |> fun x ->
-                    JsonConvert.DeserializeObject(x, typeof<Dictionary<string, obj>>)
-                    :?> Dictionary<string, obj>
-            yield! getMembers typeName traces
+        let typeName = "layout"
+        let jObj = layout.["layoutAttributes"]
+        let traces =
+            jObj.ToString()
+            |> fun x ->
+                JsonConvert.DeserializeObject(x, typeof<Dictionary<string, obj>>)
+                :?> Dictionary<string, obj>
+        yield! getMembers typeName traces
     ]
 
 let members =
@@ -183,10 +183,10 @@ let classes =
                     | "end" -> "``end``"
                     | name -> name
                 [
-                    if x.description <> "" then yield "    /// " + x.description
-                    yield "    member __." + name
-                    yield "        with get () = Option.get _" + x.name
-                    yield "        and set value = _" + x.name + " <- Some value"
+                    if x.description <> "" then "    /// " + x.description
+                    "    member __." + name
+                    "        with get () = Option.get _" + x.name
+                    "        and set value = _" + x.name + " <- Some value"
                 ]
                 |> String.concat "\n"
             )

@@ -11,7 +11,8 @@ Plotly.Signin(Credentials.username, Credentials.key)
 open System.IO
 
 let data =
-    let path = Path.Combine(__SOURCE_DIRECTORY__, "3DLineData.txt")
+    Path.
+    let path = Path.Combine(__SOURCE_DIRECTORY__, "..", "3DLineData.txt")
     File.ReadAllLines path
 
 let getData line =
