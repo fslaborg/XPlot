@@ -33,8 +33,7 @@ let solutionFile  = "XPlot.sln"
 let configuration = "Release"
 let gitHome = "https://github.com/fslaborg"
 let gitName = project
-let datePart = let x = DateTimeOffset.UtcNow in x.ToString("yymmdd")
-let devBuildSuffix = "-build-" + datePart
+let devBuildSuffix = "-preview-" + BuildServer.buildVersion
 
 let release = ReleaseNotes.load "RELEASE_NOTES.md"
 let buildConfiguration = DotNet.Custom <| Environment.environVarOrDefault "configuration" configuration
