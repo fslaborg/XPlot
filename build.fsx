@@ -110,31 +110,21 @@ Target.create "BuildReleasePackages" (fun _ ->
 
 Target.create "PublishDevPackages" (fun _ ->
     let token =
-        match Environment.environVarOrDefault "xplotpackages" "" with
-        | s when not (String.IsNullOrWhiteSpace s) -> printfn "%s" s; s
-        | _ -> failwith "please set the xplotpackages environment variable to a github personal access token with write and read package access."
+        match Environment.environVarOrDefault "mapped-gh-token" "" with
+        | s when not (String.IsNullOrWhiteSpace s) -> s
+        | _ -> failwith "GitHub packages env var doesn't exist. Create a new one and set it up!"
 
     for nupkg in !! (pkgDir + "/*.nupkg") do
-        let fileName = Path.GetFileNameWithoutExtension(nupkg)
-        let projectName = fileName.Remove(fileName.LastIndexOf('.'))
-        let projectName = projectName.Remove(projectName.LastIndexOf('.'))
-        let projectName = projectName.Remove(projectName.LastIndexOf('.'))
+        let setNugetPushParams (defaults: NuGet.NuGetPushParams) =
+            { defaults with
+                Source = Some "https://nuget.pkg.github.com/fslaborg/index.json"
+                ApiKey = Some token }
 
-        NuGet.NuGetPublish (fun p ->
-            { p with AccessKey = token
-                     PublishUrl = "https://nuget.pkg.github.com/fslaborg/index.json"
-                     Project = projectName
-                     Version = release.NugetVersion + devBuildSuffix
-                     WorkingDir = pkgDir
-                     OutputPath = pkgDir }
-        )
+        let setParams (defaults: DotNet.NuGetPushOptions) =
+            { defaults with
+                PushParams = setNugetPushParams defaults.PushParams }
 
-    // Paket.push(fun p ->
-    //     { p with
-    //         WorkingDir = "pkg"
-    //         ToolType = ToolType.CreateLocalTool()
-    //         PublishUrl = "https://nuget.pkg.github.com/fslaborg/index.json"
-    //         ApiKey = token })
+        DotNet.nugetPush setParams nupkg
 )
 
 Target.create "PublishReleasePackages" (fun _ ->
