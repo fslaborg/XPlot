@@ -24,6 +24,8 @@ steps:
 - bash: ./build.sh target PublishDevPackages
   condition: or( eq( variables['Agent.OS'], 'Darwin' ), eq( variables['Agent.OS'], 'Linux' ))
   displayName: 'build.sh'
+  env:
+    mapped-gh-token: $(xplotpackages)
 - powershell: .\build.cmd
   condition: eq( variables['Agent.OS'], 'Windows_NT' )
   displayName: 'build.cmd'
