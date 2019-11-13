@@ -1,3 +1,6 @@
+### 3.0.2
+* Include XPlot.D3
+
 ### 3.0.1 - November 8th, 2019
 * Update FSharp.Core dependency to be 4.5.0 or higher.
 
