@@ -25,7 +25,7 @@ steps:
   condition: or( eq( variables['Agent.OS'], 'Darwin' ), eq( variables['Agent.OS'], 'Linux' ))
   displayName: 'build.sh'
   env:
-    mapped-gh-token: $(xplotpackages)
+    mapped-gh-token: $(xplottest)
 - powershell: .\build.cmd
   condition: eq( variables['Agent.OS'], 'Windows_NT' )
   displayName: 'build.cmd'
