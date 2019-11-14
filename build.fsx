@@ -9,6 +9,7 @@ nuget Fake.DotNet.AssemblyInfoFile
 nuget Fake.DotNet.Paket
 nuget Fake.DotNet.FSFormatting
 nuget Fake.DotNet.Fsi
+nuget Fake.DotNet.NuGet
 nuget Fake.Tools.Git
 nuget Fake.Api.GitHub //"
 
@@ -22,6 +23,7 @@ open System.IO
 open Fake.Core
 open Fake.Core.TargetOperators
 open Fake.DotNet
+open Fake.DotNet.NuGet
 open Fake.IO
 open Fake.IO.FileSystemOperators
 open Fake.IO.Globbing.Operators
@@ -34,6 +36,7 @@ let configuration = "Release"
 let gitHome = "https://github.com/fslaborg"
 let gitName = project
 let devBuildSuffix = "-preview-" + BuildServer.buildVersion
+let pkgDir = "pkg"
 
 let release = ReleaseNotes.load "RELEASE_NOTES.md"
 let buildConfiguration = DotNet.Custom <| Environment.environVarOrDefault "configuration" configuration
@@ -91,7 +94,7 @@ Target.create "BuildDevPackages" (fun _ ->
     Paket.pack(fun p -> 
         { p with
             ToolType = ToolType.CreateLocalTool()
-            OutputPath = "pkg"
+            OutputPath = pkgDir
             Version = release.NugetVersion + devBuildSuffix
             ReleaseNotes = release.Notes |> String.toLines })
 )
@@ -100,17 +103,36 @@ Target.create "BuildReleasePackages" (fun _ ->
     Paket.pack(fun p -> 
         { p with
             ToolType = ToolType.CreateLocalTool()
-            OutputPath = "pkg"
+            OutputPath = pkgDir
             Version = release.NugetVersion
             ReleaseNotes = release.Notes |> String.toLines })
 )
 
-Target.create "PublishPackages" (fun _ ->
+Target.create "PublishDevPackages" (fun _ ->
+    let token =
+        match Environment.environVarOrDefault "mapped-gh-token" "" with
+        | s when not (String.IsNullOrWhiteSpace s) -> s
+        | _ -> failwith "GitHub packages env var doesn't exist. Create a new one and set it up!"
+
+    for nupkg in !! (pkgDir + "/*.nupkg") do
+        let setNugetPushParams (defaults: NuGet.NuGetPushParams) =
+            { defaults with
+                Source = Some "https://nuget.pkg.github.com/fslaborg/index.json"
+                ApiKey = Some token }
+
+        let setParams (defaults: DotNet.NuGetPushOptions) =
+            { defaults with
+                PushParams = setNugetPushParams defaults.PushParams }
+
+        DotNet.nugetPush setParams nupkg
+)
+
+Target.create "PublishReleasePackages" (fun _ ->
     Paket.push(fun p ->
         { p with
             WorkingDir = "pkg"
             ToolType = ToolType.CreateLocalTool()
-            ApiKey = Environment.environVarOrDefault "NugetKey" "" })
+            ApiKey = Environment.environVarOrDefault "NuGet-key" "" })
 )
 
 // --------------------------------------------------------------------------------------
@@ -155,8 +177,15 @@ Target.create "DevBuild" ignore
 "Clean"
   ==> "AssemblyInfo"
   ==> "Build"
+  ==> "BuildDevPackages"
+  ==> "DevBuild"
+  ==> "PublishDevPackages"
+
+"Clean"
+  ==> "AssemblyInfo"
+  ==> "Build"
   ==> "BuildReleasePackages"
-  ==> "PublishPackages"
+  ==> "PublishReleasePackages"
   ==> "Release"
 
 Target.runOrDefaultWithArguments "DevBuild"
