@@ -5,6 +5,7 @@ open MathNet.Numerics.Distributions
 open System
 open XPlot.Plotly
 
+// Not under test due to randomness
 module BasicContourPlot =
     let size = 100
     let x = Generate.LinearSpaced(size, -2. * Math.PI, 2. * Math.PI)
