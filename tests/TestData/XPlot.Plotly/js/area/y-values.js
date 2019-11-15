@@ -1,0 +1,1 @@
+<script>vardata=[{"type":"scatter","x":[0,1,2,3],"y":[1000,1170,660,1030],"fill":"tozeroy"}];varlayout="";Plotly.newPlot('',data,layout);</script>

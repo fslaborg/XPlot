@@ -10,6 +10,7 @@ nuget Fake.DotNet.Paket
 nuget Fake.DotNet.FSFormatting
 nuget Fake.DotNet.Fsi
 nuget Fake.DotNet.NuGet
+nuget Fake.DotNet.Testing.Expecto
 nuget Fake.Tools.Git
 nuget Fake.Api.GitHub //"
 
@@ -24,6 +25,7 @@ open Fake.Core
 open Fake.Core.TargetOperators
 open Fake.DotNet
 open Fake.DotNet.NuGet
+open Fake.DotNet.Testing
 open Fake.IO
 open Fake.IO.FileSystemOperators
 open Fake.IO.Globbing.Operators
@@ -85,7 +87,21 @@ Target.create "Build" (fun _ ->
 // --------------------------------------------------------------------------------------
 // Run the unit tests using test runner
 
-// sooooon
+let runTests assembly =
+    [Path.Combine(__SOURCE_DIRECTORY__, assembly)]
+    |> Expecto.run (fun p ->
+        { p with 
+            WorkingDirectory = __SOURCE_DIRECTORY__
+            FailOnFocusedTests = true
+            PrintVersion = true
+            Parallel = false
+            Summary =  true
+            Debug = false
+        })
+
+Target.create "RunPlotlyTests" (fun _ ->
+    runTests "tests/XPlot.Plotly.Tests/bin/Release/netcoreapp3.0/XPlot.Plotly.Tests.dll"
+)
 
 // --------------------------------------------------------------------------------------
 // Build and publish NuGet package
@@ -167,12 +183,17 @@ Target.create "Release" (fun _ ->
 )
 
 Target.create "DevBuild" ignore
+Target.create "CIBuild" ignore
 
 "Clean"
   ==> "AssemblyInfo"
   ==> "Build"
   ==> "BuildDevPackages"
   ==> "DevBuild"
+
+"DevBuild"
+  ==> "RunPlotlyTests"
+  ==> "CIBuild"
 
 "Clean"
   ==> "AssemblyInfo"

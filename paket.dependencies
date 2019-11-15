@@ -9,6 +9,16 @@ nuget Newtonsoft.Json
 nuget Microsoft.SourceLink.GitHub
 
 group Formatting
-source https://api.nuget.org/v3/index.json
-nuget FSharp.Formatting
-nuget FSharp.Formatting.CommandTool
+    source https://api.nuget.org/v3/index.json
+    nuget FSharp.Formatting
+    nuget FSharp.Formatting.CommandTool
+
+group Test
+    source https://api.nuget.org/v3/index.json
+    frameworks: netcoreapp3.0
+
+    nuget FSharp.Compiler.Service redirects: force
+    nuget FSharp.Core redirects: force
+
+    nuget Expecto
+    nuget Expecto.TestResults
