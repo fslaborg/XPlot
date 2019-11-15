@@ -66,9 +66,30 @@ module BoxPlot =
         let js = GroupedBoxPlot.js |> Helpers.cleanJS
         File.WriteAllText(area + "grouped-boxplot.js", js)
 
-        let js = BubbleCharts.js |> Helpers.cleanJS
-        File.WriteAllText(area + "bubblecharts.js", js)
+module Bubble =
+    open Bubble
 
+    let generateBubble () =
+        let area = Path.Combine(plotlyPrelude, "bubble" + string Path.DirectorySeparatorChar)
+        Directory.CreateDirectory(area) |> ignore
+
+        let js = Chart1.js |> Helpers.cleanJS
+        File.WriteAllText(area + "bubble-1.js", js)
+
+        let js = Chart2.js |> Helpers.cleanJS
+        File.WriteAllText(area + "bubble-2.js", js)
+
+        let js = Chart3.js |> Helpers.cleanJS
+        File.WriteAllText(area + "bubble-3.js", js)
+
+        let js = Chart4.js |> Helpers.cleanJS
+        File.WriteAllText(area + "bubble-4.js", js)
+
+        let js = Chart5.js |> Helpers.cleanJS
+        File.WriteAllText(area + "bubble-5.js", js)
+
+        let js = Chart6.js |> Helpers.cleanJS
+        File.WriteAllText(area + "bubble-6.js", js)
 
 [<EntryPoint>]
 let main _ =
@@ -77,4 +98,5 @@ let main _ =
     Area.generateArea ()
     Bar.generateBar ()
     BoxPlot.generateBoxPlots ()
+    Bubble.generateBubble ()
     0 // return an integer exit code

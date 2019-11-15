@@ -26,14 +26,6 @@ let testArea =
             Expect.equal expectedJS actualJS "Boxplot with underlying data"
         }
 
-        test "BubbleCharts generated JS did not regress" {
-            let bubbles = Path.Combine(baselineDir, "bubblecharts.js")
-            let expectedJS = File.ReadAllText(bubbles)
-            let actualJS = BubbleCharts.js |> Helpers.cleanJS
-
-            Expect.equal expectedJS actualJS "Bubble charts"
-        }
-
         test "Grouped boxplot generated JS did not regress" {
             let grouped = Path.Combine(baselineDir, "grouped-boxplot.js")
             let expectedJS = File.ReadAllText(grouped)

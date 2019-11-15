@@ -5,10 +5,12 @@
     <OutputType>Exe</OutputType>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="../TestData/XPlot.Plotly/Bubble.fs" Link="Bubble.fs" />
     <Compile Include="../TestData/XPlot.Plotly/BoxPlot.fs" Link="BoxPlot.fs" />
     <Compile Include="../TestData/XPlot.Plotly/Bar.fs" Link="Bar.fs" />
     <Compile Include="../TestData/XPlot.Plotly/Area.fs" Link="Area.fs" />
     <Compile Include="Helpers.fs" />
+    <Compile Include="BubbleTests.fs" />
     <Compile Include="BoxPlotTests.fs" />
     <Compile Include="BarTests.fs" />
     <Compile Include="AreaTests.fs" />
