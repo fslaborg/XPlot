@@ -1,100 +1,20 @@
-﻿#r @"../../../bin/XPlot.Plotly/netstandard2.0/XPlot.Plotly.dll"
-
-// TESTED under CI now
-
+namespace Column
 
 open XPlot.Plotly
 
-let sales = ["2013", 1000; "2014", 1170; "2015", 660; "2016", 1030]
-let expenses = ["2013", 400; "2014", 460; "2015", 1120; "2016", 540]
-
-// y values only
-sales
-|> List.map snd
-|> Chart.Column
-|> Chart.Show
-
-// single series
-sales
-|> Chart.Column
-|> Chart.Show
-
-// multiple series
-[sales; expenses]
-|> Chart.Column
-|> Chart.Show
-
-// Basic bar chart
 module Chart1 =
+    let sales = ["2013", 1000; "2014", 1170; "2015", 660; "2016", 1030]
+    let expenses = ["2013", 400; "2014", 460; "2015", 1120; "2016", 540]
 
-    let data =
-        [
-            Bar(
-                x = ["giraffes"; "orangutans"; "monkeys"],
-                y = [20; 14; 23]
-            )
-        ]
-
-    data
-    |> Chart.Plot
-    |> Chart.Show
-
-// Grouped bar chart
-module Chart2 =
-
-    let trace1 =
-        Bar(
-            x = ["giraffes"; "orangutans"; "monkeys"],
-            y = [20; 14; 23],
-            name = "SF Zoo"
-        )
-
-    let trace2 =
-        Bar(
-            x = ["giraffes"; "orangutans"; "monkeys"],
-            y = [12; 18; 29],
-            name = "LA Zoo"
-        )
-
-    let data = [trace1; trace2]
-
-    let layout = Layout(barmode = "group")
-    
-    data
-    |> Chart.Plot
-    |> Chart.WithLayout layout
-    |> Chart.Show
-
-// Stacked bar chart
-module Chart3 =
-
-    let trace1 =
-        Bar(
-            x = ["giraffes"; "orangutans"; "monkeys"],
-            y = [20; 14; 23],
-            name = "SF Zoo"
-        )
-
-    let trace2 =
-        Bar(
-            x = ["giraffes"; "orangutans"; "monkeys"],
-            y = [12; 18; 29],
-            name = "LA Zoo"
-        )
-
-    let data = [trace1; trace2]
-
-    let layout = Layout(barmode = "stack")
-
-    data
-    |> Chart.Plot
-    |> Chart.WithLayout layout
-    |> Chart.Show
+    let js =
+        let chart =
+            [sales; expenses]
+            |> Chart.Column
+        chart.GetInlineJS()
 
 // Bar chart with hover text
-module Chart4 =
-
-    let trace1 =
+module Chart2 =
+    let trace =
         Bar(
             x = ["Product A"; "Product B"; "Product C"],
             y = [20; 14; 23],
@@ -111,23 +31,21 @@ module Chart4 =
                 )
         )
 
-    let data = [trace1]
+    let options = Options(title = "January 2013 Sales Report")
 
-    let layout = Layout(title = "January 2013 Sales Report")
-
-    data
-    |> Chart.Plot
-    |> Chart.WithLayout layout
-    |> Chart.Show
+    let js =
+        let chart =
+            trace
+            |> Chart.Plot
+            |> Chart.WithOptions options
+        chart.GetInlineJS()
 
 // Bar chart with direct labels
-module Chart5 =
-
+module Chart3 =
     let xValue = ["Product A"; "Product B"; "Product C"]
-
     let yValue = [20.; 14.; 23.]
 
-    let trace1 =
+    let trace =
         Bar(
             x = xValue,
             y = yValue,
@@ -144,10 +62,6 @@ module Chart5 =
                 )
         )
 
-    let data = [trace1]
-
-    let layout = Layout(title = "January 2013 Sales Report")
-
     let annotations =
         xValue
         |> List.mapi (fun i _ ->
@@ -161,16 +75,17 @@ module Chart5 =
             )
         )
 
-    layout.annotations <- annotations
+    let options = Options(title = "January 2013 Sales Report", annotations = annotations)
             
-    data
-    |> Chart.Plot
-    |> Chart.WithLayout layout
-    |> Chart.Show
+    let js =
+        let chart =
+            trace
+            |> Chart.Plot
+            |> Chart.WithOptions options
+        chart.GetInlineJS()
 
 // Grouped bar chart with direct labels
-module Chart6 =
-
+module Chart4 =
     let trace1 =
         Bar(
             x = ["Jan"; "Feb"; "Mar"; "Apr"; "May"; "Jun"; "Jul"; "Aug"; "Sep"; "Oct"; "Nov"; "Dec"],
@@ -195,24 +110,23 @@ module Chart6 =
                 )
         )
 
-    let data = [trace1; trace2]
-
-    let layout =
-        Layout(
+    let options =
+        Options(
             title = "2013 Sales Report",
             xaxis = Xaxis(tickangle = -45.),
             barmode = "group"
         )
 
-    data
-    |> Chart.Plot
-    |> Chart.WithLayout layout
-    |> Chart.Show
+    let js =
+        let chart =
+            [trace1; trace2]
+            |> Chart.Plot
+            |> Chart.WithOptions options
+        chart.GetInlineJS()
 
 // Customizing individual bar colors
-module Chart7 =
-
-    let trace1 =
+module Chart5 =
+    let trace =
         Bar(
             x = ["Feature A"; "Feature B"; "Feature C"; "Feature D"; "Feature E"],
             y = [20; 14; 23; 25; 22],
@@ -222,19 +136,18 @@ module Chart7 =
                 )
         )
 
-    let data = [trace1]
+    let options = Options(title = "Least Used Feature")
 
-    let layout = Layout(title = "Least Used Feature")
-
-    data
-    |> Chart.Plot
-    |> Chart.WithLayout layout
-    |> Chart.Show
+    let js =
+        let chart =
+            trace
+            |> Chart.Plot
+            |> Chart.WithOptions options
+        chart.GetInlineJS()
 
 // Bar chart with hover text
-module Chart8 =
-
-    let trace1 =
+module Chart6 =
+    let trace =
         Bar(
             x = ["Liam"; "Sophie"; "Jacob"; "Mia"; "William"; "Olivia"],
             y = [8.0; 8.0; 12.0; 12.0; 13.0; 20.0],
@@ -242,10 +155,8 @@ module Chart8 =
             marker = Marker(color = "rgb(142,124,195)")
         )
 
-    let data = [trace1]
-
-    let layout =
-        Layout(
+    let options =
+        Options(
             title = "Number of Graphs Made this Week",
             font = Font(family = "Raleway; snas-serif"),
             showlegend = false,
@@ -253,19 +164,19 @@ module Chart8 =
             yaxis =
                 Yaxis(
                     zeroline = false
-//                    grigwidth = 2.
                 ),
             bargap = 0.05
         )
 
-    data
-    |> Chart.Plot
-    |> Chart.WithLayout layout
-    |> Chart.Show
+    let js =
+        let chart =
+            trace
+            |> Chart.Plot
+            |> Chart.WithOptions options
+        chart.GetInlineJS()
 
 // Colored and styled bar chart 
-module Chart9 =
-
+module Chart7 =
     let trace1 =
         Bar(
             x = [1995; 1996; 1997; 1998; 1999; 2000; 2001; 2002; 2003; 2004; 2005; 2006; 2007; 2008; 2009; 2010; 2011; 2012],
@@ -282,10 +193,8 @@ module Chart9 =
             marker = Marker(color = "rgb(26, 118, 255)")
         )
 
-    let data = [trace1; trace2]
-
-    let layout =
-        Layout(
+    let options =
+        Options(
             title = "US Export of Plastic Scrap",
             xaxis =
                 Xaxis(
@@ -318,17 +227,17 @@ module Chart9 =
                 ),
             barmode = "group",
             bargap = 0.15
-//            bargroupgap = 0.1
         )
 
-    data
-    |> Chart.Plot
-    |> Chart.WithLayout layout
-    |> Chart.Show
+    let js =
+        let chart =
+            [trace1; trace2]
+            |> Chart.Plot
+            |> Chart.WithOptions options
+        chart.GetInlineJS()
 
 // Waterfall bar chart
-module Chart10 =
-
+module Chart8 =
     let xData =
         [
             "Product Revenue";
@@ -398,17 +307,6 @@ module Chart10 =
 
     let data = [trace1; trace2; trace3; trace4]
 
-    let layout =
-        Layout(
-            title = "Annual Profit 2015",
-            barmode = "stack",
-            paper_bgcolor = "rgba(245,246,249,1)",
-            plot_bgcolor = "rgba(245,246,249,1)",
-            width = 600.,
-            height = 600.,
-            showlegend = false
-        )
-
     let annotations =
         [0 .. 6]
         |> List.map (fun i ->
@@ -426,53 +324,50 @@ module Chart10 =
             )
     )
 
-    layout.annotations <- annotations
+    let options =
+        Options(
+            title = "Annual Profit 2015",
+            barmode = "stack",
+            paper_bgcolor = "rgba(245,246,249,1)",
+            plot_bgcolor = "rgba(245,246,249,1)",
+            width = 600.,
+            height = 600.,
+            showlegend = false,
+            annotations = annotations
+        )
 
-    data
-    |> Chart.Plot
-    |> Chart.WithLayout layout
-    |> Chart.Show
-
-// ====================
-// Pipeline style tests
-// ====================
-
-// Basic bar chart
-module Chart1' =
-
-    let data = ["giraffes", 20; "orangutans", 14; "monkeys", 23]
-
-    data
-    |> Chart.Column
-    |> Chart.Show
+    let js =
+        let chart =
+            data
+            |> Chart.Plot
+            |> Chart.WithOptions options
+        chart.GetInlineJS()
 
 // Grouped bar chart
-module Chart2' =
-
+module Chart9 =
     let trace1 = ["giraffes", 20; "orangutans", 14; "monkeys", 23]
     let trace2 = ["giraffes", 12; "orangutans", 18; "monkeys", 29]
 
-    let layout = Layout(barmode = "group")
+    let options = Options(barmode = "group")
     
-    [trace1; trace2]
-    |> Chart.Column
-    |> Chart.WithLayout layout
-    |> Chart.Show
+    let js =
+        let chart =
+            [trace1; trace2]
+            |> Chart.Column
+            |> Chart.WithOptions options
+        chart.GetInlineJS()
 
 // Stacked bar chart
-module Chart3' =
-
+module Chart10 =
     let trace1 = ["giraffes", 20; "orangutans", 14; "monkeys", 23]
     let trace2 = ["giraffes", 12; "orangutans", 18; "monkeys", 29]
 
-    let layout = Layout(barmode = "stack")
+    let options = Options(barmode = "stack")
 
-    [trace1; trace2]
-    |> Chart.Column
-    |> Chart.WithLabels ["SF Zoo"; "LA Zoo"]
-    |> Chart.WithLayout layout
-    |> Chart.Show
-
-[20; 14; 23]
-|> Chart.Column
-|> Chart.Show
+    let js =
+        let chart =
+            [trace1; trace2]
+            |> Chart.Column
+            |> Chart.WithLabels ["SF Zoo"; "LA Zoo"]
+            |> Chart.WithOptions options
+        chart.GetInlineJS()

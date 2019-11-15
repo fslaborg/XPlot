@@ -1,0 +1,1 @@
+<script>vardata=[{"type":"bar","x":["giraffes","orangutans","monkeys"],"y":[20,14,23]},{"type":"bar","x":["giraffes","orangutans","monkeys"],"y":[12,18,29]}];varlayout={"barmode":"group"};Plotly.newPlot('',data,layout);</script>

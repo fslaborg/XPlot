@@ -1,0 +1,1 @@
+<script>vardata=[{"type":"bar","x":["ProductA","ProductB","ProductC"],"y":[20,14,23],"text":["27%marketshare","24%marketshare","19%marketshare"],"marker":{"opacity":0.6,"color":"rgb(158,202,225)","line":{"color":"rbg(8,48,107)","width":1.5}}}];varlayout={"title":"January2013SalesReport"};Plotly.newPlot('',data,layout);</script>

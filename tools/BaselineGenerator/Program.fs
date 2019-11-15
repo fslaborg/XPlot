@@ -107,6 +107,44 @@ module Chart =
         let js = Chart3.js |> Helpers.cleanJS
         File.WriteAllText(area + "chart-3.js", js)
 
+module Column =
+    open Column
+
+    let generateColumn () =
+        let area = Path.Combine(plotlyPrelude, "column" + string Path.DirectorySeparatorChar)
+        Directory.CreateDirectory(area) |> ignore
+
+        let js = Chart1.js |> Helpers.cleanJS
+        File.WriteAllText(area + "column-1.js", js)
+
+        let js = Chart2.js |> Helpers.cleanJS
+        File.WriteAllText(area + "column-2.js", js)
+
+        let js = Chart3.js |> Helpers.cleanJS
+        File.WriteAllText(area + "column-3.js", js)
+
+        let js = Chart4.js |> Helpers.cleanJS
+        File.WriteAllText(area + "column-4.js", js)
+
+        let js = Chart5.js |> Helpers.cleanJS
+        File.WriteAllText(area + "column-5.js", js)
+
+        let js = Chart6.js |> Helpers.cleanJS
+        File.WriteAllText(area + "column-6.js", js)
+
+        let js = Chart7.js |> Helpers.cleanJS
+        File.WriteAllText(area + "column-7.js", js)
+
+        let js = Chart8.js |> Helpers.cleanJS
+        File.WriteAllText(area + "column-8.js", js)
+
+        let js = Chart9.js |> Helpers.cleanJS
+        File.WriteAllText(area + "column-9.js", js)
+
+        let js = Chart10.js |> Helpers.cleanJS
+        File.WriteAllText(area + "column-10.js", js)
+
+
 [<EntryPoint>]
 let main _ =
     Directory.CreateDirectory(plotlyPrelude) |> ignore
@@ -116,4 +154,5 @@ let main _ =
     BoxPlot.generateBoxPlots ()
     Bubble.generateBubble ()
     Chart.generateChart ()
+    Column.generateColumn ()
     0 // return an integer exit code

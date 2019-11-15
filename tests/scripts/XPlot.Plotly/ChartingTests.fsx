@@ -1,5 +1,7 @@
 ﻿#load "../packages/FSLab.0.3.19/FsLab.fsx"
 
+// TESTED under CI now
+
 open System
 open XPlot.Plotly
 

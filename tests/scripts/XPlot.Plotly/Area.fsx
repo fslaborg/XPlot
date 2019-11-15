@@ -1,5 +1,7 @@
 ﻿#r @"../../../bin/XPlot.Plotly/netstandard2.0/XPlot.Plotly.dll"
 
+// TESTED under CI now
+
 open XPlot.Plotly
 
 // Basic Overlaid Area Chart

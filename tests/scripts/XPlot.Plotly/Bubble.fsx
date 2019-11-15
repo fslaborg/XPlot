@@ -1,5 +1,7 @@
 ﻿#r @"../../../bin/XPlot.Plotly/netstandard2.0/XPlot.Plotly.dll"
 
+// TESTED under CI now
+
 open XPlot.Plotly
 
 [1, 10, 40; 2, 11, 60; 3, 12, 80; 4, 13, 100]

@@ -1,0 +1,1 @@
+<script>vardata=[{"type":"bar","x":["FeatureA","FeatureB","FeatureC","FeatureD","FeatureE"],"y":[20,14,23,25,22],"marker":{"color":["rgba(204,204,204,1)","rgba(222,45,38,0.8)","rgba(204,204,204,1)","rgba(204,204,204,1)","rgba(204,204,204,1)"]}}];varlayout={"title":"LeastUsedFeature"};Plotly.newPlot('',data,layout);</script>
