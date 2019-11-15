@@ -21,12 +21,12 @@ steps:
     packageType: 'sdk'
     useGlobalJson: true
     installationPath: $(Agent.ToolsDirectory)/dotnet
-- bash: ./cibuild.sh
+- bash: ./build.sh target CIBuild
   condition: eq( variables['Agent.OS'], 'Linux' )
-  displayName: 'cibuild.sh'
-- powershell: .\cibuild.cmd
+  displayName: 'Linux build and test'
+- powershell: .\build.cmd target CIBuild
   condition: eq( variables['Agent.OS'], 'Windows_NT' )
-  displayName: 'cibuild.cmd'
+  displayName: 'Windows build and test'
 
 - task: PublishTestResults@2
   inputs:
