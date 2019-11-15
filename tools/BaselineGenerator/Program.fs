@@ -195,6 +195,16 @@ module ErrorBars =
         let js = AsymmetricErrorBarsConstantOffset.js |> Helpers.cleanJS
         File.WriteAllText(area + "eb-6.js", js)
 
+module Gauge =
+    open Gauge
+
+    let generateGauge () =
+        let area = Path.Combine(plotlyPrelude, "gauge" + string Path.DirectorySeparatorChar)
+        Directory.CreateDirectory(area) |> ignore
+
+        let js = CircularGauge.js |> Helpers.cleanJS
+        File.WriteAllText(area + "gauge.js", js)
+
 [<EntryPoint>]
 let main _ =
     Directory.CreateDirectory(plotlyPrelude) |> ignore
@@ -208,5 +218,6 @@ let main _ =
     Contour.generateContour ()
     ThreeDPlots.generate3DPlots ()
     ErrorBars.generateErrorbars ()
+    Gauge.generateGauge ()
     
     0 // return an integer exit code

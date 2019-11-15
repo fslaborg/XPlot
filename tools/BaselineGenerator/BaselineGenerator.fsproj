@@ -5,6 +5,7 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="../../tests/TestData/XPlot.Plotly/Gauge.fs" Link="XPlot.Plotly/Gauge.fs" />
     <Compile Include="../../tests/TestData/XPlot.Plotly/ErrorBars.fs" Link="XPlot.Plotly/ErrorBars.fs" />
     <Compile Include="../../tests/TestData/XPlot.Plotly/3DPlots.fs" Link="XPlot.Plotly/3DPlots.fs" />
     <Compile Include="../../tests/TestData/XPlot.Plotly/Contour.fs" Link="XPlot.Plotly/Contour.fs" />
