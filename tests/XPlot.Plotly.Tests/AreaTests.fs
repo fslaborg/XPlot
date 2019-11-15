@@ -19,32 +19,32 @@ let testArea =
         }
 
         test "Area2 generated JS did not regress" {
-            let area1 = Path.Combine(baselineDir, "area-2.js")
-            let expectedJS = File.ReadAllText(area1)
+            let area2 = Path.Combine(baselineDir, "area-2.js")
+            let expectedJS = File.ReadAllText(area2)
             let actualJS = Chart2.js |> Helpers.cleanJS
 
             Expect.equal expectedJS actualJS "Area2"
         }
 
         test "Multiple series generated JS did not regress" {
-            let area1 = Path.Combine(baselineDir, "multiple-series.js")
-            let expectedJS = File.ReadAllText(area1)
+            let mul = Path.Combine(baselineDir, "multiple-series.js")
+            let expectedJS = File.ReadAllText(mul)
             let actualJS = PipeStyle.multipleSeriesJS |> Helpers.cleanJS
 
             Expect.equal expectedJS actualJS "Multiple series"
         }
 
         test "Single series generated JS did not regress" {
-            let area1 = Path.Combine(baselineDir, "single-series.js")
-            let expectedJS = File.ReadAllText(area1)
+            let single = Path.Combine(baselineDir, "single-series.js")
+            let expectedJS = File.ReadAllText(single)
             let actualJS = PipeStyle.singleSeriesJS |> Helpers.cleanJS
 
             Expect.equal expectedJS actualJS "Multiple series"
         }
 
         test "Y-values series generated JS did not regress" {
-            let area1 = Path.Combine(baselineDir, "y-values.js")
-            let expectedJS = File.ReadAllText(area1)
+            let yval = Path.Combine(baselineDir, "y-values.js")
+            let expectedJS = File.ReadAllText(yval)
             let actualJS = PipeStyle.yValuesJS |> Helpers.cleanJS
 
             Expect.equal expectedJS actualJS "Y-values"

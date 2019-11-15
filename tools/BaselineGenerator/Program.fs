@@ -50,6 +50,25 @@ module Bar =
         let js = PipeStyle.yValuesJS |> Helpers.cleanJS
         File.WriteAllText(area + "y-values.js", js)
 
+module BoxPlot =
+    open BoxPlot
+
+    let generateBoxPlots () =
+        let area = Path.Combine(plotlyPrelude, "box" + string Path.DirectorySeparatorChar)
+        Directory.CreateDirectory(area) |> ignore
+
+        let js = BasicBoxPlot.js |> Helpers.cleanJS
+        File.WriteAllText(area + "basic-boxplot.js", js)
+
+        let js = BoxPlotDisplaysUnderlyingData.js |> Helpers.cleanJS
+        File.WriteAllText(area + "boxplot-displays-underlying-data.js", js)
+
+        let js = GroupedBoxPlot.js |> Helpers.cleanJS
+        File.WriteAllText(area + "grouped-boxplot.js", js)
+
+        let js = BubbleCharts.js |> Helpers.cleanJS
+        File.WriteAllText(area + "bubblecharts.js", js)
+
 
 [<EntryPoint>]
 let main _ =
@@ -57,4 +76,5 @@ let main _ =
 
     Area.generateArea ()
     Bar.generateBar ()
+    BoxPlot.generateBoxPlots ()
     0 // return an integer exit code
