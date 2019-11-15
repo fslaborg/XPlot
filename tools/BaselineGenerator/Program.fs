@@ -154,6 +154,23 @@ module Contour =
         let js = BasicContourPlot.js |> Helpers.cleanJS
         File.WriteAllText(area + "contour-1.js", js)
 
+module ThreeDPlots =
+    open ThreeDPlots
+
+    let generate3DPlots () =
+        let area = Path.Combine(plotlyPrelude, "3D" + string Path.DirectorySeparatorChar)
+        Directory.CreateDirectory(area) |> ignore
+
+        let js = ThreeDRandomWalk.js |> Helpers.cleanJS
+        File.WriteAllText(area + "3D-1.js", js)
+
+        let js = ThreeDScatterPlot.js |> Helpers.cleanJS
+        File.WriteAllText(area + "3D-2.js", js)
+
+        let js = Topographical3DSurfacePlot.js |> Helpers.cleanJS
+        File.WriteAllText(area + "3D-3.js", js)
+
+
 
 [<EntryPoint>]
 let main _ =
@@ -166,4 +183,6 @@ let main _ =
     Chart.generateChart ()
     Column.generateColumn ()
     Contour.generateContour ()
+    ThreeDPlots.generate3DPlots ()
+    
     0 // return an integer exit code
