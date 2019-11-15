@@ -91,6 +91,22 @@ module Bubble =
         let js = Chart6.js |> Helpers.cleanJS
         File.WriteAllText(area + "bubble-6.js", js)
 
+module Chart =
+    open Chart
+
+    let generateChart () =
+        let area = Path.Combine(plotlyPrelude, "chart" + string Path.DirectorySeparatorChar)
+        Directory.CreateDirectory(area) |> ignore
+
+        let js = Chart1.js |> Helpers.cleanJS
+        File.WriteAllText(area + "chart-1.js", js)
+
+        let js = Chart2.js |> Helpers.cleanJS
+        File.WriteAllText(area + "chart-2.js", js)
+
+        let js = Chart3.js |> Helpers.cleanJS
+        File.WriteAllText(area + "chart-3.js", js)
+
 [<EntryPoint>]
 let main _ =
     Directory.CreateDirectory(plotlyPrelude) |> ignore
@@ -99,4 +115,5 @@ let main _ =
     Bar.generateBar ()
     BoxPlot.generateBoxPlots ()
     Bubble.generateBubble ()
+    Chart.generateChart ()
     0 // return an integer exit code

@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <Compile Include="Helpers.fs" />
+    <Compile Include="../../tests/TestData/XPlot.Plotly/Chart.fs" Link="XPlot.Plotly/Chart.fs" />
     <Compile Include="../../tests/TestData/XPlot.Plotly/Bubble.fs" Link="XPlot.Plotly/Bubble.fs" />
     <Compile Include="../../tests/TestData/XPlot.Plotly/BoxPlot.fs" Link="XPlot.Plotly/BoxPlot.fs" />
     <Compile Include="../../tests/TestData/XPlot.Plotly/Bar.fs" Link="XPlot.Plotly/Bar.fs" />
