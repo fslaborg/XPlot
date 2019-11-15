@@ -94,7 +94,7 @@ let runTests assembly =
             WorkingDirectory = __SOURCE_DIRECTORY__
             FailOnFocusedTests = true
             PrintVersion = true
-            Parallel = false
+            Parallel = true
             Summary =  true
             Debug = false
         })
