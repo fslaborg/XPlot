@@ -11,7 +11,7 @@ let baselineDir = Path.Combine(__SOURCE_DIRECTORY__, "..", "TestData", "XPlot.Pl
 let testArea =
     testList "3D Plots" [
         test "3D Random Walk generated JS did not regress" {
-            let g = Path.Combine(baselineDir, "3d-1.js")
+            let g = Path.Combine(baselineDir, "3D-1.js")
             let expectedJS = File.ReadAllText(g)
             let actualJS = ThreeDRandomWalk.js |> Helpers.cleanJS
 
@@ -19,7 +19,7 @@ let testArea =
         }
 
         test "3D Scatter Plot generated JS did not regress" {
-            let g = Path.Combine(baselineDir, "3d-2.js")
+            let g = Path.Combine(baselineDir, "3D-2.js")
             let expectedJS = File.ReadAllText(g)
             let actualJS = ThreeDScatterPlot.js |> Helpers.cleanJS
 
@@ -27,7 +27,7 @@ let testArea =
         }
 
         test "Topographical 3D Surface Plot generated JS did not regress" {
-            let g = Path.Combine(baselineDir, "3d-3.js")
+            let g = Path.Combine(baselineDir, "3D-3.js")
             let expectedJS = File.ReadAllText(g)
             let actualJS = Topographical3DSurfacePlot.js |> Helpers.cleanJS
 

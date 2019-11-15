@@ -170,7 +170,30 @@ module ThreeDPlots =
         let js = Topographical3DSurfacePlot.js |> Helpers.cleanJS
         File.WriteAllText(area + "3D-3.js", js)
 
+module ErrorBars =
+    open ErrorBars
 
+    let generateErrorbars () =
+        let area = Path.Combine(plotlyPrelude, "errorbars" + string Path.DirectorySeparatorChar)
+        Directory.CreateDirectory(area) |> ignore
+
+        let js = BasicSymmetricErrorBars.js |> Helpers.cleanJS
+        File.WriteAllText(area + "eb-1.js", js)
+
+        let js = BarChartErrorBars.js |> Helpers.cleanJS
+        File.WriteAllText(area + "eb-2.js", js)
+
+        let js = HorizontalErrorBars.js |> Helpers.cleanJS
+        File.WriteAllText(area + "eb-3.js", js)
+
+        let js = AsymmetricErrorBars.js |> Helpers.cleanJS
+        File.WriteAllText(area + "eb-4.js", js)
+
+        let js = ErrorBarsPercentageYValue.js |> Helpers.cleanJS
+        File.WriteAllText(area + "eb-5.js", js)
+
+        let js = AsymmetricErrorBarsConstantOffset.js |> Helpers.cleanJS
+        File.WriteAllText(area + "eb-6.js", js)
 
 [<EntryPoint>]
 let main _ =
@@ -184,5 +207,6 @@ let main _ =
     Column.generateColumn ()
     Contour.generateContour ()
     ThreeDPlots.generate3DPlots ()
+    ErrorBars.generateErrorbars ()
     
     0 // return an integer exit code
