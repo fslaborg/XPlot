@@ -25,9 +25,36 @@ module Area =
         let js = PipeStyle.yValuesJS |> Helpers.cleanJS
         File.WriteAllText(area + "y-values.js", js)
 
+module Bar =
+    open Bar
+
+    let generateBar () =
+        let area = Path.Combine(plotlyPrelude, "bar" + string Path.DirectorySeparatorChar)
+        Directory.CreateDirectory(area) |> ignore
+
+        let js = Chart1.js |> Helpers.cleanJS
+        File.WriteAllText(area + "bar-1.js", js)
+
+        let js = Chart2.js |> Helpers.cleanJS
+        File.WriteAllText(area + "bar-2.js", js)
+
+        let js = Chart3.js |> Helpers.cleanJS
+        File.WriteAllText(area + "bar-3.js", js)
+
+        let js = PipeStyle.singleSeriesJS |> Helpers.cleanJS
+        File.WriteAllText(area + "single-series.js", js)
+
+        let js = PipeStyle.multipleSeriesJS |> Helpers.cleanJS
+        File.WriteAllText(area + "multiple-series.js", js)
+
+        let js = PipeStyle.yValuesJS |> Helpers.cleanJS
+        File.WriteAllText(area + "y-values.js", js)
+
+
 [<EntryPoint>]
 let main _ =
     Directory.CreateDirectory(plotlyPrelude) |> ignore
 
     Area.generateArea ()
+    Bar.generateBar ()
     0 // return an integer exit code
