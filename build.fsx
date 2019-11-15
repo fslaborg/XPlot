@@ -92,11 +92,7 @@ let runTests assembly =
     |> Expecto.run (fun p ->
         { p with 
             WorkingDirectory = __SOURCE_DIRECTORY__
-            FailOnFocusedTests = true
-            PrintVersion = true
-            Parallel = true
             Summary =  true
-            Debug = false
         })
 
 Target.create "RunPlotlyTests" (fun _ ->

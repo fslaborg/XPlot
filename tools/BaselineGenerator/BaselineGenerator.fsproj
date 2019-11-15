@@ -1,11 +1,11 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
+    <Compile Include="../../tests/TestData/XPlot.Plotly/Contour.fs" Link="XPlot.Plotly/Contour.fs" />
     <Compile Include="../../tests/TestData/XPlot.Plotly/Column.fs" Link="XPlot.Plotly/Column.fs" />
     <Compile Include="../../tests/TestData/XPlot.Plotly/Chart.fs" Link="XPlot.Plotly/Chart.fs" />
     <Compile Include="../../tests/TestData/XPlot.Plotly/Bubble.fs" Link="XPlot.Plotly/Bubble.fs" />
@@ -15,10 +15,9 @@
     <Compile Include="Helpers.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\..\src\XPlot.Plotly\XPlot.Plotly.fsproj" />
     <ProjectReference Include="..\..\src\XPlot.GoogleCharts\XPlot.GoogleCharts.fsproj" />
   </ItemGroup>
-
+  <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>

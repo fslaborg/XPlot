@@ -144,6 +144,16 @@ module Column =
         let js = Chart10.js |> Helpers.cleanJS
         File.WriteAllText(area + "column-10.js", js)
 
+module Contour =
+    open Contour
+
+    let generateContour () =
+        let area = Path.Combine(plotlyPrelude, "contour" + string Path.DirectorySeparatorChar)
+        Directory.CreateDirectory(area) |> ignore
+
+        let js = BasicContourPlot.js |> Helpers.cleanJS
+        File.WriteAllText(area + "contour-1.js", js)
+
 
 [<EntryPoint>]
 let main _ =
@@ -155,4 +165,5 @@ let main _ =
     Bubble.generateBubble ()
     Chart.generateChart ()
     Column.generateColumn ()
+    Contour.generateContour ()
     0 // return an integer exit code
