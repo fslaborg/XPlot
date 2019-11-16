@@ -1,0 +1,1 @@
+<script>vardata=[{"type":"scatter","x":["2013-10-0422:23:00","2013-11-0422:23:00","2013-12-0422:23:00"],"y":[1,3,6]}];varlayout="";Plotly.newPlot('',data,layout);</script>

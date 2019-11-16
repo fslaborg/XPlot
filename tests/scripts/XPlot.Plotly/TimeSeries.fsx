@@ -2,6 +2,8 @@
 
 open XPlot.Plotly
 
+// TESTED under CI now
+
 // Date Strings
 module Chart1 =
 

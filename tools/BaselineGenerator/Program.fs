@@ -394,6 +394,19 @@ module StackedBarChart =
         let js = Chart1.js |> Helpers.cleanJS
         File.WriteAllText(path + "stacked-bar-chart-1.js", js)
 
+module TimeSeries =
+    open TimeSeries
+
+    let generateStackedTimeSeries () =
+        let path = Path.Combine(plotlyPrelude, "timeseries" + string Path.DirectorySeparatorChar)
+        Directory.CreateDirectory(path) |> ignore
+
+        let js = TimeSeriesWithDateStrings.js |> Helpers.cleanJS
+        File.WriteAllText(path + "date-strings.js", js)
+
+        let js = TimeSeriesWithDateTime.js |> Helpers.cleanJS
+        File.WriteAllText(path + "date-time.js", js)
+
 [<EntryPoint>]
 let main _ =
     Directory.CreateDirectory(plotlyPrelude) |> ignore
@@ -416,5 +429,6 @@ let main _ =
     PolarCharts.generatePolarCharts ()
     Scatter.generateScatter ()
     StackedBarChart.generateStackedBarChart ()
+    TimeSeries.generateStackedTimeSeries ()
     
     0 // return an integer exit code

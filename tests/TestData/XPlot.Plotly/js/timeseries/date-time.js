@@ -1,0 +1,1 @@
+<script>vardata=[{"type":"scatter","x":["2013-10-04T00:00:00","2013-11-05T00:00:00","2013-12-06T00:00:00"],"y":[1,3,6]}];varlayout={"title":"TimeSeriesPlotwithdatetimeObjectsTest"};Plotly.newPlot('',data,layout);</script>
