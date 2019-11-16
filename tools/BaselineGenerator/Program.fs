@@ -350,6 +350,40 @@ module PolarCharts =
         let js = PolarAreaChart.js |> Helpers.cleanJS
         File.WriteAllText(path + "polar-area.js", js)
 
+module Scatter =
+    open Scatter
+
+    let generateScatter () =
+        let path = Path.Combine(plotlyPrelude, "scatter" + string Path.DirectorySeparatorChar)
+        Directory.CreateDirectory(path) |> ignore
+
+        let js = Chart1.js |> Helpers.cleanJS
+        File.WriteAllText(path + "scatter-1.js", js)
+
+        let js = Chart2.js |> Helpers.cleanJS
+        File.WriteAllText(path + "scatter-2.js", js)
+
+        let js = Chart3.js |> Helpers.cleanJS
+        File.WriteAllText(path + "scatter-3.js", js)
+
+        let js = Chart4.js |> Helpers.cleanJS
+        File.WriteAllText(path + "scatter-4.js", js)
+
+        let js = Chart5.js |> Helpers.cleanJS
+        File.WriteAllText(path + "scatter-5.js", js)
+
+        let js = Chart6.js |> Helpers.cleanJS
+        File.WriteAllText(path + "scatter-6.js", js)
+
+        let js = Chart7.js |> Helpers.cleanJS
+        File.WriteAllText(path + "scatter-7.js", js)
+
+        let js = Chart8.js |> Helpers.cleanJS
+        File.WriteAllText(path + "scatter-8.js", js)
+
+        let js = Chart9.js |> Helpers.cleanJS
+        File.WriteAllText(path + "scatter-9.js", js)
+
 [<EntryPoint>]
 let main _ =
     Directory.CreateDirectory(plotlyPrelude) |> ignore
@@ -370,5 +404,6 @@ let main _ =
     MultipleChartTypes.generateMultipleChartTyes ()
     Pie.generatePie ()
     PolarCharts.generatePolarCharts ()
+    Scatter.generateScatter ()
     
     0 // return an integer exit code

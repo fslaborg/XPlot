@@ -1,31 +1,9 @@
-﻿#r @"../../../bin/XPlot.Plotly/netstandard2.0/XPlot.Plotly.dll"
-
-// TESTED under CI now
+namespace Scatter
 
 open XPlot.Plotly
 
-let sales = ["2013", 1000; "2014", 1170; "2015", 660; "2016", 1030]
-let expenses = ["2013", 400; "2014", 460; "2015", 1120; "2016", 540]
-
-// y values only
-sales
-|> List.map snd
-|> Chart.Scatter
-|> Chart.Show
-
-// single series
-sales
-|> Chart.Scatter
-|> Chart.Show
-
-// multiple series
-[sales; expenses]
-|> Chart.Scatter
-|> Chart.Show
-
 // Line and scatter plot
 module Chart1 =
-
     let trace1 =
         Scatter(
             x = [1; 2; 3; 4],
@@ -47,13 +25,14 @@ module Chart1 =
             mode = "lines+markers"
         )
 
-    [trace1; trace2; trace3]
-    |> Chart.Plot
-    |> Chart.Show
+    let js =
+        let chart =
+            [trace1; trace2; trace3]
+            |> Chart.Plot
+        chart.GetInlineJS()
 
 // Data labels hover
 module Chart2 =
-
     let trace1 =
         Scatter(
             x = [1; 2; 3; 4; 5],
@@ -76,16 +55,19 @@ module Chart2 =
 
     let data = [trace1; trace2]
 
-    let layout =
-        Layout(
+    let options =
+        Options(
             xaxis = Xaxis(range = [0.75; 5.25]),
             yaxis = Yaxis(range = [0.; 8.]),
             title = "Data Labels Hover"
         )
 
-    (data, layout)
-    |> Chart.Plot
-    |> Chart.Show
+    let js =
+        let chart =
+            data
+            |> Chart.Plot
+            |> Chart.WithOptions options
+        chart.GetInlineJS()
 
 // Data labels on the plot
 module Chart3 =
@@ -115,8 +97,8 @@ module Chart3 =
 
     let data = [trace1; trace2]
 
-    let layout =
-        Layout(
+    let options =
+        Options(
             xaxis = Xaxis(range = [ 0.75; 5.25 ]),
             yaxis = Yaxis(range = [0.; 8.]),
             legend =
@@ -131,13 +113,15 @@ module Chart3 =
             title ="Data Labels on the Plot"
         )
 
-    (data, layout)
-    |> Plotly.Plot
-    |> Chart.Show
+    let js =
+        let chart =
+            data
+            |> Chart.Plot
+            |> Chart.WithOptions options
+        chart.GetInlineJS()
 
 // Scatter plot with a color dimension
 module Chart4 =
-
     let trace1 =
         Scatter(
             y = [5; 5; 5; 5; 5; 5; 5; 5; 5; 5; 5; 5; 5; 5; 5; 5; 5; 5; 5; 5; 5; 5; 5; 5; 5; 5; 5; 5; 5; 5; 5; 5; 5; 5; 5; 5; 5; 5; 5; 5],
@@ -151,11 +135,14 @@ module Chart4 =
 
     let data = [trace1]
 
-    let layout = Layout(title = "Scatter Plot with a Color Dimension")
+    let options = Options(title = "Scatter Plot with a Color Dimension")
 
-    (data, layout)
-    |> Chart.Plot
-    |> Chart.Show
+    let js =
+        let chart =
+            data
+            |> Chart.Plot
+            |> Chart.WithOptions options
+        chart.GetInlineJS()
 
 // Categorical dot plot
 module Chart5 =
@@ -206,8 +193,8 @@ module Chart5 =
 
     let data = [trace1; trace2];
 
-    let layout =
-        Layout(
+    let options =
+        Options(
             title = "Votes cast for ten lowest voting age population in OECD countries",
             xaxis =
                 Xaxis(
@@ -241,10 +228,12 @@ module Chart5 =
             hovermode = "closest"
         )
 
-    (data, layout)
-    |> Chart.Plot
-    |> Chart.Show
-
+    let js =
+        let chart =
+            data
+            |> Chart.Plot
+            |> Chart.WithOptions options
+        chart.GetInlineJS()
 
 // Multiple y axes plot
 module Chart6 =
@@ -253,33 +242,45 @@ module Chart6 =
 
     let trace2 = Scatter(x = [2; 3; 4; 5], y = [160; 52; 114; 92], yaxis = "y2")
     
-    let layout = 
-      Layout (
+    let options = 
+      Options (
         yaxis = Yaxis(title="Axis 1"),
         yaxis2 = Yaxis(title="Axis 2", overlaying="y", side="right")
     )
-    
-    Chart.Plot ([trace1; trace2], layout)
-    |> Chart.Show
 
+    let js =
+        let chart =
+            [trace1; trace2]
+            |> Chart.Plot
+            |> Chart.WithOptions options
+        chart.GetInlineJS()
 
+[<AutoOpen>]
+module Data =
+    let sales = ["2013", 1000; "2014", 1170; "2015", 660; "2016", 1030]
+    let expenses = ["2013", 400; "2014", 460; "2015", 1120; "2016", 540]
 
+module Chart7 =
+    // y values only
+    let js =
+        let chart =    
+            sales
+            |> List.map snd
+            |> Chart.Scatter
+        chart.GetInlineJS()        
 
-// ====================
-// Pipeline stype tests
-// ====================
+module Chart8 =
+    // single series
+    let js =
+        let chart =    
+            sales
+            |> Chart.Scatter
+        chart.GetInlineJS()
 
-[8., 12.; 4., 5.5; 11., 14.; 4., 5.; 3., 3.5; 6.5, 7.]
-|> Chart.Scatter
-|> Chart.Show
-
-let rnd = new System.Random(0)
-let data = [for i in 1 .. 1000 -> (rnd.Next(10),rnd.Next(10))]
-
-data
-|> Chart.Scatter
-|> Chart.Show
-
-[12.; 5.5; 14.; 5.; 3.5; 7.]
-|> Chart.Scatter
-|> Chart.Show
+module Chart9 =
+    // multiple series
+    let js =
+        let chart =    
+            [sales; expenses]
+            |> Chart.Scatter
+        chart.GetInlineJS()
