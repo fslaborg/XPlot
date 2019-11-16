@@ -1,0 +1,1 @@
+<script>vardata=[{"type":"scatter","x":[1,2,3,4],"y":[2,1,3,4],"error_x":{"type":"percent","value":10.0}}];varlayout={"title":"HorizontalErrorBarsTest"};Plotly.newPlot('',data,layout);</script>

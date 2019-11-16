@@ -1,5 +1,7 @@
 ﻿#r @"../../../bin/XPlot.Plotly/netstandard2.0/XPlot.Plotly.dll"
 
+// TESTED under CI now
+
 open XPlot.Plotly
 
 let sales = ["2013", 1000; "2014", 1170; "2015", 660; "2016", 1030]

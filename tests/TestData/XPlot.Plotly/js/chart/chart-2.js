@@ -1,0 +1,1 @@
+<script>vardata=[{"type":"scatter","x":["2013","2014","2015","2016"],"y":[1000,1170,660,1030]}];varlayout={"title":"CompanyPerformance","width":400.0,"height":400.0,"showlegend":true,"xaxis":{"title":"Year","_isSubplotObj":true},"yaxis":{"title":"Total","_isSubplotObj":true}};Plotly.newPlot('',data,layout);</script>

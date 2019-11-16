@@ -1,0 +1,1 @@
+<script>vardata=[{"type":"scatter","x":[0,1,2],"y":[6,10,2],"error_y":{"visible":true,"type":"data","array":[1,2,3]}}];varlayout={"title":"BasicSymmetricErrorBarsTest"};Plotly.newPlot('',data,layout);</script>

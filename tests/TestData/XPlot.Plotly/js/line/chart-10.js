@@ -1,0 +1,1 @@
+<script>vardata=[{"type":"scatter","x":[1,2,3,4,5,6,7,8],"y":[10,15,null,17,14,12,10,null,15],"mode":"lines+markers","connectgaps":true},{"type":"scatter","x":[1,2,3,4,5,6,7,8],"y":[16,null,13,10,8,null,11,12],"mode":"lines","connectgaps":true}];varlayout={"title":"ConnecttheGapsBetweenData","showlegend":false};Plotly.newPlot('',data,layout);</script>

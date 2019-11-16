@@ -21,21 +21,18 @@ steps:
     packageType: 'sdk'
     useGlobalJson: true
     installationPath: $(Agent.ToolsDirectory)/dotnet
-- bash: ./build.sh
-  condition: or( eq( variables['Agent.OS'], 'Darwin' ), eq( variables['Agent.OS'], 'Linux' ))
-  displayName: 'build.sh'
-- powershell: .\build.cmd
+- bash: ./build.sh target CIBuild
+  condition: eq( variables['Agent.OS'], 'Linux' )
+  displayName: 'Linux build and test'
+- powershell: .\build.cmd target CIBuild
   condition: eq( variables['Agent.OS'], 'Windows_NT' )
-  displayName: 'build.cmd'
+  displayName: 'Windows build and test'
 
-### SAMPLE - for if/when we do automated tests
-##
-# - task: PublishTestResults@2
-#   inputs:
-#     testResultsFormat: 'NUnit'
-#     testResultsFiles: 'bin/TestResults-*.xml' 
-#     #searchFolder: '$(System.DefaultWorkingDirectory)' # Optional
-#     mergeTestResults: true
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'NUnit'
+    testResultsFiles: 'testResults/TestResults-*.xml' 
+    mergeTestResults: true
 
 ## For publishing stuff, eventually
 #

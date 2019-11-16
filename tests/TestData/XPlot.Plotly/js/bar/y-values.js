@@ -1,0 +1,1 @@
+<script>vardata=[{"type":"bar","x":[1000,1170,660,1030],"orientation":"h"}];varlayout="";Plotly.newPlot('',data,layout);</script>

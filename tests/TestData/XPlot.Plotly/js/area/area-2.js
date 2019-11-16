@@ -1,0 +1,1 @@
+<script>vardata=[{"type":"scatter","x":[1,2,3,4],"y":[0,2,3,5],"mode":"none","fill":"tozeroy"},{"type":"scatter","x":[1,2,3,4],"y":[3,5,1,7],"mode":"none","fill":"tonexty"}];varlayout={"title":"OverlaidChartWithoutBoundaryLines"};Plotly.newPlot('',data,layout);</script>

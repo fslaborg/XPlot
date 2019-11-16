@@ -1,6 +1,8 @@
 ﻿#I "../../../bin"
 #r "XPlot.Plotly.dll"
 
+// TESTED under CI now
+
 open XPlot.Plotly
 
 let chart =

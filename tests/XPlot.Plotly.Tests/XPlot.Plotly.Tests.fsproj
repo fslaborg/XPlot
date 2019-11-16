@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../TestData/XPlot.Plotly/TimeSeries.fs" Link="XPlot.Plotly/TimeSeries.fs" />
+    <Compile Include="../TestData/XPlot.Plotly/StackedBarChart.fs" Link="XPlot.Plotly/StackedBarChart.fs" />
+    <Compile Include="../TestData/XPlot.Plotly/Scatter.fs" Link="XPlot.Plotly/Scatter.fs" />
+    <Compile Include="../TestData/XPlot.Plotly/PolarCharts.fs" Link="XPlot.Plotly/PolarCharts.fs" />
+    <Compile Include="../TestData/XPlot.Plotly/Pie.fs" Link="XPlot.Plotly/Pie.fs" />
+    <Compile Include="../TestData/XPlot.Plotly/MultipleChartTypes.fs" Link="XPlot.Plotly/MultipleChartTypes.fs" />
+    <Compile Include="../TestData/XPlot.Plotly/LogPlots.fs" Link="Line.fs" />
+    <Compile Include="../TestData/XPlot.Plotly/Line.fs" Link="Line.fs" />
+    <Compile Include="../TestData/XPlot.Plotly/Heatmaps.fs" Link="Heatmaps.fs" />
+    <Compile Include="../TestData/XPlot.Plotly/Gauge.fs" Link="Gauge.fs" />
+    <Compile Include="../TestData/XPlot.Plotly/ErrorBars.fs" Link="ErrorBars.fs" />
+    <Compile Include="../TestData/XPlot.Plotly/3DPlots.fs" Link="3DPlots.fs" />
+    <Compile Include="../TestData/XPlot.Plotly/Column.fs" Link="Column.fs" />
+    <Compile Include="../TestData/XPlot.Plotly/Chart.fs" Link="Chart.fs" />
+    <Compile Include="../TestData/XPlot.Plotly/Bubble.fs" Link="Bubble.fs" />
+    <Compile Include="../TestData/XPlot.Plotly/BoxPlot.fs" Link="BoxPlot.fs" />
+    <Compile Include="../TestData/XPlot.Plotly/Bar.fs" Link="Bar.fs" />
+    <Compile Include="../TestData/XPlot.Plotly/Area.fs" Link="Area.fs" />
+    <Compile Include="Helpers.fs" />
+    <Compile Include="TimeSeriesTests.fs" />
+    <Compile Include="StackedBarChartTests.fs" />
+    <Compile Include="ScatterTests.fs" />
+    <Compile Include="PolarChartsTests.fs" />
+    <Compile Include="PieTests.fs" />
+    <Compile Include="MultipleChartsTests.fs" />
+    <Compile Include="LogPlotTests.fs" />
+    <Compile Include="LineTests.fs" />
+    <Compile Include="HeatmapTests.fs" />
+    <Compile Include="GaugeTests.fs" />
+    <Compile Include="ErrorBarsTests.fs" />
+    <Compile Include="3DPlotsTests.fs" />
+    <Compile Include="ColumnTests.fs" />
+    <Compile Include="ChartTests.fs" />
+    <Compile Include="BubbleTests.fs" />
+    <Compile Include="BoxPlotTests.fs" />
+    <Compile Include="BarTests.fs" />
+    <Compile Include="AreaTests.fs" />
+    <Compile Include="Program.fs" />
+    <None Include="paket.references" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\XPlot.Plotly\XPlot.Plotly.fsproj" />
+  </ItemGroup>
+  <Import Project="..\..\.paket\Paket.Restore.targets" />
+</Project>

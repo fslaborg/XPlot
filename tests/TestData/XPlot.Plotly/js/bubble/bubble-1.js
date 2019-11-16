@@ -1,0 +1,1 @@
+<script>vardata=[{"type":"scatter","x":[1,2,3,4],"y":[10,11,12,13],"mode":"markers","marker":{"size":[40,60,80,100]}}];varlayout={"title":"MarkerSize","width":600.0,"height":600.0,"showlegend":false};Plotly.newPlot('',data,layout);</script>
