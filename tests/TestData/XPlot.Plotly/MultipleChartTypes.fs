@@ -1,13 +1,10 @@
-﻿#r @"../../../bin/XPlot.Plotly/netstandard2.0/XPlot.Plotly.dll"
-
-// TESTED under CI now
+namespace MultipleChartTypes
 
 open XPlot.Plotly
 open System
 
 // A Contour and Scatter Plot of the Method of Steepest Descent
-module Chart1 =
-
+module ContourAndScatter =
     let trace1 =
         Contour(
             z =
@@ -42,13 +39,14 @@ module Chart1 =
             line = Line(color = "black")
         ) :> Trace
 
-    [trace1; trace2]
-    |> Plotly.Plot
-    |> Plotly.Show
+    let js =
+        let chart =
+            [trace1; trace2]
+            |> Chart.Plot
+        chart.GetInlineJS()
 
 // Line Chart and a Bar Chart
-module Chart2 =
-
+module LineAndBarChart =
     let trace1 =
         Scatter(
             x = [0; 1; 2; 3; 4; 5],
@@ -61,6 +59,8 @@ module Chart2 =
             y = [1.; 0.5; 0.7; -1.2; 0.3; 0.4]
         ) :> Trace
 
-    [trace1; trace2]
-    |> Plotly.Plot
-    |> Plotly.Show
+    let js =
+        let chart =
+            [trace1; trace2]
+            |> Chart.Plot
+        chart.GetInlineJS()

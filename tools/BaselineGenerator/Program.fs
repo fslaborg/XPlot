@@ -301,6 +301,21 @@ module LogPlots =
         let js = LogarithmicAxes.js |> Helpers.cleanJS
         File.WriteAllText(path + "logarithmic-axes.js", js)
 
+
+module MultipleChartTypes =
+    open MultipleChartTypes
+
+    let generateMultipleChartTyes () =
+        let path = Path.Combine(plotlyPrelude, "multiple-chart-types" + string Path.DirectorySeparatorChar)
+        Directory.CreateDirectory(path) |> ignore
+        
+        let js = ContourAndScatter.js |> Helpers.cleanJS
+        File.WriteAllText(path + "contour-and-scatter.js", js)
+        
+        let js = LineAndBarChart.js |> Helpers.cleanJS
+        File.WriteAllText(path + "line-and-bar.js", js)
+
+
 [<EntryPoint>]
 let main _ =
     Directory.CreateDirectory(plotlyPrelude) |> ignore
@@ -318,5 +333,6 @@ let main _ =
     Heatmaps.generateHeatmaps ()
     Line.generateLine ()
     LogPlots.generateLogPlots ()
+    MultipleChartTypes.generateMultipleChartTyes ()
     
     0 // return an integer exit code
