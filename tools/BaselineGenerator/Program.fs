@@ -291,6 +291,16 @@ module Line =
         let js = LineScatter5.js |> Helpers.cleanJS
         File.WriteAllText(path + "line-scatter-5.js", js)
 
+module LogPlots =
+    open LogPlots
+
+    let generateLogPlots () =
+        let path = Path.Combine(plotlyPrelude, "logplots" + string Path.DirectorySeparatorChar)
+        Directory.CreateDirectory(path) |> ignore
+        
+        let js = LogarithmicAxes.js |> Helpers.cleanJS
+        File.WriteAllText(path + "logarithmic-axes.js", js)
+
 [<EntryPoint>]
 let main _ =
     Directory.CreateDirectory(plotlyPrelude) |> ignore
@@ -307,5 +317,6 @@ let main _ =
     Gauge.generateGauge ()
     Heatmaps.generateHeatmaps ()
     Line.generateLine ()
+    LogPlots.generateLogPlots ()
     
     0 // return an integer exit code
