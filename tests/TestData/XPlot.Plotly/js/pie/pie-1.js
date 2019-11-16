@@ -1,0 +1,1 @@
+<script>vardata=[{"type":"pie","labels":["Work","Eat","Commute","WatchTV","Sleep"],"values":[11,2,2,2,7]}];varlayout="";Plotly.newPlot('',data,layout);</script>

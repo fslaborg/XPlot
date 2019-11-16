@@ -10,7 +10,7 @@ let baselineDir = Path.Combine(__SOURCE_DIRECTORY__, "..", "TestData", "XPlot.Pl
 [<Tests>]
 let testArea =
     testList "Bar" [
-        test "Area1 generated JS did not regress" {
+        test "Bar1 generated JS did not regress" {
             let bar1 = Path.Combine(baselineDir, "bar-1.js")
             let expectedJS = File.ReadAllText(bar1)
             let actualJS = Chart1.js |> Helpers.cleanJS
@@ -18,7 +18,7 @@ let testArea =
             Expect.equal expectedJS actualJS "Bar1"
         }
 
-        test "Area2 generated JS did not regress" {
+        test "Bar2 generated JS did not regress" {
             let bar2 = Path.Combine(baselineDir, "bar-2.js")
             let expectedJS = File.ReadAllText(bar2)
             let actualJS = Chart2.js |> Helpers.cleanJS
@@ -26,7 +26,7 @@ let testArea =
             Expect.equal expectedJS actualJS "Bar2"
         }
 
-        test "Area3 generated JS did not regress" {
+        test "Bar3 generated JS did not regress" {
             let bar3 = Path.Combine(baselineDir, "bar-3.js")
             let expectedJS = File.ReadAllText(bar3)
             let actualJS = Chart3.js |> Helpers.cleanJS

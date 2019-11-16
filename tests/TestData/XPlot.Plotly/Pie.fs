@@ -1,43 +1,43 @@
-﻿#r @"../../../bin/XPlot.Plotly/netstandard2.0/XPlot.Plotly.dll"
-
-// TESTED under CI now
+namespace Pie
 
 open XPlot.Plotly
 
-[
-    "Work", 11
-    "Eat", 2
-    "Commute", 2
-    "Watch TV", 2
-    "Sleep", 7
-]
-|> Chart.Pie
-|> Chart.Show
+module Chart1 =
+    let js =
+        let chart =
+            [
+                "Work", 11
+                "Eat", 2
+                "Commute", 2
+                "Watch TV", 2
+                "Sleep", 7
+            ]
+            |> Chart.Pie
+        chart.GetInlineJS()
 
 // Basic pie chart
-module Chart1 =
-
+module Chart2 =
     let data =
-        [
-            Pie(
-                values = [19; 26; 55],
-                labels = ["Residential"; "Non-Residential"; "Utility"]
-            )
-        ]
+        Pie(
+            values = [19; 26; 55],
+            labels = ["Residential"; "Non-Residential"; "Utility"]
+        )
 
-    let layout =
-        Layout(
+    let options =
+        Options(
             height = 400.,
             width = 500.
         )
 
-    data
-    |> Plotly.Plot
-    |> Plotly.WithLayout layout
-    |> Plotly.Show
+    let js =
+        let chart =
+            data
+            |> Chart.Plot
+            |> Chart.WithOptions options
+        chart.GetInlineJS()
 
 // Pie chart subplots
-module Chart2 =
+module Chart3 =
 
     let allLabels = ["1st"; "2nd"; "3rd"; "4th"; "5th"]
 
@@ -70,9 +70,7 @@ module Chart2 =
                         y = [0.; 0.49]
                     ),
                 hoverinfo = "label+percent+name",
-                textinfo = "none"
-            );
-            
+                textinfo = "none")
             Pie(
                 values = allValues.[1],
                 labels = allLabels,
@@ -84,8 +82,7 @@ module Chart2 =
                         y = [0.; 0.49]
                     ),
                 hoverinfo = "label+percent+name",
-                textinfo = "none"
-            );
+                textinfo = "none")
             Pie(
                 values = allValues.[2],
                 labels = allLabels,
@@ -97,8 +94,7 @@ module Chart2 =
                         y = [0.51; 1.]
                     ),
                 hoverinfo = "label+percent+name",
-                textinfo = "none"
-            );
+                textinfo = "none")
             Pie(
                 values = allValues.[3],
                 labels = allLabels,
@@ -110,24 +106,24 @@ module Chart2 =
                         y = [0.52; 1.]
                     ),
                 hoverinfo = "label+percent+name",
-                textinfo = "none"
-            )
+                textinfo = "none")
         ]
 
-    let layout =
-        Layout(
+    let options =
+        Options(
             height = 400.,
             width = 500.
         )
 
-    data
-    |> Plotly.Plot
-    |> Plotly.WithLayout layout
-    |> Plotly.Show
+    let js =
+        let chart =
+            data
+            |> Chart.Plot
+            |> Chart.WithOptions options
+        chart.GetInlineJS()
 
 // Donut chart
-module Chart3 =
-
+module Chart4 =
     let data =
         [
             Pie(
@@ -136,8 +132,7 @@ module Chart3 =
                 domain = Domain(x = [0.; 0.48]),
                 name = "GHG Emissions",
                 hoverinfo = "label+percent+name",
-                hole = 0.4
-            );
+                hole = 0.4)
             Pie(
                 values = [27; 11; 25; 8; 1; 3; 25],
                 labels = ["US"; "China"; "European Union"; "Russian Federation"; "Brazil"; "India"; "Rest of World" ],
@@ -146,12 +141,11 @@ module Chart3 =
                 domain = Domain(x = [0.52; 1.]),
                 name = "CO2 Emissions",
                 hoverinfo = "label+percent+name",
-                hole = 0.4
-            )
+                hole = 0.4)
         ]
 
-    let layout =
-        Layout(
+    let options =
+        Options(
             title = "Global Emissions 1990-2011",
             annotations =
                 [
@@ -174,27 +168,9 @@ module Chart3 =
             width = 600.
         )
 
-    data
-    |> Plotly.Plot
-    |> Plotly.WithLayout layout
-    |> Plotly.Show
-
-// ====================
-// Pipeline style tests
-// ====================
-
-// Basic pie chart
-module Chart1' =
-
-    let data = ["Residential", 19; "Non-Residential", 26; "Utility", 55]
-
-    let layout =
-        Layout(
-            height = 400.,
-            width = 500.
-        )
-
-    data
-    |> Plotly.Pie
-    |> Plotly.WithLayout layout
-    |> Plotly.Show
+    let js =
+        let chart =
+            data
+            |> Chart.Plot
+            |> Chart.WithOptions options
+        chart.GetInlineJS()

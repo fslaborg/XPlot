@@ -5,6 +5,7 @@
     <OutputType>Exe</OutputType>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="../TestData/XPlot.Plotly/Pie.fs" Link="XPlot.Plotly/Pie.fs" />
     <Compile Include="../TestData/XPlot.Plotly/MultipleChartTypes.fs" Link="XPlot.Plotly/MultipleChartTypes.fs" />
     <Compile Include="../TestData/XPlot.Plotly/LogPlots.fs" Link="Line.fs" />
     <Compile Include="../TestData/XPlot.Plotly/Line.fs" Link="Line.fs" />
@@ -19,6 +20,7 @@
     <Compile Include="../TestData/XPlot.Plotly/Bar.fs" Link="Bar.fs" />
     <Compile Include="../TestData/XPlot.Plotly/Area.fs" Link="Area.fs" />
     <Compile Include="Helpers.fs" />
+    <Compile Include="PieTests.fs" />
     <Compile Include="MultipleChartsTests.fs" />
     <Compile Include="LogPlotTests.fs" />
     <Compile Include="LineTests.fs" />

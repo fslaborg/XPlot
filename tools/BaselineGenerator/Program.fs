@@ -315,6 +315,24 @@ module MultipleChartTypes =
         let js = LineAndBarChart.js |> Helpers.cleanJS
         File.WriteAllText(path + "line-and-bar.js", js)
 
+module Pie =
+    open Pie
+
+    let generatePie () =
+        let path = Path.Combine(plotlyPrelude, "pie" + string Path.DirectorySeparatorChar)
+        Directory.CreateDirectory(path) |> ignore
+
+        let js = Chart1.js |> Helpers.cleanJS
+        File.WriteAllText(path + "pie-1.js", js)
+
+        let js = Chart2.js |> Helpers.cleanJS
+        File.WriteAllText(path + "pie-2.js", js)
+
+        let js = Chart3.js |> Helpers.cleanJS
+        File.WriteAllText(path + "pie-3.js", js)
+
+        let js = Chart4.js |> Helpers.cleanJS
+        File.WriteAllText(path + "pie-4.js", js)
 
 [<EntryPoint>]
 let main _ =
@@ -334,5 +352,6 @@ let main _ =
     Line.generateLine ()
     LogPlots.generateLogPlots ()
     MultipleChartTypes.generateMultipleChartTyes ()
+    Pie.generatePie ()
     
     0 // return an integer exit code
