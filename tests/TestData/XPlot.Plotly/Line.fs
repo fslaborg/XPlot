@@ -1,31 +1,39 @@
-﻿#r @"../../../bin/XPlot.Plotly/netstandard2.0/XPlot.Plotly.dll"
-// TESTED under CI now
-
+namespace Line
 
 open XPlot.Plotly
 
-let sales = ["2013", 1000; "2014", 1170; "2015", 660; "2016", 1030]
-let expenses = ["2013", 400; "2014", 460; "2015", 1120; "2016", 540]
+[<AutoOpen>]
+module Data =
+    let sales = ["2013", 1000; "2014", 1170; "2015", 660; "2016", 1030]
+    let expenses = ["2013", 400; "2014", 460; "2015", 1120; "2016", 540]
 
-// y values only
-sales
-|> List.map snd
-|> Chart.Line
-|> Chart.Show
+module Line1 =
+    // y values only
+    let js =
+        let chart =
+            sales
+            |> List.map snd
+            |> Chart.Line
+        chart.GetInlineJS()
 
-// single series
-sales
-|> Chart.Line
-|> Chart.Show
+module Line2 =
+    // single series
+    let js =
+        let chart =
+            sales
+            |> Chart.Line
+        chart.GetInlineJS()        
 
-// multiple series
-[sales; expenses]
-|> Chart.Line
-|> Chart.Show
+module Line3 =
+    // multiple series
+    let js =
+        let chart =
+            [sales; expenses]
+            |> Chart.Line
+        chart.GetInlineJS()
 
 // Basic line plot
 module Chart1 =
-
     let trace1 =
         Scatter(
             x = [1; 2; 3; 4],
@@ -40,9 +48,11 @@ module Chart1 =
 
     let data = [trace1; trace2]
 
-    data
-    |> Chart.Plot
-    |> Chart.Show
+    let js =
+        let chart =
+            data
+            |> Chart.Plot
+        chart.GetInlineJS()
 
 // Line and scatter plot
 module Chart2 =
@@ -70,15 +80,17 @@ module Chart2 =
 
     let data = [ trace1; trace2; trace3 ]
 
-    let layout = Layout(title ="Line and Scatter Plot")
+    let options = Options(title ="Line and Scatter Plot")
 
-    (data, layout)
-    |> Chart.Plot
-    |> Chart.Show
+    let js =
+        let chart =
+            data
+            |> Chart.Plot
+            |> Chart.WithOptions options
+        chart.GetInlineJS()
 
 // Adding names to line and scatter plot
 module Chart3 =
-
     let trace1 =
         Scatter(
             x = [1; 2; 3; 4],
@@ -105,15 +117,17 @@ module Chart3 =
 
     let data = [ trace1; trace2; trace3 ]
 
-    let layout = Layout(title ="Adding Names to Line and Scatter Plot")
+    let options = Options(title ="Adding Names to Line and Scatter Plot")
 
-    (data, layout)
-    |> Chart.Plot
-    |> Chart.Show
+    let js =
+        let chart =
+            data
+            |> Chart.Plot
+            |> Chart.WithOptions options
+        chart.GetInlineJS()
 
 // Line and scatter styling
 module Chart4 =
-
     let trace1 =
         Scatter(
             x = [1; 2; 3; 4],
@@ -157,15 +171,17 @@ module Chart4 =
 
     let data = [trace1; trace2; trace3]
 
-    let layout = Layout(title = "Line and Scatter Styling")
+    let options = Options(title = "Line and Scatter Styling")
 
-    (data, layout)
-    |> Chart.Plot
-    |> Chart.Show
+    let js =
+        let chart =
+            data
+            |> Chart.Plot
+            |> Chart.WithOptions options
+        chart.GetInlineJS()
 
 // Colored and styled scatter plots
 module Chart5 =
-
     let trace1 =
         Scatter(
             x = [52698; 43117],
@@ -229,8 +245,8 @@ module Chart5 =
 
     let data = [trace1; trace2; trace3; trace4]
 
-    let layout =
-        Layout(
+    let options =
+        Options(
             title = "Quarter 1 Growth",
             xaxis =
                 Xaxis(
@@ -245,13 +261,16 @@ module Chart5 =
                 )
         )
 
-    (data, layout)
-    |> Chart.Plot
-    |> Chart.Show
+
+    let js =
+        let chart =
+            data
+            |> Chart.Plot
+            |> Chart.WithOptions options
+        chart.GetInlineJS()
 
 // Styling line plot
 module Chart6 =
-
     let trace1 =
         Scatter(
             x = [1; 2; 3; 4],
@@ -278,22 +297,23 @@ module Chart6 =
                 )
         )
 
-    let layout =
-        Layout(
+    let options =
+        Options(
             width = 500.,
             height = 500.
         )
 
     let data = [trace1; trace2]
 
-    data
-    |> Chart.Plot
-    |> Chart.WithLayout layout
-    |> Chart.Show
+    let js =
+        let chart =
+            data
+            |> Chart.Plot
+            |> Chart.WithOptions options
+        chart.GetInlineJS()
 
 // Line shape options for interpolation
 module Chart7 =
-
     let trace1 =
         Scatter(
             x = [1; 2; 3; 4; 5],
@@ -351,8 +371,8 @@ module Chart7 =
 
     let data = [trace1; trace2; trace3; trace4; trace5; trace6]
 
-    let layout =
-        Layout(
+    let options =
+        Options(
             legend =
                 Legend(
                     y = 0.5,
@@ -361,14 +381,15 @@ module Chart7 =
                 )
         )
 
-    data
-    |> Chart.Plot
-    |> Chart.WithLayout layout
-    |> Chart.Show
+    let js =
+        let chart =
+            data
+            |> Chart.Plot
+            |> Chart.WithOptions options
+        chart.GetInlineJS()
 
 // Graph and axes titles
 module Chart8 =
-
     let trace1 =
         Scatter(
             x = [1; 2; 3; 4],
@@ -395,21 +416,22 @@ module Chart8 =
 
     let data = [trace1; trace2; trace3]
 
-    let layout =
-        Layout(
+    let options =
+        Options(
             title = "Title of the Graph",
             xaxis = Xaxis(title = "x-axis title"),
             yaxis = Yaxis(title = "y-axis title")
         )
 
-    data
-    |> Chart.Plot
-    |> Chart.WithLayout layout
-    |> Chart.Show
+    let js =
+        let chart =
+            data
+            |> Chart.Plot
+            |> Chart.WithOptions options
+        chart.GetInlineJS()
 
 // Line dash
 module Chart9 =
-
     let trace1 =
         Scatter(
             x = [1; 2; 3; 4; 5],
@@ -464,8 +486,8 @@ module Chart9 =
 
     let data = [trace1; trace2; trace3; trace4]
 
-    let layout =
-        Layout(
+    let options =
+        Options(
             title = "Line Dash",
             xaxis =
                 Xaxis(
@@ -485,14 +507,15 @@ module Chart9 =
                 )
         )
 
-    data
-    |> Chart.Plot
-    |> Chart.WithLayout layout
-    |> Chart.Show
+    let js =
+        let chart =
+            data
+            |> Chart.Plot
+            |> Chart.WithOptions options
+        chart.GetInlineJS()
 
 // Connect gaps between dots
 module Chart10 =
-
     let trace1 =
         Scatter(
             x = [1; 2; 3; 4; 5; 6; 7; 8],
@@ -511,20 +534,21 @@ module Chart10 =
 
     let data = [trace1; trace2]
 
-    let layout =
-        Layout(
+    let options =
+        Options(
             title = "Connect the Gaps Between Data",
             showlegend = false
         )
 
-    data
-    |> Chart.Plot
-    |> Chart.WithLayout layout
-    |> Chart.Show
+    let js =
+        let chart =
+            data
+            |> Chart.Plot
+            |> Chart.WithOptions options
+        chart.GetInlineJS()
 
 // Labelling lines with annotations
 module Chart11 =
-
     let xData =
         [
             [2001; 2002; 2003; 2004; 2005; 2006; 2007; 2008; 2009; 2010; 2011; 2013];
@@ -576,8 +600,8 @@ module Chart11 =
                 yield result2
         ]
 
-    let layout =
-        Layout(
+    let options =
+        Options(
             showlegend = false,
             height = 600.,
             width = 600.,
@@ -588,7 +612,6 @@ module Chart11 =
                     showticklabels = true,
                     linecolor = "rgb(204,204,204)",
                     linewidth = 2.,
-//                    autotick = false,
                     ticks = "outside",
                     tickcolor = "rgb(204,204,204)",
                     tickwidth = 2.,
@@ -652,7 +675,7 @@ module Chart11 =
                 ]
         )
 
-    let annotations =
+    let additionalAnnotations =
         [
             for x in 0 .. (xData.Length - 1) do
                 let result =
@@ -691,14 +714,271 @@ module Chart11 =
                 yield result2
         ]
 
-    layout.annotations <- (Seq.append layout.annotations annotations)
+    options.annotations <- (Seq.append options.annotations additionalAnnotations)
 
-    data
-    |> Chart.Plot
-    |> Chart.WithLayout layout
-    |> Chart.Show
+    let js =
+        let chart =
+            data
+            |> Chart.Plot
+            |> Chart.WithOptions options
+        chart.GetInlineJS()
 
-// ====================
-// Pipeline style tests
-// ====================
+module LineScatter1 =
+    let trace1 =
+        Scatter(
+            x = [1; 2; 3; 4],
+            y = [10; 15; 13; 17]
+        )
 
+    let trace2 =
+        Scatter(
+            x = [1; 2; 3; 4],
+            y = [16; 5; 11; 9]
+        )
+
+    let options = Options(title = "Test", width = 400.0, height = 400.0)
+
+    let data = [trace1; trace2]
+
+    let js =
+        let chart =
+            data
+            |> Chart.Plot
+            |> Chart.WithOptions options
+        chart.GetInlineJS()
+
+module LineScatter2 =
+    let trace1 =
+        Scatter(
+            x = [1; 2; 3; 4],
+            y = [10; 15; 13; 17]
+        )
+
+    let trace2 =
+        Scatter(
+            x = [1; 2; 3; 4],
+            y = [16; 5; 11; 9]
+        )
+
+    let data = [trace1; trace2]
+
+    let options = Options(title = "Basic Line Plot")
+    
+    let js =
+        let chart =
+            data
+            |> Chart.Plot
+            |> Chart.WithOptions options
+        chart.GetInlineJS()
+
+module LineScatter3 =
+    let trace1 =
+        Scatter(
+            x = [1; 2; 3; 4],
+            y = [10; 15; 13; 17],
+            mode = "markers"
+        )
+
+    let trace2 =
+        Scatter(
+            x = [2; 3; 4; 5],
+            y = [16; 5; 11; 9],
+            mode = "lines"
+        )
+
+    let trace3 =
+        Scatter(
+            x = [1; 2; 3; 4],
+            y = [12; 9; 15; 12],
+            mode = "lines+markers"
+        )
+
+    let data = [trace1; trace2; trace3]
+
+    let options = Options(title = "Line and Scatter Plot")
+    
+    let js =
+        let chart =
+            data
+            |> Chart.Plot
+            |> Chart.WithOptions options
+        chart.GetInlineJS()
+
+module LineScatter4 =
+    let trace1 =
+        Scatter(
+            x = [52698; 43117],
+            y = [53; 31],
+            mode = "markers",
+            name = "North America",
+            text = ["United States"; "Canada"],
+            marker =
+                Marker(
+                    color = "rgb(164, 194, 244)",
+                    size = 12,
+                    line =
+                        Line(
+                            color = "white",
+                            width = 0.5
+                        )
+                )
+        )
+
+    let trace2 =
+        Scatter(
+            x = [39317; 37236; 35650; 30066; 29570; 27159; 23557; 21046; 18007],
+            y = [33; 20; 13; 19; 27; 19; 49; 44; 38],
+            mode = "markers",
+            name = "Europe",
+            text = ["Germany"; "Britain"; "France"; "Spain"; "Italy"; "Czech Rep."; "Greece"; "Poland"],
+            marker =
+                Marker(
+                    color = "rgb(255, 217, 102)",
+                    size = 12,
+                    line=
+                        Line(
+                            color = "white",
+                            width = 0.5
+                        )
+                )
+        )
+
+    let trace3 = 
+        Scatter(
+            x = [42952; 37037; 33106; 17478; 9813; 5253; 4692; 3899],
+            y = [23; 42; 54; 89; 14; 99; 93; 70],
+            mode = "markers",
+            name = "Asia/Pacific",
+            text = ["Australia"; "Japan"; "South Korea"; "Malaysia"; "China"; "Indonesia"; "Philippines"; "India"],
+            marker =
+                Marker(
+                    color = "rgb(234, 153, 153)",
+                    size = 12,
+                    line =
+                        Line(
+                            color = "white",
+                            width = 0.5
+                        )
+                )
+        )
+
+    let trace4 =
+        Scatter(
+            x = [19097; 18601; 15595; 13546; 12026; 7434; 5419],
+            y = [43; 47; 56; 80; 86; 93; 80],
+            mode = "markers",
+            name = "Latin America",
+            text = ["Chile"; "Argentina"; "Mexico"; "Venezuela"; "Venezuela"; "El Salvador"; "Bolivia"],
+            marker = 
+                Marker(
+                    color = "rgb(142, 124, 195)",
+                    size = 12,
+                    line =
+                        Line(
+                            color = "white",
+                            width = 0.5
+                        )
+                )
+        )
+
+    let data = [trace1; trace2; trace3; trace4]
+
+    let options =
+        Options(
+            title = "Quarter 1 Growth",
+            xaxis =
+                Xaxis(
+                    title = "GDP per Capita",
+                    showgrid = false,
+                    zeroline = false
+                ),
+            yaxis =
+                Yaxis(
+                    title = "Percent",
+                    showline = false
+                )
+        )
+
+    let js =
+        let chart =
+            data
+            |> Chart.Plot
+            |> Chart.WithOptions options
+        chart.GetInlineJS()
+
+module LineScatter5 =
+    let trace1 =
+        Scatter(
+            x = [1; 2; 3; 4; 5],
+            y = [1; 3; 2; 3; 1],
+            mode = "lines+markers",
+            name = "'linear'",
+            line = Line(shape = "linear")
+        )
+
+    let trace2 =
+        Scatter(
+            x = [1; 2; 3; 4; 5],
+            y = [6; 8; 7; 8; 6],
+            mode = "lines+markers",
+            name = "'spline'",
+            text = ["tweak line smoothness<br>with 'smoothing' in line object"; "tweak line smoothness<br>with 'smoothing' in line object"; "tweak line smoothness<br>with 'smoothing' in line object"; "tweak line smoothness<br>with 'smoothing' in line object"; "tweak line smoothness<br>with 'smoothing' in line object"; "tweak line smoothness<br>with 'smoothing' in line object"],
+            line = Line(shape = "spline")
+        )
+
+    let trace3 =
+        Scatter(
+            x = [1; 2; 3; 4; 5],
+            y = [11; 13; 12; 13; 11],
+            mode = "lines+markers",
+            name = "'vhv'",
+            line = Line(shape = "vhv")
+        )
+
+    let trace4 =
+        Scatter(
+            x = [1; 2; 3; 4; 5],
+            y = [16; 18; 17; 18; 16],
+            mode = "lines+markers",
+            name = "'hvh'",
+            line = Line(shape = "hvh")
+        )
+
+    let trace5 =
+        Scatter(
+            x = [1; 2; 3; 4; 5],
+            y = [21; 23; 22; 23; 21],
+            mode = "lines+markers",
+            name = "'vh'",
+            line = Line(shape = "vh")
+        )
+
+    let trace6 =
+        Scatter(
+            x = [1; 2; 3; 4; 5],
+            y = [26; 28; 27; 28; 26],
+            mode = "lines+markers",
+            name = "'hv'",
+            line = Line(shape = "hv")
+        )
+
+    let data = [trace1; trace2; trace3; trace4; trace5; trace6]
+
+    let options =
+        Options(
+            title = "Line Shape Options for Interpolation",
+            legend =
+                Legend(
+                    y = 0.5,
+                    traceorder = "reversed",
+                    font = Font(size = 16.),
+                    yref = "paper"
+                )
+            )
+
+    let js =
+        let chart =
+            data
+            |> Chart.Plot
+            |> Chart.WithOptions options
+        chart.GetInlineJS()

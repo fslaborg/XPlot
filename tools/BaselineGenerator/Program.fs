@@ -227,6 +227,69 @@ module Heatmaps =
         let js = YIGnBuColorscale.js |> Helpers.cleanJS
         File.WriteAllText(path + "yignbu-colorscale.js", js)
 
+module Line =
+    open Line
+
+    let generateLine () =
+        let path = Path.Combine(plotlyPrelude, "line" + string Path.DirectorySeparatorChar)
+        Directory.CreateDirectory(path) |> ignore
+        
+        let js = Line1.js |> Helpers.cleanJS
+        File.WriteAllText(path + "line-1.js", js)
+
+        let js = Line2.js |> Helpers.cleanJS
+        File.WriteAllText(path + "line-2.js", js)
+
+        let js = Line3.js |> Helpers.cleanJS
+        File.WriteAllText(path + "line-3.js", js)
+
+        let js = Chart1.js |> Helpers.cleanJS
+        File.WriteAllText(path + "chart-1.js", js)
+
+        let js = Chart2.js |> Helpers.cleanJS
+        File.WriteAllText(path + "chart-2.js", js)
+
+        let js = Chart3.js |> Helpers.cleanJS
+        File.WriteAllText(path + "chart-3.js", js)
+
+        let js = Chart4.js |> Helpers.cleanJS
+        File.WriteAllText(path + "chart-4.js", js)
+
+        let js = Chart5.js |> Helpers.cleanJS
+        File.WriteAllText(path + "chart-5.js", js)
+
+        let js = Chart6.js |> Helpers.cleanJS
+        File.WriteAllText(path + "chart-6.js", js)
+
+        let js = Chart7.js |> Helpers.cleanJS
+        File.WriteAllText(path + "chart-7.js", js)
+
+        let js = Chart8.js |> Helpers.cleanJS
+        File.WriteAllText(path + "chart-8.js", js)
+
+        let js = Chart9.js |> Helpers.cleanJS
+        File.WriteAllText(path + "chart-9.js", js)
+
+        let js = Chart10.js |> Helpers.cleanJS
+        File.WriteAllText(path + "chart-10.js", js)
+
+        let js = Chart11.js |> Helpers.cleanJS
+        File.WriteAllText(path + "chart-11.js", js)
+
+        let js = LineScatter1.js |> Helpers.cleanJS
+        File.WriteAllText(path + "line-scatter-1.js", js)
+
+        let js = LineScatter2.js |> Helpers.cleanJS
+        File.WriteAllText(path + "line-scatter-2.js", js)
+
+        let js = LineScatter3.js |> Helpers.cleanJS
+        File.WriteAllText(path + "line-scatter-3.js", js)
+
+        let js = LineScatter4.js |> Helpers.cleanJS
+        File.WriteAllText(path + "line-scatter-4.js", js)
+
+        let js = LineScatter5.js |> Helpers.cleanJS
+        File.WriteAllText(path + "line-scatter-5.js", js)
 
 [<EntryPoint>]
 let main _ =
@@ -243,5 +306,6 @@ let main _ =
     ErrorBars.generateErrorbars ()
     Gauge.generateGauge ()
     Heatmaps.generateHeatmaps ()
+    Line.generateLine ()
     
     0 // return an integer exit code

@@ -1,5 +1,7 @@
 ﻿#r @".\.\bin\Release\XPlot.Plotly.dll"
 #load "Credentials.fsx"
+// TESTED under CI now
+
 
 open XPlot.Plotly
 

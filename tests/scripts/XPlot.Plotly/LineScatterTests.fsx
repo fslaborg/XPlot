@@ -1,4 +1,6 @@
 ﻿#r @"../../bin/XPlot.Plotly.dll"
+// TESTED under CI now
+
 
 open XPlot.Plotly
 
