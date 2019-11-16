@@ -1,17 +1,8 @@
-﻿#r """.\.\bin\Release\XPlot.Plotly.dll"""
-#r """..\XPlot.Plotly.WPF\bin\Release\XPlot.Plotly.WPF.dll"""
-#r """..\packages\MathNet.Numerics.3.6.0\lib\net40\MathNet.Numerics.dll"""
-#load "Credentials.fsx"
+namespace PolarCharts
 
-// TESTED under CI now
-
-open MathNet.Numerics.Distributions
 open XPlot.Plotly
 
-Plotly.Signin(Credentials.username, Credentials.key)
-
 module PolarLineChart =
-
     let trace1 =
         Scatter(
             r = [1.; 0.995; 0.978; 0.951; 0.914; 0.866; 0.809; 0.743; 0.669; 0.588; 0.5; 0.407; 0.309; 0.208; 0.105; 0.; 0.105; 0.208; 0.309; 0.407; 0.5; 0.588; 0.669; 0.743; 0.809; 0.866; 0.914; 0.951; 0.978; 0.995; 1.; 0.995; 0.978; 0.951; 0.914; 0.866; 0.809; 0.743; 0.669; 0.588; 0.5; 0.407; 0.309; 0.208; 0.105; 0.; 0.105; 0.208; 0.309; 0.407; 0.5; 0.588; 0.669; 0.743; 0.809; 0.866; 0.914; 0.951; 0.978; 0.995; 1.],
@@ -77,10 +68,10 @@ module PolarLineChart =
                 )
         )
 
-    let data = Data([trace1; trace2; trace3; trace4; trace5])
+    let data = [trace1; trace2; trace3; trace4; trace5]
 
-    let layout =
-        Layout(
+    let options =
+        Options(
             title = "Mic Patterns",
             font =
                 Font(
@@ -104,14 +95,13 @@ module PolarLineChart =
             orientation = -90.
         )
 
-    let figure = Figure(data, layout)
-
-    let plotlyResponse = figure.Plot("Polar Line Chart Test")
-
-    figure.Show()
+    let js =
+        let chart =
+            data
+            |> Chart.Plot
+        chart.GetInlineJS()
 
 module PolarScatterChart =
-
     let trace1 =
         Scatter(
             r = [6.804985785265978; 3.389596010612268; 5.3814721107464445; 8.059540219420184; 5.318229227868589; 2.9850999356273773; 1.9665870023752283; 6.769265408206589; 4.073401898721205; 6.50437182526841; 7.556369818996649; 4.047456094066775; 7.386662496070009; 5.413624736983931; 7.470716531163242; 7.982110216939738; 4.737814080093381; 4.206453042929911; 5.478604804594065; 4.824520280697772; 5.599600609899737; 6.8667952170824735; 3.0856713662561464; 7.771810943227382; 3.6877944350967193; 5.360356685192225; 5.140446739300986; 6.045445680928888; 6.833920940193708; 3.6207694625408364; 3.9894305834039687; 5.3118244995018; 4.608213480282062; 6.640584716151912; 3.055188854482986; 7.492564163752965; 5.4850781777896715; 3.8977949966209358; 5.976245114026165; 5.447061560910957; 5.37703411681004; 4.690805787731301; 4.711640491184845; 3.629919329394875; 5.957668076372498; 5.357121284391151; 3.849235282821748; 6.250507136319218; 7.122243357145468; 3.399404233835391; 3.5105566722713313; 4.100997603660974; 4.096382100199779; 6.233583074805102; 3.939488526772935; 3.9254450773976983; 6.118132501462698; 3.9404503462852323; 7.583015573261159; 3.513202145338516],
@@ -202,24 +192,23 @@ module PolarScatterChart =
                 )
         )
 
-    let data = Data([trace1; trace2; trace3; trace4; trace5; trace6])
+    let data = [trace1; trace2; trace3; trace4; trace5; trace6]
 
-    let layout =
-        Layout(
+    let options =
+        Options(
             title = "Hobbs-Pearson Trials",
             font = Font(size = 15.),
             plot_bgcolor = "rgb(223, 223, 223)",
-            angularaxis = AngularAxis(tickcolor = "rgb(253,253,253)")
+            angularaxis = Angularaxis(tickcolor = "rgb(253,253,253)")
         )    
 
-    let figure = Figure(data, layout)
-
-    let plotlyResponse = figure.Plot("Polar Scatter Chart Test")
-
-    figure.Show()
+    let js =
+        let chart =
+            data
+            |> Chart.Plot
+        chart.GetInlineJS()
 
 module PolarAreaChart =
-
     let trace1 =
         Area(
             r = [77.5; 72.5; 70.0; 45.0; 22.5; 42.5; 40.0; 62.5],
@@ -252,22 +241,21 @@ module PolarAreaChart =
             marker = Marker(color = "rgb(242,240,247)")
         )
 
-    let data = Data([trace1; trace2; trace3; trace4])
+    let data = [trace1; trace2; trace3; trace4]
 
-    let layout =
-        Layout(
+    let options =
+        Options(
             title = "Wind Speed Distribution in Laurel, NE",
             font = Font(size = 16.),
             legend =
                 Legend(
                     font = Font(size = 16.)
                 ),
-            radialaxis = RadialAxis(ticksuffix = "%"),
+            radialaxis = Radialaxis(ticksuffix = "%"),
             orientation = 270.
         )
-
-    let figure = Figure(data, layout)
-
-    let plotlyResponse = figure.Plot("Polar Area Chart Test")
-
-    figure.Show()
+    let js =
+        let chart =
+            data
+            |> Chart.Plot
+        chart.GetInlineJS()

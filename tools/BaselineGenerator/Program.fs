@@ -334,6 +334,22 @@ module Pie =
         let js = Chart4.js |> Helpers.cleanJS
         File.WriteAllText(path + "pie-4.js", js)
 
+module PolarCharts =
+    open PolarCharts
+
+    let generatePolarCharts () =
+        let path = Path.Combine(plotlyPrelude, "polar" + string Path.DirectorySeparatorChar)
+        Directory.CreateDirectory(path) |> ignore
+
+        let js = PolarLineChart.js |> Helpers.cleanJS
+        File.WriteAllText(path + "polar-line.js", js)
+
+        let js = PolarScatterChart.js |> Helpers.cleanJS
+        File.WriteAllText(path + "polar-scatter.js", js)
+
+        let js = PolarAreaChart.js |> Helpers.cleanJS
+        File.WriteAllText(path + "polar-area.js", js)
+
 [<EntryPoint>]
 let main _ =
     Directory.CreateDirectory(plotlyPrelude) |> ignore
@@ -353,5 +369,6 @@ let main _ =
     LogPlots.generateLogPlots ()
     MultipleChartTypes.generateMultipleChartTyes ()
     Pie.generatePie ()
+    PolarCharts.generatePolarCharts ()
     
     0 // return an integer exit code
