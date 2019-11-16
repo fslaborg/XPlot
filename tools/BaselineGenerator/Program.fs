@@ -384,6 +384,16 @@ module Scatter =
         let js = Chart9.js |> Helpers.cleanJS
         File.WriteAllText(path + "scatter-9.js", js)
 
+module StackedBarChart =
+    open StackedBarChart
+
+    let generateStackedBarChart () =
+        let path = Path.Combine(plotlyPrelude, "stackedbarchart" + string Path.DirectorySeparatorChar)
+        Directory.CreateDirectory(path) |> ignore
+
+        let js = Chart1.js |> Helpers.cleanJS
+        File.WriteAllText(path + "stacked-bar-chart-1.js", js)
+
 [<EntryPoint>]
 let main _ =
     Directory.CreateDirectory(plotlyPrelude) |> ignore
@@ -405,5 +415,6 @@ let main _ =
     Pie.generatePie ()
     PolarCharts.generatePolarCharts ()
     Scatter.generateScatter ()
+    StackedBarChart.generateStackedBarChart ()
     
     0 // return an integer exit code
