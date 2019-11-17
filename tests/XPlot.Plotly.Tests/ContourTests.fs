@@ -2,14 +2,14 @@ module ContourTests
 
 open System.IO
 open Expecto
-open Contour
+open ContourPlots
 open Testing
 
 let baselineDir = Path.Combine(__SOURCE_DIRECTORY__, "..", "TestData", "XPlot.Plotly", "js", "contour")
 
 [<Tests>]
 let testContour =
-    testList "Counter plots" [
+    testList "Contourr plots" [
         test "BasicContourPlot generated JS did not regress" {
             let g = Path.Combine(baselineDir, "basic-contour-plot.js")
             let expectedJS = File.ReadAllText(g)

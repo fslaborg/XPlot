@@ -5,6 +5,7 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="../../tests/TestData/XPlot.Plotly/ContourPlots.fs" Link="XPlot.Plotly/ContourPlots.fs" />
     <Compile Include="../../tests/TestData/XPlot.Plotly/Histogram2D.fs" Link="XPlot.Plotly/Histogram2D.fs" />
     <Compile Include="../../tests/TestData/XPlot.Plotly/Histogram.fs" Link="XPlot.Plotly/Histogram.fs" />
     <Compile Include="../../tests/TestData/XPlot.Plotly/TimeSeries.fs" Link="XPlot.Plotly/TimeSeries.fs" />
@@ -19,7 +20,6 @@
     <Compile Include="../../tests/TestData/XPlot.Plotly/Gauge.fs" Link="XPlot.Plotly/Gauge.fs" />
     <Compile Include="../../tests/TestData/XPlot.Plotly/ErrorBars.fs" Link="XPlot.Plotly/ErrorBars.fs" />
     <Compile Include="../../tests/TestData/XPlot.Plotly/3DPlots.fs" Link="XPlot.Plotly/3DPlots.fs" />
-    <Compile Include="../../tests/TestData/XPlot.Plotly/Contour.fs" Link="XPlot.Plotly/Contour.fs" />
     <Compile Include="../../tests/TestData/XPlot.Plotly/Column.fs" Link="XPlot.Plotly/Column.fs" />
     <Compile Include="../../tests/TestData/XPlot.Plotly/Chart.fs" Link="XPlot.Plotly/Chart.fs" />
     <Compile Include="../../tests/TestData/XPlot.Plotly/Bubble.fs" Link="XPlot.Plotly/Bubble.fs" />

@@ -1,18 +1,43 @@
 namespace ContourPlots
 
+open System
 open System.IO
 open XPlot.Plotly
 
 [<AutoOpen>]
 module GetData =
-    let getLinearSpacedData line =
+    let getLinearSpacedDataXOrY line =
         let data =
-            let path = Path.Combine(__SOURCE_DIRECTORY__, "numerical-data", "linear-spaced-data.txt")
+            let path = Path.Combine(__SOURCE_DIRECTORY__, "numerical-data", "basic-linear-spaced-data.txt")
             File.ReadAllLines path
 
         data.[line]
         |> fun x -> x.Split ','
         |> Array.map float
+
+    let getLargerLinearSpacedData line =
+        let data =
+            let path = Path.Combine(__SOURCE_DIRECTORY__, "numerical-data", "larger-linear-spaced-data.txt")
+            File.ReadAllLines path
+
+        data.[line]
+        |> fun x -> x.Split ','
+        |> Array.map float
+
+    let getLinearSpacedDataZ () =
+        let data =
+            let path = Path.Combine(__SOURCE_DIRECTORY__, "numerical-data", "basic-linear-spaced-data.txt")
+            File.ReadAllLines path
+
+        let z = Array2D.create 100 100 0.0
+
+        let columns = data.[2].Trim('|').Trim(',').Split('|')
+
+        for i = 0 to columns.Length-1 do
+            let items = columns.[i].Trim('|').Trim(',').Split(',')
+            for j = 0 to items.Length-1 do
+                z.[i,j] <- float items.[j]
+        z
 
     let getNormalData line =
         let data =
@@ -26,13 +51,12 @@ module GetData =
 module BasicContourPlot =
     let trace =
         Contour(
-            z = getLinearSpacedData 2,
-            x = getLinearSpacedData 0,
-            y = getLinearSpacedData 1
+            z = getLinearSpacedDataZ (),
+            x = getLinearSpacedDataXOrY 0,
+            y = getLinearSpacedDataXOrY 1
         )
 
     let js =
-        let x = new System.String('t', 100)
         let chart =
             trace
             |> Chart.Plot
@@ -40,16 +64,10 @@ module BasicContourPlot =
         chart.GetInlineJS()
 
 module TwoDHistogramContourPlotHistogramSubplots =
-    let t = getLinearSpacedData 0
-    let sample = getNormalData 0
-
-    let x = Array.mapi (fun i x -> t.[i] ** 3. + 0.3 * x) sample
-    let y = Array.mapi (fun i x -> t.[i] ** 6. + 0.3 * x) sample
-
     let trace1 =
         Scatter(
-            x = x,
-            y = y,
+            x = getLargerLinearSpacedData 0,
+            y = getLargerLinearSpacedData 1,
             mode = "markers",
             name = "points",
             marker =
@@ -62,8 +80,8 @@ module TwoDHistogramContourPlotHistogramSubplots =
 
     let trace2 =
         Histogram2dcontour(
-            x = x,
-            y = y,
+            x = getLargerLinearSpacedData 0,
+            y = getLargerLinearSpacedData 1,
             name = "density",
             ncontours = 20,
             colorscale = "Hot",
@@ -73,7 +91,7 @@ module TwoDHistogramContourPlotHistogramSubplots =
 
     let trace3 =
         Histogram(
-            x = x,
+            x = getLargerLinearSpacedData 0,
             name = "x density",
             marker = Marker(color = "rgb(102,0,0)"),
             yaxis = "y2"
@@ -81,7 +99,7 @@ module TwoDHistogramContourPlotHistogramSubplots =
 
     let trace4 =
         Histogram(
-            y = y,
+            y = getLargerLinearSpacedData 1,
             name = "y density",
             marker = Marker(color = "rgb(102,0,0)"),
             xaxis = "x2"
