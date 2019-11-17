@@ -5,7 +5,7 @@ open System.IO
 
 module ThreeDRandomWalk =
     let data =
-        let path = Path.Combine(__SOURCE_DIRECTORY__, "3DLineData.txt")
+        let path = Path.Combine(__SOURCE_DIRECTORY__, "numerical-data", "3D-line-data.txt")
         File.ReadAllLines path
 
     let getData line =
