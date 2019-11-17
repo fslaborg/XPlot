@@ -29,24 +29,15 @@ module GetData =
             let path = Path.Combine(__SOURCE_DIRECTORY__, "numerical-data", "basic-linear-spaced-data.txt")
             File.ReadAllLines path
 
-        let z = Array2D.create 100 100 0.0
-
         let columns = data.[2].Trim('|').Trim(',').Split('|')
+
+        let z = Array2D.create columns.Length columns.Length 0.0
 
         for i = 0 to columns.Length-1 do
             let items = columns.[i].Trim('|').Trim(',').Split(',')
             for j = 0 to items.Length-1 do
                 z.[i,j] <- float items.[j]
         z
-
-    let getNormalData line =
-        let data =
-            let path = Path.Combine(__SOURCE_DIRECTORY__, "numerical-data", "normal-data.txt")
-            File.ReadAllLines path
-
-        data.[line]
-        |> fun x -> x.Split ','
-        |> Array.map float
 
 module BasicContourPlot =
     let trace =

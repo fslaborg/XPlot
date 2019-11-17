@@ -9,9 +9,9 @@ let baselineDir = Path.Combine(__SOURCE_DIRECTORY__, "..", "TestData", "XPlot.Pl
 
 [<Tests>]
 let testContour =
-    testList "Contourr plots" [
+    testList "Contour plots" [
         test "BasicContourPlot generated JS did not regress" {
-            let g = Path.Combine(baselineDir, "basic-contour-plot.js")
+            let g = Path.Combine(baselineDir, "basic-contour.js")
             let expectedJS = File.ReadAllText(g)
             let actualJS = BasicContourPlot.js |> Helpers.cleanJS
 
