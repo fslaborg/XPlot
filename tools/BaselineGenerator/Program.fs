@@ -407,6 +407,44 @@ module TimeSeries =
         let js = TimeSeriesWithDateTime.js |> Helpers.cleanJS
         File.WriteAllText(path + "date-time.js", js)
 
+module Histogram =
+    open Histogram
+
+    let generateHistograms () =
+        let path = Path.Combine(plotlyPrelude, "histogram" + string Path.DirectorySeparatorChar)
+        Directory.CreateDirectory(path) |> ignore
+
+        let js = BasicHistogram.js |> Helpers.cleanJS
+        File.WriteAllText(path + "basic-histogram.js", js)
+
+        let js = HorizontalHistogram.js |> Helpers.cleanJS
+        File.WriteAllText(path + "horizontal-histogram.js", js)
+
+        let js = OverlaidHistgram.js |> Helpers.cleanJS
+        File.WriteAllText(path + "overlaid-histogram.js", js)
+
+        let js = StackedHistograms.js |> Helpers.cleanJS
+        File.WriteAllText(path + "stacked-histograms.js", js)
+
+        let js = ColoredStyledHistograms.js |> Helpers.cleanJS
+        File.WriteAllText(path + "colored-styled-histograms.js", js)
+
+module Histogram2D =
+    open Histogram2D
+
+    let generateHistograms () =
+        let path = Path.Combine(plotlyPrelude, "histogram2d" + string Path.DirectorySeparatorChar)
+        Directory.CreateDirectory(path) |> ignore
+
+        let js = Histogram2DBivariate.js |> Helpers.cleanJS
+        File.WriteAllText(path + "histogram-2d-bivariate.js", js)
+
+        let js = Histogram2DBinningStyling.js |> Helpers.cleanJS
+        File.WriteAllText(path + "histogram-2d-binning-styling.js", js)
+
+        let js = Histogram2DOverlaidScatter.js |> Helpers.cleanJS
+        File.WriteAllText(path + "histogram-2d-overlaid-scatter.js", js)
+
 [<EntryPoint>]
 let main _ =
     Directory.CreateDirectory(plotlyPrelude) |> ignore
@@ -430,5 +468,7 @@ let main _ =
     Scatter.generateScatter ()
     StackedBarChart.generateStackedBarChart ()
     TimeSeries.generateStackedTimeSeries ()
+    Histogram.generateHistograms ()
+    Histogram2D.generateHistograms ()
     
     0 // return an integer exit code
