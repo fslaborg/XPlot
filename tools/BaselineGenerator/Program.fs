@@ -448,6 +448,40 @@ module ContourPlots =
         let js = TwoDHistogramContourPlotHistogramSubplots.js |> Helpers.cleanJS
         File.WriteAllText(path + "2d-histogram-contour-plot.js", js)
 
+module Shapes =
+    open Shapes
+
+    let generateShapes () =
+        let path = Path.Combine(plotlyPrelude, "shapes" + string Path.DirectorySeparatorChar)
+        Directory.CreateDirectory(path) |> ignore
+
+        let js = Chart1.js |> Helpers.cleanJS
+        File.WriteAllText(path + "shape-1.js", js)
+
+        let js = Chart2.js |> Helpers.cleanJS
+        File.WriteAllText(path + "shape-2.js", js)
+
+        let js = Chart3.js |> Helpers.cleanJS
+        File.WriteAllText(path + "shape-3.js", js)
+
+        let js = Chart4.js |> Helpers.cleanJS
+        File.WriteAllText(path + "shape-4.js", js)
+
+        let js = Chart5.js |> Helpers.cleanJS
+        File.WriteAllText(path + "shape-5.js", js)
+
+        let js = Chart6.js |> Helpers.cleanJS
+        File.WriteAllText(path + "shape-6.js", js)
+
+        let js = Chart7.js |> Helpers.cleanJS
+        File.WriteAllText(path + "shape-7.js", js)
+
+        let js = Chart8.js |> Helpers.cleanJS
+        File.WriteAllText(path + "shape-8.js", js)
+
+        let js = Chart9.js |> Helpers.cleanJS
+        File.WriteAllText(path + "shape-9.js", js)
+
 [<EntryPoint>]
 let main _ =
     Directory.CreateDirectory(plotlyPrelude) |> ignore
@@ -473,5 +507,6 @@ let main _ =
     TimeSeries.generateStackedTimeSeries ()
     Histogram.generateHistograms ()
     Histogram2D.generateHistograms ()
+    Shapes.generateShapes ()
     
     0 // return an integer exit code
