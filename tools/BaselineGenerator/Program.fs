@@ -144,16 +144,6 @@ module Column =
         let js = Chart10.js |> Helpers.cleanJS
         File.WriteAllText(path + "column-10.js", js)
 
-module Contour =
-    open Contour
-
-    let generateContour () =
-        let path = Path.Combine(plotlyPrelude, "contour" + string Path.DirectorySeparatorChar)
-        Directory.CreateDirectory(path) |> ignore
-
-        let js = BasicContourPlot.js |> Helpers.cleanJS
-        File.WriteAllText(path + "contour-1.js", js)
-
 module ThreeDPlots =
     open ThreeDPlots
 
@@ -445,6 +435,19 @@ module Histogram2D =
         let js = Histogram2DOverlaidScatter.js |> Helpers.cleanJS
         File.WriteAllText(path + "histogram-2d-overlaid-scatter.js", js)
 
+module ContourPlots =
+    open ContourPlots
+
+    let generateContourPlots () =
+        let path = Path.Combine(plotlyPrelude, "contour" + string Path.DirectorySeparatorChar)
+        Directory.CreateDirectory(path) |> ignore
+
+        let js = BasicContourPlot.js |> Helpers.cleanJS
+        File.WriteAllText(path + "basic-contour.js", js)
+
+        let js = TwoDHistogramContourPlotHistogramSubplots.js |> Helpers.cleanJS
+        File.WriteAllText(path + "2d-histogram-contour-plot.js", js)
+
 [<EntryPoint>]
 let main _ =
     Directory.CreateDirectory(plotlyPrelude) |> ignore
@@ -455,7 +458,7 @@ let main _ =
     Bubble.generateBubble ()
     Chart.generateChart ()
     Column.generateColumn ()
-    Contour.generateContour ()
+    ContourPlots.generateContourPlots ()
     ThreeDPlots.generate3DPlots ()
     ErrorBars.generateErrorbars ()
     Gauge.generateGauge ()

@@ -1,27 +1,50 @@
-namespace Contour
+namespace ContourPlots
 
-open MathNet.Numerics
-open MathNet.Numerics.Distributions
 open System
+open System.IO
 open XPlot.Plotly
 
-// Not under test due to randomness
+[<AutoOpen>]
+module GetData =
+    let getLinearSpacedDataXOrY line =
+        let data =
+            let path = Path.Combine(__SOURCE_DIRECTORY__, "numerical-data", "basic-linear-spaced-data.txt")
+            File.ReadAllLines path
+
+        data.[line]
+        |> fun x -> x.Split ','
+        |> Array.map float
+
+    let getLargerLinearSpacedData line =
+        let data =
+            let path = Path.Combine(__SOURCE_DIRECTORY__, "numerical-data", "larger-linear-spaced-data.txt")
+            File.ReadAllLines path
+
+        data.[line]
+        |> fun x -> x.Split ','
+        |> Array.map float
+
+    let getLinearSpacedDataZ () =
+        let data =
+            let path = Path.Combine(__SOURCE_DIRECTORY__, "numerical-data", "basic-linear-spaced-data.txt")
+            File.ReadAllLines path
+
+        let columns = data.[2].Trim('|').Trim(',').Split('|')
+
+        let z = Array2D.create columns.Length columns.Length 0.0
+
+        for i = 0 to columns.Length-1 do
+            let items = columns.[i].Trim('|').Trim(',').Split(',')
+            for j = 0 to items.Length-1 do
+                z.[i,j] <- float items.[j]
+        z
+
 module BasicContourPlot =
-    let size = 100
-    let x = Generate.LinearSpaced(size, -2. * Math.PI, 2. * Math.PI)
-    let y = Generate.LinearSpaced(size, -2. * Math.PI, 2. * Math.PI)
-    let z = Array2D.create size size 0.0
-
-    for i in 0 .. 99 do
-        for j in 0 .. 99 do
-            let r2 = x.[i] ** 2. + y.[j] ** 2.
-            z.[i,j] <- sin x.[i] * cos y.[j] * sin r2 / log(r2 + 1.)
-
     let trace =
         Contour(
-            z = z,
-            x = x,
-            y = y
+            z = getLinearSpacedDataZ (),
+            x = getLinearSpacedDataXOrY 0,
+            y = getLinearSpacedDataXOrY 1
         )
 
     let js =
@@ -31,24 +54,11 @@ module BasicContourPlot =
             |> Chart.WithTitle "Basic Contour Plot"
         chart.GetInlineJS()
 
-// Not under test due to randomness
 module TwoDHistogramContourPlotHistogramSubplots =
-    let t = Generate.LinearSpaced(2000, -1., 1.2)
-
-    let normal = new Normal(0., 1.0)
-
-    let sample =
-        normal.Samples()
-        |> Seq.take 2000
-        |> Seq.toArray
-
-    let x = sample |> Array.mapi (fun i x -> t.[i] ** 3. + 0.3 * x)
-    let y = sample |> Array.mapi (fun i x -> t.[i] ** 6. + 0.3 * x)
-
     let trace1 =
         Scatter(
-            x = x,
-            y = y,
+            x = getLargerLinearSpacedData 0,
+            y = getLargerLinearSpacedData 1,
             mode = "markers",
             name = "points",
             marker =
@@ -61,8 +71,8 @@ module TwoDHistogramContourPlotHistogramSubplots =
 
     let trace2 =
         Histogram2dcontour(
-            x = x,
-            y = y,
+            x = getLargerLinearSpacedData 0,
+            y = getLargerLinearSpacedData 1,
             name = "density",
             ncontours = 20,
             colorscale = "Hot",
@@ -72,7 +82,7 @@ module TwoDHistogramContourPlotHistogramSubplots =
 
     let trace3 =
         Histogram(
-            x = x,
+            x = getLargerLinearSpacedData 0,
             name = "x density",
             marker = Marker(color = "rgb(102,0,0)"),
             yaxis = "y2"
@@ -80,7 +90,7 @@ module TwoDHistogramContourPlotHistogramSubplots =
 
     let trace4 =
         Histogram(
-            y = y,
+            y = getLargerLinearSpacedData 1,
             name = "y density",
             marker = Marker(color = "rgb(102,0,0)"),
             xaxis = "x2"
@@ -90,6 +100,7 @@ module TwoDHistogramContourPlotHistogramSubplots =
 
     let options =
         Options(
+            title = "2D Histogram Contour Plot with Histogram Subplots",
             showlegend = false,
             autosize = false,
             width = 600.,
@@ -128,5 +139,4 @@ module TwoDHistogramContourPlotHistogramSubplots =
             data
             |> Chart.Plot
             |> Chart.WithOptions options
-            |> Chart.WithTitle "2D Histogram Contour Plot with Histogram Subplots"
         chart.GetInlineJS()
