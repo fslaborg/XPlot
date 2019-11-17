@@ -7,7 +7,7 @@ open MathNet.Numerics.Distributions
 let dataPrelude = Path.Combine("..", "..", "tests", "TestData", "XPlot.Plotly", "numerical-data" + string Path.DirectorySeparatorChar)
 
 let generateNormalData () =
-    let xSamples = Normal.Samples(0.0, 1.0) |> Seq.take 500
+    let xSamples = Normal.Samples(0.0, 1.0) |> Seq.take 2000
     let ySamples = xSamples |> Seq.map (fun x -> x + 0.1)
 
     let xSB = StringBuilder()
@@ -25,7 +25,7 @@ let generateNormalData () =
     File.WriteAllLines(dataPrelude + "normal-data.txt", lines)
 
 let generateUniformData () =
-    let xSamples = ContinuousUniform.Samples(0.0, 1.0) |> Seq.take 500
+    let xSamples = ContinuousUniform.Samples(0.0, 1.0) |> Seq.take 2000
     let ySamples = xSamples |> Seq.map (fun x -> x + 0.1)
 
     let xSB = StringBuilder()
