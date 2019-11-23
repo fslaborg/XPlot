@@ -501,7 +501,7 @@ NUGET
       System.Security.Cryptography.Encoding (>= 4.3) - restriction: || (&& (< monoandroid) (< monotouch) (< net46) (>= netstandard1.6) (< xamarinios) (< xamarinmac) (< xamarintvos) (< xamarinwatchos)) (>= net463)
       System.Security.Cryptography.Primitives (>= 4.3) - restriction: || (&& (< monoandroid) (< monotouch) (< net46) (>= netstandard1.6) (< xamarinios) (< xamarinmac) (< xamarintvos) (< xamarinwatchos)) (&& (< monoandroid) (< net46) (>= netstandard1.3) (< netstandard1.4)) (&& (< monoandroid) (< net46) (>= netstandard1.4) (< netstandard1.6)) (&& (>= net46) (< netstandard1.4)) (&& (>= net461) (< netstandard1.6)) (>= net463)
       System.Text.Encoding (>= 4.3) - restriction: && (< monoandroid) (< monotouch) (< net46) (>= netstandard1.6) (< xamarinios) (< xamarinmac) (< xamarintvos) (< xamarinwatchos)
-    System.Security.Cryptography.Cng (4.6) - restriction: || (&& (< monoandroid) (< monotouch) (< net40) (>= netstandard1.6) (< netstandard2.0) (< win8) (< wpa81) (< xamarintvos) (< xamarinwatchos)) (&& (< monoandroid) (< net40) (< netstandard1.4) (>= netstandard1.6) (< win8) (< wpa81)) (&& (< monoandroid) (< net40) (< netstandard1.5) (>= netstandard1.6) (< win8) (< wpa81)) (&& (< net40) (>= net46) (< netstandard1.4) (>= netstandard1.6)) (&& (< netstandard1.5) (>= netstandard1.6) (>= uap10.0))
+    System.Security.Cryptography.Cng (4.6.1) - restriction: || (&& (< monoandroid) (< monotouch) (< net40) (>= netstandard1.6) (< netstandard2.0) (< win8) (< wpa81) (< xamarintvos) (< xamarinwatchos)) (&& (< monoandroid) (< net40) (< netstandard1.4) (>= netstandard1.6) (< win8) (< wpa81)) (&& (< monoandroid) (< net40) (< netstandard1.5) (>= netstandard1.6) (< win8) (< wpa81)) (&& (< net40) (>= net46) (< netstandard1.4) (>= netstandard1.6)) (&& (< netstandard1.5) (>= netstandard1.6) (>= uap10.0))
       System.IO (>= 4.3) - restriction: || (&& (< monoandroid) (< monotouch) (< net46) (>= netstandard1.6) (< netstandard2.0) (< xamarintvos) (< xamarinwatchos)) (&& (< monoandroid) (< net46) (>= netstandard1.3) (< netstandard1.4)) (&& (< monoandroid) (< net46) (>= netstandard1.4) (< netstandard1.6) (< uap10.1))
       System.Resources.ResourceManager (>= 4.3) - restriction: || (&& (< monoandroid) (< monotouch) (< net46) (>= netstandard1.6) (< netstandard2.0) (< xamarintvos) (< xamarinwatchos)) (&& (< monoandroid) (< net46) (>= netstandard1.3) (< netstandard1.4)) (&& (< monoandroid) (< net46) (>= netstandard1.4) (< netstandard1.6) (< uap10.1))
       System.Runtime (>= 4.3) - restriction: || (&& (< monoandroid) (< monotouch) (< net46) (>= netstandard1.6) (< netstandard2.0) (< xamarintvos) (< xamarinwatchos)) (&& (< monoandroid) (< net46) (>= netstandard1.3) (< netstandard1.4)) (&& (< monoandroid) (< net46) (>= netstandard1.4) (< netstandard1.6) (< uap10.1))
@@ -1101,7 +1101,7 @@ NUGET
       System.Security.Cryptography.Encoding (>= 4.3) - restriction: || (&& (< monoandroid) (< monotouch) (< net46) (>= netstandard1.6) (< xamarinios) (< xamarinmac) (< xamarintvos) (< xamarinwatchos)) (>= net463)
       System.Security.Cryptography.Primitives (>= 4.3) - restriction: || (&& (< monoandroid) (< monotouch) (< net46) (>= netstandard1.6) (< xamarinios) (< xamarinmac) (< xamarintvos) (< xamarinwatchos)) (&& (< monoandroid) (< net46) (>= netstandard1.3) (< netstandard1.4)) (&& (< monoandroid) (< net46) (>= netstandard1.4) (< netstandard1.6)) (&& (>= net46) (< netstandard1.4)) (&& (>= net461) (< netstandard1.6)) (>= net463)
       System.Text.Encoding (>= 4.3) - restriction: && (< monoandroid) (< monotouch) (< net46) (>= netstandard1.6) (< xamarinios) (< xamarinmac) (< xamarintvos) (< xamarinwatchos)
-    System.Security.Cryptography.Cng (4.6) - restriction: || (&& (< monoandroid) (< monotouch) (< net45) (>= netstandard1.6) (< netstandard2.0) (< win8) (< wpa81) (< xamarintvos) (< xamarinwatchos)) (&& (< monoandroid) (< net45) (< netstandard1.4) (>= netstandard1.6) (< win8) (< wpa81)) (&& (< monoandroid) (< net45) (< netstandard1.5) (>= netstandard1.6) (< win8) (< wpa81)) (&& (< net45) (>= net46) (< netstandard1.4) (>= netstandard1.6)) (&& (< netstandard1.5) (>= netstandard1.6) (>= uap10.0) (< win8) (< wpa81))
+    System.Security.Cryptography.Cng (4.6.1) - restriction: || (&& (< monoandroid) (< monotouch) (< net45) (>= netstandard1.6) (< netstandard2.0) (< win8) (< wpa81) (< xamarintvos) (< xamarinwatchos)) (&& (< monoandroid) (< net45) (< netstandard1.4) (>= netstandard1.6) (< win8) (< wpa81)) (&& (< monoandroid) (< net45) (< netstandard1.5) (>= netstandard1.6) (< win8) (< wpa81)) (&& (< net45) (>= net46) (< netstandard1.4) (>= netstandard1.6)) (&& (< netstandard1.5) (>= netstandard1.6) (>= uap10.0) (< win8) (< wpa81))
       System.IO (>= 4.3) - restriction: || (&& (< monoandroid) (< monotouch) (< net46) (>= netstandard1.6) (< netstandard2.0) (< xamarintvos) (< xamarinwatchos)) (&& (< monoandroid) (< net46) (>= netstandard1.3) (< netstandard1.4)) (&& (< monoandroid) (< net46) (>= netstandard1.4) (< netstandard1.6) (< uap10.1))
       System.Resources.ResourceManager (>= 4.3) - restriction: || (&& (< monoandroid) (< monotouch) (< net46) (>= netstandard1.6) (< netstandard2.0) (< xamarintvos) (< xamarinwatchos)) (&& (< monoandroid) (< net46) (>= netstandard1.3) (< netstandard1.4)) (&& (< monoandroid) (< net46) (>= netstandard1.4) (< netstandard1.6) (< uap10.1))
       System.Runtime (>= 4.3) - restriction: || (&& (< monoandroid) (< monotouch) (< net46) (>= netstandard1.6) (< netstandard2.0) (< xamarintvos) (< xamarinwatchos)) (&& (< monoandroid) (< net46) (>= netstandard1.3) (< netstandard1.4)) (&& (< monoandroid) (< net46) (>= netstandard1.4) (< netstandard1.6) (< uap10.1))
@@ -1261,11 +1261,11 @@ GROUP Test
 RESTRICTION: == netcoreapp3.0
 NUGET
   remote: https://api.nuget.org/v3/index.json
-    Expecto (8.12)
+    Expecto (8.13)
       FSharp.Core (>= 4.3.4)
-      Mono.Cecil (>= 0.10.3)
-    Expecto.TestResults (8.12)
-      Expecto (>= 8.12)
+      Mono.Cecil (>= 0.11)
+    Expecto.TestResults (8.13)
+      Expecto (>= 8.13)
       FSharp.Core (>= 4.3.4)
     FSharp.Core (4.7)
     Mono.Cecil (0.11.1)
