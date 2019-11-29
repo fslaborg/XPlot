@@ -5,6 +5,27 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
+    <Compile Include="PlotBase/Trace.fs" />
+    <Compile Include="PlotBase/Font.fs" />
+    <Compile Include="PlotBase/Lighting.fs" />
+    <Compile Include="PlotBase/Rotation.fs" />
+    <Compile Include="PlotBase/ErrorX.fs" />
+    <Compile Include="PlotBase/ErrorY.fs" />
+    <Compile Include="PlotBase/ErrorZ.fs" />
+    <Compile Include="PlotBase/Project.fs" />
+    <Compile Include="PlotBase/X.fs" />
+    <Compile Include="PlotBase/Y.fs" />
+    <Compile Include="PlotBase/Z.fs" />
+    <Compile Include="PlotBase/Projection.fs" />
+    <Compile Include="PlotBase/Contours.fs" />
+    <Compile Include="PlotBase/Insidetextfont.fs" />
+    <Compile Include="PlotBase/Outsidetextfont.fs" />
+    <Compile Include="PlotBase/Domain.fs" />
+    <Compile Include="PlotBase/XBins.fs" />
+    <Compile Include="PlotBase/YBins.fs" />
+    <Compile Include="PlotBase/Textfont.fs" />
+    <Compile Include="PlotBase/Titlefont.fs" />
+    <Compile Include="PlotBase/Tickfont.fs" />
     <Compile Include="Graph.fs" />
     <Compile Include="Layout.fs" />
     <Compile Include="Main.fs" />
