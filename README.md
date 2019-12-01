@@ -1,4 +1,5 @@
-# XPlot [![Nuget Badge](https://buildstats.info/nuget/XPlot.Plotly)](https://www.nuget.org/packages/XPlot.Plotly/) [![Build Status](https://dev.azure.com/xplot/xplot/_apis/build/status/fslaborg.XPlot?branchName=master)](https://dev.azure.com/xplot/xplot/_build/latest?definitionId=1&branchName=master) [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v1.4%20adopted-ff69b4.svg)](code-of-conduct.md)
+# XPlot
+[![Nuget Badge](https://buildstats.info/nuget/XPlot.Plotly)](https://www.nuget.org/packages/XPlot.Plotly/) [![Build Status](https://dev.azure.com/xplot/xplot/_apis/build/status/fslaborg.XPlot?branchName=master)](https://dev.azure.com/xplot/xplot/_build/latest?definitionId=1&branchName=master) [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v1.4%20adopted-ff69b4.svg)](code-of-conduct.md)<a href="https://online.visualstudio.com/environments/new?name=🤘%20my-xplot&repo=fslaborg/xplot"><img src="https://img.shields.io/static/v1?style=flat-square&logo=microsoft&label=VS%20Online&message=Create&color=blue" alt="VS Online"></a>
 
 ![XPlot logo](misc/XPlot.png)
 
@@ -20,7 +21,19 @@ We pledge to be overt in our openness, welcoming all people to contribute, and p
 
 **No contribution is too small. We appreciate everything from spelling fixes to brand-new features.**
 
-Contributing is very easy. If you're on Unix, just run this from the command line:
+### Visual Studio Online quickstart
+
+If you'd like to use Visual Studio online, just click this button to create a new online environment:
+
+<a href="https://online.visualstudio.com/environments/new?name=🤘%20my-xplot&repo=fslaborg/xplot"><img src="https://img.shields.io/static/v1?style=flat-square&logo=microsoft&label=VS%20Online&message=Create&color=blue" alt="VS Online"></a>
+
+This will provision an environment with all necessary dependencies.
+
+### Local development
+
+To develop locally, first [download the latest .NET Core SDK](https://dotnet.microsoft.com/download).
+
+Then, if you're on Unix, just run this from the command line:
 
     .\build.sh
 
@@ -28,7 +41,7 @@ If you're on Windows, run this from the command line:
 
     .\build.cmd
 
-You can then open the project in any editing enviroment you prefer most.
+You can then open the project in the editing enviroment you prefer most. We recommend Visual Studio Code.
 
 ## Documentation
 
@@ -48,4 +61,4 @@ http://fslaborg.github.io/XPlot/
 
 ## Contact
 
-* Maintainers are [@zyzhu](http://github.com/zyzhu), [@cartermp](http://github.com/cartermp) and backup maintainer [@dsyme](http://github.com/dsyme) 
+* Maintainers are [@zyzhu](http://github.com/zyzhu), [@cartermp](http://github.com/cartermp) and backup maintainer [@dsyme](http://github.com/dsyme)
