@@ -168,8 +168,8 @@ module Html =
         """
 
     let jsTemplate =
-        """google.charts.setOnLoadCallback(drawChart);
-            function drawChart() {
+        """google.charts.setOnLoadCallback(drawChart_{GUID});
+            function drawChart_{GUID}() {
                 if ("{KEY}")
                     google.visualization.mapsApiKey = "{KEY}"
 

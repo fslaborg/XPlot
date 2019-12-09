@@ -23,17 +23,18 @@ module Html =
     let inlineTemplate =
         """<div id="[ID]" style="width: [WIDTH]px; height: [HEIGHT]px;"></div>
         <script>
-            var data = [DATA];
-            var layout = [LAYOUT];
-            Plotly.newPlot('[ID]', data, layout);
+            [PLOTTING]
         </script>"""
 
     let jsTemplate =
         """<script>
-            var data = [DATA];
-            var layout = [LAYOUT];
-            Plotly.newPlot('[ID]', data, layout);
-        </script>"""
+            [PLOTTING]
+        </script>"""   
+
+    let jsFunctionTemplate =
+        """var data = [DATA];
+           var layout = [LAYOUT];
+           Plotly.newPlot('[ID]', data, layout);"""  
     
     /// Display given html markup in default browser
     let showInBrowser html pageId=
@@ -76,42 +77,33 @@ type PlotlyChart() =
 
     /// Returns the chart's full HTML source.
     member __.GetHtml() =
-//        let tracesJson = serializeTraces __.labels __.traces
-//        let layoutJson =
-//            match __.layout with
-//            | None -> "\"\""
-//            | Some x -> JsonConvert.SerializeObject x
         let chartMarkup = __.GetInlineHtml()
-//            Html.inlineTemplate
-//                .Replace("[ID]", __.Id)
-//                .Replace("[WIDTH]", string __.Width)
-//                .Replace("[HEIGHT]", string __.Height)
-//                .Replace("[DATA]", tracesJson)
-//                .Replace("[LAYOUT]", layoutJson)
         Html.pageTemplate.Replace("[CHART]", chartMarkup)
 
     /// Inline markup that can be embedded in a HTML document.
     member __.GetInlineHtml() =
-        let tracesJson = serializeTraces __.labels __.traces
-        let layoutJson =
-            match __.layout with
-            | None -> "\"\""
-            | Some x -> JsonConvert.SerializeObject x
+        let plotting = __.GetPlottingJS()
         Html.inlineTemplate
             .Replace("[ID]", __.Id)
             .Replace("[WIDTH]", string __.Width)
             .Replace("[HEIGHT]", string __.Height)
-            .Replace("[DATA]", tracesJson)
-            .Replace("[LAYOUT]", layoutJson)
+            .Replace("[PLOTTING]", plotting)
 
     /// The chart's inline JavaScript code.
     member __.GetInlineJS() =
+        let plotting = __.GetPlottingJS()
+        Html.jsTemplate
+            .Replace("[ID]", __.Id)
+            .Replace("[PLOTTING]", plotting)
+    
+    /// The chart's plotting JavaScript code.
+    member __.GetPlottingJS() =
         let tracesJson = serializeTraces __.labels __.traces
         let layoutJson =
             match __.layout with
             | None -> "\"\""
             | Some x -> JsonConvert.SerializeObject x
-        Html.jsTemplate
+        Html.jsFunctionTemplate
             .Replace("[ID]", __.Id)
             .Replace("[DATA]", tracesJson)
             .Replace("[LAYOUT]", layoutJson)
@@ -132,20 +124,6 @@ type PlotlyChart() =
         __.labels <- Labels
 
     member __.Show() =
-//        let tracesJson = serializeTraces __.labels __.traces
-//        let layoutJson =
-//            match __.layout with
-//            | None -> "\"\""
-//            | Some x -> JsonConvert.SerializeObject x
-//        let html =
-//            let chartMarkup =
-//                Html.inlineTemplate
-//                    .Replace("[ID]", __.Id)
-//                    .Replace("[WIDTH]", string __.Width)
-//                    .Replace("[HEIGHT]", string __.Height)
-//                    .Replace("[DATA]", tracesJson)
-//                    .Replace("[LAYOUT]", layoutJson)
-//            Html.pageTemplate.Replace("[CHART]", chartMarkup)
         let html = __.GetHtml()
         Html.showInBrowser html __.Id        
 
