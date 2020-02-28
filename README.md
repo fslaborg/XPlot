@@ -25,7 +25,7 @@ We pledge to be overt in our openness, welcoming all people to contribute, and p
 
 If you'd like to use Visual Studio online, just click this button to create a new online environment:
 
-<a href="https://online.visualstudio.com/environments/new?name=🤘%20my-xplot&repo=fslaborg/xplot"><img src="https://img.shields.io/static/v1?style=flat-square&logo=microsoft&label=VS%20Online&message=Create&color=blue" alt="VS Online"></a>
+<a href="https://online.visualstudio.com/environments/new?name=my-xplot&repo=fslaborg/xplot"><img src="https://img.shields.io/static/v1?style=flat-square&logo=microsoft&label=VS%20Online&message=Create&color=blue" alt="VS Online"></a>
 
 This will provision an environment with all necessary dependencies.
 
