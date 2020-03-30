@@ -150,9 +150,13 @@ Target.create "PublishReleasePackages" (fun _ ->
 // Generate the documentation
 
 Target.create "GenerateDocs" (fun _ ->
-  let (exitCode, messages) = Fsi.exec (fun p -> { p with WorkingDirectory="docsrc/tools"; Define="RELEASE"; }) "generate.fsx" []
-  if exitCode = 0 then () else 
-    failwith (messages |> String.concat Environment.NewLine)
+    let result =
+        DotNet.exec
+            (fun p -> { p with WorkingDirectory = __SOURCE_DIRECTORY__ @@ "docsrc" @@ "tools" })
+            "fsi"
+            "--define:RELEASE --define:REFERENCE --define:HELP --exec generate.fsx"
+
+    if not result.OK then failwith "error generating docs"
 )
 
 // --------------------------------------------------------------------------------------
@@ -183,6 +187,7 @@ Target.create "CIBuild" ignore
 "Clean"
   ==> "AssemblyInfo"
   ==> "Build"
+  ==> "GenerateDocs"
   ==> "BuildDevPackages"
   ==> "DevBuild"
 
