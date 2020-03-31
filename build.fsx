@@ -34,7 +34,7 @@ open Fake.Tools
 let project = "XPlot"
 let summary = "Data visualization library for F#"
 let solutionFile  = "XPlot.sln"
-let configuration = "Release"
+let configuration = "release"
 let gitHome = "https://github.com/fslaborg"
 let gitName = project
 let devBuildSuffix = "-preview-" + BuildServer.buildVersion
@@ -95,7 +95,7 @@ let runTests assembly =
         })
 
 Target.create "RunPlotlyTests" (fun _ ->
-    runTests "tests/XPlot.Plotly.Tests/bin/Release/netcoreapp3.0/XPlot.Plotly.Tests.dll"
+    runTests "tests/XPlot.Plotly.Tests/bin/Release/netcoreapp3.1/XPlot.Plotly.Tests.dll"
 )
 
 // --------------------------------------------------------------------------------------
@@ -150,9 +150,13 @@ Target.create "PublishReleasePackages" (fun _ ->
 // Generate the documentation
 
 Target.create "GenerateDocs" (fun _ ->
-  let (exitCode, messages) = Fsi.exec (fun p -> { p with WorkingDirectory="docsrc/tools"; Define="RELEASE"; }) "generate.fsx" []
-  if exitCode = 0 then () else 
-    failwith (messages |> String.concat Environment.NewLine)
+    let result =
+        DotNet.exec
+            (fun p -> { p with WorkingDirectory = __SOURCE_DIRECTORY__ @@ "docsrc" @@ "tools" })
+            "fsi"
+            "--define:RELEASE --define:REFERENCE --define:HELP --exec generate.fsx"
+
+    if not result.OK then failwith "error generating docs"
 )
 
 // --------------------------------------------------------------------------------------
@@ -181,8 +185,10 @@ Target.create "DevBuild" ignore
 Target.create "CIBuild" ignore
 
 "Clean"
+  ==> "CleanDocs"
   ==> "AssemblyInfo"
   ==> "Build"
+  ==> "GenerateDocs"
   ==> "BuildDevPackages"
   ==> "DevBuild"
 
@@ -191,6 +197,7 @@ Target.create "CIBuild" ignore
   ==> "CIBuild"
 
 "Clean"
+  ==> "CleanDocs"
   ==> "AssemblyInfo"
   ==> "Build"
   ==> "BuildDevPackages"
@@ -198,6 +205,7 @@ Target.create "CIBuild" ignore
   ==> "PublishDevPackages"
 
 "Clean"
+  ==> "CleanDocs"
   ==> "AssemblyInfo"
   ==> "Build"
   ==> "BuildReleasePackages"
