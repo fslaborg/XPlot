@@ -97,8 +97,8 @@ let vitms = vectorStartItemCount, vectorEndItemCount
 
 /// Checks if the given directory exists. If not then this functions creates the directory.
 let ensureDirectory dir =
-  let di = new DirectoryInfo(dir)
-  if not di.Exists then di.Create()
+    let di = new DirectoryInfo(dir)
+    if not di.Exists then di.Create()
 
 /// Combine two paths
 let (@@) a b = Path.Combine(a, b)
@@ -109,11 +109,14 @@ let (@@) a b = Path.Combine(a, b)
 
 let mutable currentOutputKind = OutputKind.Html
 let InlineMultiformatBlock(html, latex) =
-  let block =
-    { new MarkdownEmbedParagraphs with
-        member x.Render() =
-          if currentOutputKind = OutputKind.Html then [ InlineBlock html ] else [ InlineBlock latex ] }
-  EmbedParagraphs(block, None)
+    let block =
+        { new MarkdownEmbedParagraphs with
+            member x.Render() =
+                if currentOutputKind = OutputKind.Html then
+                    [ InlineBlock html ]
+                else
+                    [ InlineBlock latex ] }
+    EmbedParagraphs(block, None)
 
 let MathDisplay(latex) = Span([ LatexDisplayMath latex ], None)
 
@@ -122,37 +125,21 @@ let createFsiEvaluator root output (floatFormat:string) =
 
   /// Counter for saving files
   let imageCounter = 
-    let count = ref 0
-    (fun () -> incr count; !count)
+      let mutable count = 0
+      fun () ->
+          count <- count + 1
+          count
 
   let transformation (value:obj, typ:System.Type) =
     match value with 
-    // | :? System.Drawing.Image as img ->
-    //     // Pretty print image - save the image to the "images" directory 
-    //     // and return a DirectImage reference to the appropriate location
-    //     let id = imageCounter().ToString()
-    //     let file = "chart" + id + ".png"
-    //     ensureDirectory (output @@ "images")
-    //     img.Save(output @@ "images" @@ file, System.Drawing.Imaging.ImageFormat.Png) 
-    //     Some [ Paragraph([DirectImage ("", root + "/images/" + file, None, None)], None) ]
-
     | :? GoogleCharts.GoogleChart as ch ->
         // Just return the inline HTML of a Google chart
         let ch = ch |> XPlot.GoogleCharts.Chart.WithSize(700, 400)
         Some [ InlineBlock (ch.GetInlineHtml(), None) ]
-
     | :? Plotly.PlotlyChart as chart ->
-        // Just return the inline HTML for a Plotly chart
-//        let name = 
-//          match fig.Layout with
-//          | Some ly -> ly.title
-//          | None -> sprintf "XPlot Generated Chart %d" (imageCounter())
-//        fig.Width <- 600
-//        fig.Height <- 300
-//        Some [ InlineBlock (fig.GetInlineHtml(name)) ]
         Some [ InlineBlock(chart.GetInlineHtml(), None) ]
-    | :? D3.ForceLayoutChart as chart -> Some [ InlineBlock(chart.GetHtml(), None) ]
-
+    | :? D3.ForceLayoutChart as chart ->
+      Some [ InlineBlock(chart.GetHtml(), None) ]
     | SeriesValues s ->
         // Pretty print series!
         let heads  = s |> mapSteps sitms fst (function Some k -> td (k.ToString()) | _ -> td " ... ")
@@ -161,30 +148,29 @@ let createFsiEvaluator root output (floatFormat:string) =
         [ InlineMultiformatBlock(("<div class=\"deedleseries\">", None), ("\\vspace{1em}", None))
           TableBlock(Some ((td "Keys")::heads), AlignDefault::aligns, [ (td "Values")::row ], None) 
           InlineMultiformatBlock(("</div>", None), ("\\vspace{1em}", None))] |> Some
-
     | :? IFrame as f ->
-      // Pretty print frame!
-      {new IFrameOperation<_> with
-        member x.Invoke(f) = 
-          let heads  = f.ColumnKeys |> mapSteps fcols id (function Some k -> td (k.ToString()) | _ -> td " ... ")
-          let aligns = f.ColumnKeys |> mapSteps fcols id (fun _ -> AlignDefault)
-          let rows = 
-            f.Rows |> Series.observationsAll |> mapSteps frows id (fun item ->
-              let def, k, data = 
-                match item with 
-                | Some(k, Some d) -> "N/A", k.ToString(), Series.observationsAll d |> Seq.map snd 
-                | Some(k, _) -> "N/A", k.ToString(), f.ColumnKeys |> Seq.map (fun _ -> None)
-                | None -> " ... ", " ... ", f.ColumnKeys |> Seq.map (fun _ -> None)
-              let row = data |> mapSteps fcols id (function Some v -> formatValue floatFormat def v | _ -> td " ... ")
-              (td k)::row )
-          [ 
-            InlineMultiformatBlock(("<div class=\"deedleframe\">", None),("\\vspace{1em}", None))
-            TableBlock(Some ([]::heads), AlignDefault::aligns, rows, None) 
-            InlineMultiformatBlock(("</div>", None), ("\\vspace{1em}", None))
-          ] |> Some }
-      |> f.Apply
-
-    | _ -> None 
+        // Pretty print frame!
+        { new IFrameOperation<_> with
+            member x.Invoke(f) = 
+                let heads  = f.ColumnKeys |> mapSteps fcols id (function Some k -> td (k.ToString()) | _ -> td " ... ")
+                let aligns = f.ColumnKeys |> mapSteps fcols id (fun _ -> AlignDefault)
+                let rows = 
+                  f.Rows |> Series.observationsAll |> mapSteps frows id (fun item ->
+                    let def, k, data = 
+                      match item with 
+                      | Some(k, Some d) -> "N/A", k.ToString(), Series.observationsAll d |> Seq.map snd 
+                      | Some(k, _) -> "N/A", k.ToString(), f.ColumnKeys |> Seq.map (fun _ -> None)
+                      | None -> " ... ", " ... ", f.ColumnKeys |> Seq.map (fun _ -> None)
+                    let row = data |> mapSteps fcols id (function Some v -> formatValue floatFormat def v | _ -> td " ... ")
+                    (td k)::row )
+                [ 
+                  InlineMultiformatBlock(("<div class=\"deedleframe\">", None),("\\vspace{1em}", None))
+                  TableBlock(Some ([]::heads), AlignDefault::aligns, rows, None) 
+                  InlineMultiformatBlock(("</div>", None), ("\\vspace{1em}", None))
+                ] |> Some }
+        |> f.Apply
+    | _ ->
+        None 
     
   // Create FSI evaluator, register transformations & return
   let fsiEvaluator = FsiEvaluator() 
