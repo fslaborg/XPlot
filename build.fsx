@@ -163,18 +163,41 @@ Target.create "GenerateDocs" (fun _ ->
 // Release Scripts
 
 Target.create "ReleaseDocs" (fun _ ->
-    Git.Repository.clone "" (gitHome + "/" + gitName + ".git") "temp/gh-pages"
-    Git.Branches.checkoutBranch "temp/gh-pages" "gh-pages"
-    Shell.copyRecursive "docs/output" "temp/gh-pages" true
-    |> printfn "%A"
+    let repoDir = "temp/gh-pages"
 
-    Git.CommandHelper.runSimpleGitCommand "temp/gh-pages" "add ."
+    let gitConfigEmail =
+        match Environment.environVarOrDefault "git-config-email" "" with
+        | s when not (String.IsNullOrWhiteSpace s) -> s
+        | _ -> failwith "git config email env var doesn't exist. Create a new one and set it up!"
+
+    let gitConfigUserName =
+        match Environment.environVarOrDefault "git-config-username" "" with
+        | s when not (String.IsNullOrWhiteSpace s) -> s
+        | _ -> failwith "git config username env var doesn't exist. Create a new one and set it up!"
+
+    Git.Repository.clone "" (gitHome + "/" + gitName + ".git") repoDir
+    Git.Branches.checkoutBranch repoDir "gh-pages"
+    Shell.copyRecursive "docs/output" repoDir true
+    |> printfn "%A"
+    
+    let gitConfigEmail = sprintf """config --global user.email "%s" """ gitConfigEmail
+    Git.CommandHelper.runSimpleGitCommand repoDir gitConfigEmail
     |> printfn "%s"
 
-    Git.CommandHelper.runSimpleGitCommand "temp/gh-pages" """commit -a -m "Update generated documentation"""
+    let gitConfigCommand = sprintf """config --global user.name "%s" """ gitConfigUserName
+    Git.CommandHelper.runSimpleGitCommand repoDir gitConfigCommand
+    |> printfn "%s"
+
+    Git.CommandHelper.runSimpleGitCommand repoDir "add ."
+    |> printfn "%s"
+
+    let msg =
+        """commit -a -m "Update generated documentation"
+        """
+    Git.CommandHelper.runSimpleGitCommand repoDir msg
     |> printfn "%s"
     
-    Git.Branches.push "temp/gh-pages"
+    Git.Branches.push repoDir
 )
 
 Target.create "Release" (fun _ ->

@@ -64,8 +64,6 @@ stages:
       - bash: ./build.sh target ReleaseDocs
         condition: eq( variables['Agent.OS'], 'Linux' )
         displayName: 'Linux build and test'
-
-## For publishing stuff, eventually
-#
-# env:
-#   mapped-gh-token: $(xplotpackages)
+        env:
+          git-config-email: $(git-config-email)
+          git-config-username: $(git-config-username)
