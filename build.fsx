@@ -165,10 +165,15 @@ Target.create "GenerateDocs" (fun _ ->
 Target.create "ReleaseDocs" (fun _ ->
     Git.Repository.clone "" (gitHome + "/" + gitName + ".git") "temp/gh-pages"
     Git.Branches.checkoutBranch "temp/gh-pages" "gh-pages"
-    Shell.copyRecursive "docs/output" "temp/gh-pages" true |> printfn "%A"
-    Git.CommandHelper.runSimpleGitCommand "temp/gh-pages" "add ." |> printfn "%s"
-    let cmd = sprintf """commit -a -m "Update generated documentation for version %s""" release.NugetVersion
-    Git.CommandHelper.runSimpleGitCommand "temp/gh-pages" cmd |> printfn "%s"
+    Shell.copyRecursive "docs/output" "temp/gh-pages" true
+    |> printfn "%A"
+
+    Git.CommandHelper.runSimpleGitCommand "temp/gh-pages" "add ."
+    |> printfn "%s"
+
+    Git.CommandHelper.runSimpleGitCommand "temp/gh-pages" """commit -a -m "Update generated documentation"""
+    |> printfn "%s"
+    
     Git.Branches.push "temp/gh-pages"
 )
 
@@ -188,13 +193,16 @@ Target.create "CIBuild" ignore
   ==> "CleanDocs"
   ==> "AssemblyInfo"
   ==> "Build"
-  ==> "GenerateDocs"
   ==> "BuildDevPackages"
   ==> "DevBuild"
 
 "DevBuild"
   ==> "RunPlotlyTests"
   ==> "CIBuild"
+
+"CIBuild"
+  ==> "GenerateDocs"
+  ==> "ReleaseDocs"
 
 "Clean"
   ==> "CleanDocs"

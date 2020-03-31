@@ -51,6 +51,7 @@ stages:
   dependsOn: BuildAndTest
   jobs:
     - job: Linux
+      displayName: 'Publish the docs'
       pool:
         vmImage: 'ubuntu-latest'
       steps:
@@ -60,9 +61,9 @@ stages:
           packageType: 'sdk'
           useGlobalJson: true
           installationPath: $(Agent.ToolsDirectory)/dotnet
-      - bash: echo "hello docs"
+      - bash: ./build.sh target ReleaseDocs
         condition: eq( variables['Agent.OS'], 'Linux' )
-        displayName: 'Publish docs'
+        displayName: 'Linux build and test'
 
 ## For publishing stuff, eventually
 #
