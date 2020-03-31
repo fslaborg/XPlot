@@ -1,38 +1,68 @@
-strategy:
-  matrix:
-    linux:
-      imageName: 'ubuntu-latest'
-    windows:
-      imageName: 'windows-latest'
-
 trigger:
 - master
-
-pool:
-  vmImage: $(imageName)
 
 variables:
   buildConfiguration: 'Release'
 
-steps:
-- task: UseDotNet@2
-  displayName: 'Install .NET Core SDK (based on global.json)'
-  inputs:
-    packageType: 'sdk'
-    useGlobalJson: true
-    installationPath: $(Agent.ToolsDirectory)/dotnet
-- bash: ./build.sh target CIBuild
-  condition: eq( variables['Agent.OS'], 'Linux' )
-  displayName: 'Linux build and test'
-- powershell: .\build.cmd target CIBuild
-  condition: eq( variables['Agent.OS'], 'Windows_NT' )
-  displayName: 'Windows build and test'
+stages:
+- stage: BuildAndTest
+  displayName: 'Build and Test'
+  jobs:
+    - job: Windows
+      pool:
+        vmImage: 'windows-latest'
+      steps:
+      - task: UseDotNet@2
+        displayName: 'Install .NET Core SDK (based on global.json)'
+        inputs:
+          packageType: 'sdk'
+          useGlobalJson: true
+          installationPath: $(Agent.ToolsDirectory)/dotnet
+      - powershell: .\build.cmd target CIBuild
+        condition: eq( variables['Agent.OS'], 'Windows_NT' )
+        displayName: 'Windows build and test'
+      - task: PublishTestResults@2
+        inputs:
+          testResultsFormat: 'NUnit'
+          testResultsFiles: 'testResults/TestResults-*.xml' 
+          mergeTestResults: true
 
-- task: PublishTestResults@2
-  inputs:
-    testResultsFormat: 'NUnit'
-    testResultsFiles: 'testResults/TestResults-*.xml' 
-    mergeTestResults: true
+    - job: Linux
+      pool:
+        vmImage: 'ubuntu-latest'
+      steps:
+      - task: UseDotNet@2
+        displayName: 'Install .NET Core SDK (based on global.json)'
+        inputs:
+          packageType: 'sdk'
+          useGlobalJson: true
+          installationPath: $(Agent.ToolsDirectory)/dotnet
+      - bash: ./build.sh target CIBuild
+        condition: eq( variables['Agent.OS'], 'Linux' )
+        displayName: 'Linux build and test'
+      - task: PublishTestResults@2
+        inputs:
+          testResultsFormat: 'NUnit'
+          testResultsFiles: 'testResults/TestResults-*.xml' 
+          mergeTestResults: true
+
+- stage: PublishDocs
+  displayName: 'Publish generated docs'
+  dependsOn: BuildAndTest
+  jobs:
+    - job: Linux
+      pool:
+        vmImage: 'ubuntu-latest'
+      steps:
+      - task: UseDotNet@2
+        displayName: 'Install .NET Core SDK (based on global.json)'
+        inputs:
+          packageType: 'sdk'
+          useGlobalJson: true
+          installationPath: $(Agent.ToolsDirectory)/dotnet
+      - bash: echo "hello docs"
+        condition: eq( variables['Agent.OS'], 'Linux' )
+        displayName: 'Publish docs'
 
 ## For publishing stuff, eventually
 #
