@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Line - XPlot</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="" />
+    <meta name="author" content="Taha Hachana; Tomas Petricek" />
+
+    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {
+            packages: ["corechart", "annotationchart", "calendar", "gauge", "geochart", "map", "sankey", "table", "timeline", "treemap"]
+        });
+    </script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://fslab.org/XPlot/content/style.css" />
+    <script type="text/javascript" src="https://fslab.org/XPlot/content/tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div class="container">
+        <div class="masthead">
+            <ul class="nav nav-pills pull-right">
+                <li>
+                    <a href="https://fslab.org"><img height="16" width="16" src="https://fslab.org/img/thumbs/fslab.png" /> FsLab</a>
+                </li>
+                <li>
+                    <a href="http://fsharp.github.io/FSharp.Data"><img height="16" width="16" src="https://fslab.org/img/thumbs/fsharpdata.png" /> F# Data</a>
+                </li>
+                <li>
+                    <a href="https://fslab.org/Deedle"><img height="16" width="16" src="https://fslab.org/img/thumbs/deedle.png" /> Deedle</a>
+                </li>
+                <li>
+                    <a href="https://fslab.org/RProvider"><img height="16" width="16" src="https://fslab.org/img/thumbs/rprovider.png" /> R Provider</a>
+                </li>
+                <li>
+                    <a href="http://numerics.mathdotnet.com/"><img height="16" width="16" src="https://fslab.org/img/thumbs/mathnet.png" /> Math.NET</a>
+                </li>
+            </ul>
+            <h3 class="muted"><a href="https://fslab.org/XPlot/">XPlot</a></h3>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="span9" id="main">
+                
+
+<h1>Line</h1>
+<p>
+
+    <span>Namespace: XPlot.Plotly</span><br />
+    </p>
+<div class="xmldoc">
+</div>
+  <h3>Constructors</h3>
+  <table class="table table-bordered member-list">
+    <thead>
+      <tr><td>Constructor</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '4279', 4279)" onmouseover="showTip(event, '4279', 4279)">
+            new()
+          </code>
+          <div class="tip" id="4279">
+            <strong>Signature:</strong> unit -&gt; Line<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Line.fs#L3-3" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+              <p>CompiledName: <code>.ctor</code></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <h3>Instance members</h3>
+  <table class="table table-bordered member-list">
+    <thead>
+      <tr><td>Instance member</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '4280', 4280)" onmouseover="showTip(event, '4280', 4280)">
+            x.autocolorscale()
+          </code>
+          <div class="tip" id="4280">
+            <strong>Signature:</strong> unit -&gt; bool<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Line.fs#L66-66" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Has only an effect if <code>marker.line.color</code> is set to a numerical array. Determines whether or not the colorscale is picked using the sign of values inside <code>marker.line.color</code>.</p>
+
+
+              <p>CompiledName: <code>set_autocolorscale</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '4281', 4281)" onmouseover="showTip(event, '4281', 4281)">
+            x.autocolorscale()
+          </code>
+          <div class="tip" id="4281">
+            <strong>Signature:</strong> unit -&gt; unit<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Line.fs#L66-66" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Has only an effect if <code>marker.line.color</code> is set to a numerical array. Determines whether or not the colorscale is picked using the sign of values inside <code>marker.line.color</code>.</p>
+
+
+              <p>CompiledName: <code>get_autocolorscale</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '4282', 4282)" onmouseover="showTip(event, '4282', 4282)">
+            x.cauto()
+          </code>
+          <div class="tip" id="4282">
+            <strong>Signature:</strong> unit -&gt; bool<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Line.fs#L51-51" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Has only an effect if <code>marker.line.color</code> is set to a numerical array. Determines the whether or not the color domain is computed with respect to the input data.</p>
+
+
+              <p>CompiledName: <code>set_cauto</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '4283', 4283)" onmouseover="showTip(event, '4283', 4283)">
+            x.cauto()
+          </code>
+          <div class="tip" id="4283">
+            <strong>Signature:</strong> unit -&gt; unit<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Line.fs#L51-51" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Has only an effect if <code>marker.line.color</code> is set to a numerical array. Determines the whether or not the color domain is computed with respect to the input data.</p>
+
+
+              <p>CompiledName: <code>get_cauto</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '4284', 4284)" onmouseover="showTip(event, '4284', 4284)">
+            x.cmax()
+          </code>
+          <div class="tip" id="4284">
+            <strong>Signature:</strong> unit -&gt; float<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Line.fs#L56-56" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Has only an effect if <code>marker.line.color</code> is set to a numerical array. Sets the upper bound of the color domain.</p>
+
+
+              <p>CompiledName: <code>set_cmax</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '4285', 4285)" onmouseover="showTip(event, '4285', 4285)">
+            x.cmax()
+          </code>
+          <div class="tip" id="4285">
+            <strong>Signature:</strong> unit -&gt; unit<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Line.fs#L56-56" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Has only an effect if <code>marker.line.color</code> is set to a numerical array. Sets the upper bound of the color domain.</p>
+
+
+              <p>CompiledName: <code>get_cmax</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '4286', 4286)" onmouseover="showTip(event, '4286', 4286)">
+            x.cmin()
+          </code>
+          <div class="tip" id="4286">
+            <strong>Signature:</strong> unit -&gt; float<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Line.fs#L61-61" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Has only an effect if <code>marker.line.color</code> is set to a numerical array. Sets the lower bound of the color domain.</p>
+
+
+              <p>CompiledName: <code>set_cmin</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '4287', 4287)" onmouseover="showTip(event, '4287', 4287)">
+            x.cmin()
+          </code>
+          <div class="tip" id="4287">
+            <strong>Signature:</strong> unit -&gt; unit<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Line.fs#L61-61" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Has only an effect if <code>marker.line.color</code> is set to a numerical array. Sets the lower bound of the color domain.</p>
+
+
+              <p>CompiledName: <code>get_cmin</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '4288', 4288)" onmouseover="showTip(event, '4288', 4288)">
+            x.color()
+          </code>
+          <div class="tip" id="4288">
+            <strong>Signature:</strong> unit -&gt; obj<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Line.fs#L21-21" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Sets the line color.</p>
+
+
+              <p>CompiledName: <code>set_color</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '4289', 4289)" onmouseover="showTip(event, '4289', 4289)">
+            x.color()
+          </code>
+          <div class="tip" id="4289">
+            <strong>Signature:</strong> unit -&gt; unit<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Line.fs#L21-21" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Sets the line color.</p>
+
+
+              <p>CompiledName: <code>get_color</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '4290', 4290)" onmouseover="showTip(event, '4290', 4290)">
+            x.colorscale()
+          </code>
+          <div class="tip" id="4290">
+            <strong>Signature:</strong> unit -&gt; obj<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Line.fs#L46-46" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Has only an effect if <code>marker.line.color</code> is set to a numerical array. Sets the colorscale.</p>
+
+
+              <p>CompiledName: <code>set_colorscale</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '4291', 4291)" onmouseover="showTip(event, '4291', 4291)">
+            x.colorscale()
+          </code>
+          <div class="tip" id="4291">
+            <strong>Signature:</strong> unit -&gt; unit<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Line.fs#L46-46" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Has only an effect if <code>marker.line.color</code> is set to a numerical array. Sets the colorscale.</p>
+
+
+              <p>CompiledName: <code>get_colorscale</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '4292', 4292)" onmouseover="showTip(event, '4292', 4292)">
+            x.colorsrc()
+          </code>
+          <div class="tip" id="4292">
+            <strong>Signature:</strong> unit -&gt; string<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Line.fs#L76-76" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Sets the source reference on plot.ly for  color .</p>
+
+
+              <p>CompiledName: <code>set_colorsrc</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '4293', 4293)" onmouseover="showTip(event, '4293', 4293)">
+            x.colorsrc()
+          </code>
+          <div class="tip" id="4293">
+            <strong>Signature:</strong> unit -&gt; unit<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Line.fs#L76-76" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Sets the source reference on plot.ly for  color .</p>
+
+
+              <p>CompiledName: <code>get_colorsrc</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '4294', 4294)" onmouseover="showTip(event, '4294', 4294)">
+            x.dash()
+          </code>
+          <div class="tip" id="4294">
+            <strong>Signature:</strong> unit -&gt; string<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Line.fs#L41-41" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Sets the style of the lines. Set to a dash string type or a dash length in px.</p>
+
+
+              <p>CompiledName: <code>set_dash</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '4295', 4295)" onmouseover="showTip(event, '4295', 4295)">
+            x.dash()
+          </code>
+          <div class="tip" id="4295">
+            <strong>Signature:</strong> unit -&gt; unit<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Line.fs#L41-41" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Sets the style of the lines. Set to a dash string type or a dash length in px.</p>
+
+
+              <p>CompiledName: <code>get_dash</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '4296', 4296)" onmouseover="showTip(event, '4296', 4296)">
+            x.outliercolor()
+          </code>
+          <div class="tip" id="4296">
+            <strong>Signature:</strong> unit -&gt; string<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Line.fs#L86-86" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Sets the border line color of the outlier sample points. Defaults to marker.color</p>
+
+
+              <p>CompiledName: <code>set_outliercolor</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '4297', 4297)" onmouseover="showTip(event, '4297', 4297)">
+            x.outliercolor()
+          </code>
+          <div class="tip" id="4297">
+            <strong>Signature:</strong> unit -&gt; unit<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Line.fs#L86-86" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Sets the border line color of the outlier sample points. Defaults to marker.color</p>
+
+
+              <p>CompiledName: <code>get_outliercolor</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '4298', 4298)" onmouseover="showTip(event, '4298', 4298)">
+            x.outlierwidth()
+          </code>
+          <div class="tip" id="4298">
+            <strong>Signature:</strong> unit -&gt; float<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Line.fs#L91-91" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Sets the border line width (in px) of the outlier sample points.</p>
+
+
+              <p>CompiledName: <code>set_outlierwidth</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '4299', 4299)" onmouseover="showTip(event, '4299', 4299)">
+            x.outlierwidth()
+          </code>
+          <div class="tip" id="4299">
+            <strong>Signature:</strong> unit -&gt; unit<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Line.fs#L91-91" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Sets the border line width (in px) of the outlier sample points.</p>
+
+
+              <p>CompiledName: <code>get_outlierwidth</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '4300', 4300)" onmouseover="showTip(event, '4300', 4300)">
+            x.reversescale()
+          </code>
+          <div class="tip" id="4300">
+            <strong>Signature:</strong> unit -&gt; bool<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Line.fs#L71-71" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Has only an effect if <code>marker.line.color</code> is set to a numerical array. Reverses the colorscale.</p>
+
+
+              <p>CompiledName: <code>set_reversescale</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '4301', 4301)" onmouseover="showTip(event, '4301', 4301)">
+            x.reversescale()
+          </code>
+          <div class="tip" id="4301">
+            <strong>Signature:</strong> unit -&gt; unit<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Line.fs#L71-71" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Has only an effect if <code>marker.line.color</code> is set to a numerical array. Reverses the colorscale.</p>
+
+
+              <p>CompiledName: <code>get_reversescale</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '4302', 4302)" onmouseover="showTip(event, '4302', 4302)">
+            x.shape()
+          </code>
+          <div class="tip" id="4302">
+            <strong>Signature:</strong> unit -&gt; obj<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Line.fs#L31-31" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Determines the line shape. With <em>spline</em> the lines are drawn using spline interpolation. The other available values correspond to step-wise line shapes.</p>
+
+
+              <p>CompiledName: <code>set_shape</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '4303', 4303)" onmouseover="showTip(event, '4303', 4303)">
+            x.shape()
+          </code>
+          <div class="tip" id="4303">
+            <strong>Signature:</strong> unit -&gt; unit<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Line.fs#L31-31" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Determines the line shape. With <em>spline</em> the lines are drawn using spline interpolation. The other available values correspond to step-wise line shapes.</p>
+
+
+              <p>CompiledName: <code>get_shape</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '4304', 4304)" onmouseover="showTip(event, '4304', 4304)">
+            x.ShouldSerializeautocolorscale()
+          </code>
+          <div class="tip" id="4304">
+            <strong>Signature:</strong> unit -&gt; bool<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Line.fs#L104-104" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '4305', 4305)" onmouseover="showTip(event, '4305', 4305)">
+            x.ShouldSerializecauto()
+          </code>
+          <div class="tip" id="4305">
+            <strong>Signature:</strong> unit -&gt; bool<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Line.fs#L101-101" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '4306', 4306)" onmouseover="showTip(event, '4306', 4306)">
+            x.ShouldSerializecmax()
+          </code>
+          <div class="tip" id="4306">
+            <strong>Signature:</strong> unit -&gt; bool<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Line.fs#L102-102" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '4307', 4307)" onmouseover="showTip(event, '4307', 4307)">
+            x.ShouldSerializecmin()
+          </code>
+          <div class="tip" id="4307">
+            <strong>Signature:</strong> unit -&gt; bool<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Line.fs#L103-103" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '4308', 4308)" onmouseover="showTip(event, '4308', 4308)">
+            x.ShouldSerializecolor()
+          </code>
+          <div class="tip" id="4308">
+            <strong>Signature:</strong> unit -&gt; bool<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Line.fs#L95-95" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '4309', 4309)" onmouseover="showTip(event, '4309', 4309)">
+            x.ShouldSerializecolorscale()
+          </code>
+          <div class="tip" id="4309">
+            <strong>Signature:</strong> unit -&gt; bool<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Line.fs#L100-100" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '4310', 4310)" onmouseover="showTip(event, '4310', 4310)">
+            x.ShouldSerializecolorsrc()
+          </code>
+          <div class="tip" id="4310">
+            <strong>Signature:</strong> unit -&gt; bool<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Line.fs#L106-106" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '4311', 4311)" onmouseover="showTip(event, '4311', 4311)">
+            x.ShouldSerializedash()
+          </code>
+          <div class="tip" id="4311">
+            <strong>Signature:</strong> unit -&gt; bool<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Line.fs#L99-99" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '4312', 4312)" onmouseover="showTip(event, '4312', 4312)">
+            x.ShouldSerializeoutliercolor()
+          </code>
+          <div class="tip" id="4312">
+            <strong>Signature:</strong> unit -&gt; bool<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Line.fs#L108-108" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '4313', 4313)" onmouseover="showTip(event, '4313', 4313)">
+            x.ShouldSerializeoutlierwidth()
+          </code>
+          <div class="tip" id="4313">
+            <strong>Signature:</strong> unit -&gt; bool<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Line.fs#L109-109" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '4314', 4314)" onmouseover="showTip(event, '4314', 4314)">
+            x.ShouldSerializereversescale()
+          </code>
+          <div class="tip" id="4314">
+            <strong>Signature:</strong> unit -&gt; bool<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Line.fs#L105-105" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '4315', 4315)" onmouseover="showTip(event, '4315', 4315)">
+            x.ShouldSerializeshape()
+          </code>
+          <div class="tip" id="4315">
+            <strong>Signature:</strong> unit -&gt; bool<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Line.fs#L97-97" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '4316', 4316)" onmouseover="showTip(event, '4316', 4316)">
+            x.ShouldSerializesmoothing()
+          </code>
+          <div class="tip" id="4316">
+            <strong>Signature:</strong> unit -&gt; bool<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Line.fs#L98-98" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '4317', 4317)" onmouseover="showTip(event, '4317', 4317)">
+            x.ShouldSerializewidth()
+          </code>
+          <div class="tip" id="4317">
+            <strong>Signature:</strong> unit -&gt; bool<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Line.fs#L96-96" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '4318', 4318)" onmouseover="showTip(event, '4318', 4318)">
+            x.ShouldSerializewidthsrc()
+          </code>
+          <div class="tip" id="4318">
+            <strong>Signature:</strong> unit -&gt; bool<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Line.fs#L107-107" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '4319', 4319)" onmouseover="showTip(event, '4319', 4319)">
+            x.smoothing()
+          </code>
+          <div class="tip" id="4319">
+            <strong>Signature:</strong> unit -&gt; float<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Line.fs#L36-36" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Has only an effect if <code>shape</code> is set to <em>spline</em> Sets the amount of smoothing. <em>0</em> corresponds to no smoothing (equivalent to a <em>linear</em> shape).</p>
+
+
+              <p>CompiledName: <code>set_smoothing</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '4320', 4320)" onmouseover="showTip(event, '4320', 4320)">
+            x.smoothing()
+          </code>
+          <div class="tip" id="4320">
+            <strong>Signature:</strong> unit -&gt; unit<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Line.fs#L36-36" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Has only an effect if <code>shape</code> is set to <em>spline</em> Sets the amount of smoothing. <em>0</em> corresponds to no smoothing (equivalent to a <em>linear</em> shape).</p>
+
+
+              <p>CompiledName: <code>get_smoothing</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '4321', 4321)" onmouseover="showTip(event, '4321', 4321)">
+            x.width()
+          </code>
+          <div class="tip" id="4321">
+            <strong>Signature:</strong> unit -&gt; obj<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Line.fs#L26-26" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Sets the line width (in px).</p>
+
+
+              <p>CompiledName: <code>set_width</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '4322', 4322)" onmouseover="showTip(event, '4322', 4322)">
+            x.width()
+          </code>
+          <div class="tip" id="4322">
+            <strong>Signature:</strong> unit -&gt; unit<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Line.fs#L26-26" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Sets the line width (in px).</p>
+
+
+              <p>CompiledName: <code>get_width</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '4323', 4323)" onmouseover="showTip(event, '4323', 4323)">
+            x.widthsrc()
+          </code>
+          <div class="tip" id="4323">
+            <strong>Signature:</strong> unit -&gt; string<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Line.fs#L81-81" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Sets the source reference on plot.ly for  width .</p>
+
+
+              <p>CompiledName: <code>set_widthsrc</code></p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+          <code onmouseout="hideTip(event, '4324', 4324)" onmouseover="showTip(event, '4324', 4324)">
+            x.widthsrc()
+          </code>
+          <div class="tip" id="4324">
+            <strong>Signature:</strong> unit -&gt; unit<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Line.fs#L81-81" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Sets the source reference on plot.ly for  width .</p>
+
+
+              <p>CompiledName: <code>get_widthsrc</code></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+            </div>
+            <div class="span3">
+                <img src="https://fslab.org/XPlot/img/logo.png" alt="F# Project" style="width:130px;margin:20px" />
+                <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
+                    <li class="nav-header">XPlot</li>
+                    <li><a href="https://fslab.org/XPlot/">Home page</a></li>
+                    <li><a href="https://fslab.org/XPlot/quickstart.html">Getting started</a></li>
+                    <li class="divider"></li>
+                    <li><a href="http://www.nuget.org/packages?q=XPlot">Get Library via NuGet</a></li>
+                    <li><a href="https://github.com/fslaborg/XPlot">Source Code on GitHub</a></li>
+                    <li><a href="https://fslab.org/XPlot/license.html">License (Apache 2.0)</a></li>
+                    <li><a href="https://fslab.org/XPlot/release-notes.html">Release Notes</a></li>
+
+                    <li class="nav-header"><a href="https://fslab.org/XPlot/google-charts.html">Google Charts</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-annotation-chart.html">Annotation</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-area-chart.html">Area</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-bar-chart.html">Bar</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-bubble-chart.html">Bubble</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-calendar-chart.html">Calendar</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-candlestick-chart.html">Candlestick</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-column-chart.html">Column</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-combo-chart.html">Combo</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-gauge-chart.html">Gauge</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-geo-chart.html">Geo</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-histogram-chart.html">Histogram</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-line-chart.html">Line</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-map-chart.html">Map</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-pie-chart.html">Pie</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-sankey-diagram.html">Sankey</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-scatter-chart.html">Scatter</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-stepped-area-chart.html">Stepped Area</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-timeline-chart.html">Timeline</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-table-chart.html">Table</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/google-treemap-chart.html">Treemap</a></li>
+
+                    <li class="nav-header"><a href="https://fslab.org/XPlot/plotly.html">Plotly</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/plotly-bar-charts.html">Bar</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/plotly-line-scatter-plots.html">Line and Scatter Plots</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/plotly-box-plots.html">Box Plots</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/plotly-bubble-charts.html">Bubble Charts</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/plotly-contour-plots.html">Contour Plots</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/plotly-area-plots.html">Area Plots</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/plotly-heatmaps.html">Heatmaps</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/plotly-histograms.html">Histograms</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/plotly-2d-histograms.html">2D Histograms</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/plotly-polar-charts.html">Polar Charts</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/plotly-time-series.html">Time Series</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/plotly-multiple-chart-types.html">Multiple Chart Types</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/plotly-log-plots.html">Log Plots</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/plotly-3d-scatter-plots.html">3D Scatter Plots</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/plotly-3d-surface-plots.html">3D Surface Plots</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/plotly-3d-line-plots.html">3D Line Plots</a></li>
+
+                    <li class="nav-header"><a href="https://fslab.org/XPlot/d3.html">D3 Charts</a></li>
+                    <li><a href="https://fslab.org/XPlot/chart/d3-network.html">Network</a></li>
+
+                    <li class="nav-header">Documentation</li>
+                    <li><a href="https://fslab.org/XPlot/reference/index.html">API Reference</a></li>
+                    <li class="divider"></li>
+
+                    <li><a href="https://fslab.org/XPlot/reference/xplot-googlecharts-chart.html">Google Chart Type</a></li>
+                    <li><a href="https://fslab.org/XPlot/reference/xplot-googlecharts-configuration-options.html">Google Option Type</a></li>
+                    <li><a href="https://fslab.org/XPlot/reference/xplot-googlecharts-configuration.html">Google Configuration Module</a></li>
+
+                    <li class="divider"></li>
+
+                    <li><a href="https://fslab.org/XPlot/reference/xplot-plotly-graph.html">Plotly Graph Module</a></li>
+                    <li><a href="https://fslab.org/XPlot/reference/xplot-plotly-layout-layout.html">Plotly Layout Type</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <a href="https://github.com/fslaborg/XPlot"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub" /></a>
+</body>
+</html>

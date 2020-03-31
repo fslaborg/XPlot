@@ -52,8 +52,7 @@
         <hr />
         <div class="row">
             <div class="span9" id="main">
-                
-<h1><a name="Your-First-XPlot-Chart" class="anchor" href="#Your-First-XPlot-Chart">Your First XPlot Chart</a></h1>
+                <h1><a name="Your-First-XPlot-Chart" class="anchor" href="#Your-First-XPlot-Chart">Your First XPlot Chart</a></h1>
 <p>In this tutorial we will walk through creating a chart in the browser,
 from an F# script running in <a href="https://code.visualstudio.com/">Visual Studio Code</a>.</p>
 <p>We assume that:</p>
@@ -73,7 +72,7 @@ and <a href="https://marketplace.visualstudio.com/items?itemName=Ionide.Ionide-p
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="id">source</span> <span class="id">https</span><span class="pn">:</span><span class="c">//www.nuget.org/api/v2</span>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="id">source</span> <span class="id">https</span><span class="pn">:</span><span class="c">//api.nuget.org/v3/index.json</span>
 <span class="id">nuget</span> <span class="id">XPlot</span><span class="pn">.</span><span class="id">GoogleCharts</span>
 </code></pre></td>
 </tr>
@@ -135,7 +134,7 @@ This installs the package in your folder. You will see two things:</p>
 <p>Notes</p>
 <ul>
 <li>
-in the path <code>#r "XPlot.GoogleCharts/lib/net45/</code>, make sure "net45" is right, 
+in the path <code>#r "XPlot.GoogleCharts/lib/netstandard2.0/</code>, make sure "net45" is right, 
 this is based on <code>paket.dependencies</code>, specifically the .NET 4.5 framework part (<code>framework:net45</code>).
 </li>
 <li>you will need an internet connection for the chart to render, as the code relies on Google-hosted services.</li>
