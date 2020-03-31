@@ -34,7 +34,7 @@ open Fake.Tools
 let project = "XPlot"
 let summary = "Data visualization library for F#"
 let solutionFile  = "XPlot.sln"
-let configuration = "Release"
+let configuration = "release"
 let gitHome = "https://github.com/fslaborg"
 let gitName = project
 let devBuildSuffix = "-preview-" + BuildServer.buildVersion
@@ -95,7 +95,7 @@ let runTests assembly =
         })
 
 Target.create "RunPlotlyTests" (fun _ ->
-    runTests "tests/XPlot.Plotly.Tests/bin/Release/netcoreapp3.0/XPlot.Plotly.Tests.dll"
+    runTests "tests/XPlot.Plotly.Tests/bin/Release/netcoreapp3.1/XPlot.Plotly.Tests.dll"
 )
 
 // --------------------------------------------------------------------------------------
@@ -185,6 +185,7 @@ Target.create "DevBuild" ignore
 Target.create "CIBuild" ignore
 
 "Clean"
+  ==> "CleanDocs"
   ==> "AssemblyInfo"
   ==> "Build"
   ==> "GenerateDocs"
@@ -196,6 +197,7 @@ Target.create "CIBuild" ignore
   ==> "CIBuild"
 
 "Clean"
+  ==> "CleanDocs"
   ==> "AssemblyInfo"
   ==> "Build"
   ==> "BuildDevPackages"
@@ -203,6 +205,7 @@ Target.create "CIBuild" ignore
   ==> "PublishDevPackages"
 
 "Clean"
+  ==> "CleanDocs"
   ==> "AssemblyInfo"
   ==> "Build"
   ==> "BuildReleasePackages"

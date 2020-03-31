@@ -1,23 +1,28 @@
 {
-	"name": "F# (.NET Core 3.0)",
+	"name": "F# (.NET Core 3.1)",
 	"dockerFile": "Dockerfile",
-	"settings": { 
+
+	// Set *default* container specific settings.json values on container create.
+	//
+	// .NET Core is now the default for F# in .NET Core 3.0+
+	// However, .NET Core scripting is not the default yet. Set that to true.
+	"settings": {
 		"terminal.integrated.shell.linux": "/bin/bash",
 		"FSharp.useSdkScripts":true
 	},
-	"postCreateCommand": "./build.sh",
 
-	// Use 'appPort' to create a container with published ports. If the port isn't working, be sure
-	// your server accepts connections from all interfaces (0.0.0.0 or '*'), not just localhost.
-	// "appPort": [],
-
-	// Uncomment the next line to use a non-root user. On Linux, this will prevent
-	// new files getting created as root, but you may need to update the USER_UID
-	// and USER_GID in .devcontainer/Dockerfile to match your user if not 1000.
-	// "runArgs": [ "-u", "vscode" ],
-
+	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"Ionide.Ionide-fsharp",
-		"ms-vscode.csharp"
+		"ms-dotnettools.csharp"
 	]
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "dotnet restore",
+
+	// Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
+	// "remoteUser": "vscode"
 }
