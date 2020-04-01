@@ -166,17 +166,24 @@ Target.create "ReleaseDocs" (fun _ ->
     let repoDir = "temp/gh-pages"
 
     let gitConfigEmail =
-        match Environment.environVarOrDefault "git-config-email" "" with
+        match Environment.environVarOrDefault "mapped-git-config-email" "" with
         | s when not (String.IsNullOrWhiteSpace s) -> s
         | _ -> failwith "git config email env var doesn't exist. Create a new one and set it up!"
 
     let gitConfigUserName =
-        match Environment.environVarOrDefault "git-config-username" "" with
+        match Environment.environVarOrDefault "mapped-git-config-username" "" with
         | s when not (String.IsNullOrWhiteSpace s) -> s
         | _ -> failwith "git config username env var doesn't exist. Create a new one and set it up!"
 
-    Git.Repository.clone "" (gitHome + "/" + gitName + ".git") repoDir
+    let gitPushToken =
+        match Environment.environVarOrDefault "mapped-github-docs" "" with
+        | s when not (String.IsNullOrWhiteSpace s) -> s
+        | _ -> failwith "github push token env var doesn't exist. Create a new one and set it up!"
+
+    let url = sprintf """https://%s@github.com/fslaborg/xplot.git""" gitPushToken
+    Git.Repository.clone String.Empty url repoDir
     Git.Branches.checkoutBranch repoDir "gh-pages"
+
     Shell.copyRecursive "docs/output" repoDir true
     |> printfn "%A"
     
@@ -191,9 +198,7 @@ Target.create "ReleaseDocs" (fun _ ->
     Git.CommandHelper.runSimpleGitCommand repoDir "add ."
     |> printfn "%s"
 
-    let msg =
-        """commit -a -m "Update generated documentation"
-        """
+    let msg = """commit -a -m "Update generated documentation" """
     Git.CommandHelper.runSimpleGitCommand repoDir msg
     |> printfn "%s"
     
