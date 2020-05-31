@@ -1,6 +1,5 @@
 ﻿namespace XPlot.Plotly
 
-open Graph
 open Newtonsoft.Json
 open System
 open System.IO
