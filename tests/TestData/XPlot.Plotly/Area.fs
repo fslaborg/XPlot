@@ -80,3 +80,33 @@ module PipeStyle =
             |> Chart.Area
         
         chart.GetInlineJS()
+
+module ChartStackedArea =
+    // stacked area
+    let trace1 =
+        Scatter(
+            x = ["2014"; "2015"; "2016"; "2017"; "2018"; "2019"; "2020"],
+            y = [0.0; 0.9; 0.9; 0.9; 3.7; 5.4; 5.7],
+            name = "M",
+            fill = "tonexty",
+            stackgroup = "one"
+        )
+
+    let trace2 =
+        Scatter(
+            x = ["2014"; "2015"; "2016"; "2017"; "2018"; "2019"; "2020"],
+            y = [0.0; 0.7; 2.3; 3.3; 4.3; 4.3; 6.0],
+            name = "W",
+            fill = "tonexty",
+            stackgroup = "one"
+        )
+
+    let layout = Layout(title = "Stacked Area")
+
+    let js =
+        let chart =
+            [trace1; trace2]
+            |> Chart.Plot
+            |> Chart.WithLayout layout
+
+        chart.GetInlineJS()
