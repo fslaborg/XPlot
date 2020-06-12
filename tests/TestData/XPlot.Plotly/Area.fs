@@ -101,7 +101,7 @@ module ChartStackedArea =
             stackgroup = "one"
         )
 
-    let layout = Layout(title = "Stacked Area")
+    let layout = Layout(title = "StackedArea")
 
     let js =
         let chart =
