@@ -38,6 +38,7 @@ type Scatter() =
     let mutable _textpositionsrc: string option = None
     let mutable _rsrc: string option = None
     let mutable _tsrc: string option = None
+    let mutable _stackgroup: string option = None
 
     member __.``type``
         with get () = Option.get _type
@@ -206,6 +207,10 @@ type Scatter() =
         with get () = Option.get _tsrc
         and set value = _tsrc <- Some value
 
+    member __.stackgroup
+        with get () = Option.get _stackgroup
+        and set value = _stackgroup <- Some value
+
     member __.ShouldSerializetype() = not _type.IsNone
     member __.ShouldSerializevisible() = not _visible.IsNone
     member __.ShouldSerializeshowlegend() = not _showlegend.IsNone
@@ -241,3 +246,4 @@ type Scatter() =
     member __.ShouldSerializetextpositionsrc() = not _textpositionsrc.IsNone
     member __.ShouldSerializersrc() = not _rsrc.IsNone
     member __.ShouldSerializetsrc() = not _tsrc.IsNone
+    member __.ShouldSerializestackgroup() = not _stackgroup.IsNone

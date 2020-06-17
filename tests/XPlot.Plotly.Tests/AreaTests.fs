@@ -49,4 +49,12 @@ let testArea =
 
             Expect.equal expectedJS actualJS "Y-values"
         }
+
+        test "Stacked area via stackgroup works correctly" {
+            let stackedArea = Path.Combine(baselineDir, "stacked-area.js")
+            let expectedJS = File.ReadAllText(stackedArea)
+            let actualJS = ChartStackedArea.js |> Helpers.cleanJS
+
+            Expect.equal expectedJS actualJS "ChartStackedArea"
+        }
     ]
