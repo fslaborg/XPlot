@@ -7,12 +7,15 @@ open System.Runtime.InteropServices
 
 module Html =    
 
+    /// https://cdn.plot.ly/plotly-latest.min.js
+    let [<Literal>] DefaultPlotlySrc = "https://cdn.plot.ly/plotly-latest.min.js"
+
     let pageTemplate =
         """<!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8" />
-        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <script src="[PLOTLYSRC]"></script>
     </head>
     <body>
         [CHART]
@@ -77,7 +80,9 @@ type PlotlyChart() =
     /// Returns the chart's full HTML source.
     member __.GetHtml() =
         let chartMarkup = __.GetInlineHtml()
-        Html.pageTemplate.Replace("[CHART]", chartMarkup)
+        Html.pageTemplate
+            .Replace("[PLOTLYSRC]", __.PlotlySrc)
+            .Replace("[CHART]", chartMarkup)
 
     /// Inline markup that can be embedded in a HTML document.
     member __.GetInlineHtml() =
@@ -125,6 +130,12 @@ type PlotlyChart() =
     member __.Show() =
         let html = __.GetHtml()
         Html.showInBrowser html __.Id        
+
+    /// The plotly.js src. Default is https://cdn.plot.ly/plotly-latest.min.js
+    member val PlotlySrc = Html.DefaultPlotlySrc with get, set
+
+    /// Sets the chart's plotly.js src. Default is https://cdn.plot.ly/plotly-latest.min.js
+    member __.WithPlotlySrc src = __.PlotlySrc <- src
 
     /// The width of the chart container element.
     member val Width = 900 with get, set
@@ -223,10 +234,21 @@ type Chart =
 
     /// Combine charts together and display as a single page in default browser
     static member ShowAll(charts:seq<PlotlyChart>)=
-        let html = charts |> Seq.map (fun c->c.GetInlineHtml()) |> Seq.reduce (+)
-        let pageHtml = Html.pageTemplate.Replace("[CHART]", html)
+        let html = charts |> Seq.map (fun c->c.GetInlineHtml()) |> Seq.reduce (+)        
+        let plotlysrc charts = 
+            match charts |> Seq.tryHead<PlotlyChart> with  
+            |Some s -> s.PlotlySrc 
+            |None -> Html.DefaultPlotlySrc              
+        let pageHtml = Html.pageTemplate
+                            .Replace("[PLOTLYSRC]", plotlysrc charts)
+                            .Replace("[CHART]", html)
         let combinedChartId = Guid.NewGuid().ToString()
         Html.showInBrowser pageHtml combinedChartId
+
+    /// Sets the chart's plotly.js src. Default is https://cdn.plot.ly/plotly-latest.min.js
+    static member WithPlotlySrc src (chart:PlotlyChart) =
+        chart.WithPlotlySrc src
+        chart
 
     /// Sets the chart's height.
     static member WithHeight height (chart:PlotlyChart) =
