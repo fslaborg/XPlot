@@ -236,8 +236,8 @@ type Chart =
         let html = charts |> Seq.map (fun c->c.GetInlineHtml()) |> Seq.reduce (+)
         let plotlysrc charts =
             match charts |> Seq.tryHead<PlotlyChart> with
-            |Some s -> s.PlotlySrc
-            |None -> Html.DefaultPlotlySrc
+            | Some s -> s.PlotlySrc
+            | None -> Html.DefaultPlotlySrc
         let pageHtml = Html.pageTemplate
                             .Replace("[PLOTLYSRC]", plotlysrc charts)
                             .Replace("[CHART]", html)
