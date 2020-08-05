@@ -1,23 +1,5 @@
-#r @"paket:
-nuget Fake.Core.Target
-nuget Fake.Core.Process
-nuget Fake.Core.ReleaseNotes
-nuget Fake.IO.FileSystem
-nuget Fake.DotNet.Cli
-nuget Fake.DotNet.MSBuild
-nuget Fake.DotNet.AssemblyInfoFile
-nuget Fake.DotNet.Paket
-nuget Fake.DotNet.FSFormatting
-nuget Fake.DotNet.Fsi
-nuget Fake.DotNet.NuGet
-nuget Fake.DotNet.Testing.Expecto
-nuget Fake.Tools.Git
-nuget Fake.Api.GitHub //"
-
-#if !FAKE
-#load "./.fake/build.fsx/intellisense.fsx"
-#r "netstandard" // Temp fix for https://github.com/dotnet/fsharp/issues/5216
-#endif
+#r "paket: groupref build //"
+#load ".fake/build.fsx/intellisense.fsx"
 
 open System
 open System.IO
@@ -37,7 +19,7 @@ let solutionFile  = "XPlot.sln"
 let configuration = "release"
 let gitHome = "https://github.com/fslaborg"
 let gitName = project
-let devBuildSuffix = "-preview-" + BuildServer.buildVersion
+let devBuildSuffix = BuildServer.buildVersion
 let pkgDir = "pkg"
 
 let release = ReleaseNotes.load "RELEASE_NOTES.md"
@@ -151,10 +133,8 @@ Target.create "PublishReleasePackages" (fun _ ->
 
 Target.create "GenerateDocs" (fun _ ->
     let result =
-        DotNet.exec
-            (fun p -> { p with WorkingDirectory = __SOURCE_DIRECTORY__ @@ "docsrc" @@ "tools" })
-            "fsi"
-            "--define:RELEASE --define:REFERENCE --define:HELP --exec generate.fsx"
+        Shell.cleanDir ".fsdocs"
+        DotNet.exec id "fsdocs" "build --clean"
 
     if not result.OK then failwith "error generating docs"
 )
