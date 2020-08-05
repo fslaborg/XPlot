@@ -3,15 +3,21 @@
   "isRoot": true,
   "tools": {
     "fake-cli": {
-      "version": "5.18.3",
+      "version": "5.20.2",
       "commands": [
         "fake"
       ]
     },
     "paket": {
-      "version": "5.236.6",
+      "version": "5.249.0",
       "commands": [
         "paket"
+      ]
+    },
+    "FSharp.Formatting.CommandTool": {
+      "version":"7.1.6",
+      "commands":[
+        "fsdocs"
       ]
     }
   }

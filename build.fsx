@@ -151,10 +151,8 @@ Target.create "PublishReleasePackages" (fun _ ->
 
 Target.create "GenerateDocs" (fun _ ->
     let result =
-        DotNet.exec
-            (fun p -> { p with WorkingDirectory = __SOURCE_DIRECTORY__ @@ "docsrc" @@ "tools" })
-            "fsi"
-            "--define:RELEASE --define:REFERENCE --define:HELP --exec generate.fsx"
+        Shell.cleanDir ".fsdocs"
+        DotNet.exec id "fsdocs" "build --clean"
 
     if not result.OK then failwith "error generating docs"
 )

@@ -1,14 +1,6 @@
 ﻿(**
 XPlot - Google Charts Support
 =============================
-NuGet
------
-
-It's recommended to get XPlot as part of [FsLab](http://www.fslab.org/). FsLab takes care
-of installing and referencing the necessary packages and adds an FSI printer that shows the charts
-you'll create in a browser window.
-
-Alternatively, the <code>XPlot.GoogleCharts</code> package is available on NuGet.
 
 Chart Gallery
 -------------
