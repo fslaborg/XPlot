@@ -11,7 +11,7 @@ Click this button to launch a Binder instance, where you can get plotting intera
 
 The `fsharp/Docs/Plotting with Xplot` and `csharp/Docs/Plotting with Xplot` notebooks show many ways you can plot data.
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/dotnet/interactive/master?urlpath=lab)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/dotnet/interactive/main?urlpath=lab)
 
 ## Contributing
 
