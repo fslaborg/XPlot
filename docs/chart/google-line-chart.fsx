@@ -73,3 +73,32 @@ create `Options` object to specify the title, smooth curve and also the legend o
 Then we call `Chart.Line` followed by `Chart.WithOptions` and also `Chart.WithLabels` to 
 provide labels for the two series.
 *)
+
+
+(*
+Create a line chart with two different Y-axes (the example above has two lines plotted by only a single Y-axis).
+Plot values of different data types
+Based off of this sample: https://developers.google.com/chart/interactive/docs/gallery/linechart#dual-y-charts
+*)
+open System
+
+//Make up some fake data. Two sets of values for the same sequence of dates
+let values1 = [1..7]
+let values2 = [20.1..10.3..90.0] //using floats here to demonstrate that we can use a different data type on the second Y axis
+let dates = [ for i in [6.0..(-1.0)..0.0] -> DateTime.Today.AddDays(-i) ]
+
+let first = Deedle.Series(dates, values1)
+let second = Deedle.Series(dates, values2)
+
+let df = Deedle.Frame(["IntVals"; "FloatVals"], [first; second])
+
+let dfOptions =
+  Options
+    ( title = "Value 1 & Value 2 by Date",
+      legend = Legend(position = "bottom") ,
+      series = [|Series("IntVals", targetAxisIndex = 0); Series("FloatVals", targetAxisIndex = 1)|],
+      vAxes = [|Axis(title = "Foo"); Axis(title = "Bar")|])
+
+df 
+|> Chart.Line
+|> Chart.WithOptions dfOptions
