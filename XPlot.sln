@@ -97,6 +97,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{E496D57B
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "XPlot.Plotly.Tests", "tests\XPlot.Plotly.Tests\XPlot.Plotly.Tests.fsproj", "{55A86A1D-0845-45FE-8AB8-88226CCAD4FF}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{493A4548-3241-4967-83FD-6B4371EFE677}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "XPlot.Plotly.InteractiveExtension", "src\XPlot.Plotly.InteractiveExtension\XPlot.Plotly.InteractiveExtension.fsproj", "{033E06DB-9831-4702-AD7F-188848319743}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -127,6 +131,10 @@ Global
 		{55A86A1D-0845-45FE-8AB8-88226CCAD4FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55A86A1D-0845-45FE-8AB8-88226CCAD4FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{55A86A1D-0845-45FE-8AB8-88226CCAD4FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{033E06DB-9831-4702-AD7F-188848319743}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{033E06DB-9831-4702-AD7F-188848319743}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{033E06DB-9831-4702-AD7F-188848319743}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{033E06DB-9831-4702-AD7F-188848319743}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -137,6 +145,7 @@ Global
 		{1F19571C-5074-44FC-973B-3E93E9FF531B} = {8E6D5255-776D-4B61-85F9-73C37AA1FB9A}
 		{96EA8D03-DF03-4F6F-B11F-C44457AA1F24} = {2FEE29BC-56F6-4189-BF78-F6E0462AC116}
 		{55A86A1D-0845-45FE-8AB8-88226CCAD4FF} = {E496D57B-837B-477C-8688-BC861C34DEBB}
+		{033E06DB-9831-4702-AD7F-188848319743} = {493A4548-3241-4967-83FD-6B4371EFE677}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {63675CE2-3907-4F15-9CB8-7D2494ECAA7B}

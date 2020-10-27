@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <PackageId>XPlot.Plotly</PackageId>
+    <IsPackable>true</IsPackable>
+    <PackageVersion>3.1.0-beta1</PackageVersion>
+    <PackageLicense></PackageLicense>
+    <RepositoryType>git</RepositoryType>
+    <PackageProjectUrl>https://fslab.org/XPlot/</PackageProjectUrl>
+    <RepositoryUrl>http://github.com/fsprojects/FSharp.TypeProviders.SDK</RepositoryUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\XPlot.Plotly\XPlot.Plotly.fsproj">
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\XPlot.Plotly.InteractiveExtension\XPlot.Plotly.InteractiveExtension.fsproj">
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None
+      Include="../XPlot.Plotly/bin/$(Configuration)/netstandard2.0/*.dll"
+      Pack="true"
+      PackagePath="lib/netstandard2.0" />
+    <None
+      Include="../XPlot.Plotly.InteractiveExtension/bin/$(Configuration)/$(TargetFramework)/XPlot.Plotly.InteractiveExtension.dll"
+      Pack="true"
+      PackagePath="interactive-extensions/dotnet" />
+  </ItemGroup>
+</Project>
