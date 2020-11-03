@@ -6,6 +6,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="KernelExtension.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Giraffe.ViewEngine" Version="1.2.0" />
+    <PackageReference Include="Microsoft.DotNet.Interactive" Version="1.0.0-beta.20522.4" />
+    <PackageReference Include="Microsoft.Dotnet.Interactive.http" Version="1.0.0-beta.20522.4"/>
+    <PackageReference Update="FSharp.Core" Version="4.7.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\XPlot.Plotly\XPlot.Plotly.fsproj" />
   </ItemGroup>
 </Project>
