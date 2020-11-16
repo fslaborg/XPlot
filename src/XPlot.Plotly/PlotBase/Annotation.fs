@@ -16,7 +16,9 @@ type Annotation() =
     let mutable _arrowhead: int option = None
     let mutable _arrowsize: float option = None
     let mutable _arrowwidth: float option = None
+    let mutable _axref: _ option = None
     let mutable _ax: float option = None
+    let mutable _ayref: _ option = None
     let mutable _ay: float option = None
     let mutable _xref: _ option = None
     let mutable _x: _ option = None
@@ -94,10 +96,20 @@ type Annotation() =
         with get () = Option.get _arrowwidth
         and set value = _arrowwidth <- Some value
 
+    /// Sets the annotation's ax coordinate axis. If set to an x axis id (e.g. *x* or *x2*), the `ax` position refers to an x coordinate If set to *paper*, the `ax` position refers to the distance from the left side of the plotting area in normalized coordinates where 0 (1) corresponds to the left (right) side.
+    member __.axref
+        with get () = Option.get _axref
+        and set value = _axref <- Some value
+
     /// Sets the x component of the arrow tail about the arrow head. A positive (negative) component corresponds to an arrow pointing from right to left (left to right)
     member __.ax
         with get () = Option.get _ax
         and set value = _ax <- Some value
+
+    /// Sets the annotation's ay coordinate axis. If set to an y axis id (e.g. *y* or *y2*), the `ay` position refers to an y coordinate If set to *paper*, the `ay` position refers to the distance from the bottom of the plotting area in normalized coordinates where 0 (1) corresponds to the bottom (top).
+    member __.ayref
+        with get () = Option.get _ayref
+        and set value = _ayref <- Some value
 
     /// Sets the y component of the arrow tail about the arrow head. A positive (negative) component corresponds to an arrow pointing from bottom to top (top to bottom)
     member __.ay
@@ -148,7 +160,9 @@ type Annotation() =
     member __.ShouldSerializearrowhead() = not _arrowhead.IsNone
     member __.ShouldSerializearrowsize() = not _arrowsize.IsNone
     member __.ShouldSerializearrowwidth() = not _arrowwidth.IsNone
+    member __.ShouldSerializeaxref() = not _axref.IsNone
     member __.ShouldSerializeax() = not _ax.IsNone
+    member __.ShouldSerializeayref() = not _ayref.IsNone
     member __.ShouldSerializeay() = not _ay.IsNone
     member __.ShouldSerializexref() = not _xref.IsNone
     member __.ShouldSerializex() = not _x.IsNone
