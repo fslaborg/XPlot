@@ -13,7 +13,7 @@ type NewPlotlyChartCommand() as this =
     let mutable traces: List<'Traces> = null
 
     [<Parameter(Mandatory = true, Position = 0, ValueFromPipeline = true)>]
-    member val Trace = Unchecked.defaultof<Trace[]> with get, set
+    member val Trace:Trace[] = Unchecked.defaultof<Trace[]> with get, set
 
     [<Parameter(Position = 1)>]
     member val Title = "" with get, set
