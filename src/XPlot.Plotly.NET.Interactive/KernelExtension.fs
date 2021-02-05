@@ -13,10 +13,7 @@ open XPlot.Plotly
 
 open System.Management.Automation
 
-
 open Microsoft.DotNet.Interactive.PowerShell
-open Microsoft.PowerShell
-open Microsoft.PowerShell.Commands
 
 open Giraffe.ViewEngine
 
