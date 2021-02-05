@@ -28,6 +28,9 @@ type NewPlotlyChartCommand() as this =
         traces.AddRange(this.Trace)
 
     override _.EndProcessing() =
+        let nullCheck03 x = match x with null -> true | _ -> false
         let chart = Chart.Plot(traces)
         chart.WithTitle(this.Title)
-        
+        if this.Layout <> Unchecked.defaultof<Layout.Layout> then 
+            chart.WithLayout(this.Layout)
+        this.WriteObject(chart)
