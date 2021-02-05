@@ -1,4 +1,4 @@
-﻿namespace XPlot.Plotly.NET.Interactive
+﻿namespace XPlot.Plotly.Interactive
 
 open System
 open System.Text

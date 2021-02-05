@@ -1,4 +1,4 @@
-﻿namespace XPlot.Plotly.NET.Interactive
+﻿namespace XPlot.Plotly.Interactive
 
 open Microsoft.DotNet.Interactive
 open System.Runtime.CompilerServices

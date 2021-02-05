@@ -1,4 +1,4 @@
-﻿namespace XPlot.Plotly.NET.Interactive.PowerShell.Commands
+﻿namespace XPlot.Plotly.Interactive.PowerShell.Commands
 
 open System.Collections.Generic
 open XPlot.Plotly
