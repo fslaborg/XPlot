@@ -36,7 +36,7 @@ var renderPlotly = function() {
         newScript.ToString()
 
     let getHtml (chart: PlotlyChart) =
-        let styleStr = sprintf "width: %dpx; height: %dpx;" chart.Width chart.Height
+        let styleStr = $"width: {chart.Width}px; height: {chart.Height}px;"
         let divElem =
             div [_style styleStr; _id chart.Id] [] |> RenderView.AsString.htmlDocument
 
@@ -49,30 +49,38 @@ var renderPlotly = function() {
                 writer.Write(getHtml chart)),
             HtmlFormatter.MimeType)
 
-    let registerAccelerators () = 
+    let registerPowerShellAccelerators () =
         // Register type accelerators for Plotly.
         let accelerator = typeof<PSObject>.Assembly.GetType("System.Management.Automation.TypeAccelerators")
         let addAccelerator = accelerator.GetMethod("Add", [| typeof<string>; typeof<Type> |])
         let traces =  typeof<Trace>.Assembly.GetTypes() |> Array.filter (fun (t:Type) -> typeof<Trace>.IsAssignableFrom(t))  
         for trace in traces do
-            addAccelerator.Invoke(null, [| $"Graph.{trace.Name}", trace |]) |>ignore
-
+            addAccelerator.Invoke(null, [|$"Graph.{trace.Name}"; trace |]) |>ignore
+           
         // Add accelerators that exist in other namespaces.
-        addAccelerator.Invoke(null, [| "Layout", typeof<Layout.Layout> |]) |>ignore
-        addAccelerator.Invoke(null, [| "Chart", typeof<Chart> |]) |>ignore
+        addAccelerator.Invoke(null, [| "Layout"; typeof<Layout.Layout> |]) |>ignore
+        addAccelerator.Invoke(null, [| "Chart"; typeof<Chart> |]) |>ignore
 
-    let registerModule () = 
-        ignore
+    let registerPowerShellModule () = 
+        ()
+        
 
     let configurePowerShellKernel () = 
-        registerAccelerators()
-        //registerModule() |> ignore
+        KernelInvocationContext.Current.Display("Configuring PowerShell Kernel for XPlot.Plotly integration.","text/markdown") |> ignore
+        registerPowerShellAccelerators()
+        registerPowerShellModule()
               
 
     interface IKernelExtension with
-        member _.OnLoadAsync _ =
+        member _.OnLoadAsync kernel =
             registerPlotlyFormatters()
-            //configurePowerShellKernel()
+            let visitKernels (subKernel: Kernel) =
+                match subKernel with
+                | :? PowerShellKernel -> configurePowerShellKernel()
+                | _ -> kernel |> ignore
+
+            kernel.VisitSubkernelsAndSelf(Action<Kernel>(visitKernels),true)         
+            KernelInvocationContext.Current.Display("Installed support for XPlot.Plotly.","text/markdown") |> ignore
             Task.CompletedTask 
             
 
