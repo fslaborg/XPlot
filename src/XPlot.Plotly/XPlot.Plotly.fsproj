@@ -1,7 +1,16 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <OutputType>Library</OutputType>
+    <PackageId>XPlot.Plotly</PackageId>
+    <IsPackable>true</IsPackable>
+    <PackageVersion>3.1.0-beta-4</PackageVersion>
+    <PackageLicense>
+    </PackageLicense>
+    <RepositoryType>git</RepositoryType>
+    <PackageProjectUrl>https://fslab.org/XPlot/</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/fslaborg/XPlot</RepositoryUrl>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />

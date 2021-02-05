@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+    <PackageId>XPlot.Plotly.NET.Interactive</PackageId>
+    <IsPackable>true</IsPackable>
+    <PackageVersion>3.1.0-beta-4</PackageVersion>
+    <PackageLicense></PackageLicense>
+    <RepositoryType>git</RepositoryType>
+    <PackageProjectUrl>https://fslab.org/XPlot/</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/fslaborg/XPlot</RepositoryUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="KernelExtension.fs" />
+    <Compile Include="XPlotExtensions.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Giraffe.ViewEngine" Version="1.2.0" />
+    <PackageReference Include="Microsoft.DotNet.Interactive" Version="1.0.0-beta.21103.1" />
+    <PackageReference Include="Microsoft.DotNet.Interactive.PowerShell" Version="1.0.0-beta.21103.1" />
+    <PackageReference Include="Microsoft.Dotnet.Interactive.http" Version="1.0.0-beta.21103.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="$(OutputPath)/XPlot.Plotly.NET.Interactive.dll" Pack="true" PackagePath="interactive-extensions/dotnet" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\XPlot.Plotly\XPlot.Plotly.fsproj" />
+  </ItemGroup>
+
+</Project>
