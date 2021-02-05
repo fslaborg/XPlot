@@ -11,6 +11,9 @@ open Microsoft.DotNet.Interactive.Formatting
 open Microsoft.DotNet.Interactive.Http
 open XPlot.Plotly
 
+open System.Management.Automation
+
+
 open Microsoft.DotNet.Interactive.PowerShell
 open Microsoft.PowerShell
 open Microsoft.PowerShell.Commands
@@ -47,22 +50,30 @@ var renderPlotly = function() {
             HtmlFormatter.MimeType)
 
     let registerAccelerators () = 
-        ignore
+        // Register type accelerators for Plotly.
+        let accelerator = typeof<PSObject>.Assembly.GetType("System.Management.Automation.TypeAccelerators")
+        let addAccelerator = accelerator.GetMethod("Add", [| typeof<string>; typeof<Type> |])
+        let traces =  typeof<Trace>.Assembly.GetTypes() |> Array.filter (fun (t:Type) -> typeof<Trace>.IsAssignableFrom(t))  
+        for trace in traces do
+            addAccelerator.Invoke(null, [| $"Graph.{trace.Name}", trace |]) |>ignore
+
+        // Add accelerators that exist in other namespaces.
+        addAccelerator.Invoke(null, [| "Layout", typeof<Layout.Layout> |]) |>ignore
+        addAccelerator.Invoke(null, [| "Chart", typeof<Chart> |]) |>ignore
 
     let registerModule () = 
         ignore
 
-    let configurePowerShellLernel () = 
-        registerAccelerators() |> ignore
-        registerModule() |> ignore
-        Task.CompletedTask        
+    let configurePowerShellKernel () = 
+        registerAccelerators()
+        //registerModule() |> ignore
+              
 
     interface IKernelExtension with
-        member _.OnLoadAsync (kernel: Kernel) =
+        member _.OnLoadAsync _ =
             registerPlotlyFormatters()
-            match kernel with
-            | :? PowerShellKernel as _powerShellKernel -> configurePowerShellLernel()
-            | _ -> Task.CompletedTask
+            //configurePowerShellKernel()
+            Task.CompletedTask 
             
 
     
