@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+    <PackageId>XPlot.Plotly.Interactive</PackageId>
+    <IsPackable>true</IsPackable>
+    <PackageVersion>3.0.1</PackageVersion>
+    <PackageLicense></PackageLicense>
+    <RepositoryType>git</RepositoryType>
+    <PackageProjectUrl>https://fslab.org/XPlot/</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/fslaborg/XPlot</RepositoryUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="NewPlotlyChartCommand .fs" />
+    <Compile Include="KernelExtension.fs" />
+    <Compile Include="XPlotExtensions.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Giraffe.ViewEngine" Version="1.2.0" />
+    <PackageReference Include="XPlot.Plotly" Version="3.0.1" />
+    <PackageReference Include="Microsoft.DotNet.Interactive" Version="1.0.0-beta.21103.1" />
+    <PackageReference Include="Microsoft.DotNet.Interactive.PowerShell" Version="1.0.0-beta.21103.1" />
+    <PackageReference Include="Microsoft.Dotnet.Interactive.http" Version="1.0.0-beta.21103.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Modules\**" Link="Modules\%(RecursiveDir)%(FileName)%(Extension)" PackagePath="contentFiles/any/any/Modules" PackageCopyToOutput="true" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="$(MSBuildThisFileDirectory)Modules\**" Link="Modules\%(RecursiveDir)%(FileName)%(Extension)" PackagePath="interactive-extensions/dotnet/Modules" PackageCopyToOutput="true" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="$(OutputPath)/XPlot.Plotly.Interactive.dll" Pack="true" PackagePath="interactive-extensions/dotnet" />
+  </ItemGroup>
+
+</Project>

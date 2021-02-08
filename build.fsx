@@ -77,7 +77,7 @@ let runTests assembly =
         })
 
 Target.create "RunPlotlyTests" (fun _ ->
-    runTests "tests/XPlot.Plotly.Tests/bin/Release/netcoreapp3.1/XPlot.Plotly.Tests.dll"
+    runTests "tests/XPlot.Plotly.Tests/bin/Release/net5.0/XPlot.Plotly.Tests.dll"
 )
 
 // --------------------------------------------------------------------------------------
