@@ -5,7 +5,7 @@
     <TargetFramework>net5.0</TargetFramework>
     <PackageId>XPlot.Plotly.Interactive</PackageId>
     <IsPackable>true</IsPackable>
-    <PackageVersion>3.0.1-beta-9</PackageVersion>
+    <PackageVersion>3.0.1-beta-12</PackageVersion>
     <PackageLicense></PackageLicense>
     <RepositoryType>git</RepositoryType>
     <PackageProjectUrl>https://fslab.org/XPlot/</PackageProjectUrl>
@@ -28,6 +28,7 @@
 
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)Modules\**" Link="Modules\%(RecursiveDir)%(FileName)%(Extension)" PackagePath="contentFiles/any/any/Modules" PackageCopyToOutput="true" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="$(MSBuildThisFileDirectory)Modules\**" Link="Modules\%(RecursiveDir)%(FileName)%(Extension)" PackagePath="interactive-extensions/dotnet/Modules" PackageCopyToOutput="true" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
   <ItemGroup>
