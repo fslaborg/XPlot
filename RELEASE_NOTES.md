@@ -1,3 +1,8 @@
+### 4.0.0
+
+- Breaking change: C# consumers now have all chart types in scope. No need to prefix charts with `Chart` anymore.
+- Unify versioning with [XPlot.Plotly.Interactive](https://www.nuget.org/packages/XPlot.Plotly.Interactive/)
+
 ### 3.1.0-preview1
 * Include basic XPlot.D3 chart and package
 

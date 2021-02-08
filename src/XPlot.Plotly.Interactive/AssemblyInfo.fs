@@ -2,7 +2,7 @@
 namespace System
 open System.Reflection
 
-[<assembly: AssemblyTitleAttribute("XPlot.GoogleCharts")>]
+[<assembly: AssemblyTitleAttribute("XPlot.Plotly.Interactive")>]
 [<assembly: AssemblyProductAttribute("XPlot")>]
 [<assembly: AssemblyDescriptionAttribute("Data visualization library for F#")>]
 [<assembly: AssemblyVersionAttribute("4.0.0")>]
@@ -10,7 +10,7 @@ open System.Reflection
 do ()
 
 module internal AssemblyVersionInformation =
-    let [<Literal>] AssemblyTitle = "XPlot.GoogleCharts"
+    let [<Literal>] AssemblyTitle = "XPlot.Plotly.Interactive"
     let [<Literal>] AssemblyProduct = "XPlot"
     let [<Literal>] AssemblyDescription = "Data visualization library for F#"
     let [<Literal>] AssemblyVersion = "4.0.0"

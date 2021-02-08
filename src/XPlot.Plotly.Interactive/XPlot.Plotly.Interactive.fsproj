@@ -5,11 +5,14 @@
     <TargetFramework>net5.0</TargetFramework>
     <PackageId>XPlot.Plotly.Interactive</PackageId>
     <IsPackable>true</IsPackable>
-    <PackageVersion>3.0.1</PackageVersion>
-    <PackageLicense></PackageLicense>
+    <PackageVersion>4.0.0</PackageVersion>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <RepositoryType>git</RepositoryType>
     <PackageProjectUrl>https://fslab.org/XPlot/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/fslaborg/XPlot</RepositoryUrl>
+    <Authors>Microsoft</Authors>
+    <Description>Enables XPlot.Plotly to be used in .NET Interactive. When you use this package, you can embed Plotly charts directly into a .NET Interactive notebook!</Description>
+    <PackageIcon>logo.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,7 +23,6 @@
 
   <ItemGroup>
     <PackageReference Include="Giraffe.ViewEngine" Version="1.2.0" />
-    <PackageReference Include="XPlot.Plotly" Version="3.0.1" />
     <PackageReference Include="Microsoft.DotNet.Interactive" Version="1.0.0-beta.21103.1" />
     <PackageReference Include="Microsoft.DotNet.Interactive.PowerShell" Version="1.0.0-beta.21103.1" />
     <PackageReference Include="Microsoft.Dotnet.Interactive.http" Version="1.0.0-beta.21103.1" />
@@ -33,6 +35,14 @@
 
   <ItemGroup>
     <None Include="$(OutputPath)/XPlot.Plotly.Interactive.dll" Pack="true" PackagePath="interactive-extensions/dotnet" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../XPlot.Plotly/XPlot.Plotly.fsproj"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\docs\img\logo.png" Pack="true" PackagePath="\" />
   </ItemGroup>
 
 </Project>
