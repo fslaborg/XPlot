@@ -26,11 +26,11 @@ type NewPlotlyChartCommand() =
         this._traces <- List<Trace>()
 
     override this.ProcessRecord() = 
-        this._traces.AddRange(this.Trace)
+        let traces = if isNull this.Trace then [||] else this.Trace
+        this._traces.AddRange(traces)
         
 
     override this.EndProcessing() =
-        let traces = if isNull this.Trace then [||] else this.Trace
         let chart = Chart.Plot(this._traces)
         chart.WithTitle(this.Title)
         if this.Layout <> Unchecked.defaultof<Layout.Layout> then 
