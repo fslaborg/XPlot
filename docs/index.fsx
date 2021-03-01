@@ -1,8 +1,9 @@
 (*** hide ***)
-#I "../../bin/XPlot.GoogleCharts/netstandard2.0"
-#I "../../bin/XPlot.Plotly/netstandard2.0"
-#r "XPlot.Plotly.dll"
-#r "XPlot.GoogleCharts.dll"
+
+#r "../bin/XPlot.GoogleCharts/netstandard2.0/XPlot.GoogleCharts.dll"
+#r "../bin/XPlot.Plotly/netstandard2.0/XPlot.Plotly.dll"
+#r "../packages/Newtonsoft.Json/lib/netstandard2.0/Newtonsoft.Json.dll"
+#r "../packages/Google.DataTable.Net.Wrapper/lib/netstandard2.0/Google.DataTable.Net.Wrapper.dll"
 open XPlot.GoogleCharts
 
 let Bolivia = ["2004/05", 165.; "2005/06", 135.; "2006/07", 157.; "2007/08", 139.; "2008/09", 136.]
@@ -10,9 +11,9 @@ let Ecuador = ["2004/05", 938.; "2005/06", 1120.; "2006/07", 1167.; "2007/08", 1
 let Madagascar = ["2004/05", 522.; "2005/06", 599.; "2006/07", 587.; "2007/08", 615.; "2008/09", 629.]
 let Average = ["2004/05", 614.6; "2005/06", 682.; "2006/07", 623.; "2007/08", 609.4; "2008/09", 569.6]
 
-type HobbsPearsonTrial = 
+type HobbsPearsonTrial =
   { Radial : float list
-    Angular : obj list 
+    Angular : obj list
     Color : string }
 
 let HobbsPearson =
@@ -38,39 +39,39 @@ let HobbsPearson =
 XPlot - F# Data Visualization Package
 =====================================
 
-XPlot is a cross-platform data visualization package for the F# programming language powered by popular 
+XPlot is a cross-platform data visualization package for the F# programming language powered by popular
 JavaScript charting libraries [Google Charts](https://developers.google.com/chart/) and [Plotly](https://plot.ly/).
 The library provides a complete mapping for the configuration options of the underlying libraries and so
 you get a nice F# interface that gives you access to the full power of Google Charts and Plotly.
 The XPlot library can be used interactively from F# Interactive, but charts can equally easy be embedded
-in F# applications and in HTML reports. 
+in F# applications and in HTML reports.
 
- - To get XPlot, scroll down to [how to get XPlot](#How-to-get-XPlot) or get XPlot as part of the 
+ - To get XPlot, scroll down to [how to get XPlot](#How-to-get-XPlot) or get XPlot as part of the
    [FsLab data science package](https://fslab.org/download/).
  - For detailed documentation, scroll down to [documentation](#Documentation) or follow links on the right.
 
 The next two demos show some of the more complex and advanced charts that can be created using XPlot.
-If you're getting started with XPlot, see the other [documentation](#Documentation) pages for 
+If you're getting started with XPlot, see the other [documentation](#Documentation) pages for
 simpler charts.
 
 ### Google Charts example
 
 The following example uses the Google Charts library to create a combo chart showing coffee production
-in Bolivia, Ecuador and Madagascar (as bar plots), together with the average visualized as a line chart
-([full source and data](https://github.com/fslaborg/XPlot/blob/master/docsrc/content/index.fsx)]): *)
-(*** define-output:combochart ***) 
+in Bolivia, Ecuador and Madagascar (as bar plots), together with the average visualized as a line chart*)
 let series = [ "bars"; "bars"; "bars"; "lines" ]
 let inputs = [ Bolivia; Ecuador; Madagascar; Average ]
 
 inputs
 |> Chart.Combo
-|> Chart.WithOptions 
-     (Options(title = "Coffee Production", 
+|> Chart.WithOptions
+     (Options(title = "Coffee Production",
               series = [| for typ in series -> Series(typ) |]))
 |> Chart.WithLabels ["Bolivia"; "Ecuador"; "Madagascar"; "Average"]
 |> Chart.WithLegend true
 |> Chart.WithSize (600, 250)
-(*** include-it:combochart ***)
+|> fun x -> x.GetHtml()
+(*** include-it-raw ***)
+
 (**
 The XPlot library uses the F# `|>` operator to configure charts. In the above example, we use `Chart.Combo`
 to create a basic chart and then we set a number of properties - `Chart.WithOptions` specifies how the
@@ -84,12 +85,10 @@ plot, rendered on a polar chart with different marker color for each of the tria
 data set:
 
 *)
-(*** hide ***)
 open XPlot.Plotly
-(*** define-output:polar ***) 
 let traces =
   [ for trial in HobbsPearson ->
-    Scatter(r = trial.Radial, t = trial.Angular, 
+    Scatter(r = trial.Radial, t = trial.Angular,
       mode = "markers", marker = Marker(color=trial.Color))]
 
 let layout =
@@ -99,35 +98,24 @@ let layout =
 traces
 |> Chart.Plot
 |> Chart.WithLayout layout
-(*** include-it:polar ***)
+(*** hide ***)
+traces
+|> Chart.Plot
+|> Chart.WithLayout layout
+|> fun x -> x.GetHtml()
+(*** include-it-raw ***)
 
 (**
 The code snippet creates one `Scatter` data series for each of the trials in the input. It sets the `r` and `t`
 properties to two lists of input values. If we wanted to produce an ordinary rectangular scatter plot, we could
-instead set the `x` and `y` properties.
-
-How to get XPlot
-----------------
-
-### XPlot as part of FsLab
-
-If you want to get XPlot as part of larger package of F# and .NET tools for doing data science, then check out
-the [FsLab web site](http://www.fslab.org). This gives you a nice cross-platform environment where you can
-access data using [F# Data type providers](http://fsharp.github.io/FSharp.Data/), analyze the data using 
-[Deedle data frames and series](https://fslab.org/Deedle/) and then visualize data using
-XPlot.
-
-### Stand alone XPlot packages
-
-Alternatively, you can reference [XPlot via a NuGet package](http://www.nuget.org/packages?q=XPlot).
-*)
+instead set the `x` and `y` properties.*)
 
 (**
 Documentation
 -------------
 
 The documentation for the library is automatically generated from F# script files that you can find
-[in the `docsrc/content` folder on GitHub](https://github.com/fslaborg/XPlot/tree/master/docsrc/content). 
+[in the `docs folder on GitHub](https://github.com/fslaborg/XPlot/tree/master/docs/).
 The links in the right panel point to a number of tutorials that demonstrate some common scenarios.
 You can also copy the source code from GitHub.
 
@@ -135,14 +123,14 @@ Additionally, the library also comes with an API reference that is generated fro
 is work in progress, so please help us & contribute comments and documentation! The most important types
 are:
 
- - [Google Chart Type](reference/xplot-googlecharts-chart.html) contains methods for creating charts like 
+ - [Google Chart Type](reference/xplot-googlecharts-chart.html) contains methods for creating charts like
    `Chart.Line` and for configuring charts like `Chart.WithOptions`.
  - [Google Options Type](reference/xplot-googlecharts-configuration-options.html) contains parameters for
    charts that are specified using `Chart.WithOptions`.
  - [Google Configuration Module](reference/xplot-googlecharts-configuration.html) contains other types
    that are used as parameters to `Chart.WithOptions`.
 
- - [Plotly Graph Module](reference/xplot-plotly-graph.html) contains methods for creating various kinds
+ - [Plotly Module](reference/xplot-plotly.html) contains methods for creating various kinds
    of charts such as `Scatter` used above.
  - [Plotly Layout Type](reference/xplot-plotly-layout-layout.html) specifies common properties of Plotly
    charts like title and color.
