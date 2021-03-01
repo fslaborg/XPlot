@@ -52,6 +52,8 @@ Target.create "CopyBinaries" (fun _ ->
     -- "src/**/*.shproj"
     |>  Seq.map (fun f -> ((System.IO.Path.GetDirectoryName f) </> "bin" </> configuration, "bin" </> (System.IO.Path.GetFileNameWithoutExtension f)))
     |>  Seq.iter (fun (fromDir, toDir) -> Shell.copyDir toDir fromDir (fun _ -> true))
+    // Copy dll to release folder to avoid errors of missing external assemblies during generating API docs
+    Shell.copyDir "src/XPlot.GoogleCharts.Deedle/bin/Release/netstandard2.0" "packages/Deedle/lib/netstandard2.0/" (fun _ -> true)
 )
 
 // --------------------------------------------------------------------------------------
@@ -144,14 +146,14 @@ Target.create "PublishReleasePackages" (fun _ ->
 Target.create "GenerateDocs" (fun _ ->
     let result =
         Shell.cleanDir ".fsdocs"
-        DotNet.exec id "fsdocs" "build --clean --eval"
+        DotNet.exec id "fsdocs" "build --clean --eval --properties Configuration=Release "
 
     if not result.OK then failwith "error generating docs"
 )
 
 Target.create "GenerateLocalDocs" (fun _ ->
     let root = "file://" + (__SOURCE_DIRECTORY__ @@ "/output/")
-    let cmd = @"build --clean --eval --parameters root """ + root + @""""
+    let cmd = @"build --clean --eval --properties Configuration=Release --parameters root """ + root + @""""
     let result =
         Shell.cleanDir ".fsdocs"
         DotNet.exec id "fsdocs" cmd
