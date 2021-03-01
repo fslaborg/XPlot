@@ -1,49 +1,62 @@
-﻿(*** hide ***)
-#I "../../../bin/XPlot.Plotly/netstandard2.0"
-#r "XPlot.Plotly.dll"
-
-open XPlot.Plotly
+﻿(*** condition: prepare ***)
+#r "../../bin/XPlot.Plotly/netstandard2.0/XPlot.Plotly.dll"
+#r "../../packages/Newtonsoft.Json/lib/netstandard2.0/Newtonsoft.Json.dll"
+(*** condition: ipynb ***)
+#if IPYNB
+#r "nuget: XPlot.Plotly"
+#r "nuget: XPlot.Plotly.Interactive"
+#endif // IPYNB
 
 (**
 Plotly Heatmaps
 ===============
-
-[Full source and data](https://github.com/fslaborg/XPlot/blob/master/docsrc/content/chart/plotly-heatmaps.fsx)
-
 Basic Heatmap
 -------------
 *)
+open XPlot.Plotly
 
-(*** define-output: chart1 ***)
 let layout = Layout(title = "Basic Heatmap")
 
-Heatmap(
-    z = [[1; 20; 30]; [20; 1; 60]; [30; 60; 1]]
-)
-|> Chart.Plot
-|> Chart.WithLayout layout
-|> Chart.WithWidth 700
-|> Chart.WithHeight 500
-(*** include-it: chart1 ***)
+let chart1 =
+    Heatmap(
+        z = [[1; 20; 30]; [20; 1; 60]; [30; 60; 1]]
+    )
+    |> Chart.Plot
+    |> Chart.WithLayout layout
+    |> Chart.WithWidth 700
+    |> Chart.WithHeight 500
+(*** condition: ipynb ***)
+#if IPYNB
+chart1
+#endif // IPYNB
+(*** hide ***)
+chart1.GetHtml()
+(*** include-it-raw ***)
 
 (**
 Heatmap with Categorical Axis Labels
 ------------------------------------
 *)
 
-(*** define-output: chart2 ***)
 let categoricalLayout = Layout(title = "Heatmap with Categorical Axis Labels")
 
-Heatmap(
-    z = [[1; 20; 30; 50; 1]; [20; 1; 60; 80; 30]; [30; 60; 1; -10; 20]],
-    x = ["Monday"; "Tuesday"; "Wednesday"; "Thursday"; "Friday"],
-    y = ["Morning"; "Afternoon"; "Evening"]
-)
-|> Chart.Plot
-|> Chart.WithLayout categoricalLayout
-|> Chart.WithWidth 700
-|> Chart.WithHeight 500
-(*** include-it: chart2 ***)
+let chart2 =
+    Heatmap(
+        z = [[1; 20; 30; 50; 1]; [20; 1; 60; 80; 30]; [30; 60; 1; -10; 20]],
+        x = ["Monday"; "Tuesday"; "Wednesday"; "Thursday"; "Friday"],
+        y = ["Morning"; "Afternoon"; "Evening"]
+    )
+    |> Chart.Plot
+    |> Chart.WithLayout categoricalLayout
+    |> Chart.WithWidth 700
+    |> Chart.WithHeight 500
+(*** condition: ipynb ***)
+#if IPYNB
+chart2
+#endif // IPYNB
+(*** hide ***)
+chart2.GetHtml()
+(*** include-it-raw ***)
 
 (**
 Custom Colorscale
@@ -74,22 +87,28 @@ let colorScale =
 
 let customLayout = Layout(title = "Custom Colorscale")
 
-Heatmap(
-    z = customZ,
-    colorscale = colorScale
-)
-|> Chart.Plot
-|> Chart.WithLayout customLayout
-|> Chart.WithWidth 700
-|> Chart.WithHeight 500
-(*** include-it: chart3 ***)
+let chart3 =
+    Heatmap(
+        z = customZ,
+        colorscale = colorScale
+    )
+    |> Chart.Plot
+    |> Chart.WithLayout customLayout
+    |> Chart.WithWidth 700
+    |> Chart.WithHeight 500
+(*** condition: ipynb ***)
+#if IPYNB
+chart3
+#endif // IPYNB
+(*** hide ***)
+chart3.GetHtml()
+(*** include-it-raw ***)
 
 (**
 Earth Colorscale
 ----------------
 *)
 
-(*** define-output: chart4 ***)
 let earthZ =
     [
         for x in 1 .. 50 ->
@@ -98,22 +117,28 @@ let earthZ =
 
 let earthLayout = Layout(title = "Earth Colorscale")
 
-Heatmap(
-    z = earthZ,
-    colorscale = "Earth"
-)
-|> Chart.Plot
-|> Chart.WithLayout earthLayout
-|> Chart.WithWidth 700
-|> Chart.WithHeight 500
-(*** include-it: chart4 ***)
+let chart4 =
+    Heatmap(
+        z = earthZ,
+        colorscale = "Earth"
+    )
+    |> Chart.Plot
+    |> Chart.WithLayout earthLayout
+    |> Chart.WithWidth 700
+    |> Chart.WithHeight 500
+(*** condition: ipynb ***)
+#if IPYNB
+chart4
+#endif // IPYNB
+(*** hide ***)
+chart4.GetHtml()
+(*** include-it-raw ***)
 
 (**
 YIGnBu Colorscale
 -----------------
 *)
 
-(*** define-output: chart5 ***)
 let yignbuZ =
     [
         for x in 1 .. 50 ->
@@ -122,12 +147,19 @@ let yignbuZ =
 
 let yignbuLayout = Layout(title = "YIGnBu Colorscale")
 
-Heatmap(
-    z = yignbuZ,
-    colorscale = "YIGnBu"
-)
-|> Chart.Plot
-|> Chart.WithLayout yignbuLayout
-|> Chart.WithWidth 700
-|> Chart.WithHeight 500
-(*** include-it: chart5 ***)
+let chart5 =
+    Heatmap(
+        z = yignbuZ,
+        colorscale = "YIGnBu"
+    )
+    |> Chart.Plot
+    |> Chart.WithLayout yignbuLayout
+    |> Chart.WithWidth 700
+    |> Chart.WithHeight 500
+(*** condition: ipynb ***)
+#if IPYNB
+chart5
+#endif // IPYNB
+(*** hide ***)
+chart5.GetHtml()
+(*** include-it-raw ***)

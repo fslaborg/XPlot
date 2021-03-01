@@ -1,30 +1,37 @@
-﻿(*** hide ***)
-#I "../../../bin/XPlot.Plotly/netstandard2.0"
-#r "XPlot.Plotly.dll"
-
-open XPlot.Plotly
+﻿(*** condition: prepare ***)
+#r "../../bin/XPlot.Plotly/netstandard2.0/XPlot.Plotly.dll"
+#r "../../packages/Newtonsoft.Json/lib/netstandard2.0/Newtonsoft.Json.dll"
+(*** condition: ipynb ***)
+#if IPYNB
+#r "nuget: XPlot.Plotly"
+#r "nuget: XPlot.Plotly.Interactive"
+#endif // IPYNB
 
 (**
 Plotly Bar Charts
 =================
-
-[Full source and data](https://github.com/fslaborg/XPlot/blob/master/docsrc/content/chart/plotly-bar-charts.fsx)
-
 Basic Bar Chart
 ---------------
 *)
+open XPlot.Plotly
 
-(*** define-output: chart1 ***)
 let layout = Layout(title = "Basic Bar Chart")
 
 let data = ["giraffes", 20; "orangutans", 14; "monkeys", 23]
 
-data
-|> Chart.Bar
-|> Chart.WithLayout layout
-|> Chart.WithHeight 500
-|> Chart.WithWidth 700
-(*** include-it: chart1 ***)
+let chart1 =
+    data
+    |> Chart.Bar
+    |> Chart.WithLayout layout
+    |> Chart.WithHeight 500
+    |> Chart.WithWidth 700
+(*** condition: ipynb ***)
+#if IPYNB
+chart1
+#endif // IPYNB
+(*** hide ***)
+chart1.GetHtml()
+(*** include-it-raw ***)
 
 (**
 Grouped Bar Chart
@@ -36,7 +43,7 @@ let groupedTrace1 =
     Bar(
         x = ["giraffes"; "orangutans"; "monkeys"],
         y = [20; 14; 23],
-        name= "SF Zoo"            
+        name= "SF Zoo"
     )
 
 let groupedTrace2 =
@@ -48,19 +55,25 @@ let groupedTrace2 =
 
 let groupedLayout = Layout(barmode = "group")
 
-[groupedTrace1; groupedTrace2]
-|> Chart.Plot
-|> Chart.WithLayout groupedLayout
-|> Chart.WithHeight 500
-|> Chart.WithWidth 700
-(*** include-it: chart2 ***)
+let chart2 =
+    [groupedTrace1; groupedTrace2]
+    |> Chart.Plot
+    |> Chart.WithLayout groupedLayout
+    |> Chart.WithHeight 500
+    |> Chart.WithWidth 700
+(*** condition: ipynb ***)
+#if IPYNB
+chart2
+#endif // IPYNB
+(*** hide ***)
+chart2.GetHtml()
+(*** include-it-raw ***)
 
 (**
 Stacked Bar Chart
 -----------------
 *)
 
-(*** define-output: chart3 ***)
 let stackedTrace1 =
     Bar(
         x = ["giraffes"; "orangutans"; "monkeys"],
@@ -77,19 +90,25 @@ let stackedTrace2 =
 
 let stackedLayout = Layout(barmode = "stack")
 
-[stackedTrace1; stackedTrace2]
-|> Chart.Plot
-|> Chart.WithLayout stackedLayout
-|> Chart.WithHeight 500
-|> Chart.WithWidth 700
-(*** include-it: chart3 ***)
+let chart3 =
+    [stackedTrace1; stackedTrace2]
+    |> Chart.Plot
+    |> Chart.WithLayout stackedLayout
+    |> Chart.WithHeight 500
+    |> Chart.WithWidth 700
+(*** condition: ipynb ***)
+#if IPYNB
+chart3
+#endif // IPYNB
+(*** hide ***)
+chart3.GetHtml()
+(*** include-it-raw ***)
 
 (**
 Colored and Styled Bar Chart
 ----------------------------
 *)
 
-(*** define-output: chart4 ***)
 let styledTrace1 =
     Bar(
         x =
@@ -109,7 +128,7 @@ let styledTrace2 =
             2007; 2008; 2009; 2010; 2011; 2012],
         y =
             [16; 13; 10; 11; 28; 37; 43; 55; 56; 88; 105; 156; 270; 299; 340; 403; 549;
-            499],        
+            499],
         name = "China",
         marker = Marker(color = "rgb(26, 118, 255)")
     )
@@ -151,19 +170,25 @@ let styledLayout =
         bargroupgap = 0.1
     )
 
-[styledTrace1; styledTrace2]
-|> Chart.Plot
-|> Chart.WithLayout styledLayout
-|> Chart.WithHeight 500
-|> Chart.WithWidth 700
-(*** include-it: chart4 ***)
+let chart4 =
+    [styledTrace1; styledTrace2]
+    |> Chart.Plot
+    |> Chart.WithLayout styledLayout
+    |> Chart.WithHeight 500
+    |> Chart.WithWidth 700
+(*** condition: ipynb ***)
+#if IPYNB
+chart4
+#endif // IPYNB
+(*** hide ***)
+chart4.GetHtml()
+(*** include-it-raw ***)
 
 (**
 Bar Chart with Hover Text
 -------------------------
 *)
 
-(*** define-output: chart5 ***)
 let hoverTrace =
     Bar(
         x = ["Liam"; "Sophie"; "Jacob"; "Mia"; "William"; "Olivia"],
@@ -188,26 +213,39 @@ let hoverLayout =
         bargap = 0.05
     )
 
-hoverTrace
-|> Chart.Plot
-|> Chart.WithLayout hoverLayout
-|> Chart.WithHeight 500
-|> Chart.WithWidth 700
-(*** include-it: chart5 ***)
+let chart5 =
+    hoverTrace
+    |> Chart.Plot
+    |> Chart.WithLayout hoverLayout
+    |> Chart.WithHeight 500
+    |> Chart.WithWidth 700
+(*** condition: ipynb ***)
+#if IPYNB
+chart5
+#endif // IPYNB
+(*** hide ***)
+chart5.GetHtml()
+(*** include-it-raw ***)
 
 (**
 Customizing Individual Bar Colors
 ---------------------------------
 *)
 
-(*** define-output: chart6 ***)
-Bar(
-    x = [1; 2; 3; 4],
-    y = [5; 4; -3; 2],
-    marker = Marker(color = ["#447adb"; "#447adb"; "#db5a44"; "#447adb"])
-)
-|> Chart.Plot
-|> Chart.WithLayout hoverLayout
-|> Chart.WithHeight 500
-|> Chart.WithWidth 700
-(*** include-it: chart6 ***)
+let chart6 =
+    Bar(
+        x = [1; 2; 3; 4],
+        y = [5; 4; -3; 2],
+        marker = Marker(color = ["#447adb"; "#447adb"; "#db5a44"; "#447adb"])
+    )
+    |> Chart.Plot
+    |> Chart.WithLayout hoverLayout
+    |> Chart.WithHeight 500
+    |> Chart.WithWidth 700
+(*** condition: ipynb ***)
+#if IPYNB
+chart6
+#endif // IPYNB
+(*** hide ***)
+chart6.GetHtml()
+(*** include-it-raw ***)

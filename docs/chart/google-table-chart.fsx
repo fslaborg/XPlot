@@ -1,12 +1,18 @@
-﻿(*** hide ***)
-#I "../../../bin/XPlot.GoogleCharts/netstandard2.0"
-#r "XPlot.GoogleCharts.dll"
-open XPlot.GoogleCharts
+﻿(*** condition: prepare ***)
+#r "../../bin/XPlot.GoogleCharts/netstandard2.0/XPlot.GoogleCharts.dll"
+#r "../../packages/Newtonsoft.Json/lib/netstandard2.0/Newtonsoft.Json.dll"
+#r "../../packages/Google.DataTable.Net.Wrapper/lib/netstandard2.0/Google.DataTable.Net.Wrapper.dll"
+(*** condition: ipynb ***)
+#if IPYNB
+#r "nuget: XPlot.GoogleCharts"
+#endif // IPYNB
 
 (**
 Google Table Chart
 ==================
 *)
+open XPlot.GoogleCharts
+
 let salary =
     [
         "Mike", 10000
@@ -15,7 +21,7 @@ let salary =
         "Bob", 7000
     ]
     |> List.map (fun (x, y) -> x, y :> value)
- 
+
 let fulltime =
     [
         "Mike", true
@@ -25,9 +31,11 @@ let fulltime =
     ]
     |> List.map (fun (x, y) -> x, y :> value)
 
-(*** define-output:table ***) 
-[salary; fulltime]        
-|> Chart.Table
-|> Chart.WithOptions(Options(showRowNumber = true))
-|> Chart.WithLabels ["Name"; "Salary"; "Full Time Employee"]
-(*** include-it:table ***)
+let chart =
+    [salary; fulltime]
+    |> Chart.Table
+    |> Chart.WithOptions(Options(showRowNumber = true))
+    |> Chart.WithLabels ["Name"; "Salary"; "Full Time Employee"]
+(*** hide ***)
+chart.GetHtml()
+(*** include-it-raw ***)

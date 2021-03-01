@@ -1,12 +1,18 @@
-﻿(*** hide ***)
-#I "../../../bin/XPlot.GoogleCharts/netstandard2.0"
-#r "XPlot.GoogleCharts.dll"
-open XPlot.GoogleCharts
+﻿(*** condition: prepare ***)
+#r "../../bin/XPlot.GoogleCharts/netstandard2.0/XPlot.GoogleCharts.dll"
+#r "../../packages/Newtonsoft.Json/lib/netstandard2.0/Newtonsoft.Json.dll"
+#r "../../packages/Google.DataTable.Net.Wrapper/lib/netstandard2.0/Google.DataTable.Net.Wrapper.dll"
+(*** condition: ipynb ***)
+#if IPYNB
+#r "nuget: XPlot.GoogleCharts"
+#endif // IPYNB
 
 (**
 Google Histogram Chart
 ======================
 *)
+open XPlot.GoogleCharts
+
 let data =
     [
         "Acrocanthosaurus (top-spined lizard)", 12.2
@@ -23,14 +29,16 @@ let data =
         "Seismosaurus (tremor lizard)", 45.7
         "Supersaurus (super lizard)", 30.5
         "Ultrasaurus (ultra lizard)", 30.5
-        "Velociraptor (swift robber)", 1.8        
+        "Velociraptor (swift robber)", 1.8
     ]
 
-(*** define-output:hist ***)  
 let options = Options(title = "Lengths of dinosaurs, in meters")
- 
-data
-|> Chart.Histogram
-|> Chart.WithOptions options
-|> Chart.WithLabel "Length"
-(*** include-it:hist ***)
+
+let chart =
+    data
+    |> Chart.Histogram
+    |> Chart.WithOptions options
+    |> Chart.WithLabel "Length"
+(*** hide ***)
+chart.GetHtml()
+(*** include-it-raw ***)

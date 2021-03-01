@@ -1,20 +1,21 @@
-﻿(*** hide ***)
-#I "../../../bin/XPlot.Plotly/netstandard2.0"
-#r "XPlot.Plotly.dll"
-
-open XPlot.Plotly
+﻿(*** condition: prepare ***)
+#r "../../bin/XPlot.Plotly/netstandard2.0/XPlot.Plotly.dll"
+#r "../../packages/Newtonsoft.Json/lib/netstandard2.0/Newtonsoft.Json.dll"
+(*** condition: ipynb ***)
+#if IPYNB
+#r "nuget: XPlot.Plotly"
+#r "nuget: XPlot.Plotly.Interactive"
+#endif // IPYNB
 
 (**
 Plotly Line and Scatter Plots
 =============================
-
-[Full source and data](https://github.com/fslaborg/XPlot/blob/master/docsrc/content/chart/plotly-line-scatter-plots.fsx)
-
 Basic Line Plot
 ---------------
 *)
 
-(*** define-output: chart1 ***)
+open XPlot.Plotly
+
 let trace1 =
     Scatter(
         x = [1; 2; 3; 4],
@@ -27,18 +28,26 @@ let trace2 =
         y = [16; 5; 11; 9]
     )
 
-[trace1; trace2]
-|> Chart.Plot
-|> Chart.WithWidth 700
-|> Chart.WithHeight 500
-(*** include-it: chart1 ***)
+let chart1 =
+    [trace1; trace2]
+    |> Chart.Plot
+    |> Chart.WithWidth 700
+    |> Chart.WithHeight 500
+(*** condition: ipynb ***)
+#if IPYNB
+chart1
+#endif // IPYNB
+(*** hide ***)
+chart1.GetHtml()
+(*** include-it-raw ***)
+
 
 (**
 Line and Scatter Plot
 ---------------------
 *)
 
-(*** define-output: chart2 ***)       
+(*** define-output: chart2 ***)
 let lineTrace1 =
     Scatter(
         x = [1; 2; 3; 4],
@@ -60,18 +69,24 @@ let lineTrace3 =
         mode = "lines+markers"
     )
 
-[lineTrace1; lineTrace2; lineTrace3]
-|> Chart.Plot
-|> Chart.WithWidth 700
-|> Chart.WithHeight 500
-(*** include-it: chart2 ***)
+let chart2 =
+    [lineTrace1; lineTrace2; lineTrace3]
+    |> Chart.Plot
+    |> Chart.WithWidth 700
+    |> Chart.WithHeight 500
+(*** condition: ipynb ***)
+#if IPYNB
+chart2
+#endif // IPYNB
+(*** hide ***)
+chart2.GetHtml()
+(*** include-it-raw ***)
 
 (**
 Colored and Styled Scatter Plot
 -------------------------------
 *)
 
-(*** define-output: chart3 ***)
 let styledTrace1 =
     Scatter(
         x = [52698; 43117],
@@ -112,7 +127,7 @@ let styledTrace2 =
             )
     )
 
-let styledTrace3 = 
+let styledTrace3 =
     Scatter(
         x = [42952; 37037; 33106; 17478; 9813; 5253; 4692; 3899],
         y = [23; 42; 54; 89; 14; 99; 93; 70],
@@ -142,7 +157,7 @@ let styledTrace4 =
         text =
             ["Chile"; "Argentina"; "Mexico"; "Venezuela"; "Venezuela"; "El Salvador";
              "Bolivia"],
-        marker = 
+        marker =
             Marker(
                 color = "rgb(142, 124, 195)",
                 size = 12,
@@ -170,12 +185,19 @@ let styledLayout =
             )
     )
 
-[styledTrace1; styledTrace2; styledTrace3; styledTrace4]
-|> Chart.Plot
-|> Chart.WithLayout styledLayout
-|> Chart.WithWidth 700
-|> Chart.WithHeight 500
-(*** include-it: chart3 ***)
+let chart3 =
+    [styledTrace1; styledTrace2; styledTrace3; styledTrace4]
+    |> Chart.Plot
+    |> Chart.WithLayout styledLayout
+    |> Chart.WithWidth 700
+    |> Chart.WithHeight 500
+(*** condition: ipynb ***)
+#if IPYNB
+chart3
+#endif // IPYNB
+(*** hide ***)
+chart3.GetHtml()
+(*** include-it-raw ***)
 
 (**
 Line Shape Options for Interpolation
@@ -243,7 +265,7 @@ let shapeTrace6 =
         name = "'hv'",
         line = Line(shape = "hv")
     )
-        
+
 let shapeLayout =
     Layout(
         legend =
@@ -255,10 +277,17 @@ let shapeLayout =
             )
     )
 
-[shapeTrace1; shapeTrace2; shapeTrace3;
- shapeTrace4; shapeTrace5; shapeTrace6]
-|> Chart.Plot
-|> Chart.WithLayout shapeLayout
-|> Chart.WithWidth 700
-|> Chart.WithHeight 500
-(*** include-it: chart4 ***)
+let chart4 =
+    [shapeTrace1; shapeTrace2; shapeTrace3;
+     shapeTrace4; shapeTrace5; shapeTrace6]
+    |> Chart.Plot
+    |> Chart.WithLayout shapeLayout
+    |> Chart.WithWidth 700
+    |> Chart.WithHeight 500
+(*** condition: ipynb ***)
+#if IPYNB
+chart4
+#endif // IPYNB
+(*** hide ***)
+chart4.GetHtml()
+(*** include-it-raw ***)

@@ -1,13 +1,19 @@
-﻿(*** hide ***)
-#I "../../../bin/XPlot.GoogleCharts/netstandard2.0"
-#r "XPlot.GoogleCharts.dll"
-open XPlot.GoogleCharts
-open System
+﻿(*** condition: prepare ***)
+#r "../../bin/XPlot.GoogleCharts/netstandard2.0/XPlot.GoogleCharts.dll"
+#r "../../packages/Newtonsoft.Json/lib/netstandard2.0/Newtonsoft.Json.dll"
+#r "../../packages/Google.DataTable.Net.Wrapper/lib/netstandard2.0/Google.DataTable.Net.Wrapper.dll"
+(*** condition: ipynb ***)
+#if IPYNB
+#r "nuget: XPlot.GoogleCharts"
+#endif // IPYNB
 
 (**
 Google Calendar Chart
 =====================
 *)
+open XPlot.GoogleCharts
+open System
+
 let data =
     let rnd = Random()
     [
@@ -20,9 +26,11 @@ let options =
         title = "GitHub Contributions",
         height = 350
     )
- 
-(*** define-output:calendar ***)  
-data
-|> Chart.Calendar
-|> Chart.WithOptions options
-(*** include-it:calendar ***)
+
+let chart =
+    data
+    |> Chart.Calendar
+    |> Chart.WithOptions options
+(*** hide ***)
+chart.GetHtml()
+(*** include-it-raw ***)

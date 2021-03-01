@@ -1,12 +1,17 @@
-﻿(*** hide ***)
-#I "../../../bin/XPlot.GoogleCharts/netstandard2.0"
-#r "XPlot.GoogleCharts.dll"
-open XPlot.GoogleCharts
+﻿(*** condition: prepare ***)
+#r "../../bin/XPlot.GoogleCharts/netstandard2.0/XPlot.GoogleCharts.dll"
+#r "../../packages/Newtonsoft.Json/lib/netstandard2.0/Newtonsoft.Json.dll"
+#r "../../packages/Google.DataTable.Net.Wrapper/lib/netstandard2.0/Google.DataTable.Net.Wrapper.dll"
+(*** condition: ipynb ***)
+#if IPYNB
+#r "nuget: XPlot.GoogleCharts"
+#endif // IPYNB
+
 (**
 Google Geo charts
 =================
 
-This example shows how to create geo charts and line charts using the 
+This example shows how to create geo charts and line charts using the
 `XPlot.GoogleCharts` library.
 
 To create a geo chart, use the `Chart.Geo` function. As usual, you can specify additional
@@ -18,20 +23,25 @@ a part of the world.
 A simple geo chart
 -------------------
 
-The following example calls `Chart.Geo` with a list of key value pairs. Google Charts 
+The following example calls `Chart.Geo` with a list of key value pairs. Google Charts
 automatically recognize country names and country codes, so the following readable code
 works just fine:
 *)
+open XPlot.GoogleCharts
+
 let pop =
   [ "Germany", 200; "United States", 300
     "Brazil", 400;  "Canada", 500
     "France", 600;  "RU", 700 ]
 
-(*** define-output:geo ***)
-pop
-|> Chart.Geo
-|> Chart.WithLabel "Popularity"
-(*** include-it:geo ***)
+let chart =
+    pop
+    |> Chart.Geo
+    |> Chart.WithLabel "Popularity"
+(*** hide ***)
+chart.GetHtml()
+(*** include-it-raw ***)
+
 (*** hide ***)
 
 //(**
@@ -55,12 +65,12 @@ pop
 //    ("Palermo", 655875, 158.9); ("Genoa", 607906, 243.60);
 //    ("Bologna", 380181, 140.7); ("Florence", 371282, 102.41);
 //    ("Anzio", 52192, 43.43);    ("Ciampino", 38262, 11.) ]
-// 
+//
 //let options =
 //  Options
 //    ( region = "IT", displayMode = "markers",
-//      colorAxis = ColorAxis(colors = [|"green"; "blue"|]) ) 
-// 
+//      colorAxis = ColorAxis(colors = [|"green"; "blue"|]) )
+//
 //data
 //|> Chart.Geo
 //|> Chart.WithLabels ["Population"; "Area"]

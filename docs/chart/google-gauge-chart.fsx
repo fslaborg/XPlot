@@ -1,15 +1,20 @@
-﻿(*** hide ***)
-#I "../../../bin/XPlot.GoogleCharts/netstandard2.0"
-#r "XPlot.GoogleCharts.dll"
-open XPlot.GoogleCharts
+﻿(*** condition: prepare ***)
+#r "../../bin/XPlot.GoogleCharts/netstandard2.0/XPlot.GoogleCharts.dll"
+#r "../../packages/Newtonsoft.Json/lib/netstandard2.0/Newtonsoft.Json.dll"
+#r "../../packages/Google.DataTable.Net.Wrapper/lib/netstandard2.0/Google.DataTable.Net.Wrapper.dll"
+(*** condition: ipynb ***)
+#if IPYNB
+#r "nuget: XPlot.GoogleCharts"
+#endif // IPYNB
 
 (**
 Google Gauge Chart
 ==================
 *)
+open XPlot.GoogleCharts
+
 let data = ["Memory", 80; "CPU", 55; "Network", 68]
 
-(*** define-output:gauge ***)  
 let options =
     Options(
         width = 400,
@@ -20,7 +25,10 @@ let options =
         yellowTo = 90,
         minorTicks = 5
     )
- 
-Chart.Gauge data
-|> Chart.WithOptions options
-(*** include-it:gauge ***)
+
+let chart =
+    Chart.Gauge data
+    |> Chart.WithOptions options
+(*** hide ***)
+chart.GetHtml()
+(*** include-it-raw ***)

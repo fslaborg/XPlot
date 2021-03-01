@@ -1,5 +1,5 @@
-﻿#r @"../../../bin/XPlot.Plotly/netstandard2.0/XPlot.Plotly.dll"
-#r "../../../packages/MathNet.Numerics/lib/net40/MathNet.Numerics.dll"
+﻿#r @"../../bin/XPlot.Plotly/netstandard2.0/XPlot.Plotly.dll"
+#r "../../packages/MathNet.Numerics/lib/net40/MathNet.Numerics.dll"
 
 open System
 

@@ -1,31 +1,42 @@
-﻿(*** hide ***)
-#I "../../../bin/XPlot.Plotly/netstandard2.0"
-#r "XPlot.Plotly.dll"
-open XPlot.Plotly
-open System
+﻿(*** condition: prepare ***)
+#r "../../bin/XPlot.Plotly/netstandard2.0/XPlot.Plotly.dll"
+#r "../../packages/Newtonsoft.Json/lib/netstandard2.0/Newtonsoft.Json.dll"
+(*** condition: ipynb ***)
+#if IPYNB
+#r "nuget: XPlot.Plotly"
+#r "nuget: XPlot.Plotly.Interactive"
+#endif // IPYNB
 
 (**
 Plotly Candlestick Chart
 ========================
 *)
-(*** define-output:candle ***) 
+open XPlot.Plotly
+open System
+
 let data =
     [
-         // x,  o,  h,  l,  c   
-        "Mon", 28, 45, 20, 38 
-        "Tue", 38, 66, 31, 55 
+         // x,  o,  h,  l,  c
+        "Mon", 28, 45, 20, 38
+        "Tue", 38, 66, 31, 55
         "Wed", 55, 80, 50, 77
         "Thu", 77, 77, 50, 66
-        "Fri", 66, 68, 15, 22        
+        "Fri", 66, 68, 15, 22
     ]
-        
-Chart.Candlestick data
-(*** include-it:candle ***)
 
-(*** define-output:XAU_USD_D1 ***) 
+let chart1 = Chart.Candlestick data
+(*** condition: ipynb ***)
+#if IPYNB
+chart1
+#endif // IPYNB
+(*** hide ***)
+chart1.GetHtml()
+(*** include-it-raw ***)
+
+(*** define-output:XAU_USD_D1 ***)
 let ``XAU USD D1`` =
     [
-                 // x,       o,       h,       l,       c   
+                 // x,       o,       h,       l,       c
         DateTime(2017, 12, 27), 1282.19, 1289.01, 1281.43, 1287.67
         DateTime(2017, 12, 26), 1278.35, 1283.80, 1277.22, 1282.18
         DateTime(2017, 12, 22), 1267.07, 1276.08, 1265.07, 1274.97
@@ -49,8 +60,15 @@ let ``XAU USD D1`` =
         DateTime(2017, 11, 28), 1294.59, 1297.48, 1290.95, 1294.06
         DateTime(2017, 11, 27), 1287.47, 1299.29, 1286.80, 1294.56
     ]
-        
-``XAU USD D1`` |> Seq.sortBy (fun (x,_,_,_,_) -> x)
-               |> Chart.Candlestick
-               
-(*** include-it:XAU_USD_D1 ***)
+
+let chart2 =
+    ``XAU USD D1``
+    |> Seq.sortBy (fun (x,_,_,_,_) -> x)
+    |> Chart.Candlestick
+(*** condition: ipynb ***)
+#if IPYNB
+chart2
+#endif // IPYNB
+(*** hide ***)
+chart2.GetHtml()
+(*** include-it-raw ***)
