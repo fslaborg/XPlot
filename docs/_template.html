@@ -14,10 +14,10 @@
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
 
-    <link type="text/css" rel="stylesheet" href="{{root}}content/navbar-{{fsdocs-navbar-position}}.css" />
-    <link type="text/css" rel="stylesheet" href="{{root}}content/fsdocs-{{fsdocs-theme}}.css" />
-    <link type="text/css" rel="stylesheet" href="{{root}}content/fsdocs-custom.css" />
-    <script type="text/javascript" src="{{root}}content/fsdocs-tips.js"></script>
+    <link type="text/css" rel="stylesheet" href="{{root}}/content/navbar-{{fsdocs-navbar-position}}.css" />
+    <link type="text/css" rel="stylesheet" href="{{root}}/content/fsdocs-{{fsdocs-theme}}.css" />
+    <link type="text/css" rel="stylesheet" href="{{root}}/content/fsdocs-custom.css" />
+    <script type="text/javascript" src="{{root}}/content/fsdocs-tips.js"></script>
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -49,16 +49,56 @@
             </div>
 
             <!-- END SEARCH BOX: this adds support for the search box -->
-            <ul class="navbar-nav">
+            <ul class="navbar-nav" id="fsdocs-nav">
                 <li class="nav-header">XPlot</li>
-                <li class="nav-item"><a class="nav-link" href="index.html">Home Page</a></li>
-                <li class="nav-item"><a class="nav-link" href="quickstart.html">Getting started</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{root}}/index.html">Home Page</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{root}}/quickstart.html">Getting started</a></li>
                 <li class="divider"></li>
                 <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="{{fsdocs-license-link}}">License (Apache 2.0)</a></li>
                 <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="{{fsdocs-release-notes-link}}">Release Notes</a></li>
                 <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="{{fsdocs-repository-link}}">Source Repository</a></li>
                 <li class="nav-header"></li>
-                {{fsdocs-list-of-documents}}
+                <li class="nav-header">Google Charts</li>
+                <li class="nav-item"><a class="nav-link" href="{{root}}/chart/google-annotation-chart.html">Annotation</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{root}}/chart/google-area-chart.html">Area</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{root}}/chart/google-bar-chart.html">Bar</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{root}}/chart/google-bubble-chart.html">Bubble</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{root}}/chart/google-calendar-chart.html">Calendar</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{root}}/chart/google-candlestick-chart.html">Candlestick</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{root}}/chart/google-column-chart.html">Column</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{root}}/chart/google-combo-chart.html">Combo</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{root}}/chart/google-gauge-chart.html">Gauge</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{root}}/chart/google-geo-chart.html">Geo</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{root}}/chart/google-histogram-chart.html">Histogram</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{root}}/chart/google-line-chart.html">Line</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{root}}/chart/google-map-chart.html">Map</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{root}}/chart/google-pie-chart.html">Pie</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{root}}/chart/google-sankey-diagram.html">Sankey</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{root}}/chart/google-scatter-chart.html">Scatter</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{root}}/chart/google-stepped-area-chart.html">Stepped Area</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{root}}/chart/google-timeline-chart.html">Timeline</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{root}}/chart/google-table-chart.html">Table</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{root}}/chart/google-treemap-chart.html">Treemap</a></li>
+                <li class="nav-header">Plotly</li>
+                <li class="nav-item"><a class="nav-link" href="{{root}}/chart/plotly-bar-charts.html">Bar</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{root}}/chart/plotly-line-scatter-plots.html">Line and Scatter</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{root}}/chart/plotly-box-plots.html">Box Plots</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{root}}/chart/plotly-bubble-charts.html">Bubble</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{root}}/chart/plotly-contour-plots.html">Contour</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{root}}/chart/plotly-candlestick-plots.html">Candlesticks</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{root}}/chart/plotly-area-plots.html">Area</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{root}}/chart/plotly-heatmaps.html">Heatmaps</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{root}}/chart/plotly-histograms.html">Histograms</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{root}}/chart/plotly-2d-histograms.html">2D Histograms</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{root}}/chart/plotly-polar-charts.html">Polar</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{root}}/chart/plotly-time-series.html">Time Series</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{root}}/chart/plotly-multiple-chart-types.html">Multiple Chart Types</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{root}}/chart/plotly-log-plots.html">Log Plots</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{root}}/chart/plotly-3d-scatter-plots.html">3D Scatter</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{root}}/chart/plotly-3d-surface-plots.html">3D Surface</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{root}}/chart/plotly-3d-line-plots.html">3D Line</a></li>
+                <li class="nav-header">D3 Charts</li>
+                <li class="nav-item"><a class="nav-link" href="{{root}}/chart/d3-network.html">Network</a></li>
                 {{fsdocs-list-of-namespaces}}
             </ul>
         </div>
