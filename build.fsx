@@ -16,7 +16,7 @@ open Fake.Tools
 let project = "XPlot"
 let summary = "Data visualization library for F#"
 let solutionFile  = "XPlot.sln"
-let configuration = "release"
+let configuration = "Release"
 let gitHome = "https://github.com/fslaborg"
 let gitName = project
 let devBuildSuffix = BuildServer.buildVersion
