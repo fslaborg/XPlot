@@ -44,11 +44,21 @@ Target.create "AssemblyInfo" (fun _ ->
         AssemblyInfoFile.createFSharp (folderName </> "AssemblyInfo.fs") attributes )
 )
 
+// Copies binaries from default VS location to expected bin folder
+// But keeps a subdirectory structure for each project in the
+// src folder to support multiple project outputs
+Target.create "CopyBinaries" (fun _ ->
+    !! "src/**/*.??proj"
+    -- "src/**/*.shproj"
+    |>  Seq.map (fun f -> ((System.IO.Path.GetDirectoryName f) </> "bin" </> configuration, "bin" </> (System.IO.Path.GetFileNameWithoutExtension f)))
+    |>  Seq.iter (fun (fromDir, toDir) -> Shell.copyDir toDir fromDir (fun _ -> true))
+)
+
 // --------------------------------------------------------------------------------------
 // Clean build results
 
 Target.create "Clean" (fun _ ->
-    !! "**/**/bin/" |> Shell.cleanDirs    
+    !! "**/**/bin/" |> Shell.cleanDirs
     ["pkg"; "temp"] |> Shell.cleanDirs
 )
 
@@ -60,8 +70,8 @@ Target.create "CleanDocs" (fun _ ->
 // Build everything
 
 Target.create "Build" (fun _ ->
-    solutionFile 
-    |> DotNet.build (fun p -> 
+    solutionFile
+    |> DotNet.build (fun p ->
         { p with
             Configuration = buildConfiguration })
 )
@@ -72,7 +82,7 @@ Target.create "Build" (fun _ ->
 let runTests assembly =
     [Path.Combine(__SOURCE_DIRECTORY__, assembly)]
     |> Expecto.run (fun p ->
-        { p with 
+        { p with
             WorkingDirectory = __SOURCE_DIRECTORY__
         })
 
@@ -84,7 +94,7 @@ Target.create "RunPlotlyTests" (fun _ ->
 // Build and publish NuGet package
 
 Target.create "BuildDevPackages" (fun _ ->
-    Paket.pack(fun p -> 
+    Paket.pack(fun p ->
         { p with
             ToolType = ToolType.CreateLocalTool()
             OutputPath = pkgDir
@@ -93,7 +103,7 @@ Target.create "BuildDevPackages" (fun _ ->
 )
 
 Target.create "BuildReleasePackages" (fun _ ->
-    Paket.pack(fun p -> 
+    Paket.pack(fun p ->
         { p with
             ToolType = ToolType.CreateLocalTool()
             OutputPath = pkgDir
@@ -134,7 +144,17 @@ Target.create "PublishReleasePackages" (fun _ ->
 Target.create "GenerateDocs" (fun _ ->
     let result =
         Shell.cleanDir ".fsdocs"
-        DotNet.exec id "fsdocs" "build --clean"
+        DotNet.exec id "fsdocs" "build --clean --eval"
+
+    if not result.OK then failwith "error generating docs"
+)
+
+Target.create "GenerateLocalDocs" (fun _ ->
+    let root = "file://" + (__SOURCE_DIRECTORY__ @@ "/output/")
+    let cmd = @"build --clean --eval --parameters root """ + root + @""""
+    let result =
+        Shell.cleanDir ".fsdocs"
+        DotNet.exec id "fsdocs" cmd
 
     if not result.OK then failwith "error generating docs"
 )
@@ -168,9 +188,13 @@ Target.create "CIBuild" ignore
   ==> "CleanDocs"
   ==> "AssemblyInfo"
   ==> "Build"
+  ==> "CopyBinaries"
   ==> "GenerateDocs"
   ==> "BuildDevPackages"
   ==> "DevBuild"
+
+"CopyBinaries"
+  ==> "GenerateLocalDocs"
 
 "DevBuild"
   ==> "RunPlotlyTests"
