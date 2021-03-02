@@ -12,7 +12,7 @@
 (**
 Google Sankey Diagram
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/zyzhu/XPlot/gh-pages?filepath=google-sankey-diagram.ipynb)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/fslaborg/XPlot/gh-pages?filepath=google-sankey-diagram.ipynb)
 
 *)
 open XPlot.GoogleCharts

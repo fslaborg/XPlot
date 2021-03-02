@@ -12,7 +12,7 @@
 (**
 Plotly Area Plots
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/zyzhu/XPlot/gh-pages?filepath=plotly-area-plots.ipynb)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/fslaborg/XPlot/gh-pages?filepath=plotly-area-plots.ipynb)
 
 Basic Overlaid Area Chart
 -------------------------

@@ -12,7 +12,7 @@
 (**
 Multiple Chart Types
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/zyzhu/XPlot/gh-pages?filepath=plotly-multiple-chart-types.ipynb)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/fslaborg/XPlot/gh-pages?filepath=plotly-multiple-chart-types.ipynb)
 
 A Contour and Scatter Plot of the Method of Steepest Descent
 ------------------------------------------------------------

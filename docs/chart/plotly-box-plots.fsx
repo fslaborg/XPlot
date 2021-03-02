@@ -12,7 +12,7 @@
 (**
 Plotly Box Plots
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/zyzhu/XPlot/gh-pages?filepath=plotly-box-plots.ipynb)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/fslaborg/XPlot/gh-pages?filepath=plotly-box-plots.ipynb)
 
 Basic Box Plot
 --------------

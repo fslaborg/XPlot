@@ -12,7 +12,7 @@
 (**
 Google Geo charts
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/zyzhu/XPlot/gh-pages?filepath=google-geo-chart.ipynb)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/fslaborg/XPlot/gh-pages?filepath=google-geo-chart.ipynb)
 
 This example shows how to create geo charts and line charts using the
 `XPlot.GoogleCharts` library.

@@ -12,7 +12,7 @@
 (**
 Google Treemap Chart
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/zyzhu/XPlot/gh-pages?filepath=google-treemap-chart.ipynb)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/fslaborg/XPlot/gh-pages?filepath=google-treemap-chart.ipynb)
 
 *)
 open XPlot.GoogleCharts

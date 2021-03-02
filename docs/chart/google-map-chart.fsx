@@ -12,7 +12,7 @@
 (**
 Google Map Chart
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/zyzhu/XPlot/gh-pages?filepath=google-map-chart.ipynb)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/fslaborg/XPlot/gh-pages?filepath=google-map-chart.ipynb)
 
 *)
 open XPlot.GoogleCharts

@@ -12,7 +12,7 @@
 (**
 Google Gauge Chart
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/zyzhu/XPlot/gh-pages?filepath=google-gauge-chart.ipynb)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/fslaborg/XPlot/gh-pages?filepath=google-gauge-chart.ipynb)
 
 *)
 open XPlot.GoogleCharts

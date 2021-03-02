@@ -15,7 +15,7 @@
 (**
 Google Line Chart
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/zyzhu/XPlot/gh-pages?filepath=google-line-chart.ipynb)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/fslaborg/XPlot/gh-pages?filepath=google-line-chart.ipynb)
 
 This example shows how to create scatter (point) charts and line charts using the
 `XPlot.GoogleCharts` library.

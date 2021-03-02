@@ -24,7 +24,7 @@ The XPlot library can be used interactively from F# Interactive, but charts can 
 in F# applications and in HTML reports.
 
 Try it out in notebook by clicking the binder badger
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/zyzhu/XPlot/gh-pages?filepath=index.ipynb)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/fslaborg/XPlot/gh-pages?filepath=index.ipynb)
 
 The next two demos show some of the more complex and advanced charts that can be created using XPlot.
 If you're getting started with XPlot, see the other [documentation](#Documentation) pages for

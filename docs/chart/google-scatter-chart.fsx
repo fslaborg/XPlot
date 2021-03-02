@@ -12,7 +12,7 @@
 (**
 Google Scatter Chart
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/zyzhu/XPlot/gh-pages?filepath=google-scatter-chart.ipynb)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/fslaborg/XPlot/gh-pages?filepath=google-scatter-chart.ipynb)
 
 Creating scatter plots (or point charts) is easy. The following example generates 1000
 points by multiplying two numbers for the X coordinate and two numbers for the Y coordinate:

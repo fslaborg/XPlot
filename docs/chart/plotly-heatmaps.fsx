@@ -12,7 +12,7 @@
 (**
 Plotly Heatmaps
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/zyzhu/XPlot/gh-pages?filepath=plotly-heatmaps.ipynb)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/fslaborg/XPlot/gh-pages?filepath=plotly-heatmaps.ipynb)
 
 Basic Heatmap
 -------------

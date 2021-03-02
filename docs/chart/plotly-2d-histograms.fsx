@@ -14,7 +14,7 @@
 (**
 Plotly 2D Histograms
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/zyzhu/XPlot/gh-pages?filepath=plotly-2d-histograms.ipynb)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/fslaborg/XPlot/gh-pages?filepath=plotly-2d-histograms.ipynb)
 
 2D Histogram of a Bivariate Normal Distribution
 -----------------------------------------------

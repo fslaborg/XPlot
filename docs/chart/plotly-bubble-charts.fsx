@@ -12,7 +12,7 @@
 (**
 Plotly Bubble Charts
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/zyzhu/XPlot/gh-pages?filepath=plotly-bubble-charts.ipynb)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/fslaborg/XPlot/gh-pages?filepath=plotly-bubble-charts.ipynb)
 
 Marker Size, Color, and Symbol as an Array
 ------------------------------------------
