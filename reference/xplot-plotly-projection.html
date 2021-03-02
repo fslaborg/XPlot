@@ -1,555 +1,797 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8" />
-    <title>Projection - XPlot</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="" />
-    <meta name="author" content="Taha Hachana; Tomas Petricek" />
+    <meta charset="utf-8">
+    <title>Projection (XPlot)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="XPlot.Plotly">
 
-    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
-    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
-    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
-    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet" />
+    <link rel="stylesheet" id="theme_link" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.3.1/materia/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-        google.charts.load('current', {
-            packages: ["corechart", "annotationchart", "calendar", "gauge", "geochart", "map", "sankey", "table", "timeline", "treemap"]
-        });
-    </script>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <link type="text/css" rel="stylesheet" href="https://fslab.org/XPlot/content/style.css" />
-    <script type="text/javascript" src="https://fslab.org/XPlot/content/tips.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
+
+    <link type="text/css" rel="stylesheet" href="https://fslab.org/XPlot//content/navbar-fixed-left.css" />
+    <link type="text/css" rel="stylesheet" href="https://fslab.org/XPlot//content/fsdocs-default.css" />
+    <link type="text/css" rel="stylesheet" href="https://fslab.org/XPlot//content/fsdocs-custom.css" />
+    <script type="text/javascript" src="https://fslab.org/XPlot//content/fsdocs-tips.js"></script>
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
-      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <!-- END SEARCH BOX: this adds support for the search box -->
+
 </head>
+
 <body>
+    <nav class="navbar navbar-expand-md navbar-light bg-secondary fixed-left" id="fsdocs-menu">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <a href="https://fslab.org/XPlot/"><img id="fsdocs-logo" src="https://fslab.org/XPlot/img/logo.png" /></a>
+            <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+            <div id="header">
+                <div class="searchbox" id="fsdocs-searchbox">
+                    <label for="search-by">
+                        <i class="fas fa-search"></i>
+                    </label>
+                    <input data-search-input="" id="search-by" type="search" placeholder="Search..." />
+                    <span data-search-clear="">
+                        <i class="fas fa-times"></i>
+                    </span>
+                </div>
+            </div>
+
+            <!-- END SEARCH BOX: this adds support for the search box -->
+            <ul class="navbar-nav" id="fsdocs-nav">
+                <li class="nav-header">XPlot</li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//index.html">Home Page</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//quickstart.html">Getting started</a></li>
+                <li class="divider"></li>
+                <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="https://github.com/fslaborg/XPlot/blob/master/LICENSE.md">License (Apache 2.0)</a></li>
+                <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="https://github.com/fslaborg/XPlot/blob/master/RELEASE_NOTES.md">Release Notes</a></li>
+                <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="https://github.com/fslaborg/XPlot/">Source Repository</a></li>
+                <li class="nav-header"></li>
+                <li class="nav-header">Plotly</li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-bar-charts.html">Bar</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-line-scatter-plots.html">Line and Scatter</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-box-plots.html">Box Plots</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-bubble-charts.html">Bubble</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-contour-plots.html">Contour</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-candlestick-plots.html">Candlesticks</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-area-plots.html">Area</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-heatmaps.html">Heatmaps</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-histograms.html">Histograms</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-2d-histograms.html">2D Histograms</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-polar-charts.html">Polar</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-time-series.html">Time Series</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-multiple-chart-types.html">Multiple Chart Types</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-log-plots.html">Log Plots</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-3d-scatter-plots.html">3D Scatter</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-3d-surface-plots.html">3D Surface</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-3d-line-plots.html">3D Line</a></li>
+                <li class="nav-header">Google Charts</li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-annotation-chart.html">Annotation</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-area-chart.html">Area</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-bar-chart.html">Bar</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-bubble-chart.html">Bubble</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-calendar-chart.html">Calendar</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-candlestick-chart.html">Candlestick</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-column-chart.html">Column</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-combo-chart.html">Combo</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-gauge-chart.html">Gauge</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-geo-chart.html">Geo</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-histogram-chart.html">Histogram</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-line-chart.html">Line</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-map-chart.html">Map</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-pie-chart.html">Pie</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-sankey-diagram.html">Sankey</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-scatter-chart.html">Scatter</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-stepped-area-chart.html">Stepped Area</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-timeline-chart.html">Timeline</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-table-chart.html">Table</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-treemap-chart.html">Treemap</a></li>
+                <li class="nav-header">D3 Charts</li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/d3-network.html">Network</a></li>
+                <li class="nav-header">
+  API Reference
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fslab.org/XPlot/reference/index.html">
+    All Namespaces
+  </a>
+</li>
+            </ul>
+        </div>
+    </nav>
     <div class="container">
         <div class="masthead">
-            <ul class="nav nav-pills pull-right">
-                <li>
-                    <a href="https://fslab.org"><img height="16" width="16" src="https://fslab.org/img/thumbs/fslab.png" /> FsLab</a>
-                </li>
-                <li>
-                    <a href="http://fsharp.github.io/FSharp.Data"><img height="16" width="16" src="https://fslab.org/img/thumbs/fsharpdata.png" /> F# Data</a>
-                </li>
-                <li>
-                    <a href="https://fslab.org/Deedle"><img height="16" width="16" src="https://fslab.org/img/thumbs/deedle.png" /> Deedle</a>
-                </li>
-                <li>
-                    <a href="https://fslab.org/RProvider"><img height="16" width="16" src="https://fslab.org/img/thumbs/rprovider.png" /> R Provider</a>
-                </li>
-                <li>
-                    <a href="http://numerics.mathdotnet.com/"><img height="16" width="16" src="https://fslab.org/img/thumbs/mathnet.png" /> Math.NET</a>
-                </li>
-            </ul>
             <h3 class="muted"><a href="https://fslab.org/XPlot/">XPlot</a></h3>
         </div>
         <hr />
-        <div class="row">
-            <div class="span9" id="main">
-                
+        <div class="container" id="fsdocs-content">
+            <div>
+  <h1>
+    Projection Type
+  </h1>
+  <p>
+    Namespace: 
+    <a href="https://fslab.org/XPlot/reference/xplot-plotly.html">
+      XPlot.Plotly
+    </a>
+  </p>
+  <p>
+    Assembly: XPlot.Plotly.dll
+  </p>
+  <p>
+    Base Type: 
+    <code>obj</code>
+  </p>
+  <div class="fsdocs-xmldoc">
+    
+  </div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div>
+    <h3>
+      Constructors
+    </h3>
+    <table class="table outer-list fsdocs-member-list">
+      <thead>
+        <tr>
+          <td class="fsdocs-member-list-header">
+            Constructor
+          </td>
+          <td class="fsdocs-member-list-header">
+            Description
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2450', 2450)" onmouseover="showTip(event, '2450', 2450)">
+                <p>
+                  <a id="( .ctor )">
+                    <a href="#( .ctor )">
+                      <code><span>Projection<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2450">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>Projection<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="https://fslab.org/XPlot/reference/xplot-plotly-projection.html">Projection</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/Projection.fs#L3-3" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code><a href="https://fslab.org/XPlot/reference/xplot-plotly-projection.html">Projection</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div>
+    <h3>
+      Instance members
+    </h3>
+    <table class="table outer-list fsdocs-member-list">
+      <thead>
+        <tr>
+          <td class="fsdocs-member-list-header">
+            Instance member
+          </td>
+          <td class="fsdocs-member-list-header">
+            Description
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2451', 2451)" onmouseover="showTip(event, '2451', 2451)">
+                <p>
+                  <a id="ShouldSerializeparallels">
+                    <a href="#ShouldSerializeparallels">
+                      <code><span>this.ShouldSerializeparallels<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2451">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializeparallels<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/Projection.fs#L48-48" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2452', 2452)" onmouseover="showTip(event, '2452', 2452)">
+                <p>
+                  <a id="ShouldSerializerotation">
+                    <a href="#ShouldSerializerotation">
+                      <code><span>this.ShouldSerializerotation<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2452">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializerotation<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/Projection.fs#L47-47" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2453', 2453)" onmouseover="showTip(event, '2453', 2453)">
+                <p>
+                  <a id="ShouldSerializescale">
+                    <a href="#ShouldSerializescale">
+                      <code><span>this.ShouldSerializescale<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2453">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializescale<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/Projection.fs#L49-49" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2454', 2454)" onmouseover="showTip(event, '2454', 2454)">
+                <p>
+                  <a id="ShouldSerializetype">
+                    <a href="#ShouldSerializetype">
+                      <code><span>this.ShouldSerializetype<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2454">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializetype<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/Projection.fs#L46-46" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2455', 2455)" onmouseover="showTip(event, '2455', 2455)">
+                <p>
+                  <a id="ShouldSerializex">
+                    <a href="#ShouldSerializex">
+                      <code><span>this.ShouldSerializex<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2455">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializex<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/Projection.fs#L43-43" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2456', 2456)" onmouseover="showTip(event, '2456', 2456)">
+                <p>
+                  <a id="ShouldSerializey">
+                    <a href="#ShouldSerializey">
+                      <code><span>this.ShouldSerializey<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2456">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializey<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/Projection.fs#L44-44" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2457', 2457)" onmouseover="showTip(event, '2457', 2457)">
+                <p>
+                  <a id="ShouldSerializez">
+                    <a href="#ShouldSerializez">
+                      <code><span>this.ShouldSerializez<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2457">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializez<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/Projection.fs#L45-45" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2458', 2458)" onmouseover="showTip(event, '2458', 2458)">
+                <p>
+                  <a id="parallels">
+                    <a href="#parallels">
+                      <code><span>this.parallels&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2458">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.parallels&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/Projection.fs#L34-34" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+ For conic projection types only. Sets the parallels (tangent, secant) where the cone intersects the sphere.
 
-<h1>Projection</h1>
-<p>
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2459', 2459)" onmouseover="showTip(event, '2459', 2459)">
+                <p>
+                  <a id="rotation">
+                    <a href="#rotation">
+                      <code><span>this.rotation&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2459">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.rotation&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/Projection.fs#L29-29" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2460', 2460)" onmouseover="showTip(event, '2460', 2460)">
+                <p>
+                  <a id="scale">
+                    <a href="#scale">
+                      <code><span>this.scale&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2460">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.scale&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/Projection.fs#L39-39" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+ Zooms in or out on the map view.
 
-    <span>Namespace: XPlot.Plotly</span><br />
-    </p>
-<div class="xmldoc">
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2461', 2461)" onmouseover="showTip(event, '2461', 2461)">
+                <p>
+                  <a id="type">
+                    <a href="#type">
+                      <code><span>this.type&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2461">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.type&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/Projection.fs#L25-25" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+ Sets the projection type.
+
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2462', 2462)" onmouseover="showTip(event, '2462', 2462)">
+                <p>
+                  <a id="x">
+                    <a href="#x">
+                      <code><span>this.x&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2462">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.x&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/Projection.fs#L12-12" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2463', 2463)" onmouseover="showTip(event, '2463', 2463)">
+                <p>
+                  <a id="y">
+                    <a href="#y">
+                      <code><span>this.y&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2463">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.y&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/Projection.fs#L16-16" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2464', 2464)" onmouseover="showTip(event, '2464', 2464)">
+                <p>
+                  <a id="z">
+                    <a href="#z">
+                      <code><span>this.z&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2464">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.z&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/Projection.fs#L20-20" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div></div>
 </div>
-  <h3>Constructors</h3>
-  <table class="table table-bordered member-list">
-    <thead>
-      <tr><td>Constructor</td><td>Description</td></tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '4479', 4479)" onmouseover="showTip(event, '4479', 4479)">
-            new()
-          </code>
-          <div class="tip" id="4479">
-            <strong>Signature:</strong> unit -&gt; Projection<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Projection.fs#L3-3" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-              <p>CompiledName: <code>.ctor</code></p>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <h3>Instance members</h3>
-  <table class="table table-bordered member-list">
-    <thead>
-      <tr><td>Instance member</td><td>Description</td></tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '4480', 4480)" onmouseover="showTip(event, '4480', 4480)">
-            x.parallels()
-          </code>
-          <div class="tip" id="4480">
-            <strong>Signature:</strong> unit -&gt; obj<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Projection.fs#L34-34" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          <p>For conic projection types only. Sets the parallels (tangent, secant) where the cone intersects the sphere.</p>
-
-
-              <p>CompiledName: <code>set_parallels</code></p>
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '4481', 4481)" onmouseover="showTip(event, '4481', 4481)">
-            x.parallels()
-          </code>
-          <div class="tip" id="4481">
-            <strong>Signature:</strong> unit -&gt; unit<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Projection.fs#L34-34" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          <p>For conic projection types only. Sets the parallels (tangent, secant) where the cone intersects the sphere.</p>
-
-
-              <p>CompiledName: <code>get_parallels</code></p>
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '4482', 4482)" onmouseover="showTip(event, '4482', 4482)">
-            x.rotation()
-          </code>
-          <div class="tip" id="4482">
-            <strong>Signature:</strong> unit -&gt; Rotation<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Projection.fs#L29-29" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-              <p>CompiledName: <code>set_rotation</code></p>
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '4483', 4483)" onmouseover="showTip(event, '4483', 4483)">
-            x.rotation()
-          </code>
-          <div class="tip" id="4483">
-            <strong>Signature:</strong> unit -&gt; unit<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Projection.fs#L29-29" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-              <p>CompiledName: <code>get_rotation</code></p>
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '4484', 4484)" onmouseover="showTip(event, '4484', 4484)">
-            x.scale()
-          </code>
-          <div class="tip" id="4484">
-            <strong>Signature:</strong> unit -&gt; float<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Projection.fs#L39-39" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          <p>Zooms in or out on the map view.</p>
-
-
-              <p>CompiledName: <code>set_scale</code></p>
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '4485', 4485)" onmouseover="showTip(event, '4485', 4485)">
-            x.scale()
-          </code>
-          <div class="tip" id="4485">
-            <strong>Signature:</strong> unit -&gt; unit<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Projection.fs#L39-39" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          <p>Zooms in or out on the map view.</p>
-
-
-              <p>CompiledName: <code>get_scale</code></p>
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '4486', 4486)" onmouseover="showTip(event, '4486', 4486)">
-            x.ShouldSerializeparallels()
-          </code>
-          <div class="tip" id="4486">
-            <strong>Signature:</strong> unit -&gt; bool<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Projection.fs#L48-48" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '4487', 4487)" onmouseover="showTip(event, '4487', 4487)">
-            x.ShouldSerializerotation()
-          </code>
-          <div class="tip" id="4487">
-            <strong>Signature:</strong> unit -&gt; bool<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Projection.fs#L47-47" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '4488', 4488)" onmouseover="showTip(event, '4488', 4488)">
-            x.ShouldSerializescale()
-          </code>
-          <div class="tip" id="4488">
-            <strong>Signature:</strong> unit -&gt; bool<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Projection.fs#L49-49" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '4489', 4489)" onmouseover="showTip(event, '4489', 4489)">
-            x.ShouldSerializetype()
-          </code>
-          <div class="tip" id="4489">
-            <strong>Signature:</strong> unit -&gt; bool<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Projection.fs#L46-46" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '4490', 4490)" onmouseover="showTip(event, '4490', 4490)">
-            x.ShouldSerializex()
-          </code>
-          <div class="tip" id="4490">
-            <strong>Signature:</strong> unit -&gt; bool<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Projection.fs#L43-43" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '4491', 4491)" onmouseover="showTip(event, '4491', 4491)">
-            x.ShouldSerializey()
-          </code>
-          <div class="tip" id="4491">
-            <strong>Signature:</strong> unit -&gt; bool<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Projection.fs#L44-44" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '4492', 4492)" onmouseover="showTip(event, '4492', 4492)">
-            x.ShouldSerializez()
-          </code>
-          <div class="tip" id="4492">
-            <strong>Signature:</strong> unit -&gt; bool<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Projection.fs#L45-45" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '4493', 4493)" onmouseover="showTip(event, '4493', 4493)">
-            x.type()
-          </code>
-          <div class="tip" id="4493">
-            <strong>Signature:</strong> unit -&gt; obj<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Projection.fs#L25-25" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          <p>Sets the projection type.</p>
-
-
-              <p>CompiledName: <code>set_type</code></p>
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '4494', 4494)" onmouseover="showTip(event, '4494', 4494)">
-            x.type()
-          </code>
-          <div class="tip" id="4494">
-            <strong>Signature:</strong> unit -&gt; unit<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Projection.fs#L25-25" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          <p>Sets the projection type.</p>
-
-
-              <p>CompiledName: <code>get_type</code></p>
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '4495', 4495)" onmouseover="showTip(event, '4495', 4495)">
-            x.x()
-          </code>
-          <div class="tip" id="4495">
-            <strong>Signature:</strong> unit -&gt; X<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Projection.fs#L12-12" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-              <p>CompiledName: <code>set_x</code></p>
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '4496', 4496)" onmouseover="showTip(event, '4496', 4496)">
-            x.x()
-          </code>
-          <div class="tip" id="4496">
-            <strong>Signature:</strong> unit -&gt; unit<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Projection.fs#L12-12" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-              <p>CompiledName: <code>get_x</code></p>
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '4497', 4497)" onmouseover="showTip(event, '4497', 4497)">
-            x.y()
-          </code>
-          <div class="tip" id="4497">
-            <strong>Signature:</strong> unit -&gt; Y<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Projection.fs#L16-16" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-              <p>CompiledName: <code>set_y</code></p>
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '4498', 4498)" onmouseover="showTip(event, '4498', 4498)">
-            x.y()
-          </code>
-          <div class="tip" id="4498">
-            <strong>Signature:</strong> unit -&gt; unit<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Projection.fs#L16-16" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-              <p>CompiledName: <code>get_y</code></p>
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '4499', 4499)" onmouseover="showTip(event, '4499', 4499)">
-            x.z()
-          </code>
-          <div class="tip" id="4499">
-            <strong>Signature:</strong> unit -&gt; Z<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Projection.fs#L20-20" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-              <p>CompiledName: <code>set_z</code></p>
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '4500', 4500)" onmouseover="showTip(event, '4500', 4500)">
-            x.z()
-          </code>
-          <div class="tip" id="4500">
-            <strong>Signature:</strong> unit -&gt; unit<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.Plotly/PlotBase/Projection.fs#L20-20" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-              <p>CompiledName: <code>get_z</code></p>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
-            </div>
-            <div class="span3">
-                <img src="https://fslab.org/XPlot/img/logo.png" alt="F# Project" style="width:130px;margin:20px" />
-                <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
-                    <li class="nav-header">XPlot</li>
-                    <li><a href="https://fslab.org/XPlot/">Home page</a></li>
-                    <li><a href="https://fslab.org/XPlot/quickstart.html">Getting started</a></li>
-                    <li class="divider"></li>
-                    <li><a href="http://www.nuget.org/packages?q=XPlot">Get Library via NuGet</a></li>
-                    <li><a href="https://github.com/fslaborg/XPlot">Source Code on GitHub</a></li>
-                    <li><a href="https://fslab.org/XPlot/license.html">License (Apache 2.0)</a></li>
-                    <li><a href="https://fslab.org/XPlot/release-notes.html">Release Notes</a></li>
-
-                    <li class="nav-header"><a href="https://fslab.org/XPlot/google-charts.html">Google Charts</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-annotation-chart.html">Annotation</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-area-chart.html">Area</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-bar-chart.html">Bar</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-bubble-chart.html">Bubble</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-calendar-chart.html">Calendar</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-candlestick-chart.html">Candlestick</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-column-chart.html">Column</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-combo-chart.html">Combo</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-gauge-chart.html">Gauge</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-geo-chart.html">Geo</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-histogram-chart.html">Histogram</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-line-chart.html">Line</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-map-chart.html">Map</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-pie-chart.html">Pie</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-sankey-diagram.html">Sankey</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-scatter-chart.html">Scatter</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-stepped-area-chart.html">Stepped Area</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-timeline-chart.html">Timeline</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-table-chart.html">Table</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-treemap-chart.html">Treemap</a></li>
-
-                    <li class="nav-header"><a href="https://fslab.org/XPlot/plotly.html">Plotly</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-bar-charts.html">Bar</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-line-scatter-plots.html">Line and Scatter Plots</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-box-plots.html">Box Plots</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-bubble-charts.html">Bubble Charts</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-contour-plots.html">Contour Plots</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-area-plots.html">Area Plots</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-heatmaps.html">Heatmaps</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-histograms.html">Histograms</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-2d-histograms.html">2D Histograms</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-polar-charts.html">Polar Charts</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-time-series.html">Time Series</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-multiple-chart-types.html">Multiple Chart Types</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-log-plots.html">Log Plots</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-3d-scatter-plots.html">3D Scatter Plots</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-3d-surface-plots.html">3D Surface Plots</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-3d-line-plots.html">3D Line Plots</a></li>
-
-                    <li class="nav-header"><a href="https://fslab.org/XPlot/d3.html">D3 Charts</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/d3-network.html">Network</a></li>
-
-                    <li class="nav-header">Documentation</li>
-                    <li><a href="https://fslab.org/XPlot/reference/index.html">API Reference</a></li>
-                    <li class="divider"></li>
-
-                    <li><a href="https://fslab.org/XPlot/reference/xplot-googlecharts-chart.html">Google Chart Type</a></li>
-                    <li><a href="https://fslab.org/XPlot/reference/xplot-googlecharts-configuration-options.html">Google Option Type</a></li>
-                    <li><a href="https://fslab.org/XPlot/reference/xplot-googlecharts-configuration.html">Google Configuration Module</a></li>
-
-                    <li class="divider"></li>
-
-                    <li><a href="https://fslab.org/XPlot/reference/xplot-plotly-graph.html">Plotly Graph Module</a></li>
-                    <li><a href="https://fslab.org/XPlot/reference/xplot-plotly-layout-layout.html">Plotly Layout Type</a></li>
-                </ul>
-            </div>
+            
         </div>
+
+        <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+        <script type="text/javascript">var fsdocs_search_baseurl = 'https://fslab.org/XPlot/'</script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
+        <script type="text/javascript" src="https://fslab.org/XPlot/content/fsdocs-search.js"></script>
+        <!-- END SEARCH BOX: this adds support for the search box -->
     </div>
-    <a href="https://github.com/fslaborg/XPlot"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub" /></a>
 </body>
+
 </html>
+

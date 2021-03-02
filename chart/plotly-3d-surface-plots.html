@@ -1,198 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8" />
-    <title>Plotly 3D Surface Plots
-</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Data visualization library for F#" />
-    <meta name="author" content="Taha Hachana; Tomas Petricek" />
+    <meta charset="utf-8">
+    <title>plotly-3d-surface-plots</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="XPlot.GoogleCharts">
 
-    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
-    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
-    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
-    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet" />
+    <link rel="stylesheet" id="theme_link" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.3.1/materia/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-        google.charts.load('current', {
-            packages: ["corechart", "annotationchart", "calendar", "gauge", "geochart", "map", "sankey", "table", "timeline", "treemap"]
-        });
-    </script>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <link type="text/css" rel="stylesheet" href="https://fslab.org/XPlot/content/style.css" />
-    <script type="text/javascript" src="https://fslab.org/XPlot/content/tips.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
+
+    <link type="text/css" rel="stylesheet" href="https://fslab.org/XPlot//content/navbar-fixed-left.css" />
+    <link type="text/css" rel="stylesheet" href="https://fslab.org/XPlot//content/fsdocs-default.css" />
+    <link type="text/css" rel="stylesheet" href="https://fslab.org/XPlot//content/fsdocs-custom.css" />
+    <script type="text/javascript" src="https://fslab.org/XPlot//content/fsdocs-tips.js"></script>
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
-      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <!-- END SEARCH BOX: this adds support for the search box -->
+
 </head>
+
 <body>
+    <nav class="navbar navbar-expand-md navbar-light bg-secondary fixed-left" id="fsdocs-menu">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <a href="https://fslab.org/XPlot/"><img id="fsdocs-logo" src="https://fslab.org/XPlot/img/logo.png" /></a>
+            <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+            <div id="header">
+                <div class="searchbox" id="fsdocs-searchbox">
+                    <label for="search-by">
+                        <i class="fas fa-search"></i>
+                    </label>
+                    <input data-search-input="" id="search-by" type="search" placeholder="Search..." />
+                    <span data-search-clear="">
+                        <i class="fas fa-times"></i>
+                    </span>
+                </div>
+            </div>
+
+            <!-- END SEARCH BOX: this adds support for the search box -->
+            <ul class="navbar-nav" id="fsdocs-nav">
+                <li class="nav-header">XPlot</li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//index.html">Home Page</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//quickstart.html">Getting started</a></li>
+                <li class="divider"></li>
+                <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="https://github.com/fslaborg/XPlot/blob/master/LICENSE.md">License (Apache 2.0)</a></li>
+                <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="https://github.com/fslaborg/XPlot/blob/master/RELEASE_NOTES.md">Release Notes</a></li>
+                <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="https://github.com/fslaborg/XPlot/">Source Repository</a></li>
+                <li class="nav-header"></li>
+                <li class="nav-header">Plotly</li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-bar-charts.html">Bar</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-line-scatter-plots.html">Line and Scatter</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-box-plots.html">Box Plots</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-bubble-charts.html">Bubble</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-contour-plots.html">Contour</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-candlestick-plots.html">Candlesticks</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-area-plots.html">Area</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-heatmaps.html">Heatmaps</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-histograms.html">Histograms</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-2d-histograms.html">2D Histograms</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-polar-charts.html">Polar</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-time-series.html">Time Series</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-multiple-chart-types.html">Multiple Chart Types</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-log-plots.html">Log Plots</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-3d-scatter-plots.html">3D Scatter</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-3d-surface-plots.html">3D Surface</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-3d-line-plots.html">3D Line</a></li>
+                <li class="nav-header">Google Charts</li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-annotation-chart.html">Annotation</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-area-chart.html">Area</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-bar-chart.html">Bar</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-bubble-chart.html">Bubble</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-calendar-chart.html">Calendar</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-candlestick-chart.html">Candlestick</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-column-chart.html">Column</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-combo-chart.html">Combo</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-gauge-chart.html">Gauge</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-geo-chart.html">Geo</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-histogram-chart.html">Histogram</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-line-chart.html">Line</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-map-chart.html">Map</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-pie-chart.html">Pie</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-sankey-diagram.html">Sankey</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-scatter-chart.html">Scatter</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-stepped-area-chart.html">Stepped Area</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-timeline-chart.html">Timeline</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-table-chart.html">Table</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-treemap-chart.html">Treemap</a></li>
+                <li class="nav-header">D3 Charts</li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/d3-network.html">Network</a></li>
+                <li class="nav-header">
+  API Reference
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fslab.org/XPlot/reference/index.html">
+    All Namespaces
+  </a>
+</li>
+            </ul>
+        </div>
+    </nav>
     <div class="container">
         <div class="masthead">
-            <ul class="nav nav-pills pull-right">
-                <li>
-                    <a href="https://fslab.org"><img height="16" width="16" src="https://fslab.org/img/thumbs/fslab.png" /> FsLab</a>
-                </li>
-                <li>
-                    <a href="http://fsharp.github.io/FSharp.Data"><img height="16" width="16" src="https://fslab.org/img/thumbs/fsharpdata.png" /> F# Data</a>
-                </li>
-                <li>
-                    <a href="https://fslab.org/Deedle"><img height="16" width="16" src="https://fslab.org/img/thumbs/deedle.png" /> Deedle</a>
-                </li>
-                <li>
-                    <a href="https://fslab.org/RProvider"><img height="16" width="16" src="https://fslab.org/img/thumbs/rprovider.png" /> R Provider</a>
-                </li>
-                <li>
-                    <a href="http://numerics.mathdotnet.com/"><img height="16" width="16" src="https://fslab.org/img/thumbs/mathnet.png" /> Math.NET</a>
-                </li>
-            </ul>
             <h3 class="muted"><a href="https://fslab.org/XPlot/">XPlot</a></h3>
         </div>
         <hr />
-        <div class="row">
-            <div class="span9" id="main">
-                
-<h1><a name="Plotly-3D-Surface-Plots" class="anchor" href="#Plotly-3D-Surface-Plots">Plotly 3D Surface Plots</a></h1>
-<p><a href="https://github.com/fslaborg/XPlot/blob/master/docsrc/content/chart/plotly-3d-surface-plots.fsx">Full source and data</a></p>
+        <div class="container" id="fsdocs-content">
+            <p>Plotly 3D Surface Plots</p>
+<p><a href="https://mybinder.org/v2/gh/fslaborg/XPlot/gh-pages?filepath=plotly-3d-surface-plots.ipynb"><img src="https://mybinder.org/badge_logo.svg" alt="Binder" /></a></p>
 <h2><a name="Topographical-3D-Surface-Plot" class="anchor" href="#Topographical-3D-Surface-Plot">Topographical 3D Surface Plot</a></h2>
-<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
-<span class="l"> 2: </span>
-<span class="l"> 3: </span>
-<span class="l"> 4: </span>
-<span class="l"> 5: </span>
-<span class="l"> 6: </span>
-<span class="l"> 7: </span>
-<span class="l"> 8: </span>
-<span class="l"> 9: </span>
-<span class="l">10: </span>
-<span class="l">11: </span>
-<span class="l">12: </span>
-<span class="l">13: </span>
-<span class="l">14: </span>
-<span class="l">15: </span>
-<span class="l">16: </span>
-<span class="l">17: </span>
-<span class="l">18: </span>
-</pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="id">layout</span> <span class="o">=</span>
-    <span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="rt">Layout</span><span class="pn">(</span>
-        <span class="id">title</span> <span class="o">=</span> <span class="s">&quot;Mt Bruno Elevation&quot;</span><span class="pn">,</span>
-        <span class="id">autosize</span> <span class="o">=</span> <span class="k">false</span><span class="pn">,</span>
-        <span class="id">margin</span> <span class="o">=</span>
-            <span onmouseout="hideTip(event, 'fs6', 6)" onmouseover="showTip(event, 'fs6', 6)" class="rt">Margin</span><span class="pn">(</span>
-                <span onmouseout="hideTip(event, 'fs7', 7)" onmouseover="showTip(event, 'fs7', 7)" class="id">l</span> <span class="o">=</span> <span class="n">65.</span><span class="pn">,</span>
-                <span onmouseout="hideTip(event, 'fs8', 8)" onmouseover="showTip(event, 'fs8', 8)" class="id">r</span> <span class="o">=</span> <span class="n">50.</span><span class="pn">,</span>
-                <span onmouseout="hideTip(event, 'fs9', 9)" onmouseover="showTip(event, 'fs9', 9)" class="id">b</span> <span class="o">=</span> <span class="n">65.</span><span class="pn">,</span>
-                <span onmouseout="hideTip(event, 'fs10', 10)" onmouseover="showTip(event, 'fs10', 10)" class="id">t</span> <span class="o">=</span> <span class="n">90.</span>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="id">XPlot</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="id">Plotly</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="id">System</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="id">z</span> <span class="o">=</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="fn">rnd</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 6)" onmouseover="showTip(event, 'fs6', 6)" class="fn">Random</span><span class="pn">(</span><span class="pn">)</span>
+    <span class="pn">[</span> <span class="k">for</span> <span class="id">_</span> <span class="k">in</span> <span class="n">1</span> <span class="o">..</span> <span class="n">25</span> <span class="k">-&gt;</span>
+        <span class="pn">[</span> <span class="k">for</span> <span class="id">_</span> <span class="k">in</span> <span class="n">1</span> <span class="o">..</span> <span class="n">25</span> <span class="k">-&gt;</span>
+            <span onmouseout="hideTip(event, 'fs5', 7)" onmouseover="showTip(event, 'fs5', 7)" class="fn">rnd</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs7', 8)" onmouseover="showTip(event, 'fs7', 8)" class="id">Next</span><span class="pn">(</span><span class="n">0</span><span class="pn">,</span> <span class="n">400</span><span class="pn">)</span>
+        <span class="pn">]</span>
+    <span class="pn">]</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs8', 9)" onmouseover="showTip(event, 'fs8', 9)" class="id">layout</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs9', 10)" onmouseover="showTip(event, 'fs9', 10)" class="fn">Layout</span><span class="pn">(</span>
+        <span class="fn">autosize</span> <span class="o">=</span> <span class="k">false</span><span class="pn">,</span>
+        <span class="fn">margin</span> <span class="o">=</span>
+            <span onmouseout="hideTip(event, 'fs10', 11)" onmouseover="showTip(event, 'fs10', 11)" class="fn">Margin</span><span class="pn">(</span>
+                <span onmouseout="hideTip(event, 'fs11', 12)" onmouseover="showTip(event, 'fs11', 12)" class="fn">l</span> <span class="o">=</span> <span class="n">65.</span><span class="pn">,</span>
+                <span onmouseout="hideTip(event, 'fs12', 13)" onmouseover="showTip(event, 'fs12', 13)" class="fn">r</span> <span class="o">=</span> <span class="n">50.</span><span class="pn">,</span>
+                <span onmouseout="hideTip(event, 'fs13', 14)" onmouseover="showTip(event, 'fs13', 14)" class="fn">b</span> <span class="o">=</span> <span class="n">65.</span><span class="pn">,</span>
+                <span onmouseout="hideTip(event, 'fs14', 15)" onmouseover="showTip(event, 'fs14', 15)" class="fn">t</span> <span class="o">=</span> <span class="n">90.</span>
             <span class="pn">)</span>
     <span class="pn">)</span>
 
-<span onmouseout="hideTip(event, 'fs11', 11)" onmouseover="showTip(event, 'fs11', 11)" class="rt">Surface</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs12', 12)" onmouseover="showTip(event, 'fs12', 12)" class="id">z</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs3', 13)" onmouseover="showTip(event, 'fs3', 13)" class="id">z</span><span class="pn">)</span>
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs13', 14)" onmouseover="showTip(event, 'fs13', 14)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs14', 15)" onmouseover="showTip(event, 'fs14', 15)" class="id">Plot</span>
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs13', 16)" onmouseover="showTip(event, 'fs13', 16)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs15', 17)" onmouseover="showTip(event, 'fs15', 17)" class="id">WithLayout</span> <span onmouseout="hideTip(event, 'fs4', 18)" onmouseover="showTip(event, 'fs4', 18)" class="id">layout</span>
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs13', 19)" onmouseover="showTip(event, 'fs13', 19)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs16', 20)" onmouseover="showTip(event, 'fs16', 20)" class="id">WithWidth</span> <span class="n">700</span>
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs13', 21)" onmouseover="showTip(event, 'fs13', 21)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs17', 22)" onmouseover="showTip(event, 'fs17', 22)" class="id">WithHeight</span> <span class="n">500</span>
-</code></pre></td>
-</tr>
-</table>
-<div id="b69806ce-04c5-460a-aa02-98649f9dfbed" style="width: 700px; height: 500px;"></div>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs15', 16)" onmouseover="showTip(event, 'fs15', 16)" class="id">chart</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs16', 17)" onmouseover="showTip(event, 'fs16', 17)" class="fn">Surface</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs17', 18)" onmouseover="showTip(event, 'fs17', 18)" class="fn">z</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 19)" onmouseover="showTip(event, 'fs4', 19)" class="id">z</span><span class="pn">)</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs18', 20)" onmouseover="showTip(event, 'fs18', 20)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs19', 21)" onmouseover="showTip(event, 'fs19', 21)" class="id">Plot</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs18', 22)" onmouseover="showTip(event, 'fs18', 22)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs20', 23)" onmouseover="showTip(event, 'fs20', 23)" class="id">WithLayout</span> <span onmouseout="hideTip(event, 'fs8', 24)" onmouseover="showTip(event, 'fs8', 24)" class="id">layout</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs18', 25)" onmouseover="showTip(event, 'fs18', 25)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs21', 26)" onmouseover="showTip(event, 'fs21', 26)" class="id">WithWidth</span> <span class="n">700</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs18', 27)" onmouseover="showTip(event, 'fs18', 27)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 28)" onmouseover="showTip(event, 'fs22', 28)" class="id">WithHeight</span> <span class="n">500</span>
+</code></pre>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    </head>
+    <body>
+        <div id="7e8878ab-7790-4ba7-ac47-06063a44e61a" style="width: 700px; height: 500px;"></div>
         <script>
-            var data = [{"type":"surface","z":[[27.80985,49.61936,83.08067,116.6632,130.414,150.7206,220.1871,156.1536,148.6416,203.7845,206.0386,107.1618,68.36975,45.3359,49.96142,21.89279,17.02552,11.74317,14.75226,13.6671,5.677561,3.31234,1.156517,-0.147662],[27.71966,48.55022,65.21374,95.27666,116.9964,133.9056,152.3412,151.934,160.1139,179.5327,147.6184,170.3943,121.8194,52.58537,33.08871,38.40972,44.24843,69.5786,4.019351,3.050024,3.039719,2.996142,2.967954,1.999594],[30.4267,33.47752,44.80953,62.47495,77.43523,104.2153,102.7393,137.0004,186.0706,219.3173,181.7615,120.9154,143.1835,82.40501,48.47132,74.71461,60.0909,7.073525,6.089851,6.53745,6.666096,7.306965,5.73684,3.625628],[16.66549,30.1086,39.96952,44.12225,59.57512,77.56929,106.8925,166.5539,175.2381,185.2815,154.5056,83.0433,62.61732,62.33167,60.55916,55.92124,15.17284,8.248324,36.68087,61.93413,20.26867,68.58819,46.49812,0.2360095],[8.815617,18.3516,8.658275,27.5859,48.62691,60.18013,91.3286,145.7109,116.0653,106.2662,68.69447,53.10596,37.92797,47.95942,47.42691,69.20731,44.95468,29.17197,17.91674,16.25515,14.65559,17.26048,31.22245,46.71704],[6.628881,10.41339,24.81939,26.08952,30.1605,52.30802,64.71007,76.30823,84.63686,99.4324,62.52132,46.81647,55.76606,82.4099,140.2647,81.26501,56.45756,30.42164,17.28782,8.302431,2.981626,2.698536,5.886086,5.268358],[21.83975,6.63927,18.97085,32.89204,43.15014,62.86014,104.6657,130.2294,114.8494,106.9873,61.89647,55.55682,86.80986,89.27802,122.4221,123.9698,109.0952,98.41956,77.61374,32.49031,14.67344,7.370775,0.03711011,0.6423392],[53.34303,26.79797,6.63927,10.88787,17.2044,56.18116,79.70141,90.8453,98.27675,80.87243,74.7931,75.54661,73.4373,74.11694,68.1749,46.24076,39.93857,31.21653,36.88335,40.02525,117.4297,12.70328,1.729771,0.0],[25.66785,63.05717,22.1414,17.074,41.74483,60.27227,81.42432,114.444,102.3234,101.7878,111.031,119.2309,114.0777,110.5296,59.19355,42.47175,14.63598,6.944074,6.944075,27.74936,0.0,0.0,0.09449376,0.07732264],[12.827,69.20554,46.76293,13.96517,33.88744,61.82613,84.74799,121.122,145.2741,153.1797,204.786,227.9242,236.3038,228.3655,79.34425,25.93483,6.944074,6.944074,6.944075,7.553681,0.0,0.0,0.0,0.0],[0.0,68.66396,59.0435,33.35762,47.45282,57.8355,78.91689,107.8275,168.0053,130.9597,212.5541,165.8122,210.2429,181.1713,189.7617,137.3378,84.65395,8.677168,6.956576,8.468093,0.0,0.0,0.0,0.0],[0.0,95.17499,80.03818,59.89862,39.58476,50.28058,63.81641,80.61302,66.37824,198.7651,244.3467,294.2474,264.3517,176.4082,60.21857,77.41475,53.16981,56.16393,6.949235,7.531059,3.780177,0.0,0.0,0.0],[0.0,134.9879,130.3696,96.86325,75.70494,58.86466,57.20374,55.18837,78.128,108.5582,154.3774,319.1686,372.8826,275.4655,130.2632,54.93822,25.49719,8.047439,8.084393,5.115252,5.678269,0.0,0.0,0.0],[0.0,48.08919,142.5558,140.3777,154.7261,87.9361,58.11092,52.83869,67.14822,83.66798,118.9242,150.0681,272.9709,341.1366,238.664,190.2,116.8943,91.48672,14.0157,42.29277,5.115252,0.0,0.0,0.0],[0.0,54.1941,146.3839,99.48143,96.19411,102.9473,76.14089,57.7844,47.0402,64.36799,84.23767,162.7181,121.3275,213.1646,328.482,285.4489,283.8319,212.815,164.549,92.29631,7.244015,1.167,0.0,0.0],[0.0,6.919659,195.1709,132.5253,135.2341,89.85069,89.45549,60.29967,50.33806,39.17583,59.06854,74.52159,84.93402,187.1219,123.9673,103.7027,128.986,165.1283,249.7054,95.39966,10.00284,2.39255,0.0,0.0],[0.0,21.73871,123.1339,176.7414,158.2698,137.235,105.3089,86.63255,53.11591,29.03865,30.40539,39.04902,49.23405,63.27853,111.4215,101.1956,40.00962,59.84565,74.51253,17.06316,2.435141,2.287471,-0.0003636982,0.0],[0.0,0.0,62.04672,136.3122,201.7952,168.1343,95.2046,58.90624,46.94091,49.27053,37.10416,17.97011,30.93697,33.39257,44.03077,55.64542,78.22423,14.42782,9.954997,7.768213,13.0254,21.73166,2.156372,0.5317867],[0.0,0.0,79.62993,139.6978,173.167,192.8718,196.3499,144.6611,106.5424,57.16653,41.16107,32.12764,13.8566,10.91772,12.07177,22.38254,24.72105,6.803666,4.200841,16.46857,15.70744,33.96221,7.575688,-0.04880907],[0.0,0.0,33.2664,57.53643,167.2241,196.4833,194.7966,182.1884,119.6961,73.02113,48.36549,33.74652,26.2379,16.3578,6.811293,6.63927,6.639271,8.468093,6.194273,3.591233,3.81486,8.600739,5.21889,0.0],[0.0,0.0,29.77937,54.97282,144.7995,207.4904,165.3432,171.4047,174.9216,100.2733,61.46441,50.19171,26.08209,17.18218,8.468093,6.63927,6.334467,6.334467,5.666687,4.272203,0.0,0.0,0.0,0.0],[0.0,0.0,31.409,132.7418,185.5796,121.8299,185.3841,160.6566,116.1478,118.1078,141.7946,65.56351,48.84066,23.13864,18.12932,10.28531,6.029663,6.044627,5.694764,3.739085,3.896037,0.0,0.0,0.0],[0.0,0.0,19.58994,42.30355,96.26777,187.1207,179.6626,221.3898,154.2617,142.1604,148.5737,67.17937,40.69044,39.74512,26.10166,14.48469,8.65873,3.896037,3.571392,3.896037,3.896037,3.896037,1.077756,0.0],[0.001229679,3.008948,5.909858,33.50574,104.3341,152.2165,198.1988,191.841,228.7349,168.1041,144.2759,110.7436,57.65214,42.63504,27.91891,15.41052,8.056102,3.90283,3.879774,3.936718,3.968634,0.1236256,3.985531,-0.1835741],[0.0,5.626141,7.676256,63.16226,45.99762,79.56688,227.311,203.9287,172.5618,177.1462,140.4554,123.9905,110.346,65.12319,34.31887,24.5278,9.561069,3.334991,5.590495,5.487353,5.909499,5.868994,5.833817,3.568177]]}];
-            var layout = {"title":"Mt Bruno Elevation","autosize":false,"margin":{"l":65.0,"r":50.0,"t":90.0,"b":65.0}};
-            Plotly.newPlot('b69806ce-04c5-460a-aa02-98649f9dfbed', data, layout);
+            var data = [{"type":"surface","z":[[363,249,229,389,236,393,98,381,188,210,110,129,377,365,256,33,221,368,267,224,95,80,252,166,81],[246,302,99,130,15,152,341,261,127,94,8,128,115,145,362,36,240,117,122,178,314,187,61,261,233],[371,45,253,371,362,283,397,63,308,390,90,398,250,172,57,169,268,250,270,248,305,106,223,304,187],[254,363,129,387,166,59,241,238,297,44,106,87,289,165,211,11,65,207,154,271,38,389,344,65,9],[46,337,190,12,327,265,221,348,184,107,320,267,75,141,331,249,160,353,127,351,81,378,84,59,237],[240,298,68,32,148,265,18,64,378,120,122,50,225,370,179,284,138,104,58,290,143,389,66,223,22],[278,36,217,113,327,67,252,130,175,86,366,153,315,36,242,302,203,96,20,208,198,335,383,348,66],[343,274,26,168,94,250,232,244,10,270,228,200,350,51,53,269,320,49,283,212,131,223,68,216,388],[339,293,46,14,224,343,53,269,47,384,193,225,361,80,235,134,308,305,165,13,101,252,45,366,338],[277,285,99,135,334,119,205,210,180,154,357,186,230,185,327,175,331,302,67,260,44,358,369,47,78],[223,317,303,202,287,86,248,79,76,346,57,353,133,113,264,387,14,181,326,278,348,78,119,237,237],[169,350,378,106,294,319,316,51,57,110,202,302,7,292,67,109,106,154,239,269,222,197,189,202,272],[29,176,42,169,129,145,198,65,365,117,136,270,372,181,26,141,301,76,2,62,84,6,288,259,168],[241,323,280,368,15,371,161,175,233,264,143,273,282,327,364,3,237,42,175,330,239,134,372,212,127],[320,121,186,140,187,22,287,183,1,288,221,317,96,350,145,375,94,138,316,283,268,19,148,38,58],[247,364,113,328,329,107,351,68,240,94,250,375,35,45,241,255,89,281,39,142,86,140,92,29,355],[144,395,55,328,259,301,372,147,81,340,58,173,255,71,180,270,249,256,256,295,0,59,92,74,27],[178,138,109,295,372,106,272,84,372,185,112,295,139,381,192,277,227,353,105,183,82,234,209,259,272],[236,284,236,134,355,85,302,380,301,80,163,263,252,109,233,185,89,282,286,68,374,110,275,63,17],[173,105,387,291,345,344,328,250,23,135,222,36,350,17,100,209,315,238,300,28,14,374,244,271,397],[392,351,323,191,298,126,8,172,116,182,380,315,89,355,136,235,12,229,374,11,149,139,265,186,258],[59,272,375,34,2,198,260,115,293,353,392,4,59,124,8,214,263,233,235,120,294,225,282,164,193],[1,145,270,260,248,253,86,137,332,238,254,33,137,113,383,119,199,195,2,143,230,353,104,365,197],[285,305,29,66,363,233,389,211,240,0,52,390,255,45,99,306,267,126,285,154,180,125,120,251,0],[95,29,280,20,363,48,41,305,63,362,348,56,71,369,5,264,222,297,112,331,129,343,150,302,237]]}];
+           var layout = {"autosize":false,"margin":{"l":65.0,"r":50.0,"t":90.0,"b":65.0}};
+           Plotly.newPlot('7e8878ab-7790-4ba7-ac47-06063a44e61a', data, layout);
         </script>
-
-<div class="tip" id="fs1">namespace XPlot</div>
-<div class="tip" id="fs2">namespace XPlot.Plotly</div>
-<div class="tip" id="fs3">val z : float list list</div>
-<div class="tip" id="fs4">val layout : Layout</div>
-<div class="tip" id="fs5">Multiple items<br />module Layout<br /><br />from XPlot.Plotly<br /><br />--------------------<br />type Layout =<br />&#160;&#160;new : unit -&gt; Layout<br />&#160;&#160;member ShouldSerializeangularaxis : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeannotations : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeautosize : unit -&gt; bool<br />&#160;&#160;member ShouldSerializebargap : unit -&gt; bool<br />&#160;&#160;member ShouldSerializebargroupgap : unit -&gt; bool<br />&#160;&#160;member ShouldSerializebarmode : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeboxmode : unit -&gt; bool<br />&#160;&#160;member ShouldSerializedirection : unit -&gt; bool<br />&#160;&#160;member ShouldSerializedragmode : unit -&gt; bool<br />&#160;&#160;...<br /><br />--------------------<br />new : unit -&gt; Layout</div>
-<div class="tip" id="fs6">Multiple items<br />type Margin =<br />&#160;&#160;new : unit -&gt; Margin<br />&#160;&#160;member ShouldSerializeautoexpand : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeb : unit -&gt; bool<br />&#160;&#160;member ShouldSerializel : unit -&gt; bool<br />&#160;&#160;member ShouldSerializepad : unit -&gt; bool<br />&#160;&#160;member ShouldSerializer : unit -&gt; bool<br />&#160;&#160;member ShouldSerializet : unit -&gt; bool<br />&#160;&#160;member autoexpand : bool<br />&#160;&#160;member b : float<br />&#160;&#160;member l : float<br />&#160;&#160;...<br /><br />--------------------<br />new : unit -&gt; Margin</div>
-<div class="tip" id="fs7">property Margin.l: float</div>
-<div class="tip" id="fs8">property Margin.r: float</div>
-<div class="tip" id="fs9">property Margin.b: float</div>
-<div class="tip" id="fs10">property Margin.t: float</div>
-<div class="tip" id="fs11">Multiple items<br />type Surface =<br />&#160;&#160;inherit Trace<br />&#160;&#160;new : unit -&gt; Surface<br />&#160;&#160;member ShouldSerializeautocolorscale : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecolorbar : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecolorscale : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecontours : unit -&gt; bool<br />&#160;&#160;member ShouldSerializehidesurface : unit -&gt; bool<br />&#160;&#160;member ShouldSerializehoverinfo : unit -&gt; bool<br />&#160;&#160;member ShouldSerializelegendgroup : unit -&gt; bool<br />&#160;&#160;member ShouldSerializelighting : unit -&gt; bool<br />&#160;&#160;...<br /><br />--------------------<br />new : unit -&gt; Surface</div>
-<div class="tip" id="fs12">property Surface.z: obj</div>
-<div class="tip" id="fs13">type Chart =<br />&#160;&#160;static member Area : data:seq&lt;#seq&lt;&#39;a1 * &#39;a2&gt;&gt; -&gt; PlotlyChart (requires &#39;a1 :&gt; key and &#39;a2 :&gt; value)<br />&#160;&#160;static member Area : data:seq&lt;#key * #value&gt; -&gt; PlotlyChart<br />&#160;&#160;static member Area : data:seq&lt;#value&gt; -&gt; PlotlyChart<br />&#160;&#160;static member Bar : data:seq&lt;#seq&lt;&#39;a1 * &#39;a2&gt;&gt; -&gt; PlotlyChart (requires &#39;a1 :&gt; key and &#39;a2 :&gt; value)<br />&#160;&#160;static member Bar : data:seq&lt;#key * #value&gt; -&gt; PlotlyChart<br />&#160;&#160;static member Bar : data:seq&lt;#value&gt; -&gt; PlotlyChart<br />&#160;&#160;static member Bubble : data:seq&lt;#key * #value * #value&gt; -&gt; PlotlyChart<br />&#160;&#160;static member Candlestick : data:seq&lt;#key * #value * #value * #value * #value&gt; -&gt; PlotlyChart<br />&#160;&#160;static member Column : data:seq&lt;#seq&lt;&#39;a1 * &#39;a2&gt;&gt; -&gt; PlotlyChart (requires &#39;a1 :&gt; key and &#39;a2 :&gt; value)<br />&#160;&#160;static member Column : data:seq&lt;#key * #value&gt; -&gt; PlotlyChart<br />&#160;&#160;...</div>
-<div class="tip" id="fs14">static member Chart.Plot : data:seq&lt;#Trace&gt; -&gt; PlotlyChart<br />static member Chart.Plot : data:Trace -&gt; PlotlyChart<br />static member Chart.Plot : data:seq&lt;#Trace&gt; * layout:Layout -&gt; PlotlyChart<br />static member Chart.Plot : data:Trace * layout:Layout -&gt; PlotlyChart</div>
-<div class="tip" id="fs15">static member Chart.WithLayout : layout:Layout -&gt; chart:PlotlyChart -&gt; PlotlyChart</div>
-<div class="tip" id="fs16">static member Chart.WithWidth : width:int -&gt; chart:PlotlyChart -&gt; PlotlyChart</div>
-<div class="tip" id="fs17">static member Chart.WithHeight : height:int -&gt; chart:PlotlyChart -&gt; PlotlyChart</div>
-
-            </div>
-            <div class="span3">
-                <img src="https://fslab.org/XPlot/img/logo.png" alt="F# Project" style="width:130px;margin:20px" />
-                <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
-                    <li class="nav-header">XPlot</li>
-                    <li><a href="https://fslab.org/XPlot/">Home page</a></li>
-                    <li><a href="https://fslab.org/XPlot/quickstart.html">Getting started</a></li>
-                    <li class="divider"></li>
-                    <li><a href="http://www.nuget.org/packages?q=XPlot">Get Library via NuGet</a></li>
-                    <li><a href="https://github.com/fslaborg/XPlot">Source Code on GitHub</a></li>
-                    <li><a href="https://fslab.org/XPlot/license.html">License (Apache 2.0)</a></li>
-                    <li><a href="https://fslab.org/XPlot/release-notes.html">Release Notes</a></li>
-
-                    <li class="nav-header"><a href="https://fslab.org/XPlot/google-charts.html">Google Charts</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-annotation-chart.html">Annotation</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-area-chart.html">Area</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-bar-chart.html">Bar</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-bubble-chart.html">Bubble</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-calendar-chart.html">Calendar</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-candlestick-chart.html">Candlestick</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-column-chart.html">Column</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-combo-chart.html">Combo</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-gauge-chart.html">Gauge</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-geo-chart.html">Geo</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-histogram-chart.html">Histogram</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-line-chart.html">Line</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-map-chart.html">Map</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-pie-chart.html">Pie</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-sankey-diagram.html">Sankey</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-scatter-chart.html">Scatter</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-stepped-area-chart.html">Stepped Area</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-timeline-chart.html">Timeline</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-table-chart.html">Table</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-treemap-chart.html">Treemap</a></li>
-
-                    <li class="nav-header"><a href="https://fslab.org/XPlot/plotly.html">Plotly</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-bar-charts.html">Bar</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-line-scatter-plots.html">Line and Scatter Plots</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-box-plots.html">Box Plots</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-bubble-charts.html">Bubble Charts</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-contour-plots.html">Contour Plots</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-area-plots.html">Area Plots</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-heatmaps.html">Heatmaps</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-histograms.html">Histograms</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-2d-histograms.html">2D Histograms</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-polar-charts.html">Polar Charts</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-time-series.html">Time Series</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-multiple-chart-types.html">Multiple Chart Types</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-log-plots.html">Log Plots</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-3d-scatter-plots.html">3D Scatter Plots</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-3d-surface-plots.html">3D Surface Plots</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-3d-line-plots.html">3D Line Plots</a></li>
-
-                    <li class="nav-header"><a href="https://fslab.org/XPlot/d3.html">D3 Charts</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/d3-network.html">Network</a></li>
-
-                    <li class="nav-header">Documentation</li>
-                    <li><a href="https://fslab.org/XPlot/reference/index.html">API Reference</a></li>
-                    <li class="divider"></li>
-
-                    <li><a href="https://fslab.org/XPlot/reference/xplot-googlecharts-chart.html">Google Chart Type</a></li>
-                    <li><a href="https://fslab.org/XPlot/reference/xplot-googlecharts-configuration-options.html">Google Option Type</a></li>
-                    <li><a href="https://fslab.org/XPlot/reference/xplot-googlecharts-configuration.html">Google Configuration Module</a></li>
-
-                    <li class="divider"></li>
-
-                    <li><a href="https://fslab.org/XPlot/reference/xplot-plotly-graph.html">Plotly Graph Module</a></li>
-                    <li><a href="https://fslab.org/XPlot/reference/xplot-plotly-layout-layout.html">Plotly Layout Type</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <a href="https://github.com/fslaborg/XPlot"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub" /></a>
-</body>
+    </body>
 </html>
+
+            <div class="fsdocs-tip" id="fs1">namespace XPlot</div>
+<div class="fsdocs-tip" id="fs2">namespace XPlot.Plotly</div>
+<div class="fsdocs-tip" id="fs3">namespace System</div>
+<div class="fsdocs-tip" id="fs4">val z : int list list</div>
+<div class="fsdocs-tip" id="fs5">val rnd : Random</div>
+<div class="fsdocs-tip" id="fs6">Multiple items<br />type Random =<br />&#160;&#160;new : unit -&gt; unit + 1 overload<br />&#160;&#160;member Next : unit -&gt; int + 2 overloads<br />&#160;&#160;member NextBytes : buffer: byte [] -&gt; unit + 1 overload<br />&#160;&#160;member NextDouble : unit -&gt; float<br />&#160;&#160;member Sample : unit -&gt; float<br /><br />--------------------<br />Random() : Random<br />Random(Seed: int) : Random</div>
+<div class="fsdocs-tip" id="fs7">Random.Next() : int<br />Random.Next(maxValue: int) : int<br />Random.Next(minValue: int, maxValue: int) : int</div>
+<div class="fsdocs-tip" id="fs8">val layout : Layout</div>
+<div class="fsdocs-tip" id="fs9">Multiple items<br />module Layout<br /><br />from XPlot.Plotly<br /><br />--------------------<br />type Layout =<br />&#160;&#160;new : unit -&gt; Layout<br />&#160;&#160;member ShouldSerializeangularaxis : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeannotations : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeautosize : unit -&gt; bool<br />&#160;&#160;member ShouldSerializebargap : unit -&gt; bool<br />&#160;&#160;member ShouldSerializebargroupgap : unit -&gt; bool<br />&#160;&#160;member ShouldSerializebarmode : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeboxmode : unit -&gt; bool<br />&#160;&#160;member ShouldSerializedirection : unit -&gt; bool<br />&#160;&#160;member ShouldSerializedragmode : unit -&gt; bool<br />&#160;&#160;...<br /><br />--------------------<br />new : unit -&gt; Layout</div>
+<div class="fsdocs-tip" id="fs10">Multiple items<br />type Margin =<br />&#160;&#160;new : unit -&gt; Margin<br />&#160;&#160;member ShouldSerializeautoexpand : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeb : unit -&gt; bool<br />&#160;&#160;member ShouldSerializel : unit -&gt; bool<br />&#160;&#160;member ShouldSerializepad : unit -&gt; bool<br />&#160;&#160;member ShouldSerializer : unit -&gt; bool<br />&#160;&#160;member ShouldSerializet : unit -&gt; bool<br />&#160;&#160;member autoexpand : bool<br />&#160;&#160;member b : float<br />&#160;&#160;member l : float<br />&#160;&#160;...<br /><br />--------------------<br />new : unit -&gt; Margin</div>
+<div class="fsdocs-tip" id="fs11">property Margin.l: float with get, set</div>
+<div class="fsdocs-tip" id="fs12">property Margin.r: float with get, set</div>
+<div class="fsdocs-tip" id="fs13">property Margin.b: float with get, set</div>
+<div class="fsdocs-tip" id="fs14">property Margin.t: float with get, set</div>
+<div class="fsdocs-tip" id="fs15">val chart : PlotlyChart</div>
+<div class="fsdocs-tip" id="fs16">Multiple items<br />type Surface =<br />&#160;&#160;inherit Trace<br />&#160;&#160;new : unit -&gt; Surface<br />&#160;&#160;member ShouldSerializeautocolorscale : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecolorbar : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecolorscale : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecontours : unit -&gt; bool<br />&#160;&#160;member ShouldSerializehidesurface : unit -&gt; bool<br />&#160;&#160;member ShouldSerializehoverinfo : unit -&gt; bool<br />&#160;&#160;member ShouldSerializelegendgroup : unit -&gt; bool<br />&#160;&#160;member ShouldSerializelighting : unit -&gt; bool<br />&#160;&#160;...<br /><br />--------------------<br />new : unit -&gt; Surface</div>
+<div class="fsdocs-tip" id="fs17">property Surface.z: obj with get, set</div>
+<div class="fsdocs-tip" id="fs18">type Chart =<br />&#160;&#160;static member Area : data:seq&lt;#value&gt; -&gt; PlotlyChart + 2 overloads<br />&#160;&#160;static member Bar : data:seq&lt;#value&gt; -&gt; PlotlyChart + 2 overloads<br />&#160;&#160;static member Bubble : data:seq&lt;#key * #value * #value&gt; -&gt; PlotlyChart<br />&#160;&#160;static member Candlestick : data:seq&lt;#key * #value * #value * #value * #value&gt; -&gt; PlotlyChart<br />&#160;&#160;static member Column : data:seq&lt;#value&gt; -&gt; PlotlyChart + 2 overloads<br />&#160;&#160;static member Line : data:seq&lt;#value&gt; -&gt; PlotlyChart + 2 overloads<br />&#160;&#160;static member Pie : data:seq&lt;#key * #value&gt; -&gt; PlotlyChart<br />&#160;&#160;static member Plot : data:Trace -&gt; PlotlyChart + 3 overloads<br />&#160;&#160;static member Scatter : data:seq&lt;#value&gt; -&gt; PlotlyChart + 2 overloads<br />&#160;&#160;static member Show : chart:PlotlyChart -&gt; unit<br />&#160;&#160;...</div>
+<div class="fsdocs-tip" id="fs19">static member Chart.Plot : data:seq&lt;#Trace&gt; -&gt; PlotlyChart<br />static member Chart.Plot : data:Trace -&gt; PlotlyChart<br />static member Chart.Plot : data:seq&lt;#Trace&gt; * layout:Layout -&gt; PlotlyChart<br />static member Chart.Plot : data:Trace * layout:Layout -&gt; PlotlyChart</div>
+<div class="fsdocs-tip" id="fs20">static member Chart.WithLayout : layout:Layout -&gt; chart:PlotlyChart -&gt; PlotlyChart</div>
+<div class="fsdocs-tip" id="fs21">static member Chart.WithWidth : width:int -&gt; chart:PlotlyChart -&gt; PlotlyChart</div>
+<div class="fsdocs-tip" id="fs22">static member Chart.WithHeight : height:int -&gt; chart:PlotlyChart -&gt; PlotlyChart</div>
+<div class="fsdocs-tip" id="fs23">member PlotlyChart.GetHtml : unit -&gt; string</div>
+
+        </div>
+
+        <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+        <script type="text/javascript">var fsdocs_search_baseurl = 'https://fslab.org/XPlot/'</script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
+        <script type="text/javascript" src="https://fslab.org/XPlot/content/fsdocs-search.js"></script>
+        <!-- END SEARCH BOX: this adds support for the search box -->
+    </div>
+</body>
+
+</html>
+

@@ -1,0 +1,1599 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Candlestick (XPlot)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="XPlot.Plotly">
+
+    <link rel="stylesheet" id="theme_link" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.3.1/materia/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
+
+    <link type="text/css" rel="stylesheet" href="https://fslab.org/XPlot//content/navbar-fixed-left.css" />
+    <link type="text/css" rel="stylesheet" href="https://fslab.org/XPlot//content/fsdocs-default.css" />
+    <link type="text/css" rel="stylesheet" href="https://fslab.org/XPlot//content/fsdocs-custom.css" />
+    <script type="text/javascript" src="https://fslab.org/XPlot//content/fsdocs-tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <!-- END SEARCH BOX: this adds support for the search box -->
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-light bg-secondary fixed-left" id="fsdocs-menu">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <a href="https://fslab.org/XPlot/"><img id="fsdocs-logo" src="https://fslab.org/XPlot/img/logo.png" /></a>
+            <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+            <div id="header">
+                <div class="searchbox" id="fsdocs-searchbox">
+                    <label for="search-by">
+                        <i class="fas fa-search"></i>
+                    </label>
+                    <input data-search-input="" id="search-by" type="search" placeholder="Search..." />
+                    <span data-search-clear="">
+                        <i class="fas fa-times"></i>
+                    </span>
+                </div>
+            </div>
+
+            <!-- END SEARCH BOX: this adds support for the search box -->
+            <ul class="navbar-nav" id="fsdocs-nav">
+                <li class="nav-header">XPlot</li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//index.html">Home Page</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//quickstart.html">Getting started</a></li>
+                <li class="divider"></li>
+                <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="https://github.com/fslaborg/XPlot/blob/master/LICENSE.md">License (Apache 2.0)</a></li>
+                <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="https://github.com/fslaborg/XPlot/blob/master/RELEASE_NOTES.md">Release Notes</a></li>
+                <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="https://github.com/fslaborg/XPlot/">Source Repository</a></li>
+                <li class="nav-header"></li>
+                <li class="nav-header">Plotly</li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-bar-charts.html">Bar</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-line-scatter-plots.html">Line and Scatter</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-box-plots.html">Box Plots</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-bubble-charts.html">Bubble</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-contour-plots.html">Contour</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-candlestick-plots.html">Candlesticks</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-area-plots.html">Area</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-heatmaps.html">Heatmaps</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-histograms.html">Histograms</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-2d-histograms.html">2D Histograms</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-polar-charts.html">Polar</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-time-series.html">Time Series</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-multiple-chart-types.html">Multiple Chart Types</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-log-plots.html">Log Plots</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-3d-scatter-plots.html">3D Scatter</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-3d-surface-plots.html">3D Surface</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-3d-line-plots.html">3D Line</a></li>
+                <li class="nav-header">Google Charts</li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-annotation-chart.html">Annotation</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-area-chart.html">Area</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-bar-chart.html">Bar</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-bubble-chart.html">Bubble</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-calendar-chart.html">Calendar</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-candlestick-chart.html">Candlestick</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-column-chart.html">Column</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-combo-chart.html">Combo</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-gauge-chart.html">Gauge</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-geo-chart.html">Geo</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-histogram-chart.html">Histogram</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-line-chart.html">Line</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-map-chart.html">Map</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-pie-chart.html">Pie</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-sankey-diagram.html">Sankey</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-scatter-chart.html">Scatter</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-stepped-area-chart.html">Stepped Area</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-timeline-chart.html">Timeline</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-table-chart.html">Table</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-treemap-chart.html">Treemap</a></li>
+                <li class="nav-header">D3 Charts</li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/d3-network.html">Network</a></li>
+                <li class="nav-header">
+  API Reference
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fslab.org/XPlot/reference/index.html">
+    All Namespaces
+  </a>
+</li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="masthead">
+            <h3 class="muted"><a href="https://fslab.org/XPlot/">XPlot</a></h3>
+        </div>
+        <hr />
+        <div class="container" id="fsdocs-content">
+            <div>
+  <h1>
+    Candlestick Type
+  </h1>
+  <p>
+    Namespace: 
+    <a href="https://fslab.org/XPlot/reference/xplot-plotly.html">
+      XPlot.Plotly
+    </a>
+  </p>
+  <p>
+    Assembly: XPlot.Plotly.dll
+  </p>
+  <p>
+    Base Type: 
+    <code><a href="https://fslab.org/XPlot/reference/xplot-plotly-trace.html">Trace</a></code>
+  </p>
+  <div class="fsdocs-xmldoc">
+    
+  </div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div>
+    <h3>
+      Constructors
+    </h3>
+    <table class="table outer-list fsdocs-member-list">
+      <thead>
+        <tr>
+          <td class="fsdocs-member-list-header">
+            Constructor
+          </td>
+          <td class="fsdocs-member-list-header">
+            Description
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '1243', 1243)" onmouseover="showTip(event, '1243', 1243)">
+                <p>
+                  <a id="( .ctor )">
+                    <a href="#( .ctor )">
+                      <code><span>Candlestick<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="1243">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>Candlestick<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="https://fslab.org/XPlot/reference/xplot-plotly-candlestick.html">Candlestick</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Candlestick.fs#L4-4" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code><a href="https://fslab.org/XPlot/reference/xplot-plotly-candlestick.html">Candlestick</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div>
+    <h3>
+      Instance members
+    </h3>
+    <table class="table outer-list fsdocs-member-list">
+      <thead>
+        <tr>
+          <td class="fsdocs-member-list-header">
+            Instance member
+          </td>
+          <td class="fsdocs-member-list-header">
+            Description
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '1244', 1244)" onmouseover="showTip(event, '1244', 1244)">
+                <p>
+                  <a id="ShouldSerializeclose">
+                    <a href="#ShouldSerializeclose">
+                      <code><span>this.ShouldSerializeclose<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="1244">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializeclose<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Candlestick.fs#L118-118" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '1245', 1245)" onmouseover="showTip(event, '1245', 1245)">
+                <p>
+                  <a id="ShouldSerializedecreasing">
+                    <a href="#ShouldSerializedecreasing">
+                      <code><span>this.ShouldSerializedecreasing<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="1245">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializedecreasing<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Candlestick.fs#L120-120" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '1246', 1246)" onmouseover="showTip(event, '1246', 1246)">
+                <p>
+                  <a id="ShouldSerializehigh">
+                    <a href="#ShouldSerializehigh">
+                      <code><span>this.ShouldSerializehigh<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="1246">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializehigh<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Candlestick.fs#L116-116" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '1247', 1247)" onmouseover="showTip(event, '1247', 1247)">
+                <p>
+                  <a id="ShouldSerializehoverinfo">
+                    <a href="#ShouldSerializehoverinfo">
+                      <code><span>this.ShouldSerializehoverinfo<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="1247">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializehoverinfo<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Candlestick.fs#L112-112" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '1248', 1248)" onmouseover="showTip(event, '1248', 1248)">
+                <p>
+                  <a id="ShouldSerializeincreasing">
+                    <a href="#ShouldSerializeincreasing">
+                      <code><span>this.ShouldSerializeincreasing<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="1248">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializeincreasing<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Candlestick.fs#L119-119" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '1249', 1249)" onmouseover="showTip(event, '1249', 1249)">
+                <p>
+                  <a id="ShouldSerializelegendgroup">
+                    <a href="#ShouldSerializelegendgroup">
+                      <code><span>this.ShouldSerializelegendgroup<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="1249">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializelegendgroup<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Candlestick.fs#L109-109" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '1250', 1250)" onmouseover="showTip(event, '1250', 1250)">
+                <p>
+                  <a id="ShouldSerializelow">
+                    <a href="#ShouldSerializelow">
+                      <code><span>this.ShouldSerializelow<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="1250">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializelow<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Candlestick.fs#L117-117" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '1251', 1251)" onmouseover="showTip(event, '1251', 1251)">
+                <p>
+                  <a id="ShouldSerializeopacity">
+                    <a href="#ShouldSerializeopacity">
+                      <code><span>this.ShouldSerializeopacity<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="1251">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializeopacity<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Candlestick.fs#L110-110" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '1252', 1252)" onmouseover="showTip(event, '1252', 1252)">
+                <p>
+                  <a id="ShouldSerializeopen">
+                    <a href="#ShouldSerializeopen">
+                      <code><span>this.ShouldSerializeopen<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="1252">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializeopen<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Candlestick.fs#L115-115" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '1253', 1253)" onmouseover="showTip(event, '1253', 1253)">
+                <p>
+                  <a id="ShouldSerializeshowlegend">
+                    <a href="#ShouldSerializeshowlegend">
+                      <code><span>this.ShouldSerializeshowlegend<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="1253">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializeshowlegend<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Candlestick.fs#L108-108" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '1254', 1254)" onmouseover="showTip(event, '1254', 1254)">
+                <p>
+                  <a id="ShouldSerializestream">
+                    <a href="#ShouldSerializestream">
+                      <code><span>this.ShouldSerializestream<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="1254">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializestream<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Candlestick.fs#L113-113" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '1255', 1255)" onmouseover="showTip(event, '1255', 1255)">
+                <p>
+                  <a id="ShouldSerializetype">
+                    <a href="#ShouldSerializetype">
+                      <code><span>this.ShouldSerializetype<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="1255">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializetype<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Candlestick.fs#L106-106" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '1256', 1256)" onmouseover="showTip(event, '1256', 1256)">
+                <p>
+                  <a id="ShouldSerializeuid">
+                    <a href="#ShouldSerializeuid">
+                      <code><span>this.ShouldSerializeuid<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="1256">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializeuid<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Candlestick.fs#L111-111" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '1257', 1257)" onmouseover="showTip(event, '1257', 1257)">
+                <p>
+                  <a id="ShouldSerializevisible">
+                    <a href="#ShouldSerializevisible">
+                      <code><span>this.ShouldSerializevisible<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="1257">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializevisible<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Candlestick.fs#L107-107" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '1258', 1258)" onmouseover="showTip(event, '1258', 1258)">
+                <p>
+                  <a id="ShouldSerializex">
+                    <a href="#ShouldSerializex">
+                      <code><span>this.ShouldSerializex<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="1258">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializex<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Candlestick.fs#L114-114" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '1259', 1259)" onmouseover="showTip(event, '1259', 1259)">
+                <p>
+                  <a id="ShouldSerializexaxis">
+                    <a href="#ShouldSerializexaxis">
+                      <code><span>this.ShouldSerializexaxis<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="1259">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializexaxis<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Candlestick.fs#L121-121" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '1260', 1260)" onmouseover="showTip(event, '1260', 1260)">
+                <p>
+                  <a id="ShouldSerializeyaxis">
+                    <a href="#ShouldSerializeyaxis">
+                      <code><span>this.ShouldSerializeyaxis<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="1260">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializeyaxis<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Candlestick.fs#L122-122" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '1261', 1261)" onmouseover="showTip(event, '1261', 1261)">
+                <p>
+                  <a id="close">
+                    <a href="#close">
+                      <code><span>this.close&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="1261">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.close&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Candlestick.fs#L82-82" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+ Sets the close values.
+
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '1262', 1262)" onmouseover="showTip(event, '1262', 1262)">
+                <p>
+                  <a id="decreasing">
+                    <a href="#decreasing">
+                      <code><span>this.decreasing&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="1262">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.decreasing&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Candlestick.fs#L92-92" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+ Sets the decreasing candles properties.
+
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '1263', 1263)" onmouseover="showTip(event, '1263', 1263)">
+                <p>
+                  <a id="high">
+                    <a href="#high">
+                      <code><span>this.high&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="1263">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.high&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Candlestick.fs#L72-72" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+ Sets the high values.
+
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '1264', 1264)" onmouseover="showTip(event, '1264', 1264)">
+                <p>
+                  <a id="hoverinfo">
+                    <a href="#hoverinfo">
+                      <code><span>this.hoverinfo&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="1264">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.hoverinfo&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Candlestick.fs#L53-53" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+ Determines which trace information appear on hover.
+
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '1265', 1265)" onmouseover="showTip(event, '1265', 1265)">
+                <p>
+                  <a id="increasing">
+                    <a href="#increasing">
+                      <code><span>this.increasing&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="1265">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.increasing&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Candlestick.fs#L87-87" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+ Sets the increasing candles properties.
+
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '1266', 1266)" onmouseover="showTip(event, '1266', 1266)">
+                <p>
+                  <a id="legendgroup">
+                    <a href="#legendgroup">
+                      <code><span>this.legendgroup&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="1266">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.legendgroup&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Candlestick.fs#L39-39" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+ Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items.
+
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '1267', 1267)" onmouseover="showTip(event, '1267', 1267)">
+                <p>
+                  <a id="low">
+                    <a href="#low">
+                      <code><span>this.low&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="1267">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.low&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Candlestick.fs#L77-77" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+ Sets the low values.
+
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '1268', 1268)" onmouseover="showTip(event, '1268', 1268)">
+                <p>
+                  <a id="opacity">
+                    <a href="#opacity">
+                      <code><span>this.opacity&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="1268">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.opacity&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Candlestick.fs#L44-44" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+ Sets the opacity of the trace.
+
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '1269', 1269)" onmouseover="showTip(event, '1269', 1269)">
+                <p>
+                  <a id="open">
+                    <a href="#open">
+                      <code><span>this.open&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="1269">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.open&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Candlestick.fs#L67-67" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+ Sets the open values.
+
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '1270', 1270)" onmouseover="showTip(event, '1270', 1270)">
+                <p>
+                  <a id="showlegend">
+                    <a href="#showlegend">
+                      <code><span>this.showlegend&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="1270">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.showlegend&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Candlestick.fs#L34-34" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+ Determines whether or not an item corresponding to this trace is shown in the legend.
+
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '1271', 1271)" onmouseover="showTip(event, '1271', 1271)">
+                <p>
+                  <a id="stream">
+                    <a href="#stream">
+                      <code><span>this.stream&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="1271">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.stream&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Candlestick.fs#L57-57" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '1272', 1272)" onmouseover="showTip(event, '1272', 1272)">
+                <p>
+                  <a id="type">
+                    <a href="#type">
+                      <code><span>this.type&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="1272">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.type&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Candlestick.fs#L24-24" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '1273', 1273)" onmouseover="showTip(event, '1273', 1273)">
+                <p>
+                  <a id="uid">
+                    <a href="#uid">
+                      <code><span>this.uid&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="1273">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.uid&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Candlestick.fs#L48-48" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '1274', 1274)" onmouseover="showTip(event, '1274', 1274)">
+                <p>
+                  <a id="visible">
+                    <a href="#visible">
+                      <code><span>this.visible&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="1274">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.visible&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Candlestick.fs#L29-29" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+ Determines whether or not this trace is visible. If *legendonly*, the trace is not drawn, but can appear as a legend item (provided that the legend itself is visible).
+
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '1275', 1275)" onmouseover="showTip(event, '1275', 1275)">
+                <p>
+                  <a id="x">
+                    <a href="#x">
+                      <code><span>this.x&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="1275">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.x&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Candlestick.fs#L62-62" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+ Sets the x values - usually time.
+
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '1276', 1276)" onmouseover="showTip(event, '1276', 1276)">
+                <p>
+                  <a id="xaxis">
+                    <a href="#xaxis">
+                      <code><span>this.xaxis&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="1276">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.xaxis&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Candlestick.fs#L97-97" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+ Sets a reference between this trace's x coordinates and a 2D cartesian x axis. If *x* (the default value), the x coordinates refer to `layout.xaxis`. If *x2*, the x coordinates refer to `layout.xaxis2`, and so on.
+
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '1277', 1277)" onmouseover="showTip(event, '1277', 1277)">
+                <p>
+                  <a id="yaxis">
+                    <a href="#yaxis">
+                      <code><span>this.yaxis&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="1277">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.yaxis&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Candlestick.fs#L102-102" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+ Sets a reference between this trace's y coordinates and a 2D cartesian y axis. If *y* (the default value), the y coordinates refer to `layout.yaxis`. If *y2*, the y coordinates refer to `layout.xaxis2`, and so on.
+
+            </p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div></div>
+</div>
+            
+        </div>
+
+        <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+        <script type="text/javascript">var fsdocs_search_baseurl = 'https://fslab.org/XPlot/'</script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
+        <script type="text/javascript" src="https://fslab.org/XPlot/content/fsdocs-search.js"></script>
+        <!-- END SEARCH BOX: this adds support for the search box -->
+    </div>
+</body>
+
+</html>
+

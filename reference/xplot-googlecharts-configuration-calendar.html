@@ -1,756 +1,1017 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8" />
-    <title>Calendar - XPlot</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="" />
-    <meta name="author" content="Taha Hachana; Tomas Petricek" />
+    <meta charset="utf-8">
+    <title>Calendar (XPlot)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="XPlot.GoogleCharts">
 
-    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
-    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
-    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
-    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet" />
+    <link rel="stylesheet" id="theme_link" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.3.1/materia/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-        google.charts.load('current', {
-            packages: ["corechart", "annotationchart", "calendar", "gauge", "geochart", "map", "sankey", "table", "timeline", "treemap"]
-        });
-    </script>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <link type="text/css" rel="stylesheet" href="https://fslab.org/XPlot/content/style.css" />
-    <script type="text/javascript" src="https://fslab.org/XPlot/content/tips.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
+
+    <link type="text/css" rel="stylesheet" href="https://fslab.org/XPlot//content/navbar-fixed-left.css" />
+    <link type="text/css" rel="stylesheet" href="https://fslab.org/XPlot//content/fsdocs-default.css" />
+    <link type="text/css" rel="stylesheet" href="https://fslab.org/XPlot//content/fsdocs-custom.css" />
+    <script type="text/javascript" src="https://fslab.org/XPlot//content/fsdocs-tips.js"></script>
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
-      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <!-- END SEARCH BOX: this adds support for the search box -->
+
 </head>
+
 <body>
+    <nav class="navbar navbar-expand-md navbar-light bg-secondary fixed-left" id="fsdocs-menu">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <a href="https://fslab.org/XPlot/"><img id="fsdocs-logo" src="https://fslab.org/XPlot/img/logo.png" /></a>
+            <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+            <div id="header">
+                <div class="searchbox" id="fsdocs-searchbox">
+                    <label for="search-by">
+                        <i class="fas fa-search"></i>
+                    </label>
+                    <input data-search-input="" id="search-by" type="search" placeholder="Search..." />
+                    <span data-search-clear="">
+                        <i class="fas fa-times"></i>
+                    </span>
+                </div>
+            </div>
+
+            <!-- END SEARCH BOX: this adds support for the search box -->
+            <ul class="navbar-nav" id="fsdocs-nav">
+                <li class="nav-header">XPlot</li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//index.html">Home Page</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//quickstart.html">Getting started</a></li>
+                <li class="divider"></li>
+                <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="{{fsdocs-license-link}}">License (Apache 2.0)</a></li>
+                <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="{{fsdocs-release-notes-link}}">Release Notes</a></li>
+                <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="{{fsdocs-repository-link}}">Source Repository</a></li>
+                <li class="nav-header"></li>
+                <li class="nav-header">Plotly</li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-bar-charts.html">Bar</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-line-scatter-plots.html">Line and Scatter</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-box-plots.html">Box Plots</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-bubble-charts.html">Bubble</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-contour-plots.html">Contour</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-candlestick-plots.html">Candlesticks</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-area-plots.html">Area</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-heatmaps.html">Heatmaps</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-histograms.html">Histograms</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-2d-histograms.html">2D Histograms</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-polar-charts.html">Polar</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-time-series.html">Time Series</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-multiple-chart-types.html">Multiple Chart Types</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-log-plots.html">Log Plots</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-3d-scatter-plots.html">3D Scatter</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-3d-surface-plots.html">3D Surface</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-3d-line-plots.html">3D Line</a></li>
+                <li class="nav-header">Google Charts</li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-annotation-chart.html">Annotation</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-area-chart.html">Area</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-bar-chart.html">Bar</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-bubble-chart.html">Bubble</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-calendar-chart.html">Calendar</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-candlestick-chart.html">Candlestick</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-column-chart.html">Column</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-combo-chart.html">Combo</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-gauge-chart.html">Gauge</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-geo-chart.html">Geo</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-histogram-chart.html">Histogram</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-line-chart.html">Line</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-map-chart.html">Map</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-pie-chart.html">Pie</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-sankey-diagram.html">Sankey</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-scatter-chart.html">Scatter</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-stepped-area-chart.html">Stepped Area</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-timeline-chart.html">Timeline</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-table-chart.html">Table</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-treemap-chart.html">Treemap</a></li>
+                <li class="nav-header">D3 Charts</li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/d3-network.html">Network</a></li>
+                <li class="nav-header">
+  API Reference
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fslab.org/XPlot/reference/index.html">
+    All Namespaces
+  </a>
+</li>
+            </ul>
+        </div>
+    </nav>
     <div class="container">
         <div class="masthead">
-            <ul class="nav nav-pills pull-right">
-                <li>
-                    <a href="https://fslab.org"><img height="16" width="16" src="https://fslab.org/img/thumbs/fslab.png" /> FsLab</a>
-                </li>
-                <li>
-                    <a href="http://fsharp.github.io/FSharp.Data"><img height="16" width="16" src="https://fslab.org/img/thumbs/fsharpdata.png" /> F# Data</a>
-                </li>
-                <li>
-                    <a href="https://fslab.org/Deedle"><img height="16" width="16" src="https://fslab.org/img/thumbs/deedle.png" /> Deedle</a>
-                </li>
-                <li>
-                    <a href="https://fslab.org/RProvider"><img height="16" width="16" src="https://fslab.org/img/thumbs/rprovider.png" /> R Provider</a>
-                </li>
-                <li>
-                    <a href="http://numerics.mathdotnet.com/"><img height="16" width="16" src="https://fslab.org/img/thumbs/mathnet.png" /> Math.NET</a>
-                </li>
-            </ul>
             <h3 class="muted"><a href="https://fslab.org/XPlot/">XPlot</a></h3>
         </div>
         <hr />
-        <div class="row">
-            <div class="span9" id="main">
-                
-
-<h1>Calendar</h1>
-<p>
-
-    <span>Namespace: XPlot.GoogleCharts</span><br />
-        <span>Parent Module: <a href="xplot-googlecharts-configuration.html">Configuration</a></span><br />
-    </p>
-<div class="xmldoc">
+        <div class="container" id="fsdocs-content">
+            <div>
+  <h1>
+    Calendar Type
+  </h1>
+  <p>
+    Namespace: 
+    <a href="https://fslab.org/XPlot/reference/xplot-googlecharts.html">
+      XPlot.GoogleCharts
+    </a>
+  </p>
+  <p>
+    Assembly: XPlot.GoogleCharts.dll
+  </p>
+  <span>
+    Parent Module: 
+    <a href="https://fslab.org/XPlot/reference/xplot-googlecharts-configuration.html">
+      Configuration
+    </a>
+  </span>
+  <p>
+    Base Type: 
+    <code>obj</code>
+  </p>
+  <div class="fsdocs-xmldoc">
+    
+  </div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div>
+    <h3>
+      Constructors
+    </h3>
+    <table class="table outer-list fsdocs-member-list">
+      <thead>
+        <tr>
+          <td class="fsdocs-member-list-header">
+            Constructor
+          </td>
+          <td class="fsdocs-member-list-header">
+            Description
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '213', 213)" onmouseover="showTip(event, '213', 213)">
+                <p>
+                  <a id="( .ctor )">
+                    <a href="#( .ctor )">
+                      <code><span>Calendar<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="213">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>Calendar<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="https://fslab.org/XPlot/reference/xplot-googlecharts-configuration-calendar.html">Calendar</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code><a href="https://fslab.org/XPlot/reference/xplot-googlecharts-configuration-calendar.html">Calendar</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div>
+    <h3>
+      Instance members
+    </h3>
+    <table class="table outer-list fsdocs-member-list">
+      <thead>
+        <tr>
+          <td class="fsdocs-member-list-header">
+            Instance member
+          </td>
+          <td class="fsdocs-member-list-header">
+            Description
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '214', 214)" onmouseover="showTip(event, '214', 214)">
+                <p>
+                  <a id="ShouldSerializecellColor">
+                    <a href="#ShouldSerializecellColor">
+                      <code><span>this.ShouldSerializecellColor<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="214">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializecellColor<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '215', 215)" onmouseover="showTip(event, '215', 215)">
+                <p>
+                  <a id="ShouldSerializecellSize">
+                    <a href="#ShouldSerializecellSize">
+                      <code><span>this.ShouldSerializecellSize<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="215">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializecellSize<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '216', 216)" onmouseover="showTip(event, '216', 216)">
+                <p>
+                  <a id="ShouldSerializedayOfWeekLabel">
+                    <a href="#ShouldSerializedayOfWeekLabel">
+                      <code><span>this.ShouldSerializedayOfWeekLabel<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="216">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializedayOfWeekLabel<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '217', 217)" onmouseover="showTip(event, '217', 217)">
+                <p>
+                  <a id="ShouldSerializedayOfWeekRightSpace">
+                    <a href="#ShouldSerializedayOfWeekRightSpace">
+                      <code><span>this.ShouldSerializedayOfWeekRightSpace<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="217">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializedayOfWeekRightSpace<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '218', 218)" onmouseover="showTip(event, '218', 218)">
+                <p>
+                  <a id="ShouldSerializedaysOfWeek">
+                    <a href="#ShouldSerializedaysOfWeek">
+                      <code><span>this.ShouldSerializedaysOfWeek<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="218">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializedaysOfWeek<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '219', 219)" onmouseover="showTip(event, '219', 219)">
+                <p>
+                  <a id="ShouldSerializefocusedCellColor">
+                    <a href="#ShouldSerializefocusedCellColor">
+                      <code><span>this.ShouldSerializefocusedCellColor<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="219">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializefocusedCellColor<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '220', 220)" onmouseover="showTip(event, '220', 220)">
+                <p>
+                  <a id="ShouldSerializemonthLabel">
+                    <a href="#ShouldSerializemonthLabel">
+                      <code><span>this.ShouldSerializemonthLabel<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="220">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializemonthLabel<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '221', 221)" onmouseover="showTip(event, '221', 221)">
+                <p>
+                  <a id="ShouldSerializemonthOutlineColor">
+                    <a href="#ShouldSerializemonthOutlineColor">
+                      <code><span>this.ShouldSerializemonthOutlineColor<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="221">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializemonthOutlineColor<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '222', 222)" onmouseover="showTip(event, '222', 222)">
+                <p>
+                  <a id="ShouldSerializeunderMonthSpace">
+                    <a href="#ShouldSerializeunderMonthSpace">
+                      <code><span>this.ShouldSerializeunderMonthSpace<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="222">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializeunderMonthSpace<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '223', 223)" onmouseover="showTip(event, '223', 223)">
+                <p>
+                  <a id="ShouldSerializeunderYearSpace">
+                    <a href="#ShouldSerializeunderYearSpace">
+                      <code><span>this.ShouldSerializeunderYearSpace<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="223">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializeunderYearSpace<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '224', 224)" onmouseover="showTip(event, '224', 224)">
+                <p>
+                  <a id="ShouldSerializeunusedMonthOutlineColor">
+                    <a href="#ShouldSerializeunusedMonthOutlineColor">
+                      <code><span>this.ShouldSerializeunusedMonthOutlineColor<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="224">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializeunusedMonthOutlineColor<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '225', 225)" onmouseover="showTip(event, '225', 225)">
+                <p>
+                  <a id="cellColor">
+                    <a href="#cellColor">
+                      <code><span>this.cellColor&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="225">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.cellColor&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '226', 226)" onmouseover="showTip(event, '226', 226)">
+                <p>
+                  <a id="cellSize">
+                    <a href="#cellSize">
+                      <code><span>this.cellSize&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="226">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.cellSize&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '227', 227)" onmouseover="showTip(event, '227', 227)">
+                <p>
+                  <a id="dayOfWeekLabel">
+                    <a href="#dayOfWeekLabel">
+                      <code><span>this.dayOfWeekLabel&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="227">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.dayOfWeekLabel&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '228', 228)" onmouseover="showTip(event, '228', 228)">
+                <p>
+                  <a id="dayOfWeekRightSpace">
+                    <a href="#dayOfWeekRightSpace">
+                      <code><span>this.dayOfWeekRightSpace&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="228">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.dayOfWeekRightSpace&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '229', 229)" onmouseover="showTip(event, '229', 229)">
+                <p>
+                  <a id="daysOfWeek">
+                    <a href="#daysOfWeek">
+                      <code><span>this.daysOfWeek&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="229">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.daysOfWeek&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '230', 230)" onmouseover="showTip(event, '230', 230)">
+                <p>
+                  <a id="focusedCellColor">
+                    <a href="#focusedCellColor">
+                      <code><span>this.focusedCellColor&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="230">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.focusedCellColor&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '231', 231)" onmouseover="showTip(event, '231', 231)">
+                <p>
+                  <a id="monthLabel">
+                    <a href="#monthLabel">
+                      <code><span>this.monthLabel&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="231">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.monthLabel&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '232', 232)" onmouseover="showTip(event, '232', 232)">
+                <p>
+                  <a id="monthOutlineColor">
+                    <a href="#monthOutlineColor">
+                      <code><span>this.monthOutlineColor&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="232">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.monthOutlineColor&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '233', 233)" onmouseover="showTip(event, '233', 233)">
+                <p>
+                  <a id="underMonthSpace">
+                    <a href="#underMonthSpace">
+                      <code><span>this.underMonthSpace&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="233">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.underMonthSpace&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '234', 234)" onmouseover="showTip(event, '234', 234)">
+                <p>
+                  <a id="underYearSpace">
+                    <a href="#underYearSpace">
+                      <code><span>this.underYearSpace&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="234">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.underYearSpace&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '235', 235)" onmouseover="showTip(event, '235', 235)">
+                <p>
+                  <a id="unusedMonthOutlineColor">
+                    <a href="#unusedMonthOutlineColor">
+                      <code><span>this.unusedMonthOutlineColor&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="235">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.unusedMonthOutlineColor&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              
+            </p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div></div>
 </div>
-  <h3>Constructors</h3>
-  <table class="table table-bordered member-list">
-    <thead>
-      <tr><td>Constructor</td><td>Description</td></tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '257', 257)" onmouseover="showTip(event, '257', 257)">
-            new()
-          </code>
-          <div class="tip" id="257">
-            <strong>Signature:</strong> unit -&gt; Calendar<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L756-756" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-              <p>CompiledName: <code>.ctor</code></p>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <h3>Instance members</h3>
-  <table class="table table-bordered member-list">
-    <thead>
-      <tr><td>Instance member</td><td>Description</td></tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '258', 258)" onmouseover="showTip(event, '258', 258)">
-            x.cellColor()
-          </code>
-          <div class="tip" id="258">
-            <strong>Signature:</strong> unit -&gt; CellColor<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L770-770" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-              <p>CompiledName: <code>set_cellColor</code></p>
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '259', 259)" onmouseover="showTip(event, '259', 259)">
-            x.cellColor()
-          </code>
-          <div class="tip" id="259">
-            <strong>Signature:</strong> unit -&gt; unit<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L770-770" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-              <p>CompiledName: <code>get_cellColor</code></p>
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '260', 260)" onmouseover="showTip(event, '260', 260)">
-            x.cellSize()
-          </code>
-          <div class="tip" id="260">
-            <strong>Signature:</strong> unit -&gt; int<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L774-774" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-              <p>CompiledName: <code>set_cellSize</code></p>
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '261', 261)" onmouseover="showTip(event, '261', 261)">
-            x.cellSize()
-          </code>
-          <div class="tip" id="261">
-            <strong>Signature:</strong> unit -&gt; unit<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L774-774" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-              <p>CompiledName: <code>get_cellSize</code></p>
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '262', 262)" onmouseover="showTip(event, '262', 262)">
-            x.dayOfWeekLabel()
-          </code>
-          <div class="tip" id="262">
-            <strong>Signature:</strong> unit -&gt; TextStyle<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L778-778" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-              <p>CompiledName: <code>set_dayOfWeekLabel</code></p>
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '263', 263)" onmouseover="showTip(event, '263', 263)">
-            x.dayOfWeekLabel()
-          </code>
-          <div class="tip" id="263">
-            <strong>Signature:</strong> unit -&gt; unit<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L778-778" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-              <p>CompiledName: <code>get_dayOfWeekLabel</code></p>
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '264', 264)" onmouseover="showTip(event, '264', 264)">
-            x.dayOfWeekRightSpace()
-          </code>
-          <div class="tip" id="264">
-            <strong>Signature:</strong> unit -&gt; int<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L782-782" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-              <p>CompiledName: <code>set_dayOfWeekRightSpace</code></p>
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '265', 265)" onmouseover="showTip(event, '265', 265)">
-            x.dayOfWeekRightSpace()
-          </code>
-          <div class="tip" id="265">
-            <strong>Signature:</strong> unit -&gt; unit<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L782-782" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-              <p>CompiledName: <code>get_dayOfWeekRightSpace</code></p>
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '266', 266)" onmouseover="showTip(event, '266', 266)">
-            x.daysOfWeek()
-          </code>
-          <div class="tip" id="266">
-            <strong>Signature:</strong> unit -&gt; string<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L786-786" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-              <p>CompiledName: <code>set_daysOfWeek</code></p>
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '267', 267)" onmouseover="showTip(event, '267', 267)">
-            x.daysOfWeek()
-          </code>
-          <div class="tip" id="267">
-            <strong>Signature:</strong> unit -&gt; unit<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L786-786" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-              <p>CompiledName: <code>get_daysOfWeek</code></p>
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '268', 268)" onmouseover="showTip(event, '268', 268)">
-            x.focusedCellColor()
-          </code>
-          <div class="tip" id="268">
-            <strong>Signature:</strong> unit -&gt; CellColor<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L790-790" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-              <p>CompiledName: <code>set_focusedCellColor</code></p>
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '269', 269)" onmouseover="showTip(event, '269', 269)">
-            x.focusedCellColor()
-          </code>
-          <div class="tip" id="269">
-            <strong>Signature:</strong> unit -&gt; unit<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L790-790" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-              <p>CompiledName: <code>get_focusedCellColor</code></p>
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '270', 270)" onmouseover="showTip(event, '270', 270)">
-            x.monthLabel()
-          </code>
-          <div class="tip" id="270">
-            <strong>Signature:</strong> unit -&gt; TextStyle<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L794-794" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-              <p>CompiledName: <code>set_monthLabel</code></p>
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '271', 271)" onmouseover="showTip(event, '271', 271)">
-            x.monthLabel()
-          </code>
-          <div class="tip" id="271">
-            <strong>Signature:</strong> unit -&gt; unit<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L794-794" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-              <p>CompiledName: <code>get_monthLabel</code></p>
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '272', 272)" onmouseover="showTip(event, '272', 272)">
-            x.monthOutlineColor()
-          </code>
-          <div class="tip" id="272">
-            <strong>Signature:</strong> unit -&gt; CellColor<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L798-798" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-              <p>CompiledName: <code>set_monthOutlineColor</code></p>
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '273', 273)" onmouseover="showTip(event, '273', 273)">
-            x.monthOutlineColor()
-          </code>
-          <div class="tip" id="273">
-            <strong>Signature:</strong> unit -&gt; unit<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L798-798" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-              <p>CompiledName: <code>get_monthOutlineColor</code></p>
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '274', 274)" onmouseover="showTip(event, '274', 274)">
-            x.ShouldSerializecellColor()
-          </code>
-          <div class="tip" id="274">
-            <strong>Signature:</strong> unit -&gt; bool<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L814-814" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '275', 275)" onmouseover="showTip(event, '275', 275)">
-            x.ShouldSerializecellSize()
-          </code>
-          <div class="tip" id="275">
-            <strong>Signature:</strong> unit -&gt; bool<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L815-815" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '276', 276)" onmouseover="showTip(event, '276', 276)">
-            x.ShouldSerializedayOfWeekLabel()
-          </code>
-          <div class="tip" id="276">
-            <strong>Signature:</strong> unit -&gt; bool<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L816-816" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '277', 277)" onmouseover="showTip(event, '277', 277)">
-            x.ShouldSerializedayOfWeekRightSpace()
-          </code>
-          <div class="tip" id="277">
-            <strong>Signature:</strong> unit -&gt; bool<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L817-817" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '278', 278)" onmouseover="showTip(event, '278', 278)">
-            x.ShouldSerializedaysOfWeek()
-          </code>
-          <div class="tip" id="278">
-            <strong>Signature:</strong> unit -&gt; bool<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L818-818" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '279', 279)" onmouseover="showTip(event, '279', 279)">
-            x.ShouldSerializefocusedCellColor()
-          </code>
-          <div class="tip" id="279">
-            <strong>Signature:</strong> unit -&gt; bool<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L819-819" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '280', 280)" onmouseover="showTip(event, '280', 280)">
-            x.ShouldSerializemonthLabel()
-          </code>
-          <div class="tip" id="280">
-            <strong>Signature:</strong> unit -&gt; bool<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L820-820" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '281', 281)" onmouseover="showTip(event, '281', 281)">
-            x.ShouldSerializemonthOutlineColor()
-          </code>
-          <div class="tip" id="281">
-            <strong>Signature:</strong> unit -&gt; bool<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L821-821" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '282', 282)" onmouseover="showTip(event, '282', 282)">
-            x.ShouldSerializeunderMonthSpace()
-          </code>
-          <div class="tip" id="282">
-            <strong>Signature:</strong> unit -&gt; bool<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L822-822" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '283', 283)" onmouseover="showTip(event, '283', 283)">
-            x.ShouldSerializeunderYearSpace()
-          </code>
-          <div class="tip" id="283">
-            <strong>Signature:</strong> unit -&gt; bool<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L823-823" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '284', 284)" onmouseover="showTip(event, '284', 284)">
-            x.ShouldSerializeunusedMonthOutlineColor(...)
-          </code>
-          <div class="tip" id="284">
-            <strong>Signature:</strong> unit -&gt; bool<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L824-824" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '285', 285)" onmouseover="showTip(event, '285', 285)">
-            x.underMonthSpace()
-          </code>
-          <div class="tip" id="285">
-            <strong>Signature:</strong> unit -&gt; int<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L802-802" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-              <p>CompiledName: <code>set_underMonthSpace</code></p>
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '286', 286)" onmouseover="showTip(event, '286', 286)">
-            x.underMonthSpace()
-          </code>
-          <div class="tip" id="286">
-            <strong>Signature:</strong> unit -&gt; unit<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L802-802" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-              <p>CompiledName: <code>get_underMonthSpace</code></p>
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '287', 287)" onmouseover="showTip(event, '287', 287)">
-            x.underYearSpace()
-          </code>
-          <div class="tip" id="287">
-            <strong>Signature:</strong> unit -&gt; int<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L806-806" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-              <p>CompiledName: <code>set_underYearSpace</code></p>
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '288', 288)" onmouseover="showTip(event, '288', 288)">
-            x.underYearSpace()
-          </code>
-          <div class="tip" id="288">
-            <strong>Signature:</strong> unit -&gt; unit<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L806-806" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-              <p>CompiledName: <code>get_underYearSpace</code></p>
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '289', 289)" onmouseover="showTip(event, '289', 289)">
-            x.unusedMonthOutlineColor()
-          </code>
-          <div class="tip" id="289">
-            <strong>Signature:</strong> unit -&gt; CellColor<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L810-810" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-              <p>CompiledName: <code>set_unusedMonthOutlineColor</code></p>
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-          <code onmouseout="hideTip(event, '290', 290)" onmouseover="showTip(event, '290', 290)">
-            x.unusedMonthOutlineColor()
-          </code>
-          <div class="tip" id="290">
-            <strong>Signature:</strong> unit -&gt; unit<br />
-                                  </div>
-        </td>
-        <td class="xmldoc">
-                      <a href="http://github.com/fsprojects/FSharp.Formatting/tree/master/src/XPlot.GoogleCharts/Configuration.fs#L810-810" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-              <p>CompiledName: <code>get_unusedMonthOutlineColor</code></p>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
-            </div>
-            <div class="span3">
-                <img src="https://fslab.org/XPlot/img/logo.png" alt="F# Project" style="width:130px;margin:20px" />
-                <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
-                    <li class="nav-header">XPlot</li>
-                    <li><a href="https://fslab.org/XPlot/">Home page</a></li>
-                    <li><a href="https://fslab.org/XPlot/quickstart.html">Getting started</a></li>
-                    <li class="divider"></li>
-                    <li><a href="http://www.nuget.org/packages?q=XPlot">Get Library via NuGet</a></li>
-                    <li><a href="https://github.com/fslaborg/XPlot">Source Code on GitHub</a></li>
-                    <li><a href="https://fslab.org/XPlot/license.html">License (Apache 2.0)</a></li>
-                    <li><a href="https://fslab.org/XPlot/release-notes.html">Release Notes</a></li>
-
-                    <li class="nav-header"><a href="https://fslab.org/XPlot/google-charts.html">Google Charts</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-annotation-chart.html">Annotation</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-area-chart.html">Area</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-bar-chart.html">Bar</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-bubble-chart.html">Bubble</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-calendar-chart.html">Calendar</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-candlestick-chart.html">Candlestick</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-column-chart.html">Column</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-combo-chart.html">Combo</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-gauge-chart.html">Gauge</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-geo-chart.html">Geo</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-histogram-chart.html">Histogram</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-line-chart.html">Line</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-map-chart.html">Map</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-pie-chart.html">Pie</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-sankey-diagram.html">Sankey</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-scatter-chart.html">Scatter</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-stepped-area-chart.html">Stepped Area</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-timeline-chart.html">Timeline</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-table-chart.html">Table</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-treemap-chart.html">Treemap</a></li>
-
-                    <li class="nav-header"><a href="https://fslab.org/XPlot/plotly.html">Plotly</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-bar-charts.html">Bar</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-line-scatter-plots.html">Line and Scatter Plots</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-box-plots.html">Box Plots</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-bubble-charts.html">Bubble Charts</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-contour-plots.html">Contour Plots</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-area-plots.html">Area Plots</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-heatmaps.html">Heatmaps</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-histograms.html">Histograms</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-2d-histograms.html">2D Histograms</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-polar-charts.html">Polar Charts</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-time-series.html">Time Series</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-multiple-chart-types.html">Multiple Chart Types</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-log-plots.html">Log Plots</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-3d-scatter-plots.html">3D Scatter Plots</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-3d-surface-plots.html">3D Surface Plots</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-3d-line-plots.html">3D Line Plots</a></li>
-
-                    <li class="nav-header"><a href="https://fslab.org/XPlot/d3.html">D3 Charts</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/d3-network.html">Network</a></li>
-
-                    <li class="nav-header">Documentation</li>
-                    <li><a href="https://fslab.org/XPlot/reference/index.html">API Reference</a></li>
-                    <li class="divider"></li>
-
-                    <li><a href="https://fslab.org/XPlot/reference/xplot-googlecharts-chart.html">Google Chart Type</a></li>
-                    <li><a href="https://fslab.org/XPlot/reference/xplot-googlecharts-configuration-options.html">Google Option Type</a></li>
-                    <li><a href="https://fslab.org/XPlot/reference/xplot-googlecharts-configuration.html">Google Configuration Module</a></li>
-
-                    <li class="divider"></li>
-
-                    <li><a href="https://fslab.org/XPlot/reference/xplot-plotly-graph.html">Plotly Graph Module</a></li>
-                    <li><a href="https://fslab.org/XPlot/reference/xplot-plotly-layout-layout.html">Plotly Layout Type</a></li>
-                </ul>
-            </div>
+            
         </div>
+
+        <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+        <script type="text/javascript">var fsdocs_search_baseurl = 'https://fslab.org/XPlot/'</script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
+        <script type="text/javascript" src="https://fslab.org/XPlot/content/fsdocs-search.js"></script>
+        <!-- END SEARCH BOX: this adds support for the search box -->
     </div>
-    <a href="https://github.com/fslaborg/XPlot"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub" /></a>
 </body>
+
 </html>
+

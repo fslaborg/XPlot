@@ -1,177 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8" />
-    <title>Google Scatter Chart
-</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Data visualization library for F#" />
-    <meta name="author" content="Taha Hachana; Tomas Petricek" />
+    <meta charset="utf-8">
+    <title>google-scatter-chart</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="XPlot.GoogleCharts">
 
-    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
-    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
-    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
-    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet" />
+    <link rel="stylesheet" id="theme_link" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.3.1/materia/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-        google.charts.load('current', {
-            packages: ["corechart", "annotationchart", "calendar", "gauge", "geochart", "map", "sankey", "table", "timeline", "treemap"]
-        });
-    </script>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <link type="text/css" rel="stylesheet" href="https://fslab.org/XPlot/content/style.css" />
-    <script type="text/javascript" src="https://fslab.org/XPlot/content/tips.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
+
+    <link type="text/css" rel="stylesheet" href="https://fslab.org/XPlot//content/navbar-fixed-left.css" />
+    <link type="text/css" rel="stylesheet" href="https://fslab.org/XPlot//content/fsdocs-default.css" />
+    <link type="text/css" rel="stylesheet" href="https://fslab.org/XPlot//content/fsdocs-custom.css" />
+    <script type="text/javascript" src="https://fslab.org/XPlot//content/fsdocs-tips.js"></script>
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
-      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <!-- END SEARCH BOX: this adds support for the search box -->
+
 </head>
+
 <body>
+    <nav class="navbar navbar-expand-md navbar-light bg-secondary fixed-left" id="fsdocs-menu">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <a href="https://fslab.org/XPlot/"><img id="fsdocs-logo" src="https://fslab.org/XPlot/img/logo.png" /></a>
+            <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+            <div id="header">
+                <div class="searchbox" id="fsdocs-searchbox">
+                    <label for="search-by">
+                        <i class="fas fa-search"></i>
+                    </label>
+                    <input data-search-input="" id="search-by" type="search" placeholder="Search..." />
+                    <span data-search-clear="">
+                        <i class="fas fa-times"></i>
+                    </span>
+                </div>
+            </div>
+
+            <!-- END SEARCH BOX: this adds support for the search box -->
+            <ul class="navbar-nav" id="fsdocs-nav">
+                <li class="nav-header">XPlot</li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//index.html">Home Page</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//quickstart.html">Getting started</a></li>
+                <li class="divider"></li>
+                <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="https://github.com/fslaborg/XPlot/blob/master/LICENSE.md">License (Apache 2.0)</a></li>
+                <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="https://github.com/fslaborg/XPlot/blob/master/RELEASE_NOTES.md">Release Notes</a></li>
+                <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="https://github.com/fslaborg/XPlot/">Source Repository</a></li>
+                <li class="nav-header"></li>
+                <li class="nav-header">Plotly</li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-bar-charts.html">Bar</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-line-scatter-plots.html">Line and Scatter</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-box-plots.html">Box Plots</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-bubble-charts.html">Bubble</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-contour-plots.html">Contour</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-candlestick-plots.html">Candlesticks</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-area-plots.html">Area</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-heatmaps.html">Heatmaps</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-histograms.html">Histograms</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-2d-histograms.html">2D Histograms</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-polar-charts.html">Polar</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-time-series.html">Time Series</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-multiple-chart-types.html">Multiple Chart Types</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-log-plots.html">Log Plots</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-3d-scatter-plots.html">3D Scatter</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-3d-surface-plots.html">3D Surface</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-3d-line-plots.html">3D Line</a></li>
+                <li class="nav-header">Google Charts</li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-annotation-chart.html">Annotation</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-area-chart.html">Area</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-bar-chart.html">Bar</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-bubble-chart.html">Bubble</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-calendar-chart.html">Calendar</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-candlestick-chart.html">Candlestick</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-column-chart.html">Column</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-combo-chart.html">Combo</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-gauge-chart.html">Gauge</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-geo-chart.html">Geo</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-histogram-chart.html">Histogram</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-line-chart.html">Line</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-map-chart.html">Map</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-pie-chart.html">Pie</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-sankey-diagram.html">Sankey</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-scatter-chart.html">Scatter</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-stepped-area-chart.html">Stepped Area</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-timeline-chart.html">Timeline</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-table-chart.html">Table</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-treemap-chart.html">Treemap</a></li>
+                <li class="nav-header">D3 Charts</li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/d3-network.html">Network</a></li>
+                <li class="nav-header">
+  API Reference
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fslab.org/XPlot/reference/index.html">
+    All Namespaces
+  </a>
+</li>
+            </ul>
+        </div>
+    </nav>
     <div class="container">
         <div class="masthead">
-            <ul class="nav nav-pills pull-right">
-                <li>
-                    <a href="https://fslab.org"><img height="16" width="16" src="https://fslab.org/img/thumbs/fslab.png" /> FsLab</a>
-                </li>
-                <li>
-                    <a href="http://fsharp.github.io/FSharp.Data"><img height="16" width="16" src="https://fslab.org/img/thumbs/fsharpdata.png" /> F# Data</a>
-                </li>
-                <li>
-                    <a href="https://fslab.org/Deedle"><img height="16" width="16" src="https://fslab.org/img/thumbs/deedle.png" /> Deedle</a>
-                </li>
-                <li>
-                    <a href="https://fslab.org/RProvider"><img height="16" width="16" src="https://fslab.org/img/thumbs/rprovider.png" /> R Provider</a>
-                </li>
-                <li>
-                    <a href="http://numerics.mathdotnet.com/"><img height="16" width="16" src="https://fslab.org/img/thumbs/mathnet.png" /> Math.NET</a>
-                </li>
-            </ul>
             <h3 class="muted"><a href="https://fslab.org/XPlot/">XPlot</a></h3>
         </div>
         <hr />
-        <div class="row">
-            <div class="span9" id="main">
-                
-<h1><a name="Google-Scatter-Chart" class="anchor" href="#Google-Scatter-Chart">Google Scatter Chart</a></h1>
+        <div class="container" id="fsdocs-content">
+            <p>Google Scatter Chart</p>
+<p><a href="https://mybinder.org/v2/gh/fslaborg/XPlot/gh-pages?filepath=google-scatter-chart.ipynb"><img src="https://mybinder.org/badge_logo.svg" alt="Binder" /></a></p>
 <p>Creating scatter plots (or point charts) is easy. The following example generates 1000
 points by multiplying two numbers for the X coordinate and two numbers for the Y coordinate:</p>
-<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
-<span class="l">2: </span>
-<span class="l">3: </span>
-<span class="l">4: </span>
-<span class="l">5: </span>
-</pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="id">rnd</span> <span class="o">=</span> <span class="k">new</span> <span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="rt">System</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="id">Random</span><span class="pn">(</span><span class="pn">)</span> 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs6', 6)" onmouseover="showTip(event, 'fs6', 6)" class="fn">next</span><span class="pn">(</span><span class="pn">)</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs3', 7)" onmouseover="showTip(event, 'fs3', 7)" class="fn">rnd</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs7', 8)" onmouseover="showTip(event, 'fs7', 8)" class="id">NextDouble</span><span class="pn">(</span><span class="pn">)</span> <span class="o">*</span> <span onmouseout="hideTip(event, 'fs3', 9)" onmouseover="showTip(event, 'fs3', 9)" class="fn">rnd</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs7', 10)" onmouseover="showTip(event, 'fs7', 10)" class="id">NextDouble</span><span class="pn">(</span><span class="pn">)</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs8', 11)" onmouseover="showTip(event, 'fs8', 11)" class="id">points</span> <span class="o">=</span> <span class="pn">[</span> <span class="k">for</span> <span onmouseout="hideTip(event, 'fs9', 12)" onmouseover="showTip(event, 'fs9', 12)" class="id">i</span> <span class="k">in</span> <span class="n">0</span> <span class="o">..</span> <span class="n">100</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs6', 13)" onmouseover="showTip(event, 'fs6', 13)" class="fn">next</span><span class="pn">(</span><span class="pn">)</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs6', 14)" onmouseover="showTip(event, 'fs6', 14)" class="fn">next</span><span class="pn">(</span><span class="pn">)</span> <span class="pn">]</span>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="id">XPlot</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="id">GoogleCharts</span>
 
-<span onmouseout="hideTip(event, 'fs8', 15)" onmouseover="showTip(event, 'fs8', 15)" class="id">points</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs10', 16)" onmouseover="showTip(event, 'fs10', 16)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs11', 17)" onmouseover="showTip(event, 'fs11', 17)" class="id">Scatter</span> 
-</code></pre></td>
-</tr>
-</table>
-<script type="text/javascript">
-    google.charts.setOnLoadCallback(drawChart);
-            function drawChart() {
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="id">rnd</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="id">System</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="id">Random</span><span class="pn">(</span><span class="pn">)</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs6', 6)" onmouseover="showTip(event, 'fs6', 6)" class="fn">next</span><span class="pn">(</span><span class="pn">)</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs3', 7)" onmouseover="showTip(event, 'fs3', 7)" class="id">rnd</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs7', 8)" onmouseover="showTip(event, 'fs7', 8)" class="id">NextDouble</span><span class="pn">(</span><span class="pn">)</span> <span class="o">*</span> <span onmouseout="hideTip(event, 'fs3', 9)" onmouseover="showTip(event, 'fs3', 9)" class="id">rnd</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs7', 10)" onmouseover="showTip(event, 'fs7', 10)" class="id">NextDouble</span><span class="pn">(</span><span class="pn">)</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs8', 11)" onmouseover="showTip(event, 'fs8', 11)" class="id">points</span> <span class="o">=</span> <span class="pn">[</span> <span class="k">for</span> <span onmouseout="hideTip(event, 'fs9', 12)" onmouseover="showTip(event, 'fs9', 12)" class="fn">i</span> <span class="k">in</span> <span class="n">0</span> <span class="o">..</span> <span class="n">100</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs6', 13)" onmouseover="showTip(event, 'fs6', 13)" class="fn">next</span><span class="pn">(</span><span class="pn">)</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs6', 14)" onmouseover="showTip(event, 'fs6', 14)" class="fn">next</span><span class="pn">(</span><span class="pn">)</span> <span class="pn">]</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs10', 15)" onmouseover="showTip(event, 'fs10', 15)" class="id">chart</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs8', 16)" onmouseover="showTip(event, 'fs8', 16)" class="id">points</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs11', 17)" onmouseover="showTip(event, 'fs11', 17)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs12', 18)" onmouseover="showTip(event, 'fs12', 18)" class="id">Scatter</span>
+</code></pre>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>Google Chart</title>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+            google.charts.load('current', {
+              packages: ["corechart"]
+            });
+            google.charts.setOnLoadCallback(drawChart_bb63c6d8_bc2c_44c9_954a_ae5b7394cf53);
+            function drawChart_bb63c6d8_bc2c_44c9_954a_ae5b7394cf53() {
                 if ("")
                     google.visualization.mapsApiKey = ""
 
-                var data = new google.visualization.DataTable({"cols": [{"type": "number" ,"id": "Column 1" ,"label": "Column 1" }, {"type": "number" ,"id": "Column 2" ,"label": "Column 2" }], "rows" : [{"c" : [{"v": 0.00958341285098656}, {"v": 0.0325464624160259}]}, {"c" : [{"v": 0.187267085230985}, {"v": 0.426423160401848}]}, {"c" : [{"v": 0.080183205298385}, {"v": 0.000530330311249227}]}, {"c" : [{"v": 0.32955504251408}, {"v": 0.0308019386620114}]}, {"c" : [{"v": 0.0713513086241152}, {"v": 0.753185081939365}]}, {"c" : [{"v": 0.18283626643765}, {"v": 0.168442167817547}]}, {"c" : [{"v": 0.353385150442109}, {"v": 0.242583500600812}]}, {"c" : [{"v": 0.201892768439893}, {"v": 0.0590211867731339}]}, {"c" : [{"v": 0.141117845496766}, {"v": 0.0759317250721677}]}, {"c" : [{"v": 0.407702029652679}, {"v": 0.262607592219658}]}, {"c" : [{"v": 0.115459006233248}, {"v": 0.270826011503909}]}, {"c" : [{"v": 0.000234816273341957}, {"v": 0.87529886386817}]}, {"c" : [{"v": 0.65554042148754}, {"v": 0.0465645144856197}]}, {"c" : [{"v": 0.0173621317603516}, {"v": 0.0771646489439936}]}, {"c" : [{"v": 0.170191620247713}, {"v": 0.265006543950963}]}, {"c" : [{"v": 0.150820580903353}, {"v": 0.223477247394471}]}, {"c" : [{"v": 0.0109052649152572}, {"v": 0.0997934976584544}]}, {"c" : [{"v": 0.193100561933679}, {"v": 0.171522727425574}]}, {"c" : [{"v": 0.146722990619657}, {"v": 0.543286138995205}]}, {"c" : [{"v": 0.0454130747185231}, {"v": 0.621033014948223}]}, {"c" : [{"v": 0.271966621396719}, {"v": 0.0824408468005803}]}, {"c" : [{"v": 0.0271396390110467}, {"v": 0.149190338892985}]}, {"c" : [{"v": 0.00426555136533702}, {"v": 0.169555801783869}]}, {"c" : [{"v": 0.0205688242213511}, {"v": 0.041488143700517}]}, {"c" : [{"v": 0.725946072546585}, {"v": 0.1393793853993}]}, {"c" : [{"v": 0.429271943035512}, {"v": 0.170378186865596}]}, {"c" : [{"v": 0.146164024445768}, {"v": 0.391822626088802}]}, {"c" : [{"v": 0.199742422931007}, {"v": 0.104374873618604}]}, {"c" : [{"v": 0.295665367246049}, {"v": 0.251561178451462}]}, {"c" : [{"v": 0.34534458659395}, {"v": 0.908245046383204}]}, {"c" : [{"v": 0.459006741378253}, {"v": 0.0818004438458739}]}, {"c" : [{"v": 0.285041015656796}, {"v": 0.248929110782569}]}, {"c" : [{"v": 0.217110559109662}, {"v": 0.0356937238336622}]}, {"c" : [{"v": 0.218821067144131}, {"v": 0.0240830001252834}]}, {"c" : [{"v": 0.298606715507164}, {"v": 0.70462154466924}]}, {"c" : [{"v": 0.340414376651245}, {"v": 0.513518888158419}]}, {"c" : [{"v": 0.656192883974315}, {"v": 0.0136414948841927}]}, {"c" : [{"v": 0.0587473060443332}, {"v": 0.0661133149006029}]}, {"c" : [{"v": 2.94019274311615E-05}, {"v": 0.488235000847099}]}, {"c" : [{"v": 0.130546833698237}, {"v": 0.349114507975423}]}, {"c" : [{"v": 0.0430265462534427}, {"v": 0.0490838654297517}]}, {"c" : [{"v": 0.125065469656554}, {"v": 0.170048515877998}]}, {"c" : [{"v": 0.825446406478552}, {"v": 0.0984464259502466}]}, {"c" : [{"v": 0.0936134441219398}, {"v": 0.305463753508874}]}, {"c" : [{"v": 0.125749262684226}, {"v": 0.231995961397488}]}, {"c" : [{"v": 0.251856332226325}, {"v": 0.397921382845643}]}, {"c" : [{"v": 0.00225713742260525}, {"v": 0.0602800527465094}]}, {"c" : [{"v": 0.0197152346366463}, {"v": 0.257294345160675}]}, {"c" : [{"v": 0.18751356310759}, {"v": 0.564145393503371}]}, {"c" : [{"v": 0.097916179806835}, {"v": 0.491170409647066}]}, {"c" : [{"v": 0.265717312792202}, {"v": 0.0388632883274408}]}, {"c" : [{"v": 0.0284521130178106}, {"v": 0.319183794794058}]}, {"c" : [{"v": 0.503638138630951}, {"v": 0.395412828320349}]}, {"c" : [{"v": 0.416359985736564}, {"v": 0.398463606800793}]}, {"c" : [{"v": 0.243896178851765}, {"v": 0.00438569825050982}]}, {"c" : [{"v": 0.755986319910907}, {"v": 0.310712336389512}]}, {"c" : [{"v": 0.0115965665178875}, {"v": 0.256999618191564}]}, {"c" : [{"v": 0.198190531493999}, {"v": 0.458338939789558}]}, {"c" : [{"v": 0.00463924692892365}, {"v": 0.311142707856735}]}, {"c" : [{"v": 0.01892256280052}, {"v": 0.577232667880454}]}, {"c" : [{"v": 0.216573113404661}, {"v": 0.198559814576031}]}, {"c" : [{"v": 0.638078156250707}, {"v": 0.493752597561435}]}, {"c" : [{"v": 0.0588621409094027}, {"v": 0.162474311991581}]}, {"c" : [{"v": 0.269017300311742}, {"v": 0.0475758965377655}]}, {"c" : [{"v": 0.649339056737957}, {"v": 0.060564793508682}]}, {"c" : [{"v": 0.0185439400645417}, {"v": 0.0223945663153567}]}, {"c" : [{"v": 0.907132429768773}, {"v": 0.232824630087361}]}, {"c" : [{"v": 0.102290217987263}, {"v": 0.05831787441029}]}, {"c" : [{"v": 0.204176327925172}, {"v": 0.188320172059886}]}, {"c" : [{"v": 0.0781956966707975}, {"v": 0.426951095906183}]}, {"c" : [{"v": 0.435405565002767}, {"v": 0.0990458842958059}]}, {"c" : [{"v": 0.0648565005301779}, {"v": 0.0230060056130329}]}, {"c" : [{"v": 0.240901120630956}, {"v": 0.13152586828899}]}, {"c" : [{"v": 0.332053476313738}, {"v": 0.219003131175022}]}, {"c" : [{"v": 0.434056064975046}, {"v": 0.28163636473806}]}, {"c" : [{"v": 0.0171490621378538}, {"v": 0.345808309585929}]}, {"c" : [{"v": 0.0754571747125192}, {"v": 0.22887082349852}]}, {"c" : [{"v": 0.0301995729970349}, {"v": 0.112754244273104}]}, {"c" : [{"v": 0.238750903673663}, {"v": 0.347169298176999}]}, {"c" : [{"v": 0.207220427671859}, {"v": 0.555147734470623}]}, {"c" : [{"v": 0.190756478272307}, {"v": 0.00121105964594667}]}, {"c" : [{"v": 0.256248837109343}, {"v": 0.137843647350098}]}, {"c" : [{"v": 0.708870827111829}, {"v": 0.548008109363222}]}, {"c" : [{"v": 0.850038246273452}, {"v": 0.136550900910321}]}, {"c" : [{"v": 0.243262987942552}, {"v": 0.131109600934124}]}, {"c" : [{"v": 0.352532101903048}, {"v": 0.41890481017504}]}, {"c" : [{"v": 0.175982970659374}, {"v": 0.133375062050987}]}, {"c" : [{"v": 0.0564364499979321}, {"v": 0.423846084807193}]}, {"c" : [{"v": 0.466076517836082}, {"v": 0.846836109320223}]}, {"c" : [{"v": 0.202651943893214}, {"v": 0.0722405665552439}]}, {"c" : [{"v": 0.283346162755177}, {"v": 0.10934666607502}]}, {"c" : [{"v": 0.333725085101478}, {"v": 0.782955776391817}]}, {"c" : [{"v": 0.207647501717635}, {"v": 0.258126287233024}]}, {"c" : [{"v": 0.243479697915732}, {"v": 0.0498519726113432}]}, {"c" : [{"v": 0.680801320587796}, {"v": 0.231328402919472}]}, {"c" : [{"v": 0.235914027209693}, {"v": 0.0263581025321457}]}, {"c" : [{"v": 0.208100052051992}, {"v": 0.320654434290332}]}, {"c" : [{"v": 0.566223867485131}, {"v": 0.772232974812461}]}, {"c" : [{"v": 0.692375356740026}, {"v": 0.0263614529873778}]}, {"c" : [{"v": 0.0632152921947758}, {"v": 0.873112886977169}]}, {"c" : [{"v": 0.449876850909701}, {"v": 0.323947494468403}]}]});
+                var data = new google.visualization.DataTable({"cols": [{"type": "number" ,"id": "Column 1" ,"label": "Column 1" }, {"type": "number" ,"id": "Column 2" ,"label": "Column 2" }], "rows" : [{"c" : [{"v": 0.09612933498025318}, {"v": 0.2533475765081499}]}, {"c" : [{"v": 0.44303451546556133}, {"v": 0.14045389039183245}]}, {"c" : [{"v": 0.12038986809385076}, {"v": 0.5394484731413373}]}, {"c" : [{"v": 0.2867180570248406}, {"v": 0.033068489254347175}]}, {"c" : [{"v": 0.314725451590158}, {"v": 0.3400508178345889}]}, {"c" : [{"v": 0.2943778239083344}, {"v": 0.08241737435317208}]}, {"c" : [{"v": 0.09318166415771531}, {"v": 0.2725001005013436}]}, {"c" : [{"v": 0.4970997612962273}, {"v": 0.08526245834217294}]}, {"c" : [{"v": 0.00016816071218091327}, {"v": 0.2116309486137275}]}, {"c" : [{"v": 0.15164124736534876}, {"v": 0.005104282529383425}]}, {"c" : [{"v": 0.05938943736562029}, {"v": 0.4316928684494093}]}, {"c" : [{"v": 0.004114078505177535}, {"v": 0.5081572753590621}]}, {"c" : [{"v": 0.12026422853345238}, {"v": 0.6102581935467633}]}, {"c" : [{"v": 0.07752272678980252}, {"v": 0.1989559768138132}]}, {"c" : [{"v": 0.4210971112116227}, {"v": 0.20301909561162237}]}, {"c" : [{"v": 0.24280339099518233}, {"v": 0.2125254251638587}]}, {"c" : [{"v": 0.10643659614649606}, {"v": 0.8835544571690058}]}, {"c" : [{"v": 0.007859529132287846}, {"v": 0.4879036158262312}]}, {"c" : [{"v": 0.055371172399020896}, {"v": 0.29065294615665027}]}, {"c" : [{"v": 0.5916679182124405}, {"v": 0.25114769139057186}]}, {"c" : [{"v": 0.44761149188937654}, {"v": 0.3770329854227249}]}, {"c" : [{"v": 0.7878413895765659}, {"v": 0.010327289536811701}]}, {"c" : [{"v": 0.36443540458912255}, {"v": 0.07136398505219597}]}, {"c" : [{"v": 0.07677820497021758}, {"v": 0.128771505701381}]}, {"c" : [{"v": 0.10140504232642097}, {"v": 0.2204436993672967}]}, {"c" : [{"v": 0.056324009715806284}, {"v": 0.1092489777423707}]}, {"c" : [{"v": 0.08942608125070978}, {"v": 0.3505185807497124}]}, {"c" : [{"v": 0.016633153071941607}, {"v": 0.03233018615131994}]}, {"c" : [{"v": 0.12417202092837927}, {"v": 0.0032561182409403884}]}, {"c" : [{"v": 0.047219825290435335}, {"v": 0.18456654562889827}]}, {"c" : [{"v": 0.26455846267877364}, {"v": 0.036135037354574163}]}, {"c" : [{"v": 0.04395724064406273}, {"v": 0.199266544245704}]}, {"c" : [{"v": 0.29011658633866316}, {"v": 0.19218005894115917}]}, {"c" : [{"v": 0.20029373056911054}, {"v": 0.4549777702391637}]}, {"c" : [{"v": 0.03380367527520012}, {"v": 0.054369827982383566}]}, {"c" : [{"v": 0.07988561381669083}, {"v": 0.3136807427361014}]}, {"c" : [{"v": 0.6278302884609822}, {"v": 0.26373669452118986}]}, {"c" : [{"v": 0.054095168238523506}, {"v": 0.03422676090032445}]}, {"c" : [{"v": 0.012719659139273028}, {"v": 0.18269936466794312}]}, {"c" : [{"v": 0.07039913071515436}, {"v": 0.08509005794891827}]}, {"c" : [{"v": 0.11252668279888245}, {"v": 0.05813835448439621}]}, {"c" : [{"v": 0.5654542254971763}, {"v": 0.4545248601625848}]}, {"c" : [{"v": 0.046596976744371646}, {"v": 0.462907658347089}]}, {"c" : [{"v": 0.054840702433335636}, {"v": 0.23260461999153031}]}, {"c" : [{"v": 0.17326258035214412}, {"v": 0.09037467452382468}]}, {"c" : [{"v": 0.5770837414172254}, {"v": 0.04718836335189272}]}, {"c" : [{"v": 0.062353614672643776}, {"v": 0.25140762106560094}]}, {"c" : [{"v": 0.014851903409487737}, {"v": 0.23501676235844807}]}, {"c" : [{"v": 0.897282552021265}, {"v": 0.024336295402526017}]}, {"c" : [{"v": 0.17777719793846203}, {"v": 0.5060184233213085}]}, {"c" : [{"v": 0.24063234225965413}, {"v": 0.025395175523908037}]}, {"c" : [{"v": 0.0021806405903338068}, {"v": 0.2367355229063703}]}, {"c" : [{"v": 0.32873804859312983}, {"v": 0.6170425213310556}]}, {"c" : [{"v": 0.21811993887878944}, {"v": 0.012895502719671336}]}, {"c" : [{"v": 0.7837996282881308}, {"v": 0.14034146643007545}]}, {"c" : [{"v": 0.07861219524414595}, {"v": 0.020654824736463524}]}, {"c" : [{"v": 0.35473902139664865}, {"v": 0.04513606709200344}]}, {"c" : [{"v": 0.01129099888406507}, {"v": 0.11423403456510013}]}, {"c" : [{"v": 0.3940945385529382}, {"v": 0.6448149899170941}]}, {"c" : [{"v": 0.051504127283496376}, {"v": 0.02208774952496145}]}, {"c" : [{"v": 0.07943264468320209}, {"v": 0.5207819164408065}]}, {"c" : [{"v": 0.3527075948547069}, {"v": 0.0005481951956418861}]}, {"c" : [{"v": 0.37779078952216155}, {"v": 0.048727072352207815}]}, {"c" : [{"v": 0.015048085929307065}, {"v": 0.0025892499453657085}]}, {"c" : [{"v": 0.1270073857517367}, {"v": 0.2723436472834716}]}, {"c" : [{"v": 0.4108339760742356}, {"v": 0.06489410370241543}]}, {"c" : [{"v": 0.05375251846783557}, {"v": 0.14138318408174205}]}, {"c" : [{"v": 0.595381178074665}, {"v": 0.37026641861735776}]}, {"c" : [{"v": 0.12286439209118105}, {"v": 0.004976192316677468}]}, {"c" : [{"v": 0.28889736217792933}, {"v": 0.3949901319138578}]}, {"c" : [{"v": 0.25807264511780653}, {"v": 0.18784122609832002}]}, {"c" : [{"v": 0.13021254749423025}, {"v": 0.07269860542397474}]}, {"c" : [{"v": 0.13260431455779528}, {"v": 0.06194044681952033}]}, {"c" : [{"v": 0.3310112783993409}, {"v": 0.28612507232114565}]}, {"c" : [{"v": 0.04242081268592116}, {"v": 0.40232621672261293}]}, {"c" : [{"v": 0.23568744908116157}, {"v": 0.3183453297709023}]}, {"c" : [{"v": 0.05932895853342874}, {"v": 0.7852067528282072}]}, {"c" : [{"v": 0.06807503807498488}, {"v": 0.3969850971695394}]}, {"c" : [{"v": 0.5727097766297137}, {"v": 0.05074250711835076}]}, {"c" : [{"v": 0.3191143853271151}, {"v": 0.04743813674998039}]}, {"c" : [{"v": 0.24531747543672985}, {"v": 0.43513871879402627}]}, {"c" : [{"v": 0.051567384072268026}, {"v": 0.027447257610135858}]}, {"c" : [{"v": 0.29820304405794196}, {"v": 0.7248285008138483}]}, {"c" : [{"v": 0.3585869879604195}, {"v": 0.30117862141760193}]}, {"c" : [{"v": 0.7545469469993911}, {"v": 0.06900891263631252}]}, {"c" : [{"v": 0.2925605646490103}, {"v": 0.16386706017083014}]}, {"c" : [{"v": 0.1602221279115149}, {"v": 0.42129373609801696}]}, {"c" : [{"v": 0.554118312549661}, {"v": 0.0010497903798743142}]}, {"c" : [{"v": 0.08037463671684868}, {"v": 0.5359169349349331}]}, {"c" : [{"v": 0.48136753872429944}, {"v": 0.02989724696723399}]}, {"c" : [{"v": 0.7050394412616134}, {"v": 0.21395535166440402}]}, {"c" : [{"v": 0.4160853320676894}, {"v": 0.0914138210757981}]}, {"c" : [{"v": 0.04354220932044483}, {"v": 0.058300202876047764}]}, {"c" : [{"v": 0.2005271839693761}, {"v": 0.0005434180181323486}]}, {"c" : [{"v": 0.4854822971587173}, {"v": 0.5407554382830627}]}, {"c" : [{"v": 0.2620053493215942}, {"v": 0.2011251678282633}]}, {"c" : [{"v": 0.5238806631134}, {"v": 0.08867270528299746}]}, {"c" : [{"v": 0.17326521576974518}, {"v": 0.19722218729015425}]}, {"c" : [{"v": 0.5520675153781743}, {"v": 0.009805325151330339}]}, {"c" : [{"v": 0.6399059952616237}, {"v": 0.08619106565829289}]}, {"c" : [{"v": 0.45768632174185253}, {"v": 0.1605059508421306}]}]});
 
                 
 
-                var options = {"legend":{"position":"none"}} 
+                var options = {"legend":{"position":"none"}}
 
-                var chart = new google.visualization.ScatterChart(document.getElementById('a2d59b8c-3420-4a9c-b817-51b06def4214'));
+                var chart = new google.visualization.ScatterChart(document.getElementById('bb63c6d8_bc2c_44c9_954a_ae5b7394cf53'));
                 chart.draw(data, options);
             }
-</script>
-<div id="a2d59b8c-3420-4a9c-b817-51b06def4214" style="width: 700px; height: 400px;"></div>
-
-<div class="tip" id="fs1">namespace XPlot</div>
-<div class="tip" id="fs2">namespace XPlot.GoogleCharts</div>
-<div class="tip" id="fs3">val rnd : System.Random</div>
-<div class="tip" id="fs4">namespace System</div>
-<div class="tip" id="fs5">Multiple items<br />type Random =<br />&#160;&#160;new : unit -&gt; Random + 1 overload<br />&#160;&#160;member Next : unit -&gt; int + 2 overloads<br />&#160;&#160;member NextBytes : buffer:byte[] -&gt; unit<br />&#160;&#160;member NextDouble : unit -&gt; float<br /><br />--------------------<br />System.Random() : System.Random<br />System.Random(Seed: int) : System.Random</div>
-<div class="tip" id="fs6">val next : unit -&gt; float</div>
-<div class="tip" id="fs7">System.Random.NextDouble() : float</div>
-<div class="tip" id="fs8">val points : (float * float) list</div>
-<div class="tip" id="fs9">val i : int</div>
-<div class="tip" id="fs10">type Chart =<br />&#160;&#160;static member Annotation : data:seq&lt;#seq&lt;DateTime * &#39;V * string * string&gt;&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart (requires &#39;V :&gt; value)<br />&#160;&#160;static member Annotation : data:seq&lt;DateTime * #value * string * string&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart<br />&#160;&#160;static member Area : data:seq&lt;#seq&lt;&#39;K * &#39;V&gt;&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart (requires &#39;K :&gt; key and &#39;V :&gt; value)<br />&#160;&#160;static member Area : data:seq&lt;#key * #value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart<br />&#160;&#160;static member Area : data:seq&lt;#value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart<br />&#160;&#160;static member Bar : data:seq&lt;#seq&lt;&#39;K * &#39;V&gt;&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart (requires &#39;K :&gt; key and &#39;V :&gt; value)<br />&#160;&#160;static member Bar : data:seq&lt;#key * #value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart<br />&#160;&#160;static member Bar : data:seq&lt;#value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart<br />&#160;&#160;static member Bubble : data:seq&lt;string * #value * #value * #value * #value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart<br />&#160;&#160;static member Bubble : data:seq&lt;string * #value * #value * #value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart<br />&#160;&#160;...</div>
-<div class="tip" id="fs11">static member Chart.Scatter : data:seq&lt;#seq&lt;&#39;K * &#39;V&gt;&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart (requires &#39;K :&gt; key and &#39;V :&gt; value)<br />static member Chart.Scatter : data:seq&lt;#key * #value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart<br />static member Chart.Scatter : data:seq&lt;#value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart</div>
-
-            </div>
-            <div class="span3">
-                <img src="https://fslab.org/XPlot/img/logo.png" alt="F# Project" style="width:130px;margin:20px" />
-                <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
-                    <li class="nav-header">XPlot</li>
-                    <li><a href="https://fslab.org/XPlot/">Home page</a></li>
-                    <li><a href="https://fslab.org/XPlot/quickstart.html">Getting started</a></li>
-                    <li class="divider"></li>
-                    <li><a href="http://www.nuget.org/packages?q=XPlot">Get Library via NuGet</a></li>
-                    <li><a href="https://github.com/fslaborg/XPlot">Source Code on GitHub</a></li>
-                    <li><a href="https://fslab.org/XPlot/license.html">License (Apache 2.0)</a></li>
-                    <li><a href="https://fslab.org/XPlot/release-notes.html">Release Notes</a></li>
-
-                    <li class="nav-header"><a href="https://fslab.org/XPlot/google-charts.html">Google Charts</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-annotation-chart.html">Annotation</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-area-chart.html">Area</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-bar-chart.html">Bar</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-bubble-chart.html">Bubble</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-calendar-chart.html">Calendar</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-candlestick-chart.html">Candlestick</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-column-chart.html">Column</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-combo-chart.html">Combo</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-gauge-chart.html">Gauge</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-geo-chart.html">Geo</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-histogram-chart.html">Histogram</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-line-chart.html">Line</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-map-chart.html">Map</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-pie-chart.html">Pie</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-sankey-diagram.html">Sankey</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-scatter-chart.html">Scatter</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-stepped-area-chart.html">Stepped Area</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-timeline-chart.html">Timeline</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-table-chart.html">Table</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-treemap-chart.html">Treemap</a></li>
-
-                    <li class="nav-header"><a href="https://fslab.org/XPlot/plotly.html">Plotly</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-bar-charts.html">Bar</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-line-scatter-plots.html">Line and Scatter Plots</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-box-plots.html">Box Plots</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-bubble-charts.html">Bubble Charts</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-contour-plots.html">Contour Plots</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-area-plots.html">Area Plots</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-heatmaps.html">Heatmaps</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-histograms.html">Histograms</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-2d-histograms.html">2D Histograms</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-polar-charts.html">Polar Charts</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-time-series.html">Time Series</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-multiple-chart-types.html">Multiple Chart Types</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-log-plots.html">Log Plots</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-3d-scatter-plots.html">3D Scatter Plots</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-3d-surface-plots.html">3D Surface Plots</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-3d-line-plots.html">3D Line Plots</a></li>
-
-                    <li class="nav-header"><a href="https://fslab.org/XPlot/d3.html">D3 Charts</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/d3-network.html">Network</a></li>
-
-                    <li class="nav-header">Documentation</li>
-                    <li><a href="https://fslab.org/XPlot/reference/index.html">API Reference</a></li>
-                    <li class="divider"></li>
-
-                    <li><a href="https://fslab.org/XPlot/reference/xplot-googlecharts-chart.html">Google Chart Type</a></li>
-                    <li><a href="https://fslab.org/XPlot/reference/xplot-googlecharts-configuration-options.html">Google Option Type</a></li>
-                    <li><a href="https://fslab.org/XPlot/reference/xplot-googlecharts-configuration.html">Google Configuration Module</a></li>
-
-                    <li class="divider"></li>
-
-                    <li><a href="https://fslab.org/XPlot/reference/xplot-plotly-graph.html">Plotly Graph Module</a></li>
-                    <li><a href="https://fslab.org/XPlot/reference/xplot-plotly-layout-layout.html">Plotly Layout Type</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <a href="https://github.com/fslaborg/XPlot"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub" /></a>
-</body>
+        </script>
+    </head>
+    <body>
+        <div id="bb63c6d8_bc2c_44c9_954a_ae5b7394cf53" style="width: -1px; height: -1px;"></div>
+    </body>
 </html>
+
+            <div class="fsdocs-tip" id="fs1">namespace XPlot</div>
+<div class="fsdocs-tip" id="fs2">namespace XPlot.GoogleCharts</div>
+<div class="fsdocs-tip" id="fs3">val rnd : System.Random</div>
+<div class="fsdocs-tip" id="fs4">namespace System</div>
+<div class="fsdocs-tip" id="fs5">Multiple items<br />type Random =<br />&#160;&#160;new : unit -&gt; unit + 1 overload<br />&#160;&#160;member Next : unit -&gt; int + 2 overloads<br />&#160;&#160;member NextBytes : buffer: byte [] -&gt; unit + 1 overload<br />&#160;&#160;member NextDouble : unit -&gt; float<br />&#160;&#160;member Sample : unit -&gt; float<br /><br />--------------------<br />System.Random() : System.Random<br />System.Random(Seed: int) : System.Random</div>
+<div class="fsdocs-tip" id="fs6">val next : unit -&gt; float</div>
+<div class="fsdocs-tip" id="fs7">System.Random.NextDouble() : float</div>
+<div class="fsdocs-tip" id="fs8">val points : (float * float) list</div>
+<div class="fsdocs-tip" id="fs9">val i : int</div>
+<div class="fsdocs-tip" id="fs10">val chart : GoogleChart</div>
+<div class="fsdocs-tip" id="fs11">type Chart =<br />&#160;&#160;static member Annotation : data:seq&lt;DateTime * #value * string * string&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart + 1 overload<br />&#160;&#160;static member Area : data:seq&lt;#value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart + 2 overloads<br />&#160;&#160;static member Bar : data:seq&lt;#value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart + 2 overloads<br />&#160;&#160;static member Bubble : data:seq&lt;string * #value * #value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart + 2 overloads<br />&#160;&#160;static member Calendar : data:seq&lt;DateTime * #value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart<br />&#160;&#160;static member Candlestick : data:seq&lt;#key * #value * #value * #value * #value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart + 1 overload<br />&#160;&#160;static member Column : data:seq&lt;#value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart + 2 overloads<br />&#160;&#160;static member Combo : data:seq&lt;#seq&lt;&#39;K * &#39;V&gt;&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart (requires &#39;K :&gt; key and &#39;V :&gt; value)<br />&#160;&#160;static member private Create : data:seq&lt;#seq&lt;&#39;T&gt;&gt; -&gt; labels:seq&lt;string&gt; option -&gt; options:Options option -&gt; chartType:ChartGallery -&gt; datumNew:(&#39;T -&gt; Datum) -&gt; GoogleChart<br />&#160;&#160;static member private Create&#39; : data:seq&lt;#value&gt; -&gt; labels:seq&lt;string&gt; option -&gt; options:Options option -&gt; chartType:ChartGallery -&gt; GoogleChart<br />&#160;&#160;...</div>
+<div class="fsdocs-tip" id="fs12">static member Chart.Scatter : data:seq&lt;#seq&lt;&#39;K * &#39;V&gt;&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart (requires &#39;K :&gt; key and &#39;V :&gt; value)<br />static member Chart.Scatter : data:seq&lt;#key * #value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart<br />static member Chart.Scatter : data:seq&lt;#value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart</div>
+<div class="fsdocs-tip" id="fs13">member GoogleChart.GetHtml : unit -&gt; string</div>
+
+        </div>
+
+        <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+        <script type="text/javascript">var fsdocs_search_baseurl = 'https://fslab.org/XPlot/'</script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
+        <script type="text/javascript" src="https://fslab.org/XPlot/content/fsdocs-search.js"></script>
+        <!-- END SEARCH BOX: this adds support for the search box -->
+    </div>
+</body>
+
+</html>
+

@@ -1,0 +1,2153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Scattergeo (XPlot)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="XPlot.Plotly">
+
+    <link rel="stylesheet" id="theme_link" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.3.1/materia/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
+
+    <link type="text/css" rel="stylesheet" href="https://fslab.org/XPlot//content/navbar-fixed-left.css" />
+    <link type="text/css" rel="stylesheet" href="https://fslab.org/XPlot//content/fsdocs-default.css" />
+    <link type="text/css" rel="stylesheet" href="https://fslab.org/XPlot//content/fsdocs-custom.css" />
+    <script type="text/javascript" src="https://fslab.org/XPlot//content/fsdocs-tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <!-- END SEARCH BOX: this adds support for the search box -->
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-light bg-secondary fixed-left" id="fsdocs-menu">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <a href="https://fslab.org/XPlot/"><img id="fsdocs-logo" src="https://fslab.org/XPlot/img/logo.png" /></a>
+            <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+            <div id="header">
+                <div class="searchbox" id="fsdocs-searchbox">
+                    <label for="search-by">
+                        <i class="fas fa-search"></i>
+                    </label>
+                    <input data-search-input="" id="search-by" type="search" placeholder="Search..." />
+                    <span data-search-clear="">
+                        <i class="fas fa-times"></i>
+                    </span>
+                </div>
+            </div>
+
+            <!-- END SEARCH BOX: this adds support for the search box -->
+            <ul class="navbar-nav" id="fsdocs-nav">
+                <li class="nav-header">XPlot</li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//index.html">Home Page</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//quickstart.html">Getting started</a></li>
+                <li class="divider"></li>
+                <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="https://github.com/fslaborg/XPlot/blob/master/LICENSE.md">License (Apache 2.0)</a></li>
+                <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="https://github.com/fslaborg/XPlot/blob/master/RELEASE_NOTES.md">Release Notes</a></li>
+                <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="https://github.com/fslaborg/XPlot/">Source Repository</a></li>
+                <li class="nav-header"></li>
+                <li class="nav-header">Plotly</li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-bar-charts.html">Bar</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-line-scatter-plots.html">Line and Scatter</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-box-plots.html">Box Plots</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-bubble-charts.html">Bubble</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-contour-plots.html">Contour</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-candlestick-plots.html">Candlesticks</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-area-plots.html">Area</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-heatmaps.html">Heatmaps</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-histograms.html">Histograms</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-2d-histograms.html">2D Histograms</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-polar-charts.html">Polar</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-time-series.html">Time Series</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-multiple-chart-types.html">Multiple Chart Types</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-log-plots.html">Log Plots</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-3d-scatter-plots.html">3D Scatter</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-3d-surface-plots.html">3D Surface</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-3d-line-plots.html">3D Line</a></li>
+                <li class="nav-header">Google Charts</li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-annotation-chart.html">Annotation</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-area-chart.html">Area</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-bar-chart.html">Bar</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-bubble-chart.html">Bubble</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-calendar-chart.html">Calendar</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-candlestick-chart.html">Candlestick</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-column-chart.html">Column</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-combo-chart.html">Combo</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-gauge-chart.html">Gauge</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-geo-chart.html">Geo</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-histogram-chart.html">Histogram</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-line-chart.html">Line</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-map-chart.html">Map</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-pie-chart.html">Pie</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-sankey-diagram.html">Sankey</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-scatter-chart.html">Scatter</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-stepped-area-chart.html">Stepped Area</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-timeline-chart.html">Timeline</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-table-chart.html">Table</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-treemap-chart.html">Treemap</a></li>
+                <li class="nav-header">D3 Charts</li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/d3-network.html">Network</a></li>
+                <li class="nav-header">
+  API Reference
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fslab.org/XPlot/reference/index.html">
+    All Namespaces
+  </a>
+</li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="masthead">
+            <h3 class="muted"><a href="https://fslab.org/XPlot/">XPlot</a></h3>
+        </div>
+        <hr />
+        <div class="container" id="fsdocs-content">
+            <div>
+  <h1>
+    Scattergeo Type
+  </h1>
+  <p>
+    Namespace: 
+    <a href="https://fslab.org/XPlot/reference/xplot-plotly.html">
+      XPlot.Plotly
+    </a>
+  </p>
+  <p>
+    Assembly: XPlot.Plotly.dll
+  </p>
+  <p>
+    Base Type: 
+    <code><a href="https://fslab.org/XPlot/reference/xplot-plotly-trace.html">Trace</a></code>
+  </p>
+  <div class="fsdocs-xmldoc">
+    
+  </div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div>
+    <h3>
+      Constructors
+    </h3>
+    <table class="table outer-list fsdocs-member-list">
+      <thead>
+        <tr>
+          <td class="fsdocs-member-list-header">
+            Constructor
+          </td>
+          <td class="fsdocs-member-list-header">
+            Description
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2627', 2627)" onmouseover="showTip(event, '2627', 2627)">
+                <p>
+                  <a id="( .ctor )">
+                    <a href="#( .ctor )">
+                      <code><span>Scattergeo<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2627">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>Scattergeo<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="https://fslab.org/XPlot/reference/xplot-plotly-scattergeo.html">Scattergeo</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Scattergeo.fs#L3-3" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code><a href="https://fslab.org/XPlot/reference/xplot-plotly-scattergeo.html">Scattergeo</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div>
+    <h3>
+      Instance members
+    </h3>
+    <table class="table outer-list fsdocs-member-list">
+      <thead>
+        <tr>
+          <td class="fsdocs-member-list-header">
+            Instance member
+          </td>
+          <td class="fsdocs-member-list-header">
+            Description
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2628', 2628)" onmouseover="showTip(event, '2628', 2628)">
+                <p>
+                  <a id="ShouldSerializegeo">
+                    <a href="#ShouldSerializegeo">
+                      <code><span>this.ShouldSerializegeo<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2628">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializegeo<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Scattergeo.fs#L163-163" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2629', 2629)" onmouseover="showTip(event, '2629', 2629)">
+                <p>
+                  <a id="ShouldSerializehoverinfo">
+                    <a href="#ShouldSerializehoverinfo">
+                      <code><span>this.ShouldSerializehoverinfo<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2629">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializehoverinfo<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Scattergeo.fs#L151-151" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2630', 2630)" onmouseover="showTip(event, '2630', 2630)">
+                <p>
+                  <a id="ShouldSerializelat">
+                    <a href="#ShouldSerializelat">
+                      <code><span>this.ShouldSerializelat<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2630">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializelat<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Scattergeo.fs#L154-154" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2631', 2631)" onmouseover="showTip(event, '2631', 2631)">
+                <p>
+                  <a id="ShouldSerializelatsrc">
+                    <a href="#ShouldSerializelatsrc">
+                      <code><span>this.ShouldSerializelatsrc<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2631">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializelatsrc<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Scattergeo.fs#L165-165" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2632', 2632)" onmouseover="showTip(event, '2632', 2632)">
+                <p>
+                  <a id="ShouldSerializelegendgroup">
+                    <a href="#ShouldSerializelegendgroup">
+                      <code><span>this.ShouldSerializelegendgroup<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2632">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializelegendgroup<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Scattergeo.fs#L148-148" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2633', 2633)" onmouseover="showTip(event, '2633', 2633)">
+                <p>
+                  <a id="ShouldSerializeline">
+                    <a href="#ShouldSerializeline">
+                      <code><span>this.ShouldSerializeline<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2633">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializeline<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Scattergeo.fs#L159-159" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2634', 2634)" onmouseover="showTip(event, '2634', 2634)">
+                <p>
+                  <a id="ShouldSerializelocationmode">
+                    <a href="#ShouldSerializelocationmode">
+                      <code><span>this.ShouldSerializelocationmode<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2634">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializelocationmode<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Scattergeo.fs#L156-156" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2635', 2635)" onmouseover="showTip(event, '2635', 2635)">
+                <p>
+                  <a id="ShouldSerializelocations">
+                    <a href="#ShouldSerializelocations">
+                      <code><span>this.ShouldSerializelocations<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2635">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializelocations<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Scattergeo.fs#L155-155" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2636', 2636)" onmouseover="showTip(event, '2636', 2636)">
+                <p>
+                  <a id="ShouldSerializelocationssrc">
+                    <a href="#ShouldSerializelocationssrc">
+                      <code><span>this.ShouldSerializelocationssrc<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2636">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializelocationssrc<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Scattergeo.fs#L166-166" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2637', 2637)" onmouseover="showTip(event, '2637', 2637)">
+                <p>
+                  <a id="ShouldSerializelon">
+                    <a href="#ShouldSerializelon">
+                      <code><span>this.ShouldSerializelon<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2637">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializelon<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Scattergeo.fs#L153-153" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2638', 2638)" onmouseover="showTip(event, '2638', 2638)">
+                <p>
+                  <a id="ShouldSerializelonsrc">
+                    <a href="#ShouldSerializelonsrc">
+                      <code><span>this.ShouldSerializelonsrc<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2638">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializelonsrc<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Scattergeo.fs#L164-164" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2639', 2639)" onmouseover="showTip(event, '2639', 2639)">
+                <p>
+                  <a id="ShouldSerializemarker">
+                    <a href="#ShouldSerializemarker">
+                      <code><span>this.ShouldSerializemarker<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2639">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializemarker<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Scattergeo.fs#L160-160" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2640', 2640)" onmouseover="showTip(event, '2640', 2640)">
+                <p>
+                  <a id="ShouldSerializemode">
+                    <a href="#ShouldSerializemode">
+                      <code><span>this.ShouldSerializemode<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2640">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializemode<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Scattergeo.fs#L157-157" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2641', 2641)" onmouseover="showTip(event, '2641', 2641)">
+                <p>
+                  <a id="ShouldSerializeopacity">
+                    <a href="#ShouldSerializeopacity">
+                      <code><span>this.ShouldSerializeopacity<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2641">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializeopacity<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Scattergeo.fs#L149-149" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2642', 2642)" onmouseover="showTip(event, '2642', 2642)">
+                <p>
+                  <a id="ShouldSerializeshowlegend">
+                    <a href="#ShouldSerializeshowlegend">
+                      <code><span>this.ShouldSerializeshowlegend<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2642">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializeshowlegend<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Scattergeo.fs#L147-147" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2643', 2643)" onmouseover="showTip(event, '2643', 2643)">
+                <p>
+                  <a id="ShouldSerializestream">
+                    <a href="#ShouldSerializestream">
+                      <code><span>this.ShouldSerializestream<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2643">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializestream<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Scattergeo.fs#L152-152" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2644', 2644)" onmouseover="showTip(event, '2644', 2644)">
+                <p>
+                  <a id="ShouldSerializetext">
+                    <a href="#ShouldSerializetext">
+                      <code><span>this.ShouldSerializetext<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2644">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializetext<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Scattergeo.fs#L158-158" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2645', 2645)" onmouseover="showTip(event, '2645', 2645)">
+                <p>
+                  <a id="ShouldSerializetextfont">
+                    <a href="#ShouldSerializetextfont">
+                      <code><span>this.ShouldSerializetextfont<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2645">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializetextfont<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Scattergeo.fs#L161-161" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2646', 2646)" onmouseover="showTip(event, '2646', 2646)">
+                <p>
+                  <a id="ShouldSerializetextposition">
+                    <a href="#ShouldSerializetextposition">
+                      <code><span>this.ShouldSerializetextposition<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2646">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializetextposition<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Scattergeo.fs#L162-162" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2647', 2647)" onmouseover="showTip(event, '2647', 2647)">
+                <p>
+                  <a id="ShouldSerializetextpositionsrc">
+                    <a href="#ShouldSerializetextpositionsrc">
+                      <code><span>this.ShouldSerializetextpositionsrc<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2647">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializetextpositionsrc<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Scattergeo.fs#L168-168" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2648', 2648)" onmouseover="showTip(event, '2648', 2648)">
+                <p>
+                  <a id="ShouldSerializetextsrc">
+                    <a href="#ShouldSerializetextsrc">
+                      <code><span>this.ShouldSerializetextsrc<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2648">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializetextsrc<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Scattergeo.fs#L167-167" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2649', 2649)" onmouseover="showTip(event, '2649', 2649)">
+                <p>
+                  <a id="ShouldSerializetype">
+                    <a href="#ShouldSerializetype">
+                      <code><span>this.ShouldSerializetype<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2649">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializetype<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Scattergeo.fs#L145-145" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2650', 2650)" onmouseover="showTip(event, '2650', 2650)">
+                <p>
+                  <a id="ShouldSerializeuid">
+                    <a href="#ShouldSerializeuid">
+                      <code><span>this.ShouldSerializeuid<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2650">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializeuid<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Scattergeo.fs#L150-150" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2651', 2651)" onmouseover="showTip(event, '2651', 2651)">
+                <p>
+                  <a id="ShouldSerializevisible">
+                    <a href="#ShouldSerializevisible">
+                      <code><span>this.ShouldSerializevisible<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2651">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ShouldSerializevisible<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Scattergeo.fs#L146-146" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns:
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2652', 2652)" onmouseover="showTip(event, '2652', 2652)">
+                <p>
+                  <a id="geo">
+                    <a href="#geo">
+                      <code><span>this.geo&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2652">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.geo&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Scattergeo.fs#L116-116" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+ Sets a reference between this trace's geospatial coordinates and a geographic map. If *geo* (the default value), the geospatial coordinates refer to `layout.geo`. If *geo2*, the geospatial coordinates refer to `layout.geo2`, and so on.
+
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2653', 2653)" onmouseover="showTip(event, '2653', 2653)">
+                <p>
+                  <a id="hoverinfo">
+                    <a href="#hoverinfo">
+                      <code><span>this.hoverinfo&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2653">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.hoverinfo&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Scattergeo.fs#L60-60" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+ Determines which trace information appear on hover.
+
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2654', 2654)" onmouseover="showTip(event, '2654', 2654)">
+                <p>
+                  <a id="lat">
+                    <a href="#lat">
+                      <code><span>this.lat&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2654">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.lat&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Scattergeo.fs#L74-74" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+ Sets the latitude coordinates (in degrees North).
+
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2655', 2655)" onmouseover="showTip(event, '2655', 2655)">
+                <p>
+                  <a id="latsrc">
+                    <a href="#latsrc">
+                      <code><span>this.latsrc&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2655">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.latsrc&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Scattergeo.fs#L126-126" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+ Sets the source reference on plot.ly for  lat .
+
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2656', 2656)" onmouseover="showTip(event, '2656', 2656)">
+                <p>
+                  <a id="legendgroup">
+                    <a href="#legendgroup">
+                      <code><span>this.legendgroup&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2656">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.legendgroup&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Scattergeo.fs#L46-46" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+ Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items.
+
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2657', 2657)" onmouseover="showTip(event, '2657', 2657)">
+                <p>
+                  <a id="line">
+                    <a href="#line">
+                      <code><span>this.line&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2657">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.line&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Scattergeo.fs#L98-98" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2658', 2658)" onmouseover="showTip(event, '2658', 2658)">
+                <p>
+                  <a id="locationmode">
+                    <a href="#locationmode">
+                      <code><span>this.locationmode&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2658">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.locationmode&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Scattergeo.fs#L84-84" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+ Determines the set of locations used to match entries in `locations` to regions on the map.
+
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2659', 2659)" onmouseover="showTip(event, '2659', 2659)">
+                <p>
+                  <a id="locations">
+                    <a href="#locations">
+                      <code><span>this.locations&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2659">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.locations&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Scattergeo.fs#L79-79" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+ Sets the coordinates via location IDs or names. Coordinates correspond to the centroid of each location given. See `locationmode` for more info.
+
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2660', 2660)" onmouseover="showTip(event, '2660', 2660)">
+                <p>
+                  <a id="locationssrc">
+                    <a href="#locationssrc">
+                      <code><span>this.locationssrc&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2660">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.locationssrc&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Scattergeo.fs#L131-131" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+ Sets the source reference on plot.ly for  locations .
+
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2661', 2661)" onmouseover="showTip(event, '2661', 2661)">
+                <p>
+                  <a id="lon">
+                    <a href="#lon">
+                      <code><span>this.lon&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2661">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.lon&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Scattergeo.fs#L69-69" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+ Sets the longitude coordinates (in degrees East).
+
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2662', 2662)" onmouseover="showTip(event, '2662', 2662)">
+                <p>
+                  <a id="lonsrc">
+                    <a href="#lonsrc">
+                      <code><span>this.lonsrc&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2662">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.lonsrc&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Scattergeo.fs#L121-121" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+ Sets the source reference on plot.ly for  lon .
+
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2663', 2663)" onmouseover="showTip(event, '2663', 2663)">
+                <p>
+                  <a id="marker">
+                    <a href="#marker">
+                      <code><span>this.marker&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2663">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.marker&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Scattergeo.fs#L102-102" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2664', 2664)" onmouseover="showTip(event, '2664', 2664)">
+                <p>
+                  <a id="mode">
+                    <a href="#mode">
+                      <code><span>this.mode&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2664">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.mode&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Scattergeo.fs#L89-89" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+ Determines the drawing mode for this scatter trace. If the provided `mode` includes *text* then the `text` elements appear at the coordinates. Otherwise, the `text` elements appear on hover. If there are less than 20 points, then the default is *lines+markers*. Otherwise, *lines*.
+
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2665', 2665)" onmouseover="showTip(event, '2665', 2665)">
+                <p>
+                  <a id="opacity">
+                    <a href="#opacity">
+                      <code><span>this.opacity&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2665">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.opacity&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Scattergeo.fs#L51-51" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+ Sets the opacity of the trace.
+
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2666', 2666)" onmouseover="showTip(event, '2666', 2666)">
+                <p>
+                  <a id="showlegend">
+                    <a href="#showlegend">
+                      <code><span>this.showlegend&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2666">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.showlegend&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Scattergeo.fs#L41-41" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+ Determines whether or not an item corresponding to this trace is shown in the legend.
+
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2667', 2667)" onmouseover="showTip(event, '2667', 2667)">
+                <p>
+                  <a id="stream">
+                    <a href="#stream">
+                      <code><span>this.stream&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2667">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.stream&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Scattergeo.fs#L64-64" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2668', 2668)" onmouseover="showTip(event, '2668', 2668)">
+                <p>
+                  <a id="text">
+                    <a href="#text">
+                      <code><span>this.text&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2668">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.text&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Scattergeo.fs#L94-94" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+ Sets text elements associated with each (lon,lat) pair. or item in `locations`. If a single string, the same string appears over all the data points. If an array of string, the items are mapped in order to the this trace's (lon,lat) or `locations` coordinates.
+
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2669', 2669)" onmouseover="showTip(event, '2669', 2669)">
+                <p>
+                  <a id="textfont">
+                    <a href="#textfont">
+                      <code><span>this.textfont&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2669">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.textfont&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Scattergeo.fs#L106-106" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2670', 2670)" onmouseover="showTip(event, '2670', 2670)">
+                <p>
+                  <a id="textposition">
+                    <a href="#textposition">
+                      <code><span>this.textposition&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2670">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.textposition&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Scattergeo.fs#L111-111" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+ Sets the positions of the `text` elements with respects to the (x,y) coordinates.
+
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2671', 2671)" onmouseover="showTip(event, '2671', 2671)">
+                <p>
+                  <a id="textpositionsrc">
+                    <a href="#textpositionsrc">
+                      <code><span>this.textpositionsrc&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2671">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.textpositionsrc&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Scattergeo.fs#L141-141" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+ Sets the source reference on plot.ly for  textposition .
+
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2672', 2672)" onmouseover="showTip(event, '2672', 2672)">
+                <p>
+                  <a id="textsrc">
+                    <a href="#textsrc">
+                      <code><span>this.textsrc&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2672">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.textsrc&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Scattergeo.fs#L136-136" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+ Sets the source reference on plot.ly for  text .
+
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2673', 2673)" onmouseover="showTip(event, '2673', 2673)">
+                <p>
+                  <a id="type">
+                    <a href="#type">
+                      <code><span>this.type&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2673">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.type&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Scattergeo.fs#L31-31" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2674', 2674)" onmouseover="showTip(event, '2674', 2674)">
+                <p>
+                  <a id="uid">
+                    <a href="#uid">
+                      <code><span>this.uid&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2674">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.uid&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Scattergeo.fs#L55-55" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-name">
+            <div>
+              <code onmouseout="hideTip(event, '2675', 2675)" onmouseover="showTip(event, '2675', 2675)">
+                <p>
+                  <a id="visible">
+                    <a href="#visible">
+                      <code><span>this.visible&#32;</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="2675">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.visible&#32;</span></code>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-xmldoc">
+            <p class="fsdocs-summary">
+              <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Scattergeo.fs#L36-36" class="fsdocs-source-link">
+                <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+                <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+              </a>
+              
+ Determines whether or not this trace is visible. If *legendonly*, the trace is not drawn, but can appear as a legend item (provided that the legend itself is visible).
+
+            </p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div></div>
+</div>
+            
+        </div>
+
+        <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+        <script type="text/javascript">var fsdocs_search_baseurl = 'https://fslab.org/XPlot/'</script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
+        <script type="text/javascript" src="https://fslab.org/XPlot/content/fsdocs-search.js"></script>
+        <!-- END SEARCH BOX: this adds support for the search box -->
+    </div>
+</body>
+
+</html>
+

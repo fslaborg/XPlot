@@ -1,59 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8" />
-    <title>Google Line Chart
-</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Data visualization library for F#" />
-    <meta name="author" content="Taha Hachana; Tomas Petricek" />
+    <meta charset="utf-8">
+    <title>google-line-chart</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="XPlot.GoogleCharts">
 
-    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
-    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
-    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
-    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet" />
+    <link rel="stylesheet" id="theme_link" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.3.1/materia/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-        google.charts.load('current', {
-            packages: ["corechart", "annotationchart", "calendar", "gauge", "geochart", "map", "sankey", "table", "timeline", "treemap"]
-        });
-    </script>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <link type="text/css" rel="stylesheet" href="https://fslab.org/XPlot/content/style.css" />
-    <script type="text/javascript" src="https://fslab.org/XPlot/content/tips.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
+
+    <link type="text/css" rel="stylesheet" href="https://fslab.org/XPlot//content/navbar-fixed-left.css" />
+    <link type="text/css" rel="stylesheet" href="https://fslab.org/XPlot//content/fsdocs-default.css" />
+    <link type="text/css" rel="stylesheet" href="https://fslab.org/XPlot//content/fsdocs-custom.css" />
+    <script type="text/javascript" src="https://fslab.org/XPlot//content/fsdocs-tips.js"></script>
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
-      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <!-- END SEARCH BOX: this adds support for the search box -->
+
 </head>
+
 <body>
+    <nav class="navbar navbar-expand-md navbar-light bg-secondary fixed-left" id="fsdocs-menu">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <a href="https://fslab.org/XPlot/"><img id="fsdocs-logo" src="https://fslab.org/XPlot/img/logo.png" /></a>
+            <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+            <div id="header">
+                <div class="searchbox" id="fsdocs-searchbox">
+                    <label for="search-by">
+                        <i class="fas fa-search"></i>
+                    </label>
+                    <input data-search-input="" id="search-by" type="search" placeholder="Search..." />
+                    <span data-search-clear="">
+                        <i class="fas fa-times"></i>
+                    </span>
+                </div>
+            </div>
+
+            <!-- END SEARCH BOX: this adds support for the search box -->
+            <ul class="navbar-nav" id="fsdocs-nav">
+                <li class="nav-header">XPlot</li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//index.html">Home Page</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//quickstart.html">Getting started</a></li>
+                <li class="divider"></li>
+                <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="https://github.com/fslaborg/XPlot/blob/master/LICENSE.md">License (Apache 2.0)</a></li>
+                <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="https://github.com/fslaborg/XPlot/blob/master/RELEASE_NOTES.md">Release Notes</a></li>
+                <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="https://github.com/fslaborg/XPlot/">Source Repository</a></li>
+                <li class="nav-header"></li>
+                <li class="nav-header">Plotly</li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-bar-charts.html">Bar</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-line-scatter-plots.html">Line and Scatter</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-box-plots.html">Box Plots</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-bubble-charts.html">Bubble</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-contour-plots.html">Contour</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-candlestick-plots.html">Candlesticks</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-area-plots.html">Area</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-heatmaps.html">Heatmaps</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-histograms.html">Histograms</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-2d-histograms.html">2D Histograms</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-polar-charts.html">Polar</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-time-series.html">Time Series</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-multiple-chart-types.html">Multiple Chart Types</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-log-plots.html">Log Plots</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-3d-scatter-plots.html">3D Scatter</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-3d-surface-plots.html">3D Surface</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-3d-line-plots.html">3D Line</a></li>
+                <li class="nav-header">Google Charts</li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-annotation-chart.html">Annotation</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-area-chart.html">Area</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-bar-chart.html">Bar</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-bubble-chart.html">Bubble</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-calendar-chart.html">Calendar</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-candlestick-chart.html">Candlestick</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-column-chart.html">Column</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-combo-chart.html">Combo</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-gauge-chart.html">Gauge</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-geo-chart.html">Geo</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-histogram-chart.html">Histogram</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-line-chart.html">Line</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-map-chart.html">Map</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-pie-chart.html">Pie</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-sankey-diagram.html">Sankey</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-scatter-chart.html">Scatter</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-stepped-area-chart.html">Stepped Area</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-timeline-chart.html">Timeline</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-table-chart.html">Table</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-treemap-chart.html">Treemap</a></li>
+                <li class="nav-header">D3 Charts</li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/d3-network.html">Network</a></li>
+                <li class="nav-header">
+  API Reference
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fslab.org/XPlot/reference/index.html">
+    All Namespaces
+  </a>
+</li>
+            </ul>
+        </div>
+    </nav>
     <div class="container">
         <div class="masthead">
-            <ul class="nav nav-pills pull-right">
-                <li>
-                    <a href="https://fslab.org"><img height="16" width="16" src="https://fslab.org/img/thumbs/fslab.png" /> FsLab</a>
-                </li>
-                <li>
-                    <a href="http://fsharp.github.io/FSharp.Data"><img height="16" width="16" src="https://fslab.org/img/thumbs/fsharpdata.png" /> F# Data</a>
-                </li>
-                <li>
-                    <a href="https://fslab.org/Deedle"><img height="16" width="16" src="https://fslab.org/img/thumbs/deedle.png" /> Deedle</a>
-                </li>
-                <li>
-                    <a href="https://fslab.org/RProvider"><img height="16" width="16" src="https://fslab.org/img/thumbs/rprovider.png" /> R Provider</a>
-                </li>
-                <li>
-                    <a href="http://numerics.mathdotnet.com/"><img height="16" width="16" src="https://fslab.org/img/thumbs/mathnet.png" /> Math.NET</a>
-                </li>
-            </ul>
             <h3 class="muted"><a href="https://fslab.org/XPlot/">XPlot</a></h3>
         </div>
         <hr />
-        <div class="row">
-            <div class="span9" id="main">
-                
-<h1><a name="Google-Line-Chart" class="anchor" href="#Google-Line-Chart">Google Line Chart</a></h1>
+        <div class="container" id="fsdocs-content">
+            <p>Google Line Chart</p>
+<p><a href="https://mybinder.org/v2/gh/fslaborg/XPlot/gh-pages?filepath=google-line-chart.ipynb"><img src="https://mybinder.org/badge_logo.svg" alt="Binder" /></a></p>
 <p>This example shows how to create scatter (point) charts and line charts using the
 <code>XPlot.GoogleCharts</code> library.</p>
 <p>To create a line chart, use <code>Chart.Line</code>. To create a scatter (point) chart, use
@@ -63,57 +127,80 @@ than with just a plan list of key value pairs)</p>
 <h2><a name="A-simple-line-chart" class="anchor" href="#A-simple-line-chart">A simple line chart</a></h2>
 <p>The following example calls <code>Chart.Line</code> with a list of key value pairs, created
 using a simple F# list comprehension:</p>
-<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
-</pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="id">Line</span> <span class="pn">[</span> <span class="k">for</span> <span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="id">x</span> <span class="k">in</span> <span class="n">0.</span> <span class="o">..</span> <span class="n">0.5</span> <span class="o">..</span> <span class="n">6.3</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs5', 6)" onmouseover="showTip(event, 'fs5', 6)" class="id">x</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs6', 7)" onmouseover="showTip(event, 'fs6', 7)" class="fn">sin</span> <span onmouseout="hideTip(event, 'fs5', 8)" onmouseover="showTip(event, 'fs5', 8)" class="id">x</span> <span class="pn">]</span>
-</code></pre></td>
-</tr>
-</table>
-<script type="text/javascript">
-    google.charts.setOnLoadCallback(drawChart);
-            function drawChart() {
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="id">XPlot</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="id">GoogleCharts</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="id">chart1</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="id">Line</span> <span class="pn">[</span> <span class="k">for</span> <span onmouseout="hideTip(event, 'fs6', 6)" onmouseover="showTip(event, 'fs6', 6)" class="fn">x</span> <span class="k">in</span> <span class="o">0.</span> <span class="o">..</span> <span class="n">0.5</span> <span class="o">..</span> <span class="n">6.3</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs6', 7)" onmouseover="showTip(event, 'fs6', 7)" class="fn">x</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs7', 8)" onmouseover="showTip(event, 'fs7', 8)" class="fn">sin</span> <span onmouseout="hideTip(event, 'fs6', 9)" onmouseover="showTip(event, 'fs6', 9)" class="fn">x</span> <span class="pn">]</span>
+</code></pre>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>Google Chart</title>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+            google.charts.load('current', {
+              packages: ["corechart"]
+            });
+            google.charts.setOnLoadCallback(drawChart_880baab3_a85b_4f47_87ce_863f9c367c2e);
+            function drawChart_880baab3_a85b_4f47_87ce_863f9c367c2e() {
                 if ("")
                     google.visualization.mapsApiKey = ""
 
-                var data = new google.visualization.DataTable({"cols": [{"type": "number" ,"id": "Column 1" ,"label": "Column 1" }, {"type": "number" ,"id": "Column 2" ,"label": "Column 2" }], "rows" : [{"c" : [{"v": 0}, {"v": 0}]}, {"c" : [{"v": 0.5}, {"v": 0.479425538604203}]}, {"c" : [{"v": 1}, {"v": 0.841470984807897}]}, {"c" : [{"v": 1.5}, {"v": 0.997494986604054}]}, {"c" : [{"v": 2}, {"v": 0.909297426825682}]}, {"c" : [{"v": 2.5}, {"v": 0.598472144103957}]}, {"c" : [{"v": 3}, {"v": 0.141120008059867}]}, {"c" : [{"v": 3.5}, {"v": -0.35078322768962}]}, {"c" : [{"v": 4}, {"v": -0.756802495307928}]}, {"c" : [{"v": 4.5}, {"v": -0.977530117665097}]}, {"c" : [{"v": 5}, {"v": -0.958924274663138}]}, {"c" : [{"v": 5.5}, {"v": -0.705540325570392}]}, {"c" : [{"v": 6}, {"v": -0.279415498198926}]}]});
+                var data = new google.visualization.DataTable({"cols": [{"type": "number" ,"id": "Column 1" ,"label": "Column 1" }, {"type": "number" ,"id": "Column 2" ,"label": "Column 2" }], "rows" : [{"c" : [{"v": 0}, {"v": 0}]}, {"c" : [{"v": 0.5}, {"v": 0.479425538604203}]}, {"c" : [{"v": 1}, {"v": 0.8414709848078965}]}, {"c" : [{"v": 1.5}, {"v": 0.9974949866040544}]}, {"c" : [{"v": 2}, {"v": 0.9092974268256817}]}, {"c" : [{"v": 2.5}, {"v": 0.5984721441039564}]}, {"c" : [{"v": 3}, {"v": 0.1411200080598672}]}, {"c" : [{"v": 3.5}, {"v": -0.35078322768961984}]}, {"c" : [{"v": 4}, {"v": -0.7568024953079282}]}, {"c" : [{"v": 4.5}, {"v": -0.977530117665097}]}, {"c" : [{"v": 5}, {"v": -0.9589242746631385}]}, {"c" : [{"v": 5.5}, {"v": -0.7055403255703919}]}, {"c" : [{"v": 6}, {"v": -0.27941549819892586}]}]});
 
                 
 
-                var options = {"legend":{"position":"none"}} 
+                var options = {"legend":{"position":"none"}}
 
-                var chart = new google.visualization.LineChart(document.getElementById('70bc099a-28c8-4717-80f2-14de8a512a1a'));
+                var chart = new google.visualization.LineChart(document.getElementById('880baab3_a85b_4f47_87ce_863f9c367c2e'));
                 chart.draw(data, options);
             }
-</script>
-<div id="70bc099a-28c8-4717-80f2-14de8a512a1a" style="width: 700px; height: 400px;"></div>
+        </script>
+    </head>
+    <body>
+        <div id="880baab3_a85b_4f47_87ce_863f9c367c2e" style="width: -1px; height: -1px;"></div>
+    </body>
+</html>
 <h2><a name="A-smooth-function-chart" class="anchor" href="#A-smooth-function-chart">A smooth function chart</a></h2>
 <p>By default, line charts use straight line segments between the points. You can add
 smoothing by creating <code>Options</code> with <code>curveType="function"</code> as follows:</p>
-<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
-<span class="l">2: </span>
-</pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs3', 9)" onmouseover="showTip(event, 'fs3', 9)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs4', 10)" onmouseover="showTip(event, 'fs4', 10)" class="id">Line</span> <span class="pn">[</span> <span class="k">for</span> <span onmouseout="hideTip(event, 'fs5', 11)" onmouseover="showTip(event, 'fs5', 11)" class="id">x</span> <span class="k">in</span> <span class="n">0.</span> <span class="o">..</span> <span class="n">0.5</span> <span class="o">..</span> <span class="n">6.3</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs5', 12)" onmouseover="showTip(event, 'fs5', 12)" class="id">x</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs6', 13)" onmouseover="showTip(event, 'fs6', 13)" class="fn">sin</span> <span onmouseout="hideTip(event, 'fs5', 14)" onmouseover="showTip(event, 'fs5', 14)" class="id">x</span> <span class="pn">]</span>
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs3', 15)" onmouseover="showTip(event, 'fs3', 15)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs7', 16)" onmouseover="showTip(event, 'fs7', 16)" class="id">WithOptions</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs8', 17)" onmouseover="showTip(event, 'fs8', 17)" class="rt">Options</span><span class="pn">(</span><span class="id">curveType</span> <span class="o">=</span> <span class="s">&quot;function&quot;</span><span class="pn">)</span><span class="pn">)</span>
-</code></pre></td>
-</tr>
-</table>
-<script type="text/javascript">
-    google.charts.setOnLoadCallback(drawChart);
-            function drawChart() {
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs9', 12)" onmouseover="showTip(event, 'fs9', 12)" class="id">chart2</span> <span class="o">=</span>
+    <span class="pn">[</span> <span class="k">for</span> <span onmouseout="hideTip(event, 'fs6', 13)" onmouseover="showTip(event, 'fs6', 13)" class="fn">x</span> <span class="k">in</span> <span class="o">0.</span> <span class="o">..</span> <span class="n">0.5</span> <span class="o">..</span> <span class="n">6.3</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs6', 14)" onmouseover="showTip(event, 'fs6', 14)" class="fn">x</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs7', 15)" onmouseover="showTip(event, 'fs7', 15)" class="fn">sin</span> <span onmouseout="hideTip(event, 'fs6', 16)" onmouseover="showTip(event, 'fs6', 16)" class="fn">x</span> <span class="pn">]</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs4', 17)" onmouseover="showTip(event, 'fs4', 17)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs5', 18)" onmouseover="showTip(event, 'fs5', 18)" class="id">Line</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs4', 19)" onmouseover="showTip(event, 'fs4', 19)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs10', 20)" onmouseover="showTip(event, 'fs10', 20)" class="id">WithOptions</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs11', 21)" onmouseover="showTip(event, 'fs11', 21)" class="fn">Options</span><span class="pn">(</span><span class="fn">curveType</span> <span class="o">=</span> <span class="s">&quot;function&quot;</span><span class="pn">)</span><span class="pn">)</span>
+</code></pre>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>Google Chart</title>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+            google.charts.load('current', {
+              packages: ["corechart"]
+            });
+            google.charts.setOnLoadCallback(drawChart_8e489471_4521_4a14_8271_8e8743084825);
+            function drawChart_8e489471_4521_4a14_8271_8e8743084825() {
                 if ("")
                     google.visualization.mapsApiKey = ""
 
-                var data = new google.visualization.DataTable({"cols": [{"type": "number" ,"id": "Column 1" ,"label": "Column 1" }, {"type": "number" ,"id": "Column 2" ,"label": "Column 2" }], "rows" : [{"c" : [{"v": 0}, {"v": 0}]}, {"c" : [{"v": 0.5}, {"v": 0.479425538604203}]}, {"c" : [{"v": 1}, {"v": 0.841470984807897}]}, {"c" : [{"v": 1.5}, {"v": 0.997494986604054}]}, {"c" : [{"v": 2}, {"v": 0.909297426825682}]}, {"c" : [{"v": 2.5}, {"v": 0.598472144103957}]}, {"c" : [{"v": 3}, {"v": 0.141120008059867}]}, {"c" : [{"v": 3.5}, {"v": -0.35078322768962}]}, {"c" : [{"v": 4}, {"v": -0.756802495307928}]}, {"c" : [{"v": 4.5}, {"v": -0.977530117665097}]}, {"c" : [{"v": 5}, {"v": -0.958924274663138}]}, {"c" : [{"v": 5.5}, {"v": -0.705540325570392}]}, {"c" : [{"v": 6}, {"v": -0.279415498198926}]}]});
+                var data = new google.visualization.DataTable({"cols": [{"type": "number" ,"id": "Column 1" ,"label": "Column 1" }, {"type": "number" ,"id": "Column 2" ,"label": "Column 2" }], "rows" : [{"c" : [{"v": 0}, {"v": 0}]}, {"c" : [{"v": 0.5}, {"v": 0.479425538604203}]}, {"c" : [{"v": 1}, {"v": 0.8414709848078965}]}, {"c" : [{"v": 1.5}, {"v": 0.9974949866040544}]}, {"c" : [{"v": 2}, {"v": 0.9092974268256817}]}, {"c" : [{"v": 2.5}, {"v": 0.5984721441039564}]}, {"c" : [{"v": 3}, {"v": 0.1411200080598672}]}, {"c" : [{"v": 3.5}, {"v": -0.35078322768961984}]}, {"c" : [{"v": 4}, {"v": -0.7568024953079282}]}, {"c" : [{"v": 4.5}, {"v": -0.977530117665097}]}, {"c" : [{"v": 5}, {"v": -0.9589242746631385}]}, {"c" : [{"v": 5.5}, {"v": -0.7055403255703919}]}, {"c" : [{"v": 6}, {"v": -0.27941549819892586}]}]});
 
                 
 
-                var options = {"legend":{"position":"none"},"curveType":"function"} 
+                var options = {"legend":{"position":"none"},"curveType":"function"}
 
-                var chart = new google.visualization.LineChart(document.getElementById('8634ed50-d646-49f8-be1f-a462396ba57d'));
+                var chart = new google.visualization.LineChart(document.getElementById('8e489471_4521_4a14_8271_8e8743084825'));
                 chart.draw(data, options);
             }
-</script>
-<div id="8634ed50-d646-49f8-be1f-a462396ba57d" style="width: 700px; height: 400px;"></div>
+        </script>
+    </head>
+    <body>
+        <div id="8e489471_4521_4a14_8271_8e8743084825" style="width: -1px; height: -1px;"></div>
+    </body>
+</html>
 <p>You can find more information about other options that you can specify in the documentation
 <a href="reference/xplot-googlecharts-configuration-options.html">for the <code>Options</code> type</a> in the API
 reference. Another way to explore the available configuration options is to type dot right
@@ -124,37 +211,33 @@ are available.</p>
 a chart that shows multiple data sets using a different line or point color for each data set.
 The following example plots sales and expenses of some non-existent company in a single line
 chart with annotations:</p>
-<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
-<span class="l"> 2: </span>
-<span class="l"> 3: </span>
-<span class="l"> 4: </span>
-<span class="l"> 5: </span>
-<span class="l"> 6: </span>
-<span class="l"> 7: </span>
-<span class="l"> 8: </span>
-<span class="l"> 9: </span>
-<span class="l">10: </span>
-<span class="l">11: </span>
-<span class="l">12: </span>
-</pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs9', 18)" onmouseover="showTip(event, 'fs9', 18)" class="id">sales</span> <span class="o">=</span> <span class="pn">[</span><span class="pn">(</span><span class="s">&quot;2013&quot;</span><span class="pn">,</span> <span class="n">1000</span><span class="pn">)</span><span class="pn">;</span> <span class="pn">(</span><span class="s">&quot;2014&quot;</span><span class="pn">,</span> <span class="n">1170</span><span class="pn">)</span><span class="pn">;</span> <span class="pn">(</span><span class="s">&quot;2015&quot;</span><span class="pn">,</span> <span class="n">660</span><span class="pn">)</span><span class="pn">;</span> <span class="pn">(</span><span class="s">&quot;2016&quot;</span><span class="pn">,</span> <span class="n">1030</span><span class="pn">)</span><span class="pn">]</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs10', 19)" onmouseover="showTip(event, 'fs10', 19)" class="id">expenses</span> <span class="o">=</span> <span class="pn">[</span><span class="pn">(</span><span class="s">&quot;2013&quot;</span><span class="pn">,</span> <span class="n">400</span><span class="pn">)</span><span class="pn">;</span> <span class="pn">(</span><span class="s">&quot;2014&quot;</span><span class="pn">,</span> <span class="n">460</span><span class="pn">)</span><span class="pn">;</span> <span class="pn">(</span><span class="s">&quot;2015&quot;</span><span class="pn">,</span> <span class="n">1120</span><span class="pn">)</span><span class="pn">;</span> <span class="pn">(</span><span class="s">&quot;2016&quot;</span><span class="pn">,</span> <span class="n">540</span><span class="pn">)</span><span class="pn">]</span>
- 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs11', 20)" onmouseover="showTip(event, 'fs11', 20)" class="id">options</span> <span class="o">=</span>
-  <span onmouseout="hideTip(event, 'fs8', 21)" onmouseover="showTip(event, 'fs8', 21)" class="rt">Options</span>
-    <span class="pn">(</span> <span class="id">title</span> <span class="o">=</span> <span class="s">&quot;Company Performance&quot;</span><span class="pn">,</span> <span class="id">curveType</span> <span class="o">=</span> <span class="s">&quot;function&quot;</span><span class="pn">,</span>
-      <span class="id">legend</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs12', 22)" onmouseover="showTip(event, 'fs12', 22)" class="rt">Legend</span><span class="pn">(</span><span class="id">position</span> <span class="o">=</span> <span class="s">&quot;bottom&quot;</span><span class="pn">)</span> <span class="pn">)</span>
-            
-<span class="pn">[</span><span onmouseout="hideTip(event, 'fs9', 23)" onmouseover="showTip(event, 'fs9', 23)" class="id">sales</span><span class="pn">;</span> <span onmouseout="hideTip(event, 'fs10', 24)" onmouseover="showTip(event, 'fs10', 24)" class="id">expenses</span><span class="pn">]</span>
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs3', 25)" onmouseover="showTip(event, 'fs3', 25)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs4', 26)" onmouseover="showTip(event, 'fs4', 26)" class="id">Line</span>
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs3', 27)" onmouseover="showTip(event, 'fs3', 27)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs7', 28)" onmouseover="showTip(event, 'fs7', 28)" class="id">WithOptions</span> <span onmouseout="hideTip(event, 'fs11', 29)" onmouseover="showTip(event, 'fs11', 29)" class="id">options</span>
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs3', 30)" onmouseover="showTip(event, 'fs3', 30)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs13', 31)" onmouseover="showTip(event, 'fs13', 31)" class="id">WithLabels</span> <span class="pn">[</span><span class="s">&quot;Sales&quot;</span><span class="pn">;</span> <span class="s">&quot;Expenses&quot;</span><span class="pn">]</span>
-</code></pre></td>
-</tr>
-</table>
-<script type="text/javascript">
-    google.charts.setOnLoadCallback(drawChart);
-            function drawChart() {
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs12', 24)" onmouseover="showTip(event, 'fs12', 24)" class="id">sales</span> <span class="o">=</span> <span class="pn">[</span><span class="pn">(</span><span class="s">&quot;2013&quot;</span><span class="pn">,</span> <span class="n">1000</span><span class="pn">)</span><span class="pn">;</span> <span class="pn">(</span><span class="s">&quot;2014&quot;</span><span class="pn">,</span> <span class="n">1170</span><span class="pn">)</span><span class="pn">;</span> <span class="pn">(</span><span class="s">&quot;2015&quot;</span><span class="pn">,</span> <span class="n">660</span><span class="pn">)</span><span class="pn">;</span> <span class="pn">(</span><span class="s">&quot;2016&quot;</span><span class="pn">,</span> <span class="n">1030</span><span class="pn">)</span><span class="pn">]</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs13', 25)" onmouseover="showTip(event, 'fs13', 25)" class="id">expenses</span> <span class="o">=</span> <span class="pn">[</span><span class="pn">(</span><span class="s">&quot;2013&quot;</span><span class="pn">,</span> <span class="n">400</span><span class="pn">)</span><span class="pn">;</span> <span class="pn">(</span><span class="s">&quot;2014&quot;</span><span class="pn">,</span> <span class="n">460</span><span class="pn">)</span><span class="pn">;</span> <span class="pn">(</span><span class="s">&quot;2015&quot;</span><span class="pn">,</span> <span class="n">1120</span><span class="pn">)</span><span class="pn">;</span> <span class="pn">(</span><span class="s">&quot;2016&quot;</span><span class="pn">,</span> <span class="n">540</span><span class="pn">)</span><span class="pn">]</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs14', 26)" onmouseover="showTip(event, 'fs14', 26)" class="id">options</span> <span class="o">=</span>
+  <span onmouseout="hideTip(event, 'fs11', 27)" onmouseover="showTip(event, 'fs11', 27)" class="fn">Options</span>
+    <span class="pn">(</span> <span class="fn">title</span> <span class="o">=</span> <span class="s">&quot;Company Performance&quot;</span><span class="pn">,</span> <span class="fn">curveType</span> <span class="o">=</span> <span class="s">&quot;function&quot;</span><span class="pn">,</span>
+      <span class="fn">legend</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs15', 28)" onmouseover="showTip(event, 'fs15', 28)" class="fn">Legend</span><span class="pn">(</span><span class="fn">position</span> <span class="o">=</span> <span class="s">&quot;bottom&quot;</span><span class="pn">)</span> <span class="pn">)</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs16', 29)" onmouseover="showTip(event, 'fs16', 29)" class="id">chart3</span> <span class="o">=</span>
+    <span class="pn">[</span><span onmouseout="hideTip(event, 'fs12', 30)" onmouseover="showTip(event, 'fs12', 30)" class="id">sales</span><span class="pn">;</span> <span onmouseout="hideTip(event, 'fs13', 31)" onmouseover="showTip(event, 'fs13', 31)" class="id">expenses</span><span class="pn">]</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs4', 32)" onmouseover="showTip(event, 'fs4', 32)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs5', 33)" onmouseover="showTip(event, 'fs5', 33)" class="id">Line</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs4', 34)" onmouseover="showTip(event, 'fs4', 34)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs10', 35)" onmouseover="showTip(event, 'fs10', 35)" class="id">WithOptions</span> <span onmouseout="hideTip(event, 'fs14', 36)" onmouseover="showTip(event, 'fs14', 36)" class="id">options</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs4', 37)" onmouseover="showTip(event, 'fs4', 37)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs17', 38)" onmouseover="showTip(event, 'fs17', 38)" class="id">WithLabels</span> <span class="pn">[</span><span class="s">&quot;Sales&quot;</span><span class="pn">;</span> <span class="s">&quot;Expenses&quot;</span><span class="pn">]</span>
+</code></pre>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>Google Chart</title>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+            google.charts.load('current', {
+              packages: ["corechart"]
+            });
+            google.charts.setOnLoadCallback(drawChart_dff633bb_efcd_4b96_b214_10a3cd1ee9a0);
+            function drawChart_dff633bb_efcd_4b96_b214_10a3cd1ee9a0() {
                 if ("")
                     google.visualization.mapsApiKey = ""
 
@@ -162,104 +245,129 @@ chart with annotations:</p>
 
                 
 
-                var options = {"legend":{"position":"right"},"title":"Company Performance","curveType":"function"} 
+                var options = {"legend":{"position":"right"},"title":"Company Performance","curveType":"function"}
 
-                var chart = new google.visualization.LineChart(document.getElementById('64848b54-8831-4ad9-b2c1-5398a5545d11'));
+                var chart = new google.visualization.LineChart(document.getElementById('dff633bb_efcd_4b96_b214_10a3cd1ee9a0'));
                 chart.draw(data, options);
             }
-</script>
-<div id="64848b54-8831-4ad9-b2c1-5398a5545d11" style="width: 700px; height: 400px;"></div>
+        </script>
+    </head>
+    <body>
+        <div id="dff633bb_efcd_4b96_b214_10a3cd1ee9a0" style="width: -1px; height: -1px;"></div>
+    </body>
+</html>
 <p>Note that the two inputs are sequences of tuples with X (year) and Y (value) pairs. We then
 create <code>Options</code> object to specify the title, smooth curve and also the legend of the chart.
 Then we call <code>Chart.Line</code> followed by <code>Chart.WithOptions</code> and also <code>Chart.WithLabels</code> to
-provide labels for the two series.</p>
+provide labels for the two series.
+*)</p>
+<p>(*
+Create a line chart with two different Y-axes (the example above has two lines plotted by only a single Y-axis).
+Plot values of different data types
+Based off of this sample: <a href="https://developers.google.com/chart/interactive/docs/gallery/linechart#dual-y-charts">https://developers.google.com/chart/interactive/docs/gallery/linechart#dual-y-charts</a></p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span onmouseout="hideTip(event, 'fs18', 41)" onmouseover="showTip(event, 'fs18', 41)" class="id">System</span>
 
-<div class="tip" id="fs1">namespace XPlot</div>
-<div class="tip" id="fs2">namespace XPlot.GoogleCharts</div>
-<div class="tip" id="fs3">type Chart =<br />&#160;&#160;static member Annotation : data:seq&lt;#seq&lt;DateTime * &#39;V * string * string&gt;&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart (requires &#39;V :&gt; value)<br />&#160;&#160;static member Annotation : data:seq&lt;DateTime * #value * string * string&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart<br />&#160;&#160;static member Area : data:seq&lt;#seq&lt;&#39;K * &#39;V&gt;&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart (requires &#39;K :&gt; key and &#39;V :&gt; value)<br />&#160;&#160;static member Area : data:seq&lt;#key * #value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart<br />&#160;&#160;static member Area : data:seq&lt;#value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart<br />&#160;&#160;static member Bar : data:seq&lt;#seq&lt;&#39;K * &#39;V&gt;&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart (requires &#39;K :&gt; key and &#39;V :&gt; value)<br />&#160;&#160;static member Bar : data:seq&lt;#key * #value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart<br />&#160;&#160;static member Bar : data:seq&lt;#value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart<br />&#160;&#160;static member Bubble : data:seq&lt;string * #value * #value * #value * #value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart<br />&#160;&#160;static member Bubble : data:seq&lt;string * #value * #value * #value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart<br />&#160;&#160;...</div>
-<div class="tip" id="fs4">static member Chart.Line : data:seq&lt;#seq&lt;&#39;K * &#39;V&gt;&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart (requires &#39;K :&gt; key and &#39;V :&gt; value)<br />static member Chart.Line : data:seq&lt;#key * #value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart<br />static member Chart.Line : data:seq&lt;#value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart</div>
-<div class="tip" id="fs5">val x : float</div>
-<div class="tip" id="fs6">val sin : value:&#39;T -&gt; &#39;T (requires member Sin)</div>
-<div class="tip" id="fs7">static member Chart.WithOptions : options:Options -&gt; chart:GoogleChart -&gt; GoogleChart</div>
-<div class="tip" id="fs8">Multiple items<br />type Options =<br />&#160;&#160;new : unit -&gt; Options<br />&#160;&#160;member ShouldSerializeaggregationTarget : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeallValuesSuffix : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeallowHtml : unit -&gt; bool<br />&#160;&#160;member ShouldSerializealternatingRowStyle : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeanimation : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeannotations : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeannotationsWidth : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeareaOpacity : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeavoidOverlappingGridLines : unit -&gt; bool<br />&#160;&#160;...<br /><br />--------------------<br />new : unit -&gt; Options</div>
-<div class="tip" id="fs9">val sales : (string * int) list</div>
-<div class="tip" id="fs10">val expenses : (string * int) list</div>
-<div class="tip" id="fs11">val options : Options</div>
-<div class="tip" id="fs12">Multiple items<br />type Legend =<br />&#160;&#160;new : unit -&gt; Legend<br />&#160;&#160;member ShouldSerializealignment : unit -&gt; bool<br />&#160;&#160;member ShouldSerializemaxLines : unit -&gt; bool<br />&#160;&#160;member ShouldSerializenumberFormat : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeposition : unit -&gt; bool<br />&#160;&#160;member ShouldSerializetextStyle : unit -&gt; bool<br />&#160;&#160;member alignment : string<br />&#160;&#160;member maxLines : int<br />&#160;&#160;member numberFormat : string<br />&#160;&#160;member position : string<br />&#160;&#160;...<br /><br />--------------------<br />new : unit -&gt; Legend</div>
-<div class="tip" id="fs13">static member Chart.WithLabels : labels:seq&lt;string&gt; -&gt; chart:GoogleChart -&gt; GoogleChart</div>
+<span class="c">//Make up some fake data. Two sets of values for the same sequence of dates</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs19', 42)" onmouseover="showTip(event, 'fs19', 42)" class="id">values1</span> <span class="o">=</span> <span class="pn">[</span><span class="n">1..</span><span class="n">7</span><span class="pn">]</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs20', 43)" onmouseover="showTip(event, 'fs20', 43)" class="id">values2</span> <span class="o">=</span> <span class="pn">[</span><span class="o">20.1</span><span class="o">..</span><span class="n">10.3</span><span class="o">..</span><span class="n">90.0</span><span class="pn">]</span> <span class="c">//using floats here to demonstrate that we can use a different data type on the second Y axis</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs21', 44)" onmouseover="showTip(event, 'fs21', 44)" class="id">dates</span> <span class="o">=</span> <span class="pn">[</span> <span class="k">for</span> <span onmouseout="hideTip(event, 'fs22', 45)" onmouseover="showTip(event, 'fs22', 45)" class="fn">i</span> <span class="k">in</span> <span class="pn">[</span><span class="o">6.0</span><span class="o">..</span><span class="pn">(</span><span class="o">-</span><span class="n">1.0</span><span class="pn">)</span><span class="o">..</span><span class="n">0.0</span><span class="pn">]</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs23', 46)" onmouseover="showTip(event, 'fs23', 46)" class="vt">DateTime</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs24', 47)" onmouseover="showTip(event, 'fs24', 47)" class="id">Today</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 48)" onmouseover="showTip(event, 'fs25', 48)" class="id">AddDays</span><span class="pn">(</span><span class="o">-</span><span onmouseout="hideTip(event, 'fs22', 49)" onmouseover="showTip(event, 'fs22', 49)" class="fn">i</span><span class="pn">)</span> <span class="pn">]</span>
 
-            </div>
-            <div class="span3">
-                <img src="https://fslab.org/XPlot/img/logo.png" alt="F# Project" style="width:130px;margin:20px" />
-                <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
-                    <li class="nav-header">XPlot</li>
-                    <li><a href="https://fslab.org/XPlot/">Home page</a></li>
-                    <li><a href="https://fslab.org/XPlot/quickstart.html">Getting started</a></li>
-                    <li class="divider"></li>
-                    <li><a href="http://www.nuget.org/packages?q=XPlot">Get Library via NuGet</a></li>
-                    <li><a href="https://github.com/fslaborg/XPlot">Source Code on GitHub</a></li>
-                    <li><a href="https://fslab.org/XPlot/license.html">License (Apache 2.0)</a></li>
-                    <li><a href="https://fslab.org/XPlot/release-notes.html">Release Notes</a></li>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs26', 50)" onmouseover="showTip(event, 'fs26', 50)" class="id">first</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs27', 51)" onmouseover="showTip(event, 'fs27', 51)" class="m">Deedle</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs28', 52)" onmouseover="showTip(event, 'fs28', 52)" class="id">Series</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs21', 53)" onmouseover="showTip(event, 'fs21', 53)" class="id">dates</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs19', 54)" onmouseover="showTip(event, 'fs19', 54)" class="id">values1</span><span class="pn">)</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs29', 55)" onmouseover="showTip(event, 'fs29', 55)" class="id">second</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs27', 56)" onmouseover="showTip(event, 'fs27', 56)" class="m">Deedle</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs28', 57)" onmouseover="showTip(event, 'fs28', 57)" class="id">Series</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs21', 58)" onmouseover="showTip(event, 'fs21', 58)" class="id">dates</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs20', 59)" onmouseover="showTip(event, 'fs20', 59)" class="id">values2</span><span class="pn">)</span>
 
-                    <li class="nav-header"><a href="https://fslab.org/XPlot/google-charts.html">Google Charts</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-annotation-chart.html">Annotation</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-area-chart.html">Area</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-bar-chart.html">Bar</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-bubble-chart.html">Bubble</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-calendar-chart.html">Calendar</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-candlestick-chart.html">Candlestick</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-column-chart.html">Column</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-combo-chart.html">Combo</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-gauge-chart.html">Gauge</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-geo-chart.html">Geo</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-histogram-chart.html">Histogram</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-line-chart.html">Line</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-map-chart.html">Map</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-pie-chart.html">Pie</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-sankey-diagram.html">Sankey</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-scatter-chart.html">Scatter</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-stepped-area-chart.html">Stepped Area</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-timeline-chart.html">Timeline</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-table-chart.html">Table</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-treemap-chart.html">Treemap</a></li>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs30', 60)" onmouseover="showTip(event, 'fs30', 60)" class="id">df</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs27', 61)" onmouseover="showTip(event, 'fs27', 61)" class="m">Deedle</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs31', 62)" onmouseover="showTip(event, 'fs31', 62)" class="id">Frame</span><span class="pn">(</span><span class="pn">[</span><span class="s">&quot;IntVals&quot;</span><span class="pn">;</span> <span class="s">&quot;FloatVals&quot;</span><span class="pn">]</span><span class="pn">,</span> <span class="pn">[</span><span onmouseout="hideTip(event, 'fs26', 63)" onmouseover="showTip(event, 'fs26', 63)" class="id">first</span><span class="pn">;</span> <span onmouseout="hideTip(event, 'fs29', 64)" onmouseover="showTip(event, 'fs29', 64)" class="id">second</span><span class="pn">]</span><span class="pn">)</span>
 
-                    <li class="nav-header"><a href="https://fslab.org/XPlot/plotly.html">Plotly</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-bar-charts.html">Bar</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-line-scatter-plots.html">Line and Scatter Plots</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-box-plots.html">Box Plots</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-bubble-charts.html">Bubble Charts</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-contour-plots.html">Contour Plots</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-area-plots.html">Area Plots</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-heatmaps.html">Heatmaps</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-histograms.html">Histograms</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-2d-histograms.html">2D Histograms</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-polar-charts.html">Polar Charts</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-time-series.html">Time Series</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-multiple-chart-types.html">Multiple Chart Types</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-log-plots.html">Log Plots</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-3d-scatter-plots.html">3D Scatter Plots</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-3d-surface-plots.html">3D Surface Plots</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-3d-line-plots.html">3D Line Plots</a></li>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs32', 65)" onmouseover="showTip(event, 'fs32', 65)" class="id">dfOptions</span> <span class="o">=</span>
+  <span onmouseout="hideTip(event, 'fs11', 66)" onmouseover="showTip(event, 'fs11', 66)" class="fn">Options</span>
+    <span class="pn">(</span> <span class="fn">title</span> <span class="o">=</span> <span class="s">&quot;Value 1 &amp; Value 2 by Date&quot;</span><span class="pn">,</span>
+      <span class="fn">legend</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs15', 67)" onmouseover="showTip(event, 'fs15', 67)" class="fn">Legend</span><span class="pn">(</span><span class="fn">position</span> <span class="o">=</span> <span class="s">&quot;bottom&quot;</span><span class="pn">)</span> <span class="pn">,</span>
+      <span class="fn">series</span> <span class="o">=</span> <span class="pn">[|</span><span onmouseout="hideTip(event, 'fs33', 68)" onmouseover="showTip(event, 'fs33', 68)" class="fn">Series</span><span class="pn">(</span><span class="s">&quot;IntVals&quot;</span><span class="pn">,</span> <span class="fn">targetAxisIndex</span> <span class="o">=</span> <span class="n">0</span><span class="pn">)</span><span class="pn">;</span> <span onmouseout="hideTip(event, 'fs33', 69)" onmouseover="showTip(event, 'fs33', 69)" class="fn">Series</span><span class="pn">(</span><span class="s">&quot;FloatVals&quot;</span><span class="pn">,</span> <span class="fn">targetAxisIndex</span> <span class="o">=</span> <span class="n">1</span><span class="pn">)</span><span class="pn">|]</span><span class="pn">,</span>
+      <span class="fn">vAxes</span> <span class="o">=</span> <span class="pn">[|</span><span onmouseout="hideTip(event, 'fs34', 70)" onmouseover="showTip(event, 'fs34', 70)" class="fn">Axis</span><span class="pn">(</span><span class="fn">title</span> <span class="o">=</span> <span class="s">&quot;Foo&quot;</span><span class="pn">)</span><span class="pn">;</span> <span onmouseout="hideTip(event, 'fs34', 71)" onmouseover="showTip(event, 'fs34', 71)" class="fn">Axis</span><span class="pn">(</span><span class="fn">title</span> <span class="o">=</span> <span class="s">&quot;Bar&quot;</span><span class="pn">)</span><span class="pn">|]</span><span class="pn">)</span>
 
-                    <li class="nav-header"><a href="https://fslab.org/XPlot/d3.html">D3 Charts</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/d3-network.html">Network</a></li>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs35', 72)" onmouseover="showTip(event, 'fs35', 72)" class="id">chart4</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs30', 73)" onmouseover="showTip(event, 'fs30', 73)" class="id">df</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs4', 74)" onmouseover="showTip(event, 'fs4', 74)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs5', 75)" onmouseover="showTip(event, 'fs5', 75)" class="id">Line</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs4', 76)" onmouseover="showTip(event, 'fs4', 76)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs10', 77)" onmouseover="showTip(event, 'fs10', 77)" class="id">WithOptions</span> <span onmouseout="hideTip(event, 'fs32', 78)" onmouseover="showTip(event, 'fs32', 78)" class="id">dfOptions</span>
+</code></pre>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>Google Chart</title>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+            google.charts.load('current', {
+              packages: ["corechart"]
+            });
+            google.charts.setOnLoadCallback(drawChart_3ed174e3_9ee3_43de_bfee_35c09cfd71df);
+            function drawChart_3ed174e3_9ee3_43de_bfee_35c09cfd71df() {
+                if ("")
+                    google.visualization.mapsApiKey = ""
 
-                    <li class="nav-header">Documentation</li>
-                    <li><a href="https://fslab.org/XPlot/reference/index.html">API Reference</a></li>
-                    <li class="divider"></li>
+                var data = new google.visualization.DataTable({"cols": [{"type": "datetime" ,"id": "Key" ,"label": "Key" }, {"type": "number" ,"id": "IntVals" ,"label": "IntVals" }, {"type": "number" ,"id": "FloatVals" ,"label": "FloatVals" }], "rows" : [{"c" : [{"v": "Date(2021, 1, 24, 0, 0, 0)"}, {"v": 1}, {"v": 20.1}]}, {"c" : [{"v": "Date(2021, 1, 25, 0, 0, 0)"}, {"v": 2}, {"v": 30.400000000000002}]}, {"c" : [{"v": "Date(2021, 1, 26, 0, 0, 0)"}, {"v": 3}, {"v": 40.7}]}, {"c" : [{"v": "Date(2021, 1, 27, 0, 0, 0)"}, {"v": 4}, {"v": 51}]}, {"c" : [{"v": "Date(2021, 1, 28, 0, 0, 0)"}, {"v": 5}, {"v": 61.3}]}, {"c" : [{"v": "Date(2021, 2, 1, 0, 0, 0)"}, {"v": 6}, {"v": 71.6}]}, {"c" : [{"v": "Date(2021, 2, 2, 0, 0, 0)"}, {"v": 7}, {"v": 81.89999999999999}]}]});
 
-                    <li><a href="https://fslab.org/XPlot/reference/xplot-googlecharts-chart.html">Google Chart Type</a></li>
-                    <li><a href="https://fslab.org/XPlot/reference/xplot-googlecharts-configuration-options.html">Google Option Type</a></li>
-                    <li><a href="https://fslab.org/XPlot/reference/xplot-googlecharts-configuration.html">Google Configuration Module</a></li>
+                
 
-                    <li class="divider"></li>
+                var options = {"legend":{"position":"bottom"},"series":[{"targetAxisIndex":0,"type":"IntVals"},{"targetAxisIndex":1,"type":"FloatVals"}],"title":"Value 1 & Value 2 by Date","vAxes":[{"title":"Foo"},{"title":"Bar"}]}
 
-                    <li><a href="https://fslab.org/XPlot/reference/xplot-plotly-graph.html">Plotly Graph Module</a></li>
-                    <li><a href="https://fslab.org/XPlot/reference/xplot-plotly-layout-layout.html">Plotly Layout Type</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <a href="https://github.com/fslaborg/XPlot"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub" /></a>
-</body>
+                var chart = new google.visualization.LineChart(document.getElementById('3ed174e3_9ee3_43de_bfee_35c09cfd71df'));
+                chart.draw(data, options);
+            }
+        </script>
+    </head>
+    <body>
+        <div id="3ed174e3_9ee3_43de_bfee_35c09cfd71df" style="width: -1px; height: -1px;"></div>
+    </body>
 </html>
+
+            <div class="fsdocs-tip" id="fs1">namespace XPlot</div>
+<div class="fsdocs-tip" id="fs2">namespace XPlot.GoogleCharts</div>
+<div class="fsdocs-tip" id="fs3">val chart1 : GoogleChart</div>
+<div class="fsdocs-tip" id="fs4">type Chart =<br />&#160;&#160;static member Annotation : data:seq&lt;DateTime * #value * string * string&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart + 1 overload<br />&#160;&#160;static member Area : data:seq&lt;#value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart + 2 overloads<br />&#160;&#160;static member Bar : data:seq&lt;#value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart + 2 overloads<br />&#160;&#160;static member Bubble : data:seq&lt;string * #value * #value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart + 2 overloads<br />&#160;&#160;static member Calendar : data:seq&lt;DateTime * #value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart<br />&#160;&#160;static member Candlestick : data:seq&lt;#key * #value * #value * #value * #value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart + 1 overload<br />&#160;&#160;static member Column : data:seq&lt;#value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart + 2 overloads<br />&#160;&#160;static member Combo : data:seq&lt;#seq&lt;&#39;K * &#39;V&gt;&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart (requires &#39;K :&gt; key and &#39;V :&gt; value)<br />&#160;&#160;static member private Create : data:seq&lt;#seq&lt;&#39;T&gt;&gt; -&gt; labels:seq&lt;string&gt; option -&gt; options:Options option -&gt; chartType:ChartGallery -&gt; datumNew:(&#39;T -&gt; Datum) -&gt; GoogleChart<br />&#160;&#160;static member private Create&#39; : data:seq&lt;#value&gt; -&gt; labels:seq&lt;string&gt; option -&gt; options:Options option -&gt; chartType:ChartGallery -&gt; GoogleChart<br />&#160;&#160;...</div>
+<div class="fsdocs-tip" id="fs5">static member Chart.Line : data:Deedle.Frame&lt;&#39;K,&#39;V&gt; * ?Options:Options -&gt; GoogleChart (requires equality and equality)<br />static member Chart.Line : data:Deedle.Series&lt;&#39;K,#value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart (requires equality and &#39;K :&gt; key)<br />static member Chart.Line : data:seq&lt;Deedle.Series&lt;&#39;K,#value&gt;&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart (requires equality and &#39;K :&gt; key)<br />static member Chart.Line : data:seq&lt;#seq&lt;&#39;K * &#39;V&gt;&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart (requires &#39;K :&gt; key and &#39;V :&gt; value)<br />static member Chart.Line : data:seq&lt;#key * #value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart<br />static member Chart.Line : data:seq&lt;#value&gt; * ?Labels:seq&lt;string&gt; * ?Options:Options -&gt; GoogleChart</div>
+<div class="fsdocs-tip" id="fs6">val x : float</div>
+<div class="fsdocs-tip" id="fs7">val sin : value:&#39;T -&gt; &#39;T (requires member Sin)</div>
+<div class="fsdocs-tip" id="fs8">member GoogleChart.GetHtml : unit -&gt; string</div>
+<div class="fsdocs-tip" id="fs9">val chart2 : GoogleChart</div>
+<div class="fsdocs-tip" id="fs10">static member Chart.WithOptions : options:Options -&gt; chart:GoogleChart -&gt; GoogleChart</div>
+<div class="fsdocs-tip" id="fs11">Multiple items<br />type Options =<br />&#160;&#160;new : unit -&gt; Options<br />&#160;&#160;member ShouldSerializeaggregationTarget : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeallValuesSuffix : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeallowHtml : unit -&gt; bool<br />&#160;&#160;member ShouldSerializealternatingRowStyle : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeanimation : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeannotations : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeannotationsWidth : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeareaOpacity : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeavoidOverlappingGridLines : unit -&gt; bool<br />&#160;&#160;...<br /><br />--------------------<br />new : unit -&gt; Options</div>
+<div class="fsdocs-tip" id="fs12">val sales : (string * int) list</div>
+<div class="fsdocs-tip" id="fs13">val expenses : (string * int) list</div>
+<div class="fsdocs-tip" id="fs14">val options : Options</div>
+<div class="fsdocs-tip" id="fs15">Multiple items<br />type Legend =<br />&#160;&#160;new : unit -&gt; Legend<br />&#160;&#160;member ShouldSerializealignment : unit -&gt; bool<br />&#160;&#160;member ShouldSerializemaxLines : unit -&gt; bool<br />&#160;&#160;member ShouldSerializenumberFormat : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeposition : unit -&gt; bool<br />&#160;&#160;member ShouldSerializetextStyle : unit -&gt; bool<br />&#160;&#160;member alignment : string<br />&#160;&#160;member maxLines : int<br />&#160;&#160;member numberFormat : string<br />&#160;&#160;member position : string<br />&#160;&#160;...<br /><br />--------------------<br />new : unit -&gt; Legend</div>
+<div class="fsdocs-tip" id="fs16">val chart3 : GoogleChart</div>
+<div class="fsdocs-tip" id="fs17">static member Chart.WithLabels : labels:seq&lt;string&gt; -&gt; chart:GoogleChart -&gt; GoogleChart</div>
+<div class="fsdocs-tip" id="fs18">namespace System</div>
+<div class="fsdocs-tip" id="fs19">val values1 : int list</div>
+<div class="fsdocs-tip" id="fs20">val values2 : float list</div>
+<div class="fsdocs-tip" id="fs21">val dates : DateTime list</div>
+<div class="fsdocs-tip" id="fs22">val i : float</div>
+<div class="fsdocs-tip" id="fs23">Multiple items<br />[&lt;Struct&gt;]<br />type DateTime =<br />&#160;&#160;new : year: int * month: int * day: int -&gt; unit + 10 overloads<br />&#160;&#160;member Add : value: TimeSpan -&gt; DateTime<br />&#160;&#160;member AddDays : value: float -&gt; DateTime<br />&#160;&#160;member AddHours : value: float -&gt; DateTime<br />&#160;&#160;member AddMilliseconds : value: float -&gt; DateTime<br />&#160;&#160;member AddMinutes : value: float -&gt; DateTime<br />&#160;&#160;member AddMonths : months: int -&gt; DateTime<br />&#160;&#160;member AddSeconds : value: float -&gt; DateTime<br />&#160;&#160;member AddTicks : value: int64 -&gt; DateTime<br />&#160;&#160;member AddYears : value: int -&gt; DateTime<br />&#160;&#160;...<br /><br />--------------------<br />DateTime ()<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(ticks: int64) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(ticks: int64, kind: DateTimeKind) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int, calendar: Globalization.Calendar) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int, hour: int, minute: int, second: int) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int, hour: int, minute: int, second: int, kind: DateTimeKind) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int, hour: int, minute: int, second: int, calendar: Globalization.Calendar) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int, hour: int, minute: int, second: int, millisecond: int) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int, hour: int, minute: int, second: int, millisecond: int, kind: DateTimeKind) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em></div>
+<div class="fsdocs-tip" id="fs24">property DateTime.Today: DateTime with get</div>
+<div class="fsdocs-tip" id="fs25">DateTime.AddDays(value: float) : DateTime</div>
+<div class="fsdocs-tip" id="fs26">val first : Deedle.Series&lt;DateTime,int&gt;</div>
+<div class="fsdocs-tip" id="fs27">Multiple items<br />module Deedle<br /><br />from XPlot.GoogleCharts<br /><br />--------------------<br />namespace Deedle</div>
+<div class="fsdocs-tip" id="fs28">Multiple items<br />module Series<br /><br />from Deedle<br /><br />--------------------<br />type Series&lt;&#39;K,&#39;V (requires equality)&gt; =<br />&#160;&#160;interface IFsiFormattable<br />&#160;&#160;interface ISeries&lt;&#39;K&gt;<br />&#160;&#160;new : index:IIndex&lt;&#39;K&gt; * vector:IVector&lt;&#39;V&gt; * vectorBuilder:IVectorBuilder * indexBuilder:IIndexBuilder -&gt; Series&lt;&#39;K,&#39;V&gt; + 3 overloads<br />&#160;&#160;member After : lowerExclusive:&#39;K -&gt; Series&lt;&#39;K,&#39;V&gt;<br />&#160;&#160;member Aggregate : aggregation:Aggregation&lt;&#39;K&gt; * keySelector:Func&lt;DataSegment&lt;Series&lt;&#39;K,&#39;V&gt;&gt;,&#39;TNewKey&gt; * valueSelector:Func&lt;DataSegment&lt;Series&lt;&#39;K,&#39;V&gt;&gt;,OptionalValue&lt;&#39;R&gt;&gt; -&gt; Series&lt;&#39;TNewKey,&#39;R&gt; (requires equality) + 1 overload<br />&#160;&#160;member AsyncMaterialize : unit -&gt; Async&lt;Series&lt;&#39;K,&#39;V&gt;&gt;<br />&#160;&#160;member Before : upperExclusive:&#39;K -&gt; Series&lt;&#39;K,&#39;V&gt;<br />&#160;&#160;member Between : lowerInclusive:&#39;K * upperInclusive:&#39;K -&gt; Series&lt;&#39;K,&#39;V&gt;<br />&#160;&#160;member Compare : another:Series&lt;&#39;K,&#39;V&gt; -&gt; Series&lt;&#39;K,Diff&lt;&#39;V&gt;&gt;<br />&#160;&#160;member Convert : forward:Func&lt;&#39;V,&#39;R&gt; * backward:Func&lt;&#39;R,&#39;V&gt; -&gt; Series&lt;&#39;K,&#39;R&gt;<br />&#160;&#160;...<br /><br />--------------------<br />new : pairs:seq&lt;Collections.Generic.KeyValuePair&lt;&#39;K,&#39;V&gt;&gt; -&gt; Deedle.Series&lt;&#39;K,&#39;V&gt;<br />new : keys:seq&lt;&#39;K&gt; * values:seq&lt;&#39;V&gt; -&gt; Deedle.Series&lt;&#39;K,&#39;V&gt;<br />new : keys:&#39;K [] * values:&#39;V [] -&gt; Deedle.Series&lt;&#39;K,&#39;V&gt;<br />new : index:Deedle.Indices.IIndex&lt;&#39;K&gt; * vector:Deedle.IVector&lt;&#39;V&gt; * vectorBuilder:Deedle.Vectors.IVectorBuilder * indexBuilder:Deedle.Indices.IIndexBuilder -&gt; Deedle.Series&lt;&#39;K,&#39;V&gt;</div>
+<div class="fsdocs-tip" id="fs29">val second : Deedle.Series&lt;DateTime,float&gt;</div>
+<div class="fsdocs-tip" id="fs30">val df : Deedle.Frame&lt;DateTime,string&gt;</div>
+<div class="fsdocs-tip" id="fs31">Multiple items<br />module Frame<br /><br />from Deedle<br /><br />--------------------<br />type Frame =<br />&#160;&#160;static member ReadCsv : location:string * hasHeaders:Nullable&lt;bool&gt; * inferTypes:Nullable&lt;bool&gt; * inferRows:Nullable&lt;int&gt; * schema:string * separators:string * culture:string * maxRows:Nullable&lt;int&gt; * missingValues:string [] * preferOptions:bool -&gt; Frame&lt;int,string&gt; + 1 overload<br />&#160;&#160;static member ReadReader : reader:IDataReader -&gt; Frame&lt;int,string&gt;<br />&#160;&#160;static member CustomExpanders : Dictionary&lt;Type,Func&lt;obj,seq&lt;string * Type * obj&gt;&gt;&gt;<br />&#160;&#160;static member NonExpandableInterfaces : ResizeArray&lt;Type&gt;<br />&#160;&#160;static member NonExpandableTypes : HashSet&lt;Type&gt;<br /><br />--------------------<br />type Frame&lt;&#39;TRowKey,&#39;TColumnKey (requires equality and equality)&gt; =<br />&#160;&#160;interface IDynamicMetaObjectProvider<br />&#160;&#160;interface INotifyCollectionChanged<br />&#160;&#160;interface IFsiFormattable<br />&#160;&#160;interface IFrame<br />&#160;&#160;new : rowIndex:IIndex&lt;&#39;TRowKey&gt; * columnIndex:IIndex&lt;&#39;TColumnKey&gt; * data:IVector&lt;IVector&gt; * indexBuilder:IIndexBuilder * vectorBuilder:IVectorBuilder -&gt; Frame&lt;&#39;TRowKey,&#39;TColumnKey&gt; + 1 overload<br />&#160;&#160;member AddColumn : column:&#39;TColumnKey * series:seq&lt;&#39;V&gt; -&gt; unit + 3 overloads<br />&#160;&#160;member AggregateRowsBy : groupBy:seq&lt;&#39;TColumnKey&gt; * aggBy:seq&lt;&#39;TColumnKey&gt; * aggFunc:Func&lt;Series&lt;&#39;TRowKey,&#39;a&gt;,&#39;b&gt; -&gt; Frame&lt;int,&#39;TColumnKey&gt;<br />&#160;&#160;member Clone : unit -&gt; Frame&lt;&#39;TRowKey,&#39;TColumnKey&gt;<br />&#160;&#160;member ColumnApply : f:Func&lt;Series&lt;&#39;TRowKey,&#39;T&gt;,ISeries&lt;&#39;TRowKey&gt;&gt; -&gt; Frame&lt;&#39;TRowKey,&#39;TColumnKey&gt; + 1 overload<br />&#160;&#160;member DropColumn : column:&#39;TColumnKey -&gt; unit<br />&#160;&#160;...<br /><br />--------------------<br />new : names:seq&lt;&#39;TColumnKey&gt; * columns:seq&lt;Deedle.ISeries&lt;&#39;TRowKey&gt;&gt; -&gt; Deedle.Frame&lt;&#39;TRowKey,&#39;TColumnKey&gt;<br />new : rowIndex:Deedle.Indices.IIndex&lt;&#39;TRowKey&gt; * columnIndex:Deedle.Indices.IIndex&lt;&#39;TColumnKey&gt; * data:Deedle.IVector&lt;Deedle.IVector&gt; * indexBuilder:Deedle.Indices.IIndexBuilder * vectorBuilder:Deedle.Vectors.IVectorBuilder -&gt; Deedle.Frame&lt;&#39;TRowKey,&#39;TColumnKey&gt;</div>
+<div class="fsdocs-tip" id="fs32">val dfOptions : Options</div>
+<div class="fsdocs-tip" id="fs33">Multiple items<br />type Series =<br />&#160;&#160;new : ?type:string -&gt; Series<br />&#160;&#160;member ShouldSerializeannotations : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeareaOpacity : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecolor : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecurveType : unit -&gt; bool<br />&#160;&#160;member ShouldSerializefallingColor : unit -&gt; bool<br />&#160;&#160;member ShouldSerializelineWidth : unit -&gt; bool<br />&#160;&#160;member ShouldSerializepointShape : unit -&gt; bool<br />&#160;&#160;member ShouldSerializepointSize : unit -&gt; bool<br />&#160;&#160;member ShouldSerializerisingColor : unit -&gt; bool<br />&#160;&#160;...<br /><br />--------------------<br />new : ?type:string -&gt; Series</div>
+<div class="fsdocs-tip" id="fs34">Multiple items<br />type Axis =<br />&#160;&#160;new : unit -&gt; Axis<br />&#160;&#160;member ShouldSerializeallowContainerBoundaryTextCufoff : unit -&gt; bool<br />&#160;&#160;member ShouldSerializebaseline : unit -&gt; bool<br />&#160;&#160;member ShouldSerializebaselineColor : unit -&gt; bool<br />&#160;&#160;member ShouldSerializedirection : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeformat : unit -&gt; bool<br />&#160;&#160;member ShouldSerializegridlines : unit -&gt; bool<br />&#160;&#160;member ShouldSerializelogScale : unit -&gt; bool<br />&#160;&#160;member ShouldSerializemaxAlternation : unit -&gt; bool<br />&#160;&#160;member ShouldSerializemaxTextLines : unit -&gt; bool<br />&#160;&#160;...<br /><br />--------------------<br />new : unit -&gt; Axis</div>
+<div class="fsdocs-tip" id="fs35">val chart4 : GoogleChart</div>
+
+        </div>
+
+        <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+        <script type="text/javascript">var fsdocs_search_baseurl = 'https://fslab.org/XPlot/'</script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
+        <script type="text/javascript" src="https://fslab.org/XPlot/content/fsdocs-search.js"></script>
+        <!-- END SEARCH BOX: this adds support for the search box -->
+    </div>
+</body>
+
+</html>
+

@@ -1,315 +1,296 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8" />
-    <title>Plotly Box Plots
-</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Data visualization library for F#" />
-    <meta name="author" content="Taha Hachana; Tomas Petricek" />
+    <meta charset="utf-8">
+    <title>plotly-box-plots</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="XPlot.GoogleCharts">
 
-    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
-    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
-    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
-    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet" />
+    <link rel="stylesheet" id="theme_link" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.3.1/materia/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-        google.charts.load('current', {
-            packages: ["corechart", "annotationchart", "calendar", "gauge", "geochart", "map", "sankey", "table", "timeline", "treemap"]
-        });
-    </script>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <link type="text/css" rel="stylesheet" href="https://fslab.org/XPlot/content/style.css" />
-    <script type="text/javascript" src="https://fslab.org/XPlot/content/tips.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
+
+    <link type="text/css" rel="stylesheet" href="https://fslab.org/XPlot//content/navbar-fixed-left.css" />
+    <link type="text/css" rel="stylesheet" href="https://fslab.org/XPlot//content/fsdocs-default.css" />
+    <link type="text/css" rel="stylesheet" href="https://fslab.org/XPlot//content/fsdocs-custom.css" />
+    <script type="text/javascript" src="https://fslab.org/XPlot//content/fsdocs-tips.js"></script>
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
-      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <!-- END SEARCH BOX: this adds support for the search box -->
+
 </head>
+
 <body>
+    <nav class="navbar navbar-expand-md navbar-light bg-secondary fixed-left" id="fsdocs-menu">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <a href="https://fslab.org/XPlot/"><img id="fsdocs-logo" src="https://fslab.org/XPlot/img/logo.png" /></a>
+            <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+            <div id="header">
+                <div class="searchbox" id="fsdocs-searchbox">
+                    <label for="search-by">
+                        <i class="fas fa-search"></i>
+                    </label>
+                    <input data-search-input="" id="search-by" type="search" placeholder="Search..." />
+                    <span data-search-clear="">
+                        <i class="fas fa-times"></i>
+                    </span>
+                </div>
+            </div>
+
+            <!-- END SEARCH BOX: this adds support for the search box -->
+            <ul class="navbar-nav" id="fsdocs-nav">
+                <li class="nav-header">XPlot</li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//index.html">Home Page</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//quickstart.html">Getting started</a></li>
+                <li class="divider"></li>
+                <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="https://github.com/fslaborg/XPlot/blob/master/LICENSE.md">License (Apache 2.0)</a></li>
+                <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="https://github.com/fslaborg/XPlot/blob/master/RELEASE_NOTES.md">Release Notes</a></li>
+                <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="https://github.com/fslaborg/XPlot/">Source Repository</a></li>
+                <li class="nav-header"></li>
+                <li class="nav-header">Plotly</li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-bar-charts.html">Bar</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-line-scatter-plots.html">Line and Scatter</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-box-plots.html">Box Plots</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-bubble-charts.html">Bubble</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-contour-plots.html">Contour</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-candlestick-plots.html">Candlesticks</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-area-plots.html">Area</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-heatmaps.html">Heatmaps</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-histograms.html">Histograms</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-2d-histograms.html">2D Histograms</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-polar-charts.html">Polar</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-time-series.html">Time Series</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-multiple-chart-types.html">Multiple Chart Types</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-log-plots.html">Log Plots</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-3d-scatter-plots.html">3D Scatter</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-3d-surface-plots.html">3D Surface</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-3d-line-plots.html">3D Line</a></li>
+                <li class="nav-header">Google Charts</li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-annotation-chart.html">Annotation</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-area-chart.html">Area</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-bar-chart.html">Bar</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-bubble-chart.html">Bubble</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-calendar-chart.html">Calendar</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-candlestick-chart.html">Candlestick</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-column-chart.html">Column</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-combo-chart.html">Combo</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-gauge-chart.html">Gauge</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-geo-chart.html">Geo</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-histogram-chart.html">Histogram</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-line-chart.html">Line</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-map-chart.html">Map</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-pie-chart.html">Pie</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-sankey-diagram.html">Sankey</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-scatter-chart.html">Scatter</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-stepped-area-chart.html">Stepped Area</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-timeline-chart.html">Timeline</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-table-chart.html">Table</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-treemap-chart.html">Treemap</a></li>
+                <li class="nav-header">D3 Charts</li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/d3-network.html">Network</a></li>
+                <li class="nav-header">
+  API Reference
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fslab.org/XPlot/reference/index.html">
+    All Namespaces
+  </a>
+</li>
+            </ul>
+        </div>
+    </nav>
     <div class="container">
         <div class="masthead">
-            <ul class="nav nav-pills pull-right">
-                <li>
-                    <a href="https://fslab.org"><img height="16" width="16" src="https://fslab.org/img/thumbs/fslab.png" /> FsLab</a>
-                </li>
-                <li>
-                    <a href="http://fsharp.github.io/FSharp.Data"><img height="16" width="16" src="https://fslab.org/img/thumbs/fsharpdata.png" /> F# Data</a>
-                </li>
-                <li>
-                    <a href="https://fslab.org/Deedle"><img height="16" width="16" src="https://fslab.org/img/thumbs/deedle.png" /> Deedle</a>
-                </li>
-                <li>
-                    <a href="https://fslab.org/RProvider"><img height="16" width="16" src="https://fslab.org/img/thumbs/rprovider.png" /> R Provider</a>
-                </li>
-                <li>
-                    <a href="http://numerics.mathdotnet.com/"><img height="16" width="16" src="https://fslab.org/img/thumbs/mathnet.png" /> Math.NET</a>
-                </li>
-            </ul>
             <h3 class="muted"><a href="https://fslab.org/XPlot/">XPlot</a></h3>
         </div>
         <hr />
-        <div class="row">
-            <div class="span9" id="main">
-                
-<h1><a name="Plotly-Box-Plots" class="anchor" href="#Plotly-Box-Plots">Plotly Box Plots</a></h1>
-<p><a href="https://github.com/fslaborg/XPlot/blob/master/docsrc/content/chart/plotly-box-plots.fsx">Full source and data</a></p>
+        <div class="container" id="fsdocs-content">
+            <p>Plotly Box Plots</p>
+<p><a href="https://mybinder.org/v2/gh/fslaborg/XPlot/gh-pages?filepath=plotly-box-plots.ipynb"><img src="https://mybinder.org/badge_logo.svg" alt="Binder" /></a></p>
 <h2><a name="Basic-Box-Plot" class="anchor" href="#Basic-Box-Plot">Basic Box Plot</a></h2>
-<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
-<span class="l">2: </span>
-<span class="l">3: </span>
-<span class="l">4: </span>
-<span class="l">5: </span>
-<span class="l">6: </span>
-<span class="l">7: </span>
-</pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs15', 22)" onmouseover="showTip(event, 'fs15', 22)" class="id">trace1</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs16', 23)" onmouseover="showTip(event, 'fs16', 23)" class="rt">Box</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs17', 24)" onmouseover="showTip(event, 'fs17', 24)" class="id">y</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs13', 25)" onmouseover="showTip(event, 'fs13', 25)" class="id">y0</span><span class="pn">)</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs18', 26)" onmouseover="showTip(event, 'fs18', 26)" class="id">trace2</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs16', 27)" onmouseover="showTip(event, 'fs16', 27)" class="rt">Box</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs17', 28)" onmouseover="showTip(event, 'fs17', 28)" class="id">y</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs14', 29)" onmouseover="showTip(event, 'fs14', 29)" class="id">y1</span><span class="pn">)</span>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="id">System</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="id">XPlot</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="id">Plotly</span>
 
-<span class="pn">[</span><span onmouseout="hideTip(event, 'fs15', 30)" onmouseover="showTip(event, 'fs15', 30)" class="id">trace1</span><span class="pn">;</span> <span onmouseout="hideTip(event, 'fs18', 31)" onmouseover="showTip(event, 'fs18', 31)" class="id">trace2</span><span class="pn">]</span>
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs19', 32)" onmouseover="showTip(event, 'fs19', 32)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs20', 33)" onmouseover="showTip(event, 'fs20', 33)" class="id">Plot</span>
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs19', 34)" onmouseover="showTip(event, 'fs19', 34)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs21', 35)" onmouseover="showTip(event, 'fs21', 35)" class="id">WithWidth</span> <span class="n">700</span>
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs19', 36)" onmouseover="showTip(event, 'fs19', 36)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 37)" onmouseover="showTip(event, 'fs22', 37)" class="id">WithHeight</span> <span class="n">500</span>
-</code></pre></td>
-</tr>
-</table>
-<div id="6f7eb744-6362-4a2d-af0b-8271ff69ff83" style="width: 700px; height: 500px;"></div>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="id">rnd</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="fn">Random</span><span class="pn">(</span><span class="pn">)</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs6', 6)" onmouseover="showTip(event, 'fs6', 6)" class="fn">randn</span> <span onmouseout="hideTip(event, 'fs7', 7)" onmouseover="showTip(event, 'fs7', 7)" class="fn">count</span> <span onmouseout="hideTip(event, 'fs8', 8)" onmouseover="showTip(event, 'fs8', 8)" class="fn">min</span> <span onmouseout="hideTip(event, 'fs9', 9)" onmouseover="showTip(event, 'fs9', 9)" class="fn">max</span> <span class="o">=</span>
+    <span class="pn">[</span><span class="n">1</span> <span class="o">..</span> <span onmouseout="hideTip(event, 'fs7', 10)" onmouseover="showTip(event, 'fs7', 10)" class="fn">count</span><span class="pn">]</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs10', 11)" onmouseover="showTip(event, 'fs10', 11)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs11', 12)" onmouseover="showTip(event, 'fs11', 12)" class="id">map</span> <span class="pn">(</span><span class="k">fun</span> <span class="id">_</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs4', 13)" onmouseover="showTip(event, 'fs4', 13)" class="id">rnd</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs12', 14)" onmouseover="showTip(event, 'fs12', 14)" class="id">NextDouble</span><span class="pn">(</span><span class="pn">)</span> <span class="o">*</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs9', 15)" onmouseover="showTip(event, 'fs9', 15)" class="fn">max</span> <span class="o">-</span> <span onmouseout="hideTip(event, 'fs8', 16)" onmouseover="showTip(event, 'fs8', 16)" class="fn">min</span><span class="pn">)</span> <span class="o">+</span> <span onmouseout="hideTip(event, 'fs8', 17)" onmouseover="showTip(event, 'fs8', 17)" class="fn">min</span><span class="pn">)</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs13', 18)" onmouseover="showTip(event, 'fs13', 18)" class="id">y0</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 19)" onmouseover="showTip(event, 'fs6', 19)" class="fn">randn</span> <span class="n">50</span> <span class="o">-</span><span class="n">1.86</span> <span class="n">1.67</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs14', 20)" onmouseover="showTip(event, 'fs14', 20)" class="id">y1</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 21)" onmouseover="showTip(event, 'fs6', 21)" class="fn">randn</span> <span class="n">50</span> <span class="o">-</span><span class="n">1.2</span> <span class="n">3.44</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs15', 22)" onmouseover="showTip(event, 'fs15', 22)" class="id">trace1</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs16', 23)" onmouseover="showTip(event, 'fs16', 23)" class="fn">Box</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs17', 24)" onmouseover="showTip(event, 'fs17', 24)" class="fn">y</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs13', 25)" onmouseover="showTip(event, 'fs13', 25)" class="id">y0</span><span class="pn">)</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs18', 26)" onmouseover="showTip(event, 'fs18', 26)" class="id">trace2</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs16', 27)" onmouseover="showTip(event, 'fs16', 27)" class="fn">Box</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs17', 28)" onmouseover="showTip(event, 'fs17', 28)" class="fn">y</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs14', 29)" onmouseover="showTip(event, 'fs14', 29)" class="id">y1</span><span class="pn">)</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs19', 30)" onmouseover="showTip(event, 'fs19', 30)" class="id">chart1</span> <span class="o">=</span>
+    <span class="pn">[</span><span onmouseout="hideTip(event, 'fs15', 31)" onmouseover="showTip(event, 'fs15', 31)" class="id">trace1</span><span class="pn">;</span> <span onmouseout="hideTip(event, 'fs18', 32)" onmouseover="showTip(event, 'fs18', 32)" class="id">trace2</span><span class="pn">]</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs20', 33)" onmouseover="showTip(event, 'fs20', 33)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs21', 34)" onmouseover="showTip(event, 'fs21', 34)" class="id">Plot</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs20', 35)" onmouseover="showTip(event, 'fs20', 35)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 36)" onmouseover="showTip(event, 'fs22', 36)" class="id">WithWidth</span> <span class="n">700</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs20', 37)" onmouseover="showTip(event, 'fs20', 37)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 38)" onmouseover="showTip(event, 'fs23', 38)" class="id">WithHeight</span> <span class="n">500</span>
+</code></pre>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    </head>
+    <body>
+        <div id="27a63721-87f3-4675-aceb-ae22b12ee0ec" style="width: 700px; height: 500px;"></div>
         <script>
-            var data = [{"type":"box","y":[-1.0670710890540254,-0.83415963108379376,1.3773959633602744,1.594526105348266,-1.1246935514708487,0.50568099312748793,0.28779144414132074,1.0650420600013073,-0.80572542482788,-0.40301742519392514,-0.93336555865749982,0.67601857654564967,-0.89688762685604762,-0.168747456720447,-0.20146889747188834,1.13337439548847,-0.23944393052227975,1.5532779278155779,1.5009800560311326,1.3647988483332096,-0.29759078315812659,-0.0034448603649830378,-0.92679078126642434,-1.5831431708173562,1.0094971059353541,-1.0441495371536118,1.3369679339448772,0.54736609018285143,-1.7761069920594372,0.39019690589057121,0.96317244400418045,0.0602192722355106,-0.018787123192468336,-0.89810512367547735,-1.6910844626375869,-0.88463685390289726,1.2754974874414027,-1.4688470251573469,-1.1846292672141592,0.54926779415424343,0.54948648815485,1.0767548913772937,-0.14713785348792463,-0.40878144376388814,0.085477397830913571,0.3269370373929561,-0.9974915847962218,1.4419172768955668,-0.63335825266007251,-1.0248792691737783]},{"type":"box","y":[1.6132123980360162,1.3875345900783012,0.78731158729051764,-0.41456742756747056,1.8337003885925285,2.0419190648393331,-1.0782412076919532,2.6914735361428335,-0.43101004043175373,3.3341291143252185,2.3473168823250186,3.0988027315488091,2.5345415301874938,1.8680227720867946,1.6442150161248696,2.1339848115174025,-0.28671432102411731,-1.19839966423735,0.80103221174377581,-0.30201152469125181,3.2531866440052095,0.41598593742399737,2.3988355198124589,0.050975890965655246,-0.1283146313802872,1.6334946374378607,-1.0111230911925078,2.7591038736510569,1.2466857114651637,-0.30281056146268293,3.3786705668730059,3.3020495888693482,0.3520002693459392,2.452550528558227,-1.0554464934093162,-0.076622369064307971,-0.66328398865800542,0.43474525997170477,1.6706600154147762,0.42011155650956167,-0.0396950535288525,-0.970026413840254,3.1851601263439093,-0.20638968086167686,3.0595393683479815,2.3083409809266877,-1.0743311347227222,2.6234447519404087,2.5033357206840696,2.6632432694841377]}];
-            var layout = "";
-            Plotly.newPlot('6f7eb744-6362-4a2d-af0b-8271ff69ff83', data, layout);
+            var data = [{"type":"box","y":[0.7160064366767214,-1.738763662045246,1.2687146118836081,-0.20154249791593415,1.1056598363749963,0.5668702966193064,0.878160290149115,-0.43048387149837053,-0.2193558173670227,0.06601554349810623,1.3265788930592028,1.3592735762890775,-1.8069026161669302,0.5687251346552393,0.0481898036125068,-0.8000536998175336,1.1164180153358811,-0.9154377578457062,0.15373291927563604,-0.010267492490945163,-1.0229216403714017,0.6999627858633002,0.7548950472590026,0.9423955490451286,-0.8234189682888888,-1.548715904368421,-0.30316698621640303,-1.6798412242857002,-1.5735952560247832,-0.9012210944300617,-0.35508019602628416,0.4351072212518694,-1.1942193894573578,1.5216996420927809,1.0896887257647185,-0.7696617398316328,0.44449930364475576,1.1919259675554585,-0.1586607340763606,0.9768038018405456,1.263008612325885,-0.011965005571006326,0.41501531424234384,-0.024938466667634662,1.5106927503415817,-1.3083104615138428,1.5181474241233188,0.8577987038799557,-0.6628944256402993,-0.3851252945024173]},{"type":"box","y":[2.146466997035996,1.7244922706691976,1.5325018128065866,1.416240970816575,1.673113056790602,-1.178911461820319,0.16221631411566229,-0.771070693606078,-0.3825759709545299,2.289037800863868,-0.05638158856722608,2.1623589311551106,0.30256000685624773,-0.3037238284497167,-0.646491719152076,-0.028207207596026018,2.1564326801879483,-0.9352732233215464,2.7552206621110535,-0.12497700805076262,1.8041003013980108,3.340748754022991,2.445256263374005,2.3581164603112805,1.7663452899858096,2.1111504857014634,-0.8254514820619725,-0.17494971540521354,2.6930031121769,-0.5626355443162078,-0.591231117337584,1.91397144417929,2.103276729259303,1.8778185208317908,1.3537976267159901,2.493645941919482,-0.9157036522942146,1.6988927495567558,0.37195389485543306,2.656122704751846,-1.129023813497752,1.4002142542042832,1.9941727101775688,2.187283500520178,1.3852115150658466,-0.4573277806757613,-0.2734148583716782,0.8941122301733644,0.6585839329373948,2.058806176883544]}];
+           var layout = "";
+           Plotly.newPlot('27a63721-87f3-4675-aceb-ae22b12ee0ec', data, layout);
         </script>
+    </body>
+</html>
 <h2><a name="Box-Plot-That-Displays-the-Underlying-Data" class="anchor" href="#Box-Plot-That-Displays-the-Underlying-Data">Box Plot That Displays the Underlying Data</a></h2>
-<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
-<span class="l">2: </span>
-<span class="l">3: </span>
-<span class="l">4: </span>
-<span class="l">5: </span>
-<span class="l">6: </span>
-<span class="l">7: </span>
-<span class="l">8: </span>
-<span class="l">9: </span>
-</pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs16', 38)" onmouseover="showTip(event, 'fs16', 38)" class="rt">Box</span><span class="pn">(</span>
-    <span onmouseout="hideTip(event, 'fs17', 39)" onmouseover="showTip(event, 'fs17', 39)" class="id">y</span> <span class="o">=</span> <span class="pn">[</span><span class="n">0</span><span class="pn">;</span> <span class="n">1</span><span class="pn">;</span> <span class="n">1</span><span class="pn">;</span> <span class="n">2</span><span class="pn">;</span> <span class="n">3</span><span class="pn">;</span> <span class="n">5</span><span class="pn">;</span> <span class="n">8</span><span class="pn">;</span> <span class="n">13</span><span class="pn">;</span> <span class="n">21</span><span class="pn">]</span><span class="pn">,</span>
-    <span class="id">boxpoints</span> <span class="o">=</span> <span class="s">&quot;all&quot;</span><span class="pn">,</span>
-    <span class="id">jitter</span> <span class="o">=</span> <span class="n">0.3</span><span class="pn">,</span>
-    <span class="id">pointpos</span> <span class="o">=</span> <span class="o">-</span><span class="n">1.8</span>
-<span class="pn">)</span>
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs19', 40)" onmouseover="showTip(event, 'fs19', 40)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs20', 41)" onmouseover="showTip(event, 'fs20', 41)" class="id">Plot</span>
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs19', 42)" onmouseover="showTip(event, 'fs19', 42)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs21', 43)" onmouseover="showTip(event, 'fs21', 43)" class="id">WithWidth</span> <span class="n">700</span>
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs19', 44)" onmouseover="showTip(event, 'fs19', 44)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 45)" onmouseover="showTip(event, 'fs22', 45)" class="id">WithHeight</span> <span class="n">500</span>
-</code></pre></td>
-</tr>
-</table>
-<div id="60984902-e9a1-474c-a282-b08fef1eac32" style="width: 700px; height: 500px;"></div>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs25', 41)" onmouseover="showTip(event, 'fs25', 41)" class="id">chart2</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs16', 42)" onmouseover="showTip(event, 'fs16', 42)" class="fn">Box</span><span class="pn">(</span>
+        <span onmouseout="hideTip(event, 'fs17', 43)" onmouseover="showTip(event, 'fs17', 43)" class="fn">y</span> <span class="o">=</span> <span class="pn">[</span><span class="n">0</span><span class="pn">;</span> <span class="n">1</span><span class="pn">;</span> <span class="n">1</span><span class="pn">;</span> <span class="n">2</span><span class="pn">;</span> <span class="n">3</span><span class="pn">;</span> <span class="n">5</span><span class="pn">;</span> <span class="n">8</span><span class="pn">;</span> <span class="n">13</span><span class="pn">;</span> <span class="n">21</span><span class="pn">]</span><span class="pn">,</span>
+        <span class="fn">boxpoints</span> <span class="o">=</span> <span class="s">&quot;all&quot;</span><span class="pn">,</span>
+        <span class="fn">jitter</span> <span class="o">=</span> <span class="n">0.3</span><span class="pn">,</span>
+        <span class="fn">pointpos</span> <span class="o">=</span> <span class="o">-</span><span class="n">1.8</span>
+    <span class="pn">)</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs20', 44)" onmouseover="showTip(event, 'fs20', 44)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs21', 45)" onmouseover="showTip(event, 'fs21', 45)" class="id">Plot</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs20', 46)" onmouseover="showTip(event, 'fs20', 46)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 47)" onmouseover="showTip(event, 'fs22', 47)" class="id">WithWidth</span> <span class="n">700</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs20', 48)" onmouseover="showTip(event, 'fs20', 48)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 49)" onmouseover="showTip(event, 'fs23', 49)" class="id">WithHeight</span> <span class="n">500</span>
+</code></pre>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    </head>
+    <body>
+        <div id="b2141128-cc04-49a0-8a80-c26f55268a34" style="width: 700px; height: 500px;"></div>
         <script>
             var data = [{"type":"box","y":[0,1,1,2,3,5,8,13,21],"boxpoints":"all","jitter":0.3,"pointpos":-1.8}];
-            var layout = "";
-            Plotly.newPlot('60984902-e9a1-474c-a282-b08fef1eac32', data, layout);
+           var layout = "";
+           Plotly.newPlot('b2141128-cc04-49a0-8a80-c26f55268a34', data, layout);
         </script>
+    </body>
+</html>
 <h2><a name="Grouped-Box-Plot" class="anchor" href="#Grouped-Box-Plot">Grouped Box Plot</a></h2>
-<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
-<span class="l"> 2: </span>
-<span class="l"> 3: </span>
-<span class="l"> 4: </span>
-<span class="l"> 5: </span>
-<span class="l"> 6: </span>
-<span class="l"> 7: </span>
-<span class="l"> 8: </span>
-<span class="l"> 9: </span>
-<span class="l">10: </span>
-<span class="l">11: </span>
-<span class="l">12: </span>
-<span class="l">13: </span>
-<span class="l">14: </span>
-<span class="l">15: </span>
-<span class="l">16: </span>
-<span class="l">17: </span>
-<span class="l">18: </span>
-<span class="l">19: </span>
-<span class="l">20: </span>
-<span class="l">21: </span>
-<span class="l">22: </span>
-<span class="l">23: </span>
-<span class="l">24: </span>
-<span class="l">25: </span>
-<span class="l">26: </span>
-<span class="l">27: </span>
-<span class="l">28: </span>
-<span class="l">29: </span>
-<span class="l">30: </span>
-<span class="l">31: </span>
-<span class="l">32: </span>
-<span class="l">33: </span>
-<span class="l">34: </span>
-<span class="l">35: </span>
-<span class="l">36: </span>
-<span class="l">37: </span>
-<span class="l">38: </span>
-<span class="l">39: </span>
-<span class="l">40: </span>
-<span class="l">41: </span>
-<span class="l">42: </span>
-</pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs23', 46)" onmouseover="showTip(event, 'fs23', 46)" class="id">x</span> <span class="o">=</span> <span class="pn">[</span><span class="s">&quot;day 1&quot;</span><span class="pn">;</span> <span class="s">&quot;day 1&quot;</span><span class="pn">;</span> <span class="s">&quot;day 1&quot;</span><span class="pn">;</span> <span class="s">&quot;day 1&quot;</span><span class="pn">;</span> <span class="s">&quot;day 1&quot;</span><span class="pn">;</span> <span class="s">&quot;day 1&quot;</span><span class="pn">;</span>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs26', 52)" onmouseover="showTip(event, 'fs26', 52)" class="id">x</span> <span class="o">=</span> <span class="pn">[</span><span class="s">&quot;day 1&quot;</span><span class="pn">;</span> <span class="s">&quot;day 1&quot;</span><span class="pn">;</span> <span class="s">&quot;day 1&quot;</span><span class="pn">;</span> <span class="s">&quot;day 1&quot;</span><span class="pn">;</span> <span class="s">&quot;day 1&quot;</span><span class="pn">;</span> <span class="s">&quot;day 1&quot;</span><span class="pn">;</span>
         <span class="s">&quot;day 2&quot;</span><span class="pn">;</span> <span class="s">&quot;day 2&quot;</span><span class="pn">;</span> <span class="s">&quot;day 2&quot;</span><span class="pn">;</span> <span class="s">&quot;day 2&quot;</span><span class="pn">;</span> <span class="s">&quot;day 2&quot;</span><span class="pn">;</span> <span class="s">&quot;day 2&quot;</span><span class="pn">]</span>
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs24', 47)" onmouseover="showTip(event, 'fs24', 47)" class="id">groupedTrace1</span> <span class="o">=</span>
-    <span onmouseout="hideTip(event, 'fs16', 48)" onmouseover="showTip(event, 'fs16', 48)" class="rt">Box</span><span class="pn">(</span>
-        <span onmouseout="hideTip(event, 'fs17', 49)" onmouseover="showTip(event, 'fs17', 49)" class="id">y</span> <span class="o">=</span> <span class="pn">[</span><span class="n">0.2</span><span class="pn">;</span> <span class="n">0.2</span><span class="pn">;</span> <span class="n">0.6</span><span class="pn">;</span> <span class="n">1.0</span><span class="pn">;</span> <span class="n">0.5</span><span class="pn">;</span> <span class="n">0.4</span><span class="pn">;</span> <span class="n">0.2</span><span class="pn">;</span> <span class="n">0.7</span><span class="pn">;</span> <span class="n">0.9</span><span class="pn">;</span> <span class="n">0.1</span><span class="pn">;</span> <span class="n">0.5</span><span class="pn">;</span> <span class="n">0.3</span><span class="pn">]</span><span class="pn">,</span>
-        <span onmouseout="hideTip(event, 'fs25', 50)" onmouseover="showTip(event, 'fs25', 50)" class="id">x</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs23', 51)" onmouseover="showTip(event, 'fs23', 51)" class="id">x</span><span class="pn">,</span>
-        <span class="id">name</span> <span class="o">=</span> <span class="s">&quot;kale&quot;</span><span class="pn">,</span>
-        <span class="id">marker</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs26', 52)" onmouseover="showTip(event, 'fs26', 52)" class="rt">Marker</span><span class="pn">(</span><span class="id">color</span> <span class="o">=</span> <span class="s">&quot;#3D9970&quot;</span><span class="pn">)</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs27', 53)" onmouseover="showTip(event, 'fs27', 53)" class="id">groupedTrace1</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs16', 54)" onmouseover="showTip(event, 'fs16', 54)" class="fn">Box</span><span class="pn">(</span>
+        <span onmouseout="hideTip(event, 'fs17', 55)" onmouseover="showTip(event, 'fs17', 55)" class="fn">y</span> <span class="o">=</span> <span class="pn">[</span><span class="n">0.2</span><span class="pn">;</span> <span class="n">0.2</span><span class="pn">;</span> <span class="n">0.6</span><span class="pn">;</span> <span class="n">1.0</span><span class="pn">;</span> <span class="n">0.5</span><span class="pn">;</span> <span class="n">0.4</span><span class="pn">;</span> <span class="n">0.2</span><span class="pn">;</span> <span class="n">0.7</span><span class="pn">;</span> <span class="n">0.9</span><span class="pn">;</span> <span class="n">0.1</span><span class="pn">;</span> <span class="n">0.5</span><span class="pn">;</span> <span class="n">0.3</span><span class="pn">]</span><span class="pn">,</span>
+        <span onmouseout="hideTip(event, 'fs28', 56)" onmouseover="showTip(event, 'fs28', 56)" class="fn">x</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs26', 57)" onmouseover="showTip(event, 'fs26', 57)" class="id">x</span><span class="pn">,</span>
+        <span class="fn">name</span> <span class="o">=</span> <span class="s">&quot;kale&quot;</span><span class="pn">,</span>
+        <span class="fn">marker</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs29', 58)" onmouseover="showTip(event, 'fs29', 58)" class="fn">Marker</span><span class="pn">(</span><span class="fn">color</span> <span class="o">=</span> <span class="s">&quot;#3D9970&quot;</span><span class="pn">)</span>
     <span class="pn">)</span>
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs27', 53)" onmouseover="showTip(event, 'fs27', 53)" class="id">groupedTrace2</span> <span class="o">=</span>
-    <span onmouseout="hideTip(event, 'fs16', 54)" onmouseover="showTip(event, 'fs16', 54)" class="rt">Box</span><span class="pn">(</span>
-        <span onmouseout="hideTip(event, 'fs17', 55)" onmouseover="showTip(event, 'fs17', 55)" class="id">y</span> <span class="o">=</span> <span class="pn">[</span><span class="n">0.6</span><span class="pn">;</span> <span class="n">0.7</span><span class="pn">;</span> <span class="n">0.3</span><span class="pn">;</span> <span class="n">0.6</span><span class="pn">;</span> <span class="n">0.0</span><span class="pn">;</span> <span class="n">0.5</span><span class="pn">;</span> <span class="n">0.7</span><span class="pn">;</span> <span class="n">0.9</span><span class="pn">;</span> <span class="n">0.5</span><span class="pn">;</span> <span class="n">0.8</span><span class="pn">;</span> <span class="n">0.7</span><span class="pn">;</span> <span class="n">0.2</span><span class="pn">]</span><span class="pn">,</span>
-        <span onmouseout="hideTip(event, 'fs25', 56)" onmouseover="showTip(event, 'fs25', 56)" class="id">x</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs23', 57)" onmouseover="showTip(event, 'fs23', 57)" class="id">x</span><span class="pn">,</span>
-        <span class="id">name</span> <span class="o">=</span> <span class="s">&quot;radishes&quot;</span><span class="pn">,</span>
-        <span class="id">marker</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs26', 58)" onmouseover="showTip(event, 'fs26', 58)" class="rt">Marker</span><span class="pn">(</span><span class="id">color</span> <span class="o">=</span> <span class="s">&quot;#FF4136&quot;</span><span class="pn">)</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs30', 59)" onmouseover="showTip(event, 'fs30', 59)" class="id">groupedTrace2</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs16', 60)" onmouseover="showTip(event, 'fs16', 60)" class="fn">Box</span><span class="pn">(</span>
+        <span onmouseout="hideTip(event, 'fs17', 61)" onmouseover="showTip(event, 'fs17', 61)" class="fn">y</span> <span class="o">=</span> <span class="pn">[</span><span class="n">0.6</span><span class="pn">;</span> <span class="n">0.7</span><span class="pn">;</span> <span class="n">0.3</span><span class="pn">;</span> <span class="n">0.6</span><span class="pn">;</span> <span class="n">0.0</span><span class="pn">;</span> <span class="n">0.5</span><span class="pn">;</span> <span class="n">0.7</span><span class="pn">;</span> <span class="n">0.9</span><span class="pn">;</span> <span class="n">0.5</span><span class="pn">;</span> <span class="n">0.8</span><span class="pn">;</span> <span class="n">0.7</span><span class="pn">;</span> <span class="n">0.2</span><span class="pn">]</span><span class="pn">,</span>
+        <span onmouseout="hideTip(event, 'fs28', 62)" onmouseover="showTip(event, 'fs28', 62)" class="fn">x</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs26', 63)" onmouseover="showTip(event, 'fs26', 63)" class="id">x</span><span class="pn">,</span>
+        <span class="fn">name</span> <span class="o">=</span> <span class="s">&quot;radishes&quot;</span><span class="pn">,</span>
+        <span class="fn">marker</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs29', 64)" onmouseover="showTip(event, 'fs29', 64)" class="fn">Marker</span><span class="pn">(</span><span class="fn">color</span> <span class="o">=</span> <span class="s">&quot;#FF4136&quot;</span><span class="pn">)</span>
     <span class="pn">)</span>
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs28', 59)" onmouseover="showTip(event, 'fs28', 59)" class="id">groupedTrace3</span> <span class="o">=</span>
-    <span onmouseout="hideTip(event, 'fs16', 60)" onmouseover="showTip(event, 'fs16', 60)" class="rt">Box</span><span class="pn">(</span>
-        <span onmouseout="hideTip(event, 'fs17', 61)" onmouseover="showTip(event, 'fs17', 61)" class="id">y</span> <span class="o">=</span> <span class="pn">[</span><span class="n">0.1</span><span class="pn">;</span> <span class="n">0.3</span><span class="pn">;</span> <span class="n">0.1</span><span class="pn">;</span> <span class="n">0.9</span><span class="pn">;</span> <span class="n">0.6</span><span class="pn">;</span> <span class="n">0.6</span><span class="pn">;</span> <span class="n">0.9</span><span class="pn">;</span> <span class="n">1.0</span><span class="pn">;</span> <span class="n">0.3</span><span class="pn">;</span> <span class="n">0.6</span><span class="pn">;</span> <span class="n">0.8</span><span class="pn">;</span> <span class="n">0.5</span><span class="pn">]</span><span class="pn">,</span>
-        <span onmouseout="hideTip(event, 'fs25', 62)" onmouseover="showTip(event, 'fs25', 62)" class="id">x</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs23', 63)" onmouseover="showTip(event, 'fs23', 63)" class="id">x</span><span class="pn">,</span>
-        <span class="id">name</span> <span class="o">=</span> <span class="s">&quot;carrots&quot;</span><span class="pn">,</span>
-        <span class="id">marker</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs26', 64)" onmouseover="showTip(event, 'fs26', 64)" class="rt">Marker</span><span class="pn">(</span><span class="id">color</span> <span class="o">=</span> <span class="s">&quot;#FF851B&quot;</span><span class="pn">)</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs31', 65)" onmouseover="showTip(event, 'fs31', 65)" class="id">groupedTrace3</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs16', 66)" onmouseover="showTip(event, 'fs16', 66)" class="fn">Box</span><span class="pn">(</span>
+        <span onmouseout="hideTip(event, 'fs17', 67)" onmouseover="showTip(event, 'fs17', 67)" class="fn">y</span> <span class="o">=</span> <span class="pn">[</span><span class="n">0.1</span><span class="pn">;</span> <span class="n">0.3</span><span class="pn">;</span> <span class="n">0.1</span><span class="pn">;</span> <span class="n">0.9</span><span class="pn">;</span> <span class="n">0.6</span><span class="pn">;</span> <span class="n">0.6</span><span class="pn">;</span> <span class="n">0.9</span><span class="pn">;</span> <span class="n">1.0</span><span class="pn">;</span> <span class="n">0.3</span><span class="pn">;</span> <span class="n">0.6</span><span class="pn">;</span> <span class="n">0.8</span><span class="pn">;</span> <span class="n">0.5</span><span class="pn">]</span><span class="pn">,</span>
+        <span onmouseout="hideTip(event, 'fs28', 68)" onmouseover="showTip(event, 'fs28', 68)" class="fn">x</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs26', 69)" onmouseover="showTip(event, 'fs26', 69)" class="id">x</span><span class="pn">,</span>
+        <span class="fn">name</span> <span class="o">=</span> <span class="s">&quot;carrots&quot;</span><span class="pn">,</span>
+        <span class="fn">marker</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs29', 70)" onmouseover="showTip(event, 'fs29', 70)" class="fn">Marker</span><span class="pn">(</span><span class="fn">color</span> <span class="o">=</span> <span class="s">&quot;#FF851B&quot;</span><span class="pn">)</span>
     <span class="pn">)</span>
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs29', 65)" onmouseover="showTip(event, 'fs29', 65)" class="id">layout</span> <span class="o">=</span>
-    <span onmouseout="hideTip(event, 'fs30', 66)" onmouseover="showTip(event, 'fs30', 66)" class="rt">Layout</span><span class="pn">(</span>
-        <span class="id">yaxis</span> <span class="o">=</span>
-            <span onmouseout="hideTip(event, 'fs31', 67)" onmouseover="showTip(event, 'fs31', 67)" class="rt">Yaxis</span><span class="pn">(</span>
-                <span class="id">title</span> <span class="o">=</span> <span class="s">&quot;normalized moisture&quot;</span><span class="pn">,</span>
-                <span class="id">zeroline</span> <span class="o">=</span> <span class="k">false</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs32', 71)" onmouseover="showTip(event, 'fs32', 71)" class="id">layout</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs33', 72)" onmouseover="showTip(event, 'fs33', 72)" class="fn">Layout</span><span class="pn">(</span>
+        <span class="fn">yaxis</span> <span class="o">=</span>
+            <span onmouseout="hideTip(event, 'fs34', 73)" onmouseover="showTip(event, 'fs34', 73)" class="fn">Yaxis</span><span class="pn">(</span>
+                <span class="fn">title</span> <span class="o">=</span> <span class="s">&quot;normalized moisture&quot;</span><span class="pn">,</span>
+                <span class="fn">zeroline</span> <span class="o">=</span> <span class="k">false</span>
             <span class="pn">)</span><span class="pn">,</span>
-        <span class="id">boxmode</span> <span class="o">=</span> <span class="s">&quot;group&quot;</span>
+        <span class="fn">boxmode</span> <span class="o">=</span> <span class="s">&quot;group&quot;</span>
     <span class="pn">)</span>
 
-<span class="pn">[</span><span onmouseout="hideTip(event, 'fs24', 68)" onmouseover="showTip(event, 'fs24', 68)" class="id">groupedTrace1</span><span class="pn">;</span> <span onmouseout="hideTip(event, 'fs27', 69)" onmouseover="showTip(event, 'fs27', 69)" class="id">groupedTrace2</span><span class="pn">;</span> <span onmouseout="hideTip(event, 'fs28', 70)" onmouseover="showTip(event, 'fs28', 70)" class="id">groupedTrace3</span><span class="pn">]</span>
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs19', 71)" onmouseover="showTip(event, 'fs19', 71)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs20', 72)" onmouseover="showTip(event, 'fs20', 72)" class="id">Plot</span>
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs19', 73)" onmouseover="showTip(event, 'fs19', 73)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs32', 74)" onmouseover="showTip(event, 'fs32', 74)" class="id">WithLayout</span> <span onmouseout="hideTip(event, 'fs29', 75)" onmouseover="showTip(event, 'fs29', 75)" class="id">layout</span>
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs19', 76)" onmouseover="showTip(event, 'fs19', 76)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs21', 77)" onmouseover="showTip(event, 'fs21', 77)" class="id">WithWidth</span> <span class="n">700</span>
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs19', 78)" onmouseover="showTip(event, 'fs19', 78)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 79)" onmouseover="showTip(event, 'fs22', 79)" class="id">WithHeight</span> <span class="n">500</span>
-</code></pre></td>
-</tr>
-</table>
-<div id="8d9e4305-47be-4d87-8634-c5e58adaa540" style="width: 700px; height: 500px;"></div>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs35', 74)" onmouseover="showTip(event, 'fs35', 74)" class="id">chart3</span> <span class="o">=</span>
+    <span class="pn">[</span><span onmouseout="hideTip(event, 'fs27', 75)" onmouseover="showTip(event, 'fs27', 75)" class="id">groupedTrace1</span><span class="pn">;</span> <span onmouseout="hideTip(event, 'fs30', 76)" onmouseover="showTip(event, 'fs30', 76)" class="id">groupedTrace2</span><span class="pn">;</span> <span onmouseout="hideTip(event, 'fs31', 77)" onmouseover="showTip(event, 'fs31', 77)" class="id">groupedTrace3</span><span class="pn">]</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs20', 78)" onmouseover="showTip(event, 'fs20', 78)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs21', 79)" onmouseover="showTip(event, 'fs21', 79)" class="id">Plot</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs20', 80)" onmouseover="showTip(event, 'fs20', 80)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs36', 81)" onmouseover="showTip(event, 'fs36', 81)" class="id">WithLayout</span> <span onmouseout="hideTip(event, 'fs32', 82)" onmouseover="showTip(event, 'fs32', 82)" class="id">layout</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs20', 83)" onmouseover="showTip(event, 'fs20', 83)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 84)" onmouseover="showTip(event, 'fs22', 84)" class="id">WithWidth</span> <span class="n">700</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs20', 85)" onmouseover="showTip(event, 'fs20', 85)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 86)" onmouseover="showTip(event, 'fs23', 86)" class="id">WithHeight</span> <span class="n">500</span>
+</code></pre>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    </head>
+    <body>
+        <div id="6a1578a6-0640-4d43-9744-701458b51e4a" style="width: 700px; height: 500px;"></div>
         <script>
             var data = [{"type":"box","y":[0.2,0.2,0.6,1.0,0.5,0.4,0.2,0.7,0.9,0.1,0.5,0.3],"x":["day 1","day 1","day 1","day 1","day 1","day 1","day 2","day 2","day 2","day 2","day 2","day 2"],"marker":{"color":"#3D9970"},"name":"kale"},{"type":"box","y":[0.6,0.7,0.3,0.6,0.0,0.5,0.7,0.9,0.5,0.8,0.7,0.2],"x":["day 1","day 1","day 1","day 1","day 1","day 1","day 2","day 2","day 2","day 2","day 2","day 2"],"marker":{"color":"#FF4136"},"name":"radishes"},{"type":"box","y":[0.1,0.3,0.1,0.9,0.6,0.6,0.9,1.0,0.3,0.6,0.8,0.5],"x":["day 1","day 1","day 1","day 1","day 1","day 1","day 2","day 2","day 2","day 2","day 2","day 2"],"marker":{"color":"#FF851B"},"name":"carrots"}];
-            var layout = {"yaxis":{"title":"normalized moisture","zeroline":false,"_isSubplotObj":true},"boxmode":"group"};
-            Plotly.newPlot('8d9e4305-47be-4d87-8634-c5e58adaa540', data, layout);
+           var layout = {"yaxis":{"title":"normalized moisture","zeroline":false,"_isSubplotObj":true},"boxmode":"group"};
+           Plotly.newPlot('6a1578a6-0640-4d43-9744-701458b51e4a', data, layout);
         </script>
-
-<div class="tip" id="fs1">namespace System</div>
-<div class="tip" id="fs2">namespace XPlot</div>
-<div class="tip" id="fs3">namespace XPlot.Plotly</div>
-<div class="tip" id="fs4">val rnd : Random</div>
-<div class="tip" id="fs5">Multiple items<br />type Random =<br />&#160;&#160;new : unit -&gt; Random + 1 overload<br />&#160;&#160;member Next : unit -&gt; int + 2 overloads<br />&#160;&#160;member NextBytes : buffer:byte[] -&gt; unit<br />&#160;&#160;member NextDouble : unit -&gt; float<br /><br />--------------------<br />Random() : Random<br />Random(Seed: int) : Random</div>
-<div class="tip" id="fs6">val randn : count:int -&gt; min:float -&gt; max:float -&gt; float list</div>
-<div class="tip" id="fs7">val count : int</div>
-<div class="tip" id="fs8">val min : float</div>
-<div class="tip" id="fs9">val max : float</div>
-<div class="tip" id="fs10">Multiple items<br />module List<br /><br />from Microsoft.FSharp.Collections<br /><br />--------------------<br />type List&lt;&#39;T&gt; =<br />&#160;&#160;| ( [] )<br />&#160;&#160;| ( :: ) of Head: &#39;T * Tail: &#39;T list<br />&#160;&#160;&#160;&#160;interface IReadOnlyList&lt;&#39;T&gt;<br />&#160;&#160;&#160;&#160;interface IReadOnlyCollection&lt;&#39;T&gt;<br />&#160;&#160;&#160;&#160;interface IEnumerable<br />&#160;&#160;&#160;&#160;interface IEnumerable&lt;&#39;T&gt;<br />&#160;&#160;&#160;&#160;member GetSlice : startIndex:int option * endIndex:int option -&gt; &#39;T list<br />&#160;&#160;&#160;&#160;member Head : &#39;T<br />&#160;&#160;&#160;&#160;member IsEmpty : bool<br />&#160;&#160;&#160;&#160;member Item : index:int -&gt; &#39;T with get<br />&#160;&#160;&#160;&#160;member Length : int<br />&#160;&#160;&#160;&#160;member Tail : &#39;T list<br />&#160;&#160;&#160;&#160;...</div>
-<div class="tip" id="fs11">val map : mapping:(&#39;T -&gt; &#39;U) -&gt; list:&#39;T list -&gt; &#39;U list</div>
-<div class="tip" id="fs12">Random.NextDouble() : float</div>
-<div class="tip" id="fs13">val y0 : float list</div>
-<div class="tip" id="fs14">val y1 : float list</div>
-<div class="tip" id="fs15">val trace1 : Box</div>
-<div class="tip" id="fs16">Multiple items<br />type Box =<br />&#160;&#160;inherit Trace<br />&#160;&#160;new : unit -&gt; Box<br />&#160;&#160;member ShouldSerializeboxmean : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeboxpoints : unit -&gt; bool<br />&#160;&#160;member ShouldSerializefillcolor : unit -&gt; bool<br />&#160;&#160;member ShouldSerializehoverinfo : unit -&gt; bool<br />&#160;&#160;member ShouldSerializejitter : unit -&gt; bool<br />&#160;&#160;member ShouldSerializelegendgroup : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeline : unit -&gt; bool<br />&#160;&#160;member ShouldSerializemarker : unit -&gt; bool<br />&#160;&#160;...<br /><br />--------------------<br />new : unit -&gt; Box</div>
-<div class="tip" id="fs17">property Box.y: obj</div>
-<div class="tip" id="fs18">val trace2 : Box</div>
-<div class="tip" id="fs19">type Chart =<br />&#160;&#160;static member Area : data:seq&lt;#seq&lt;&#39;a1 * &#39;a2&gt;&gt; -&gt; PlotlyChart (requires &#39;a1 :&gt; key and &#39;a2 :&gt; value)<br />&#160;&#160;static member Area : data:seq&lt;#key * #value&gt; -&gt; PlotlyChart<br />&#160;&#160;static member Area : data:seq&lt;#value&gt; -&gt; PlotlyChart<br />&#160;&#160;static member Bar : data:seq&lt;#seq&lt;&#39;a1 * &#39;a2&gt;&gt; -&gt; PlotlyChart (requires &#39;a1 :&gt; key and &#39;a2 :&gt; value)<br />&#160;&#160;static member Bar : data:seq&lt;#key * #value&gt; -&gt; PlotlyChart<br />&#160;&#160;static member Bar : data:seq&lt;#value&gt; -&gt; PlotlyChart<br />&#160;&#160;static member Bubble : data:seq&lt;#key * #value * #value&gt; -&gt; PlotlyChart<br />&#160;&#160;static member Candlestick : data:seq&lt;#key * #value * #value * #value * #value&gt; -&gt; PlotlyChart<br />&#160;&#160;static member Column : data:seq&lt;#seq&lt;&#39;a1 * &#39;a2&gt;&gt; -&gt; PlotlyChart (requires &#39;a1 :&gt; key and &#39;a2 :&gt; value)<br />&#160;&#160;static member Column : data:seq&lt;#key * #value&gt; -&gt; PlotlyChart<br />&#160;&#160;...</div>
-<div class="tip" id="fs20">static member Chart.Plot : data:seq&lt;#Trace&gt; -&gt; PlotlyChart<br />static member Chart.Plot : data:Trace -&gt; PlotlyChart<br />static member Chart.Plot : data:seq&lt;#Trace&gt; * layout:Layout -&gt; PlotlyChart<br />static member Chart.Plot : data:Trace * layout:Layout -&gt; PlotlyChart</div>
-<div class="tip" id="fs21">static member Chart.WithWidth : width:int -&gt; chart:PlotlyChart -&gt; PlotlyChart</div>
-<div class="tip" id="fs22">static member Chart.WithHeight : height:int -&gt; chart:PlotlyChart -&gt; PlotlyChart</div>
-<div class="tip" id="fs23">val x : string list</div>
-<div class="tip" id="fs24">val groupedTrace1 : Box</div>
-<div class="tip" id="fs25">property Box.x: obj</div>
-<div class="tip" id="fs26">Multiple items<br />type Marker =<br />&#160;&#160;new : unit -&gt; Marker<br />&#160;&#160;member ShouldSerializeautocolorscale : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecauto : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecmax : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecmin : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecolor : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecolorbar : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecolors : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecolorscale : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecolorsrc : unit -&gt; bool<br />&#160;&#160;...<br /><br />--------------------<br />new : unit -&gt; Marker</div>
-<div class="tip" id="fs27">val groupedTrace2 : Box</div>
-<div class="tip" id="fs28">val groupedTrace3 : Box</div>
-<div class="tip" id="fs29">val layout : Layout</div>
-<div class="tip" id="fs30">Multiple items<br />module Layout<br /><br />from XPlot.Plotly<br /><br />--------------------<br />type Layout =<br />&#160;&#160;new : unit -&gt; Layout<br />&#160;&#160;member ShouldSerializeangularaxis : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeannotations : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeautosize : unit -&gt; bool<br />&#160;&#160;member ShouldSerializebargap : unit -&gt; bool<br />&#160;&#160;member ShouldSerializebargroupgap : unit -&gt; bool<br />&#160;&#160;member ShouldSerializebarmode : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeboxmode : unit -&gt; bool<br />&#160;&#160;member ShouldSerializedirection : unit -&gt; bool<br />&#160;&#160;member ShouldSerializedragmode : unit -&gt; bool<br />&#160;&#160;...<br /><br />--------------------<br />new : unit -&gt; Layout</div>
-<div class="tip" id="fs31">Multiple items<br />type Yaxis =<br />&#160;&#160;new : unit -&gt; Yaxis<br />&#160;&#160;member ShouldSerialize_isSubplotObj : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeanchor : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeautorange : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeautotick : unit -&gt; bool<br />&#160;&#160;member ShouldSerializebackgroundcolor : unit -&gt; bool<br />&#160;&#160;member ShouldSerializedomain : unit -&gt; bool<br />&#160;&#160;member ShouldSerializedtick : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeexponentformat : unit -&gt; bool<br />&#160;&#160;member ShouldSerializefixedrange : unit -&gt; bool<br />&#160;&#160;...<br /><br />--------------------<br />new : unit -&gt; Yaxis</div>
-<div class="tip" id="fs32">static member Chart.WithLayout : layout:Layout -&gt; chart:PlotlyChart -&gt; PlotlyChart</div>
-
-            </div>
-            <div class="span3">
-                <img src="https://fslab.org/XPlot/img/logo.png" alt="F# Project" style="width:130px;margin:20px" />
-                <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
-                    <li class="nav-header">XPlot</li>
-                    <li><a href="https://fslab.org/XPlot/">Home page</a></li>
-                    <li><a href="https://fslab.org/XPlot/quickstart.html">Getting started</a></li>
-                    <li class="divider"></li>
-                    <li><a href="http://www.nuget.org/packages?q=XPlot">Get Library via NuGet</a></li>
-                    <li><a href="https://github.com/fslaborg/XPlot">Source Code on GitHub</a></li>
-                    <li><a href="https://fslab.org/XPlot/license.html">License (Apache 2.0)</a></li>
-                    <li><a href="https://fslab.org/XPlot/release-notes.html">Release Notes</a></li>
-
-                    <li class="nav-header"><a href="https://fslab.org/XPlot/google-charts.html">Google Charts</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-annotation-chart.html">Annotation</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-area-chart.html">Area</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-bar-chart.html">Bar</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-bubble-chart.html">Bubble</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-calendar-chart.html">Calendar</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-candlestick-chart.html">Candlestick</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-column-chart.html">Column</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-combo-chart.html">Combo</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-gauge-chart.html">Gauge</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-geo-chart.html">Geo</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-histogram-chart.html">Histogram</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-line-chart.html">Line</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-map-chart.html">Map</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-pie-chart.html">Pie</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-sankey-diagram.html">Sankey</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-scatter-chart.html">Scatter</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-stepped-area-chart.html">Stepped Area</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-timeline-chart.html">Timeline</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-table-chart.html">Table</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/google-treemap-chart.html">Treemap</a></li>
-
-                    <li class="nav-header"><a href="https://fslab.org/XPlot/plotly.html">Plotly</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-bar-charts.html">Bar</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-line-scatter-plots.html">Line and Scatter Plots</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-box-plots.html">Box Plots</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-bubble-charts.html">Bubble Charts</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-contour-plots.html">Contour Plots</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-area-plots.html">Area Plots</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-heatmaps.html">Heatmaps</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-histograms.html">Histograms</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-2d-histograms.html">2D Histograms</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-polar-charts.html">Polar Charts</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-time-series.html">Time Series</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-multiple-chart-types.html">Multiple Chart Types</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-log-plots.html">Log Plots</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-3d-scatter-plots.html">3D Scatter Plots</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-3d-surface-plots.html">3D Surface Plots</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/plotly-3d-line-plots.html">3D Line Plots</a></li>
-
-                    <li class="nav-header"><a href="https://fslab.org/XPlot/d3.html">D3 Charts</a></li>
-                    <li><a href="https://fslab.org/XPlot/chart/d3-network.html">Network</a></li>
-
-                    <li class="nav-header">Documentation</li>
-                    <li><a href="https://fslab.org/XPlot/reference/index.html">API Reference</a></li>
-                    <li class="divider"></li>
-
-                    <li><a href="https://fslab.org/XPlot/reference/xplot-googlecharts-chart.html">Google Chart Type</a></li>
-                    <li><a href="https://fslab.org/XPlot/reference/xplot-googlecharts-configuration-options.html">Google Option Type</a></li>
-                    <li><a href="https://fslab.org/XPlot/reference/xplot-googlecharts-configuration.html">Google Configuration Module</a></li>
-
-                    <li class="divider"></li>
-
-                    <li><a href="https://fslab.org/XPlot/reference/xplot-plotly-graph.html">Plotly Graph Module</a></li>
-                    <li><a href="https://fslab.org/XPlot/reference/xplot-plotly-layout-layout.html">Plotly Layout Type</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <a href="https://github.com/fslaborg/XPlot"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub" /></a>
-</body>
+    </body>
 </html>
+
+            <div class="fsdocs-tip" id="fs1">namespace System</div>
+<div class="fsdocs-tip" id="fs2">namespace XPlot</div>
+<div class="fsdocs-tip" id="fs3">namespace XPlot.Plotly</div>
+<div class="fsdocs-tip" id="fs4">val rnd : Random</div>
+<div class="fsdocs-tip" id="fs5">Multiple items<br />type Random =<br />&#160;&#160;new : unit -&gt; unit + 1 overload<br />&#160;&#160;member Next : unit -&gt; int + 2 overloads<br />&#160;&#160;member NextBytes : buffer: byte [] -&gt; unit + 1 overload<br />&#160;&#160;member NextDouble : unit -&gt; float<br />&#160;&#160;member Sample : unit -&gt; float<br /><br />--------------------<br />Random() : Random<br />Random(Seed: int) : Random</div>
+<div class="fsdocs-tip" id="fs6">val randn : count:int -&gt; min:float -&gt; max:float -&gt; float list</div>
+<div class="fsdocs-tip" id="fs7">val count : int</div>
+<div class="fsdocs-tip" id="fs8">val min : float</div>
+<div class="fsdocs-tip" id="fs9">val max : float</div>
+<div class="fsdocs-tip" id="fs10">Multiple items<br />module List<br /><br />from Microsoft.FSharp.Collections<br /><br />--------------------<br />type List&lt;&#39;T&gt; =<br />&#160;&#160;| ( [] )<br />&#160;&#160;| ( :: ) of Head: &#39;T * Tail: &#39;T list<br />&#160;&#160;&#160;&#160;interface IReadOnlyList&lt;&#39;T&gt;<br />&#160;&#160;&#160;&#160;interface IReadOnlyCollection&lt;&#39;T&gt;<br />&#160;&#160;&#160;&#160;interface IEnumerable<br />&#160;&#160;&#160;&#160;interface IEnumerable&lt;&#39;T&gt;<br />&#160;&#160;&#160;&#160;member GetReverseIndex : rank:int * offset:int -&gt; int<br />&#160;&#160;&#160;&#160;member GetSlice : startIndex:int option * endIndex:int option -&gt; &#39;T list<br />&#160;&#160;&#160;&#160;static member Cons : head:&#39;T * tail:&#39;T list -&gt; &#39;T list<br />&#160;&#160;&#160;&#160;member Head : &#39;T<br />&#160;&#160;&#160;&#160;member IsEmpty : bool<br />&#160;&#160;&#160;&#160;member Item : index:int -&gt; &#39;T with get<br />&#160;&#160;&#160;&#160;...</div>
+<div class="fsdocs-tip" id="fs11">val map : mapping:(&#39;T -&gt; &#39;U) -&gt; list:&#39;T list -&gt; &#39;U list</div>
+<div class="fsdocs-tip" id="fs12">Random.NextDouble() : float</div>
+<div class="fsdocs-tip" id="fs13">val y0 : float list</div>
+<div class="fsdocs-tip" id="fs14">val y1 : float list</div>
+<div class="fsdocs-tip" id="fs15">val trace1 : Box</div>
+<div class="fsdocs-tip" id="fs16">Multiple items<br />type Box =<br />&#160;&#160;inherit Trace<br />&#160;&#160;new : unit -&gt; Box<br />&#160;&#160;member ShouldSerializeboxmean : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeboxpoints : unit -&gt; bool<br />&#160;&#160;member ShouldSerializefillcolor : unit -&gt; bool<br />&#160;&#160;member ShouldSerializehoverinfo : unit -&gt; bool<br />&#160;&#160;member ShouldSerializejitter : unit -&gt; bool<br />&#160;&#160;member ShouldSerializelegendgroup : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeline : unit -&gt; bool<br />&#160;&#160;member ShouldSerializemarker : unit -&gt; bool<br />&#160;&#160;...<br /><br />--------------------<br />new : unit -&gt; Box</div>
+<div class="fsdocs-tip" id="fs17">property Box.y: obj with get, set</div>
+<div class="fsdocs-tip" id="fs18">val trace2 : Box</div>
+<div class="fsdocs-tip" id="fs19">val chart1 : PlotlyChart</div>
+<div class="fsdocs-tip" id="fs20">type Chart =<br />&#160;&#160;static member Area : data:seq&lt;#value&gt; -&gt; PlotlyChart + 2 overloads<br />&#160;&#160;static member Bar : data:seq&lt;#value&gt; -&gt; PlotlyChart + 2 overloads<br />&#160;&#160;static member Bubble : data:seq&lt;#key * #value * #value&gt; -&gt; PlotlyChart<br />&#160;&#160;static member Candlestick : data:seq&lt;#key * #value * #value * #value * #value&gt; -&gt; PlotlyChart<br />&#160;&#160;static member Column : data:seq&lt;#value&gt; -&gt; PlotlyChart + 2 overloads<br />&#160;&#160;static member Line : data:seq&lt;#value&gt; -&gt; PlotlyChart + 2 overloads<br />&#160;&#160;static member Pie : data:seq&lt;#key * #value&gt; -&gt; PlotlyChart<br />&#160;&#160;static member Plot : data:Trace -&gt; PlotlyChart + 3 overloads<br />&#160;&#160;static member Scatter : data:seq&lt;#value&gt; -&gt; PlotlyChart + 2 overloads<br />&#160;&#160;static member Show : chart:PlotlyChart -&gt; unit<br />&#160;&#160;...</div>
+<div class="fsdocs-tip" id="fs21">static member Chart.Plot : data:seq&lt;#Trace&gt; -&gt; PlotlyChart<br />static member Chart.Plot : data:Trace -&gt; PlotlyChart<br />static member Chart.Plot : data:seq&lt;#Trace&gt; * layout:Layout -&gt; PlotlyChart<br />static member Chart.Plot : data:Trace * layout:Layout -&gt; PlotlyChart</div>
+<div class="fsdocs-tip" id="fs22">static member Chart.WithWidth : width:int -&gt; chart:PlotlyChart -&gt; PlotlyChart</div>
+<div class="fsdocs-tip" id="fs23">static member Chart.WithHeight : height:int -&gt; chart:PlotlyChart -&gt; PlotlyChart</div>
+<div class="fsdocs-tip" id="fs24">member PlotlyChart.GetHtml : unit -&gt; string</div>
+<div class="fsdocs-tip" id="fs25">val chart2 : PlotlyChart</div>
+<div class="fsdocs-tip" id="fs26">val x : string list</div>
+<div class="fsdocs-tip" id="fs27">val groupedTrace1 : Box</div>
+<div class="fsdocs-tip" id="fs28">property Box.x: obj with get, set</div>
+<div class="fsdocs-tip" id="fs29">Multiple items<br />type Marker =<br />&#160;&#160;new : unit -&gt; Marker<br />&#160;&#160;member ShouldSerializeautocolorscale : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecauto : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecmax : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecmin : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecolor : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecolorbar : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecolors : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecolorscale : unit -&gt; bool<br />&#160;&#160;member ShouldSerializecolorsrc : unit -&gt; bool<br />&#160;&#160;...<br /><br />--------------------<br />new : unit -&gt; Marker</div>
+<div class="fsdocs-tip" id="fs30">val groupedTrace2 : Box</div>
+<div class="fsdocs-tip" id="fs31">val groupedTrace3 : Box</div>
+<div class="fsdocs-tip" id="fs32">val layout : Layout</div>
+<div class="fsdocs-tip" id="fs33">Multiple items<br />module Layout<br /><br />from XPlot.Plotly<br /><br />--------------------<br />type Layout =<br />&#160;&#160;new : unit -&gt; Layout<br />&#160;&#160;member ShouldSerializeangularaxis : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeannotations : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeautosize : unit -&gt; bool<br />&#160;&#160;member ShouldSerializebargap : unit -&gt; bool<br />&#160;&#160;member ShouldSerializebargroupgap : unit -&gt; bool<br />&#160;&#160;member ShouldSerializebarmode : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeboxmode : unit -&gt; bool<br />&#160;&#160;member ShouldSerializedirection : unit -&gt; bool<br />&#160;&#160;member ShouldSerializedragmode : unit -&gt; bool<br />&#160;&#160;...<br /><br />--------------------<br />new : unit -&gt; Layout</div>
+<div class="fsdocs-tip" id="fs34">Multiple items<br />type Yaxis =<br />&#160;&#160;new : unit -&gt; Yaxis<br />&#160;&#160;member ShouldSerialize_isSubplotObj : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeanchor : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeautorange : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeautotick : unit -&gt; bool<br />&#160;&#160;member ShouldSerializebackgroundcolor : unit -&gt; bool<br />&#160;&#160;member ShouldSerializedomain : unit -&gt; bool<br />&#160;&#160;member ShouldSerializedtick : unit -&gt; bool<br />&#160;&#160;member ShouldSerializeexponentformat : unit -&gt; bool<br />&#160;&#160;member ShouldSerializefixedrange : unit -&gt; bool<br />&#160;&#160;...<br /><br />--------------------<br />new : unit -&gt; Yaxis</div>
+<div class="fsdocs-tip" id="fs35">val chart3 : PlotlyChart</div>
+<div class="fsdocs-tip" id="fs36">static member Chart.WithLayout : layout:Layout -&gt; chart:PlotlyChart -&gt; PlotlyChart</div>
+
+        </div>
+
+        <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+        <script type="text/javascript">var fsdocs_search_baseurl = 'https://fslab.org/XPlot/'</script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
+        <script type="text/javascript" src="https://fslab.org/XPlot/content/fsdocs-search.js"></script>
+        <!-- END SEARCH BOX: this adds support for the search box -->
+    </div>
+</body>
+
+</html>
+

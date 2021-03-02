@@ -1,0 +1,1552 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>XPlot.Plotly</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="XPlot.GoogleCharts">
+
+    <link rel="stylesheet" id="theme_link" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.3.1/materia/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
+
+    <link type="text/css" rel="stylesheet" href="https://fslab.org/XPlot//content/navbar-fixed-left.css" />
+    <link type="text/css" rel="stylesheet" href="https://fslab.org/XPlot//content/fsdocs-default.css" />
+    <link type="text/css" rel="stylesheet" href="https://fslab.org/XPlot//content/fsdocs-custom.css" />
+    <script type="text/javascript" src="https://fslab.org/XPlot//content/fsdocs-tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <!-- END SEARCH BOX: this adds support for the search box -->
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-light bg-secondary fixed-left" id="fsdocs-menu">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <a href="https://fslab.org/XPlot/"><img id="fsdocs-logo" src="https://fslab.org/XPlot/img/logo.png" /></a>
+            <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+            <div id="header">
+                <div class="searchbox" id="fsdocs-searchbox">
+                    <label for="search-by">
+                        <i class="fas fa-search"></i>
+                    </label>
+                    <input data-search-input="" id="search-by" type="search" placeholder="Search..." />
+                    <span data-search-clear="">
+                        <i class="fas fa-times"></i>
+                    </span>
+                </div>
+            </div>
+
+            <!-- END SEARCH BOX: this adds support for the search box -->
+            <ul class="navbar-nav" id="fsdocs-nav">
+                <li class="nav-header">XPlot</li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//index.html">Home Page</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//quickstart.html">Getting started</a></li>
+                <li class="divider"></li>
+                <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="https://github.com/fslaborg/XPlot/blob/master/LICENSE.md">License (Apache 2.0)</a></li>
+                <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="https://github.com/fslaborg/XPlot/blob/master/RELEASE_NOTES.md">Release Notes</a></li>
+                <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="https://github.com/fslaborg/XPlot/">Source Repository</a></li>
+                <li class="nav-header"></li>
+                <li class="nav-header">Plotly</li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-bar-charts.html">Bar</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-line-scatter-plots.html">Line and Scatter</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-box-plots.html">Box Plots</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-bubble-charts.html">Bubble</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-contour-plots.html">Contour</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-candlestick-plots.html">Candlesticks</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-area-plots.html">Area</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-heatmaps.html">Heatmaps</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-histograms.html">Histograms</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-2d-histograms.html">2D Histograms</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-polar-charts.html">Polar</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-time-series.html">Time Series</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-multiple-chart-types.html">Multiple Chart Types</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-log-plots.html">Log Plots</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-3d-scatter-plots.html">3D Scatter</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-3d-surface-plots.html">3D Surface</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/plotly-3d-line-plots.html">3D Line</a></li>
+                <li class="nav-header">Google Charts</li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-annotation-chart.html">Annotation</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-area-chart.html">Area</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-bar-chart.html">Bar</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-bubble-chart.html">Bubble</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-calendar-chart.html">Calendar</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-candlestick-chart.html">Candlestick</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-column-chart.html">Column</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-combo-chart.html">Combo</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-gauge-chart.html">Gauge</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-geo-chart.html">Geo</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-histogram-chart.html">Histogram</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-line-chart.html">Line</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-map-chart.html">Map</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-pie-chart.html">Pie</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-sankey-diagram.html">Sankey</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-scatter-chart.html">Scatter</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-stepped-area-chart.html">Stepped Area</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-timeline-chart.html">Timeline</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-table-chart.html">Table</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/google-treemap-chart.html">Treemap</a></li>
+                <li class="nav-header">D3 Charts</li>
+                <li class="nav-item"><a class="nav-link" href="https://fslab.org/XPlot//chart/d3-network.html">Network</a></li>
+                <li class="nav-header">
+  API Reference
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fslab.org/XPlot/reference/index.html">
+    All Namespaces
+  </a>
+</li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="masthead">
+            <h3 class="muted"><a href="https://fslab.org/XPlot/">XPlot</a></h3>
+        </div>
+        <hr />
+        <div class="container" id="fsdocs-content">
+            <div>
+  <h2 id="xplot-plotly">
+    XPlot.Plotly Namespace
+  </h2>
+  <table class="table outer-list fsdocs-entity-list">
+    <thead>
+      <tr>
+        <td>
+          Type/Module
+        </td>
+        <td>
+          Description
+        </td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Angularaxis">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-angularaxis.html">
+                Angularaxis
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/Angularaxis.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Annotation">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-annotation.html">
+                Annotation
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/Annotation.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Annotations">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-annotations.html">
+                Annotations
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/Annotations.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Area">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-area.html">
+                Area
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Area.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Aspectratio">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-aspectratio.html">
+                Aspectratio
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/Aspectratio.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Bar">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-bar.html">
+                Bar
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Bar.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Box">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-box.html">
+                Box
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Box.fs#L4-4" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Camera">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-camera.html">
+                Camera
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/Camera.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Candlestick">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-candlestick.html">
+                Candlestick
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Candlestick.fs#L4-4" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Center">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-center.html">
+                Center
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/Center.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Chart">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-chart.html">
+                Chart
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Main.fs#L209-209" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Choropleth">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-choropleth.html">
+                Choropleth
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Choropleth.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Colorbar">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-colorbar.html">
+                Colorbar
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/Colorbar.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Contour">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-contour.html">
+                Contour
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Countor.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Contours">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-contours.html">
+                Contours
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/Contours.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Domain">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-domain.html">
+                Domain
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/Domain.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Error_x">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-error_x.html">
+                Error_x
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/ErrorX.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Error_y">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-error_y.html">
+                Error_y
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/ErrorY.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Error_z">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-error_z.html">
+                Error_z
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/ErrorZ.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Eye">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-eye.html">
+                Eye
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/Eye.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Font">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-font.html">
+                Font
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/Font.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Geo">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-geo.html">
+                Geo
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/Geo.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Heatmap">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-heatmap.html">
+                Heatmap
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Heatmap.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Histogram">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-histogram.html">
+                Histogram
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Histogram.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Histogram2d">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-histogram2d.html">
+                Histogram2d
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Histogram2D.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Histogram2dcontour">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-histogram2dcontour.html">
+                Histogram2dcontour
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Histogram2DContour.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Html">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-html.html">
+                Html
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Main.fs#L8-8" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Insidetextfont">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-insidetextfont.html">
+                Insidetextfont
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/Insidetextfont.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Items">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-items.html">
+                Items
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/Items.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="key">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-key.html">
+                key
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Main.fs#L206-206" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Lataxis">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-lataxis.html">
+                Lataxis
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/Lataxis.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Layout">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-layout.html">
+                Layout
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Layout.fs#L2-2" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Legend">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-legend.html">
+                Legend
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/Legend.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Lighting">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-lighting.html">
+                Lighting
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/Lighting.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Line">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-line.html">
+                Line
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/Line.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Lonaxis">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-lonaxis.html">
+                Lonaxis
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/Lonaxis.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Margin">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-margin.html">
+                Margin
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/Margin.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Marker">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-marker.html">
+                Marker
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/Marker.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Mesh3d">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-mesh3d.html">
+                Mesh3d
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Mesh3D.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Options">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-options.html">
+                Options
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Main.fs#L56-56" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Outsidetextfont">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-outsidetextfont.html">
+                Outsidetextfont
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/Outsidetextfont.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Pie">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-pie.html">
+                Pie
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Pie.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="PlotlyChart">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-plotlychart.html">
+                PlotlyChart
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Main.fs#L58-58" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Project">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-project.html">
+                Project
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/Project.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Projection">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-projection.html">
+                Projection
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/Projection.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Radialaxis">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-radialaxis.html">
+                Radialaxis
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/Radialaxis.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Rotation">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-rotation.html">
+                Rotation
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/Rotation.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Scatter">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-scatter.html">
+                Scatter
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Scatter.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Scatter3d">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-scatter3d.html">
+                Scatter3d
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Scatter3D.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Scattergeo">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-scattergeo.html">
+                Scattergeo
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Scattergeo.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Scattergl">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-scattergl.html">
+                Scattergl
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Scattergl.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Scene">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-scene.html">
+                Scene
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/Scene.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Shape">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-shape.html">
+                Shape
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/Shape.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Shapes">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-shapes.html">
+                Shapes
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/Shapes.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Stream">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-stream.html">
+                Stream
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/Stream.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Surface">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-surface.html">
+                Surface
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Plots/Surface.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Textfont">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-textfont.html">
+                Textfont
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/Textfont.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Tickfont">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-tickfont.html">
+                Tickfont
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/Tickfont.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Titlefont">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-titlefont.html">
+                Titlefont
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/Titlefont.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Trace">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-trace.html">
+                Trace
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/Trace.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Up">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-up.html">
+                Up
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/Up.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="value">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-value.html">
+                value
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/Main.fs#L207-207" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="X">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-x.html">
+                X
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/X.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Xaxis">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-xaxis.html">
+                Xaxis
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/Xaxis.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Xbins">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-xbins.html">
+                Xbins
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/XBins.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Y">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-y.html">
+                Y
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/Y.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Yaxis">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-yaxis.html">
+                Yaxis
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/Yaxis.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Ybins">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-ybins.html">
+                Ybins
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/YBins.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Z">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-z.html">
+                Z
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/Z.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Zaxis">
+              <a href="https://fslab.org/XPlot/reference/xplot-plotly-zaxis.html">
+                Zaxis
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-xmldoc">
+          <p>
+            <a href="https://github.com/fslaborg/XPlot/tree/master/src/XPlot.Plotly/PlotBase/Zaxis.fs#L3-3" class="fsdocs-source-link">
+              <img src="https://fslab.org/XPlot/content/img/github.png" class="normal"/>
+              <img src="https://fslab.org/XPlot/content/img/github-blue.png" class="hover"/>
+            </a>
+            
+          </p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+            
+        </div>
+
+        <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+        <script type="text/javascript">var fsdocs_search_baseurl = 'https://fslab.org/XPlot/'</script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
+        <script type="text/javascript" src="https://fslab.org/XPlot/content/fsdocs-search.js"></script>
+        <!-- END SEARCH BOX: this adds support for the search box -->
+    </div>
+</body>
+
+</html>
+
