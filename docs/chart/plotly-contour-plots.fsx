@@ -4,6 +4,8 @@
 #r "../../packages/Newtonsoft.Json/lib/netstandard2.0/Newtonsoft.Json.dll"
 (*** condition: ipynb ***)
 #if IPYNB
+#i "nuget:https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet5/nuget/v3/index.json"
+#i "nuget:https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-tools/nuget/v3/index.json"
 #r "nuget: XPlot.Plotly"
 #r "nuget: MathNet.Numerics"
 #r "nuget: XPlot.Plotly.Interactive"
@@ -11,7 +13,9 @@
 
 (**
 Plotly Contour Plots
-====================
+
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/zyzhu/XPlot/gh-pages?filepath=plotly-contour-plots.ipynb)
+
 Basic Contour Plot
 ------------------
 *)

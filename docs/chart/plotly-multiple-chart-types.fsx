@@ -3,13 +3,17 @@
 #r "../../packages/Newtonsoft.Json/lib/netstandard2.0/Newtonsoft.Json.dll"
 (*** condition: ipynb ***)
 #if IPYNB
+#i "nuget:https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet5/nuget/v3/index.json"
+#i "nuget:https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-tools/nuget/v3/index.json"
 #r "nuget: XPlot.Plotly"
 #r "nuget: XPlot.Plotly.Interactive"
 #endif // IPYNB
 
 (**
 Multiple Chart Types
-====================
+
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/zyzhu/XPlot/gh-pages?filepath=plotly-multiple-chart-types.ipynb)
+
 A Contour and Scatter Plot of the Method of Steepest Descent
 ------------------------------------------------------------
 *)

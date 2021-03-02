@@ -6,13 +6,16 @@
 #r "../../packages/Newtonsoft.Json/lib/netstandard2.0/Newtonsoft.Json.dll"
 (*** condition: ipynb ***)
 #if IPYNB
+#i "nuget:https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet5/nuget/v3/index.json"
+#i "nuget:https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-tools/nuget/v3/index.json"
 #r "nuget: XPlot.GoogleCharts"
 #r "nuget: XPlot.GoogleCharts.Deedle"
 #endif // IPYNB
 
 (**
 Google Line Chart
-=================
+
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/zyzhu/XPlot/gh-pages?filepath=google-line-chart.ipynb)
 
 This example shows how to create scatter (point) charts and line charts using the
 `XPlot.GoogleCharts` library.

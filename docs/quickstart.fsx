@@ -24,19 +24,20 @@ open XPlot.Plotly
 
 [ 1 .. 10 ] |> Chart.Line |> Chart.Show
 
-
 (**
 Select all of the code you pasted in and press `Alt`+`Enter` to execute it.
 
 That's it! You should see a chart popping up in your browser.
-
-Notes
-
-- you will need an internet connection for the chart to render, as the code relies on Plotly.
-
 *)
 (*** hide ***)
 [ 1 .. 10 ]
 |> Chart.Line
 |> fun x -> x.GetHtml()
 (*** include-it-raw ***)
+
+(**
+Notes
+
+- you will need an internet connection for the chart to render, as the code relies on Plotly.
+
+*)

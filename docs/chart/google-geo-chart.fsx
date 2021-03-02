@@ -4,12 +4,15 @@
 #r "../../packages/Google.DataTable.Net.Wrapper/lib/netstandard2.0/Google.DataTable.Net.Wrapper.dll"
 (*** condition: ipynb ***)
 #if IPYNB
+#i "nuget:https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet5/nuget/v3/index.json"
+#i "nuget:https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-tools/nuget/v3/index.json"
 #r "nuget: XPlot.GoogleCharts"
 #endif // IPYNB
 
 (**
 Google Geo charts
-=================
+
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/zyzhu/XPlot/gh-pages?filepath=google-geo-chart.ipynb)
 
 This example shows how to create geo charts and line charts using the
 `XPlot.GoogleCharts` library.
