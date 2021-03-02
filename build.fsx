@@ -192,7 +192,6 @@ Target.create "CIBuild" ignore
   ==> "Build"
   ==> "CopyBinaries"
   ==> "GenerateDocs"
-  ==> "ReleaseDocs"
   ==> "BuildDevPackages"
   ==> "DevBuild"
 
