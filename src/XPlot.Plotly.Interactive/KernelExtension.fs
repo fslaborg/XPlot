@@ -31,6 +31,7 @@ var renderPlotly = function() {
 };"
         ) |> ignore
         newScript.AppendLine(JavascriptUtilities.GetCodeForEnsureRequireJs(Uri("https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"), "renderPlotly")) |> ignore
+        newScript.AppendLine("</script>") |> ignore
         newScript.ToString()
 
     let getHtml (chart: PlotlyChart) =
@@ -52,22 +53,22 @@ var renderPlotly = function() {
         let accelerator = typeof<PSObject>.Assembly.GetType("System.Management.Automation.TypeAccelerators")
         let addMethod = accelerator.GetMethod("Add", [| typeof<string>; typeof<Type> |])
         let addAccelerator (name, objectType) = addMethod.Invoke(null, [| name; objectType |]) |> ignore
-        typeof<Trace>.Assembly.GetTypes() 
+        typeof<Trace>.Assembly.GetTypes()
         |> Array.filter typeof<Trace>.IsAssignableFrom
         |> Array.map (fun trace -> ($"Graph.{trace.Name}", trace))
         |> Array.append [| ("Layout", typeof<Layout.Layout>); ("Chart", typeof<Chart>) |]
-        |> Array.iter addAccelerator          
+        |> Array.iter addAccelerator
 
-    let registerPowerShellModule () = 
+    let registerPowerShellModule () =
         // Add Modules directory that contains the helper modules.
         let psModulePath = Environment.GetEnvironmentVariable("PSModulePath")
         let psXPlotModulePath = Path.Join(Path.GetDirectoryName(typeof<NewPlotlyChartCommand>.Assembly.Location), "Modules")
-        Environment.SetEnvironmentVariable("PSModulePath", $"{psXPlotModulePath}{Path.PathSeparator}{psModulePath}")        
+        Environment.SetEnvironmentVariable("PSModulePath", $"{psXPlotModulePath}{Path.PathSeparator}{psModulePath}")
 
-    let configurePowerShellKernel () = 
+    let configurePowerShellKernel () =
         KernelInvocationContext.Current.Display("Configuring PowerShell Kernel for XPlot.Plotly integration.","text/markdown") |> ignore
         registerPowerShellAccelerators()
-        registerPowerShellModule()              
+        registerPowerShellModule()
 
     interface IKernelExtension with
         member _.OnLoadAsync kernel =
@@ -77,9 +78,9 @@ var renderPlotly = function() {
                 | :? PowerShellKernel -> configurePowerShellKernel()
                 | _ -> ()
 
-            kernel.VisitSubkernelsAndSelf(Action<Kernel>(visitKernels),true)         
+            kernel.VisitSubkernelsAndSelf(Action<Kernel>(visitKernels),true)
             KernelInvocationContext.Current.Display("Installed support for XPlot.Plotly.","text/markdown") |> ignore
-            Task.CompletedTask 
-            
+            Task.CompletedTask
 
-    
+
+
