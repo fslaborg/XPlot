@@ -1,8 +1,7 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
     <OutputType>Library</OutputType>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>XPlot.Plotly</PackageId>
     <IsPackable>true</IsPackable>
     <PackageVersion>4.0.0</PackageVersion>
@@ -10,6 +9,8 @@
     <RepositoryType>git</RepositoryType>
     <PackageProjectUrl>https://fslab.org/XPlot/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/fslaborg/XPlot</RepositoryUrl>
+    <Authors>Microsoft</Authors>
+    <Description>Brings Plotly charting to F# and .NET developers!</Description>
     <PackageIcon>logo.png</PackageIcon>
   </PropertyGroup>
   <ItemGroup>
@@ -86,5 +87,9 @@
     <None Include="..\..\docs\img\logo.png" Pack="true" PackagePath="\" />
   </ItemGroup>
 
-  <Import Project="..\..\.paket\Paket.Restore.targets" />
+  <ItemGroup>
+    <PackageReference Update="FSharp.Core" Version="4.7.2"/>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3"/>
+  </ItemGroup>
+
 </Project>
