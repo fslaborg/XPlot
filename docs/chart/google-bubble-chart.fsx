@@ -1,12 +1,22 @@
-﻿(*** hide ***)
-#I "../../../bin/XPlot.GoogleCharts/netstandard2.0"
-#r "XPlot.GoogleCharts.dll"
-open XPlot.GoogleCharts
+﻿(*** condition: prepare ***)
+#r "../../bin/XPlot.GoogleCharts/netstandard2.0/XPlot.GoogleCharts.dll"
+#r "../../packages/Newtonsoft.Json/lib/netstandard2.0/Newtonsoft.Json.dll"
+#r "../../packages/Google.DataTable.Net.Wrapper/lib/netstandard2.0/Google.DataTable.Net.Wrapper.dll"
+(*** condition: ipynb ***)
+#if IPYNB
+#i "nuget:https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet5/nuget/v3/index.json"
+#i "nuget:https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-tools/nuget/v3/index.json"
+#r "nuget: XPlot.GoogleCharts"
+#endif // IPYNB
 
 (**
 Google Bubble Chart
-===================
+
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/fslaborg/XPlot/gh-pages?filepath=google-bubble-chart.ipynb)
+
 *)
+open XPlot.GoogleCharts
+
 let data =
     [
         "CAN", 80.66, 1.67, "North America", 33739900
@@ -25,10 +35,12 @@ let options =
         vAxis = Axis(title = "Fertility Rate"),
         bubble = Bubble(textStyle = TextStyle(fontSize = 11))
     )
- 
-(*** define-output:bubble ***) 
-data
-|> Chart.Bubble
-|> Chart.WithOptions options
-|> Chart.WithLabels ["Life Expectancy"; "Fertility Rat"; "Region"; "Population"]
-(*** include-it:bubble ***)
+
+let chart =
+    data
+    |> Chart.Bubble
+    |> Chart.WithOptions options
+    |> Chart.WithLabels ["Life Expectancy"; "Fertility Rat"; "Region"; "Population"]
+(*** hide ***)
+chart.GetHtml()
+(*** include-it-raw ***)

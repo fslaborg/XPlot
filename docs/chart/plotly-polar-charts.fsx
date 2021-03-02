@@ -1,7 +1,22 @@
-﻿(*** hide ***)
-#I "../../../bin/XPlot.Plotly/netstandard2.0"
-#r "XPlot.Plotly.dll"
+﻿(*** condition: prepare ***)
+#r "../../bin/XPlot.Plotly/netstandard2.0/XPlot.Plotly.dll"
+#r "../../packages/Newtonsoft.Json/lib/netstandard2.0/Newtonsoft.Json.dll"
+(*** condition: ipynb ***)
+#if IPYNB
+#i "nuget:https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet5/nuget/v3/index.json"
+#i "nuget:https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-tools/nuget/v3/index.json"
+#r "nuget: XPlot.Plotly"
+#r "nuget: XPlot.Plotly.Interactive"
+#endif // IPYNB
 
+(**
+Plotly Polar Charts
+
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/fslaborg/XPlot/gh-pages?filepath=plotly-polar-charts.ipynb)
+
+Polar Line Chart
+----------------
+*)
 open XPlot.Plotly
 
 let r1 = [1.; 0.995; 0.978; 0.951; 0.914; 0.866; 0.809; 0.743; 0.669; 0.588; 0.5; 0.407; 0.309; 0.208; 0.105; 0.; 0.105; 0.208; 0.309; 0.407; 0.5; 0.588; 0.669; 0.743; 0.809; 0.866; 0.914; 0.951; 0.978; 0.995; 1.; 0.995; 0.978; 0.951; 0.914; 0.866; 0.809; 0.743; 0.669; 0.588; 0.5; 0.407; 0.309; 0.208; 0.105; 0.; 0.105; 0.208; 0.309; 0.407; 0.5; 0.588; 0.669; 0.743; 0.809; 0.866; 0.914; 0.951; 0.978; 0.995; 1.]
@@ -27,18 +42,6 @@ let t10 = [-101.83378577584543; -127.47839157875458; -112.2442849973417; -82.325
 let r11 = [8.46918052789063; 5.821997567373959; 6.1409183282181425; 5.831724284786043; 5.546754471857236; 5.62748770920125; 3.94832897601986; 6.490184614609525; 5.320618245151644; 3.2435930414929843; 6.444085331576761; 3.363778100648707; 6.463116810505407; 4.730944925781221; 7.796578411114142; 4.570127829915901; 3.926206816002813; 5.254348139870139; 4.8384111066133375; 8.694523998982934; 4.39953181821818; 5.8564839051788535; 3.62157703921442; 8.894912373110186; 5.494542836078211; 5.968980890853802; 6.047899573604184; 5.384671396722035; 5.381220018196653; 5.11157462273727; 4.7705611050578; 3.0983308826347407; 1.665083171936659; 6.740258533332946; 5.5944949288820025; 6.879630825669177; 4.382792466280775; 6.410843616485085; 5.154204317772818; 4.01515851865648; 4.9391488682598155; 5.298297314485713; 5.490417176946796; 2.6237512593812404; 5.9535886616652665; 3.3014793719195046; 4.954889001100974; 5.500053669614178; 4.4505123495497285; 5.786624513349857; 4.906834424064605; 2.6299694734469274; 3.769703608047238; 7.396735715500286; 5.7644819019579545; 2.794585195883112; 5.782033269824353; 3.4853519176219963; 6.500653598620165; 4.748640710129176]
 let t11 = [-66.53583632728323; -84.514422676922; -63.339741699567846; -24.146812744223833; -59.70124532256676; -88.06537267996578; -98.44420453532204; -49.15839681719936; -73.63622331202959; -17.923874678608904; -38.41239945460549; -66.34036237792131; -40.88883873919996; -52.46063321002169; -52.61046255912479; -7.039351050913894; -57.23545869215697; -71.64220350197985; -52.345396169095466; -92.78303867354904; -47.18716305503351; -41.969208462875166; -82.14422824993427; -59.43916560317718; -79.19482259319774; -62.29990853531319; -65.53790403937941; -48.9060554475786; -37.74831103800929; -78.05333345828834; -71.87311766307504; -41.891092825900685; -53.11545548549721; -52.997628097314845; -87.0843610179252; -43.61190483837573; -48.79799840560851; -82.56680315713163; -47.90996299570176; -46.57048558531105; -54.5004832176089; -65.90072712679752; -66.87331746360131; -75.48080725209734; -54.777693866880114; -42.5983345913628; -74.50816626907293; -47.11021844342552; -22.356873183328428; -84.19298674498425; -78.50528475620209; -65.0363717923471; -66.51373368133282; -63.52677656175937; -77.80907855131592; -68.51017974013602; -51.296869310885135; -68.33991302765452; -38.631733068443026; -77.85184858511114]
 
-
-(**
-Plotly Polar Charts
-===================
-
-[Full source and data](https://github.com/fslaborg/XPlot/blob/master/docsrc/content/chart/plotly-polar-charts.fsx)
-
-Polar Line Chart
-----------------
-*)
-
-(*** define-output: chart1 ***)
 let lineTrace1 =
     Scatter(
         r = r1,
@@ -129,20 +132,26 @@ let layout =
         orientation = -90.
     )
 
-[lineTrace1; lineTrace2; lineTrace3;
-    lineTrace4; lineTrace5]
-|> Chart.Plot
-|> Chart.WithLayout layout
-|> Chart.WithWidth 700
-|> Chart.WithHeight 500
-(*** include-it: chart1 ***)
+let chart1 =
+    [lineTrace1; lineTrace2; lineTrace3;
+        lineTrace4; lineTrace5]
+    |> Chart.Plot
+    |> Chart.WithLayout layout
+    |> Chart.WithWidth 700
+    |> Chart.WithHeight 500
+(*** condition: ipynb ***)
+#if IPYNB
+chart1
+#endif // IPYNB
+(*** hide ***)
+chart1.GetHtml()
+(*** include-it-raw ***)
 
 (**
 Polar Scatter Chart
 -------------------
 *)
 
-(*** define-output: chart2 ***)       
 let scatterTrace1 =
     Scatter(
         r = r6,
@@ -240,22 +249,29 @@ let scatterLayout =
         font = Font(size = 15.),
         plot_bgcolor = "rgb(223, 223, 223)",
         angularaxis = Angularaxis(tickcolor = "rgb(253,253,253)")
-    )    
+    )
 
-[scatterTrace1; scatterTrace2; scatterTrace3;
-    scatterTrace4; scatterTrace5; scatterTrace6]
-|> Chart.Plot
-|> Chart.WithLayout scatterLayout
-|> Chart.WithWidth 700
-|> Chart.WithHeight 500
-(*** include-it: chart2 ***)
+let chart2 =
+    [scatterTrace1; scatterTrace2; scatterTrace3;
+        scatterTrace4; scatterTrace5; scatterTrace6]
+    |> Chart.Plot
+    |> Chart.WithLayout scatterLayout
+    |> Chart.WithWidth 700
+    |> Chart.WithHeight 500
+(*** condition: ipynb ***)
+#if IPYNB
+chart2
+#endif // IPYNB
+(*** hide ***)
+chart2.GetHtml()
+(*** include-it-raw ***)
 
-(**      
+(**
 Polar Area Chart
 ----------------
 *)
 
-(*** define-output: chart3 ***)       
+(*** define-output: chart3 ***)
 let areaTrace1 =
     Area(
         r = [77.5; 72.5; 70.0; 45.0; 22.5; 42.5; 40.0; 62.5],
@@ -300,9 +316,16 @@ let areaLayout =
         orientation = 270.
     )
 
-[areaTrace1; areaTrace2; areaTrace3; areaTrace4]
-|> Chart.Plot
-|> Chart.WithLayout areaLayout
-|> Chart.WithWidth 700
-|> Chart.WithHeight 500
-(*** include-it: chart3 ***)
+let chart3 =
+    [areaTrace1; areaTrace2; areaTrace3; areaTrace4]
+    |> Chart.Plot
+    |> Chart.WithLayout areaLayout
+    |> Chart.WithWidth 700
+    |> Chart.WithHeight 500
+(*** condition: ipynb ***)
+#if IPYNB
+chart3
+#endif // IPYNB
+(*** hide ***)
+chart3.GetHtml()
+(*** include-it-raw ***)

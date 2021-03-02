@@ -1,9 +1,23 @@
-﻿(*** hide ***)
-#I "../../../bin/XPlot.Plotly/netstandard2.0"
-#r "XPlot.Plotly.dll"
+﻿(*** condition: prepare ***)
+#r "../../bin/XPlot.Plotly/netstandard2.0/XPlot.Plotly.dll"
+#r "../../packages/Newtonsoft.Json/lib/netstandard2.0/Newtonsoft.Json.dll"
+(*** condition: ipynb ***)
+#if IPYNB
+#i "nuget:https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet5/nuget/v3/index.json"
+#i "nuget:https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-tools/nuget/v3/index.json"
+#r "nuget: XPlot.Plotly"
+#r "nuget: XPlot.Plotly.Interactive"
+#endif // IPYNB
 
+(**
+Plotly Box Plots
+
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/fslaborg/XPlot/gh-pages?filepath=plotly-box-plots.ipynb)
+
+Basic Box Plot
+--------------
+*)
 open System
-
 open XPlot.Plotly
 
 let rnd = Random()
@@ -15,49 +29,50 @@ let randn count min max =
 let y0 = randn 50 -1.86 1.67
 let y1 = randn 50 -1.2 3.44
 
-(**
-Plotly Box Plots
-================
-
-[Full source and data](https://github.com/fslaborg/XPlot/blob/master/docsrc/content/chart/plotly-box-plots.fsx)
-
-Basic Box Plot
---------------
-*)
-
-(*** define-output: chart1 ***)
 let trace1 = Box(y = y0)
 let trace2 = Box(y = y1)
 
-[trace1; trace2]
-|> Chart.Plot
-|> Chart.WithWidth 700
-|> Chart.WithHeight 500
-(*** include-it: chart1 ***)
+let chart1 =
+    [trace1; trace2]
+    |> Chart.Plot
+    |> Chart.WithWidth 700
+    |> Chart.WithHeight 500
+(*** condition: ipynb ***)
+#if IPYNB
+chart1
+#endif // IPYNB
+(*** hide ***)
+chart1.GetHtml()
+(*** include-it-raw ***)
 
 (**
 Box Plot That Displays the Underlying Data
 ------------------------------------------
 *)
 
-(*** define-output: chart2 ***)
-Box(
-    y = [0; 1; 1; 2; 3; 5; 8; 13; 21],
-    boxpoints = "all",
-    jitter = 0.3,
-    pointpos = -1.8
-)
-|> Chart.Plot
-|> Chart.WithWidth 700
-|> Chart.WithHeight 500
-(*** include-it: chart2 ***)
+let chart2 =
+    Box(
+        y = [0; 1; 1; 2; 3; 5; 8; 13; 21],
+        boxpoints = "all",
+        jitter = 0.3,
+        pointpos = -1.8
+    )
+    |> Chart.Plot
+    |> Chart.WithWidth 700
+    |> Chart.WithHeight 500
+(*** condition: ipynb ***)
+#if IPYNB
+chart2
+#endif // IPYNB
+(*** hide ***)
+chart2.GetHtml()
+(*** include-it-raw ***)
 
 (**
 Grouped Box Plot
 ----------------
 *)
 
-(*** define-output: chart3 ***)
 let x = ["day 1"; "day 1"; "day 1"; "day 1"; "day 1"; "day 1";
         "day 2"; "day 2"; "day 2"; "day 2"; "day 2"; "day 2"]
 
@@ -95,9 +110,16 @@ let layout =
         boxmode = "group"
     )
 
-[groupedTrace1; groupedTrace2; groupedTrace3]
-|> Chart.Plot
-|> Chart.WithLayout layout
-|> Chart.WithWidth 700
-|> Chart.WithHeight 500
-(*** include-it: chart3 ***)
+let chart3 =
+    [groupedTrace1; groupedTrace2; groupedTrace3]
+    |> Chart.Plot
+    |> Chart.WithLayout layout
+    |> Chart.WithWidth 700
+    |> Chart.WithHeight 500
+(*** condition: ipynb ***)
+#if IPYNB
+chart3
+#endif // IPYNB
+(*** hide ***)
+chart3.GetHtml()
+(*** include-it-raw ***)

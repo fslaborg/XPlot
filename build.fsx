@@ -16,7 +16,7 @@ open Fake.Tools
 let project = "XPlot"
 let summary = "Data visualization library for F#"
 let solutionFile  = "XPlot.sln"
-let configuration = "release"
+let configuration = "Release"
 let gitHome = "https://github.com/fslaborg"
 let gitName = project
 let devBuildSuffix = BuildServer.buildVersion
@@ -44,11 +44,23 @@ Target.create "AssemblyInfo" (fun _ ->
         AssemblyInfoFile.createFSharp (folderName </> "AssemblyInfo.fs") attributes )
 )
 
+// Copies binaries from default VS location to expected bin folder
+// But keeps a subdirectory structure for each project in the
+// src folder to support multiple project outputs
+Target.create "CopyBinaries" (fun _ ->
+    !! "src/**/*.??proj"
+    -- "src/**/*.shproj"
+    |>  Seq.map (fun f -> ((System.IO.Path.GetDirectoryName f) </> "bin" </> configuration, "bin" </> (System.IO.Path.GetFileNameWithoutExtension f)))
+    |>  Seq.iter (fun (fromDir, toDir) -> Shell.copyDir toDir fromDir (fun _ -> true))
+    // Copy dll to release folder to avoid errors of missing external assemblies during generating API docs
+    Shell.copyDir "src/XPlot.GoogleCharts.Deedle/bin/Release/netstandard2.0" "packages/Deedle/lib/netstandard2.0/" (fun _ -> true)
+)
+
 // --------------------------------------------------------------------------------------
 // Clean build results
 
 Target.create "Clean" (fun _ ->
-    !! "**/**/bin/" |> Shell.cleanDirs    
+    !! "**/**/bin/" |> Shell.cleanDirs
     ["pkg"; "temp"] |> Shell.cleanDirs
 )
 
@@ -60,8 +72,8 @@ Target.create "CleanDocs" (fun _ ->
 // Build everything
 
 Target.create "Build" (fun _ ->
-    solutionFile 
-    |> DotNet.build (fun p -> 
+    solutionFile
+    |> DotNet.build (fun p ->
         { p with
             Configuration = buildConfiguration })
 )
@@ -72,7 +84,7 @@ Target.create "Build" (fun _ ->
 let runTests assembly =
     [Path.Combine(__SOURCE_DIRECTORY__, assembly)]
     |> Expecto.run (fun p ->
-        { p with 
+        { p with
             WorkingDirectory = __SOURCE_DIRECTORY__
         })
 
@@ -84,7 +96,7 @@ Target.create "RunPlotlyTests" (fun _ ->
 // Build and publish NuGet package
 
 Target.create "BuildDevPackages" (fun _ ->
-    Paket.pack(fun p -> 
+    Paket.pack(fun p ->
         { p with
             ToolType = ToolType.CreateLocalTool()
             OutputPath = pkgDir
@@ -93,7 +105,7 @@ Target.create "BuildDevPackages" (fun _ ->
 )
 
 Target.create "BuildReleasePackages" (fun _ ->
-    Paket.pack(fun p -> 
+    Paket.pack(fun p ->
         { p with
             ToolType = ToolType.CreateLocalTool()
             OutputPath = pkgDir
@@ -134,7 +146,17 @@ Target.create "PublishReleasePackages" (fun _ ->
 Target.create "GenerateDocs" (fun _ ->
     let result =
         Shell.cleanDir ".fsdocs"
-        DotNet.exec id "fsdocs" "build --clean"
+        DotNet.exec id "fsdocs" "build --clean --eval --properties Configuration=Release --parameters fsdocs-navbar-position fixed-left"
+
+    if not result.OK then failwith "error generating docs"
+)
+
+Target.create "GenerateLocalDocs" (fun _ ->
+    let root = "file://" + (__SOURCE_DIRECTORY__ @@ "/output/")
+    let cmd = @"build --clean --eval --properties Configuration=Release --parameters fsdocs-navbar-position fixed-left root """ + root + @""""
+    let result =
+        Shell.cleanDir ".fsdocs"
+        DotNet.exec id "fsdocs" cmd
 
     if not result.OK then failwith "error generating docs"
 )
@@ -145,7 +167,7 @@ Target.create "GenerateDocs" (fun _ ->
 Target.create "ReleaseDocs" (fun _ ->
     Git.Repository.clone "" (gitHome + "/" + gitName + ".git") "temp/gh-pages"
     Git.Branches.checkoutBranch "temp/gh-pages" "gh-pages"
-    Shell.copyRecursive "docs/output" "temp/gh-pages" true |> printfn "%A"
+    Shell.copyRecursive "output" "temp/gh-pages" true |> printfn "%A"
     Git.CommandHelper.runSimpleGitCommand "temp/gh-pages" "add ." |> printfn "%s"
     let cmd = sprintf """commit -a -m "Update generated documentation for version %s""" release.NugetVersion
     Git.CommandHelper.runSimpleGitCommand "temp/gh-pages" cmd |> printfn "%s"
@@ -168,9 +190,16 @@ Target.create "CIBuild" ignore
   ==> "CleanDocs"
   ==> "AssemblyInfo"
   ==> "Build"
+  ==> "CopyBinaries"
   ==> "GenerateDocs"
   ==> "BuildDevPackages"
   ==> "DevBuild"
+
+"CopyBinaries"
+  ==> "GenerateLocalDocs"
+
+"GenerateDocs"
+  ==> "ReleaseDocs"
 
 "DevBuild"
   ==> "RunPlotlyTests"

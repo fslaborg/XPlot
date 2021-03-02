@@ -1,4 +1,4 @@
-﻿#I "../../../bin/XPlot.GoogleCharts/netstandard2.0"
+﻿#I "../../bin/XPlot.GoogleCharts/netstandard2.0"
 #r "XPlot.GoogleCharts.dll"
 
 open XPlot.GoogleCharts

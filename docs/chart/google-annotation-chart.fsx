@@ -1,6 +1,19 @@
-﻿(*** hide ***)
-#I "../../../bin/XPlot.GoogleCharts/netstandard2.0"
-#r "XPlot.GoogleCharts.dll"
+﻿(*** condition: prepare ***)
+#r "../../bin/XPlot.GoogleCharts/netstandard2.0/XPlot.GoogleCharts.dll"
+#r "../../packages/Newtonsoft.Json/lib/netstandard2.0/Newtonsoft.Json.dll"
+#r "../../packages/Google.DataTable.Net.Wrapper/lib/netstandard2.0/Google.DataTable.Net.Wrapper.dll"
+(*** condition: ipynb ***)
+#if IPYNB
+#i "nuget:https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet5/nuget/v3/index.json"
+#i "nuget:https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-tools/nuget/v3/index.json"
+#r "nuget: XPlot.GoogleCharts"
+#endif // IPYNB
+
+(**
+Google Annotation Chart
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/fslaborg/XPlot/gh-pages?filepath=google-annotation-chart.ipynb)
+*)
+
 open XPlot.GoogleCharts
 open System
 
@@ -13,7 +26,7 @@ let kepler =
         DateTime(2314, 3, 19), 8476, "Lalibertines", "Heavy casualties"
         DateTime(2314, 3, 20), 0, "Lalibertines", "All crew lost"
     ]
- 
+
 let gliese =
     [
         DateTime(2314, 3, 15), 10645, "", ""
@@ -24,22 +37,17 @@ let gliese =
         DateTime(2314, 3, 20), 79463, "Gallantors", "Omniscience achieved"
     ]
 
-(**
-Google Annotation Chart
-=======================
-
-[Full source and data](https://github.com/fslaborg/XPlot/blob/master/docsrc/content/chart/google-annotation-chart.fsx)
-
-*)
-(*** define-output:annotation ***)
 let options = Options(displayAnnotations = true)
- 
-[kepler; gliese]
-|> Chart.Annotation
-|> Chart.WithOptions options
-|> Chart.WithLabels
-    [
-        "Kepler-22b mission"; "Kepler-22b title"; "Kepler-22b text"
-        "Gliese 163 mission"; "Gliese title"; "Gliese text"            
-    ]
-(*** include-it:annotation ***)
+
+let chart =
+    [kepler; gliese]
+    |> Chart.Annotation
+    |> Chart.WithOptions options
+    |> Chart.WithLabels
+        [
+            "Kepler-22b mission"; "Kepler-22b title"; "Kepler-22b text"
+            "Gliese 163 mission"; "Gliese title"; "Gliese text"
+        ]
+(*** hide ***)
+chart.GetHtml()
+(*** include-it-raw ***)

@@ -110,7 +110,7 @@ module Data =
                         |> List.mapi (fun idx x -> x, idx + 1)
                     key, fields'
                 )
-            
+
         let sysDt = new System.Data.DataTable()
         sysDt.Locale <- CultureInfo.InvariantCulture
 
@@ -128,7 +128,7 @@ module Data =
         sysDt.Columns.Add(Seq.item 0 labels', (fst longestRow).GetType())
         |> ignore
 
-        let values = Seq.map snd rows 
+        let values = Seq.map snd rows
 
         (snd longestRow)
         |> List.iteri (fun idx _ ->
@@ -145,7 +145,7 @@ module Data =
         )
 
         rows
-        |> Seq.iter (fun (key, values) -> 
+        |> Seq.iter (fun (key, values) ->
             let row = sysDt.NewRow()
             row.[0] <- key // SetField(0, key)
             values
@@ -161,10 +161,10 @@ module Data =
 
 module Html =
 
-    let formatDatasetTemplate = 
+    let formatDatasetTemplate =
         """
         var __number_formatter_{COLUME} = new google.visualization.NumberFormat({FORMAT});
-        __number_formatter_{COLUME}.format(data, {COLUME});    
+        __number_formatter_{COLUME}.format(data, {COLUME});
         """
 
     let jsTemplate =
@@ -177,7 +177,7 @@ module Html =
 
                 {FORMAT}
 
-                var options = {OPTIONS} 
+                var options = {OPTIONS}
 
                 var chart = new google.visualization.{TYPE}(document.getElementById('{GUID}'));
                 chart.draw(data, options);
@@ -250,7 +250,7 @@ type GoogleChart() =
 
     [<DefaultValue>]
     val mutable private dataTable : DataTable
-    
+
     [<DefaultValue>]
     val mutable private options : Options
 
@@ -304,12 +304,12 @@ type GoogleChart() =
 
     /// The chart's inline JavaScript code.
     member __.GetInlineJS() =
-        let dataJson = __.dataTable.ToGoogleDataTable().GetJson()         
+        let dataJson = __.dataTable.ToGoogleDataTable().GetJson()
         let optionsJson = JsonConvert.SerializeObject(__.options)
 
-        let formatTemplate = 
+        let formatTemplate =
             match __.options.datasetNumberFormats with
-            | Some formats -> 
+            | Some formats ->
                 formats
                 |> List.map (fun (col, format) ->
                     Html.formatDatasetTemplate.Replace("{FORMAT}", JsonConvert.SerializeObject(format)).Replace("{COLUME}", col.ToString()))
@@ -328,7 +328,7 @@ type GoogleChart() =
 
     /// The chart's container div id.
     member val Id =
-        Guid.NewGuid().ToString()
+        Guid.NewGuid().ToString().Replace("-", "_")
         with get, set
 
     /// The Google Maps API Key, used with Goe and Map charts.
@@ -351,7 +351,7 @@ type GoogleChart() =
         elif RuntimeInformation.IsOSPlatform(OSPlatform.OSX) then
             Process.Start("open", path) |> ignore
         else
-            invalidOp "Not supported OS platform"        
+            invalidOp "Not supported OS platform"
 
     /// The width of the chart container element.
     member val Width = -1 with get, set
@@ -390,25 +390,25 @@ type GoogleChart() =
         | false ->
             try
                 __.options.legend.position <- "none"
-            with _ -> __.options.legend <- Legend(position = "none") 
+            with _ -> __.options.legend <- Legend(position = "none")
         | true ->
             try
                 __.options.legend.position <- "right"
-            with _ -> __.options.legend <- Legend(position = "right") 
-                
+            with _ -> __.options.legend <- Legend(position = "right")
+
     /// Sets the chart's configuration options.
     member __.WithOptions (options:Options) =
         // If the chart title has been set,
         // do not overwrite it.
-        let currentTitle = __.options.title        
+        let currentTitle = __.options.title
         if not (String.IsNullOrEmpty currentTitle)
         then
             options.title <- currentTitle
-            
+
         __.options <- options
 
     /// Sets the chart's width and height.
-    member __.WithSize (width, height) = 
+    member __.WithSize (width, height) =
         __.Height <- height
         __.Width <- width
 
@@ -716,7 +716,7 @@ type Chart with
     /// <param name="Options">The chart's options.</param>
     static member Line(data:seq<#seq<'K * 'V>> when 'K :> key and 'V :> value, ?Labels, ?Options) =
         Chart.Create data Labels Options Line Datum.New
-     
+
     /// <summary>Creates a map chart.</summary>
     /// <param name="data">The chart's data.</param>
     /// <param name="Labels">Labels for the data table columns.</param>
