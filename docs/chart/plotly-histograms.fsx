@@ -1,13 +1,28 @@
-﻿(*** hide ***)
-#I "../../../bin/XPlot.Plotly/netstandard2.0"
-#I "../../../packages/MathNet.Numerics/lib/net40"
-#r "XPlot.Plotly.dll"
-#r "MathNet.Numerics.dll"
+﻿(*** condition: prepare ***)
+#r "../../bin/XPlot.Plotly/netstandard2.0/XPlot.Plotly.dll"
+#r "../../packages/MathNet.Numerics/lib/netstandard2.0/MathNet.Numerics.dll"
+#r "../../packages/Newtonsoft.Json/lib/netstandard2.0/Newtonsoft.Json.dll"
+(*** condition: ipynb ***)
+#if IPYNB
+#i "nuget:https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet5/nuget/v3/index.json"
+#i "nuget:https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-tools/nuget/v3/index.json"
+#r "nuget: XPlot.Plotly"
+#r "nuget: MathNet.Numerics"
+#r "nuget: XPlot.Plotly.Interactive"
+#endif // IPYNB
 
+(**
+Plotly Histograms
+
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/fslaborg/XPlot/gh-pages?filepath=plotly-histograms.ipynb)
+
+Basic Histogram
+---------------
+*)
 open XPlot.Plotly
 open MathNet.Numerics.Distributions
 
-let normal = new Normal(0., 1.0)
+let normal = Normal(0., 1.0)
 
 let basicX =
     normal.Samples()
@@ -40,22 +55,18 @@ let coloredX0 =
 
 let coloredX1 = Array.map (fun x -> x + 1.) coloredX0
 
-(**
-Plotly Histograms
-=================
-
-[Full source and data](https://github.com/fslaborg/XPlot/blob/master/docsrc/content/chart/plotly-histograms.fsx)
-
-Basic Histogram
----------------
-*)
-
-(*** define-output: chart1 ***)
-Histogram(x = basicX)
-|> Chart.Plot
-|> Chart.WithWidth 700
-|> Chart.WithHeight 500
-(*** include-it: chart1 ***)
+let chart1 =
+    Histogram(x = basicX)
+    |> Chart.Plot
+    |> Chart.WithWidth 700
+    |> Chart.WithHeight 500
+(*** condition: ipynb ***)
+#if IPYNB
+chart1
+#endif // IPYNB
+(*** hide ***)
+chart1.GetHtml()
+(*** include-it-raw ***)
 
 (**
 Horizontal Histogram
@@ -64,20 +75,26 @@ Horizontal Histogram
 
 (*** define-output: chart2 ***)
 let horizontalLayout = Layout(title = "Horizontal Histogram")
-       
-Histogram(y = horizontalY)
-|> Chart.Plot
-|> Chart.WithLayout horizontalLayout
-|> Chart.WithWidth 700
-|> Chart.WithHeight 500
-(*** include-it: chart2 ***)
+
+let chart2 =
+    Histogram(y = horizontalY)
+    |> Chart.Plot
+    |> Chart.WithLayout horizontalLayout
+    |> Chart.WithWidth 700
+    |> Chart.WithHeight 500
+(*** condition: ipynb ***)
+#if IPYNB
+chart2
+#endif // IPYNB
+(*** hide ***)
+chart2.GetHtml()
+(*** include-it-raw ***)
 
 (**
 Overlaid Histogram
 ------------------
 *)
 
-(*** define-output: chart3 ***)       
 let overlaidTrace1 =
     Histogram(
         x = overlaidX0,
@@ -96,12 +113,19 @@ let overlaidLayout =
         title = "Overlaid Histogram"
     )
 
-[overlaidTrace1; overlaidTrace2]
-|> Chart.Plot
-|> Chart.WithLayout overlaidLayout
-|> Chart.WithWidth 700
-|> Chart.WithHeight 500
-(*** include-it: chart3 ***)
+let chart3 =
+    [overlaidTrace1; overlaidTrace2]
+    |> Chart.Plot
+    |> Chart.WithLayout overlaidLayout
+    |> Chart.WithWidth 700
+    |> Chart.WithHeight 500
+(*** condition: ipynb ***)
+#if IPYNB
+chart3
+#endif // IPYNB
+(*** hide ***)
+chart3.GetHtml()
+(*** include-it-raw ***)
 
 (**
 Stacked Histograms
@@ -119,19 +143,25 @@ let stackedLayout =
         title = "Stacked Histograms"
     )
 
-[stackedTrace1; stackedTrace2]
-|> Chart.Plot
-|> Chart.WithLayout stackedLayout
-|> Chart.WithWidth 700
-|> Chart.WithHeight 500
-(*** include-it: chart4 ***)
+let chart4 =
+    [stackedTrace1; stackedTrace2]
+    |> Chart.Plot
+    |> Chart.WithLayout stackedLayout
+    |> Chart.WithWidth 700
+    |> Chart.WithHeight 500
+(*** condition: ipynb ***)
+#if IPYNB
+chart4
+#endif // IPYNB
+(*** hide ***)
+chart4.GetHtml()
+(*** include-it-raw ***)
 
 (**
 Colored and Styled Histograms
 -----------------------------
 *)
 
-(*** define-output: chart5 ***)
 let coloredTrace1 =
     Histogram(
         x = coloredX0,
@@ -181,9 +211,16 @@ let coloredLayout =
         bargroupgap = 0.3
     )
 
-[coloredTrace1; coloredTrace2]
-|> Chart.Plot
-|> Chart.WithLayout coloredLayout
-|> Chart.WithWidth 700
-|> Chart.WithHeight 500
-(*** include-it: chart5 ***)
+let chart5 =
+    [coloredTrace1; coloredTrace2]
+    |> Chart.Plot
+    |> Chart.WithLayout coloredLayout
+    |> Chart.WithWidth 700
+    |> Chart.WithHeight 500
+(*** condition: ipynb ***)
+#if IPYNB
+chart5
+#endif // IPYNB
+(*** hide ***)
+chart5.GetHtml()
+(*** include-it-raw ***)

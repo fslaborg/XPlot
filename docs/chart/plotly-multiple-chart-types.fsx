@@ -1,7 +1,22 @@
-﻿(*** hide ***)
-#I "../../../bin/XPlot.Plotly/netstandard2.0"
-#r "XPlot.Plotly.dll"
+﻿(*** condition: prepare ***)
+#r "../../bin/XPlot.Plotly/netstandard2.0/XPlot.Plotly.dll"
+#r "../../packages/Newtonsoft.Json/lib/netstandard2.0/Newtonsoft.Json.dll"
+(*** condition: ipynb ***)
+#if IPYNB
+#i "nuget:https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet5/nuget/v3/index.json"
+#i "nuget:https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-tools/nuget/v3/index.json"
+#r "nuget: XPlot.Plotly"
+#r "nuget: XPlot.Plotly.Interactive"
+#endif // IPYNB
 
+(**
+Multiple Chart Types
+
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/fslaborg/XPlot/gh-pages?filepath=plotly-multiple-chart-types.ipynb)
+
+A Contour and Scatter Plot of the Method of Steepest Descent
+------------------------------------------------------------
+*)
 open XPlot.Plotly
 
 let z1 =
@@ -30,17 +45,6 @@ let x2 = [-0.8; -0.48; -0.288; -0.17279999999999998; -0.10367999999999998; -0.06
 
 let y2 = [-0.9; -0.72; -0.576; -0.4608; -0.36863999999999997; -0.29491199999999995; -0.23592959999999996; -0.18874367999999997; -0.15099494399999996; -0.12079595519999997; -0.09663676415999997; -0.07730941132799998; -0.061847529062399986; -0.04947802324991999; -0.03958241859993599; -0.031665934879948794]
 
-(**
-Multiple Chart Types
-====================
-
-[Full source and data](https://github.com/fslaborg/XPlot/blob/master/docsrc/content/chart/plotly-multiple-chart-types.fsx)
-
-A Contour and Scatter Plot of the Method of Steepest Descent
-------------------------------------------------------------
-*)
-
-(*** define-output: chart1 ***)
 let trace1 =
     Contour(
         z = z1,
@@ -61,19 +65,25 @@ let trace2 =
 
 let layout = Layout(title = "A Contour and Scatter Plot of the Method of Steepest Descent")
 
-[trace1 :> Trace; trace2 :> Trace]
-|> Chart.Plot
-|> Chart.WithLayout layout
-|> Chart.WithWidth 700
-|> Chart.WithHeight 500
-(*** include-it: chart1 ***)
+let chart1 =
+    [trace1 :> Trace; trace2 :> Trace]
+    |> Chart.Plot
+    |> Chart.WithLayout layout
+    |> Chart.WithWidth 700
+    |> Chart.WithHeight 500
+(*** condition: ipynb ***)
+#if IPYNB
+chart1
+#endif // IPYNB
+(*** hide ***)
+chart1.GetHtml()
+(*** include-it-raw ***)
 
 (**
 Line Chart and a Bar Chart
 --------------------------
 *)
 
-(*** define-output: chart2 ***)
 let trace1' =
     Scatter(
         x = [0; 1; 2; 3; 4; 5],
@@ -88,9 +98,16 @@ let trace2' =
 
 let multiLayout = Layout(title = "Line Chart and a Bar Chart")
 
-[trace1'; trace2']
-|> Chart.Plot
-|> Chart.WithLayout multiLayout
-|> Chart.WithWidth 700
-|> Chart.WithHeight 500
-(*** include-it: chart2 ***)
+let chart2 =
+    [trace1'; trace2']
+    |> Chart.Plot
+    |> Chart.WithLayout multiLayout
+    |> Chart.WithWidth 700
+    |> Chart.WithHeight 500
+(*** condition: ipynb ***)
+#if IPYNB
+chart2
+#endif // IPYNB
+(*** hide ***)
+chart2.GetHtml()
+(*** include-it-raw ***)

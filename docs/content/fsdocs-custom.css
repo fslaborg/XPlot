@@ -1,0 +1,150 @@
+/*--------------------------------------------------------------------------
+  Formatting for page & standard document content
+/*--------------------------------------------------------------------------*/
+
+body {
+    font-family: FreightSans, Helvetica Neue, Helvetica, Arial, sans-serif;
+}
+
+/* Format the heading - nicer spacing etc. */
+.masthead {
+    overflow: hidden;
+}
+
+.masthead .muted a {
+    text-decoration: none;
+    color: #999999;
+}
+
+.masthead ul, .masthead li {
+    margin-bottom: 0px;
+}
+
+.masthead .nav li {
+    margin-top: 15px;
+    font-size: 110%;
+}
+
+.masthead h3 {
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-size: 170%;
+}
+
+/*--------------------------------------------------------------------------
+  Formatting fsdocs-content
+/*--------------------------------------------------------------------------*/
+
+/* Change font sizes for headings etc. */
+#fsdocs-content h1 {
+    margin: 30px 0px 15px 0px;
+    /* font-weight: 400; */
+    font-size: 2rem;
+    letter-spacing: 1.78px;
+    line-height: 2.5rem;
+    text-transform: uppercase;
+    font-weight: 400;
+}
+
+#fsdocs-content h2 {
+    font-size: 1.6rem;
+    margin: 20px 0px 10px 0px;
+    font-weight: 400;
+}
+
+#fsdocs-content h3 {
+    font-size: 1.2rem;
+    margin: 15px 0px 10px 0px;
+    font-weight: 400;
+}
+
+#fsdocs-content hr {
+    margin: 0px 0px 20px 0px;
+}
+
+#fsdocs-content li {
+    font-size: 1.0rem;
+    line-height: 1.375rem;
+    letter-spacing: 0.01px;
+    font-weight: 500;
+    margin: 0px 0px 15px 0px;
+}
+
+#fsdocs-content p {
+    font-size: 1.0rem;
+    line-height: 1.375rem;
+    letter-spacing: 0.01px;
+    font-weight: 500;
+    color: #262626;
+}
+
+#fsdocs-content a {
+    color: #4974D1;
+}
+
+
+/*--------------------------------------------------------------------------
+  Formatting xmldoc sections in fsdocs-content
+/*--------------------------------------------------------------------------*/
+
+.fsdocs-xmldoc h1 {
+    font-size: 1.2rem;
+    margin: 10px 0px 0px 0px;
+}
+
+.fsdocs-xmldoc h2 {
+    font-size: 1.2rem;
+    margin: 10px 0px 0px 0px;
+}
+
+.fsdocs-xmldoc h3 {
+    font-size: 1.1rem;
+    margin: 10px 0px 0px 0px;
+}
+
+/* #fsdocs-nav .searchbox {
+    margin-top: 30px;
+    margin-bottom: 30px;
+} */
+
+#fsdocs-nav img.logo{
+    width:90%;
+    /* height:140px; */
+    /* margin:10px 0px 0px 20px; */
+    margin-top:40px;
+    border-style:none;
+}
+
+#fsdocs-nav input{
+    margin-right: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 93%;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+}
+
+#fsdocs-nav li.nav-header{
+    padding-left: 0;
+    color: #262626;
+    text-transform: none;
+    font-size:16px;
+}
+
+#fsdocs-nav li.nav-item{
+    padding-left: 20px;
+    color: #262626;
+    text-transform: none;
+    font-size:16px;
+}
+
+#fsdocs-nav a.nav-link{
+    padding-left: 0;
+    color: #6c6c6d;
+}
+
+
+#fsdocs-nav a:hover.nav-link{
+    padding-left: 0;
+    color: #141277;
+}

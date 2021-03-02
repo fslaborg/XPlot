@@ -1,12 +1,23 @@
-﻿(*** hide ***)
-#I "../../../bin/XPlot.GoogleCharts/netstandard2.0"
-#r "XPlot.GoogleCharts.dll"
-open XPlot.GoogleCharts
+﻿(*** condition: prepare ***)
+#r "../../bin/XPlot.GoogleCharts/netstandard2.0/XPlot.GoogleCharts.dll"
+#r "../../packages/Newtonsoft.Json/lib/netstandard2.0/Newtonsoft.Json.dll"
+#r "../../packages/Google.DataTable.Net.Wrapper/lib/netstandard2.0/Google.DataTable.Net.Wrapper.dll"
+(*** condition: ipynb ***)
+#if IPYNB
+#i "nuget:https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet5/nuget/v3/index.json"
+#i "nuget:https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-tools/nuget/v3/index.json"
+#r "nuget: XPlot.GoogleCharts"
+#endif // IPYNB
 
 (**
 Google Combo Chart
-==================
+
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/fslaborg/XPlot/gh-pages?filepath=google-combo-chart.ipynb)
+
 *)
+
+open XPlot.GoogleCharts
+
 let Bolivia = ["2004/05", 165.; "2005/06", 135.; "2006/07", 157.; "2007/08", 139.; "2008/09", 136.]
 let Ecuador = ["2004/05", 938.; "2005/06", 1120.; "2006/07", 1167.; "2007/08", 1110.; "2008/09", 691.]
 let Madagascar = ["2004/05", 522.; "2005/06", 599.; "2006/07", 587.; "2007/08", 615.; "2008/09", 629.]
@@ -26,10 +37,12 @@ let options =
                 yield Series(``type`` = "line")
             |]
     )
- 
-(*** define-output:combo ***) 
-[Bolivia; Ecuador; Madagascar; ``Papua New Guinea``; Rwanda; Average]
-|> Chart.Combo
-|> Chart.WithOptions options
-|> Chart.WithLabels ["Bolivia"; "Ecuador"; "Madagascar"; "Papua New Guinea"; "Rwanda"; "Average"]
-(*** include-it:combo ***)
+
+let chart =
+    [Bolivia; Ecuador; Madagascar; ``Papua New Guinea``; Rwanda; Average]
+    |> Chart.Combo
+    |> Chart.WithOptions options
+    |> Chart.WithLabels ["Bolivia"; "Ecuador"; "Madagascar"; "Papua New Guinea"; "Rwanda"; "Average"]
+(*** hide ***)
+chart.GetHtml()
+(*** include-it-raw ***)

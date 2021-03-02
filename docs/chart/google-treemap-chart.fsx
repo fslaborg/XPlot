@@ -1,6 +1,20 @@
-﻿(*** hide ***)
-#I "../../../bin/XPlot.GoogleCharts/netstandard2.0"
-#r "XPlot.GoogleCharts.dll"
+﻿(*** condition: prepare ***)
+#r "../../bin/XPlot.GoogleCharts/netstandard2.0/XPlot.GoogleCharts.dll"
+#r "../../packages/Newtonsoft.Json/lib/netstandard2.0/Newtonsoft.Json.dll"
+#r "../../packages/Google.DataTable.Net.Wrapper/lib/netstandard2.0/Google.DataTable.Net.Wrapper.dll"
+(*** condition: ipynb ***)
+#if IPYNB
+#i "nuget:https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet5/nuget/v3/index.json"
+#i "nuget:https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-tools/nuget/v3/index.json"
+#r "nuget: XPlot.GoogleCharts"
+#endif // IPYNB
+
+(**
+Google Treemap Chart
+
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/fslaborg/XPlot/gh-pages?filepath=google-treemap-chart.ipynb)
+
+*)
 open XPlot.GoogleCharts
 
 let data =
@@ -35,14 +49,6 @@ let data =
         "Zaire", "Africa", 8, 10
     ]
 
-(**
-Google Treemap Chart
-====================
-
-[Full source and data](https://github.com/fslaborg/XPlot/blob/master/docsrc/content/chart/google-treemap-chart.fsx)
-
-*)
-(*** define-output:tree ***) 
 let options =
     Options(
         minColor = "#f00",
@@ -50,17 +56,20 @@ let options =
         maxColor = "#0d0",
         headerHeight = 15,
         fontColor = "black",
-        showScale = true        
+        showScale = true
     )
- 
-data
-|> Chart.Treemap
-|> Chart.WithOptions options
-|> Chart.WithLabels
-    [
-        "Location"
-        "Parent"
-        "Market trade volume (size)"
-        "Market increase/decrease (color)"
-    ]
-(*** include-it:tree ***)
+
+let chart =
+    data
+    |> Chart.Treemap
+    |> Chart.WithOptions options
+    |> Chart.WithLabels
+        [
+            "Location"
+            "Parent"
+            "Market trade volume (size)"
+            "Market increase/decrease (color)"
+        ]
+(*** hide ***)
+chart.GetHtml()
+(*** include-it-raw ***)

@@ -1,14 +1,26 @@
-﻿(*** hide ***)
-#I "../../../bin/XPlot.Plotly/netstandard2.0"
-#I "../../../packages/MathNet.Numerics/lib/net40"
-#r "XPlot.Plotly.dll"
-#r "MathNet.Numerics.dll"
+﻿(*** condition: prepare ***)
+#r "../../bin/XPlot.Plotly/netstandard2.0/XPlot.Plotly.dll"
+#r "../../packages/MathNet.Numerics/lib/netstandard2.0/MathNet.Numerics.dll"
+#r "../../packages/Newtonsoft.Json/lib/netstandard2.0/Newtonsoft.Json.dll"
+(*** condition: ipynb ***)
+#if IPYNB
+#i "nuget:https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet5/nuget/v3/index.json"
+#i "nuget:https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-tools/nuget/v3/index.json"
+#r "nuget: XPlot.Plotly"
+#r "nuget: MathNet.Numerics"
+#r "nuget: XPlot.Plotly.Interactive"
+#endif // IPYNB
 
+(**
+Plotly Contour Plots
+
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/fslaborg/XPlot/gh-pages?filepath=plotly-contour-plots.ipynb)
+
+Basic Contour Plot
+------------------
+*)
 open System
-
 open MathNet.Numerics
-open MathNet.Numerics.Distributions
-
 open XPlot.Plotly
 
 let size = 100
@@ -22,23 +34,19 @@ for i in 0 .. 99 do
         let r2 = x.[i] ** 2. + y.[j] ** 2.
         z.[i,j] <- sin x.[i] * cos y.[j] * sin r2 / log(r2 + 1.)
 
-(**
-Plotly Contour Plots
-====================
-
-[Full source and data](https://github.com/fslaborg/XPlot/blob/master/docsrc/content/chart/plotly-contour-plots.fsx)
-
-Basic Contour Plot
-------------------
-*)
-
-(*** define-output: chart ***)
-Contour(
-    z = z,
-    x = x,
-    y = y
-)
-|> Chart.Plot
-|> Chart.WithWidth 700
-|> Chart.WithHeight 500
-(*** include-it: chart ***)
+let chart =
+    Contour(
+        z = z,
+        x = x,
+        y = y
+    )
+    |> Chart.Plot
+    |> Chart.WithWidth 700
+    |> Chart.WithHeight 500
+(*** condition: ipynb ***)
+#if IPYNB
+chart
+#endif // IPYNB
+(*** hide ***)
+chart.GetHtml()
+(*** include-it-raw ***)
