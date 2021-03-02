@@ -1,7 +1,8 @@
 ### 4.0.0
 
-- Breaking change: C# consumers now have all chart types in scope. No need to prefix charts with `Chart` anymore.
-- Unify versioning with [XPlot.Plotly.Interactive](https://www.nuget.org/packages/XPlot.Plotly.Interactive/)
+* Breaking change: C# consumers now have all chart types in scope. No need to prefix charts with `Chart` anymore.
+* Unify versioning with [XPlot.Plotly.Interactive](https://www.nuget.org/packages/XPlot.Plotly.Interactive/)
+* Fix an issue where the HTML output of a notebook in .NET Interactive wouldn't work
 
 ### 3.1.0-preview1
 * Include basic XPlot.D3 chart and package
@@ -105,4 +106,4 @@
 * Google annotation chart
 
 ### 0.1.0
-* Basic Google area chart 
+* Basic Google area chart
