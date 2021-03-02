@@ -146,14 +146,14 @@ Target.create "PublishReleasePackages" (fun _ ->
 Target.create "GenerateDocs" (fun _ ->
     let result =
         Shell.cleanDir ".fsdocs"
-        DotNet.exec id "fsdocs" "build --clean --eval --properties Configuration=Release "
+        DotNet.exec id "fsdocs" "build --clean --eval --properties Configuration=Release --parameters fsdocs-navbar-position fixed-left"
 
     if not result.OK then failwith "error generating docs"
 )
 
 Target.create "GenerateLocalDocs" (fun _ ->
     let root = "file://" + (__SOURCE_DIRECTORY__ @@ "/output/")
-    let cmd = @"build --clean --eval --properties Configuration=Release --parameters root """ + root + @""""
+    let cmd = @"build --clean --eval --properties Configuration=Release --parameters fsdocs-navbar-position fixed-left root """ + root + @""""
     let result =
         Shell.cleanDir ".fsdocs"
         DotNet.exec id "fsdocs" cmd
@@ -167,7 +167,7 @@ Target.create "GenerateLocalDocs" (fun _ ->
 Target.create "ReleaseDocs" (fun _ ->
     Git.Repository.clone "" (gitHome + "/" + gitName + ".git") "temp/gh-pages"
     Git.Branches.checkoutBranch "temp/gh-pages" "gh-pages"
-    Shell.copyRecursive "docs/output" "temp/gh-pages" true |> printfn "%A"
+    Shell.copyRecursive "output" "temp/gh-pages" true |> printfn "%A"
     Git.CommandHelper.runSimpleGitCommand "temp/gh-pages" "add ." |> printfn "%s"
     let cmd = sprintf """commit -a -m "Update generated documentation for version %s""" release.NugetVersion
     Git.CommandHelper.runSimpleGitCommand "temp/gh-pages" cmd |> printfn "%s"
@@ -192,11 +192,15 @@ Target.create "CIBuild" ignore
   ==> "Build"
   ==> "CopyBinaries"
   ==> "GenerateDocs"
+  ==> "ReleaseDocs"
   ==> "BuildDevPackages"
   ==> "DevBuild"
 
 "CopyBinaries"
   ==> "GenerateLocalDocs"
+
+"GenerateDocs"
+  ==> "ReleaseDocs"
 
 "DevBuild"
   ==> "RunPlotlyTests"
