@@ -1,0 +1,10 @@
+image:
+  file: Dockerfile
+
+vscode:
+  extensions:
+    - muhammad-sammy.csharp
+    - ionide.ionide-fsharp
+
+tasks:
+  - init: sh build.sh
