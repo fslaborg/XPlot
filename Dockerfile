@@ -1,6 +1,6 @@
-FROM gitpod/workspace-full:latest
+FROM gitpod/workspace-full
 
-USER gitpod
+USER root
 
 # Install .NET Core 5.0 SDK binaries on Ubuntu 20.04
 # Source: https://docs.microsoft.com/en-us/dotnet/core/install/linux-scripted-manual#scripted-install
