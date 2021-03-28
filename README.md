@@ -1,5 +1,5 @@
 # XPlot
-[![Nuget Badge](https://buildstats.info/nuget/XPlot.Plotly)](https://www.nuget.org/packages/XPlot.Plotly/) [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v1.4%20adopted-ff69b4.svg)](code-of-conduct.md)<a href="https://online.visualstudio.com/environments/new?name=🤘%20my-xplot&repo=fslaborg/xplot"><img src="https://img.shields.io/static/v1?style=flat-square&logo=microsoft&label=VS%20Online&message=Create&color=blue" alt="VS Online"></a>
+[![Nuget Badge](https://buildstats.info/nuget/XPlot.Plotly)](https://www.nuget.org/packages/XPlot.Plotly/) [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v1.4%20adopted-ff69b4.svg)](code-of-conduct.md) [![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/fslaborg/xplot)
 
 ![XPlot logo](misc/XPlot.png)
 
@@ -21,13 +21,13 @@ We pledge to be overt in our openness, welcoming all people to contribute, and p
 
 **No contribution is too small. We appreciate everything from spelling fixes to brand-new features.**
 
-### Visual Studio Online quickstart
+### Gitpod quickstart
 
-If you'd like to use Visual Studio online, just click this button to create a new online environment:
+If you'd like to use contribute without leaving your browser, just click this button to create a new online environment:
 
-<a href="https://online.visualstudio.com/environments/new?name=my-xplot&repo=fslaborg/xplot"><img src="https://img.shields.io/static/v1?style=flat-square&logo=microsoft&label=VS%20Online&message=Create&color=blue" alt="VS Online"></a>
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/fsprojects/fsharp.core.fluent)
 
-This will provision an environment with all necessary dependencies.
+This will provision an environment with all necessary dependencies so you can just write some code.
 
 ### Local development
 
