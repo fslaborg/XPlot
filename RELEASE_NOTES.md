@@ -1,3 +1,7 @@
+### 4.0.1
+
+* Bump dependencies on .NET Interactive to fix issue where plots wouldn't render in unsaved documents.
+
 ### 4.0.0
 
 * Breaking change: C# consumers now have all chart types in scope. No need to prefix charts with `Chart` anymore.
