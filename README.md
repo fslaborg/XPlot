@@ -25,7 +25,7 @@ We pledge to be overt in our openness, welcoming all people to contribute, and p
 
 If you'd like to use contribute without leaving your browser, just click this button to create a new online environment:
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/fsprojects/fsharp.core.fluent)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/fslaborg/xplot)
 
 This will provision an environment with all necessary dependencies so you can just write some code.
 
