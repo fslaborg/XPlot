@@ -5,6 +5,11 @@ vscode:
   extensions:
     - muhammad-sammy.csharp
     - ionide.ionide-fsharp
+    - christian-kohler.path-intellisense
+    - PKief.material-icon-theme
+    - zhuangtongfa.material-theme
+    - eamodio.gitlens
+    - ms-azuretools.vscode-docker
 
 tasks:
-  - init: sh build.sh
+  - init: ./build.sh
