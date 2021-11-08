@@ -1,3 +1,15 @@
+### 4.0.4
+
+* Bump .NET Interactive dependencies
+
+### 4.0.3
+
+* Bump .NET Interactive dependencies
+
+### 4.0.2
+
+* Bump .NET Interactive dependencies
+
 ### 4.0.1
 
 * Bump dependencies on .NET Interactive to fix issue where plots wouldn't render in unsaved documents.
