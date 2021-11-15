@@ -1,3 +1,7 @@
+### 4.0.5
+
+* Bump .NET Interactive dependencies
+
 ### 4.0.4
 
 * Bump .NET Interactive dependencies
