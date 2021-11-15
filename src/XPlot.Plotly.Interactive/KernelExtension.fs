@@ -1,4 +1,4 @@
-﻿namespace XPlot.Plotly.Interactive
+namespace XPlot.Plotly.Interactive
 
 open System
 open System.Text
@@ -66,7 +66,7 @@ var renderPlotly = function() {
         Environment.SetEnvironmentVariable("PSModulePath", $"{psXPlotModulePath}{Path.PathSeparator}{psModulePath}")
 
     let configurePowerShellKernel () =
-        KernelInvocationContext.Current.Display("Configuring PowerShell Kernel for XPlot.Plotly integration.","text/markdown") |> ignore
+        KernelInvocationContext.Current.DisplayAs("Configuring PowerShell Kernel for XPlot.Plotly integration.","text/markdown") |> ignore
         registerPowerShellAccelerators()
         registerPowerShellModule()
 
@@ -79,7 +79,7 @@ var renderPlotly = function() {
                 | _ -> ()
 
             kernel.VisitSubkernelsAndSelf(Action<Kernel>(visitKernels),true)
-            KernelInvocationContext.Current.Display("Installed support for XPlot.Plotly.","text/markdown") |> ignore
+            KernelInvocationContext.Current.DisplayAs("Installed support for XPlot.Plotly.","text/markdown") |> ignore
             Task.CompletedTask
 
 
