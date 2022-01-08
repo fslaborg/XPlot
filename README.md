@@ -1,4 +1,9 @@
 # XPlot
+
+XPlot is a largely "done" project. It works for what it does, but it is not feature-complete enough.
+
+For a much more feature-complete way to build Plotly charts with F#, use Plotly.NET: https://plotly.net/
+
 [![Nuget Badge](https://buildstats.info/nuget/XPlot.Plotly)](https://www.nuget.org/packages/XPlot.Plotly/) [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v1.4%20adopted-ff69b4.svg)](code-of-conduct.md) [![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/fslaborg/xplot)
 
 ![XPlot logo](misc/XPlot.png)
