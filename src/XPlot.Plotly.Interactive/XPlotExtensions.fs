@@ -1,4 +1,4 @@
-﻿namespace XPlot.Plotly.Interactive
+namespace XPlot.Plotly.Interactive
 
 open Microsoft.DotNet.Interactive
 open System.Runtime.CompilerServices
@@ -7,7 +7,6 @@ open System.Runtime.CompilerServices
 type XplotExtensions =
     [<Extension>]
     static member inline UseXplot<'a when 'a :> Kernel>(kernel: 'a) : 'a =
-        let extension = KernelExtension() :> IKernelExtension
-        extension.OnLoadAsync(kernel) |> ignore
+        KernelExtension.Load(kernel) |> ignore
         kernel
 

@@ -1,48 +1,48 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>Library</OutputType>
-    <TargetFramework>net7.0</TargetFramework>
-    <PackageId>XPlot.Plotly.Interactive</PackageId>
-    <IsPackable>true</IsPackable>
-    <PackageVersion>4.0.7</PackageVersion>
-    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-    <RepositoryType>git</RepositoryType>
-    <PackageProjectUrl>https://fslab.org/XPlot/</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/fslaborg/XPlot</RepositoryUrl>
-    <Authors>fsproject contributors</Authors>
-    <Description>Enables XPlot.Plotly to be used in .NET Interactive. When you use this package, you can embed Plotly charts directly into a .NET Interactive notebook!</Description>
-    <PackageIcon>logo.png</PackageIcon>
-  </PropertyGroup>
+    <PropertyGroup>
+        <OutputType>Library</OutputType>
+        <TargetFramework>net7.0</TargetFramework>
+        <PackageId>XPlot.Plotly.Interactive</PackageId>
+        <IsPackable>true</IsPackable>
+        <PackageVersion>4.0.7</PackageVersion>
+        <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+        <RepositoryType>git</RepositoryType>
+        <PackageProjectUrl>https://fslab.org/XPlot/</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/fslaborg/XPlot</RepositoryUrl>
+        <Authors>fsproject contributors</Authors>
+        <Description>Enables XPlot.Plotly to be used in .NET Interactive. When you use this package, you can embed Plotly charts directly into a .NET Interactive notebook!</Description>
+        <PackageIcon>logo.png</PackageIcon>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Include="NewPlotlyChartCommand.fs" />
-    <Compile Include="KernelExtension.fs" />
-    <Compile Include="XPlotExtensions.fs" />
-  </ItemGroup>
+    <ItemGroup>
+        <Compile Include="NewPlotlyChartCommand.fs" />
+        <Compile Include="KernelExtension.fs" />
+        <Compile Include="XPlotExtensions.fs" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Giraffe.ViewEngine" Version="1.2.0" />
-    <PackageReference Include="Microsoft.DotNet.Interactive" Version="1.0.0-beta.23258.3" />
-    <PackageReference Include="Microsoft.DotNet.Interactive.PowerShell" Version="1.0.0-beta.23258.3" />
-    <PackageReference Include="Microsoft.Dotnet.Interactive.http" Version="1.0.0-beta.23258.3" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Giraffe.ViewEngine" Version="1.2.0" />
+        <PackageReference Include="Microsoft.DotNet.Interactive" Version="1.0.0-beta.23562.1" />
+        <PackageReference Include="Microsoft.DotNet.Interactive.Formatting" Version="1.0.0-beta.23562.1" />
+        <PackageReference Include="Microsoft.DotNet.Interactive.PowerShell" Version="1.0.0-beta.23562.1" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <Content Include="$(MSBuildThisFileDirectory)Modules\**" Link="Modules\%(RecursiveDir)%(FileName)%(Extension)" PackagePath="contentFiles/any/any/Modules" PackageCopyToOutput="true" CopyToOutputDirectory="PreserveNewest" />
-    <Content Include="$(MSBuildThisFileDirectory)Modules\**" Link="Modules\%(RecursiveDir)%(FileName)%(Extension)" PackagePath="interactive-extensions/dotnet/Modules" PackageCopyToOutput="true" CopyToOutputDirectory="PreserveNewest" />
-  </ItemGroup>
+    <ItemGroup>
+        <Content Include="$(MSBuildThisFileDirectory)Modules\**" Link="Modules\%(RecursiveDir)%(FileName)%(Extension)" PackagePath="contentFiles/any/any/Modules" PackageCopyToOutput="true" CopyToOutputDirectory="PreserveNewest" />
+        <Content Include="$(MSBuildThisFileDirectory)Modules\**" Link="Modules\%(RecursiveDir)%(FileName)%(Extension)" PackagePath="interactive-extensions/dotnet/Modules" PackageCopyToOutput="true" CopyToOutputDirectory="PreserveNewest" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <None Include="$(OutputPath)/XPlot.Plotly.Interactive.dll" Pack="true" PackagePath="interactive-extensions/dotnet" />
-  </ItemGroup>
+    <ItemGroup>
+        <None Include="extension.dib" Pack="true" PackagePath="interactive-extensions/dotnet" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="../XPlot.Plotly/XPlot.Plotly.fsproj"/>
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="../XPlot.Plotly/XPlot.Plotly.fsproj" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <None Include="..\..\docs\img\logo.png" Pack="true" PackagePath="\" />
-  </ItemGroup>
+    <ItemGroup>
+        <None Include="..\..\docs\img\logo.png" Pack="true" PackagePath="\" />
+    </ItemGroup>
 
 </Project>
