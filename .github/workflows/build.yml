@@ -15,7 +15,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest]
-        dotnet: [5.0.102]
+        dotnet: [7.0.404]
     runs-on: ${{ matrix.os }}
 
     steps:
