@@ -119,7 +119,7 @@ chart2
 #endif // IPYNB
 (*** hide ***)
 chart2.GetHtml()
-(*** include-it-raw ***))
+(*** include-it-raw ***)
 
 (**
 The XPlot library uses the F# `|>` operator to configure charts. In the above example, we use `Chart.Combo`

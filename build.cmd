@@ -3,4 +3,4 @@ cls
 
 dotnet tool restore
 dotnet paket restore
-dotnet fake build %*
+dotnet fsi build.fsx -- %*
