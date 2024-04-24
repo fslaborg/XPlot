@@ -82,4 +82,3 @@ type KernelExtension() =
         KernelInvocationContext.Current.DisplayAs("Installed support for XPlot.Plotly.","text/markdown") |> ignore
 
 
-

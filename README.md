@@ -60,9 +60,8 @@ http://fslaborg.github.io/XPlot/
 
 ## Release
 
-    .\build target NuGet
     set APIKEY=...
-    ..\FsLab\.nuget\NuGet.exe push bin\*.nupkg  %APIKEY% -Source https://www.nuget.org
+    dotnet fsi build.fsx -- -p Release
 
 ## Contact
 
