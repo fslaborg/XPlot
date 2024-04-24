@@ -19,76 +19,66 @@ open Giraffe.ViewEngine
 open XPlot.Plotly.Interactive.PowerShell.Commands
 
 type KernelExtension() =
-    static let mutable PlotlyUrl = "https://cdn.plot.ly/plotly-1.49.2.min"
-    static let mutable RequireJsUrl = "https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"
-    let getScriptElementWithRequire (script: string) =
-        let newScript = StringBuilder()
-        newScript.AppendLine("""<script type="text/javascript">""") |> ignore
-        newScript.AppendLine($"""
-var renderPlotly = function() {{
-    var xplotRequire = require.config({{context:'xplot-3.0.1',paths:{{plotly:'%s{PlotlyUrl}'}}}}) || require;
-    xplotRequire(['plotly'], function(Plotly) {{ """) |> ignore
-        newScript.AppendLine(script) |> ignore
-        newScript.AppendLine(@"});
-};"
-        ) |> ignore
-        newScript.AppendLine(JavascriptUtilities.GetCodeForEnsureRequireJs(Uri(RequireJsUrl), "renderPlotly")) |> ignore
-        newScript.AppendLine("</script>") |> ignore
-        newScript.ToString()
 
-    let getHtml (chart: PlotlyChart) =
-        let styleStr = $"width: {chart.Width}px; height: {chart.Height}px;"
-        let divElem =
-            div [_style styleStr; _id chart.Id] [] |> RenderView.AsString.htmlDocument
+    static member Load (kernel: Kernel) =
+        let getScriptElementWithRequire (script: string) =
+                let newScript = StringBuilder()
+                newScript.AppendLine("""<script type="text/javascript">""") |> ignore
+                newScript.AppendLine("""
+        var renderPlotly = function() {
+            var xplotRequire = require.config({context:'xplot-3.0.1',paths:{plotly:'https://cdn.plot.ly/plotly-1.49.2.min'}}) || require;
+            xplotRequire(['plotly'], function(Plotly) { """) |> ignore
+                newScript.AppendLine(script) |> ignore
+                newScript.AppendLine(@"});
+        };"
+                ) |> ignore
+                newScript.AppendLine(JavascriptUtilities.GetCodeForEnsureRequireJs(Uri("https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"), "renderPlotly")) |> ignore
+                newScript.AppendLine("</script>") |> ignore
+                newScript.ToString()
 
-        let js = chart.GetInlineJS().Replace("<script>", String.Empty).Replace("</script>", String.Empty)
-        HtmlString(divElem + getScriptElementWithRequire js)
+        let getHtml (chart: PlotlyChart) =
+            let styleStr = $"width: {chart.Width}px; height: {chart.Height}px;"
+            let divElem =
+                div [_style styleStr; _id chart.Id] [] |> RenderView.AsString.htmlDocument
 
-    let registerPlotlyFormatters () =
-        Formatter.Register<PlotlyChart>(
-            Action<_,_>(fun (chart: PlotlyChart) (writer: TextWriter) ->
-                writer.Write(getHtml chart)),
-            HtmlFormatter.MimeType)
+            let js = chart.GetInlineJS().Replace("<script>", String.Empty).Replace("</script>", String.Empty)
+            HtmlString(divElem + getScriptElementWithRequire js)
 
-    let registerPowerShellAccelerators () =
-        // Register type accelerators for Plotly.
-        let accelerator = typeof<PSObject>.Assembly.GetType("System.Management.Automation.TypeAccelerators")
-        let addMethod = accelerator.GetMethod("Add", [| typeof<string>; typeof<Type> |])
-        let addAccelerator (name, objectType) = addMethod.Invoke(null, [| name; objectType |]) |> ignore
-        typeof<Trace>.Assembly.GetTypes()
-        |> Array.filter typeof<Trace>.IsAssignableFrom
-        |> Array.map (fun trace -> ($"Graph.{trace.Name}", trace))
-        |> Array.append [| ("Layout", typeof<Layout.Layout>); ("Chart", typeof<Chart>) |]
-        |> Array.iter addAccelerator
+        let registerPlotlyFormatters () =
+            Formatter.Register<PlotlyChart>(
+                Action<_,_>(fun (chart: PlotlyChart) (writer: TextWriter) ->
+                    writer.Write(getHtml chart)),
+                HtmlFormatter.MimeType)
 
-    let registerPowerShellModule () =
-        // Add Modules directory that contains the helper modules.
-        let psModulePath = Environment.GetEnvironmentVariable("PSModulePath")
-        let psXPlotModulePath = Path.Join(Path.GetDirectoryName(typeof<NewPlotlyChartCommand>.Assembly.Location), "Modules")
-        Environment.SetEnvironmentVariable("PSModulePath", $"{psXPlotModulePath}{Path.PathSeparator}{psModulePath}")
+        let registerPowerShellAccelerators () =
+            // Register type accelerators for Plotly.
+            let accelerator = typeof<PSObject>.Assembly.GetType("System.Management.Automation.TypeAccelerators")
+            let addMethod = accelerator.GetMethod("Add", [| typeof<string>; typeof<Type> |])
+            let addAccelerator (name, objectType) = addMethod.Invoke(null, [| name; objectType |]) |> ignore
+            typeof<Trace>.Assembly.GetTypes()
+            |> Array.filter typeof<Trace>.IsAssignableFrom
+            |> Array.map (fun trace -> ($"Graph.{trace.Name}", trace))
+            |> Array.append [| ("Layout", typeof<Layout.Layout>); ("Chart", typeof<Chart>) |]
+            |> Array.iter addAccelerator
 
-    let configurePowerShellKernel () =
-        KernelInvocationContext.Current.DisplayAs("Configuring PowerShell Kernel for XPlot.Plotly integration.","text/markdown") |> ignore
-        registerPowerShellAccelerators()
-        registerPowerShellModule()
+        let registerPowerShellModule () =
+            // Add Modules directory that contains the helper modules.
+            let psModulePath = Environment.GetEnvironmentVariable("PSModulePath")
+            let psXPlotModulePath = Path.Join(Path.GetDirectoryName(typeof<NewPlotlyChartCommand>.Assembly.Location), "Modules")
+            Environment.SetEnvironmentVariable("PSModulePath", $"{psXPlotModulePath}{Path.PathSeparator}{psModulePath}")
 
-    /// Override the Plotly cdn url value used in all KernelExtensions.
-    static member SetPlotlyUrl(url: string) = PlotlyUrl <- url
+        let configurePowerShellKernel () =
+            KernelInvocationContext.Current.DisplayAs("Configuring PowerShell Kernel for XPlot.Plotly integration.","text/markdown") |> ignore
+            registerPowerShellAccelerators()
+            registerPowerShellModule()
 
-    /// Override the RequireJS cdn url value used in all KernelExtensions.
-    static member SetRequireJsUrl(url: string) = RequireJsUrl <- url
+        let visitKernels (subKernel: Kernel) =
+            match subKernel with
+            | :? PowerShellKernel -> configurePowerShellKernel()
+            | _ -> ()
 
-    interface IKernelExtension with
-        member _.OnLoadAsync kernel =
-            registerPlotlyFormatters()
-            let visitKernels (subKernel: Kernel) =
-                match subKernel with
-                | :? PowerShellKernel -> configurePowerShellKernel()
-                | _ -> ()
-
-            kernel.VisitSubkernelsAndSelf(Action<Kernel>(visitKernels),true)
-            KernelInvocationContext.Current.DisplayAs("Installed support for XPlot.Plotly.","text/markdown") |> ignore
-            Task.CompletedTask
-
+        registerPlotlyFormatters()
+        kernel.VisitSubkernelsAndSelf(Action<Kernel>(visitKernels),true)
+        KernelInvocationContext.Current.DisplayAs("Installed support for XPlot.Plotly.","text/markdown") |> ignore
 
 
