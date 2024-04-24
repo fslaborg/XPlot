@@ -15,18 +15,15 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest]
-        dotnet: [7.0.404]
     runs-on: ${{ matrix.os }}
 
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v4
     - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: ${{ matrix.dotnet }}
+      uses: actions/setup-dotnet@v4
     - name: Restore .NET local tools
       run: dotnet tool restore
     - name: Restore packages
       run: dotnet paket restore
     - name: Build and test
-      run: dotnet fake build target CIBuild
+      run: dotnet fsi build.fsx -- -p CIBuild
