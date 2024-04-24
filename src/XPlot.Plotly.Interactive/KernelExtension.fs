@@ -19,18 +19,20 @@ open Giraffe.ViewEngine
 open XPlot.Plotly.Interactive.PowerShell.Commands
 
 type KernelExtension() =
+    static let mutable PlotlyUrl = "https://cdn.plot.ly/plotly-1.49.2.min"
+    static let mutable RequireJsUrl = "https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"
     let getScriptElementWithRequire (script: string) =
         let newScript = StringBuilder()
         newScript.AppendLine("""<script type="text/javascript">""") |> ignore
-        newScript.AppendLine("""
-var renderPlotly = function() {
-    var xplotRequire = require.config({context:'xplot-3.0.1',paths:{plotly:'https://cdn.plot.ly/plotly-1.49.2.min'}}) || require;
-    xplotRequire(['plotly'], function(Plotly) { """) |> ignore
+        newScript.AppendLine($"""
+var renderPlotly = function() {{
+    var xplotRequire = require.config({{context:'xplot-3.0.1',paths:{{plotly:'%s{PlotlyUrl}'}}}}) || require;
+    xplotRequire(['plotly'], function(Plotly) {{ """) |> ignore
         newScript.AppendLine(script) |> ignore
         newScript.AppendLine(@"});
 };"
         ) |> ignore
-        newScript.AppendLine(JavascriptUtilities.GetCodeForEnsureRequireJs(Uri("https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"), "renderPlotly")) |> ignore
+        newScript.AppendLine(JavascriptUtilities.GetCodeForEnsureRequireJs(Uri(RequireJsUrl), "renderPlotly")) |> ignore
         newScript.AppendLine("</script>") |> ignore
         newScript.ToString()
 
@@ -69,6 +71,12 @@ var renderPlotly = function() {
         KernelInvocationContext.Current.DisplayAs("Configuring PowerShell Kernel for XPlot.Plotly integration.","text/markdown") |> ignore
         registerPowerShellAccelerators()
         registerPowerShellModule()
+
+    /// Override the Plotly cdn url value used in all KernelExtensions.
+    static member SetPlotlyUrl(url: string) = PlotlyUrl <- url
+
+    /// Override the RequireJS cdn url value used in all KernelExtensions.
+    static member SetRequireJsUrl(url: string) = RequireJsUrl <- url
 
     interface IKernelExtension with
         member _.OnLoadAsync kernel =
