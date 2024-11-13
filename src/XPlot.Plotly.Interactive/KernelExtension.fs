@@ -86,7 +86,7 @@ var renderPlotly = function() {{
                 | :? PowerShellKernel -> configurePowerShellKernel()
                 | _ -> ()
 
-            kernel.VisitSubkernelsAndSelf(Action<Kernel>(visitKernels),true)
+            kernel.VisitSubkernelsAndSelf(Action<Kernel>(visitKernels))
             KernelInvocationContext.Current.DisplayAs("Installed support for XPlot.Plotly.","text/markdown") |> ignore
             Task.CompletedTask
 
