@@ -133,7 +133,7 @@ let BuildPackages (isDev: bool) =
     }
 
 let RunPlotlyTests =
-    stage "RunPlotlyTests" { run "dotnet ./tests/XPlot.Plotly.Tests/bin/Release/net7.0/XPlot.Plotly.Tests.dll" }
+    stage "RunPlotlyTests" { run "dotnet ./tests/XPlot.Plotly.Tests/bin/Release/net8.0/XPlot.Plotly.Tests.dll" }
 
 let PublishDevPackages =
     stage "PublishDevPackages" {
