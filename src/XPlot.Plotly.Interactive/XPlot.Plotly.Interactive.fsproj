@@ -2,10 +2,10 @@
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <PackageId>XPlot.Plotly.Interactive</PackageId>
     <IsPackable>true</IsPackable>
-    <PackageVersion>4.1.0</PackageVersion>
+    <PackageVersion>4.2.0</PackageVersion>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <RepositoryType>git</RepositoryType>
     <PackageProjectUrl>https://fslab.org/XPlot/</PackageProjectUrl>
@@ -23,9 +23,9 @@
 
   <ItemGroup>
     <PackageReference Include="Giraffe.ViewEngine" Version="1.2.0" />
-    <PackageReference Include="Microsoft.DotNet.Interactive" Version="1.0.0-beta.23258.3" />
-    <PackageReference Include="Microsoft.DotNet.Interactive.PowerShell" Version="1.0.0-beta.23258.3" />
-    <PackageReference Include="Microsoft.Dotnet.Interactive.http" Version="1.0.0-beta.23258.3" />
+    <PackageReference Include="Microsoft.DotNet.Interactive" Version="1.0.0-beta.24563.1" />
+    <PackageReference Include="Microsoft.DotNet.Interactive.PowerShell" Version="1.0.0-beta.24563.1" />
+    <PackageReference Include="Microsoft.Dotnet.Interactive.http" Version="1.0.0-beta.24563.1" />
   </ItemGroup>
 
   <ItemGroup>

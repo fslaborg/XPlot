@@ -1,3 +1,8 @@
+### 4.2.0
+
+* Update TFMs and packages
+* Bump .NET Interactive dependencies
+
 ### 4.1.0
 
 * some stuff
